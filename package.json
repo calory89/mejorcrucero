@@ -1,0 +1,9 @@
+{
+  "name": "mejorcrucero",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.js",
+    "serve": "npx --yes serve dist"
+  }
+}
