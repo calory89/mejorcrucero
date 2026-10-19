@@ -4,6 +4,8 @@ import path from 'node:path';
 import { CONFIG, LINES, VIDEOS, VIDEO_TOPICS, HOME_PORTS, AMERICA_PORTS, SCALE_PORTS, SOURCES } from './data/content.js';
 import { GUIDES } from './data/guides.js';
 import { DESTINATIONS, MONTHS, COMPARISONS } from './data/destinations.js';
+import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
+import { scoreBadge } from './lib.js';
 import { SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
 const D = (f) => path.join(path.dirname(new URL(import.meta.url).pathname), 'data', f);
@@ -26,20 +28,37 @@ const photos = readJson('photos.json', {});
 // SAILINGS=ruta permite probar el motor con un fichero de prueba local (nunca se publica)
 const sailings = process.env.SAILINGS ? JSON.parse(fs.readFileSync(process.env.SAILINGS, 'utf8')) : readJson('sailings.json', []);
 let fx = readJson('fx.json', null);
+const vsp = readJson('vsp.json', {});
+const specs = Object.fromEntries(readCsv('ships_specs.csv').map((r) => [r.name, r]));
+// Opiniones de la comunidad agregadas (API en Cloudflare). Si no responde, la nota se calcula sin ellas.
+let ratings = {};
+if (CONFIG.api && !process.env.OFFLINE) {
+  try { const r = await fetch(CONFIG.api + '/ratings', { signal: AbortSignal.timeout(8000) }); if (r.ok) ratings = await r.json(); } catch {}
+}
 
 const seen = new Set();
 const ships = [...readCsv('ships.csv').map((r) => ({ ...r, source: SOURCES[0][1] })), ...readCsv('ships_extra.csv')].map((r) => {
   const L = LINES[r.line] || (LINES[r.line] = GENERIC_LINE(r.line));
-  const s = { name: r.name, line: r.line, lineShort: L.short, lineSlug: L.slug, color: L.color, tier: L.tier || 'estandar', year: +r.year, gt: +r.gt, pax: r.pax ? +r.pax : null, slug: slugify(r.name), source: r.source || SOURCES[0][1] };
+  const sp = specs[r.name] || {};
+  const s = { name: r.name, line: r.line, lineShort: L.short, lineSlug: L.slug, color: L.color, tier: L.tier || 'estandar', year: +r.year, gt: +r.gt, pax: (() => { const a = r.pax ? +r.pax : null, b = sp.pax ? Math.round(+sp.pax) : null; return a && b ? Math.min(a, b) : a || b; })(), slug: slugify(r.name), source: r.source || SOURCES[0][1] };
+  s.crew = sp.crew ? Math.round(+sp.crew) : null; s.refit = sp.refit_year ? +sp.refit_year : null; s.length = sp.length_m ? Math.round(+sp.length_m) : null; s.decks = sp.decks ? Math.round(+sp.decks) : null; s.formerNames = sp.former_names || ''; s.paxMax = sp.pax_max ? +sp.pax_max : null; s.specSource = sp.source || null;
   s.ratio = s.pax ? Math.round((s.gt / s.pax) * 10) / 10 : null;
   s.size = s.gt >= 200000 ? 'Gigante' : s.gt >= 160000 ? 'Muy grande' : s.gt >= 100000 ? 'Grande' : s.gt >= 50000 ? 'Mediano' : 'Pequeño';
   s.age = 2026 - s.year;
   const vids = (VIDEOS[s.slug] || []).map(([id, t]) => [id, t, /español/i.test(t)]).concat(extraVideos[s.slug] || extraVideos[VIDEO_ALIAS[s.slug]] || []);
   const ids = new Set(); s.videos = vids.filter(([id]) => !ids.has(id) && ids.add(id));
-  s.photo = photos[s.slug] || null;
+  s.photo = photos[s.slug] ? { ...photos[s.slug] } : null;
+  // Fotos servidas desde nuestro dominio (más rápido y sin cookies de terceros); el crédito enlaza a Commons.
+  if (s.photo && fs.existsSync(path.join(path.dirname(D('x')), '..', '..', 'public', 'img', 'barcos', s.slug + '.webp'))) { s.photo.thumb = `/img/barcos/${s.slug}.webp`; s.photo.large = s.photo.thumb; s.photo.local = true; }
   s.sailings = sailings.filter((x) => x.ship === s.slug);
   return s;
 }).filter((s) => s.gt > 1000 && s.year > 1950 && !seen.has(s.slug) && seen.add(s.slug));
+// Barcos gemelos (misma naviera y arqueo ±1,5%): Wikipedia mezcla a veces capacidad doble y máxima;
+// usamos la cifra de doble ocupación (la menor) de la clase para que el espacio por pasajero sea comparable.
+ships.forEach((s) => { const sis = ships.filter((o) => o.line === s.line && o.pax && Math.abs(o.gt - s.gt) / s.gt <= 0.015); const m = Math.min(...sis.map((o) => o.pax)); if (s.pax && m < s.pax) { s.pax = m; s.ratio = Math.round((s.gt / m) * 10) / 10; } });
+ships.forEach((s) => { s.score = scoreShip(s, { vsp, community: ratings }); s.sc = s.score?.total ?? null; s.vsp = vsp[s.name] || null; s.tags = tagsFor(s, LINES[s.line]); });
+const scored = ships.filter((s) => s.sc != null).sort((a, b) => b.sc - a.sc || b.gt - a.gt);
+scored.forEach((s, i) => { s.rank = i + 1; });
 
 const bySlug = Object.fromEntries(ships.map((s) => [s.slug, s]));
 const lineList = Object.entries(LINES).map(([full, L]) => ({ full, ...L, ships: ships.filter((s) => s.line === full) })).filter((l) => l.ships.length);
@@ -91,7 +110,7 @@ function home() {
   const roomiest = ships.filter((s) => s.ratio && s.pax > 1500).sort((a, b) => b.ratio - a.ratio).slice(0, 5);
   const deals = [...sailings].sort((a, b) => ppn(a) - ppn(b)).slice(0, 6);
   const body = `
-<section class="hero${heroShip.photo ? ' hero-photo' : ''}"${heroShip.photo ? ` style="--hero:url('${esc(heroShip.photo.large || heroShip.photo.thumb)}')"` : ''}><div class="wrap hero-in">
+<section class="hero${heroShip.photo ? ' hero-photo' : ''}"${heroShip.photo ? ` style="--hero:url('${heroShip.photo.local ? BASE.replace(/\/$/, '') : ''}${esc(heroShip.photo.large || heroShip.photo.thumb)}')"` : ''}><div class="wrap hero-in">
   <div class="hero-copy">
     <p class="kicker">El comparador de cruceros en español</p>
     <h1>Elige el crucero perfecto y descubre <em>lo que de verdad cuesta</em></h1>
@@ -106,6 +125,11 @@ function home() {
   </div>
   <div class="hero-art" aria-hidden="true">${heroShip.photo ? '' : shipSvg(heroShip, 520)}</div>
 </div>${heroShip.photo ? `<p class="credit hero-credit">${esc(heroShip.name)} · Foto: ${esc(heroShip.photo.author || '')} (${esc(heroShip.photo.license || '')}), Wikimedia Commons</p>` : ''}</section>
+
+<section class="wrap block"><div class="sec-h"><h2>Ranking ${new Date().getFullYear()}: los mejores barcos con nota de 0 a 100</h2><a href="/rankings/">Ver ranking completo →</a></div>
+<p class="muted">Higiene oficial (CDC), espacio, tripulación, modernidad y opiniones verificadas. <a href="/metodologia/">Cómo puntuamos</a> · <button class="link-btn js-surprise" type="button">🎲 Sorpréndeme</button></p>
+<div class="chips">${BEST_FOR.map(([slug, , t]) => `<a class="chip" href="/rankings/${slug}/">${esc(t.replace('Los mejores ', '').replace('cruceros ', ''))}</a>`).join('')}</div>
+<div class="grid">${scored.filter((s) => s.photo).slice(0, 4).map((s) => shipCard(s)).join('')}</div></section>
 
 <section class="wrap usp" aria-label="Por qué MejorCrucero">
   <a class="usp-i" href="/herramientas/precio-real/"><span class="usp-e">💶</span><h2>Precio real</h2><p>Sumamos propinas, bebidas, excursiones y traslados. Sin sorpresas al desembarcar.</p></a>
@@ -184,16 +208,18 @@ function searchPage() {
 }
 
 function shipsIndex() {
-  const sorted = [...ships].sort((a, b) => b.gt - a.gt);
+  const sorted = [...ships].sort((a, b) => (b.sc ?? -1) - (a.sc ?? -1) || b.gt - a.gt);
   const az = [...ships].sort((a, b) => a.name.localeCompare(b.name));
   const body = `<section class="wrap block page-h"><h1>Todos los barcos de crucero</h1><p class="lead-p">${ships.length} barcos de ${lineList.length} navieras. Filtra, guarda tus favoritos y añádelos al comparador.</p>
   <form class="filters" id="filters" role="search">
-    <label><span>Buscar</span><input name="q" type="search" placeholder="Nombre del barco" autocomplete="off"></label>
+    <label class="f-wide"><span>Buscar</span><input name="q" type="search" placeholder="Ej.: familia español nuevo · MSC · Icon" autocomplete="off"></label>
     <label><span>Naviera</span><select name="linea"><option value="">Todas</option>${[...lineList].sort((a, b) => a.short.localeCompare(b.short)).map((l) => `<option value="${l.slug}">${esc(l.short)} (${l.ships.length})</option>`).join('')}</select></label>
     <label><span>Tamaño</span><select name="tam"><option value="">Todos</option><option>Gigante</option><option>Muy grande</option><option>Grande</option><option>Mediano</option><option>Pequeño</option></select></label>
     <label><span>Gama</span><select name="gama"><option value="">Todas</option><option value="estandar">Precio medio</option><option value="premium">Premium</option><option value="lujo">Lujo</option></select></label>
-    <label><span>Ordenar</span><select name="orden"><option value="gt">Más grandes</option><option value="year">Más nuevos</option><option value="ratio">Más espaciosos</option><option value="name">A–Z</option></select></label>
-  </form><h2 class="sr">Resultados</h2><p class="muted small" id="count" aria-live="polite">${ships.length} barcos</p>
+    <label><span>Nota mínima</span><select name="nota"><option value="">Cualquiera</option><option value="85">85+ excelente</option><option value="75">75+ muy bueno</option><option value="65">65+ bueno</option></select></label>
+    <label><span>Ideal para</span><select name="tag"><option value="">Todo</option><option value="familias">Familias</option><option value="adultos">Solo adultos</option><option value="espanol">Español a bordo</option><option value="espacioso">Mucho espacio</option><option value="pequeno">Barco pequeño</option><option value="nuevo">Recién estrenado</option><option value="lujo">Lujo</option><option value="servicio">Mucha tripulación</option></select></label>
+    <label><span>Ordenar</span><select name="orden"><option value="sc">Mejor nota</option><option value="m">Mi encaje</option><option value="gt">Más grandes</option><option value="year">Más nuevos</option><option value="ratio">Más espaciosos</option><option value="name">A–Z</option></select></label>
+  </form><h2 class="sr">Resultados</h2><p class="muted small" id="count" aria-live="polite">${ships.length} barcos</p><p class="small"><button class="btn btn-ghost btn-sm js-surprise" type="button">🎲 Sorpréndeme</button> <a class="small" href="/metodologia/">Cómo calculamos la nota</a></p>
   <div class="grid" id="ship-grid">${sorted.slice(0, 24).map((s) => shipCard(s)).join('')}</div>
   <p class="center"><button class="btn btn-ghost" id="more" type="button">Ver más barcos</button></p>
   <p class="empty" id="empty" hidden>No hay barcos con esos filtros. <a href="/barcos/">Ver todos</a>.</p>
@@ -201,9 +227,20 @@ function shipsIndex() {
   return layout({ title: 'Todos los barcos de crucero: fichas, vídeos y comparador', desc: `Fichas de ${ships.length} barcos de crucero de MSC, Costa, Royal Caribbean, Norwegian y más: tamaño, año, pasajeros, espacio, vídeos y foro.`, url: '/barcos/', body, crumbs: [['Inicio', '/'], ['Barcos', '/barcos/']] });
 }
 
+function scoreSection(s) {
+  if (s.sc == null) return `<section class="block" id="nota"><h2>MejorCrucero Score</h2><p class="muted">Todavía no tenemos datos públicos suficientes para dar una nota fiable a este barco (necesitamos al menos el espacio por pasajero y otros dos indicadores). Preferimos no inventarla. <a href="/metodologia/">Cómo se calcula</a>.</p></section>`;
+  const sc = s.score;
+  return `<section class="block score-sec" id="nota"><h2>MejorCrucero Score: ${s.sc}/100</h2>
+  <div class="score-top">${scoreBadge(s.sc, true)}<p><b>${scoreLabel(s.sc)}</b>. Puesto <a href="/rankings/">${s.rank} de ${scored.length}</a> barcos con nota${(() => { const same = scored.filter((o) => o.line === s.line); const tier = scored.filter((o) => o.tier === s.tier); return (same.length > 1 ? `, ${same.findIndex((o) => o.slug === s.slug) + 1}º de ${same.length} en ${esc(s.lineShort)}` : '') + ` y ${tier.findIndex((o) => o.slug === s.slug) + 1}º de ${tier.length} en su gama (${TIER[s.tier].toLowerCase()})`; })()}.</p></div>
+  <ul class="bars">${sc.parts.map((p) => `<li><span class="bar-l">${esc(p.label)}</span><span class="bar"><i style="width:${Math.round((p.pts / p.max) * 100)}%"></i></span><b>${String(p.pts).replace('.', ',')}/${p.max}</b><small>${esc(p.detail)}${p.source ? ` · <a href="${esc(p.source)}" target="_blank" rel="noopener">fuente</a>` : ''}</small></li>`).join('')}</ul>
+  ${sc.missing.length ? `<p class="muted small">Sin datos todavía de: ${sc.missing.join(', ')}. La nota se calcula sobre el ${sc.coverage}% de los puntos posibles y se reescala a 100.</p>` : ''}
+  <p class="small"><a href="/metodologia/">Cómo calculamos la nota</a> · <a href="/rankings/">Ver el ranking completo</a></p>${shareBar(`El ${s.name} tiene un ${s.sc}/100 en MejorCrucero:`, '/barcos/' + s.slug + '/')}</section>`;
+}
+
 function shipPage(s) {
   const L = LINES[s.line];
-  const similar = ships.filter((o) => o.slug !== s.slug && (o.line === s.line || Math.abs(o.gt - s.gt) < 8000)).sort((a, b) => (a.line === s.line ? -1 : 1) - (b.line === s.line ? -1 : 1) || Math.abs(a.gt - s.gt) - Math.abs(b.gt - s.gt)).slice(0, 4);
+  const simD = (o) => Math.abs(o.gt - s.gt) / 20000 + (o.tier === s.tier ? 0 : 1.5) + Math.abs((o.sc ?? 60) - (s.sc ?? 60)) / 10 + Math.abs(o.year - s.year) / 8 + (o.line === s.line ? -0.5 : 0);
+  const similar = ships.filter((o) => o.slug !== s.slug).sort((a, b) => simD(a) - simD(b)).slice(0, 5);
   const rankGt = [...ships].sort((a, b) => b.gt - a.gt).findIndex((o) => o.slug === s.slug) + 1;
   const ytq = (t) => `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name + ' ' + t)}`;
   const fw = forWhom(s);
@@ -221,6 +258,9 @@ function shipPage(s) {
   <div>
     <a class="eyebrow eyebrow-l" href="/navieras/${s.lineSlug}/">${esc(L.short)} · ${TIER[s.tier]}</a>
     <h1>${esc(s.name)}</h1>
+    ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>MejorCrucero Score · nº ${s.rank} de ${scored.length}</small></span></a>` : ''}
+    ${s.tags.length ? `<p class="tags">${s.tags.map(([k, t]) => `<a class="tag" href="/barcos/?tag=${k}">${esc(t)}</a>`).join('')}</p>` : ''}
+    <p class="match-box" data-slug="${s.slug}" hidden></p>
     <p class="lead-p">Barco ${s.size.toLowerCase()} de ${esc(L.short)} en servicio desde ${s.year}${s.pax ? `, con capacidad para unos ${fmt(s.pax)} pasajeros` : ''}. Vídeos, ficha técnica, dónde reservar y opiniones de cruceristas.</p>
     <div class="stats">
       <div><b>${s.year}</b><span>Año</span></div>
@@ -230,12 +270,14 @@ function shipPage(s) {
     </div>
     <div class="actions"><a class="btn" href="#reservar">Comparar precios</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
   </div>
-  <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.large || s.photo.thumb)}" alt="${esc(s.name)}" width="960" height="${Math.round(960 / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
+  <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.large || s.photo.thumb)}" alt="${esc(s.name)}" width="${s.photo.local ? 640 : 960}" height="${Math.round((s.photo.local ? 640 : 960) / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
 </div></section>
 
 <div class="wrap ship-grid">
 <div class="ship-main">
   <section class="block forwhom"><h2>¿Es para ti?</h2><div class="fw"><div><h3 class="h-sm">👍 Ideal para</h3><ul>${fw.yes.map((x) => `<li>${esc(cap(x))}</li>`).join('')}</ul></div>${fw.no.length ? `<div><h3 class="h-sm">👎 Mejor no si…</h3><ul>${fw.no.map((x) => `<li>${esc(cap(x))}</li>`).join('')}</ul></div>` : ''}</div><p class="muted small">Orientación basada en el tamaño, la gama, la edad y el espacio del barco. Las opiniones de la comunidad, más abajo.</p></section>
+
+  ${scoreSection(s)}
 
   ${s.sailings.length ? `<section class="block" id="salidas"><h2>Próximas salidas del ${esc(s.name)}</h2><div class="grid">${s.sailings.slice(0, 6).map(sailingCard).join('')}</div></section>` : ''}
 
@@ -248,6 +290,8 @@ function shipPage(s) {
     ${partnerLink({ href: affLink('vayacruceros'), key: 'vayacruceros', title: 'VayaCruceros', sub: 'Especialista en cruceros', page })}
   </div>
   <div class="tip"><b>Antes de pagar:</b> calcula el <a href="/herramientas/precio-real/?linea=${s.lineSlug}">precio real con propinas y extras</a> y guarda tu reserva en la <a href="/herramientas/alerta-precio/?barco=${s.slug}">alerta de bajada de precio</a>.</div>
+  <p class="muted small">🔗 Algunos enlaces son de afiliado: si reservas, el vendedor nos paga una comisión y <b>tú pagas lo mismo</b>. La comisión nunca cambia la nota ni el orden. <a href="/afiliacion/">Más info</a>.</p>
+  <details class="book-help"><summary>🙋 ¿Prefieres que te ayudemos a reservarlo?</summary><p class="small">Déjanos tu email y la fecha aproximada: te mandamos las mejores opciones de las agencias para el ${esc(s.name)}.</p>${leadForm('reserva:' + s.slug, 'Quiero ayuda', '<label class="sr" for="bh-' + s.slug + '">Fecha aproximada</label><input id="bh-' + s.slug + '" type="month" name="month">')}</details>
   <form class="follow" data-thread="barco:${s.slug}"><label><span>🔔 Avísame de ofertas del ${esc(s.name)}</span><input type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></label><button class="btn btn-sm" type="submit">Seguir barco</button><p class="form-msg" role="status" aria-live="polite"></p></form>
   </section>
 
@@ -268,11 +312,17 @@ function shipPage(s) {
     <tr><th scope="row">En servicio desde</th><td>${s.year} (${s.age <= 0 ? 'nuevo' : s.age === 1 ? '1 año' : s.age + ' años'})</td></tr>
     <tr><th scope="row">Arqueo bruto</th><td>${fmt(s.gt)} GT · puesto ${rankGt} de ${ships.length}</td></tr>
     <tr><th scope="row">Pasajeros</th><td>${fmt(s.pax)}</td></tr>
+    ${s.crew ? `<tr><th scope="row">Tripulación</th><td>${fmt(s.crew)} (${dec(Math.round((s.pax / s.crew) * 100) / 100)} pasajeros por tripulante)</td></tr>` : ''}
+    ${s.length ? `<tr><th scope="row">Eslora</th><td>${fmt(s.length)} m</td></tr>` : ''}
+    ${s.decks ? `<tr><th scope="row">Cubiertas</th><td>${s.decks}</td></tr>` : ''}
+    ${s.refit ? `<tr><th scope="row">Última gran reforma</th><td>${s.refit}</td></tr>` : ''}
+    ${s.formerNames ? `<tr><th scope="row">Nombres anteriores</th><td>${esc(s.formerNames)}</td></tr>` : ''}
+    ${s.vsp ? `<tr><th scope="row">Inspección sanitaria CDC</th><td>${s.vsp.score}/100 (${s.vsp.date}) · <a href="${esc(s.vsp.source)}" target="_blank" rel="noopener">ver en el CDC</a></td></tr>` : ''}
     <tr><th scope="row">Índice de espacio</th><td>${dec(s.ratio)} GT por pasajero · ${spaceLabel(s.ratio)}</td></tr>
     <tr><th scope="row">Cargo de servicio (ref.)</th><td>${L.tip ? `${String(L.tip).replace('.', ',')} $ por persona y noche (camarote estándar, mercado EE. UU.)` : 'Consulta las condiciones de tu reserva'}</td></tr>
     <tr><th scope="row">Español a bordo</th><td>${L.es ? 'Habitual en el Mediterráneo' : 'Consúltalo al reservar'}</td></tr>
   </tbody></table>
-  <p class="muted small">Índice de espacio: arqueo bruto dividido entre pasajeros. Orientativo: algunas navieras publican capacidad máxima y otras a doble ocupación. Fuente: <a href="${esc(s.source)}" target="_blank" rel="noopener">Wikipedia</a>. ${reportBtn('barco:' + s.slug)}</p>
+  <p class="muted small">Índice de espacio: arqueo bruto dividido entre pasajeros. Orientativo: algunas navieras publican capacidad máxima y otras a doble ocupación. Fuente: <a href="${esc(s.specSource || s.source)}" target="_blank" rel="noopener">Wikipedia</a>. ${reportBtn('barco:' + s.slug)}</p>
   </section>
 
   ${forumBlock('barco:' + s.slug, `Opiniones y foro del ${s.name}`)}
@@ -285,7 +335,8 @@ function shipPage(s) {
 
 <aside class="ship-side">
   <div class="side-card"><h2>Comparte este barco</h2>${shareBar(`Mira el ${s.name} en MejorCrucero:`, page)}</div>
-  <div class="side-card"><h2>Barcos parecidos</h2><ul class="mini">${similar.map((o) => `<li><a href="/barcos/${o.slug}/"><b>${esc(o.name)}</b><span>${esc(o.lineShort)} · ${o.year} · ${fmt(o.gt)} GT</span></a></li>`).join('')}</ul></div>
+  ${s.sc != null ? `<div class="side-card"><h2>¿Tienes un blog o una agencia?</h2><p class="small">Pon la nota del ${esc(s.name)} en tu web:</p><textarea class="embed-code" readonly rows="3" aria-label="Código para insertar">&lt;iframe src="${SITE}/embed/${s.slug}/" width="300" height="120" style="border:0" title="MejorCrucero Score ${esc(s.name)}" loading="lazy"&gt;&lt;/iframe&gt;</textarea><button class="btn btn-sm btn-ghost js-copy-embed" type="button">Copiar código</button></div>` : ''}
+  <div class="side-card"><h2>Barcos parecidos</h2><ul class="mini">${similar.map((o) => `<li><a href="/barcos/${o.slug}/"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${esc(o.lineShort)} · ${o.year} · ${fmt(o.gt)} GT</span></a></li>`).join('')}</ul>${s.sc != null && similar[0] ? `<a class="small" href="/herramientas/comparar/?b=${s.slug},${similar[0].slug}">Comparar con el ${esc(similar[0].name)} →</a>` : ''}</div>
   <div class="side-card"><h2>Guías útiles</h2><ul class="mini"><li><a href="/guias/como-elegir-camarote/"><b>Cómo elegir camarote</b><span>Y cuáles evitar</span></a></li><li><a href="/guias/propinas-y-cargos-de-servicio/"><b>Propinas y cargos</b><span>Cuánto se paga de verdad</span></a></li><li><a href="/guias/cuando-reservar-crucero/"><b>Cuándo reservar</b><span>Para pagar menos</span></a></li></ul></div>
 </aside>
 </div>
@@ -349,12 +400,13 @@ function linesIndex() {
 }
 
 function linePage(l) {
-  const sorted = [...l.ships].sort((a, b) => b.year - a.year);
+  const sorted = [...l.ships].sort((a, b) => (b.sc ?? -1) - (a.sc ?? -1) || b.year - a.year);
+  const sc = l.ships.filter((s) => s.sc != null), avg = sc.length ? Math.round(sc.reduce((a, s) => a + s.sc, 0) / sc.length) : null;
   const body = `<section class="wrap block page-h line-h" style="--c:${l.color}"><span class="line-bar"></span><h1>Cruceros ${esc(l.short)}</h1><p class="lead-p">${esc(l.blurb)}</p>
-  <div class="stats stats-light"><div><b>${l.ships.length}</b><span>Barcos analizados</span></div><div><b>${Math.max(...l.ships.map((s) => s.year))}</b><span>Barco más nuevo</span></div><div><b>${l.tip ? String(l.tip).replace('.', ',') + ' $' : '—'}</b><span>Cargo servicio/noche (ref.)</span></div><div><b>${TIER[l.tier || 'estandar']}</b><span>Gama</span></div></div>
+  <div class="stats stats-light">${avg != null ? `<div><b>${avg}</b><span>Nota media de la flota</span></div>` : ''}<div><b>${l.ships.length}</b><span>Barcos analizados</span></div><div><b>${Math.max(...l.ships.map((s) => s.year))}</b><span>Barco más nuevo</span></div><div><b>${l.tip ? String(l.tip).replace('.', ',') + ' $' : '—'}</b><span>Cargo servicio/noche (ref.)</span></div><div><b>${TIER[l.tier || 'estandar']}</b><span>Gama</span></div></div>
   ${l.web ? `<p><a class="btn" href="${l.web}" target="_blank" rel="noopener" data-aff="oficial-${l.slug}" data-page="/navieras/${l.slug}/">Web oficial de ${esc(l.short)}</a> <a class="btn btn-ghost" href="/herramientas/precio-real/?linea=${l.slug}">Calcular precio real</a></p>` : ''}
   </section>
-  <section class="wrap block"><h2>Todos los barcos de ${esc(l.short)} comparados</h2><div class="table-wrap"><table class="rank-t sortable"><thead><tr><th><button type="button" class="th-sort">Barco</button></th><th><button type="button" class="th-sort">Año</button></th><th><button type="button" class="th-sort">Arqueo (GT)</button></th><th><button type="button" class="th-sort">Pasajeros</button></th><th><button type="button" class="th-sort">Espacio</button></th><th><button type="button" class="th-sort">Vídeos</button></th></tr></thead><tbody>${sorted.map((s) => `<tr><td><a href="/barcos/${s.slug}/">${esc(s.name)}</a></td><td data-v="${s.year}">${s.year}</td><td data-v="${s.gt}">${fmt(s.gt)}</td><td data-v="${s.pax || 0}">${fmt(s.pax)}</td><td data-v="${s.ratio || 0}">${dec(s.ratio)}</td><td data-v="${s.videos.length}">${s.videos.length || '—'}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Pulsa en una columna para ordenar.</p></section>
+  <section class="wrap block"><h2>Todos los barcos de ${esc(l.short)} comparados</h2><div class="table-wrap"><table class="rank-t sortable"><thead><tr><th><button type="button" class="th-sort">Barco</button></th><th><button type="button" class="th-sort">Nota</button></th><th><button type="button" class="th-sort">Año</button></th><th><button type="button" class="th-sort">Arqueo (GT)</button></th><th><button type="button" class="th-sort">Pasajeros</button></th><th><button type="button" class="th-sort">Espacio</button></th><th><button type="button" class="th-sort">Vídeos</button></th></tr></thead><tbody>${sorted.map((s) => `<tr><td><a href="/barcos/${s.slug}/">${esc(s.name)}</a></td><td data-v="${s.sc ?? -1}">${s.sc != null ? scoreBadge(s.sc) : '—'}</td><td data-v="${s.year}">${s.year}</td><td data-v="${s.gt}">${fmt(s.gt)}</td><td data-v="${s.pax || 0}">${fmt(s.pax)}</td><td data-v="${s.ratio || 0}">${dec(s.ratio)}</td><td data-v="${s.videos.length}">${s.videos.length || '—'}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Pulsa en una columna para ordenar.</p></section>
   <section class="wrap block"><h2>Fichas</h2><div class="grid">${sorted.map((s) => shipCard(s)).join('')}</div></section>
   <section class="wrap block"><div class="chips">${COMPARISONS.filter((c) => c.includes(l.slug)).map(([a, b]) => lineBySlug[a] && lineBySlug[b] ? `<a class="chip" href="/comparativas/${a}-vs-${b}/">${esc(lineBySlug[a].short)} vs ${esc(lineBySlug[b].short)}</a>` : '').join('')}</div>${shareBar(`Barcos de ${l.short} comparados en MejorCrucero:`, `/navieras/${l.slug}/`)}</section>`;
   return layout({ title: `Cruceros ${l.short}: barcos, opiniones y precio real`, desc: `Todos los barcos de ${l.short} comparados: año, tamaño, pasajeros y espacio, vídeos, cargos de servicio y dónde reservar.`, url: `/navieras/${l.slug}/`, body, crumbs: [['Inicio', '/'], ['Navieras', '/navieras/'], [l.short, `/navieras/${l.slug}/`]] });
@@ -478,17 +530,62 @@ function excursions() {
   return layout({ title: 'Excursiones en cruceros por tu cuenta: puerto a puerto', desc: 'Excursiones en español en Roma, Nápoles, Florencia, Marsella, Malta, Atenas, Santorini, Dubrovnik y más, más baratas que las del barco.', url: '/excursiones/', body, crumbs: [['Inicio', '/'], ['Excursiones', '/excursiones/']] });
 }
 
+const hasTag = (s, tag) => (tag.startsWith('tier:') ? s.tier === tag.slice(5) : s.tags.some((x) => x[0] === tag));
+const BEST_FOR = [
+  ['precio-medio', 'tier:estandar', 'Los mejores cruceros de precio medio', 'Navieras de gama media (MSC, Costa, Royal Caribbean, Norwegian, Carnival…): la mejor calidad sin pagar lujo.'],
+  ['familias', 'familias', 'Los mejores cruceros para familias', 'Barcos grandes (más de 160.000 GT) con atracciones, ordenados por nota.'],
+  ['espanol', 'espanol', 'Los mejores cruceros con español a bordo', 'Navieras que trabajan con el mercado español en el Mediterráneo.'],
+  ['lujo', 'lujo', 'Los mejores cruceros de lujo', 'Navieras de gama lujo.'],
+  ['parejas', 'premium', 'Los mejores cruceros para parejas', 'Navieras premium: ambiente más tranquilo y cuidado.'],
+  ['pequenos', 'pequeno', 'Los mejores barcos pequeños', 'Menos de 70.000 GT: menos colas y puertos más pequeños.'],
+  ['nuevos', 'nuevo', 'Los mejores barcos nuevos', 'Estrenados en los últimos 3 años.'],
+];
+function rankTable(list, { full = false } = {}) {
+  const pt = (s, k) => { const x = s.score.parts.find((p) => p.k === k); return x ? String(x.pts).replace('.', ',') : '—'; };
+  return `<div class="table-wrap"><table class="rank-t sortable"><thead><tr><th><button class="th-sort" type="button">#</button></th><th>Barco</th><th>Naviera</th><th><button class="th-sort" type="button">Nota</button></th>${full ? PARTS.map((P) => `<th><button class="th-sort" type="button">${P.label.split(' ')[0]}</button><small>/${P.max}</small></th>`).join('') : ''}</tr></thead><tbody>${list.map((s, i) => `<tr data-line="${s.lineSlug}"><td>${i + 1}</td><td><a href="/barcos/${s.slug}/">${esc(s.name)}</a></td><td>${esc(s.lineShort)}</td><td data-v="${s.sc}">${scoreBadge(s.sc)}</td>${full ? PARTS.map((P) => `<td>${pt(s, P.k)}</td>`).join('') : ''}</tr>`).join('')}</tbody></table></div>`;
+}
 function rankings() {
   const table = (list, col, label) => `<div class="table-wrap"><table class="rank-t"><thead><tr><th>#</th><th>Barco</th><th>Naviera</th><th>${label}</th></tr></thead><tbody>${list.map((s, i) => `<tr><td>${i + 1}</td><td><a href="/barcos/${s.slug}/">${esc(s.name)}</a></td><td>${esc(s.lineShort)}</td><td>${col(s)}</td></tr>`).join('')}</tbody></table></div>`;
   const big = [...ships].sort((a, b) => b.gt - a.gt).slice(0, 20);
   const roomy = ships.filter((s) => s.ratio && s.pax > 1500).sort((a, b) => b.ratio - a.ratio).slice(0, 20);
   const newest = [...ships].sort((a, b) => b.year - a.year || b.gt - a.gt).slice(0, 20);
-  const body = `<section class="wrap block page-h"><h1>Rankings de barcos de crucero ${new Date().getFullYear()}</h1><p class="lead-p">Datos públicos, sin opiniones compradas.</p>${shareBar('Los rankings de barcos de crucero de MejorCrucero:', '/rankings/')}</section>
+  const lines = lineList.map((l) => ({ l, best: scored.filter((s) => s.line === l.full) })).filter((x) => x.best.length);
+  const y = new Date().getFullYear();
+  const body = `<section class="wrap block page-h"><h1>Ranking de cruceros ${y}: los mejores barcos con nota de 0 a 100</h1><p class="lead-p">${scored.length} barcos puntuados con datos públicos y verificables: inspecciones sanitarias oficiales, espacio por pasajero, tripulación, antigüedad y opiniones verificadas. <a href="/metodologia/">Así calculamos la nota</a>.</p>${shareBar(`El ranking de los mejores cruceros de ${y}:`, '/rankings/')}</section>
+  <section class="wrap block" id="top"><h2>Top 100 barcos de crucero</h2>
+  <form class="filters filters-inline" id="rank-filter"><label><span>Naviera</span><select name="linea"><option value="">Todas</option>${lines.map(({ l, best }) => `<option value="${l.slug}">${esc(l.short)} (${best.length})</option>`).join('')}</select></label></form>
+  ${rankTable(scored.slice(0, 100), { full: true })}${scored.length > 100 ? `<details class="az"><summary>Ver los ${scored.length - 100} barcos restantes</summary>${rankTable(scored.slice(100), { full: true })}</details>` : ''}</section>
+  <section class="wrap block" id="mejores-para"><h2>Los mejores según para qué</h2><div class="grid grid-3">${BEST_FOR.map(([slug, tag, t]) => { const l = scored.filter((s) => hasTag(s, tag)).slice(0, 3); return l.length ? `<a class="tool tool-light" href="/rankings/${slug}/"><h3>${esc(t)}</h3><ol class="small">${l.map((s) => `<li>${esc(s.name)} · ${s.sc}</li>`).join('')}</ol></a>` : ''; }).join('')}</div></section>
+  <section class="wrap block" id="navieras"><h2>El mejor barco de cada naviera</h2><div class="table-wrap"><table class="rank-t"><thead><tr><th>Naviera</th><th>Mejor barco</th><th>Nota</th><th>Media de la flota</th></tr></thead><tbody>${lines.sort((a, b) => b.best[0].sc - a.best[0].sc).map(({ l, best }) => `<tr><td><a href="/navieras/${l.slug}/">${esc(l.short)}</a></td><td><a href="/barcos/${best[0].slug}/">${esc(best[0].name)}</a></td><td>${scoreBadge(best[0].sc)}</td><td>${Math.round(best.reduce((a, s) => a + s.sc, 0) / best.length)} (${best.length} barcos)</td></tr>`).join('')}</tbody></table></div></section>
   <section class="wrap block" id="grandes"><h2>Los 20 barcos más grandes</h2>${table(big, (s) => fmt(s.gt) + ' GT', 'Arqueo')}</section>
-  <section class="wrap block" id="espaciosos"><h2>Los 20 barcos con más espacio por pasajero</h2><p class="muted small">Arqueo bruto ÷ pasajeros, barcos de más de 1.500 pasajeros. Orientativo: no todas las navieras publican la capacidad con el mismo criterio.</p>${table(roomy, (s) => dec(s.ratio), 'Índice')}</section>
+  <section class="wrap block" id="espaciosos"><h2>Los 20 barcos con más espacio por pasajero</h2><p class="muted small">Arqueo bruto ÷ pasajeros, barcos de más de 1.500 pasajeros.</p>${table(roomy, (s) => dec(s.ratio), 'Índice')}</section>
   <section class="wrap block" id="nuevos"><h2>Los 20 barcos más nuevos</h2>${table(newest, (s) => s.year, 'Año')}</section>
-  <section class="wrap block"><p class="muted small">Fuente: Wikipedia (lista de cruceros y artículos de cada naviera), consultada en octubre de 2026.</p></section>`;
-  return layout({ title: 'Rankings de cruceros: los barcos más grandes, nuevos y espaciosos', desc: 'Ranking de los barcos de crucero más grandes del mundo, los más nuevos y los que más espacio ofrecen por pasajero.', url: '/rankings/', body, crumbs: [['Inicio', '/'], ['Rankings', '/rankings/']] });
+  <section class="wrap block"><p class="muted small">Fuentes: CDC Vessel Sanitation Program, Wikipedia y opiniones verificadas de la comunidad. Actualizado el ${BUILD_DATE}.</p></section>`;
+  return layout({ title: `Ranking de cruceros ${y}: los mejores barcos del mundo con nota 0-100`, desc: `Los ${scored.length} mejores barcos de crucero puntuados de 0 a 100 con datos oficiales: higiene (CDC), espacio, tripulación, antigüedad y opiniones. Mejores para familias, parejas, lujo y con español a bordo.`, url: '/rankings/', body, crumbs: [['Inicio', '/'], ['Ranking', '/rankings/']],
+    schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: `Mejores barcos de crucero ${y}`, itemListElement: scored.slice(0, 20).map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + '/barcos/' + s.slug + '/', name: s.name })) }] });
+}
+function bestForPage([slug, tag, title, desc]) {
+  const l = scored.filter((s) => hasTag(s, tag));
+  const y = new Date().getFullYear();
+  const body = `<section class="wrap block page-h"><h1>${esc(title)} (${y})</h1><p class="lead-p">${esc(desc)} Ordenados por MejorCrucero Score. <a href="/metodologia/">Metodología</a>.</p>${shareBar(title + ':', '/rankings/' + slug + '/')}</section>
+  <section class="wrap block"><div class="grid">${l.slice(0, 12).map((s) => shipCard(s)).join('')}</div></section>
+  <section class="wrap block"><h2>Clasificación completa</h2>${rankTable(l)}</section>`;
+  return layout({ title: `${title} ${y}`, desc: `${title} según el MejorCrucero Score: ${l.slice(0, 3).map((s) => s.name).join(', ')} y más, con nota de 0 a 100 y datos verificables.`, url: '/rankings/' + slug + '/', body, crumbs: [['Inicio', '/'], ['Ranking', '/rankings/'], [title, '/rankings/' + slug + '/']] });
+}
+function methodology() {
+  const ex = scored[0];
+  const body = `<section class="wrap block page-h narrow"><h1>Cómo calculamos el MejorCrucero Score</h1><p class="lead-p">Una nota de 0 a 100 para cada barco, hecha solo con datos que cualquiera puede comprobar. Sin notas pagadas: las comisiones de afiliación no cambian ni la nota ni el orden.</p>
+  <h2>Los 5 indicadores</h2><div class="table-wrap"><table class="spec"><thead><tr><th>Indicador</th><th>Puntos</th><th>Cómo se calcula</th></tr></thead><tbody>${PARTS.map((P) => `<tr><th scope="row">${P.label}</th><td>${P.max}</td><td>${esc(P.how)}</td></tr>`).join('')}</tbody></table></div>
+  <h2>Cuando falta un dato</h2><p>Si no hay dato fiable de un indicador (por ejemplo, barcos que nunca hacen escala en EE. UU. no tienen inspección del CDC), ese indicador no cuenta y la nota se reescala sobre los puntos disponibles. En cada ficha indicamos qué datos faltan. Si un barco no tiene al menos el espacio por pasajero y otros dos indicadores, <b>no le damos nota</b>: preferimos "sin datos" a una nota inventada.</p>
+  <h2>Escala</h2><ul><li><b>85–100</b> Excelente</li><li><b>75–84</b> Muy bueno</li><li><b>65–74</b> Bueno</li><li><b>50–64</b> Correcto</li><li><b>0–49</b> Flojo</li></ul>
+  ${ex ? `<h2>Ejemplo: ${esc(ex.name)} (${ex.sc}/100)</h2><ul>${ex.score.parts.map((p) => `<li>${esc(p.label)}: ${String(p.pts).replace('.', ',')} de ${p.max} — ${esc(p.detail)}</li>`).join('')}</ul>` : ''}
+  <h2>Fuentes</h2><ul><li>Inspecciones sanitarias: <a href="https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx" target="_blank" rel="noopener">CDC Vessel Sanitation Program</a> (Centros para el Control y la Prevención de Enfermedades de EE. UU.).</li><li>Arqueo, pasajeros, tripulación, eslora y reformas: artículos de Wikipedia de cada barco (enlazados en cada ficha).</li><li>Opiniones: comunidad de MejorCrucero, con moderación y detección de spam. Las opiniones verificadas con la confirmación de reserva pesan igual pero llevan insignia.</li></ul>
+  <h2>¿Ves un error?</h2><p>Cada ficha tiene un botón para reportarlo. Revisamos y corregimos con la fuente delante.</p><p class="muted small">Última actualización: ${BUILD_DATE}. La nota se recalcula a diario.</p></section>`;
+  return layout({ title: 'Cómo calculamos el MejorCrucero Score (nota de 0 a 100)', desc: 'Metodología de la nota de 0 a 100 de los barcos de crucero: higiene oficial del CDC, espacio por pasajero, tripulación, modernidad y opiniones verificadas.', url: '/metodologia/', body, crumbs: [['Inicio', '/'], ['Metodología', '/metodologia/']] });
+}
+function embedPage(s) {
+  const c = s.sc >= 85 ? '#065f46' : s.sc >= 75 ? '#166534' : s.sc >= 65 ? '#92400e' : s.sc >= 50 ? '#9a3412' : '#991b1b';
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><link rel="icon" href="${SITE}/favicon.svg"><title>${esc(s.name)} · MejorCrucero Score</title><style>body{margin:0;font:14px/1.3 system-ui,sans-serif}a{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid #e2e8f0;border-radius:12px;color:#0f172a;text-decoration:none;background:#fff;height:94px;box-sizing:border-box}b.n{display:grid;place-items:center;min-width:64px;height:64px;border-radius:14px;background:${c};color:#fff;font-size:28px}small{color:#64748b;display:block}</style></head><body><a href="${SITE}/barcos/${s.slug}/" target="_blank" rel="noopener"><b class="n">${s.sc}</b><span><strong>${esc(s.name)}</strong><small>${scoreLabel(s.sc)} · nº ${s.rank} de ${scored.length}</small><small>MejorCrucero Score</small></span></a></body></html>`;
 }
 
 // ---------- herramientas ----------
@@ -505,6 +602,13 @@ const TOOLS = [
   ['conversor-horario', '🕐', 'Conversor horario', 'Hora del puerto frente a la del barco y la tuya.'],
   ['reclamar', '✉️', 'Reclamar una bajada de precio', 'Te escribimos el email para pedir la diferencia.'],
   ['camarotes', '🛏️', 'Buscador de camarotes', 'Lo que cuenta la comunidad de cada número de camarote.'],
+  ['propinas', '💵', 'Simulador de propinas', 'Cuánto pagarás de cargo de servicio según naviera, noches y personas.'],
+  ['paquete-bebidas', '🍹', '¿Me compensa el paquete de bebidas?', 'Tus consumos frente al precio del paquete.'],
+  ['presupuesto-compartido', '🧮', 'Presupuesto compartido', 'Quién ha pagado qué y cómo quedar en paz entre amigos.'],
+  ['tiempo-puerto', '🌤️', 'El tiempo en tu puerto', 'Previsión de 14 días para puertos de salida y escala.'],
+  ['maleta', '🧳', 'Maleta según destino y mes', 'Lista de equipaje adaptada al clima de tu crucero.'],
+  ['documentacion', '🛂', 'Documentación por destino', 'Qué papeles necesitas y dónde comprobarlo en fuentes oficiales.'],
+  ['glosario', '📖', 'Glosario del crucerista', 'Tender, muster drill, todo incluido… explicado en cristiano.'],
 ];
 const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'], [n, u]];
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
@@ -683,6 +787,89 @@ function toolCabins() {
   return layout({ title: 'Buscador de camarotes de crucero por número', desc: 'Busca un camarote por número y barco: opiniones sobre ruido, vistas y vídeos de otros cruceristas.', url: '/herramientas/camarotes/', body, crumbs: toolCrumbs('Camarotes', '/herramientas/camarotes/') });
 }
 
+
+// Coordenadas de puertos (para la previsión del tiempo)
+const PORT_COORDS = [['Barcelona', 41.37, 2.18], ['Palma de Mallorca', 39.56, 2.63], ['Valencia', 39.45, -0.32], ['Málaga', 36.71, -4.42], ['Alicante', 38.34, -0.48], ['Cádiz', 36.53, -6.29], ['Tarragona', 41.1, 1.24], ['Bilbao', 43.34, -3.03], ['Vigo', 42.24, -8.72], ['Santa Cruz de Tenerife', 28.47, -16.24], ['Las Palmas de Gran Canaria', 28.14, -15.41], ['Lisboa', 38.71, -9.13], ['Funchal (Madeira)', 32.64, -16.91], ['Marsella', 43.3, 5.36], ['Génova', 44.41, 8.92], ['Roma (Civitavecchia)', 42.09, 11.79], ['Nápoles', 40.84, 14.26], ['La Spezia', 44.1, 9.82], ['Venecia', 45.43, 12.33], ['Malta (La Valeta)', 35.9, 14.51], ['Atenas (El Pireo)', 37.94, 23.64], ['Santorini', 36.42, 25.43], ['Mykonos', 37.45, 25.33], ['Dubrovnik', 42.65, 18.09], ['Kotor', 42.42, 18.77], ['Estambul', 41.03, 28.98], ['Southampton', 50.9, -1.4], ['Copenhague', 55.69, 12.6], ['Kiel', 54.32, 10.14], ['Bergen', 60.39, 5.32], ['Geiranger', 62.1, 7.21], ['Estocolmo', 59.33, 18.07], ['Miami', 25.77, -80.17], ['Fort Lauderdale', 26.09, -80.12], ['Port Canaveral', 28.41, -80.61], ['Nassau', 25.08, -77.35], ['Cozumel', 20.5, -86.95], ['San Juan', 18.46, -66.1], ['Saint Thomas', 18.34, -64.93], ['Juneau (Alaska)', 58.3, -134.42], ['Seattle', 47.61, -122.35], ['Buenos Aires', -34.6, -58.37]];
+const DEST_CLIMATE = { 'mediterraneo-occidental': ['warm', 0, 0, 0], 'mediterraneo-oriental': ['warm', 0, 1, 1], caribe: ['warm', 1, 0, 1], 'fiordos-noruegos': ['cold', 0, 0, 0], 'capitales-balticas': ['mild', 0, 0, 0], 'canarias-y-madeira': ['warm', 1, 0, 0], alaska: ['cold', 0, 0, 1], transatlanticos: ['mild', 0, 0, 1] };
+function toolTips() {
+  const ls = lineList.filter((l) => l.tip).sort((a, b) => a.short.localeCompare(b.short));
+  const body = `<section class="wrap block page-h narrow"><h1>Simulador de propinas de crucero</h1><p class="lead-p">El cargo de servicio (las "propinas") se suma a tu cuenta cada noche. Calcula cuánto será.</p>
+  <form class="calc" id="tip-form" data-fx="${fx?.usdEur || 0.9}"><label><span>Naviera</span><select name="linea">${ls.map((l) => `<option data-tip="${l.tip}" data-suite="${l.tipSuite || l.tip}">${esc(l.short)} · ${String(l.tip).replace('.', ',')} $</option>`).join('')}</select></label>
+  <label><span>Camarote</span><select name="cabin"><option value="std">Interior, exterior o balcón</option><option value="suite">Suite</option></select></label>
+  <label><span>Noches</span><input name="nights" type="number" min="1" max="60" value="7" inputmode="numeric"></label><label><span>Personas</span><input name="people" type="number" min="1" max="10" value="2" inputmode="numeric"></label></form>
+  <div id="tip-out" class="calc-out" aria-live="polite"></div><p class="muted small">Fuente: ${esc(SOURCES[1][0])}. <a href="/guias/propinas-y-cargos-de-servicio/">Guía de propinas</a>.</p></section>`;
+  return layout({ title: 'Simulador de propinas de crucero por naviera', desc: 'Calcula el cargo de servicio (propinas) de tu crucero según naviera, noches, personas y tipo de camarote.', url: '/herramientas/propinas/', body, crumbs: toolCrumbs('Propinas', '/herramientas/propinas/') });
+}
+function toolDrinks() {
+  const f = (n, l, v, step = 1) => `<label><span>${l}</span><input name="${n}" type="number" min="0" step="${step}" value="${v}" inputmode="decimal"></label>`;
+  const body = `<section class="wrap block page-h narrow"><h1>¿Me compensa el paquete de bebidas del crucero?</h1><p class="lead-p">Pon lo que sueles beber al día y el precio del paquete de tu naviera. Los precios por bebida son editables: cópialos de la carta de tu barco.</p>
+  <form class="calc grid-form" id="drinks-form">
+  ${f('pack', 'Precio del paquete por persona y día (€)', 60)}${f('service', 'Cargo de servicio sobre bebidas (%)', 18)}${f('nights', 'Noches', 7)}
+  <fieldset><legend>Al día bebes…</legend>${f('coffee', 'Cafés especiales', 2)}${f('soft', 'Refrescos', 2)}${f('water', 'Botellas de agua', 1)}${f('beer', 'Cervezas', 2)}${f('wine', 'Copas de vino', 1)}${f('cocktail', 'Cócteles', 2)}</fieldset>
+  <fieldset><legend>Precio por bebida (€)</legend>${f('p_coffee', 'Café', 4, 0.5)}${f('p_soft', 'Refresco', 4, 0.5)}${f('p_water', 'Agua', 4, 0.5)}${f('p_beer', 'Cerveza', 8, 0.5)}${f('p_wine', 'Vino', 10, 0.5)}${f('p_cocktail', 'Cóctel', 14, 0.5)}</fieldset></form>
+  <div id="drinks-out" class="calc-out" aria-live="polite"></div><p class="muted small">Los valores iniciales son solo un ejemplo para empezar: cambia todos por los de tu naviera. <a href="/guias/paquete-de-bebidas/">Guía del paquete de bebidas</a>.</p></section>`;
+  return layout({ title: '¿Compensa el paquete de bebidas del crucero? Calculadora', desc: 'Calcula si te compensa el paquete de bebidas de tu crucero según lo que bebes cada día y los precios de tu barco.', url: '/herramientas/paquete-bebidas/', body, crumbs: toolCrumbs('Paquete de bebidas', '/herramientas/paquete-bebidas/') });
+}
+function toolSplit() {
+  const body = `<section class="wrap block page-h narrow"><h1>Presupuesto compartido del crucero</h1><p class="lead-p">Para viajes en grupo: apunta quién paga qué y te decimos cómo quedar en paz con los mínimos pagos. Se guarda en este dispositivo.</p>
+  <form class="calc" id="split-form"><label class="f-wide"><span>Viajeros (separados por comas)</span><input name="people" placeholder="Ana, Luis, Marta, Pablo"></label>
+  <label><span>Concepto</span><input name="what" placeholder="Excursión Santorini"></label><label><span>Importe (€)</span><input name="amount" type="number" min="0" step="0.01" inputmode="decimal"></label><label><span>Pagó</span><select name="who"></select></label><button class="btn" type="submit">Añadir gasto</button></form>
+  <div id="split-out" class="tool-out" aria-live="polite"></div><p><button class="btn btn-ghost btn-sm js-split-reset" type="button">Empezar de cero</button></p></section>`;
+  return layout({ title: 'Presupuesto compartido para cruceros en grupo', desc: 'Divide los gastos del crucero entre amigos o familia: quién ha pagado qué y cuánto debe cada uno.', url: '/herramientas/presupuesto-compartido/', body, crumbs: toolCrumbs('Presupuesto compartido', '/herramientas/presupuesto-compartido/') });
+}
+function toolWeather() {
+  const body = `<section class="wrap block page-h"><h1>El tiempo en tu puerto de crucero</h1><p class="lead-p">Previsión de 14 días para los principales puertos de salida y escala.</p>
+  <form class="calc" id="weather-form"><label class="f-wide"><span>Puerto</span><select name="port">${PORT_COORDS.map(([n, a, b]) => `<option value="${a}|${b}|${esc(n)}">${esc(n)}</option>`).join('')}</select></label></form>
+  <div id="weather-out" class="tool-out" aria-live="polite"></div></section>`;
+  return layout({ title: 'El tiempo en los puertos de crucero: previsión de 14 días', desc: 'Previsión del tiempo de 14 días en Barcelona, Palma, Málaga, Santorini, Miami, fiordos y otros puertos de crucero.', url: '/herramientas/tiempo-puerto/', body, crumbs: toolCrumbs('El tiempo en tu puerto', '/herramientas/tiempo-puerto/') });
+}
+function toolPack() {
+  const body = `<section class="wrap block page-h narrow"><h1>Qué meter en la maleta para un crucero</h1><p class="lead-p">Elige destino y mes: te damos la lista adaptada al clima. Márcala sobre la marcha.</p>
+  <form class="calc" id="pack-form"><label><span>Destino</span><select name="dest">${DESTINATIONS.map((d) => { const c = DEST_CLIMATE[d.slug] || ['mild', 0, 0, 0]; return `<option data-months='${JSON.stringify(d.months)}' data-climate="${c[0]}" data-always="${c[1]}" data-religious="${c[2]}" data-plane="${c[3] || (d.fromSpain ? 0 : 1)}">${esc(d.name)}</option>`; }).join('')}</select></label>
+  <label><span>Mes</span><select name="month">${MONTHS.map((m, i) => `<option value="${i + 1}"${i === 6 ? ' selected' : ''}>${cap(m)}</option>`).join('')}</select></label></form>
+  <div id="pack-out" class="tool-out" aria-live="polite"></div><p class="small"><a href="/herramientas/checklist/">Checklist completo del crucero</a> · <a href="/herramientas/tiempo-puerto/">El tiempo en tu puerto</a></p></section>`;
+  return layout({ title: 'Qué llevar a un crucero: maleta según destino y mes', desc: 'Lista de equipaje para tu crucero adaptada al destino y al mes: Mediterráneo, Caribe, fiordos, Alaska y más.', url: '/herramientas/maleta/', body, crumbs: toolCrumbs('Maleta', '/herramientas/maleta/') });
+}
+function toolDocs() {
+  const rows = [
+    ['Crucero solo por la UE / espacio Schengen (Mediterráneo occidental, Grecia, Báltico)', 'Ciudadanos españoles: DNI o pasaporte en vigor. Algunas navieras exigen pasaporte siempre: míralo en tu reserva. Si el itinerario toca un país fuera de la UE (Montenegro, Turquía, Marruecos, Reino Unido…) necesitarás pasaporte.', 'https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Recomendaciones-de-viaje.aspx', 'Recomendaciones de viaje (Ministerio de Asuntos Exteriores)'],
+    ['Reino Unido (Southampton, escalas británicas)', 'Pasaporte y autorización electrónica de viaje (ETA) del Reino Unido para la mayoría de visitantes.', 'https://www.gov.uk/guidance/apply-for-an-electronic-travel-authorisation-eta', 'GOV.UK: ETA'],
+    ['Estados Unidos (Miami, Alaska, Caribe con escala en EE. UU.)', 'Pasaporte y autorización ESTA (o visado). Solicítala solo en la web oficial.', 'https://esta.cbp.dhs.gov/', 'ESTA (CBP, web oficial)'],
+    ['Canadá (Alaska desde Vancouver, Nueva Inglaterra)', 'Pasaporte y eTA de Canadá si llegas en avión.', 'https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html', 'Gobierno de Canadá: eTA'],
+    ['Caribe (otros países) y Sudamérica', 'Pasaporte con validez suficiente (normalmente 6 meses). Los requisitos cambian por país.', 'https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Recomendaciones-de-viaje.aspx', 'Fichas por país (Exteriores)'],
+  ];
+  const body = `<section class="wrap block page-h narrow"><h1>Documentación para un crucero según el destino</h1><p class="lead-p">Qué necesitas y, sobre todo, dónde comprobarlo en la fuente oficial. Los requisitos cambian: revisa siempre la web oficial y las condiciones de tu naviera antes de viajar.</p>
+  ${rows.map(([t, d, u, l]) => `<div class="side-card"><h2 class="h-sm">${esc(t)}</h2><p>${esc(d)}</p><p class="small"><a href="${u}" target="_blank" rel="noopener">${esc(l)} →</a></p></div>`).join('')}
+  <h2>Siempre</h2><ul><li>Tarjeta Sanitaria Europea para escalas en la UE y seguro de viaje con cobertura médica y de evacuación.</li><li>Menores que viajan sin uno de los progenitores: autorización y copia del documento del otro progenitor (consulta la política de tu naviera).</li><li>Las tarjetas de embarque y el registro online de la naviera (check-in) se completan días antes de salir.</li></ul>
+  <p class="muted small">Información orientativa para ciudadanos españoles, revisada el ${BUILD_DATE}. No sustituye a la información oficial. <a href="/guias/documentacion/">Guía completa de documentación</a>.</p></section>`;
+  return layout({ title: 'Documentación para un crucero: DNI, pasaporte, ESTA y ETA', desc: 'Qué documentación necesitas para tu crucero según el destino (UE, Reino Unido, EE. UU., Caribe) y enlaces a las webs oficiales.', url: '/herramientas/documentacion/', body, crumbs: toolCrumbs('Documentación', '/herramientas/documentacion/') });
+}
+const GLOSSARY = [
+  ['All inclusive / todo incluido', 'En crucero suele significar comidas en restaurantes principales y bufé. Las bebidas alcohólicas, cafés especiales, restaurantes de especialidad y propinas casi nunca están incluidos salvo que lo diga el paquete.'],
+  ['Arqueo bruto (GT)', 'Medida del volumen interior del barco, no de su peso. Sirve para comparar tamaños.'],
+  ['Babor y estribor', 'Babor es el lado izquierdo mirando hacia la proa; estribor, el derecho.'],
+  ['Camarote garantizado (GTY)', 'Pagas una categoría y la naviera te asigna el número más tarde. Más barato, pero no eliges ubicación.'],
+  ['Cargo de servicio', 'Las "propinas" automáticas que se cargan por persona y noche.'],
+  ['Cubierta', 'Cada planta del barco.'],
+  ['Desembarque exprés', 'Salir del barco cargando tú con tu equipaje, sin esperar a que lo bajen.'],
+  ['Día de navegación', 'Día sin escala, en alta mar.'],
+  ['Escala', 'Puerto que se visita durante el crucero.'],
+  ['Eslora', 'Longitud del barco.'],
+  ['Muster drill / simulacro', 'Ejercicio de seguridad obligatorio antes de zarpar: te explican tu punto de reunión.'],
+  ['Naviera', 'La compañía que opera los barcos (MSC, Costa, Royal Caribbean…).'],
+  ['Popa y proa', 'Popa es la parte de atrás del barco; proa, la de delante.'],
+  ['Puerto base', 'Puerto donde empieza y acaba el crucero.'],
+  ['Tarjeta de crucero', 'Tu llave del camarote, identificación y medio de pago a bordo. Todo se carga a tu cuenta.'],
+  ['Tender', 'Lanchas que llevan a tierra cuando el barco fondea fuera del puerto. Con mal tiempo se puede cancelar la escala.'],
+  ['Tasas portuarias', 'Impuestos y tasas de los puertos. A veces vienen aparte del precio anunciado.'],
+  ['Ocupación doble', 'Precio por persona con dos personas en el camarote. Viajar solo suele tener suplemento.'],
+];
+function glossary() {
+  const body = `<section class="wrap block page-h narrow"><h1>Glosario del crucerista</h1><p class="lead-p">La jerga de los cruceros, explicada en cristiano.</p><dl class="gloss">${GLOSSARY.map(([t, d]) => `<dt id="${slugify(t)}">${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')}</dl></section>`;
+  return layout({ title: 'Glosario de cruceros: tender, muster drill, GTY y más', desc: 'Diccionario de términos de cruceros explicados de forma sencilla: tender, muster drill, camarote garantizado, arqueo bruto y más.', url: '/herramientas/glosario/', body, crumbs: toolCrumbs('Glosario', '/herramientas/glosario/'),
+    schema: [{ '@context': 'https://schema.org', '@type': 'DefinedTermSet', name: 'Glosario del crucerista', hasDefinedTerm: GLOSSARY.map(([t, d]) => ({ '@type': 'DefinedTerm', name: t, description: d })) }] });
+}
+
 // ---------- comunidad ----------
 function community() {
   const shipOpts = [...ships].sort((a, b) => a.name.localeCompare(b.name)).map((s) => `<option value="${s.slug}">${esc(s.name)}</option>`).join('');
@@ -728,8 +915,15 @@ function myCruises() {
   const body = `<section class="wrap block page-h"><h1>Mis cruceros</h1><p class="lead-p">Tus favoritos, lo último que has visto, tus alertas y tu cuenta atrás. Se guarda en este dispositivo, sin registro.</p></section>
   <section class="wrap block"><h2>❤️ Favoritos</h2><div class="grid" id="my-favs"><p class="muted">Pulsa el corazón en cualquier barco para guardarlo aquí.</p></div></section>
   <section class="wrap block"><h2>🕘 Vistos recientemente</h2><div class="grid" id="my-recent"><p class="muted">Todavía no has visto ningún barco.</p></div></section>
+  <section class="wrap block" id="avisos"><h2>💬 Avisos</h2><div id="my-notifs"><p class="muted">Cargando…</p></div></section>
+  <section class="wrap block split"><div><h2>🚢 Barcos en los que he navegado</h2><form class="calc" id="log-form"><label><span>Barco</span><input name="ship" list="log-ships" required autocomplete="off"></label><label><span>Año</span><input name="year" type="number" min="1970" max="2030" inputmode="numeric"></label><button class="btn" type="submit">Añadir</button><p class="form-msg" role="status"></p></form>${shipDatalist('log-ships')}<div id="log-out"></div></div><div><h2>🏅 Mi resumen y retos</h2><div id="wrapped"><p class="muted">Añade tus cruceros para ver tu resumen.</p></div></div></section>
   <section class="wrap block split"><div><h2>🔔 Alertas</h2><div id="my-alerts"><p class="muted">Sin alertas. <a href="/herramientas/alerta-precio/">Crear una</a>.</p></div></div><div><h2>⏳ Cuenta atrás</h2><div id="my-cd"><p class="muted">Sin cruceros. <a href="/herramientas/cuenta-atras/">Añadir</a>.</p></div></div></section>`;
   return layout({ title: 'Mis cruceros: favoritos, alertas y cuenta atrás', desc: 'Tus barcos favoritos, vistos recientemente, alertas de precio y cuenta atrás.', url: '/mis-cruceros/', body, noindex: true, crumbs: [['Inicio', '/'], ['Mis cruceros', '/mis-cruceros/']] });
+}
+
+function admin() {
+  const body = `<section class="wrap block page-h"><h1>Panel de MejorCrucero</h1><form class="calc" id="adm-form"><label><span>Clave de administrador</span><input id="adm-token" type="password" autocomplete="current-password"></label><label><span>Periodo</span><select id="adm-days"><option value="7">7 días</option><option value="30" selected>30 días</option><option value="90">90 días</option></select></label><button class="btn" type="submit">Entrar</button></form><div id="adm-out"></div></section><script src="/assets/admin.js?v=${BUILD_DATE}" defer></script>`;
+  return layout({ title: 'Panel de administración', desc: 'Panel interno.', url: '/admin/', body, noindex: true, crumbs: [['Inicio', '/'], ['Panel', '/admin/']] });
 }
 
 // ---------- guías ----------
@@ -815,6 +1009,9 @@ write('puertos/index.html', portsIndex());
 allPorts.forEach((p) => write(`puertos/${p.slug}/index.html`, portPage(p)));
 write('excursiones/index.html', excursions());
 write('rankings/index.html', rankings());
+BEST_FOR.forEach((b) => write(`rankings/${b[0]}/index.html`, bestForPage(b)));
+write('metodologia/index.html', methodology());
+scored.forEach((s) => { fs.mkdirSync(path.join(OUT, 'embed', s.slug), { recursive: true }); fs.writeFileSync(path.join(OUT, 'embed', s.slug, 'index.html'), embedPage(s)); });
 write('herramientas/index.html', toolsIndex());
 write('herramientas/precio-real/index.html', toolPrice());
 write('herramientas/alerta-precio/index.html', toolAlert());
@@ -828,11 +1025,19 @@ write('herramientas/cuenta-atras/index.html', toolCountdown());
 write('herramientas/mareometro/index.html', toolSea());
 write('herramientas/conversor-horario/index.html', toolTime());
 write('herramientas/camarotes/index.html', toolCabins());
+write('herramientas/propinas/index.html', toolTips());
+write('herramientas/paquete-bebidas/index.html', toolDrinks());
+write('herramientas/presupuesto-compartido/index.html', toolSplit());
+write('herramientas/tiempo-puerto/index.html', toolWeather());
+write('herramientas/maleta/index.html', toolPack());
+write('herramientas/documentacion/index.html', toolDocs());
+write('herramientas/glosario/index.html', glossary());
 write('comunidad/index.html', community());
 write('comunidad/salida/index.html', rollcallShell());
 write('comunidad/perfil/index.html', profileShell());
 write('comunidad/ranking/index.html', leaderboard());
 write('mis-cruceros/index.html', myCruises());
+write('admin/index.html', admin());
 write('guias/index.html', guidesIndex());
 GUIDES.forEach((g) => write(`guias/${g.slug}/index.html`, guidePage(g)));
 write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));
@@ -848,7 +1053,7 @@ write('offline/index.html', offline());
 
 // datos para el JS del cliente
 const lineOf = (slug) => Object.values(LINES).find((l) => l.slug === slug) || {};
-write('data/ships.json', JSON.stringify(ships.map(({ name, slug, lineShort, lineSlug, year, gt, pax, ratio, size, color, tier, photo, videos }) => ({ name, slug, lineShort, lineSlug, year, gt, pax, ratio, size, color, tier, es: !!lineOf(lineSlug).es, tip: lineOf(lineSlug).tip ?? null, img: photo?.thumb || null, v: videos.length }))));
+write('data/ships.json', JSON.stringify(ships.map(({ name, slug, lineShort, lineSlug, year, gt, pax, ratio, size, color, tier, photo, videos, sc, crew, tags, rank, score }) => ({ name, slug, lineShort, lineSlug, year, gt, pax, ratio, size, color, tier, es: !!lineOf(lineSlug).es, tip: lineOf(lineSlug).tip ?? null, img: photo?.thumb ? (photo.local ? BASE.replace(/\/$/, '') : '') + photo.thumb : null, v: videos.length, sc, crew, rank: rank ?? null, tags: tags.map((t) => t[0]), p: score ? Object.fromEntries(score.parts.map((x) => [x.k, x.pts])) : null }))));
 write('data/index.json', JSON.stringify([
   ...ships.map((s) => [s.name, `/barcos/${s.slug}/`, s.lineShort]),
   ...lineList.map((l) => [l.short, `/navieras/${l.slug}/`, 'Naviera']),
@@ -863,7 +1068,7 @@ write('data/config.json', JSON.stringify({ api: CONFIG.api, ab: CONFIG.ab, fx })
 // sitemap + robots + service worker
 const sm = pages.filter((p) => !p.noindex).map((p) => `<url><loc>${SITE}${p.url}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join('');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sm}</urlset>`);
-write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nSitemap: ${SITE}/sitemap.xml\n`);
+write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nDisallow: /admin/\nDisallow: /embed/\nSitemap: ${SITE}/sitemap.xml\n`);
 write('sw.js', `const V='mc-${Date.now()}';const B='${BASE}';const CORE=[B,B+'offline/',B+'assets/style.css?v=${BUILD_DATE}',B+'assets/app.js?v=${BUILD_DATE}',B+'mis-cruceros/',B+'herramientas/checklist/',B+'herramientas/cuenta-atras/'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

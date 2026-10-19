@@ -1,0 +1,1826 @@
+{
+ "AIDAbella": {
+  "score": 98,
+  "date": "2014-10-28",
+  "avg3": 96.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "AIDABella"
+ },
+ "AIDAdiva": {
+  "score": 99,
+  "date": "2019-11-10",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "AIDAdiva"
+ },
+ "AIDAluna": {
+  "score": 91,
+  "date": "2019-10-06",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "AIDAluna"
+ },
+ "AIDAmar": {
+  "score": 94,
+  "date": "2017-10-31",
+  "avg3": 95.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "AIDAmar"
+ },
+ "Adventure of the Seas": {
+  "score": 95,
+  "date": "2026-06-02",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Adventure of the Seas"
+ },
+ "Allura": {
+  "score": 100,
+  "date": "2026-03-23",
+  "avg3": 100.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Allura"
+ },
+ "Allure of the Seas": {
+  "score": 98,
+  "date": "2026-04-29",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Allure of the Seas"
+ },
+ "Amadea": {
+  "score": 89,
+  "date": "2026-02-10",
+  "avg3": 91.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Amadea"
+ },
+ "Amera": {
+  "score": 98,
+  "date": "2023-09-12",
+  "avg3": 97.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Amera"
+ },
+ "Anthem of the Seas": {
+  "score": 100,
+  "date": "2026-06-11",
+  "avg3": 99.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Anthem of the Seas"
+ },
+ "Arcadia": {
+  "score": 96,
+  "date": "2026-03-20",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Arcadia"
+ },
+ "Artania": {
+  "score": 94,
+  "date": "2023-11-15",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Artania"
+ },
+ "Aurora": {
+  "score": 98,
+  "date": "2025-09-18",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Aurora"
+ },
+ "Azamara Journey": {
+  "score": 99,
+  "date": "2024-11-06",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Azamara Journey"
+ },
+ "Azamara Onward": {
+  "score": 96,
+  "date": "2025-12-03",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Azamara Onward"
+ },
+ "Azamara Pursuit": {
+  "score": 99,
+  "date": "2026-05-26",
+  "avg3": 97.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Azamara Pursuit"
+ },
+ "Azamara Quest": {
+  "score": 96,
+  "date": "2026-03-26",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Azamara Quest"
+ },
+ "Azura": {
+  "score": 95,
+  "date": "2016-12-27",
+  "avg3": 96.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Azura"
+ },
+ "Balmoral": {
+  "score": 95,
+  "date": "2023-10-12",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Balmoral"
+ },
+ "Borealis": {
+  "score": 94,
+  "date": "2019-02-14",
+  "avg3": 94.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Borealis"
+ },
+ "Brilliance of the Seas": {
+  "score": 92,
+  "date": "2026-04-12",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Brilliance of the Seas"
+ },
+ "Brilliant Lady": {
+  "score": 97,
+  "date": "2026-04-06",
+  "avg3": 98.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Brilliant Lady"
+ },
+ "Britannia": {
+  "score": 95,
+  "date": "2016-12-13",
+  "avg3": 95.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Britannia"
+ },
+ "Caribbean Princess": {
+  "score": 93,
+  "date": "2026-02-09",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Caribbean Princess"
+ },
+ "Carnival Breeze": {
+  "score": 86,
+  "date": "2026-05-14",
+  "avg3": 92.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Breeze"
+ },
+ "Carnival Celebration": {
+  "score": 100,
+  "date": "2026-03-15",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Celebration"
+ },
+ "Carnival Conquest": {
+  "score": 99,
+  "date": "2026-06-12",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Conquest"
+ },
+ "Carnival Dream": {
+  "score": 98,
+  "date": "2026-07-05",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Dream"
+ },
+ "Carnival Elation": {
+  "score": 98,
+  "date": "2026-05-07",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Elation"
+ },
+ "Carnival Firenze": {
+  "score": 98,
+  "date": "2026-01-12",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Firenze"
+ },
+ "Carnival Freedom": {
+  "score": 92,
+  "date": "2026-06-29",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Freedom"
+ },
+ "Carnival Glory": {
+  "score": 96,
+  "date": "2025-11-17",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Glory"
+ },
+ "Carnival Horizon": {
+  "score": 96,
+  "date": "2026-08-15",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Horizon"
+ },
+ "Carnival Jubilee": {
+  "score": 100,
+  "date": "2026-03-07",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Jubilee"
+ },
+ "Carnival Legend": {
+  "score": 100,
+  "date": "2026-03-06",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Legend"
+ },
+ "Carnival Liberty": {
+  "score": 97,
+  "date": "2026-06-21",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Liberty"
+ },
+ "Carnival Luminosa": {
+  "score": 98,
+  "date": "2026-05-14",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Luminosa"
+ },
+ "Carnival Magic": {
+  "score": 96,
+  "date": "2026-06-07",
+  "avg3": 93.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Magic"
+ },
+ "Carnival Miracle": {
+  "score": 98,
+  "date": "2026-01-25",
+  "avg3": 94.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Miracle"
+ },
+ "Carnival Panorama": {
+  "score": 97,
+  "date": "2026-08-23",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Panorama"
+ },
+ "Carnival Paradise": {
+  "score": 99,
+  "date": "2026-07-30",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Paradise"
+ },
+ "Carnival Pride": {
+  "score": 93,
+  "date": "2026-04-14",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Pride"
+ },
+ "Carnival Radiance": {
+  "score": 96,
+  "date": "2026-07-09",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Radiance"
+ },
+ "Carnival Spirit": {
+  "score": 99,
+  "date": "2026-02-08",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Spirit"
+ },
+ "Carnival Splendor": {
+  "score": 93,
+  "date": "2018-10-06",
+  "avg3": 92.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Splendor"
+ },
+ "Carnival Sunrise": {
+  "score": 100,
+  "date": "2026-02-12",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Sunrise"
+ },
+ "Carnival Sunshine": {
+  "score": 99,
+  "date": "2026-08-16",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Sunshine"
+ },
+ "Carnival Valor": {
+  "score": 99,
+  "date": "2026-02-16",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Valor"
+ },
+ "Carnival Venezia": {
+  "score": 95,
+  "date": "2026-06-18",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Venezia"
+ },
+ "Carnival Vista": {
+  "score": 98,
+  "date": "2026-04-12",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Carnival Vista"
+ },
+ "Celebrity Apex": {
+  "score": 100,
+  "date": "2026-04-19",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Apex"
+ },
+ "Celebrity Ascent": {
+  "score": 98,
+  "date": "2026-02-04",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Ascent"
+ },
+ "Celebrity Beyond": {
+  "score": 95,
+  "date": "2026-08-09",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Beyond"
+ },
+ "Celebrity Constellation": {
+  "score": 99,
+  "date": "2026-02-17",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Constellation"
+ },
+ "Celebrity Eclipse": {
+  "score": 94,
+  "date": "2026-03-22",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Eclipse"
+ },
+ "Celebrity Edge": {
+  "score": 98,
+  "date": "2026-05-25",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Edge"
+ },
+ "Celebrity Equinox": {
+  "score": 92,
+  "date": "2025-01-07",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Equinox"
+ },
+ "Celebrity Infinity": {
+  "score": 97,
+  "date": "2019-12-12",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Infinity"
+ },
+ "Celebrity Millennium": {
+  "score": 100,
+  "date": "2023-02-03",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Millennium"
+ },
+ "Celebrity Reflection": {
+  "score": 100,
+  "date": "2026-08-22",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Reflection"
+ },
+ "Celebrity Silhouette": {
+  "score": 100,
+  "date": "2026-02-07",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Silhouette"
+ },
+ "Celebrity Solstice": {
+  "score": 95,
+  "date": "2026-06-10",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Solstice"
+ },
+ "Celebrity Summit": {
+  "score": 97,
+  "date": "2026-02-10",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Summit"
+ },
+ "Celebrity Xcel": {
+  "score": 100,
+  "date": "2026-04-22",
+  "avg3": 99.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Celebrity Xcel"
+ },
+ "Club Med 2": {
+  "score": 89,
+  "date": "2016-11-29",
+  "avg3": 87.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Club Med 2"
+ },
+ "Coral Princess": {
+  "score": 98,
+  "date": "2026-06-19",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Coral Princess"
+ },
+ "Costa Deliziosa": {
+  "score": 96,
+  "date": "2023-04-15",
+  "avg3": 94.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Costa Deliziosa"
+ },
+ "Crown Princess": {
+  "score": 99,
+  "date": "2026-07-30",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Crown Princess"
+ },
+ "Crystal Serenity": {
+  "score": 99,
+  "date": "2025-11-11",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Crystal Serenity"
+ },
+ "Crystal Symphony": {
+  "score": 96,
+  "date": "2026-07-30",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Crystal Symphony"
+ },
+ "Diamond Princess": {
+  "score": 98,
+  "date": "2013-09-17",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Diamond Princess"
+ },
+ "Discovery Princess": {
+  "score": 96,
+  "date": "2026-05-26",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Discovery Princess"
+ },
+ "Disney Destiny": {
+  "score": 100,
+  "date": "2026-06-06",
+  "avg3": 98.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Destiny"
+ },
+ "Disney Dream": {
+  "score": 100,
+  "date": "2026-05-02",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Dream"
+ },
+ "Disney Fantasy": {
+  "score": 100,
+  "date": "2026-06-24",
+  "avg3": 99.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Fantasy"
+ },
+ "Disney Magic": {
+  "score": 100,
+  "date": "2026-04-19",
+  "avg3": 99.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Magic"
+ },
+ "Disney Treasure": {
+  "score": 100,
+  "date": "2026-02-17",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Treasure"
+ },
+ "Disney Wish": {
+  "score": 99,
+  "date": "2026-03-09",
+  "avg3": 99.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Wish"
+ },
+ "Disney Wonder": {
+  "score": 98,
+  "date": "2026-03-06",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Disney Wonder"
+ },
+ "Emerald Princess": {
+  "score": 99,
+  "date": "2026-05-12",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Emerald Princess"
+ },
+ "Enchanted Princess": {
+  "score": 93,
+  "date": "2026-01-06",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Enchanted Princess"
+ },
+ "Enchantment of the Seas": {
+  "score": 100,
+  "date": "2026-01-26",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Enchantment of the Seas"
+ },
+ "Eurodam": {
+  "score": 99,
+  "date": "2026-07-13",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Eurodam"
+ },
+ "Europa": {
+  "score": 92,
+  "date": "2025-10-09",
+  "avg3": 92.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Europa"
+ },
+ "Europa 2": {
+  "score": 98,
+  "date": "2026-02-04",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Europa 2"
+ },
+ "Evrima": {
+  "score": 99,
+  "date": "2025-12-06",
+  "avg3": 93.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Evrima"
+ },
+ "Explora I": {
+  "score": 100,
+  "date": "2025-11-12",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Explora I"
+ },
+ "Explora II": {
+  "score": 97,
+  "date": "2026-02-24",
+  "avg3": 98.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Explora II"
+ },
+ "Explorer of the Seas": {
+  "score": 100,
+  "date": "2026-04-13",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Explorer of the Seas"
+ },
+ "Freedom of the Seas": {
+  "score": 94,
+  "date": "2026-08-08",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Freedom of the Seas"
+ },
+ "Grand Princess": {
+  "score": 95,
+  "date": "2026-04-16",
+  "avg3": 92.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Grand Princess"
+ },
+ "Grandeur of the Seas": {
+  "score": 100,
+  "date": "2026-01-24",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Grandeur of the Seas"
+ },
+ "Hanseatic Inspiration": {
+  "score": 89,
+  "date": "2024-10-28",
+  "avg3": 75.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Hanseatic Inspiration"
+ },
+ "Harmony of the Seas": {
+  "score": 98,
+  "date": "2026-08-25",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Harmony of the Seas"
+ },
+ "Icon of the Seas": {
+  "score": 100,
+  "date": "2026-03-14",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Icon of the Seas"
+ },
+ "Ilma": {
+  "score": 94,
+  "date": "2026-03-31",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Ilma"
+ },
+ "Independence of the Seas": {
+  "score": 99,
+  "date": "2026-07-21",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Independence of the Seas"
+ },
+ "Insignia": {
+  "score": 97,
+  "date": "2026-05-04",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Insignia"
+ },
+ "Island Princess": {
+  "score": 93,
+  "date": "2026-07-11",
+  "avg3": 94.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Island Princess"
+ },
+ "Jewel of the Seas": {
+  "score": 99,
+  "date": "2026-06-05",
+  "avg3": 99.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Jewel of the Seas"
+ },
+ "Koningsdam": {
+  "score": 100,
+  "date": "2026-07-23",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Koningsdam"
+ },
+ "L'Austral": {
+  "score": 92,
+  "date": "2015-08-06",
+  "avg3": 92.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "L'Austral"
+ },
+ "Le Boréal": {
+  "score": 89,
+  "date": "2023-04-19",
+  "avg3": 87.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Le Boreal"
+ },
+ "Le Soléal": {
+  "score": 91,
+  "date": "2019-07-06",
+  "avg3": 92.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Le Soleal"
+ },
+ "Liberty of the Seas": {
+  "score": 97,
+  "date": "2025-12-12",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Liberty of the Seas"
+ },
+ "Luminara": {
+  "score": 99,
+  "date": "2026-07-22",
+  "avg3": 99.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Luminara"
+ },
+ "MSC Armonia": {
+  "score": 95,
+  "date": "2020-01-06",
+  "avg3": 94.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Armonia"
+ },
+ "MSC Divina": {
+  "score": 99,
+  "date": "2025-11-06",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Divina"
+ },
+ "MSC Grandiosa": {
+  "score": 99,
+  "date": "2025-12-06",
+  "avg3": 99.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Grandiosa"
+ },
+ "MSC Lirica": {
+  "score": 100,
+  "date": "2009-01-06",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Lirica"
+ },
+ "MSC Magnifica": {
+  "score": 86,
+  "date": "2024-05-17",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Magnifica"
+ },
+ "MSC Meraviglia": {
+  "score": 89,
+  "date": "2026-03-10",
+  "avg3": 89.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Meraviglia"
+ },
+ "MSC Orchestra": {
+  "score": 96,
+  "date": "2009-05-05",
+  "avg3": 95.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Orchestra"
+ },
+ "MSC Poesia": {
+  "score": 97,
+  "date": "2026-04-23",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Poesia"
+ },
+ "MSC Seascape": {
+  "score": 100,
+  "date": "2026-03-08",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Seascape"
+ },
+ "MSC Seashore": {
+  "score": 94,
+  "date": "2026-06-25",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Seashore"
+ },
+ "MSC Seaside": {
+  "score": 96,
+  "date": "2026-08-17",
+  "avg3": 94.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC Seaside"
+ },
+ "MSC World America": {
+  "score": 95,
+  "date": "2026-06-30",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "MSC World America"
+ },
+ "Majestic Princess": {
+  "score": 99,
+  "date": "2026-03-26",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Majestic Princess"
+ },
+ "Mardi Gras": {
+  "score": 98,
+  "date": "2026-04-11",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Mardi Gras"
+ },
+ "Marella Discovery": {
+  "score": 94,
+  "date": "2024-12-03",
+  "avg3": 95.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Marella Discovery"
+ },
+ "Margaritaville at Sea Islander": {
+  "score": 100,
+  "date": "2026-02-27",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Margaritaville at Sea Islander"
+ },
+ "Margaritaville at Sea Paradise": {
+  "score": 100,
+  "date": "2026-02-23",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Margaritaville at Sea Paradise"
+ },
+ "Marina": {
+  "score": 98,
+  "date": "2026-04-07",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Marina"
+ },
+ "Mariner of the Seas": {
+  "score": 100,
+  "date": "2026-06-22",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Mariner of the Seas"
+ },
+ "Mein Schiff 1": {
+  "score": 95,
+  "date": "2025-10-18",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Mein Schiff 1"
+ },
+ "Mein Schiff 6": {
+  "score": 98,
+  "date": "2023-09-25",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Mein Schiff 6"
+ },
+ "Nautica": {
+  "score": 97,
+  "date": "2026-03-27",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Nautica"
+ },
+ "Navigator of the Seas": {
+  "score": 96,
+  "date": "2026-07-10",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Navigator of the Seas"
+ },
+ "Nieuw Amsterdam": {
+  "score": 99,
+  "date": "2026-07-10",
+  "avg3": 98.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Nieuw Amsterdam"
+ },
+ "Nieuw Statendam": {
+  "score": 97,
+  "date": "2026-01-07",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Nieuw Statendam"
+ },
+ "Noordam": {
+  "score": 95,
+  "date": "2026-08-16",
+  "avg3": 94.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Noordam"
+ },
+ "Norwegian Aqua": {
+  "score": 100,
+  "date": "2026-03-25",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Aqua"
+ },
+ "Norwegian Bliss": {
+  "score": 100,
+  "date": "2026-02-08",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Bliss"
+ },
+ "Norwegian Breakaway": {
+  "score": 99,
+  "date": "2026-04-26",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Breakaway"
+ },
+ "Norwegian Dawn": {
+  "score": 84,
+  "date": "2026-03-29",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Dawn"
+ },
+ "Norwegian Encore": {
+  "score": 92,
+  "date": "2026-02-14",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Encore"
+ },
+ "Norwegian Epic": {
+  "score": 93,
+  "date": "2026-03-29",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Epic"
+ },
+ "Norwegian Escape": {
+  "score": 88,
+  "date": "2026-08-24",
+  "avg3": 94.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Escape"
+ },
+ "Norwegian Gem": {
+  "score": 94,
+  "date": "2026-03-23",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Gem"
+ },
+ "Norwegian Getaway": {
+  "score": 92,
+  "date": "2026-05-08",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Getaway"
+ },
+ "Norwegian Jade": {
+  "score": 95,
+  "date": "2026-04-17",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Jade"
+ },
+ "Norwegian Jewel": {
+  "score": 96,
+  "date": "2026-07-16",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Jewel"
+ },
+ "Norwegian Joy": {
+  "score": 100,
+  "date": "2026-07-12",
+  "avg3": 99.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Joy"
+ },
+ "Norwegian Luna": {
+  "score": 100,
+  "date": "2026-04-21",
+  "avg3": 100.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Luna"
+ },
+ "Norwegian Pearl": {
+  "score": 98,
+  "date": "2026-04-03",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Pearl"
+ },
+ "Norwegian Prima": {
+  "score": 99,
+  "date": "2026-06-03",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Prima"
+ },
+ "Norwegian Spirit": {
+  "score": 97,
+  "date": "2023-04-24",
+  "avg3": 99.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Spirit"
+ },
+ "Norwegian Star": {
+  "score": 99,
+  "date": "2025-12-05",
+  "avg3": 99.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Star"
+ },
+ "Norwegian Sun": {
+  "score": 95,
+  "date": "2025-06-18",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Sun"
+ },
+ "Norwegian Viva": {
+  "score": 100,
+  "date": "2026-04-14",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Norwegian Viva"
+ },
+ "Oasis of the Seas": {
+  "score": 89,
+  "date": "2026-06-30",
+  "avg3": 92.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oasis of the Seas"
+ },
+ "Odyssey of the Seas": {
+  "score": 97,
+  "date": "2026-03-01",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Odyssey of the Seas"
+ },
+ "Oosterdam": {
+  "score": 99,
+  "date": "2025-11-17",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oosterdam"
+ },
+ "Ovation of the Seas": {
+  "score": 97,
+  "date": "2026-05-24",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Ovation of the Seas"
+ },
+ "Quantum of the Seas": {
+  "score": 100,
+  "date": "2026-03-10",
+  "avg3": 99.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Quantum of the Seas"
+ },
+ "Queen Anne": {
+  "score": 95,
+  "date": "2026-04-05",
+  "avg3": 94.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Queen Anne"
+ },
+ "Queen Elizabeth": {
+  "score": 100,
+  "date": "2026-04-02",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Queen Elizabeth"
+ },
+ "Queen Mary 2": {
+  "score": 88,
+  "date": "2026-06-17",
+  "avg3": 88.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Queen Mary 2"
+ },
+ "Queen Victoria": {
+  "score": 96,
+  "date": "2025-03-14",
+  "avg3": 91.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Queen Victoria"
+ },
+ "Radiance of the Seas": {
+  "score": 97,
+  "date": "2026-03-23",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Radiance of the Seas"
+ },
+ "Regal Princess": {
+  "score": 100,
+  "date": "2026-05-12",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Regal Princess"
+ },
+ "Resilient Lady": {
+  "score": 100,
+  "date": "2026-03-31",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Resilient Lady"
+ },
+ "Rhapsody of the Seas": {
+  "score": 99,
+  "date": "2026-07-25",
+  "avg3": 99.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Rhapsody of the Seas"
+ },
+ "Riviera": {
+  "score": 100,
+  "date": "2026-05-25",
+  "avg3": 99.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Riviera"
+ },
+ "Rotterdam": {
+  "score": 99,
+  "date": "2026-03-16",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Rotterdam"
+ },
+ "Royal Princess": {
+  "score": 96,
+  "date": "2026-06-09",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Royal Princess"
+ },
+ "Ruby Princess": {
+  "score": 98,
+  "date": "2026-07-12",
+  "avg3": 96.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Ruby Princess"
+ },
+ "Sapphire Princess": {
+  "score": 94,
+  "date": "2025-11-16",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Sapphire Princess"
+ },
+ "Scarlet Lady": {
+  "score": 99,
+  "date": "2026-04-15",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Scarlet Lady"
+ },
+ "SeaDream I": {
+  "score": 94,
+  "date": "2025-12-13",
+  "avg3": 92.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seadream I"
+ },
+ "SeaDream II": {
+  "score": 98,
+  "date": "2025-12-21",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seadream II"
+ },
+ "Seabourn Encore": {
+  "score": 96,
+  "date": "2026-07-27",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seabourn Encore"
+ },
+ "Seabourn Ovation": {
+  "score": 92,
+  "date": "2025-12-14",
+  "avg3": 92.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seabourn Ovation"
+ },
+ "Seabourn Quest": {
+  "score": 99,
+  "date": "2026-04-07",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seabourn Quest"
+ },
+ "Seabourn Venture": {
+  "score": 96,
+  "date": "2025-08-28",
+  "avg3": 95.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seabourn Venture"
+ },
+ "Serenade of the Seas": {
+  "score": 95,
+  "date": "2026-05-15",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Serenade of the Seas"
+ },
+ "Seven Seas Explorer": {
+  "score": 100,
+  "date": "2026-05-22",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Explorer"
+ },
+ "Seven Seas Grandeur": {
+  "score": 100,
+  "date": "2026-04-07",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Grandeur"
+ },
+ "Seven Seas Mariner": {
+  "score": 93,
+  "date": "2026-02-05",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Mariner"
+ },
+ "Seven Seas Navigator": {
+  "score": 95,
+  "date": "2023-05-29",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Navigator"
+ },
+ "Seven Seas Splendor": {
+  "score": 100,
+  "date": "2026-03-13",
+  "avg3": 98.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Splendor"
+ },
+ "Seven Seas Voyager": {
+  "score": 91,
+  "date": "2019-02-06",
+  "avg3": 93.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Seven Seas Voyager"
+ },
+ "Silver Cloud": {
+  "score": 99,
+  "date": "2015-03-20",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Cloud"
+ },
+ "Silver Dawn": {
+  "score": 94,
+  "date": "2026-01-05",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Dawn"
+ },
+ "Silver Moon": {
+  "score": 99,
+  "date": "2026-05-23",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Moon"
+ },
+ "Silver Muse": {
+  "score": 98,
+  "date": "2024-07-25",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Muse"
+ },
+ "Silver Nova": {
+  "score": 97,
+  "date": "2026-05-05",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Nova"
+ },
+ "Silver Ray": {
+  "score": 100,
+  "date": "2025-12-05",
+  "avg3": 96.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Ray"
+ },
+ "Silver Shadow": {
+  "score": 91,
+  "date": "2025-11-10",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Shadow"
+ },
+ "Silver Spirit": {
+  "score": 94,
+  "date": "2026-02-12",
+  "avg3": 88.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Spirit"
+ },
+ "Silver Whisper": {
+  "score": 97,
+  "date": "2026-06-20",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Whisper"
+ },
+ "Silver Wind": {
+  "score": 98,
+  "date": "2020-03-06",
+  "avg3": 90.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Silver Wind"
+ },
+ "Sirena": {
+  "score": 98,
+  "date": "2024-12-04",
+  "avg3": 94.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Sirena"
+ },
+ "Sky Princess": {
+  "score": 97,
+  "date": "2025-12-08",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Sky Princess"
+ },
+ "Spirit of Discovery": {
+  "score": 96,
+  "date": "2025-02-11",
+  "avg3": 98.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Spirit of Discovery"
+ },
+ "Star Breeze": {
+  "score": 98,
+  "date": "2023-08-03",
+  "avg3": 98.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star Breeze"
+ },
+ "Star Legend": {
+  "score": 97,
+  "date": "2019-05-28",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star Legend"
+ },
+ "Star Pride": {
+  "score": 95,
+  "date": "2025-09-26",
+  "avg3": 95.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star Pride"
+ },
+ "Star Princess": {
+  "score": 99,
+  "date": "2026-07-21",
+  "avg3": 95.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star Princess"
+ },
+ "Star Seeker": {
+  "score": 94,
+  "date": "2026-08-28",
+  "avg3": 94.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star Seeker"
+ },
+ "Star of the Seas": {
+  "score": 100,
+  "date": "2026-05-13",
+  "avg3": 98.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Star of the Seas"
+ },
+ "Sun Princess": {
+  "score": 89,
+  "date": "2026-02-15",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Sun Princess"
+ },
+ "Symphony of the Seas": {
+  "score": 99,
+  "date": "2026-08-29",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Symphony of the Seas"
+ },
+ "Utopia of the Seas": {
+  "score": 97,
+  "date": "2026-01-30",
+  "avg3": 95.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Utopia of the Seas"
+ },
+ "Valiant Lady": {
+  "score": 100,
+  "date": "2026-03-28",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Valiant Lady"
+ },
+ "Ventura": {
+  "score": 92,
+  "date": "2020-03-04",
+  "avg3": 94.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Ventura"
+ },
+ "Viking Mars": {
+  "score": 93,
+  "date": "2025-12-30",
+  "avg3": 96.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Mars"
+ },
+ "Viking Neptune": {
+  "score": 100,
+  "date": "2025-04-22",
+  "avg3": 98.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Neptune"
+ },
+ "Viking Octantis": {
+  "score": 98,
+  "date": "2025-10-13",
+  "avg3": 99.0,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Octantis"
+ },
+ "Viking Orion": {
+  "score": 100,
+  "date": "2026-07-28",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Orion"
+ },
+ "Viking Polaris": {
+  "score": 100,
+  "date": "2026-05-21",
+  "avg3": 99.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Polaris"
+ },
+ "Viking Saturn": {
+  "score": 98,
+  "date": "2023-06-06",
+  "avg3": 98.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Saturn"
+ },
+ "Viking Sea": {
+  "score": 96,
+  "date": "2026-01-19",
+  "avg3": 97.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Sea"
+ },
+ "Viking Sky": {
+  "score": 94,
+  "date": "2026-01-12",
+  "avg3": 95.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Sky"
+ },
+ "Viking Star": {
+  "score": 99,
+  "date": "2023-09-28",
+  "avg3": 99.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Star"
+ },
+ "Viking Venus": {
+  "score": 97,
+  "date": "2026-06-18",
+  "avg3": 97.5,
+  "n": 2,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Viking Venus"
+ },
+ "Villa Vie Odyssey": {
+  "score": 81,
+  "date": "2025-07-09",
+  "avg3": 81.0,
+  "n": 1,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Villa Vie Odyssey"
+ },
+ "Vision of the Seas": {
+  "score": 97,
+  "date": "2026-08-15",
+  "avg3": 97.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Vision of the Seas"
+ },
+ "Vista": {
+  "score": 100,
+  "date": "2026-07-06",
+  "avg3": 100.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Oceania Vista"
+ },
+ "Volendam": {
+  "score": 95,
+  "date": "2025-07-12",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Volendam"
+ },
+ "Voyager of the Seas": {
+  "score": 95,
+  "date": "2026-05-11",
+  "avg3": 96.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Voyager of the Seas"
+ },
+ "Westerdam": {
+  "score": 97,
+  "date": "2026-05-06",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Westerdam"
+ },
+ "Wind Spirit": {
+  "score": 97,
+  "date": "2009-03-15",
+  "avg3": 93.7,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Wind Spirit"
+ },
+ "Wind Surf": {
+  "score": 95,
+  "date": "2006-02-28",
+  "avg3": 97.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Wind Surf"
+ },
+ "Wonder of the Seas": {
+  "score": 99,
+  "date": "2026-02-13",
+  "avg3": 98.0,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Wonder Of The Seas"
+ },
+ "Zaandam": {
+  "score": 96,
+  "date": "2026-08-14",
+  "avg3": 94.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Zaandam"
+ },
+ "Zuiderdam": {
+  "score": 90,
+  "date": "2026-07-17",
+  "avg3": 93.3,
+  "n": 3,
+  "source": "https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx",
+  "cdcName": "Zuiderdam"
+ }
+}

@@ -65,9 +65,11 @@ export function photoCredit(s) {
   return `<p class="credit">Foto: <a href="${esc(s.photo.page)}" target="_blank" rel="noopener">${esc(s.photo.author || 'Wikimedia Commons')}</a> · ${esc(s.photo.license || '')} · Wikimedia Commons</p>`;
 }
 
+export const scoreBadge = (n, big = false) => (n == null ? '' : `<span class="scb ${n >= 85 ? 'sc-a' : n >= 75 ? 'sc-b' : n >= 65 ? 'sc-c' : n >= 50 ? 'sc-d' : 'sc-e'}${big ? ' scb-big' : ''}" title="MejorCrucero Score ${n}/100"><b>${n}</b>${big ? '<small>/100</small>' : ''}</span>`);
+
 export function shipCard(s, opts = {}) {
-  return `<article class="card ship-card" data-name="${esc(s.name.toLowerCase())}" data-line="${s.lineSlug}" data-size="${s.size}" data-gt="${s.gt}" data-year="${s.year}" data-ratio="${s.ratio ?? 0}" data-pax="${s.pax ?? 0}" data-tier="${s.tier}" data-slug="${s.slug}">
-  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}</div>
+  return `<article class="card ship-card" data-name="${esc(s.name.toLowerCase())}" data-line="${s.lineSlug}" data-size="${s.size}" data-gt="${s.gt}" data-year="${s.year}" data-ratio="${s.ratio ?? 0}" data-pax="${s.pax ?? 0}" data-tier="${s.tier}" data-sc="${s.sc ?? -1}" data-slug="${s.slug}">
+  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}${scoreBadge(s.sc)}</div>
   <div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3>
   <ul class="facts"><li><b>${s.year}</b> año</li><li><b>${fmt(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul></div></a>
   <button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false">${ICON.heart}</button>
@@ -122,6 +124,7 @@ export function forumBlock(thread, title, opts = {}) {
     <h3 class="h-sm forum-form-title">Escribe tu opinión</h3>
     <div class="rating-row" data-for="review">${[['general', 'General'], ['comida', 'Comida'], ['camarote', 'Camarote'], ['animacion', 'Animación'], ['ninos', 'Niños'], ['limpieza', 'Limpieza']].map(([k, n]) => `<label><span>${n}</span><select name="r_${k}"><option value="">—</option>${[5, 4, 3, 2, 1].map((v) => `<option value="${v}">${'★'.repeat(v)}</option>`).join('')}</select></label>`).join('')}<label><span>¿Repetirías?</span><select name="r_repetiria"><option value="">—</option><option value="1">Sí</option><option value="0">No</option></select></label></div>
     <div class="cabin-row" data-for="cabin"><label><span>Nº de camarote</span><input name="cabin" inputmode="numeric" maxlength="8" placeholder="Ej.: 12045"></label><label><span>Vídeo de YouTube (opcional)</span><input name="video" type="url" placeholder="https://youtube.com/…"></label></div>
+    <details class="proof" data-for="review"><summary>✅ Verifica tu opinión (opcional)</summary><label><span>Pega aquí el email de confirmación de tu reserva. Solo comprobamos que es de este barco: no se guarda ni se publica.</span><textarea name="proof" rows="3" maxlength="6000"></textarea></label></details>
     <label><span>Tu nombre</span><input name="name" maxlength="40" autocomplete="nickname" required></label>
     <label><span>Tu mensaje</span><textarea name="body" rows="4" maxlength="4000" required></textarea></label>
     <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -132,7 +135,7 @@ export function forumBlock(thread, title, opts = {}) {
 </section>`;
 }
 
-const NAV = [['/buscar/', 'Buscar'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/puertos/', 'Puertos'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
+const NAV = [['/buscar/', 'Buscar'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/rankings/', 'Ranking'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
 
 export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null }) {
   pages.push({ url, noindex });
@@ -164,10 +167,11 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <a class="logo" href="/" aria-label="MejorCrucero, inicio"><svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#0b2540"/><path d="M8 24h24l-3 6H11z" fill="#e8492a"/><path d="M12 23v-4h16v4zM15 18v-4h10v4z" fill="#fff"/><path d="M19 13V9h3v4z" fill="#e8492a"/></svg><span>Mejor<b>Crucero</b></span></a>
 <nav class="nav" aria-label="Principal"><ul>${NAV.map(([u, n]) => `<li><a href="${u}"${url.startsWith(u) ? ' aria-current="page"' : ''}>${n}</a></li>`).join('')}</ul></nav>
 <form class="gsearch" action="/buscar/" role="search"><label class="sr" for="gq">Buscar barco, naviera, destino o puerto</label><input id="gq" name="q" type="search" placeholder="Barco, destino, puerto…" autocomplete="off" aria-autocomplete="list" aria-controls="gq-list"><ul id="gq-list" class="ac" role="listbox" hidden></ul></form>
+<a class="notif" href="/mis-cruceros/#avisos" hidden aria-label="Tienes respuestas nuevas">💬<span></span></a>
 <button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button>
 <a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">🔔 Alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
-${[['/', 'Inicio'], ...NAV, ['/ofertas/', 'Ofertas'], ['/rankings/', 'Rankings'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
+${[['/', 'Inicio'], ...NAV, ['/ofertas/', 'Ofertas'], ['/puertos/', 'Puertos'], ['/rankings/', 'Ranking 0-100'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
 </ul></nav></details>
 </div></header>
 ${crumbHtml}
@@ -182,6 +186,7 @@ ${crumbHtml}
 <div><h2>Herramientas</h2><ul><li><a href="/herramientas/precio-real/">Precio real</a></li><li><a href="/herramientas/alerta-precio/">Alerta de precio</a></li><li><a href="/herramientas/asistente/">Asistente IA</a></li><li><a href="/herramientas/que-crucero/">¿Qué crucero es para mí?</a></li><li><a href="/herramientas/comparar/">Comparar barcos</a></li><li><a href="/herramientas/checklist/">Checklist</a></li><li><a href="/herramientas/">Todas</a></li></ul></div>
 <div><h2>MejorCrucero</h2><ul><li><a href="/sobre-nosotros/">Quiénes somos</a></li><li><a href="/afiliacion/">Cómo ganamos dinero</a></li><li><a href="/newsletter/">Newsletter</a></li><li><a href="/creadores/">Programa de creadores</a></li><li><a href="/aviso-legal/">Aviso legal</a></li><li><a href="/privacidad/">Privacidad</a></li><li><a href="/cookies/">Cookies</a></li></ul></div>
 </div><p class="wrap fine">© ${new Date().getFullYear()} MejorCrucero.com · Algunos enlaces son de afiliado: si reservas a través de ellos podemos recibir una comisión, sin coste extra para ti. Los datos técnicos proceden de fuentes públicas citadas en cada página.</p></footer>
+<script src="/assets/v3.js?v=${BUILD_DATE}" defer></script>
 <script src="/assets/app.js?v=${BUILD_DATE}" defer></script>
 ${CONFIG.cfBeacon ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CONFIG.cfBeacon}"}'></script>` : ''}
 </body></html>`);

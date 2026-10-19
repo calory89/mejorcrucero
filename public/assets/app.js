@@ -207,7 +207,8 @@
 
   // ---------- Listado de barcos: filtros en la URL y paginación (datos de ships.json) ----------
   const filters = $('#filters');
-  const fullCard = (s) => `<article class="card ship-card"><a class="card-link" href="${BASE}barcos/${s.slug}/"><div class="ship-art${s.img ? ' has-photo' : ''}" style="--c:${s.color}">${s.img ? `<img src="${esc(s.img)}" alt="${esc(s.name)} navegando" loading="lazy" decoding="async" width="640" height="400" class="ship-photo">` : `<svg viewBox="0 0 340 130" width="300" aria-hidden="true"><path d="M60 78h220v8H60zM80 64h180v10H80zM100 50h140v10H100z" fill="#fff"/><rect x="160" y="36" width="24" height="12" rx="3" fill="${s.color}"/><path d="M8 86H332L304 112H34Z" fill="${s.color}"/></svg>`}${s.v ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}</div><div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3><ul class="facts"><li><b>${s.year}</b> año</li><li><b>${num(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul></div></a><button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8.1 3.2 4.5 6.8 4.5c2 0 3.5 1.1 4.2 2.4h2c.7-1.3 2.2-2.4 4.2-2.4 3.6 0 5.9 3.6 4.4 7.1C19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg></button><button class="cmp-add" type="button" data-cmp="${s.slug}">+ Comparar<span class="sr"> ${esc(s.name)}</span></button></article>`;
+  const NL_TAGS = [[/solo adultos|sin niñ\w*|adultos/g, 'adultos'], [/famili\w*|niñ\w*|hij\w*|tobog\w*/g, 'familias'], [/lujo\w*|exclusiv\w*/g, 'lujo'], [/españo\w*|espano\w*|castellano/g, 'espanol'], [/espacios\w*|sin agobios|amplio\w*/g, 'espacioso'], [/pequeñ\w*|pequen\w*|íntimo|intimo/g, 'pequeno'], [/nuev\w*|recient\w*|estren\w*/g, 'nuevo'], [/tranquil\w*|relax\w*|pareja\w*/g, 'premium']];
+  const fullCard = (s) => `<article class="card ship-card"><a class="card-link" href="${BASE}barcos/${s.slug}/"><div class="ship-art${s.img ? ' has-photo' : ''}" style="--c:${s.color}">${s.img ? `<img src="${esc(s.img)}" alt="${esc(s.name)} navegando" loading="lazy" decoding="async" width="640" height="400" class="ship-photo">` : `<svg viewBox="0 0 340 130" width="300" aria-hidden="true"><path d="M60 78h220v8H60zM80 64h180v10H80zM100 50h140v10H100z" fill="#fff"/><rect x="160" y="36" width="24" height="12" rx="3" fill="${s.color}"/><path d="M8 86H332L304 112H34Z" fill="${s.color}"/></svg>`}${s.v ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}${s.sc != null ? `<span class="scb ${s.sc >= 85 ? 'sc-a' : s.sc >= 75 ? 'sc-b' : s.sc >= 65 ? 'sc-c' : s.sc >= 50 ? 'sc-d' : 'sc-e'}" title="MejorCrucero Score ${s.sc}/100"><b>${s.sc}</b></span>` : ''}${s.m != null ? `<span class="match">${s.m}% para ti</span>` : ''}</div><div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3><ul class="facts"><li><b>${s.year}</b> año</li><li><b>${num(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul></div></a><button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8.1 3.2 4.5 6.8 4.5c2 0 3.5 1.1 4.2 2.4h2c.7-1.3 2.2-2.4 4.2-2.4 3.6 0 5.9 3.6 4.4 7.1C19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg></button><button class="cmp-add" type="button" data-cmp="${s.slug}">+ Comparar<span class="sr"> ${esc(s.name)}</span></button></article>`;
   if (filters) {
     const grid = $('#ship-grid'), more = $('#more');
     const PER = 24; let shown = PER, touched = false;
@@ -215,9 +216,16 @@
     const apply = async (resetPage = true) => {
       if (resetPage) shown = PER;
       const ships = await getShips();
-      const q = filters.q.value.trim().toLowerCase(), line = filters.linea.value, size = filters.tam.value, tier = filters.gama.value, sort = filters.orden.value;
-      const ok = ships.filter((s) => (!q || s.name.toLowerCase().includes(q)) && (!line || s.lineSlug === line) && (!size || s.size === size) && (!tier || s.tier === tier));
-      const key = { gt: (s) => -s.gt, year: (s) => -s.year * 1e6 - s.gt, ratio: (s) => -(s.ratio || 0), name: null }[sort];
+      let q = filters.q.value.trim().toLowerCase(); const line = filters.linea.value, size = filters.tam.value, tier = filters.gama.value, sort = filters.orden.value;
+      const minSc = +(filters.nota?.value || 0), tag = filters.tag?.value || '';
+      // Búsqueda en lenguaje natural: "familia español nuevo", "lujo tranquilo", "barco pequeño"
+      const want = new Set(tag ? [tag] : []);
+      for (const [re, t] of NL_TAGS) if (re.test(q)) { want.add(t); q = q.replace(re, ' '); }
+      q = q.replace(/\b(crucero|cruceros|barco|barcos|para|con|de|en|un|una|el|la|los|las|y|que|mejor|mejores)\b/g, ' ').replace(/\s+/g, ' ').trim();
+      const prof = window.MC_profile ? window.MC_profile() : null;
+      ships.forEach((s) => { s.m = prof ? window.MC_match(s, prof) : null; });
+      const ok = ships.filter((s) => (!q || s.name.toLowerCase().includes(q) || s.lineShort.toLowerCase().includes(q)) && (!line || s.lineSlug === line) && (!size || s.size === size) && (!tier || s.tier === tier) && (!minSc || (s.sc ?? -1) >= minSc) && [...want].every((t) => (s.tags || []).includes(t)));
+      const key = { sc: (s) => -((s.sc ?? -1) * 1e7 + s.gt), m: (s) => -((s.m ?? -1) * 1e7 + (s.sc ?? 0)), gt: (s) => -s.gt, year: (s) => -s.year * 1e6 - s.gt, ratio: (s) => -(s.ratio || 0), name: null }[sort];
       ok.sort(key ? (x, y) => key(x) - key(y) : (x, y) => x.name.localeCompare(y.name));
       grid.innerHTML = ok.slice(0, shown).map(fullCard).join('');
       $('#count').textContent = `${ok.length} barco${ok.length === 1 ? '' : 's'}`;
@@ -225,7 +233,7 @@
       more.hidden = ok.length <= shown;
       syncFavs(); renderCmpBar();
       const p = new URLSearchParams();
-      for (const el of filters.elements) if (el.name && el.value && !(el.name === 'orden' && el.value === 'gt')) p.set(el.name, el.value);
+      for (const el of filters.elements) if (el.name && el.value && !(el.name === 'orden' && el.value === 'sc')) p.set(el.name, el.value);
       history.replaceState(null, '', p.toString() ? '?' + p : location.pathname);
     };
     filters.addEventListener('input', () => apply());
@@ -282,7 +290,7 @@
   // ---------- Comparador de barcos ----------
   const cmp = $('#cmp-form');
   if (cmp) {
-    store.get('mc_cmp', []).forEach((s, i) => { if (cmp['s' + i]) cmp['s' + i].value = s; });
+    (qs.get('b') ? qs.get('b').split(',') : store.get('mc_cmp', [])).forEach((s, i) => { if (cmp['s' + i]) cmp['s' + i].value = s; });
     const render = async () => {
       const ships = await getShips();
       const sel = [0, 1, 2].map((i) => cmp['s' + i].value).filter(Boolean).map((s) => ships.find((x) => x.slug === s)).filter(Boolean);
@@ -290,6 +298,10 @@
       const out = $('#cmp-out');
       if (!sel.length) { out.innerHTML = '<p class="muted">Elige al menos un barco.</p>'; return; }
       const rows = [
+        ['MejorCrucero Score', (s) => (s.sc != null ? `<b class="scb ${s.sc >= 85 ? 'sc-a' : s.sc >= 75 ? 'sc-b' : s.sc >= 65 ? 'sc-c' : s.sc >= 50 ? 'sc-d' : 'sc-e'}">${s.sc}</b>` : 'Sin nota'), (s) => s.sc ?? -1],
+        ...(window.MC_profile && window.MC_profile() ? [['Encaje contigo', (s) => window.MC_match(s, window.MC_profile()) + '%', (s) => window.MC_match(s, window.MC_profile())]] : []),
+        ['Higiene CDC (/25)', (s) => (s.p?.higiene != null ? dec(s.p.higiene) : '—'), (s) => s.p?.higiene ?? -1],
+        ['Tripulación', (s) => (s.crew ? num(s.crew) + ` (${dec(Math.round((s.pax / s.crew) * 100) / 100)} pax/trip.)` : '—'), (s) => (s.crew && s.pax ? -s.pax / s.crew : -99)],
         ['Naviera', (s) => esc(s.lineShort)],
         ['Gama', (s) => ({ estandar: 'Precio medio', premium: 'Premium', lujo: 'Lujo' }[s.tier])],
         ['Año', (s) => s.year, (s) => s.year],
@@ -474,6 +486,7 @@
   if (quiz) quiz.addEventListener('submit', async (e) => {
     e.preventDefault();
     const a = Object.fromEntries(new FormData(quiz));
+    store.set('mc_profile', a);
     const ships = await getShips();
     const dests = JSON.parse($('#dest-meta').textContent);
     const monthsFor = { summer: [6, 7, 8], winter: [12, 1, 2], spring: [3, 4, 5, 9, 10, 11], any: [] }[a.month];
@@ -603,7 +616,7 @@
   $$('.js-ago').forEach((t) => { t.textContent = ago(t.getAttribute('datetime')); });
   const stars = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
   const LBL = { general: 'General', comida: 'Comida', camarote: 'Camarote', animacion: 'Animación', ninos: 'Niños', limpieza: 'Limpieza' };
-  const postHtml = (p, all) => `<article class="post" id="p${p.id}"><header><b>${p.user_id ? `<a href="${BASE}comunidad/perfil/?id=${esc(p.user_id)}">${esc(p.name)}</a>` : esc(p.name)}</b> <span class="muted small">${ago(p.created)}${p.cabin ? ' · camarote ' + esc(p.cabin) : ''}</span></header>
+  const postHtml = (p, all) => `<article class="post" id="p${p.id}"><header><b>${p.user_id ? `<a href="${BASE}comunidad/perfil/?id=${esc(p.user_id)}">${esc(p.name)}</a>` : esc(p.name)}</b>${p.verified ? ' <span class="verif" title="Opinión verificada con la confirmación de reserva">✅ Verificada</span>' : ''} <span class="muted small">${ago(p.created)}${p.cabin ? ' · camarote ' + esc(p.cabin) : ''}</span></header>
     ${p.rating ? `<p class="stars">${Object.entries(p.rating).filter(([k]) => LBL[k]).map(([k, v]) => `<span>${LBL[k]} <b aria-label="${v} de 5">${stars(v)}</b></span>`).join('')}${p.rating.repetiria != null ? `<span>${p.rating.repetiria ? '👍 Repetiría' : '👎 No repetiría'}</span>` : ''}</p>` : ''}
     ${p.body ? `<p>${esc(p.body).replace(/\n/g, '<br>')}</p>` : ''}
     ${p.video ? `<button class="yt yt-sm" type="button" data-id="${esc(p.video)}" aria-label="Reproducir vídeo de ${esc(p.name)}"><img src="https://i.ytimg.com/vi/${esc(p.video)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play">▶</span></button>` : ''}
@@ -653,10 +666,10 @@
         if (form.name.value.trim().length < 2 || (form.body.value.trim().length < 3 && !form.video?.value)) { msg.textContent = 'Escribe tu nombre y un mensaje.'; return; }
         const rating = kind === 'review' ? Object.fromEntries(['general', 'comida', 'camarote', 'animacion', 'ninos', 'limpieza', 'repetiria'].map((k) => [k, form['r_' + k].value]).filter(([, x]) => x !== '').map(([k, x]) => [k, k === 'repetiria' ? x === '1' : +x])) : null;
         try {
-          await api('/posts', { body: { thread: f.dataset.thread, kind: replyTo ? 'answer' : kind, parent: replyTo, name: form.name.value.trim(), body: form.body.value.trim(), rating, cabin: kind === 'cabin' ? form.cabin?.value : '', video: kind === 'cabin' ? form.video?.value : '', user_id: uid(), website: form.website.value } });
+          const res = await api('/posts', { body: { proof: kind === 'review' ? form.proof?.value : '', thread: f.dataset.thread, kind: replyTo ? 'answer' : kind, parent: replyTo, name: form.name.value.trim(), body: form.body.value.trim(), rating, cabin: kind === 'cabin' ? form.cabin?.value : '', video: kind === 'cabin' ? form.video?.value : '', user_id: uid(), website: form.website.value } });
           store.set('mc_me', { ...me(), name: form.name.value.trim() });
           api('/user', { body: { id: uid(), name: form.name.value.trim(), cruises: me().cruises || 0, lines: me().lines || '' } }).catch(() => {});
-          msg.textContent = '¡Publicado!'; form.body.value = ''; if (form.video) form.video.value = ''; replyTo = null; load();
+          msg.textContent = res.held ? 'Gracias. Tu mensaje queda pendiente de revisión.' : res.verified ? '¡Publicado como opinión verificada! ✅' : '¡Publicado!'; if (form.proof) form.proof.value = ''; form.body.value = ''; if (form.video) form.video.value = ''; replyTo = null; load();
           track('post', kind);
         } catch (err) { msg.textContent = err.message === 'rate' ? 'Has publicado mucho en poco tiempo: espera un poco.' : 'No se ha podido publicar. Revisa el mensaje e inténtalo de nuevo.'; }
       });

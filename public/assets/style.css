@@ -258,3 +258,35 @@ fieldset .chk{grid-column:1/-1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 .card-link:hover,.card-link:hover h3{color:inherit}
 .az{margin-top:24px}.az summary{cursor:pointer;font-weight:600}.az-list{columns:4 200px;font-size:.9rem;padding-left:18px}
+/* ---------- v3: nota 0-100, encaje, herramientas nuevas ---------- */
+.scb{display:inline-grid;place-items:center;min-width:2.4em;height:2.4em;padding:0 .3em;border-radius:10px;color:#fff;font:800 1rem/1 var(--sans);box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.scb b{font-weight:800}.ship-art .scb{position:absolute;top:10px;right:10px;z-index:1}
+.scb-big{min-width:3.6em;height:3.6em;font-size:1.35rem;border-radius:16px;grid-auto-flow:column;gap:2px}.scb-big small{font-size:.55em;font-weight:600}
+.sc-a{background:#065f46}.sc-b{background:#166534}.sc-c{background:#92400e}.sc-d{background:#9a3412}.sc-e{background:#991b1b}
+.hero-score{display:inline-flex;gap:12px;align-items:center;text-decoration:none;color:inherit;margin:.2em 0 .6em}.hero-score span{display:flex;flex-direction:column;line-height:1.2}.hero-score small{color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:.2em 0 .8em}.tag{font:600 .8rem/1 var(--sans);padding:7px 10px;border-radius:999px;background:var(--sea-2);color:var(--ink);text-decoration:none}.tag:hover{color:var(--coral)}
+.match-box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:.4em 0 .8em;font-size:.95rem}
+.match{position:absolute;left:10px;bottom:10px;z-index:1;font:700 .72rem/1 var(--sans);padding:6px 9px;border-radius:999px;background:#0b2540;color:#fff}
+.score-top{display:flex;gap:16px;align-items:center;margin-bottom:12px}.score-top p{margin:0}
+.bars{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:12px}.bars li{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;gap:4px 12px;align-items:center}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--sea);border-radius:99px}
+.bars small{grid-column:1/-1;color:var(--muted)}
+@media (max-width:560px){.bars li{grid-template-columns:1fr auto}.bar{grid-column:1/-1;grid-row:2}}
+.embed-code{width:100%;font:12px/1.4 ui-monospace,monospace;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);color:var(--ink);resize:none}
+.verif{font:700 .72rem/1 var(--sans);color:#047857;background:#d1fae5;padding:4px 7px;border-radius:999px}
+.proof{margin:.3em 0 .8em}.proof summary{cursor:pointer;font-weight:600}.proof textarea{width:100%}
+.notif{position:relative;text-decoration:none;font-size:1.25rem}.notif span{position:absolute;top:-6px;right:-10px;background:var(--coral);color:#fff;font:700 .7rem/1 var(--sans);padding:3px 6px;border-radius:99px}
+.retos{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}.retos li{opacity:.6}.retos li.ok{opacity:1;font-weight:600}
+.wx{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}.wx>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}.wx-i{font-size:1.6rem}.wx small{color:var(--muted)}
+.gloss dt{font-weight:700;margin-top:1em;font-family:var(--serif);font-size:1.1rem}.gloss dd{margin:.2em 0 0}
+.big-num{font:800 clamp(1.6rem,4vw,2.4rem)/1.1 var(--sans);margin:.3em 0}.big-num small{font-size:.5em;color:var(--muted);font-weight:600}.big-num.ok{color:#065f46}.big-num.ko{color:var(--coral)}
+.f-wide{grid-column:1/-1}.filters-inline{display:flex;gap:12px;margin-bottom:12px}
+.grid-form fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;grid-column:1/-1}.grid-form legend{font-weight:700;padding:0 6px}
+.book-help{margin:.6em 0;border:1px dashed var(--line);border-radius:12px;padding:10px 14px}.book-help summary{cursor:pointer;font-weight:600}
+.chk{list-style:none;padding:0;columns:2 260px}.chk li{break-inside:avoid;margin:.25em 0}
+.rank-t th small{display:block;font-weight:400;color:var(--muted)}
+.link{background:none;border:0;color:var(--muted);cursor:pointer;font-size:1rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .big-num.ok{color:#6ee7b7}}:root[data-theme=dark] .big-num.ok{color:#6ee7b7}
+.scb small,.hero-score .scb small{color:#fff}.calc-out .big-num.ok{color:#6ee7b7}.calc-out .big-num.ko{color:#fca5a5}.calc-out .big-num small{color:#cfe0f3}
+.tool-out{margin-top:16px}
+#pack-out{min-height:720px}#weather-out{min-height:420px}#tip-out,#drinks-out{min-height:150px}

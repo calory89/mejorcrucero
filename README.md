@@ -30,3 +30,17 @@ Regenerar fotos: `python3 tools/photos.py`. Imágenes para compartir: `python3 t
 3. **Afiliados**: `CONFIG.affiliates.*.param`.
 4. **Feed de precios**: variable `FEED_URL` (ver `docs/feed.md`).
 5. **Emails salientes** (alertas, newsletter): proveedor de envío (Resend u otro) conectado al Worker.
+
+## MejorCrucero Score (nota 0–100)
+- Fórmula en `src/score.js`, explicada en `/metodologia/`. Datos:
+  - `src/data/vsp.json`: inspecciones sanitarias del CDC (Vessel Sanitation Program). Solo cuentan si la última es de los últimos 4 años.
+  - `src/data/ships_specs.csv`: pasajeros, tripulación, eslora, cubiertas, reformas y nombres anteriores (Wikipedia, artículo de cada barco).
+  - Opiniones de la comunidad: el build llama a `GET /ratings` de la API (solo cuenta con 5 opiniones o más).
+- Sin al menos espacio por pasajero + otros dos indicadores, el barco queda "sin nota".
+- Imágenes para compartir con la nota: `node src/build.js && python3 tools/og.py` (genera `public/og/*.png`).
+- Fotos servidas en local desde `public/img/barcos/*.webp` (sin cookies de terceros); el crédito enlaza a Wikimedia Commons.
+
+## API (Cloudflare Worker `mejorcrucero-api`)
+- URL: https://mejorcrucero-api.mejorcrucero.workers.dev · base de datos D1 `mejorcrucero`.
+- Migraciones en `backend/migrations/` (aplicar una vez con `wrangler d1 execute mejorcrucero --remote --file ...`).
+- Panel interno: `/admin/` (pide la clave ADMIN_TOKEN).

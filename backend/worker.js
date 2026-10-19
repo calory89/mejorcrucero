@@ -29,6 +29,9 @@ function badges(u) {
   if (u.cruises >= 1) b.push(`${u.cruises} crucero${u.cruises > 1 ? 's' : ''}`);
   if (u.cruises >= 10) b.push('Lobo de mar');
   if (u.cabins >= 1) b.push('Reportero de camarotes');
+  if (u.verified >= 1) b.push('Opinión verificada');
+  if (u.refs >= 3) b.push('Embajador');
+  if (u.refs >= 10) b.push('Embajador de oro');
   return b;
 }
 
@@ -97,7 +100,9 @@ export default {
         if (!u) return R({ error: 'no' }, 404);
         const st = await env.DB.prepare("SELECT COUNT(*) posts, SUM(kind='cabin') cabins FROM posts WHERE user_id=? AND hidden=0").bind(id).first();
         const posts = await env.DB.prepare('SELECT id,thread,kind,body,created FROM posts WHERE user_id=? AND hidden=0 ORDER BY id DESC LIMIT 30').bind(id).all();
-        const full = { ...u, posts: st.posts || 0, cabins: st.cabins || 0 };
+        const refs = await env.DB.prepare("SELECT COUNT(DISTINCT variant) n FROM events WHERE name='ref' AND target=?").bind(id).first();
+        const ver = await env.DB.prepare('SELECT COUNT(*) n FROM posts WHERE user_id=? AND verified=1 AND hidden=0').bind(id).first();
+        const full = { ...u, posts: st.posts || 0, cabins: st.cabins || 0, refs: refs.n || 0, verified: ver.n || 0 };
         return R({ user: { ...full, badges: badges(full) }, posts: posts.results });
       }
       if (p === '/leaderboard') {
@@ -111,8 +116,8 @@ export default {
         if (!THREAD.test(thread) && !thread.endsWith(':*')) return R({ error: 'thread' }, 400);
         const like = thread.endsWith(':*');
         const q = like
-          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,created FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
-          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,created FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
+          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
+          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
         const r = await q.all();
         const members = like ? { n: 0 } : await env.DB.prepare('SELECT COUNT(*) n FROM members WHERE thread=?').bind(thread).first();
         const summary = like ? null : await env.DB.prepare('SELECT body, posts FROM summaries WHERE thread=?').bind(thread).first();
@@ -135,9 +140,29 @@ export default {
             if (k === 'repetiria') { if (body.rating[k] != null) rating[k] = !!body.rating[k]; } else if (v >= 1 && v <= 5) rating[k] = Math.round(v);
           }
         }
-        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash) VALUES(?,?,?,?,?,?,?,?,?,?) RETURNING id')
-          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash).first();
-        return R({ ok: true, id: r.id });
+        // Moderación automática con IA (Llama Guard). Si la IA falla, se publica y queda el sistema de reportes.
+        let hidden = 0, mod = null;
+        if (env.AI && text.length >= 3) {
+          try {
+            const g = await env.AI.run('@cf/meta/llama-guard-3-8b', { messages: [{ role: 'user', content: text.slice(0, 3000) }] });
+            const res = g?.response; const unsafe = typeof res === 'object' ? res.safe === false : /unsafe/i.test(String(res));
+            if (unsafe) { hidden = 1; mod = 'ia:' + JSON.stringify(res).slice(0, 120); }
+          } catch {}
+        }
+        // Opinión verificada: el usuario pega su email de confirmación y comprobamos que es de este barco.
+        let verified = 0;
+        if (kind === 'review' && env.AI && body.proof && thread.startsWith('barco:')) {
+          try {
+            const out = await ai(env, { messages: [{ role: 'system', content: 'Extrae de este email de confirmación de crucero un JSON con: ship (nombre del barco) y date (fecha de salida YYYY-MM-DD). Si no es una confirmación de reserva de crucero, responde {"ship":null}. Responde SOLO el JSON.' }, { role: 'user', content: clean(body.proof, 6000) }], max_tokens: 120 });
+            const m = /\{[\s\S]*\}/.exec(out.response || ''); const d = m ? JSON.parse(m[0]) : null;
+            const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const slug = thread.slice(7), sh = norm(d?.ship).replace(/^(ms|mv|msc-)?/, '');
+            if (sh && sh.length > 3 && (slug.includes(sh) || sh.includes(slug.replace(/^msc-/, '')))) verified = 1;
+          } catch {}
+        }
+        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
+          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified).first();
+        return R({ ok: true, id: r.id, held: !!hidden, verified: !!verified });
       }
       if (p === '/vote' && req.method === 'POST') {
         const id = parseInt(body.id);
@@ -159,6 +184,26 @@ export default {
         await env.DB.prepare('INSERT OR IGNORE INTO members(thread,user_id,name) VALUES(?,?,?)').bind(thread, uid, name).run();
         const n = await env.DB.prepare('SELECT COUNT(*) n FROM members WHERE thread=?').bind(thread).first();
         return R({ ok: true, members: n.n });
+      }
+      // Nota de la comunidad por barco (para el MejorCrucero Score)
+      if (p === '/ratings') {
+        const r = await env.DB.prepare("SELECT thread, AVG(json_extract(rating,'$.general')) avg, COUNT(*) n, SUM(verified) v FROM posts WHERE kind='review' AND hidden=0 AND rating IS NOT NULL AND json_extract(rating,'$.general') IS NOT NULL AND thread LIKE 'barco:%' GROUP BY thread").all();
+        return R(Object.fromEntries(r.results.map((x) => [x.thread, { avg: Math.round(x.avg * 100) / 100, n: x.n, v: x.v || 0 }])));
+      }
+      // Avisos: respuestas a mis mensajes desde una fecha
+      if (p === '/notifications') {
+        const uid = clean(url.searchParams.get('user_id'), 40), since = clean(url.searchParams.get('since'), 25) || '1970-01-01';
+        if (!/^[a-z0-9]{16,40}$/.test(uid)) return R({ items: [] });
+        const r = await env.DB.prepare("SELECT c.id, c.thread, c.name, c.kind, substr(c.body,1,140) body, c.created FROM posts c JOIN posts m ON c.parent=m.id WHERE m.user_id=? AND (c.user_id IS NULL OR c.user_id<>?) AND c.hidden=0 AND c.created>? ORDER BY c.id DESC LIMIT 30").bind(uid, uid, since).all();
+        return R({ items: r.results });
+      }
+      // Referidos: quién trae a quién (para insignias y retos)
+      if (p === '/ref' && req.method === 'POST') {
+        const code = clean(body.code, 40), uid = clean(body.user_id, 40);
+        if (!/^[a-z0-9]{16,40}$/.test(code) || code === uid) return R({ ok: false });
+        if (await limited(env, 'ref:' + ipHash, 3, 1440)) return R({ ok: true });
+        await env.DB.prepare('INSERT INTO events(name,page,target,variant) VALUES(?,?,?,?)').bind('ref', clean(body.page, 200), code, ipHash.slice(0, 12)).run();
+        return R({ ok: true });
       }
       if (p === '/stats') {
         const thread = clean(url.searchParams.get('thread'), 140);
@@ -222,6 +267,16 @@ export default {
           return R({ leads: await one('SELECT COUNT(*) n FROM leads'), alerts: await one('SELECT COUNT(*) n FROM alerts'), posts: await one('SELECT COUNT(*) n FROM posts'), reports: await one('SELECT COUNT(*) n FROM reports'),
             clicks7d: (await env.DB.prepare("SELECT target, COUNT(*) n FROM events WHERE name='aff_click' AND created > datetime('now','-7 days') GROUP BY target ORDER BY n DESC LIMIT 30").all()).results });
         }
+        if (p === '/admin/funnel') {
+          const days = Math.min(90, parseInt(url.searchParams.get('days')) || 30);
+          const ev = (await env.DB.prepare("SELECT name, COUNT(*) n FROM events WHERE created > datetime('now', ?) GROUP BY name ORDER BY n DESC").bind(`-${days} days`).all()).results;
+          const pages = (await env.DB.prepare("SELECT page, COUNT(*) n FROM events WHERE name='aff_click' AND created > datetime('now', ?) GROUP BY page ORDER BY n DESC LIMIT 20").bind(`-${days} days`).all()).results;
+          const ab = (await env.DB.prepare("SELECT target, variant, COUNT(*) n FROM events WHERE name IN ('ab_view','ab_click') AND created > datetime('now', ?) GROUP BY name, target, variant").bind(`-${days} days`).all()).results;
+          const leads = (await env.DB.prepare("SELECT source, COUNT(*) n FROM leads WHERE created > datetime('now', ?) GROUP BY source ORDER BY n DESC LIMIT 30").bind(`-${days} days`).all()).results;
+          return R({ days, events: ev, affPages: pages, ab, leads });
+        }
+        if (p === '/admin/queue') return R((await env.DB.prepare('SELECT id,thread,name,kind,body,reports,mod,created FROM posts WHERE hidden=1 OR reports>0 ORDER BY id DESC LIMIT 200').all()).results);
+        if (p === '/admin/reports') return R((await env.DB.prepare('SELECT * FROM reports ORDER BY id DESC LIMIT 500').all()).results);
         if (p === '/admin/leads') return R((await env.DB.prepare('SELECT * FROM leads ORDER BY id DESC LIMIT 5000').all()).results);
         if (p === '/admin/alerts') return R((await env.DB.prepare('SELECT * FROM alerts ORDER BY id DESC LIMIT 5000').all()).results);
       }
