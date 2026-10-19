@@ -3,8 +3,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'   # reconstrucción diaria: tipo de cambio del BCE y, cuando exista, feed de precios
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -18,6 +20,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Importar feed de precios (si está configurado)
+        if: ${{ vars.FEED_URL != '' }}
+        env:
+          FEED_URL: ${{ vars.FEED_URL }}
+          FEED_TOKEN: ${{ secrets.FEED_TOKEN }}
+        run: |
+          node tools/import-feed.js
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/sailings.json && git commit -m "Actualizar precios (feed diario)" && git push || echo "sin cambios"
       - name: Build
         env:
           # Con dominio propio: crear variables de repo BASE="/" y CNAME="mejorcrucero.com"

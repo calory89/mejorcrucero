@@ -125,4 +125,86 @@ export const GUIDES = [
 <h2>Paga lo mínimo por adelantado</h2>
 <p>Compara también las condiciones de pago: hay vendedores que piden un depósito pequeño y otros que cobran un porcentaje alto al reservar. Cuanto menos adelantes, más fácil será cambiar si encuentras algo mejor.</p>`,
   },
+  {
+    slug: 'que-incluye-un-crucero',
+    title: '¿Qué incluye un crucero y qué se paga aparte?',
+    desc: 'Lo que entra en el precio (camarote, comida, espectáculos) y lo que suele cobrarse a bordo: bebidas, propinas, wifi, excursiones y restaurantes de especialidad.',
+    emoji: '🧾',
+    body: `
+<p>La regla general en las grandes navieras es sencilla: <strong>dormir, comer en los restaurantes principales y los espectáculos están incluidos</strong>; casi todo lo demás se paga.</p>
+<h2>Normalmente incluido</h2>
+<ul><li>El camarote y su limpieza diaria.</li><li>Restaurante principal y bufé, con agua, té y café básicos en ciertos horarios.</li><li>Teatro, música en vivo, piscinas, gimnasio y la mayoría de actividades a bordo.</li><li>Clubes infantiles en horario estándar (según naviera y edad).</li></ul>
+<h2>Normalmente se paga aparte</h2>
+<ul><li>Cargos de servicio diarios (propinas): ver <a href="/guias/propinas-y-cargos-de-servicio/">nuestra guía</a>.</li><li>Bebidas alcohólicas, refrescos, agua embotellada y cafés especiales, o un paquete de bebidas.</li><li>Wifi.</li><li>Restaurantes de especialidad, spa y algunas atracciones.</li><li>Excursiones en tierra.</li><li>Tasas portuarias, si no van incluidas en la tarifa.</li></ul>
+<p>Algunas navieras y tarifas "todo incluido" meten bebidas, wifi o propinas en el precio: compara siempre con la <a href="/herramientas/precio-real/">calculadora del precio real</a>.</p>`,
+  },
+  {
+    slug: 'mareo-en-crucero',
+    title: 'Mareo en un crucero: cómo evitarlo',
+    desc: 'Qué camarote elegir, qué rutas se mueven más y qué hacer si te mareas a bordo.',
+    emoji: '🌊',
+    body: `
+<p>Los barcos modernos llevan estabilizadores y la mayoría de pasajeros no nota casi nada. Aun así, si eres propenso al mareo, hay decisiones que ayudan mucho.</p>
+<h2>Antes de reservar</h2>
+<ul><li><strong>Camarote central y en cubierta baja:</strong> es donde menos se nota el movimiento.</li><li><strong>Barcos grandes:</strong> suelen moverse menos que los pequeños.</li><li><strong>Itinerarios con más puertos y menos navegación</strong>, como el Mediterráneo en verano, frente a travesías oceánicas.</li></ul>
+<p>Mira el <a href="/herramientas/mareometro/">mareómetro por destino y mes</a> para saber qué zonas suelen estar más movidas.</p>
+<h2>A bordo</h2>
+<ul><li>Sal a cubierta y mira al horizonte.</li><li>Come algo ligero; el estómago vacío empeora el mareo.</li><li>El centro médico del barco y la recepción suelen tener remedios para el mareo; si tomas medicación, consulta antes a tu médico o farmacéutico.</li></ul>`,
+  },
+  {
+    slug: 'paquete-de-bebidas',
+    title: '¿Merece la pena el paquete de bebidas del crucero?',
+    desc: 'Cómo calcular si te compensa el paquete de bebidas, qué suele incluir y las condiciones que conviene leer.',
+    emoji: '🍹',
+    body: `
+<p>El paquete de bebidas es un precio fijo por persona y día a cambio de bebidas "ilimitadas" dentro de una lista. Si te compensa depende de cuánto bebes realmente.</p>
+<h2>Haz la cuenta</h2>
+<p>Divide el precio diario del paquete entre el precio medio de una bebida a bordo: ese es el número de consumiciones al día a partir del cual te sale a cuenta. Si no llegas cómodamente, paga por consumición.</p>
+<h2>Letra pequeña habitual</h2>
+<ul><li>Muchas navieras obligan a que <strong>todos los adultos del camarote</strong> contraten el mismo paquete.</li><li>Se paga por cada día del crucero, también los días de puerto.</li><li>Suele haber un precio máximo por bebida incluida y marcas excluidas.</li><li>Los cargos de servicio pueden aplicarse también sobre el paquete.</li></ul>
+<p>Añade el paquete en la <a href="/herramientas/precio-real/">calculadora del precio real</a> para ver el total.</p>`,
+  },
+  {
+    slug: 'excursiones-por-libre',
+    title: 'Excursiones en crucero: con la naviera o por libre',
+    desc: 'Ventajas e inconvenientes de cada opción, cuándo compensa ir por tu cuenta y cómo no perder el barco.',
+    emoji: '🗺️',
+    body: `
+<p>Las excursiones de la naviera son cómodas, pero suelen ser más caras. Ir por libre o con una agencia local ahorra dinero y, a menudo, evita los grupos enormes.</p>
+<h2>Con la naviera</h2>
+<ul><li>Si se retrasa la excursión, el barco espera.</li><li>Todo organizado desde a bordo.</li><li>Más caro y en grupos grandes.</li></ul>
+<h2>Por libre o con agencia local</h2>
+<ul><li>Más barato y flexible.</li><li>Si llegas tarde, <strong>el barco no te espera</strong>: deja al menos hora y media de margen.</li><li>Ideal en puertos donde la ciudad está al lado del muelle.</li></ul>
+<p>En nuestra sección de <a href="/excursiones/">excursiones por puerto</a> tienes visitas en español, y en el <a href="/comunidad/">grupo de tu salida</a> puedes compartir taxi o guía con otros pasajeros.</p>`,
+  },
+  {
+    slug: 'documentacion-crucero',
+    title: 'Documentación para un crucero: DNI, pasaporte y visados',
+    desc: 'Qué documento necesitas según el itinerario, menores, y lo que debes comprobar antes de embarcar.',
+    emoji: '🛂',
+    body: `
+<p>El documento que necesitas depende del <strong>itinerario completo</strong>, no solo del puerto de salida. Esta guía es orientativa: la naviera te indicará lo exigido en tu reserva y es lo que manda.</p>
+<h2>Cruceros por la Unión Europea</h2>
+<p>Para ciudadanos españoles suele bastar el DNI en vigor si todas las escalas están en países del espacio Schengen, aunque algunas navieras recomiendan o exigen pasaporte.</p>
+<h2>Si hay escalas fuera de la UE</h2>
+<p>Marruecos, Turquía, Reino Unido, EE. UU. o el Caribe requieren normalmente pasaporte, y algunos países piden autorizaciones electrónicas (por ejemplo, ESTA para EE. UU. o eTA para Canadá).</p>
+<h2>Menores</h2>
+<p>Los menores necesitan su propio documento. Si viajan con un solo progenitor o con otros adultos, pueden pedirse autorizaciones adicionales.</p>
+<h2>Checklist</h2>
+<p>Usa nuestro <a href="/herramientas/checklist/">checklist de crucero</a> para no olvidarte de nada.</p>`,
+  },
+  {
+    slug: 'crucero-tercera-edad',
+    title: 'Cruceros para mayores: comodidad sin complicaciones',
+    desc: 'Por qué el crucero es uno de los viajes más cómodos para personas mayores y qué tener en cuenta al elegir barco y camarote.',
+    emoji: '🧓',
+    body: `
+<p>Sin maletas que hacer cada día, con médico a bordo y el hotel siempre a mano, el crucero es uno de los viajes más cómodos a cualquier edad.</p>
+<h2>Elige bien el barco</h2>
+<ul><li>Navieras de ambiente más tranquilo, como <a href="/navieras/celebrity/">Celebrity</a>, <a href="/navieras/princess/">Princess</a> o <a href="/navieras/cunard/">Cunard</a>.</li><li>Un <a href="/rankings/#espaciosos">índice de espacio</a> alto significa menos colas.</li><li>Evita las fechas de vacaciones escolares si buscas calma.</li></ul>
+<h2>Camarote</h2>
+<ul><li>Cerca de los ascensores para caminar menos.</li><li>Si hay movilidad reducida, pide camarote adaptado al reservar: son pocos.</li></ul>
+<h2>Excursiones</h2>
+<p>Revisa el nivel de esfuerzo de cada excursión y si el puerto es de atraque o con lancha (tender), que es más difícil para quien camina con dificultad.</p>`,
+  },
 ];

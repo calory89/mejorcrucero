@@ -1,0 +1,23 @@
+name: Actualizar fotos de barcos
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 4 * * 1'   # cada lunes: fotos de barcos nuevos
+permissions:
+  contents: write
+  actions: write
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buscar fotos con licencia en Wikimedia Commons
+        run: python3 tools/photos.py
+      - name: Guardar
+        run: |
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/photos.json && git commit -m "Actualizar fotos de barcos (Wikimedia Commons)" && git push || echo "sin cambios"
+      - name: Republicar la web
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

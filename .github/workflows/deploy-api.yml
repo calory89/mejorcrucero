@@ -1,0 +1,29 @@
+name: Deploy API (Cloudflare Worker)
+on:
+  push:
+    branches: [main]
+    paths: ['backend/**', '.github/workflows/deploy-api.yml']
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ vars.DEPLOY_API == 'true' }}
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Base de datos D1
+        run: |
+          npx --yes wrangler@4 d1 create mejorcrucero || true
+          ID=$(npx --yes wrangler@4 d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).find(d=>d.name==='mejorcrucero').uuid))")
+          sed -i "s/__D1_ID__/$ID/" wrangler.toml
+          npx --yes wrangler@4 d1 execute mejorcrucero --remote --file schema.sql
+      - name: Publicar Worker
+        run: npx --yes wrangler@4 deploy

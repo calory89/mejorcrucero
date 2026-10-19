@@ -14,6 +14,13 @@ export const CONFIG = {
   },
   // Endpoint POST (JSON) para alertas de precio y newsletter. Vacío = se guardan solo en el dispositivo.
   formEndpoint: '',
+  // API propia (Cloudflare Worker en backend/). Vacío = funciones de comunidad en modo "abre pronto".
+  api: '',
+  // Cloudflare Web Analytics (sin cookies). Vacío = desactivado.
+  cfBeacon: '',
+  // Tests A/B: variantes de texto que se reparten al azar y se miden con /evt
+  ab: { heroCta: ['Buscar', 'Encontrar mi crucero'] },
+  author: { name: 'Carlos de Ory', role: 'Fundador de MejorCrucero y de Happy Low Cost' },
   // Foro y opiniones con Giscus (GitHub Discussions). Activar tras instalar https://github.com/apps/giscus en el repo.
   giscus: {
     enabled: false,
@@ -28,35 +35,68 @@ export const CONFIG = {
 // Cargos de servicio diarios por persona (USD, mercado EE. UU.). Fuente: Cruzely, actualizado 3-feb-2026.
 // En Europa pueden variar o venir incluidos en la tarifa: el usuario siempre puede ajustarlo.
 export const LINES = {
-  'Royal Caribbean International': { slug: 'royal-caribbean', short: 'Royal Caribbean', web: 'https://www.royalcaribbean.com/', tip: 18.5, tipSuite: 21, color: '#1d4ed8', es: false,
+  'Royal Caribbean International': { tier: 'estandar', slug: 'royal-caribbean', short: 'Royal Caribbean', web: 'https://www.royalcaribbean.com/', tip: 18.5, tipSuite: 21, color: '#1d4ed8', es: false,
     blurb: 'La naviera de los barcos más grandes del mundo (clase Oasis e Icon): toboganes, parques acuáticos, patinaje sobre hielo y espectáculos tipo Broadway. Ideal para familias y para quien quiere un "resort flotante".' },
-  'MSC Cruises': { slug: 'msc', short: 'MSC Cruceros', web: 'https://www.msccruceros.es/', tip: 16, tipSuite: 20, color: '#0b2a5b', es: true,
+  'MSC Cruises': { tier: 'estandar', slug: 'msc', short: 'MSC Cruceros', web: 'https://www.msccruceros.es/', tip: 16, tipSuite: 20, color: '#0b2a5b', es: true,
     blurb: 'Naviera de origen italo-suizo muy presente en el Mediterráneo y con salidas desde puertos españoles. Ambiente internacional, anuncios en varios idiomas incluido el español, y el MSC Yacht Club como "barco dentro del barco".' },
-  'Costa Cruises': { slug: 'costa', short: 'Costa Cruceros', web: 'https://www.costacruceros.es/', tip: null, tipSuite: null, color: '#f2b705', es: true,
+  'Costa Cruises': { tier: 'estandar', slug: 'costa', short: 'Costa Cruceros', web: 'https://www.costacruceros.es/', tip: null, tipSuite: null, color: '#f2b705', es: true,
     blurb: 'Naviera italiana con mucha tradición entre el público español y latino. Barcos como el Costa Smeralda y el Costa Toscana, con salidas habituales desde el Mediterráneo occidental.' },
-  'Norwegian Cruise Line': { slug: 'norwegian', short: 'Norwegian (NCL)', web: 'https://www.ncl.com/', tip: 20, tipSuite: 25, color: '#0e7490', es: false,
+  'Norwegian Cruise Line': { tier: 'estandar', slug: 'norwegian', short: 'Norwegian (NCL)', web: 'https://www.ncl.com/', tip: 20, tipSuite: 25, color: '#0e7490', es: false,
     blurb: 'Pionera del "freestyle cruising": sin horarios fijos de cena ni código de vestimenta estricto. The Haven es su zona de suites con servicio exclusivo.' },
-  'Carnival Cruise Line': { slug: 'carnival', short: 'Carnival', web: 'https://www.carnival.com/', tip: 16, tipSuite: 18, color: '#c2410c', es: false,
+  'Carnival Cruise Line': { tier: 'estandar', slug: 'carnival', short: 'Carnival', web: 'https://www.carnival.com/', tip: 16, tipSuite: 18, color: '#c2410c', es: false,
     blurb: 'La naviera "divertida" por excelencia en EE. UU., con barcos como el Mardi Gras y la montaña rusa BOLT. Muy orientada al Caribe desde puertos estadounidenses.' },
-  'Princess Cruises': { slug: 'princess', short: 'Princess', web: 'https://www.princess.com/', tip: 17, tipSuite: 19, color: '#1e3a8a', es: false,
+  'Princess Cruises': { tier: 'premium', slug: 'princess', short: 'Princess', web: 'https://www.princess.com/', tip: 17, tipSuite: 19, color: '#1e3a8a', es: false,
     blurb: 'Ambiente más tranquilo y clásico, buena gastronomía y el sistema MedallionClass. Gran presencia en Alaska y el Mediterráneo.' },
-  'Celebrity Cruises': { slug: 'celebrity', short: 'Celebrity', web: 'https://www.celebritycruises.com/', tip: 18, tipSuite: 23, color: '#111827', es: false,
+  'Celebrity Cruises': { tier: 'premium', slug: 'celebrity', short: 'Celebrity', web: 'https://www.celebritycruises.com/', tip: 18, tipSuite: 23, color: '#111827', es: false,
     blurb: 'Lujo moderno a precio premium: diseño cuidado, gastronomía destacada y la plataforma Magic Carpet en la clase Edge. Público adulto.' },
-  'Disney Cruise Line': { slug: 'disney', short: 'Disney Cruise Line', web: 'https://disneycruise.disney.go.com/', tip: 16, tipSuite: 27.25, color: '#7c3aed', es: false,
+  'Disney Cruise Line': { tier: 'premium', slug: 'disney', short: 'Disney Cruise Line', web: 'https://disneycruise.disney.go.com/', tip: 16, tipSuite: 27.25, color: '#7c3aed', es: false,
     blurb: 'La opción de referencia para familias con niños, con personajes, espectáculos y zonas infantiles muy cuidadas. Precio alto.' },
-  'P&O Cruises': { slug: 'po-cruises', short: 'P&O Cruises', web: 'https://www.pocruises.com/', tip: null, tipSuite: null, color: '#0f3d5e', es: false,
+  'P&O Cruises': { tier: 'estandar', slug: 'po-cruises', short: 'P&O Cruises', web: 'https://www.pocruises.com/', tip: null, tipSuite: null, color: '#0f3d5e', es: false,
     blurb: 'Naviera británica pensada para el público del Reino Unido. Barcos como el Arvia y el Iona.' },
-  'AIDA Cruises': { slug: 'aida', short: 'AIDA', web: 'https://www.aida.de/', tip: null, tipSuite: null, color: '#db2777', es: false,
+  'AIDA Cruises': { tier: 'estandar', slug: 'aida', short: 'AIDA', web: 'https://www.aida.de/', tip: null, tipSuite: null, color: '#db2777', es: false,
     blurb: 'Naviera alemana, muy popular en el mercado germanohablante, reconocible por los labios pintados en la proa.' },
-  'TUI Cruises': { slug: 'tui-cruises', short: 'TUI Cruises', web: 'https://www.tuicruises.com/', tip: null, tipSuite: null, color: '#0369a1', es: false,
+  'TUI Cruises': { tier: 'premium', slug: 'tui-cruises', short: 'TUI Cruises', web: 'https://www.tuicruises.com/', tip: null, tipSuite: null, color: '#0369a1', es: false,
     blurb: 'Naviera alemana de la flota Mein Schiff, con un enfoque "premium todo incluido" para el mercado germanohablante.' },
-  'Cunard Line': { slug: 'cunard', short: 'Cunard', web: 'https://www.cunard.com/', tip: null, tipSuite: null, color: '#7f1d1d', es: false,
+  'Cunard Line': { tier: 'premium', slug: 'cunard', short: 'Cunard', web: 'https://www.cunard.com/', tip: null, tipSuite: null, color: '#7f1d1d', es: false,
     blurb: 'La naviera de los transatlánticos. El Queen Mary 2 cruza el Atlántico entre Southampton y Nueva York con un estilo clásico y elegante.' },
-  'Dream Cruises': { slug: 'dream-cruises', short: 'Dream Cruises', web: null, tip: null, tipSuite: null, color: '#9333ea', es: false,
+  'Dream Cruises': { tier: 'estandar', slug: 'dream-cruises', short: 'Dream Cruises', web: null, tip: null, tipSuite: null, color: '#9333ea', es: false,
     blurb: 'Naviera orientada al mercado asiático.' },
-  'Aroya Cruises': { slug: 'aroya', short: 'Aroya Cruises', web: null, tip: null, tipSuite: null, color: '#047857', es: false,
+  'Aroya Cruises': { tier: 'estandar', slug: 'aroya', short: 'Aroya Cruises', web: null, tip: null, tipSuite: null, color: '#047857', es: false,
     blurb: 'Naviera saudí orientada al mar Rojo y al público de Oriente Medio.' },
+  'Holland America Line': { slug: 'holland-america', short: 'Holland America', web: 'https://www.hollandamerica.com/', tip: 17, tipSuite: 19, color: '#0c2d5a', es: false, tier: 'premium',
+    blurb: 'Naviera clásica de ambiente tranquilo, con música en vivo y buena oferta en Alaska y Europa.' },
+  'Virgin Voyages': { slug: 'virgin-voyages', short: 'Virgin Voyages', web: 'https://www.virginvoyages.com/', tip: 22, tipSuite: 22, color: '#b91c1c', es: false, tier: 'premium',
+    blurb: 'Solo para adultos, con diseño moderno y restaurantes incluidos. Tiene barcos con salidas desde Barcelona.' },
+  'Oceania Cruises': { slug: 'oceania', short: 'Oceania Cruises', web: 'https://www.oceaniacruises.com/', tip: null, tipSuite: null, color: '#1f2937', es: false, tier: 'lujo',
+    blurb: 'Barcos medianos centrados en la gastronomía y en itinerarios con muchos puertos.' },
+  'Regent Seven Seas Cruises': { slug: 'regent', short: 'Regent Seven Seas', web: 'https://www.rssc.com/', tip: null, tipSuite: null, color: '#1e293b', es: false, tier: 'lujo',
+    blurb: 'Lujo con todo incluido: suites, bebidas, excursiones y propinas en el precio.' },
+  'Viking': { slug: 'viking', short: 'Viking', web: 'https://www.vikingcruises.com/', tip: null, tipSuite: null, color: '#7c2d12', es: false, tier: 'lujo',
+    blurb: 'Barcos sin casino ni niños, enfocados en cultura y destinos, con muchas inclusiones.' },
+  'Explora Journeys': { slug: 'explora', short: 'Explora Journeys', web: 'https://explorajourneys.com/', tip: null, tipSuite: null, color: '#334155', es: false, tier: 'lujo',
+    blurb: 'La marca de lujo del grupo MSC: suites con terraza y servicio de alto nivel.' },
+  'Azamara': { slug: 'azamara', short: 'Azamara', web: 'https://www.azamara.com/', tip: null, tipSuite: null, color: '#1e3a8a', es: false, tier: 'premium',
+    blurb: 'Barcos pequeños con estancias largas en puerto y noches en destino.' },
+  'Silversea Cruises': { slug: 'silversea', short: 'Silversea', web: 'https://www.silversea.com/', tip: null, tipSuite: null, color: '#475569', es: false, tier: 'lujo',
+    blurb: 'Lujo ultra con barcos pequeños y expediciones a destinos remotos.' },
+  'Seabourn': { slug: 'seabourn', short: 'Seabourn', web: 'https://www.seabourn.com/', tip: null, tipSuite: null, color: '#0f172a', es: false, tier: 'lujo',
+    blurb: 'Lujo íntimo, todo suites y mucho servicio personalizado.' },
+  'Ponant': { slug: 'ponant', short: 'Ponant', web: 'https://www.ponant.com/', tip: null, tipSuite: null, color: '#1d4ed8', es: false, tier: 'lujo',
+    blurb: 'Naviera francesa de yates de expedición y lujo, de los Polos al Mediterráneo.' },
+  'Celestyal': { slug: 'celestyal', short: 'Celestyal', web: 'https://celestyal.com/', tip: null, tipSuite: null, color: '#0369a1', es: false, tier: 'estandar',
+    blurb: 'Especialista griega en islas del Egeo, con barcos medianos y ambiente local.' },
+  'Hurtigruten': { slug: 'hurtigruten', short: 'Hurtigruten', web: 'https://www.hurtigruten.com/', tip: null, tipSuite: null, color: '#991b1b', es: false, tier: 'premium',
+    blurb: 'La ruta costera de Noruega: barcos que conectan puertos del norte, ideales para auroras.' },
+  'Marella Cruises': { slug: 'marella', short: 'Marella', web: 'https://www.tui.co.uk/cruise', tip: null, tipSuite: null, color: '#0e7490', es: false, tier: 'estandar',
+    blurb: 'Naviera británica del grupo TUI con muchas inclusiones, orientada al público del Reino Unido.' },
+  'Fred. Olsen Cruise Lines': { slug: 'fred-olsen', short: 'Fred. Olsen', web: 'https://www.fredolsencruises.com/', tip: null, tipSuite: null, color: '#14532d', es: false, tier: 'estandar',
+    blurb: 'Barcos pequeños y clásicos para el mercado británico.' },
+  'Ambassador Cruise Line': { slug: 'ambassador', short: 'Ambassador', web: 'https://www.ambassadorcruiseline.com/', tip: null, tipSuite: null, color: '#1e40af', es: false, tier: 'estandar',
+    blurb: 'Naviera británica de barcos clásicos para público adulto.' },
+  'Margaritaville at Sea': { slug: 'margaritaville', short: 'Margaritaville at Sea', web: 'https://www.margaritavilleatsea.com/', tip: null, tipSuite: null, color: '#ca8a04', es: false, tier: 'estandar',
+    blurb: 'Cruceros cortos y festivos desde Florida.' },
 };
+
 
 // Vídeos reales de YouTube (IDs verificados vía búsqueda el 19-oct-2026). Facade ligero: solo carga el iframe al hacer clic.
 export const VIDEOS = {
@@ -138,6 +178,14 @@ export const HOME_PORTS = [
     text: 'Las Canarias son destino de cruceros en otoño e invierno, con itinerarios entre islas y hacia Madeira.' },
   { slug: 'gran-canaria', name: 'Las Palmas de Gran Canaria', civ: 'gran-canaria', region: 'Canarias',
     text: 'Puerto clave de la temporada de invierno en Canarias, con embarques para recorrer las islas.' },
+];
+
+export const AMERICA_PORTS = [
+  { slug: 'miami', name: 'Miami', civ: 'miami', region: 'Florida, EE. UU.', text: 'Conocida como la capital mundial de los cruceros: desde aquí salen a diario barcos hacia el Caribe y las Bahamas.' },
+  { slug: 'fort-lauderdale', name: 'Fort Lauderdale (Port Everglades)', civ: null, region: 'Florida, EE. UU.', text: 'A pocos kilómetros de Miami, otro de los grandes puertos de salida hacia el Caribe.' },
+  { slug: 'port-canaveral', name: 'Port Canaveral', civ: null, region: 'Florida, EE. UU.', text: 'Puerto cercano a Orlando: muy cómodo para combinar parques temáticos y crucero.' },
+  { slug: 'san-juan', name: 'San Juan', civ: null, region: 'Puerto Rico', text: 'Puerto de salida hacia el Caribe sur, con el Viejo San Juan junto al muelle.' },
+  { slug: 'buenos-aires', name: 'Buenos Aires', civ: 'buenos-aires', region: 'Argentina', text: 'Puerto de la temporada de verano austral, con itinerarios por Uruguay y Brasil.' },
 ];
 
 export const SCALE_PORTS = [
