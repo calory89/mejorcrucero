@@ -32,6 +32,14 @@ function badges(u) {
   return b;
 }
 
+// Modelos de Workers AI por orden de preferencia (si uno se retira, prueba el siguiente)
+const MODELS = ['@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/mistralai/mistral-small-3.1-24b-instruct', '@cf/meta/llama-3.1-8b-instruct-fp8'];
+async function ai(env, input) {
+  let err;
+  for (const m of MODELS) { try { return await env.AI.run(m, input); } catch (e) { err = e; } }
+  throw err;
+}
+
 export default {
   async fetch(req, env) {
     const allowed = (env.ALLOWED_ORIGINS || '*').split(',').map((s) => s.trim());
@@ -182,7 +190,7 @@ export default {
         if (r.results.length < 5) return R({ summary: null, need: 5 - r.results.length });
         if (cached && cached.posts === r.results.length) return R({ summary: cached.body });
         const prompt = `Resume en español, en dos listas cortas ("A favor" y "En contra", máximo 4 puntos cada una), SOLO lo que dicen estas opiniones reales de cruceristas. No inventes nada.\n\n${r.results.map((x) => '- ' + x.body).join('\n').slice(0, 9000)}`;
-        const out = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { messages: [{ role: 'user', content: prompt }], max_tokens: 400 });
+        const out = await ai(env, { messages: [{ role: 'user', content: prompt }], max_tokens: 400 });
         await env.DB.prepare('INSERT OR REPLACE INTO summaries(thread, body, posts) VALUES(?,?,?)').bind(thread, out.response, r.results.length).run();
         return R({ summary: out.response });
       }
@@ -192,14 +200,14 @@ export default {
         const q = clean(body.q, 600);
         const ctx = clean(body.context, 6000);
         const sys = 'Eres el asistente de MejorCrucero.com. Ayudas a elegir crucero en español. Usa SOLO los datos de barcos del contexto; si no sabes algo (precios, fechas, itinerarios), dilo y sugiere usar las herramientas de la web. Responde breve, directo y con hasta 3 barcos recomendados, cada uno con su motivo. Nombra los barcos exactamente como aparecen en el contexto.';
-        const out = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { messages: [{ role: 'system', content: sys + '\n\nContexto:\n' + ctx }, { role: 'user', content: q }], max_tokens: 500 });
+        const out = await ai(env, { messages: [{ role: 'system', content: sys + '\n\nContexto:\n' + ctx }, { role: 'user', content: q }], max_tokens: 500 });
         return R({ answer: out.response });
       }
       if (p === '/parse-booking' && req.method === 'POST') {
         if (!env.AI) return R({ data: null });
         if (await limited(env, 'parse:' + ipHash, 20, 60)) return R({ error: 'rate' }, 429);
         const text = clean(body.text, 8000);
-        const out = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { messages: [{ role: 'system', content: 'Extrae de este email de confirmación de crucero un JSON con: ship (nombre del barco), date (fecha de salida YYYY-MM-DD), price (importe total en número), cabin (Interior|Exterior|Balcón|Suite), where (vendedor). Si un dato no aparece, pon null. Responde SOLO el JSON.' }, { role: 'user', content: text }], max_tokens: 200 });
+        const out = await ai(env, { messages: [{ role: 'system', content: 'Extrae de este email de confirmación de crucero un JSON con: ship (nombre del barco), date (fecha de salida YYYY-MM-DD), price (importe total en número), cabin (Interior|Exterior|Balcón|Suite), where (vendedor). Si un dato no aparece, pon null. Responde SOLO el JSON.' }, { role: 'user', content: text }], max_tokens: 200 });
         const m = /\{[\s\S]*\}/.exec(out.response || '');
         let data = null; try { data = m ? JSON.parse(m[0]) : null; } catch {}
         return R({ data });

@@ -9,7 +9,7 @@ ALLOWED_ORIGINS = "https://mejorcrucero.com,https://www.mejorcrucero.com,https:/
 [[d1_databases]]
 binding = "DB"
 database_name = "mejorcrucero"
-database_id = "__D1_ID__"
+database_id = "6da3ae6e-8d15-41dd-aaba-975d21e40c5c"
 
 [ai]
 binding = "AI"

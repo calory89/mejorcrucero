@@ -15,7 +15,7 @@ export const CONFIG = {
   // Endpoint POST (JSON) para alertas de precio y newsletter. Vacío = se guardan solo en el dispositivo.
   formEndpoint: '',
   // API propia (Cloudflare Worker en backend/). Vacío = funciones de comunidad en modo "abre pronto".
-  api: '',
+  api: 'https://mejorcrucero-api.mejorcrucero.workers.dev',
   // Cloudflare Web Analytics (sin cookies). Vacío = desactivado.
   cfBeacon: '',
   // Tests A/B: variantes de texto que se reparten al azar y se miden con /evt
