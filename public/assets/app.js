@@ -205,24 +205,25 @@
     }
   }
 
-  // ---------- Listado de barcos: filtros en la URL y paginación ----------
+  // ---------- Listado de barcos: filtros en la URL y paginación (datos de ships.json) ----------
   const filters = $('#filters');
+  const fullCard = (s) => `<article class="card ship-card"><a class="card-link" href="${BASE}barcos/${s.slug}/"><div class="ship-art${s.img ? ' has-photo' : ''}" style="--c:${s.color}">${s.img ? `<img src="${esc(s.img)}" alt="${esc(s.name)} navegando" loading="lazy" decoding="async" width="640" height="400" class="ship-photo">` : `<svg viewBox="0 0 340 130" width="300" aria-hidden="true"><path d="M60 78h220v8H60zM80 64h180v10H80zM100 50h140v10H100z" fill="#fff"/><rect x="160" y="36" width="24" height="12" rx="3" fill="${s.color}"/><path d="M8 86H332L304 112H34Z" fill="${s.color}"/></svg>`}${s.v ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}</div><div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3><ul class="facts"><li><b>${s.year}</b> año</li><li><b>${num(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul></div></a><button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8.1 3.2 4.5 6.8 4.5c2 0 3.5 1.1 4.2 2.4h2c.7-1.3 2.2-2.4 4.2-2.4 3.6 0 5.9 3.6 4.4 7.1C19.5 16.4 12 21 12 21Z" fill="currentColor"/></svg></button><button class="cmp-add" type="button" data-cmp="${s.slug}">+ Comparar<span class="sr"> ${esc(s.name)}</span></button></article>`;
   if (filters) {
-    const grid = $('#ship-grid'), cards = $$('.ship-card', grid), more = $('#more');
-    const PER = 24; let shown = PER;
-    for (const [k, v] of qs) if (filters[k]) filters[k].value = v;
-    const apply = (resetPage = true) => {
+    const grid = $('#ship-grid'), more = $('#more');
+    const PER = 24; let shown = PER, touched = false;
+    for (const [k, v] of qs) if (filters[k]) { filters[k].value = v; touched = true; }
+    const apply = async (resetPage = true) => {
       if (resetPage) shown = PER;
+      const ships = await getShips();
       const q = filters.q.value.trim().toLowerCase(), line = filters.linea.value, size = filters.tam.value, tier = filters.gama.value, sort = filters.orden.value;
-      const ok = cards.filter((c) => (!q || c.dataset.name.includes(q)) && (!line || c.dataset.line === line) && (!size || c.dataset.size === size) && (!tier || c.dataset.tier === tier));
-      const key = { gt: (c) => -c.dataset.gt, year: (c) => -c.dataset.year * 1e6 - c.dataset.gt, ratio: (c) => -c.dataset.ratio, name: null }[sort];
-      ok.sort(key ? (a, b) => key(a) - key(b) : (a, b) => a.dataset.name.localeCompare(b.dataset.name));
-      cards.forEach((c) => { c.hidden = true; });
-      ok.forEach((c, i) => { c.hidden = i >= shown; });
-      grid.append(...ok);
+      const ok = ships.filter((s) => (!q || s.name.toLowerCase().includes(q)) && (!line || s.lineSlug === line) && (!size || s.size === size) && (!tier || s.tier === tier));
+      const key = { gt: (s) => -s.gt, year: (s) => -s.year * 1e6 - s.gt, ratio: (s) => -(s.ratio || 0), name: null }[sort];
+      ok.sort(key ? (x, y) => key(x) - key(y) : (x, y) => x.name.localeCompare(y.name));
+      grid.innerHTML = ok.slice(0, shown).map(fullCard).join('');
       $('#count').textContent = `${ok.length} barco${ok.length === 1 ? '' : 's'}`;
       $('#empty').hidden = ok.length > 0;
       more.hidden = ok.length <= shown;
+      syncFavs(); renderCmpBar();
       const p = new URLSearchParams();
       for (const el of filters.elements) if (el.name && el.value && !(el.name === 'orden' && el.value === 'gt')) p.set(el.name, el.value);
       history.replaceState(null, '', p.toString() ? '?' + p : location.pathname);
@@ -230,7 +231,7 @@
     filters.addEventListener('input', () => apply());
     filters.addEventListener('submit', (e) => e.preventDefault());
     more.addEventListener('click', () => { shown += PER; apply(false); });
-    apply();
+    if (touched) apply();
   }
 
   // ---------- Tablas ordenables ----------

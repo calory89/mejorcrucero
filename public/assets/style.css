@@ -257,3 +257,4 @@ fieldset .chk{grid-column:1/-1}
 @media print{.top,.bottom-nav,.foot,.cmp-bar,.crumbs,.js-print,.chk-opts{display:none!important}body{background:#fff}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 .card-link:hover,.card-link:hover h3{color:inherit}
+.az{margin-top:24px}.az summary{cursor:pointer;font-weight:600}.az-list{columns:4 200px;font-size:.9rem;padding-left:18px}

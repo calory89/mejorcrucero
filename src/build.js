@@ -174,9 +174,9 @@ function searchPage() {
   </form>
   <p class="muted small" id="s-count" aria-live="polite"></p>
   <div class="grid" id="s-results"></div>
-  <div id="s-empty" hidden>
+  <div id="s-empty">
     <div class="tip"><b>Estamos conectando los precios en directo de navieras y agencias.</b> Mientras tanto te enseñamos destinos, barcos y puertos que encajan con tu búsqueda, y te avisamos en cuanto haya salidas con esos filtros.</div>
-    <div id="s-alt"></div>
+    <div id="s-alt"><h2>Destinos que encajan</h2><div class="dest-grid">${DESTINATIONS.map((d) => `<a class="dest" href="/destinos/${d.slug}/"><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b></a>`).join('')}</div><h2>Barcos más nuevos</h2><div class="grid">${[...ships].sort((a, b) => b.year - a.year).slice(0, 8).map((s) => shipCard(s, { compare: false })).join('')}</div></div>
     <form class="alert-crit" id="crit-form"><h2 class="h-sm">Avísame cuando haya cruceros así</h2><label><span>Tu email</span><input name="email" type="email" required autocomplete="email"></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Crear alerta</button><p class="form-msg" role="status" aria-live="polite"></p></form>
   </div></section>
   <script type="application/json" id="search-meta">${JSON.stringify({ dest: DESTINATIONS.map((d) => ({ slug: d.slug, name: d.name, emoji: d.emoji, months: d.months, ports: d.ports })), ports: allPorts.map((p) => ({ slug: p.slug, name: p.name })) })}</script>`;
@@ -184,6 +184,8 @@ function searchPage() {
 }
 
 function shipsIndex() {
+  const sorted = [...ships].sort((a, b) => b.gt - a.gt);
+  const az = [...ships].sort((a, b) => a.name.localeCompare(b.name));
   const body = `<section class="wrap block page-h"><h1>Todos los barcos de crucero</h1><p class="lead-p">${ships.length} barcos de ${lineList.length} navieras. Filtra, guarda tus favoritos y añádelos al comparador.</p>
   <form class="filters" id="filters" role="search">
     <label><span>Buscar</span><input name="q" type="search" placeholder="Nombre del barco" autocomplete="off"></label>
@@ -191,10 +193,11 @@ function shipsIndex() {
     <label><span>Tamaño</span><select name="tam"><option value="">Todos</option><option>Gigante</option><option>Muy grande</option><option>Grande</option><option>Mediano</option><option>Pequeño</option></select></label>
     <label><span>Gama</span><select name="gama"><option value="">Todas</option><option value="estandar">Precio medio</option><option value="premium">Premium</option><option value="lujo">Lujo</option></select></label>
     <label><span>Ordenar</span><select name="orden"><option value="gt">Más grandes</option><option value="year">Más nuevos</option><option value="ratio">Más espaciosos</option><option value="name">A–Z</option></select></label>
-  </form><h2 class="sr">Resultados</h2><p class="muted small" id="count" aria-live="polite"></p>
-  <div class="grid" id="ship-grid">${[...ships].sort((a, b) => b.gt - a.gt).map((s) => shipCard(s)).join('')}</div>
-  <p class="center"><button class="btn btn-ghost" id="more" type="button" hidden>Ver más barcos</button></p>
-  <p class="empty" id="empty" hidden>No hay barcos con esos filtros. <a href="/barcos/">Ver todos</a>.</p></section>`;
+  </form><h2 class="sr">Resultados</h2><p class="muted small" id="count" aria-live="polite">${ships.length} barcos</p>
+  <div class="grid" id="ship-grid">${sorted.slice(0, 24).map((s) => shipCard(s)).join('')}</div>
+  <p class="center"><button class="btn btn-ghost" id="more" type="button">Ver más barcos</button></p>
+  <p class="empty" id="empty" hidden>No hay barcos con esos filtros. <a href="/barcos/">Ver todos</a>.</p>
+  <details class="az"><summary>Lista completa de barcos de la A a la Z</summary><ul class="az-list">${az.map((s) => `<li><a href="/barcos/${s.slug}/">${esc(s.name)}</a></li>`).join('')}</ul></details></section>`;
   return layout({ title: 'Todos los barcos de crucero: fichas, vídeos y comparador', desc: `Fichas de ${ships.length} barcos de crucero de MSC, Costa, Royal Caribbean, Norwegian y más: tamaño, año, pasajeros, espacio, vídeos y foro.`, url: '/barcos/', body, crumbs: [['Inicio', '/'], ['Barcos', '/barcos/']] });
 }
 

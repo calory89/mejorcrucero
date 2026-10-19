@@ -71,7 +71,7 @@ export function shipCard(s, opts = {}) {
   <div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3>
   <ul class="facts"><li><b>${s.year}</b> año</li><li><b>${fmt(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul></div></a>
   <button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false">${ICON.heart}</button>
-  ${opts.compare !== false ? `<button class="cmp-add" type="button" data-cmp="${s.slug}" aria-label="Añadir ${esc(s.name)} al comparador">+ Comparar</button>` : ''}
+  ${opts.compare !== false ? `<button class="cmp-add" type="button" data-cmp="${s.slug}">+ Comparar<span class="sr"> ${esc(s.name)}</span></button>` : ''}
 </article>`;
 }
 
