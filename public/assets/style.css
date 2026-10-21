@@ -343,3 +343,7 @@ fieldset .chk{grid-column:1/-1}
 .h-sm{font-size:1.05rem;margin:22px 0 8px}
 @media (max-width:720px){.video-grid,.videos{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px}.video-grid>*,.videos>*{scroll-snap-align:start}}
 @media print{.tabs-nav,.to-top,.m-cta,.sticky-price,header nav,.burger,footer,.trip-g,.forum,.chips,.offer-filter,iframe{display:none!important}body{background:#fff;color:#000}a{color:#000;text-decoration:none}.wrap{max-width:none;padding:0}}
+.offer-sum{font-size:1.02rem;line-height:1.55;max-width:62ch;margin:10px 0 14px;opacity:.95}
+.adm-bars{display:flex;align-items:flex-end;gap:2px;height:90px;border-bottom:1px solid var(--line);margin:8px 0 16px}.adm-bars span{flex:1;background:var(--sea);border-radius:3px 3px 0 0;min-height:2px}
+.ppn-v{display:none}#offer-grid[data-sort=ppn] .ppn-v{display:block;font-size:.95rem;margin-top:2px}#offer-grid[data-sort=ppn] .ppn-v b{font-size:1.25rem;color:var(--coral-d)}
+.low-av{display:inline-block;background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:999px;padding:3px 10px;font-size:.82rem;font-weight:600;margin:4px 0}

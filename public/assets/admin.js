@@ -11,11 +11,17 @@
   async function load() {
     const out = $('#adm-out');
     try {
-      const [ov, fn, q] = await Promise.all([call('/admin/overview'), call('/admin/funnel?days=' + $('#adm-days').value), call('/admin/queue')]);
+      const days = $('#adm-days').value;
+      const [ov, fn, q, ck, ob] = await Promise.all([call('/admin/overview'), call('/admin/funnel?days=' + days), call('/admin/queue'), call('/admin/clicks?days=' + days).catch(() => ({ byPartner: [], byPage: [], byDay: [] })), call('/admin/outbox').catch(() => [])]);
+      const maxDay = Math.max(1, ...ck.byDay.map((d) => d.n));
+      const bars = ck.byDay.length ? `<div class="adm-bars">${ck.byDay.map((d) => `<span title="${esc(d.d)}: ${d.n} clics" style="height:${Math.round((d.n / maxDay) * 100)}%"></span>`).join('')}</div>` : '';
       out.innerHTML = `<div class="stats stats-light"><div><b>${ov.leads}</b><span>Leads</span></div><div><b>${ov.alerts}</b><span>Alertas</span></div><div><b>${ov.posts}</b><span>Mensajes</span></div><div><b>${ov.reports}</b><span>Reportes</span></div></div>
+      <h2>Clics a socios (${days} días)</h2>${bars}<h3>Por socio</h3>${table(ck.byPartner)}<h3>Por página</h3>${table(ck.byPage)}
+      <h2>Avisos por email</h2><p class="muted small">${ob.filter((m) => m.status === 'pending').length} en cola · ${ob.filter((m) => m.status === 'sent').length} enviados · ${ob.filter((m) => m.status === 'error').length} con error</p><p><button class="btn btn-ghost btn-sm" id="run-alerts">Comprobar avisos ahora</button> <span id="run-out" class="small"></span></p>${table(ob.slice(0, 30).map(({ id, email, kind, subject, status, created }) => ({ id, email, kind, subject, status, created })))}
       <h2>Embudo (${fn.days} días)</h2>${table(fn.events)}<h3>Páginas que más clics a socios generan</h3>${table(fn.affPages)}<h3>Clics a socios (7 días)</h3>${table(ov.clicks7d)}<h3>Pruebas A/B</h3>${table(fn.ab)}<h3>Leads por origen</h3>${table(fn.leads)}
       <h2>Moderación</h2>${q.length ? `<ul class="mini">${q.map((p) => `<li><span><b>${esc(p.name)}</b> · ${esc(p.thread)} · ${esc(p.kind)} · reportes ${p.reports}${p.mod ? ' · IA' : ''}<br>${esc(p.body)}</span><button class="btn btn-sm btn-ghost" data-show="${p.id}">Publicar</button><button class="btn btn-sm btn-ghost" data-hide="${p.id}">Ocultar</button></li>`).join('')}</ul>` : '<p class="muted">Nada pendiente.</p>'}
       <h2>Descargas</h2><p><button class="btn btn-ghost" id="dl-leads">Leads (CSV)</button> <button class="btn btn-ghost" id="dl-alerts">Alertas (CSV)</button></p>`;
+      $('#run-alerts').onclick = async () => { $('#run-out').textContent = 'Comprobando…'; try { $('#run-out').textContent = JSON.stringify(await call('/admin/run-alerts')); } catch { $('#run-out').textContent = 'Error'; } };
       $('#dl-leads').onclick = async () => csv(await call('/admin/leads'), 'leads');
       $('#dl-alerts').onclick = async () => csv(await call('/admin/alerts'), 'alertas');
     } catch (e) { out.innerHTML = `<p class="tip">${e.message === 'auth' ? 'Clave incorrecta.' : 'No se ha podido conectar con la API.'}</p>`; }

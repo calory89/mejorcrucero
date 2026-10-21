@@ -43,6 +43,80 @@ async function ai(env, input) {
   throw err;
 }
 
+// ---------- Motor de avisos (cron): compara las ofertas publicadas con los avisos que la gente pidió ----------
+const SITE = 'https://mejorcrucero.com';
+const fold = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+const eurF = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+const fecha = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const unsubToken = async (env, email) => (await sha((env.SALT || 'mc') + ':unsub:' + email)).slice(0, 20);
+async function mailBody(env, email, title, intro, items) {
+  const u = `https://mejorcrucero-api.mejorcrucero.workers.dev/unsub?e=${encodeURIComponent(email)}&t=${await unsubToken(env, email)}`;
+  const rows = items.map((o) => `<tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb"><a href="${SITE}/salidas/${o.i}/?utm_source=email&utm_medium=aviso" style="color:#0b2540;font-weight:700;text-decoration:none">${o.t} · ${o.sn}</a><br><span style="color:#475569">${fecha(o.d)} · desde ${o.p}</span><br><b style="color:#c2410c;font-size:18px">${eurF(o.pr)}</b>${o.was ? ` <s style="color:#64748b">${eurF(o.was)}</s>` : ''} <span style="color:#475569">por persona · nota de la oferta ${o.sc}/100</span></td></tr>`).join('');
+  const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:600px;margin:auto;color:#0f172a"><p style="font:700 22px Georgia,serif;color:#0b2540">MejorCrucero</p><h1 style="font-size:20px">${title}</h1><p>${intro}</p><table style="width:100%;border-collapse:collapse">${rows}</table><p style="color:#64748b;font-size:13px;margin-top:24px">Precios públicos de la web oficial de la naviera en el momento de la comprobación; pueden cambiar. Recibes esto porque creaste un aviso en mejorcrucero.com. <a href="${u}">Darme de baja</a>.</p></div>`;
+  const text = `${title}\n\n${intro}\n\n${items.map((o) => `- ${o.t} · ${o.sn} · ${fecha(o.d)} desde ${o.p}: ${eurF(o.pr)} p.p. ${SITE}/salidas/${o.i}/`).join('\n')}\n\nDarme de baja: ${u}`;
+  return { html, text };
+}
+async function enqueue(env, email, kind, key, subject, intro, items) {
+  if (!items.length) return 0;
+  const m = await mailBody(env, email, subject, intro, items.slice(0, 8));
+  const r = await env.DB.prepare('INSERT OR IGNORE INTO outbox(email,kind,subject,html,text,k) VALUES(?,?,?,?,?,?)').bind(email, kind, subject, m.html, m.text, key).run();
+  return r.meta?.changes || 0;
+}
+const isSeen = async (env, k) => !!(await env.DB.prepare('SELECT 1 FROM seen WHERE k=?').bind(k).first());
+const markSeen = (env, k) => env.DB.prepare('INSERT OR IGNORE INTO seen(k) VALUES(?)').bind(k).run();
+async function runAlerts(env) {
+  const r = await fetch(SITE + '/data/ofertas.json');
+  if (!r.ok) return { error: 'ofertas ' + r.status };
+  const offers = await r.json();
+  const today = new Date().toISOString().slice(0, 10);
+  const blocked = new Set((await env.DB.prepare('SELECT email FROM unsub').all()).results.map((x) => x.email));
+  const stats = { price: 0, criteria: 0, follow: 0 };
+  const alerts = (await env.DB.prepare("SELECT id,email,kind,payload FROM alerts WHERE email IS NOT NULL AND kind IN ('price','criteria')").all()).results;
+  for (const a of alerts) {
+    if (blocked.has(a.email)) continue;
+    let pl; try { pl = JSON.parse(a.payload); } catch { continue; }
+    // Crucero ya reservado: avisar si la web oficial lo vende más barato que lo que pagó
+    if (a.kind === 'price' && pl.ship && pl.date && pl.price) {
+      for (const o of offers.filter((x) => x.d === pl.date && fold(x.sn) === fold(pl.ship) && x.pr < pl.price))
+        stats.price += await enqueue(env, a.email, 'price', `price:${a.id}:${o.i}:${o.pr}`, `Tu crucero en el ${o.sn} ha bajado a ${eurF(o.pr)}`, `Pagaste ${eurF(pl.price)} por persona. Hoy la web oficial lo vende desde ${eurF(o.pr)}. Pregunta a tu agencia o a la naviera si tus condiciones permiten un ajuste de precio o crédito a bordo.`, [{ ...o, was: pl.price }]);
+    }
+    // Alerta por destino / mes / presupuesto
+    if (a.kind === 'criteria' && (pl.destino || pl.max || pl.mes)) {
+      const mes = String(pl.mes || '');
+      const fresh = [];
+      for (const o of offers.filter((x) => (!pl.destino || x.dst === pl.destino) && (!pl.max || x.pr <= +pl.max) && (!mes || x.d.startsWith(mes) || +x.d.slice(5, 7) === +mes)).sort((x, y) => y.sc - x.sc)) {
+        const k = `crit:${a.id}:${o.i}:${o.pr}`; if (!(await isSeen(env, k))) { fresh.push(o); await markSeen(env, k); }
+      }
+      stats.criteria += await enqueue(env, a.email, 'criteria', `crit:${a.id}:${today}`, `${fresh.length} ofertas que encajan con tu alerta`, 'Estas salidas cumplen lo que nos pediste (o han cambiado de precio desde la última vez). Ordenadas por nota de la oferta.', fresh);
+    }
+  }
+  // Barcos seguidos: salidas nuevas (la primera pasada solo registra lo que ya había, sin email)
+  const follows = (await env.DB.prepare("SELECT email, thread FROM follows WHERE thread LIKE 'barco:%'").all()).results;
+  for (const f of follows) {
+    if (blocked.has(f.email)) continue;
+    const slug = f.thread.slice(6), init = `finit:${f.email}:${slug}`, first = !(await isSeen(env, init));
+    const fresh = [];
+    for (const o of offers.filter((x) => x.s === slug)) { const k = `f:${f.email}:${o.i}`; if (!(await isSeen(env, k))) { await markSeen(env, k); if (!first) fresh.push(o); } }
+    if (first) await markSeen(env, init);
+    else stats.follow += await enqueue(env, f.email, 'follow', `follow:${f.email}:${slug}:${today}`, `Nuevas salidas del ${fresh[0]?.sn || 'barco que sigues'}`, 'Han salido a la venta nuevas fechas del barco que sigues en MejorCrucero.', fresh);
+  }
+  return { offers: offers.length, queued: stats, sent: await sendOutbox(env) };
+}
+// Envío con Resend cuando estén RESEND_KEY y MAIL_FROM; si no, los emails esperan en la cola (outbox).
+async function sendOutbox(env) {
+  if (!env.RESEND_KEY || !env.MAIL_FROM) return 'en cola (falta RESEND_KEY/MAIL_FROM)';
+  const rows = (await env.DB.prepare("SELECT * FROM outbox WHERE status='pending' ORDER BY id LIMIT 40").all()).results;
+  let ok = 0;
+  for (const m of rows) {
+    const u = m.text.match(/Darme de baja: (\S+)/)?.[1];
+    const res = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + env.RESEND_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'mc-' + m.id },
+      body: JSON.stringify({ from: env.MAIL_FROM, to: [m.email], subject: m.subject, html: m.html, text: m.text, headers: u ? { 'List-Unsubscribe': `<${u}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } : {} }) });
+    if (res.ok) { ok++; await env.DB.prepare("UPDATE outbox SET status='sent', sent=datetime('now') WHERE id=?").bind(m.id).run(); }
+    else await env.DB.prepare("UPDATE outbox SET status='error', err=? WHERE id=?").bind((await res.text()).slice(0, 300), m.id).run();
+  }
+  return ok;
+}
+
 export default {
   async fetch(req, env) {
     const allowed = (env.ALLOWED_ORIGINS || '*').split(',').map((s) => s.trim());
@@ -57,6 +131,13 @@ export default {
     const R = (d, s) => json(d, s, origin);
     try {
       if (p === '/health') return R({ ok: true });
+      if (p === '/unsub') {
+        const e = clean(url.searchParams.get('e'), 254).toLowerCase();
+        if (!EMAIL.test(e) || url.searchParams.get('t') !== (await unsubToken(env, e))) return new Response('Enlace no válido', { status: 400 });
+        await env.DB.prepare('INSERT OR IGNORE INTO unsub(email) VALUES(?)').bind(e).run();
+        await env.DB.prepare("UPDATE outbox SET status='unsub' WHERE email=? AND status='pending'").bind(e).run();
+        return new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Baja confirmada</title><body style="font-family:system-ui;max-width:520px;margin:60px auto;padding:0 16px"><h1>Baja confirmada</h1><p>No te enviaremos más avisos a este email.</p><p><a href="https://mejorcrucero.com/">Volver a MejorCrucero</a></p>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      }
 
       // --- Leads / newsletter / avisos
       if (p === '/lead' && req.method === 'POST') {
@@ -278,6 +359,16 @@ export default {
         if (p === '/admin/queue') return R((await env.DB.prepare('SELECT id,thread,name,kind,body,reports,mod,created FROM posts WHERE hidden=1 OR reports>0 ORDER BY id DESC LIMIT 200').all()).results);
         if (p === '/admin/reports') return R((await env.DB.prepare('SELECT * FROM reports ORDER BY id DESC LIMIT 500').all()).results);
         if (p === '/admin/leads') return R((await env.DB.prepare('SELECT * FROM leads ORDER BY id DESC LIMIT 5000').all()).results);
+        if (p === '/admin/run-alerts') return R(await runAlerts(env));
+        if (p === '/admin/outbox') return R((await env.DB.prepare('SELECT id,email,kind,subject,status,err,created,sent FROM outbox ORDER BY id DESC LIMIT 500').all()).results);
+        if (p === '/admin/clicks') {
+          const days = Math.min(365, parseInt(url.searchParams.get('days')) || 30), w = `-${days} days`;
+          const q = async (sql) => (await env.DB.prepare(sql).bind(w).all()).results;
+          return R({ days,
+            byPartner: await q("SELECT substr(target,1,instr(target||' ',' ')-1) partner, COUNT(*) n FROM events WHERE name='aff_click' AND created > datetime('now', ?) GROUP BY partner ORDER BY n DESC"),
+            byPage: await q("SELECT substr(target,instr(target,' ')+1) page, COUNT(*) n FROM events WHERE name='aff_click' AND created > datetime('now', ?) GROUP BY page ORDER BY n DESC LIMIT 50"),
+            byDay: await q("SELECT date(created) d, COUNT(*) n FROM events WHERE name='aff_click' AND created > datetime('now', ?) GROUP BY d ORDER BY d") });
+        }
         if (p === '/admin/alerts') return R((await env.DB.prepare('SELECT * FROM alerts ORDER BY id DESC LIMIT 5000').all()).results);
       }
       return R({ error: 'not found' }, 404);
@@ -285,4 +376,5 @@ export default {
       return R({ error: 'server', detail: String(e).slice(0, 200) }, 500);
     }
   },
+  async scheduled(event, env, ctx) { ctx.waitUntil(runAlerts(env).catch(() => {})); },
 };
