@@ -1,8 +1,6 @@
 name: Actualizar fotos de barcos
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '43 4 * * 1'   # cada lunes: fotos de barcos nuevos
+  workflow_dispatch:   # manual: las fotos ahora se sirven en local (public/img); no programar para no pisar photos.json
 permissions:
   contents: write
   actions: write

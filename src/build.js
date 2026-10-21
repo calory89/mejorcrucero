@@ -27,6 +27,7 @@ const GENERIC_LINE = (name) => ({ slug: slugify(name), short: name, web: null, t
 const extraVideos = readJson('videos_extra.json', {});
 const VIDEO_ALIAS = { 'scarlet-lady': 'virgin-voyages-scarlet-lady' };
 const photos = readJson('photos.json', {});
+const portPhotos = readJson('port_photos.json', {});
 // SAILINGS=ruta permite probar el motor con un fichero de prueba local (nunca se publica)
 const sailings = process.env.SAILINGS ? JSON.parse(fs.readFileSync(process.env.SAILINGS, 'utf8')) : readJson('sailings.json', []);
 let fx = readJson('fx.json', null);
@@ -51,7 +52,7 @@ const ships = [...readCsv('ships.csv').map((r) => ({ ...r, source: SOURCES[0][1]
   const ids = new Set(); s.videos = vids.filter(([id]) => !ids.has(id) && ids.add(id));
   s.photo = photos[s.slug] ? { ...photos[s.slug] } : null;
   // Fotos servidas desde nuestro dominio (más rápido y sin cookies de terceros); el crédito enlaza a Commons.
-  if (s.photo && fs.existsSync(path.join(path.dirname(D('x')), '..', '..', 'public', 'img', 'barcos', s.slug + '.webp'))) { s.photo.thumb = `/img/barcos/${s.slug}.webp`; s.photo.large = s.photo.thumb; s.photo.local = true; }
+  // Fotos servidas desde nuestro dominio (640 y 1280 px, sin cookies de terceros); el crédito enlaza a Commons.
   s.sailings = sailings.filter((x) => x.ship === s.slug);
   return s;
 }).filter((s) => s.gt > 1000 && s.year > 1950 && !seen.has(s.slug) && seen.add(s.slug));
@@ -267,7 +268,7 @@ function shipPage(s) {
     </div>
     <div class="actions"><a class="btn" href="#reservar">Comparar precios</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
   </div>
-  <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.large || s.photo.thumb)}" alt="${esc(s.name)}" width="${s.photo.local ? 640 : 960}" height="${Math.round((s.photo.local ? 640 : 960) / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
+  <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.thumb)}"${s.photo.hi ? ` srcset="${esc(s.photo.thumb)} 640w, ${esc(s.photo.large)} 1280w" sizes="(max-width: 900px) 100vw, 560px"` : ''} alt="${esc(s.name)}" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
 </div></section>
 
 <div class="wrap ship-grid">
@@ -475,7 +476,8 @@ function portsIndex() {
 function portPage(p) {
   const ps = sailings.filter((x) => x.depart_port_slug === p.slug || slugify(x.depart_port || '') === p.slug);
   const city = p.name.split(' (')[0];
-  const body = `<section class="wrap block page-h"><span class="eyebrow">${esc(p.region)}</span><h1>Cruceros desde ${esc(p.name)}</h1><p class="lead-p">${esc(p.text)}</p></section>
+  const pph = portPhotos[p.name] || portPhotos[city];
+  const body = `<section class="wrap block page-h${pph ? ' port-h' : ''}"><div><span class="eyebrow">${esc(p.region)}</span><h1>Cruceros desde ${esc(p.name)}</h1><p class="lead-p">${esc(p.text)}</p><p><a class="btn" href="/ofertas/desde-${p.slug}/">Ver ofertas desde ${esc(city)}</a></p></div>${pph ? `<figure class="port-fig"><img src="${pph.thumb}" srcset="${pph.thumb} 640w, ${pph.large} 1280w" sizes="(max-width: 900px) 100vw, 520px" alt="Puerto de ${esc(city)}" width="640" height="${Math.round(640 / (pph.ratio || 1.5))}" fetchpriority="high"><figcaption class="credit">Foto: <a href="${esc(pph.page)}" target="_blank" rel="noopener">${esc(pph.author)}</a> · ${esc(pph.license)} · Wikimedia Commons</figcaption></figure>` : ''}</section>
   ${ps.length ? `<section class="wrap block"><h2>Próximas salidas desde ${esc(city)}</h2><div class="grid">${ps.slice(0, 12).map(sailingCard).join('')}</div></section>` : ''}
   <section class="wrap block grid grid-3">
     <a class="tool tool-light" href="/ofertas/desde-${p.slug}/"><h2>Ofertas desde ${esc(city)}</h2><p>Todas las salidas con precio real y nota de la oferta.</p><span class="btn btn-sm">Ver ofertas →</span></a>
@@ -967,7 +969,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync(path.join(OUT, '..', 'public'), OUT, { recursive: true });
 
-OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE, PORT_COORDS });
+OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE, PORT_COORDS, portPhotos });
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());

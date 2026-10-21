@@ -1,0 +1,722 @@
+{
+"Barcelona": {
+"slug": "barcelona",
+"thumb": "/img/puertos/barcelona-640.webp",
+"large": "/img/puertos/barcelona-1280.webp",
+"ratio": 1.494,
+"author": "Felix König",
+"license": "CC BY 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Geb%C3%A4ude_Port_Vell_Barcelona_2013.JPG"
+},
+"Savona": {
+"slug": "savona",
+"thumb": "/img/puertos/savona-640.webp",
+"large": "/img/puertos/savona-1280.webp",
+"ratio": 1.5,
+"author": "raffaele sergi",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Savona_-_porto,_veduta_dal_ponte_mobile.jpg"
+},
+"Santa Cruz de Tenerife": {
+"slug": "santa-cruz-de-tenerife",
+"thumb": "/img/puertos/santa-cruz-de-tenerife-640.webp",
+"large": "/img/puertos/santa-cruz-de-tenerife-1280.webp",
+"ratio": 1.57,
+"author": "Diego Delso",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Auditorio_de_Tenerife,_Santa_Cruz_de_Tenerife,_Espa%C3%B1a,_2012-12-15,_DD_02.jpg"
+},
+"Roma (Civitavecchia)": {
+"slug": "roma-civitavecchia",
+"thumb": "/img/puertos/roma-civitavecchia-640.webp",
+"large": "/img/puertos/roma-civitavecchia-1280.webp",
+"ratio": 1.704,
+"author": "Diliff",
+"license": "CC BY-SA 2.5",
+"page": "https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome,_Italy_-_April_2007.jpg"
+},
+"Las Palmas de Gran Canaria": {
+"slug": "las-palmas-de-gran-canaria",
+"thumb": "/img/puertos/las-palmas-de-gran-canaria-640.webp",
+"large": "/img/puertos/las-palmas-de-gran-canaria-1280.webp",
+"ratio": 1.371,
+"author": "Martin Falbisoner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Santa_Ana,_Las_Palmas_de_Gran_Canaria,_May_2018.jpg"
+},
+"Marsella": {
+"slug": "marsella",
+"thumb": "/img/puertos/marsella-640.webp",
+"large": "/img/puertos/marsella-1280.webp",
+"ratio": 1.333,
+"author": "Jiròni Picas",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Marseille_le_vieux_port.jpg"
+},
+"La Romana / Santo Domingo": {
+"slug": "la-romana-santo-domingo",
+"thumb": "/img/puertos/la-romana-santo-domingo-640.webp",
+"large": "/img/puertos/la-romana-santo-domingo-1280.webp",
+"ratio": 1.333,
+"author": "Dr. Eugen Lehle",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Altos_de_Chav%C3%B3n.jpg"
+},
+"Guadalupe": {
+"slug": "guadalupe",
+"thumb": "/img/puertos/guadalupe-640.webp",
+"large": "/img/puertos/guadalupe-1280.webp",
+"ratio": 2.297,
+"author": "Tournasol7",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Plage_de_Clugny_(11).jpg"
+},
+"Venecia": {
+"slug": "venecia",
+"thumb": "/img/puertos/venecia-640.webp",
+"large": "/img/puertos/venecia-1280.webp",
+"ratio": 1.507,
+"author": "kallerna",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Ponte_di_Rialto_Venice_1.jpg"
+},
+"Génova": {
+"slug": "genova",
+"thumb": "/img/puertos/genova-640.webp",
+"large": "/img/puertos/genova-1280.webp",
+"ratio": 1.6,
+"author": "Timothy A. Gonsalves",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Sail_Boats_Old_Harbour_Genoa_Sep23_A7C_06652.jpg"
+},
+"Bari": {
+"slug": "bari",
+"thumb": "/img/puertos/bari-640.webp",
+"large": "/img/puertos/bari-1280.webp",
+"ratio": 1.607,
+"author": "Bernard Gagnon",
+"license": "CC0",
+"page": "https://commons.wikimedia.org/wiki/File:Lungomare_(Bari)_01.jpg"
+},
+"Atenas": {
+"slug": "atenas",
+"thumb": "/img/puertos/atenas-640.webp",
+"large": "/img/puertos/atenas-1280.webp",
+"ratio": 1.6,
+"author": "A.Savin",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg"
+},
+"Santo Domingo": {
+"slug": "santo-domingo",
+"thumb": "/img/puertos/santo-domingo-640.webp",
+"large": "/img/puertos/santo-domingo-1280.webp",
+"ratio": 1.557,
+"author": "Martin Falbisoner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Santo_Domingo_-_Alcazar_de_Colon_02.JPG"
+},
+"Málaga": {
+"slug": "malaga",
+"thumb": "/img/puertos/malaga-640.webp",
+"large": "/img/puertos/malaga-1280.webp",
+"ratio": 1.746,
+"author": "Grez",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Puerto_de_M%C3%A1laga_090308.jpg"
+},
+"Palma de Mallorca": {
+"slug": "palma-de-mallorca",
+"thumb": "/img/puertos/palma-de-mallorca-640.webp",
+"large": "/img/puertos/palma-de-mallorca-1280.webp",
+"ratio": 1.876,
+"author": "Wolfgang Moroder",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Palma_de_Mallorca_Royal_Palace_La_Almudaina_Cathedral.jpg"
+},
+"Palermo": {
+"slug": "palermo",
+"thumb": "/img/puertos/palermo-640.webp",
+"large": "/img/puertos/palermo-1280.webp",
+"ratio": 1.5,
+"author": "Berthold Werner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Palermo_Cathedral_BW_2025-04-29_11-14-42.jpg"
+},
+"San Cristóbal": {
+"slug": "san-cristobal",
+"thumb": "/img/puertos/san-cristobal-640.webp",
+"large": "/img/puertos/san-cristobal-1280.webp",
+"ratio": 1.778,
+"author": "Dr. Thomas Liptak",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:St._Kitts_Basseterre_Port_Zante.jpg"
+},
+"Lanzarote": {
+"slug": "lanzarote",
+"thumb": "/img/puertos/lanzarote-640.webp",
+"large": "/img/puertos/lanzarote-1280.webp",
+"ratio": 1.784,
+"author": "Luis Miguel Bugallo Sánchez (Lmbuga)",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Timanfaya-_Lanzarote-_Illas_Canarias-_Spain-T20.jpg"
+},
+"Cádiz": {
+"slug": "cadiz",
+"thumb": "/img/puertos/cadiz-640.webp",
+"large": "/img/puertos/cadiz-1280.webp",
+"ratio": 1.909,
+"author": "Diego Delso",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Vista_de_C%C3%A1diz,_Espa%C3%B1a,_2015-12-08,_DD_78.JPG"
+},
+"Hamburgo": {
+"slug": "hamburgo",
+"thumb": "/img/puertos/hamburgo-640.webp",
+"large": "/img/puertos/hamburgo-1280.webp",
+"ratio": 1.5,
+"author": "Dietmar Rabich",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Hamburg,_Landungsbr%C3%BCcken_--_2016_--_3131-7.jpg"
+},
+"Madeira": {
+"slug": "madeira",
+"thumb": "/img/puertos/madeira-640.webp",
+"large": "/img/puertos/madeira-1280.webp",
+"ratio": 1.5,
+"author": "Dietmar Rabich",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Santa_Maria_Maior_(Madeira,_Portugal),_Jardim_Bot%C3%A2nico_da_Madeira,_Blick_auf_den_Hafen_von_Funchal_--_2025_--_1824.jpg"
+},
+"Tórtola": {
+"slug": "tortola",
+"thumb": "/img/puertos/tortola-640.webp",
+"large": "/img/puertos/tortola-1280.webp",
+"ratio": 1.333,
+"author": "Kevin Stroup",
+"license": "CC BY 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Tortola,_British_Virgin_Islands_-_panoramio_(7).jpg"
+},
+"Sídney": {
+"slug": "sidney",
+"thumb": "/img/puertos/sidney-640.webp",
+"large": "/img/puertos/sidney-1280.webp",
+"ratio": 1.778,
+"author": "DXR",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge,_southeast_view_20230224_1.jpg"
+},
+"Río de Janeiro": {
+"slug": "rio-de-janeiro",
+"thumb": "/img/puertos/rio-de-janeiro-640.webp",
+"large": "/img/puertos/rio-de-janeiro-1280.webp",
+"ratio": 1.616,
+"author": "Wilfredor",
+"license": "CC0",
+"page": "https://commons.wikimedia.org/wiki/File:Sugarloaf_Mountain,_Rio_de_Janeiro,_Brazil.jpg"
+},
+"Lisboa": {
+"slug": "lisboa",
+"thumb": "/img/puertos/lisboa-640.webp",
+"large": "/img/puertos/lisboa-1280.webp",
+"ratio": 1.494,
+"author": "Matti Blume",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Alfama,_Lisbon_(DSC03367).jpg"
+},
+"Nápoles": {
+"slug": "napoles",
+"thumb": "/img/puertos/napoles-640.webp",
+"large": "/img/puertos/napoles-1280.webp",
+"ratio": 1.498,
+"author": "Wolfgang Moroder",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Naples_from_the_Castello_Sant_Elmo_with_Abbazia_San_Martino_the_port_and_the_Vesuv.jpg"
+},
+"Valencia": {
+"slug": "valencia",
+"thumb": "/img/puertos/valencia-640.webp",
+"large": "/img/puertos/valencia-1280.webp",
+"ratio": 1.644,
+"author": "Diego Delso",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Museo_Pr%C3%ADncipe_Felipe,_Ciudad_de_las_Artes_y_las_Ciencias,_Valencia,_Espa%C3%B1a,_2014-06-29,_DD_59.JPG"
+},
+"San Francisco": {
+"slug": "san-francisco",
+"thumb": "/img/puertos/san-francisco-640.webp",
+"large": "/img/puertos/san-francisco-1280.webp",
+"ratio": 1.6,
+"author": "Frank Schulenburg",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg"
+},
+"Fuerteventura": {
+"slug": "fuerteventura",
+"thumb": "/img/puertos/fuerteventura-640.webp",
+"large": "/img/puertos/fuerteventura-1280.webp",
+"ratio": 1.5,
+"author": "Dietmar Rabich",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Morro_Jable_(Fuerteventura,_Spain),_Strand,_Rettungsturm_--_2025_--_2498.jpg"
+},
+"Hong Kong (China)": {
+"slug": "hong-kong-china",
+"thumb": "/img/puertos/hong-kong-china-640.webp",
+"large": "/img/puertos/hong-kong-china-1280.webp",
+"ratio": 1.507,
+"author": "Diego Delso",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Vista_del_Puerto_de_Victoria_desde_Sky100,_Hong_Kong,_2013-08-09,_DD_10.JPG"
+},
+"Cefalonia": {
+"slug": "cefalonia",
+"thumb": "/img/puertos/cefalonia-640.webp",
+"large": "/img/puertos/cefalonia-1280.webp",
+"ratio": 1.494,
+"author": "Matt Sims",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Asos,_Kefalonia.jpg"
+},
+"Nueva York": {
+"slug": "nueva-york",
+"thumb": "/img/puertos/nueva-york-640.webp",
+"large": "/img/puertos/nueva-york-1280.webp",
+"ratio": 2.192,
+"author": "Rhododendrites",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Lower_Manhattan_from_Governors_Island_with_a_fishing_boat_(46294p).jpg"
+},
+"Buenos Aires": {
+"slug": "buenos-aires",
+"thumb": "/img/puertos/buenos-aires-640.webp",
+"large": "/img/puertos/buenos-aires-1280.webp",
+"ratio": 1.333,
+"author": "Ermell",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Buenos_Aires_Puente_de_la_Mujer_1030985.jpg"
+},
+"Santorini": {
+"slug": "santorini",
+"thumb": "/img/puertos/santorini-640.webp",
+"large": "/img/puertos/santorini-1280.webp",
+"ratio": 1.5,
+"author": "Giles Laurent",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg"
+},
+"Corfú": {
+"slug": "corfu",
+"thumb": "/img/puertos/corfu-640.webp",
+"large": "/img/puertos/corfu-1280.webp",
+"ratio": 1.5,
+"author": "Anton Zelenov",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Old_Corfu_town_aerial_01.jpg"
+},
+"Tánger": {
+"slug": "tanger",
+"thumb": "/img/puertos/tanger-640.webp",
+"large": "/img/puertos/tanger-1280.webp",
+"ratio": 1.836,
+"author": "Diego Delso",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Faro_del_cabo_Espartel,_Marruecos,_2015-12-11,_DD_02.JPG"
+},
+"Martinica": {
+"slug": "martinica",
+"thumb": "/img/puertos/martinica-640.webp",
+"large": "/img/puertos/martinica-1280.webp",
+"ratio": 1.5,
+"author": "Nicolas Dubois",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:La_baie_de_Saint-Anne_depuis_le_Calvaire.jpg"
+},
+"Estambul": {
+"slug": "estambul",
+"thumb": "/img/puertos/estambul-640.webp",
+"large": "/img/puertos/estambul-1280.webp",
+"ratio": 2.096,
+"author": "Mike McBey",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Istanbul_skyline_(39926058353).jpg"
+},
+"Mykonos": {
+"slug": "mykonos",
+"thumb": "/img/puertos/mykonos-640.webp",
+"large": "/img/puertos/mykonos-1280.webp",
+"ratio": 1.505,
+"author": "Roberto Faccenda",
+"license": "CC BY-SA 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Sunset_of_Mykonos.jpg"
+},
+"Kotor": {
+"slug": "kotor",
+"thumb": "/img/puertos/kotor-640.webp",
+"large": "/img/puertos/kotor-1280.webp",
+"ratio": 1.5,
+"author": "kallerna",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Bay_of_Kotor_3.jpg"
+},
+"San Martín": {
+"slug": "san-martin",
+"thumb": "/img/puertos/san-martin-640.webp",
+"large": "/img/puertos/san-martin-1280.webp",
+"ratio": 1.778,
+"author": "Dr. Thomas Liptak",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:St._Maarten_Philipsburg_Great_Bay_Beach.jpg"
+},
+"Port Everglades": {
+"slug": "port-everglades",
+"thumb": "/img/puertos/port-everglades-640.webp",
+"large": "/img/puertos/port-everglades-1280.webp",
+"ratio": 1.866,
+"author": "Sharon Hahn Darlin",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Fort_Lauderdale,_Florida_2021_-_Port_Everglades.jpg"
+},
+"Catania": {
+"slug": "catania",
+"thumb": "/img/puertos/catania-640.webp",
+"large": "/img/puertos/catania-1280.webp",
+"ratio": 1.504,
+"author": "Berthold Werner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Catania_BW_2025-04-25_15-15-28.jpg"
+},
+"Alicante": {
+"slug": "alicante",
+"thumb": "/img/puertos/alicante-640.webp",
+"large": "/img/puertos/alicante-1280.webp",
+"ratio": 1.798,
+"author": "Diego Delso",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Vista_de_Alicante,_Espa%C3%B1a,_2014-07-04,_DD_49.JPG"
+},
+"Creta": {
+"slug": "creta",
+"thumb": "/img/puertos/creta-640.webp",
+"large": "/img/puertos/creta-1280.webp",
+"ratio": 1.806,
+"author": "Ввласенко",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Harbor_and_lighthouse_of_Chania._Crete,_Greece.jpg"
+},
+"Azores": {
+"slug": "azores",
+"thumb": "/img/puertos/azores-640.webp",
+"large": "/img/puertos/azores-1280.webp",
+"ratio": 1.676,
+"author": "Diego Delso",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Portas_da_Cidade,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-29,_DD_123-125_HDR.jpg"
+},
+"Tokio": {
+"slug": "tokio",
+"thumb": "/img/puertos/tokio-640.webp",
+"large": "/img/puertos/tokio-1280.webp",
+"ratio": 1.778,
+"author": "David Kernan",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Minato_City,_Tokyo,_Japan.jpg"
+},
+"São Vicente": {
+"slug": "sao-vicente",
+"thumb": "/img/puertos/sao-vicente-640.webp",
+"large": "/img/puertos/sao-vicente-1280.webp",
+"ratio": 1.333,
+"author": "Herbert wie",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Mansa_Floating_Hub_Mindelo,_Cabo_Verde.jpg"
+},
+"Antigua": {
+"slug": "antigua",
+"thumb": "/img/puertos/antigua-640.webp",
+"large": "/img/puertos/antigua-1280.webp",
+"ratio": 1.778,
+"author": "Dr. Thomas Liptak",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Antigua_Shirley%27s_Heights_English_Harbour.jpg"
+},
+"Saint-Tropez": {
+"slug": "saint-tropez",
+"thumb": "/img/puertos/saint-tropez-640.webp",
+"large": "/img/puertos/saint-tropez-1280.webp",
+"ratio": 1.501,
+"author": "dronepicr",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Bell_tower_of_the_church_Our_Lady_of_the_Assumption_in_Saint-Tropez,_France_(52723273607).jpg"
+},
+"Trieste": {
+"slug": "trieste",
+"thumb": "/img/puertos/trieste-640.webp",
+"large": "/img/puertos/trieste-1280.webp",
+"ratio": 1.63,
+"author": "Diego Delso",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento,_Trieste,_Italia,_2017-04-15,_DD_10.jpg"
+},
+"Ibiza": {
+"slug": "ibiza",
+"thumb": "/img/puertos/ibiza-640.webp",
+"large": "/img/puertos/ibiza-1280.webp",
+"ratio": 1.778,
+"author": "RoxFuchs",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Dalt_Vila_20160421_111948.jpg"
+},
+"Túnez": {
+"slug": "tunez",
+"thumb": "/img/puertos/tunez-640.webp",
+"large": "/img/puertos/tunez-1280.webp",
+"ratio": 1.507,
+"author": "Habib M'henni",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Sidi_Bou_Said,_Tunisia,_19_March_2018_DSC_8004.jpg"
+},
+"Barbados": {
+"slug": "barbados",
+"thumb": "/img/puertos/barbados-640.webp",
+"large": "/img/puertos/barbados-1280.webp",
+"ratio": 1.4,
+"author": "P. Hughes",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Carlisle_Bay_-_Barbados.jpg"
+},
+"Cagliari": {
+"slug": "cagliari",
+"thumb": "/img/puertos/cagliari-640.webp",
+"large": "/img/puertos/cagliari-1280.webp",
+"ratio": 1.684,
+"author": "Martin Kraft",
+"license": "CC BY-SA 3.0 de",
+"page": "https://commons.wikimedia.org/wiki/File:Cagliari_Kathedrale.jpg"
+},
+"Split": {
+"slug": "split",
+"thumb": "/img/puertos/split-640.webp",
+"large": "/img/puertos/split-1280.webp",
+"ratio": 1.333,
+"author": "Martin Brož",
+"license": "CC BY 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Split,_pristav_trajektu.jpg"
+},
+"Los Ángeles": {
+"slug": "los-angeles",
+"thumb": "/img/puertos/los-angeles-640.webp",
+"large": "/img/puertos/los-angeles-1280.webp",
+"ratio": 1.558,
+"author": "Levi Clancy",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Los_Angeles,_Downtown_Los_Angeles,_California_13.jpg"
+},
+"Ciudad del Cabo": {
+"slug": "ciudad-del-cabo",
+"thumb": "/img/puertos/ciudad-del-cabo-640.webp",
+"large": "/img/puertos/ciudad-del-cabo-1280.webp",
+"ratio": 1.506,
+"author": "Josep M. Gracia",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:CT_-_V%26A_Waterfront_with_Table_Mountain,_Cape_Town,_South_Africa,_2017.jpg"
+},
+"Taormina": {
+"slug": "taormina",
+"thumb": "/img/puertos/taormina-640.webp",
+"large": "/img/puertos/taormina-1280.webp",
+"ratio": 1.504,
+"author": "Berthold Werner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Taormina_BW_2025-04-27_09-32-30.jpg"
+},
+"La Valeta": {
+"slug": "la-valeta",
+"thumb": "/img/puertos/la-valeta-640.webp",
+"large": "/img/puertos/la-valeta-1280.webp",
+"ratio": 1.5,
+"author": "Trajcinema",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Valletta_Grand_Harbour_from_Upper_Barrakka_Gardens.jpg"
+},
+"Salvador": {
+"slug": "salvador",
+"thumb": "/img/puertos/salvador-640.webp",
+"large": "/img/puertos/salvador-1280.webp",
+"ratio": 1.494,
+"author": "Matti Blume",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Largo_do_Pelourinho,_Salvador_20150719-DSC05452.JPG"
+},
+"Colón": {
+"slug": "colon",
+"thumb": "/img/puertos/colon-640.webp",
+"large": "/img/puertos/colon-1280.webp",
+"ratio": 1.455,
+"author": "Ancestor of Infrogmation of New Orleans",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Panama_Canal_locks_1994_ships.jpg"
+},
+"Santa Lucia": {
+"slug": "santa-lucia",
+"thumb": "/img/puertos/santa-lucia-640.webp",
+"large": "/img/puertos/santa-lucia-1280.webp",
+"ratio": 1.333,
+"author": "XeresNelro",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:The_Pitons,_St._Lucia3.jpg"
+},
+"Zadar": {
+"slug": "zadar",
+"thumb": "/img/puertos/zadar-640.webp",
+"large": "/img/puertos/zadar-1280.webp",
+"ratio": 1.771,
+"author": "Palauenc05",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Zadar_Porta_di_Terraferma.jpg"
+},
+"Cabo Rojo": {
+"slug": "cabo-rojo",
+"thumb": "/img/puertos/cabo-rojo-640.webp",
+"large": "/img/puertos/cabo-rojo-1280.webp",
+"ratio": 1.333,
+"author": "Scmjht",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Bahia_de_las_Aguilas.jpg"
+},
+"Arroyo Barril (Samaná)": {
+"slug": "arroyo-barril-samana",
+"thumb": "/img/puertos/arroyo-barril-samana-640.webp",
+"large": "/img/puertos/arroyo-barril-samana-1280.webp",
+"ratio": 1.5,
+"author": "Danu Widjajanto",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:View_of_Saman%C3%A1_Bay_from_the_Top_1.jpg"
+},
+"Taranto": {
+"slug": "taranto",
+"thumb": "/img/puertos/taranto-640.webp",
+"large": "/img/puertos/taranto-1280.webp",
+"ratio": 1.5,
+"author": "ParisTaras",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Castello_Aragonese_-_Taranto.jpg"
+},
+"El Havre": {
+"slug": "el-havre",
+"thumb": "/img/puertos/el-havre-640.webp",
+"large": "/img/puertos/el-havre-1280.webp",
+"ratio": 1.828,
+"author": "Martin Falbisoner",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Panorama_of_Le_Havre,_September_2019.jpg"
+},
+"Suva": {
+"slug": "suva",
+"thumb": "/img/puertos/suva-640.webp",
+"large": "/img/puertos/suva-1280.webp",
+"ratio": 1.333,
+"author": "Ftaaffe",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Suva_harbour_fiji.jpg"
+},
+"Gibraltar": {
+"slug": "gibraltar",
+"thumb": "/img/puertos/gibraltar-640.webp",
+"large": "/img/puertos/gibraltar-1280.webp",
+"ratio": 1.333,
+"author": "Xemenendura",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_Algeciras_o.jpg"
+},
+"Costa Amalfitana": {
+"slug": "costa-amalfitana",
+"thumb": "/img/puertos/costa-amalfitana-640.webp",
+"large": "/img/puertos/costa-amalfitana-1280.webp",
+"ratio": 1.631,
+"author": "Bernard Gagnon",
+"license": "CC BY 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Positano_(Italy)_03.jpg"
+},
+"Cairns": {
+"slug": "cairns",
+"thumb": "/img/puertos/cairns-640.webp",
+"large": "/img/puertos/cairns-1280.webp",
+"ratio": 1.5,
+"author": "Bernard Gagnon",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Cairns_(Queensland).jpg"
+},
+"Half Moon Cay": {
+"slug": "half-moon-cay",
+"thumb": "/img/puertos/half-moon-cay-640.webp",
+"large": "/img/puertos/half-moon-cay-1280.webp",
+"ratio": 1.5,
+"author": "Jonathan Palombo",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Half_Moon_Cay_(12385275415).jpg"
+},
+"Dubrovnik": {
+"slug": "dubrovnik",
+"thumb": "/img/puertos/dubrovnik-640.webp",
+"large": "/img/puertos/dubrovnik-1280.webp",
+"ratio": 1.837,
+"author": "Diego Delso",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-14,_DD_04.JPG"
+},
+"Walvis Bay": {
+"slug": "walvis-bay",
+"thumb": "/img/puertos/walvis-bay-640.webp",
+"large": "/img/puertos/walvis-bay-1280.webp",
+"ratio": 1.5,
+"author": "Diego Delso",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Flamencos_comunes_(Phoenicopterus_roseus),_Walvis_Bay,_Namibia,_2018-08-05,_DD_23.jpg"
+},
+"Florencia": {
+"slug": "florencia",
+"thumb": "/img/puertos/florencia-640.webp",
+"large": "/img/puertos/florencia-1280.webp",
+"ratio": 1.334,
+"author": "Dllu",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Florence_Cathedral_seen_from_Piazzale_Michelangelo_night_dllu.jpg"
+},
+"Honolulu": {
+"slug": "honolulu",
+"thumb": "/img/puertos/honolulu-640.webp",
+"large": "/img/puertos/honolulu-1280.webp",
+"ratio": 1.506,
+"author": "Frank Schulenburg",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Waikiki_Beach_(2024)-L1004709.jpg"
+},
+"Hilo": {
+"slug": "hilo",
+"thumb": "/img/puertos/hilo-640.webp",
+"large": "/img/puertos/hilo-1280.webp",
+"ratio": 1.5,
+"author": "AlaskaDave",
+"license": "CC BY-SA 3.0",
+"page": "https://commons.wikimedia.org/wiki/File:Hilo_Bay_from_Liliu%27okalani_Park.JPG"
+},
+"Rabaul": {
+"slug": "rabaul",
+"thumb": "/img/puertos/rabaul-640.webp",
+"large": "/img/puertos/rabaul-1280.webp",
+"ratio": 1.333,
+"author": "Stefan Krasowski from New York, NY, USA",
+"license": "CC BY 2.0",
+"page": "https://commons.wikimedia.org/wiki/File:Rabaul_from_Vulcanology_Observatory.jpg"
+},
+"Kobe (Kioto)": {
+"slug": "kobe-kioto",
+"thumb": "/img/puertos/kobe-kioto-640.webp",
+"large": "/img/puertos/kobe-kioto-1280.webp",
+"ratio": 1.584,
+"author": "Zairon",
+"license": "CC BY-SA 4.0",
+"page": "https://commons.wikimedia.org/wiki/File:Kobe_Harbour_Area_2.jpg"
+}
+}

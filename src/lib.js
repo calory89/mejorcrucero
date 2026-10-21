@@ -55,7 +55,7 @@ export function shipSvg(s, w = 320) {
 
 export function shipVisual(s, w = 300, eager = false) {
   if (s.photo) {
-    return `<img src="${esc(s.photo.thumb)}" alt="${esc(s.name)} navegando" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" class="ship-photo">`;
+    return `<img src="${esc(s.photo.thumb)}"${s.photo.hi ? ` srcset="${esc(s.photo.thumb)} 640w, ${esc(s.photo.large)} 1280w" sizes="(max-width: 600px) 100vw, 360px"` : ''} alt="${esc(s.name)} navegando" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" class="ship-photo">`;
   }
   return shipSvg(s, w);
 }
