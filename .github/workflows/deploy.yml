@@ -4,7 +4,8 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: '17 5 * * *'   # reconstrucción diaria: tipo de cambio del BCE y, cuando exista, feed de precios
+    - cron: '17 5 * * *'
+    - cron: '17 17 * * *'   # segunda actualización de precios   # reconstrucción diaria: tipo de cambio del BCE y, cuando exista, feed de precios
 permissions:
   contents: write
   pages: write
@@ -20,6 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Importar ofertas de Costa Cruceros (web oficial)
+        run: |
+          node tools/costa.js
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/sailings.json && git commit -m "Ofertas: precios de Costa actualizados" && git pull --rebase -q && git push || echo "sin cambios en ofertas"
       - name: Importar feed de precios (si está configurado)
         if: ${{ vars.FEED_URL != '' }}
         env:
