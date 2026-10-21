@@ -965,7 +965,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync(path.join(OUT, '..', 'public'), OUT, { recursive: true });
 
-OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE });
+OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE, PORT_COORDS });
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());
