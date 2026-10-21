@@ -268,4 +268,19 @@
     };
     f.addEventListener('input', apply);
   });
+// ---------- Ofertas guardadas y vistas ----------
+  const so = $('.js-save-offer');
+  if (so) {
+    const o = JSON.parse(so.dataset.offer);
+    const rec = store.get('mc_offer_recent', []).filter((x) => x.id !== o.id); rec.unshift({ ...o, seen: Date.now() }); store.set('mc_offer_recent', rec.slice(0, 20));
+    const sync = () => { const on = store.get('mc_offer_favs', []).some((x) => x.id === o.id); so.setAttribute('aria-pressed', on); so.lastChild.textContent = on ? ' Guardada' : ' Guardar oferta'; };
+    so.addEventListener('click', () => { const l = store.get('mc_offer_favs', []); const on = l.some((x) => x.id === o.id); store.set('mc_offer_favs', on ? l.filter((x) => x.id !== o.id) : [o, ...l].slice(0, 50)); sync(); });
+    sync();
+  }
+  const mo = $('#my-offers');
+  if (mo) {
+    const favs = store.get('mc_offer_favs', []), rec = store.get('mc_offer_recent', []).filter((r) => !favs.some((f) => f.id === r.id)).slice(0, 8);
+    const li = (x, tag) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d)} · desde ${eur(x.p)}${tag ? ' · ' + tag : ''}</span></a></li>`;
+    if (favs.length || rec.length) mo.innerHTML = `<ul class="mini">${favs.map((x) => li(x, '❤️ guardada')).join('')}${rec.map((x) => li(x, 'vista')).join('')}</ul>`;
+  }
 })();
