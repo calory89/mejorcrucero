@@ -6,6 +6,8 @@ import { GUIDES } from './data/guides.js';
 import { DESTINATIONS, MONTHS, COMPARISONS } from './data/destinations.js';
 import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
 import { scoreBadge } from './lib.js';
+import { cj, tripBox, bookingHotels } from './lib.js';
+import { makeOffers } from './offers.js';
 import { SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
 const D = (f) => path.join(path.dirname(new URL(import.meta.url).pathname), 'data', f);
@@ -82,17 +84,12 @@ function forWhom(s) {
   return { yes: yes.slice(0, 3), no: no.slice(0, 2) };
 }
 
+let OFF; // se crea tras definir los barcos
 // ---------- salidas (feed) ----------
 const sailingUrl = (x) => `/salidas/${x.id}/`;
 const minPrice = (x) => Math.min(...Object.values(x.prices || {}).filter((v) => v > 0));
 const ppn = (x) => Math.round(minPrice(x) / x.nights);
-function sailingCard(x) {
-  const s = bySlug[x.ship];
-  const drop = x.history?.length > 1 ? Math.round((1 - minPrice(x) / Math.max(...x.history.map((h) => h.price))) * 100) : 0;
-  return `<a class="card sail-card" href="${sailingUrl(x)}"><div class="card-body"><span class="eyebrow">${esc(s?.lineShort || '')} · ${esc(s?.name || x.ship)}</span><h3>${esc(x.itinerary?.name || 'Crucero')}</h3>
-  <p class="muted small">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${x.nights} noches · desde ${esc(x.depart_port)}</p>
-  <p class="price">desde <b>${eur(minPrice(x))}</b> <span class="muted small">(${eur(ppn(x))}/noche)</span>${drop >= 5 ? ` <span class="badge-drop">−${drop}%</span>` : ''}</p></div></a>`;
-}
+function sailingCard(x) { return OFF.card(x); }
 
 function monthRange(ms) {
   let start = ms[0], end = ms[ms.length - 1];
@@ -108,13 +105,13 @@ const totalVideos = ships.reduce((a, s) => a + s.videos.length, 0);
 
 function home() {
   const roomiest = ships.filter((s) => s.ratio && s.pax > 1500).sort((a, b) => b.ratio - a.ratio).slice(0, 5);
-  const deals = [...sailings].sort((a, b) => ppn(a) - ppn(b)).slice(0, 6);
+  const deals = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score || OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 8);
   const body = `
 <section class="hero${heroShip.photo ? ' hero-photo' : ''}"${heroShip.photo ? ` style="--hero:url('${heroShip.photo.local ? BASE.replace(/\/$/, '') : ''}${esc(heroShip.photo.large || heroShip.photo.thumb)}')"` : ''}><div class="wrap hero-in">
   <div class="hero-copy">
-    <p class="kicker">El comparador de cruceros en español</p>
-    <h1>Elige el crucero perfecto y descubre <em>lo que de verdad cuesta</em></h1>
-    <p class="lead-p">${ships.length} barcos y ${totalVideos} vídeos reales, el precio final con propinas incluidas, alertas si baja el precio después de reservar y un foro por cada barco y cada salida.</p>
+    <p class="kicker">El comparador de cruceros de España</p>
+    <h1>Compara y elige tu mejor crucero <em>al mejor precio</em></h1>
+    <p class="lead-p">${sailings.length ? `${sailings.length} ofertas con precio real (tasas incluidas) y nota de 0 a 100, ` : ''}${ships.length} barcos puntuados, ${totalVideos} vídeos y alertas si baja el precio.</p>
     <form class="search search-big" action="/buscar/" role="search">
       <label><span>Destino</span><select name="destino"><option value="">Cualquiera</option>${DESTINATIONS.map((d) => `<option value="${d.slug}">${esc(d.name)}</option>`).join('')}</select></label>
       <label><span>Mes</span><select name="mes"><option value="">Cualquiera</option>${MONTHS.map((m, i) => `<option value="${i + 1}">${cap(m)}</option>`).join('')}</select></label>
@@ -140,7 +137,7 @@ function home() {
 
 <section class="wrap block mine" hidden><div class="block-h"><h2>Tus barcos</h2><a href="/mis-cruceros/">Mis cruceros →</a></div><div class="grid mine-grid"></div></section>
 
-${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Ofertas de la semana</h2><a href="/ofertas/">Ver todas →</a></div><div class="grid">${deals.map(sailingCard).join('')}</div></section>` : ''}
+${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas →</a></div><div class="grid">${deals.map(sailingCard).join('')}</div></section>` : ''}
 
 <section class="wrap block" id="videos"><div class="block-h"><h2>Los barcos más buscados, en vídeo</h2><a href="/barcos/">Ver los ${ships.length} barcos →</a></div>
 <div class="grid">${featured.map((s) => shipCard(s)).join('')}</div></section>
@@ -176,10 +173,10 @@ ${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Ofertas d
   ${leadForm('newsletter-home', 'Quiero los chollos')}
 </div></section>`;
   return layout({
-    title: 'MejorCrucero: compara cruceros en español con precio real, vídeos y opiniones',
-    desc: `Compara ${ships.length} barcos de crucero con vídeos, precio real con propinas, alertas de bajada de precio y foro por barco. Cruceros desde Barcelona, Málaga, Valencia y más.`,
+    title: 'MejorCrucero: compara y elige tu mejor crucero al mejor precio',
+    desc: `El comparador de cruceros de España: ${sailings.length} ofertas con precio real y nota de 0 a 100, ${ships.length} barcos puntuados, vídeos y opiniones. Cruceros desde Barcelona, Valencia, Málaga, Palma y Canarias.`,
     url: '/', body,
-    schema: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'MejorCrucero', url: SITE, inLanguage: 'es', potentialAction: { '@type': 'SearchAction', target: SITE + '/buscar/?q={q}', 'query-input': 'required name=q' } }],
+    schema: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'MejorCrucero', url: SITE, inLanguage: 'es-ES', potentialAction: { '@type': 'SearchAction', target: SITE + '/buscar/?q={q}', 'query-input': 'required name=q' } }],
   });
 }
 
@@ -279,7 +276,7 @@ function shipPage(s) {
 
   ${scoreSection(s)}
 
-  ${s.sailings.length ? `<section class="block" id="salidas"><h2>Próximas salidas del ${esc(s.name)}</h2><div class="grid">${s.sailings.slice(0, 6).map(sailingCard).join('')}</div></section>` : ''}
+  ${s.sailings.length ? `<section class="block" id="salidas"><h2>Ofertas del ${esc(s.name)} (${s.sailings.length} salidas)</h2><div class="grid">${[...s.sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 6).map(sailingCard).join('')}</div>${s.sailings.length > 6 ? `<details class="az"><summary>Ver todas las fechas</summary><ul class="az-list">${s.sailings.map((x) => `<li><a href="/salidas/${x.id}/">${x.date} · ${x.nights} noches · ${esc(x.depart_port)} · ${eur(OFF.minPrice(x))}</a></li>`).join('')}</ul></details>` : ''}</section>${tripBox(s.sailings[0].depart_port.split(' (')[0], { sid: 'barco-' + s.slug, title: `¿Embarcas en ${s.sailings[0].depart_port}? Hotel, traslado y vuelo` })}` : ''}
 
   <section id="reservar" class="block"><h2>Dónde reservar el ${esc(s.name)}</h2>
   <p class="muted">Compara la misma salida en la naviera y en las agencias.${s.sailings.length ? '' : ' Los precios en directo se están conectando: de momento te llevamos a la búsqueda de cada sitio.'}</p>
@@ -353,32 +350,7 @@ function shipPage(s) {
   });
 }
 
-function sailingPage(x) {
-  const s = bySlug[x.ship];
-  const L = s ? LINES[s.line] : null;
-  const ports = x.itinerary?.ports || [];
-  const hist = x.history || [];
-  const cabins = [['interior', 'Interior'], ['exterior', 'Exterior'], ['balcon', 'Balcón'], ['suite', 'Suite']].filter(([k]) => x.prices?.[k]);
-  const sameShip = sailings.filter((o) => o.ship === x.ship && o.id !== x.id && o.itinerary?.name === x.itinerary?.name);
-  const chart = hist.length > 1 ? (() => {
-    const W = 600, H = 160, min = Math.min(...hist.map((h) => h.price)), max = Math.max(...hist.map((h) => h.price));
-    const pts = hist.map((h, i) => [20 + (i / (hist.length - 1)) * (W - 40), H - 20 - ((h.price - min) / (max - min || 1)) * (H - 40)]);
-    return `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Histórico de precio"><polyline fill="none" stroke="currentColor" stroke-width="3" points="${pts.map((p) => p.join(',')).join(' ')}"/>${pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="4"><title>${hist[i].date}: ${eur(hist[i].price)}</title></circle>`).join('')}<text x="20" y="14" class="ct">${eur(max)}</text><text x="20" y="${H - 4}" class="ct">${eur(min)}</text></svg>`;
-  })() : '';
-  const trend = hist.length > 2 ? (minPrice(x) <= Math.min(...hist.map((h) => h.price)) ? 'Está en su precio más bajo registrado: buen momento para reservar.' : 'Ha estado más barato antes: si no tienes prisa, crea una alerta y espera.') : '';
-  const body = `<section class="wrap block page-h"><span class="eyebrow">${esc(L?.short || '')} · <a href="/barcos/${x.ship}/">${esc(s?.name || x.ship)}</a></span><h1>${esc(x.itinerary?.name || 'Crucero')}</h1>
-  <p class="lead-p">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} · ${x.nights} noches · salida desde ${esc(x.depart_port)}</p>
-  <div class="stats"><div><b>${eur(minPrice(x))}</b><span>Desde, por persona</span></div><div><b>${eur(ppn(x))}</b><span>Por persona y noche</span></div><div><b>${ports.filter((p) => !/navegaci/i.test(p.name)).length}</b><span>Escalas</span></div><div><b>${ports.filter((p) => /navegaci/i.test(p.name)).length}</b><span>Días de navegación</span></div></div>
-  ${x.updated ? `<p class="muted small">Precio actualizado: <time datetime="${x.updated}" class="js-ago">${x.updated}</time></p>` : ''}</section>
-  <section class="wrap block"><h2>Comparar precios de esta salida</h2><div class="table-wrap"><table class="rank-t"><thead><tr><th>Vendedor</th>${cabins.map(([, n]) => `<th>${n}</th>`).join('')}<th></th></tr></thead><tbody>${(x.sources || []).map((src) => `<tr><td>${esc(src.partner)}</td>${cabins.map(([k]) => `<td>${src.prices?.[k] ? eur(src.prices[k]) : '—'}</td>`).join('')}<td><a class="btn btn-sm" href="${esc(src.url)}" target="_blank" rel="sponsored noopener" data-aff="${esc(src.partner)}" data-page="${sailingUrl(x)}">Ver</a></td></tr>`).join('')}</tbody></table></div></section>
-  ${chart ? `<section class="wrap block"><h2>Histórico de precio</h2>${chart}<p><b>${trend}</b></p></section>` : ''}
-  <section class="wrap block"><h2>Itinerario</h2><ol class="itin">${ports.map((p) => `<li><b>Día ${p.day}</b> ${esc(p.name)}${p.arrive || p.depart ? ` <span class="muted small">${esc(p.arrive || '')}${p.depart ? '–' + esc(p.depart) : ''}</span>` : ''}</li>`).join('')}</ol>
-  ${ports.some((p) => p.lat) ? `<div class="map" data-ports='${esc(JSON.stringify(ports.filter((p) => p.lat).map((p) => [p.lat, p.lon, p.name])))}'><button class="btn btn-ghost js-map" type="button">Ver mapa del itinerario</button></div>` : ''}</section>
-  ${sameShip.length ? `<section class="wrap block"><h2>Otras fechas de este itinerario</h2><div class="cal">${sameShip.concat([x]).sort((a, b) => a.date.localeCompare(b.date)).map((o) => `<a href="${sailingUrl(o)}" class="cal-d${o.id === x.id ? ' on' : ''}"><b>${new Date(o.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</b><span>${eur(minPrice(o))}</span></a>`).join('')}</div></section>` : ''}
-  <section class="wrap block"><a class="btn" href="/herramientas/alerta-precio/?barco=${x.ship}&amp;fecha=${x.date}">🔔 Avísame si baja</a> <a class="btn btn-ghost" href="/herramientas/precio-real/?linea=${s?.lineSlug || ''}&amp;precio=${minPrice(x)}&amp;noches=${x.nights}">Calcular precio real</a> <a class="btn btn-ghost" href="/comunidad/salida/?b=${x.ship}&amp;f=${x.date}">Grupo de esta salida</a></section>`;
-  return layout({ title: `${x.itinerary?.name || 'Crucero'} en el ${s?.name || x.ship} (${x.date})`, desc: `${x.nights} noches desde ${x.depart_port} en el ${s?.name}: compara precios por camarote, histórico y escalas.`, url: sailingUrl(x), body, crumbs: [['Inicio', '/'], ['Buscar', '/buscar/'], [s?.name || x.ship, `/barcos/${x.ship}/`], [x.date, sailingUrl(x)]],
-    schema: [{ '@context': 'https://schema.org', '@type': 'Product', name: `${x.itinerary?.name} · ${s?.name}`, offers: (x.sources || []).map((src) => ({ '@type': 'Offer', price: Math.min(...Object.values(src.prices || {}).filter(Boolean)), priceCurrency: 'EUR', url: src.url, seller: { '@type': 'Organization', name: src.partner } })) }] });
-}
+function sailingPage(x) { return OFF.page(x); }
 
 function dealsPage(kind) {
   const now = new Date();
@@ -506,10 +478,12 @@ function portPage(p) {
   const body = `<section class="wrap block page-h"><span class="eyebrow">${esc(p.region)}</span><h1>Cruceros desde ${esc(p.name)}</h1><p class="lead-p">${esc(p.text)}</p></section>
   ${ps.length ? `<section class="wrap block"><h2>Próximas salidas desde ${esc(city)}</h2><div class="grid">${ps.slice(0, 12).map(sailingCard).join('')}</div></section>` : ''}
   <section class="wrap block grid grid-3">
-    ${p.civ ? `<a class="tool tool-light" href="${civLink(p.civ)}" target="_blank" rel="sponsored noopener" data-aff="civitatis" data-page="/puertos/${p.slug}/"><h2>Excursiones en ${esc(city)}</h2><p>Si llegas antes o es una escala, aprovecha el día con visitas guiadas en español.</p><span class="btn btn-sm">Ver excursiones →</span></a>` : ''}
-    <a class="tool tool-light" href="https://www.google.com/travel/flights?q=${encodeURIComponent('Vuelos a ' + city)}&amp;hl=es" target="_blank" rel="noopener"><h2>Vuelos a ${esc(city)}</h2><p>Compara vuelos para llegar al puerto el día antes. Y en Happy Low Cost publicamos chollos cada día.</p><span class="btn btn-sm">Buscar vuelos →</span></a>
+    <a class="tool tool-light" href="/ofertas/desde-${p.slug}/"><h2>Ofertas desde ${esc(city)}</h2><p>Todas las salidas con precio real y nota de la oferta.</p><span class="btn btn-sm">Ver ofertas →</span></a>
     <a class="tool tool-light" href="/herramientas/precio-real/"><h2>Calcula el precio real</h2><p>Suma el traslado al puerto, el aparcamiento y los extras de a bordo.</p><span class="btn btn-sm">Calcular →</span></a>
+    <a class="tool tool-light" href="/herramientas/tiempo-puerto/"><h2>El tiempo en ${esc(city)}</h2><p>Previsión de 14 días para el día de embarque.</p><span class="btn btn-sm">Ver tiempo →</span></a>
   </section>
+  <div class="wrap">${tripBox(city, { sid: 'puerto-' + p.slug, title: `Llegar al puerto de ${city}: hotel, traslado y vuelo` })}</div>
+  ${['miami', 'fort-lauderdale', 'port-canaveral'].includes(p.slug) ? `<div class="wrap"><div class="side-card aff-card"><h2 class="h-sm">🎢 ¿Días extra en Florida?</h2><p class="small">Muchos cruceristas suman Disney World o Universal Orlando antes o después del crucero. Entradas con descuento:</p><a class="btn btn-sm" href="${cj('orlando', null, 'puerto-' + p.slug)}" target="_blank" rel="sponsored noopener" data-aff="cj-orlando">Ver entradas a parques →</a><p class="muted small">Enlace de afiliado (Undercover Tourist).</p></div></div>` : ''}
   <section class="wrap block"><h2>Consejos para embarcar en ${esc(city)}</h2><ul class="list">
     <li>Llega con margen: el embarque suele cerrar unas horas antes de zarpar y en temporada alta hay colas.</li>
     <li>Comprueba en tu tarjeta de embarque la terminal exacta: en los puertos grandes hay varias.</li>
@@ -522,9 +496,9 @@ function portPage(p) {
 }
 
 function excursions() {
-  const body = `<section class="wrap block page-h"><h1>Excursiones en cada puerto, más baratas que las de la naviera</h1><p class="lead-p">Las excursiones del barco son cómodas, pero suelen ser caras. Estas son visitas en español reservables por tu cuenta.</p>
-  <h2>Escalas del Mediterráneo y Atlántico</h2><div class="ports">${SCALE_PORTS.map(([n, c]) => `<a class="port" href="${civLink(c)}" target="_blank" rel="sponsored noopener" data-aff="civitatis" data-page="/excursiones/"><b>${esc(n)}</b><span>Ver excursiones →</span></a>`).join('')}</div>
-  <h2>Puertos de embarque</h2><div class="ports">${allPorts.filter((p) => p.civ).map((p) => `<a class="port" href="${civLink(p.civ)}" target="_blank" rel="sponsored noopener" data-aff="civitatis" data-page="/excursiones/"><b>${esc(p.name)}</b><span>Ver excursiones →</span></a>`).join('')}</div>
+  const body = `<section class="wrap block page-h"><h1>Excursiones en cada puerto, más baratas que las de la naviera</h1><p class="lead-p">Las excursiones del barco son cómodas, pero suelen ser caras. Reserva entradas y tours por tu cuenta en Booking.com (enlace de afiliado: tú pagas lo mismo).</p>
+  <h2>Escalas del Mediterráneo y Atlántico</h2><div class="ports">${SCALE_PORTS.map(([n, c]) => `<a class="port" href="${cj('attr', null, 'excursiones-' + c)}" target="_blank" rel="sponsored noopener" data-aff="cj-attr" data-page="/excursiones/"><b>${esc(n)}</b><span>Ver excursiones →</span></a>`).join('')}</div>
+  <h2>Puertos de embarque</h2><div class="ports">${allPorts.filter((p) => p.civ).map((p) => `<a class="port" href="${cj('attr', null, 'excursiones-' + p.slug)}" target="_blank" rel="sponsored noopener" data-aff="cj-attr" data-page="/excursiones/"><b>${esc(p.name)}</b><span>Ver excursiones →</span></a>`).join('')}</div>
   <div class="tip"><b>Importante:</b> si vas por tu cuenta y llegas tarde, el barco no te espera. Deja al menos hora y media de margen. ¿Quieres compartir guía o taxi? Propónlo en el <a href="/comunidad/">grupo de tu salida</a>.</div>
   <p><a href="/guias/excursiones-por-libre/">Guía: excursiones con la naviera o por libre →</a></p></section>`;
   return layout({ title: 'Excursiones en cruceros por tu cuenta: puerto a puerto', desc: 'Excursiones en español en Roma, Nápoles, Florencia, Marsella, Malta, Atenas, Santorini, Dubrovnik y más, más baratas que las del barco.', url: '/excursiones/', body, crumbs: [['Inicio', '/'], ['Excursiones', '/excursiones/']] });
@@ -580,6 +554,7 @@ function methodology() {
   <h2>Escala</h2><ul><li><b>85–100</b> Excelente</li><li><b>75–84</b> Muy bueno</li><li><b>65–74</b> Bueno</li><li><b>50–64</b> Correcto</li><li><b>0–49</b> Flojo</li></ul>
   ${ex ? `<h2>Ejemplo: ${esc(ex.name)} (${ex.sc}/100)</h2><ul>${ex.score.parts.map((p) => `<li>${esc(p.label)}: ${String(p.pts).replace('.', ',')} de ${p.max} — ${esc(p.detail)}</li>`).join('')}</ul>` : ''}
   <h2>Fuentes</h2><ul><li>Inspecciones sanitarias: <a href="https://wwwn.cdc.gov/InspectionQueryTool/InspectionSearch.aspx" target="_blank" rel="noopener">CDC Vessel Sanitation Program</a> (Centros para el Control y la Prevención de Enfermedades de EE. UU.).</li><li>Arqueo, pasajeros, tripulación, eslora y reformas: artículos de Wikipedia de cada barco (enlazados en cada ficha).</li><li>Opiniones: comunidad de MejorCrucero, con moderación y detección de spam. Las opiniones verificadas con la confirmación de reserva pesan igual pero llevan insignia.</li></ul>
+  <h2 id="ofertas">La nota de cada oferta (0–100)</h2><p>Cada salida tiene su propia nota, distinta de la del barco. Mide si el precio es bueno:</p><ul><li><b>Hasta 75 puntos</b>: precio real por noche (tarifa + tasas portuarias + cuota de servicio) frente a cruceros parecidos: mismo destino, duración similar y salida en un margen de 60 días. Cuanto más barato que ellos, más puntos.</li><li><b>Hasta 15 puntos</b>: descuento sobre el precio de catálogo que publica la propia naviera.</li><li><b>10 puntos</b> si está en su precio más bajo desde que lo seguimos, y <b>5</b> si ha bajado un 5% o más.</li></ul><p>85 o más = <b>chollo</b>; 70–84 = buen precio; 45–69 = precio normal. Los precios se leen dos veces al día de las webs oficiales de las navieras.</p>
   <h2>¿Ves un error?</h2><p>Cada ficha tiene un botón para reportarlo. Revisamos y corregimos con la fuente delante.</p><p class="muted small">Última actualización: ${BUILD_DATE}. La nota se recalcula a diario.</p></section>`;
   return layout({ title: 'Cómo calculamos el MejorCrucero Score (nota de 0 a 100)', desc: 'Metodología de la nota de 0 a 100 de los barcos de crucero: higiene oficial del CDC, espacio por pasajero, tripulación, modernidad y opiniones verificadas.', url: '/metodologia/', body, crumbs: [['Inicio', '/'], ['Metodología', '/metodologia/']] });
 }
@@ -737,7 +712,7 @@ function toolChecklist() {
   <form class="chk-opts" id="chk-opts"><label class="chk"><input type="checkbox" name="nonEU"> Escalas fuera de la UE</label><label class="chk"><input type="checkbox" name="cold"> Destino frío</label><label class="chk"><input type="checkbox" name="hot"> Destino de calor</label><label class="chk"><input type="checkbox" name="baby"> Viajo con bebé</label></form>
   ${Object.entries(groups).map(([k, items]) => `<fieldset class="chk-group" data-group="${k}" ${k === 'base' ? '' : 'hidden'}><legend>${names[k]}</legend>${items.map((t, i) => `<label class="chk"><input type="checkbox" data-item="${k}-${i}"> ${esc(t)}</label>`).join('')}</fieldset>`).join('')}
   <p class="muted small" id="chk-count"></p><button class="btn btn-ghost js-print" type="button">Imprimir o guardar en PDF</button>
-  <p class="muted small">Orientativo: la documentación exigida la marca la naviera en tu reserva. <a href="/guias/documentacion-crucero/">Guía de documentación</a>.</p></section>`;
+  <p class="muted small">Orientativo: la documentación exigida la marca la naviera en tu reserva. <a href="/guias/documentacion-crucero/">Guía de documentación</a>.</p><div class="side-card aff-card"><h2 class="h-sm">📶 Wifi del barco y de los puertos</h2><p class="small">En el puerto y en cafeterías de las escalas usarás wifi público. Una VPN cifra tu conexión cuando consultes el banco o la reserva.</p><a class="btn btn-sm" href="${cj('vpn', null, 'checklist')}" target="_blank" rel="sponsored noopener" data-aff="cj-vpn">Ver oferta de NordVPN →</a><p class="muted small">Enlace de afiliado.</p></div></section>`;
   return layout({ title: 'Checklist de crucero: maleta y documentos', desc: 'Lista interactiva para preparar tu crucero: documentos, maleta, bebé, frío o calor.', url: '/herramientas/checklist/', body, crumbs: toolCrumbs('Checklist', '/herramientas/checklist/') });
 }
 
@@ -990,13 +965,14 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync(path.join(OUT, '..', 'public'), OUT, { recursive: true });
 
+OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE });
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());
 ships.forEach((s) => write(`barcos/${s.slug}/index.html`, shipPage(s)));
 sailings.forEach((x) => write(`salidas/${x.id}/index.html`, sailingPage(x)));
-write('ofertas/index.html', dealsPage('ofertas'));
-write('ultima-hora/index.html', dealsPage('ultima'));
+OFF.hubs().forEach(([f, html]) => write(f, html));
+OFF.feeds().forEach(([f, c]) => write(f, c));
 write('navieras/index.html', linesIndex());
 lineList.forEach((l) => write(`navieras/${l.slug}/index.html`, linePage(l)));
 write('comparativas/index.html', comparisonsIndex());

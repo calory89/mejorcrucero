@@ -88,6 +88,25 @@ export function affLink(key, page = '') {
   return url;
 }
 export const isAff = (key) => !!CONFIG.affiliates[key]?.param;
+// Enlace de afiliado CJ (solo programas aprobados). url = destino profundo (si el programa lo permite).
+export function cj(kind, url, sid = 'web') {
+  const L = CONFIG.cj.links[kind];
+  const u = url || L.def;
+  return `${CONFIG.cj.host}/click-${CONFIG.cj.pid}-${L.aid}?sid=${encodeURIComponent('mc-' + sid)}${u ? '&url=' + encodeURIComponent(u) : ''}`;
+}
+export const bookingHotels = (city, checkin, checkout) => `https://www.booking.com/searchresults.es.html?ss=${encodeURIComponent(city)}&lang=es&group_adults=2${checkin ? `&checkin=${checkin}&checkout=${checkout}` : ''}`;
+// Caja "Prepara tu viaje al puerto": hotel la noche antes, traslado, vuelo, coche y excursiones (CJ)
+export function tripBox(city, { date, sid = 'web', title, attrCity } = {}) {
+  const before = date ? new Date(new Date(date + 'T12:00:00') - 864e5).toISOString().slice(0, 10) : null;
+  const a = (kind, url, icon, t, sub) => `<a class="trip-a" href="${cj(kind, url, sid)}" target="_blank" rel="sponsored noopener" data-aff="cj-${kind}" data-page="${esc(sid)}"><span class="trip-i" aria-hidden="true">${icon}</span><b>${esc(t)}</b><small>${esc(sub)}</small></a>`;
+  return `<section class="block trip"><h2>${esc(title || `Prepara tu viaje a ${city}`)}</h2><div class="trip-g">
+  ${a('hotel', bookingHotels(city, before, date), '🏨', `Hotel en ${city}${date ? ' la noche antes' : ''}`, 'Embarca sin prisas · Booking.com')}
+  ${a('taxi', null, '🚕', 'Traslado al puerto', 'Taxi reservado con precio cerrado · Booking.com')}
+  ${a('flight', null, '✈️', `Vuelo a ${city}`, 'Compara vuelos · Booking.com')}
+  ${a('car', null, '🚗', 'Coche de alquiler', 'Para llegar o hacer excursiones · Holiday Autos')}
+  ${a('attr', null, '🎟️', `Excursiones en ${attrCity || city}`, 'Entradas y tours por libre · Booking.com')}
+  </div><p class="muted small">Enlaces de afiliado: si reservas, podemos cobrar una comisión y tú pagas lo mismo.</p></section>`;
+}
 export function civLink(slug) {
   const a = CONFIG.affiliates.civitatis;
   return a.base + slug + '/' + (a.param ? '?' + a.param : '');
@@ -135,23 +154,25 @@ export function forumBlock(thread, title, opts = {}) {
 </section>`;
 }
 
-const NAV = [['/buscar/', 'Buscar'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/rankings/', 'Ranking'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
+const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/rankings/', 'Ranking'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
 
 export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null }) {
   pages.push({ url, noindex });
-  const fullTitle = url === '/' ? title : `${title} | MejorCrucero`;
+  const fullTitle = url === '/' ? title : title.length > 62 ? title : `${title} | MejorCrucero`;
   const ld = [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'MejorCrucero', url: SITE, logo: SITE + '/icon-512.png', sameAs: [CONFIG.happyLowCost], founder: { '@type': 'Person', name: CONFIG.author.name } }, ...schema];
   if (crumbs) ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: crumbs.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) });
   const crumbHtml = crumbs ? `<nav class="crumbs wrap" aria-label="Migas de pan"><ol>${crumbs.map(([n, u], i) => i === crumbs.length - 1 ? `<li aria-current="page">${esc(n)}</li>` : `<li><a href="${u}">${esc(n)}</a></li>`).join('')}</ol></nav>` : '';
   const ogImg = image || SITE + og;
   return rebase(`<!doctype html>
-<html lang="es">
+<html lang="es-ES">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${SITE}${url}">
+<link rel="alternate" hreflang="es-ES" href="${SITE}${url}"><link rel="alternate" hreflang="x-default" href="${SITE}${url}">
+<meta property="og:locale" content="es_ES"><meta name="geo.region" content="ES"><link rel="alternate" type="application/rss+xml" title="Chollos de cruceros" href="/ofertas/feed.xml">
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="theme-color" content="#0b2540">
 <meta property="og:type" content="${ogType}"><meta property="og:site_name" content="MejorCrucero"><meta property="og:title" content="${esc(fullTitle)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE}${url}"><meta property="og:image" content="${esc(ogImg)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="es_ES">

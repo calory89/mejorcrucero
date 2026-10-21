@@ -62,7 +62,7 @@ async function main() {
     const x = {
       id, line: 'costa', ship: slugify(c.shipName), ship_name: c.shipName, destination, dest_name: c.destinationName,
       date, nights, depart_port: depart, depart_port_slug: PORT_SLUG[depart] || null, arrive_port: PORT(c.arrivalPortName),
-      itinerary: { name: c.title || c.destinationName, ports: itin },
+      itinerary: { name: String(c.title || c.destinationName).replace(/desde (.+)$/, (m, q) => 'desde ' + PORT(q)), ports: itin },
       countries: c.visitingCountries || '',
       prices: { [cabin]: price },
       allinc, base_price: base && base > price ? base : null,

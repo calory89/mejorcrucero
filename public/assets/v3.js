@@ -254,4 +254,18 @@
     };
     mF.addEventListener('input', calc); calc();
   }
+  // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
+  $$('.offer-filter').forEach((f) => {
+    const g = $(f.dataset.target); if (!g) return;
+    const cards = [...g.children];
+    const apply = () => {
+      const o = f.o.value, n = f.n.value, b = +(f.b?.value || 0), es = f.es?.value;
+      const key = { score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date }[o];
+      cards.sort((a, b) => { const x = key(a), y = key(b); return x < y ? -1 : x > y ? 1 : 0; });
+      let shown = 0;
+      cards.forEach((c) => { c.hidden = (n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1'); if (!c.hidden) shown++; g.appendChild(c); });
+      let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); } m.textContent = `${shown} ofertas`;
+    };
+    f.addEventListener('input', apply);
+  });
 })();

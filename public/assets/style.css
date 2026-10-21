@@ -290,3 +290,20 @@ fieldset .chk{grid-column:1/-1}
 .scb small,.hero-score .scb small{color:#fff}.calc-out .big-num.ok{color:#6ee7b7}.calc-out .big-num.ko{color:#fca5a5}.calc-out .big-num small{color:#cfe0f3}
 .tool-out{margin-top:16px}
 #pack-out{min-height:720px}#weather-out{min-height:420px}#tip-out,#drinks-out{min-height:150px}
+/* ---------- v4: ofertas y afiliación ---------- */
+.trip-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.trip-a{display:flex;flex-direction:column;gap:2px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
+.trip-a:hover{border-color:var(--sea);color:var(--ink)}.trip-i{font-size:1.5rem}.trip-a small{color:var(--muted)}
+.offer-card .ship-art{aspect-ratio:16/9}.offer-card .ports-line{min-height:1.4em}
+.deal-l{font:700 .8rem/1 var(--sans);margin:.4em 0 0}.sc-a-t{color:#065f46}.sc-b-t{color:#166534}.sc-c-t{color:#92400e}.sc-e-t{color:#991b1b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .sc-a-t,:root:not([data-theme=light]) .sc-b-t{color:#6ee7b7}:root:not([data-theme=light]) .sc-c-t{color:#fcd34d}:root:not([data-theme=light]) .sc-e-t{color:#fca5a5}}
+:root[data-theme=dark] .sc-a-t,:root[data-theme=dark] .sc-b-t{color:#6ee7b7}:root[data-theme=dark] .sc-c-t{color:#fcd34d}:root[data-theme=dark] .sc-e-t{color:#fca5a5}
+.spec tr.tot th,.spec tr.tot td{border-top:2px solid var(--ink)}
+.sticky-price{position:sticky;top:84px}.btn-block{display:block;width:100%;text-align:center;margin-top:8px}
+.sticky-price .big-num{color:var(--ink)}
+.offer-filter{flex-wrap:wrap}
+@media (max-width:700px){.sticky-price{position:static}}
+.fav-inline{display:inline-flex;align-items:center;gap:8px}
+.m-cta{display:none}
+@media (max-width:700px){.m-cta{display:flex;position:fixed;left:0;right:0;bottom:calc(58px + env(safe-area-inset-bottom));z-index:30;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.08)}.m-cta b{font-size:1.15rem}.m-cta small{display:block;color:var(--muted)}.offer{padding-bottom:70px}}
+.offer-count{width:100%;margin:0}

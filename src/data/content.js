@@ -4,7 +4,7 @@
 export const CONFIG = {
   siteName: 'MejorCrucero',
   siteUrl: 'https://mejorcrucero.com',
-  tagline: 'Compara cruceros en español: barcos, vídeos, precio real y opiniones de cruceristas',
+  tagline: 'Compara y elige tu mejor crucero al mejor precio',
   // Afiliación: rellenar con los IDs reales al darse de alta. Vacío = enlace normal.
   affiliates: {
     logitravel: { name: 'Logitravel', url: 'https://www.logitravel.com/cruceros/', param: '' },
@@ -30,6 +30,20 @@ export const CONFIG = {
     categoryId: '',
   },
   happyLowCost: 'https://www.facebook.com/happylowcostofficialpage',
+  // CJ (Commission Junction): propiedad "MejorCrucero" = PID 101909239. Solo programas APROBADOS (21-oct-2026).
+  cj: {
+    pid: '101909239',
+    host: 'https://www.kqzyfj.com',
+    links: {
+      hotel: { aid: '17288959', name: 'Booking.com', what: 'Hoteles', def: 'https://www.booking.com/index.es.html' },
+      flight: { aid: '17288982', name: 'Booking.com', what: 'Vuelos', def: 'https://www.booking.com/flights/index.es.html' },
+      attr: { aid: '17288984', name: 'Booking.com', what: 'Excursiones y entradas', def: 'https://www.booking.com/attractions/index.es.html' },
+      taxi: { aid: '17322565', name: 'Booking.com', what: 'Traslados', def: 'https://www.booking.com/taxi/index.es.html' },
+      car: { aid: '12506471', name: 'Holiday Autos', what: 'Alquiler de coches', def: 'https://www.holidayautos.com/es/' },
+      vpn: { aid: '13942081', name: 'NordVPN', what: 'VPN para el wifi del barco', def: null },
+      orlando: { aid: '12834895', name: 'Undercover Tourist', what: 'Entradas a parques de Orlando', def: null },
+    },
+  },
 };
 
 // Cargos de servicio diarios por persona (USD, mercado EE. UU.). Fuente: Cruzely, actualizado 3-feb-2026.
