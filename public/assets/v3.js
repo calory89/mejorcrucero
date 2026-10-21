@@ -233,6 +233,7 @@
         out.innerHTML = `<h2 class="h-sm">Próximos 14 días en ${esc(name)}</h2><div class="wx">${d.time.map((t, i) => `<div><b>${new Date(t).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' })}</b><span class="wx-i">${icon(d.weather_code[i])}</span><span>${Math.round(d.temperature_2m_max[i])}° / ${Math.round(d.temperature_2m_min[i])}°</span><small>💧${d.precipitation_probability_max[i] ?? '—'}% · 💨${Math.round(d.wind_speed_10m_max[i])} km/h</small></div>`).join('')}</div><p class="muted small">Previsión de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. El viento fuerte (más de 40 km/h) puede hacer que el barco se mueva o que se cancele una escala con lanchas.</p>`;
       } catch { out.innerHTML = '<p class="muted">No se ha podido cargar la previsión. Inténtalo más tarde.</p>'; }
     };
+    if (qs.get('lat') && qs.get('lon')) { const o = document.createElement('option'); o.value = `${qs.get('lat')}|${qs.get('lon')}|${qs.get('n') || 'Puerto'}`; o.textContent = qs.get('n') || 'Puerto'; wF.port.prepend(o); wF.port.value = o.value; }
     wF.addEventListener('input', go); if (qs.get('p')) { const o = [...wF.port.options].find((x) => x.value.endsWith('|' + qs.get('p'))); if (o) wF.port.value = o.value; } go();
   }
 
@@ -254,19 +255,40 @@
     };
     mF.addEventListener('input', calc); calc();
   }
+  // ---------- Ofertas: búsqueda en lenguaje natural ----------
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const fold = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const nlParse = (raw) => {
+    let t = fold(raw); if (!t.trim()) return null;
+    const money = /(?:menos de|hasta|maximo|max|por)\s*(\d{2,5})|(\d{2,5})\s*(?:€|eur)/.exec(t); const max = money ? +(money[1] || money[2]) : 0; if (money) t = t.replace(money[0], ' ');
+    const nm = /(\d{1,2})\s*noches?/.exec(t); const nights = nm ? +nm[1] : 0; if (nm) t = t.replace(nm[0], ' ');
+    const month = MESES.findIndex((m) => t.includes(m)); if (month >= 0) t = t.replace(MESES[month], ' ');
+    const words = t.replace(/\b(crucero|cruceros|en|de|del|la|el|los|las|por|desde|con|y|a|para|un|una|barato|baratos|baratas|islas|oferta|ofertas|euros?)\b/g, ' ').split(/\s+/).filter((w) => w.length > 2).map((w) => (w.length > 5 ? w.slice(0, -1) : w));
+    return (c) => (!max || +c.dataset.price <= max) && (!nights || Math.abs(+c.dataset.nights - nights) <= 1) && (month < 0 || +String(c.dataset.m).slice(5) === month + 1) && words.every((w) => fold(c.dataset.q).includes(w));
+  };
   // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
   $$('.offer-filter').forEach((f) => {
     const g = $(f.dataset.target); if (!g) return;
     const cards = [...g.children];
     const apply = () => {
-      const o = f.o.value, n = f.n.value, b = +(f.b?.value || 0), es = f.es?.value, mo = f.m?.value;
+      const o = f.o.value, n = f.n.value, b = +(f.b?.value || 0), es = f.es?.value, mo = f.m?.value, nl = nlParse(f.q?.value);
       const key = { score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date }[o];
       cards.sort((a, b) => { const x = key(a), y = key(b); return x < y ? -1 : x > y ? 1 : 0; });
       let shown = 0;
-      cards.forEach((c) => { c.hidden = (n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo); if (!c.hidden) shown++; g.appendChild(c); });
+      cards.forEach((c) => { c.hidden = (n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nl && !nl(c)); if (!c.hidden) shown++; g.appendChild(c); });
       let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); } m.textContent = `${shown} ofertas`;
+      let more = $('.nl-more', f.parentNode); if (more) more.remove();
+      if (nl && shown < 6) getJson('ofertas.json').then((all) => {
+        const vis = new Set(cards.filter((c) => !c.hidden).map((c) => c.querySelector('a[href*="/salidas/"]')?.getAttribute('href')));
+        const hits = all.filter((o) => !vis.has(`${BASE}salidas/${o.i}/`) && nl({ dataset: { price: o.pr, nights: o.n, m: o.d.slice(0, 7), q: [o.dst, o.sn, o.p, ...(o.pts || []), MESES[+o.d.slice(5, 7) - 1]].join(' ') } })).sort((a, b) => b.sc - a.sc).slice(0, 24);
+        $('.nl-more', f.parentNode)?.remove();
+        const box = document.createElement('div'); box.className = 'nl-more';
+        box.innerHTML = hits.length ? `<h3 class="h-sm">${hits.length} ofertas más en otras fechas y destinos que encajan</h3><ul class="mini">${hits.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota ${o.sc}</span></a></li>`).join('')}</ul>` : (shown ? '' : '<p class="tip">No hay ofertas que cumplan todo. Prueba quitando el presupuesto, el mes o alguna palabra.</p>');
+        g.before(box);
+      }).catch(() => {});
     };
-    f.addEventListener('input', apply);
+    f.addEventListener('input', apply); f.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
+    let any = false; for (const el of f.elements) if (el.name && qs.get(el.name)) { el.value = qs.get(el.name); any = true; } if (any) apply();
   });
 // ---------- Ofertas guardadas y vistas ----------
   const so = $('.js-save-offer');
@@ -283,4 +305,100 @@
     const li = (x, tag) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d)} · desde ${eur(x.p)}${tag ? ' · ' + tag : ''}</span></a></li>`;
     if (favs.length || rec.length) mo.innerHTML = `<ul class="mini">${favs.map((x) => li(x, '❤️ guardada')).join('')}${rec.map((x) => li(x, 'vista')).join('')}</ul>`;
   }
+// ---------- Ofertas: datos ligeros ----------
+  const getOffers = () => getJson('ofertas.json');
+
+  // Guardar búsquedas y sorpréndeme con un chollo
+  $$('.js-save-search').forEach((b) => b.addEventListener('click', () => {
+    const f = $('.offer-filter'); const params = new URLSearchParams();
+    if (f) for (const el of f.elements) if (el.name && el.value) params.set(el.name, el.value);
+    const item = { u: location.pathname + (params.toString() ? '?' + params : ''), t: document.querySelector('h1')?.textContent.trim() + (f?.q?.value ? ` · "${f.q.value}"` : ''), at: Date.now() };
+    const l = store.get('mc_searches', []).filter((x) => x.u !== item.u); l.unshift(item); store.set('mc_searches', l.slice(0, 20)); b.textContent = '⭐ Guardada en Mis cruceros';
+  }));
+  $$('.js-surprise-offer').forEach((b) => b.addEventListener('click', async () => {
+    const l = (await getOffers()).filter((o) => o.sc >= 80); const o = l[Math.floor(Math.random() * l.length)]; if (o) location.href = `${BASE}salidas/${o.i}/`;
+  }));
+
+  // Cambio de precio desde tu última visita
+  const pc = $('.price-change');
+  if (pc) {
+    const seen = store.get('mc_prices', {}); const now = +pc.dataset.price, prev = seen[pc.dataset.id];
+    if (prev && prev !== now) { pc.hidden = false; pc.className = 'price-change tip ' + (now < prev ? 'tip-ok' : 'tip-hot'); pc.innerHTML = now < prev ? `📉 <b>Ha bajado ${eur(prev - now)}</b> desde tu última visita (antes ${eur(prev)}).` : `📈 Ha subido ${eur(now - prev)} desde tu última visita (antes ${eur(prev)}).`; }
+    seen[pc.dataset.id] = now; store.set('mc_prices', seen);
+  }
+  // Mis cruceros: avisos de cambios de precio en ofertas guardadas + búsquedas guardadas
+  const mo2 = $('#my-offers');
+  if (mo2) getOffers().then((all) => {
+    const by = Object.fromEntries(all.map((o) => [o.i, o])); const favs = store.get('mc_offer_favs', []);
+    const changes = favs.filter((f) => by[f.id] && f.p && by[f.id].pr !== f.p).map((f) => `<li><a href="${BASE}salidas/${f.id}/"><b>${esc(f.t)}</b><span>${by[f.id].pr < f.p ? '📉 ha bajado' : '📈 ha subido'} de ${eur(f.p)} a ${eur(by[f.id].pr)}</span></a></li>`);
+    if (changes.length) mo2.insertAdjacentHTML('afterbegin', `<div class="tip"><b>Cambios de precio en tus ofertas guardadas</b><ul class="mini">${changes.join('')}</ul></div>`);
+    const ss = store.get('mc_searches', []);
+    if (ss.length) mo2.insertAdjacentHTML('beforeend', `<h3 class="h-sm">⭐ Búsquedas guardadas</h3><ul class="mini">${ss.map((x) => `<li><a href="${esc(x.u)}"><b>${esc(x.t)}</b><span>${new Date(x.at).toLocaleDateString('es-ES')}</span></a></li>`).join('')}</ul>`);
+  }).catch(() => {});
+
+  // Comparar ofertas
+  $$('.js-cmp-offer').forEach((b) => b.addEventListener('click', () => { const l = store.get('mc_cmp_offers', []).filter((x) => x !== b.dataset.id); l.unshift(b.dataset.id); store.set('mc_cmp_offers', l.slice(0, 3)); location.href = BASE + 'herramientas/comparar-ofertas/'; }));
+  const cf = $('#cmpo-form');
+  if (cf) getOffers().then((all) => {
+    const by = Object.fromEntries(all.map((o) => [o.i, o]));
+    const label = (o) => `${o.sn} · ${o.d} · ${o.n} noches · ${o.p} · ${o.pr} €`;
+    $('#cmpo-dl').innerHTML = all.slice(0, 1500).map((o) => `<option value="${esc(label(o))}">`).join('');
+    const render = () => {
+      const sel = store.get('mc_cmp_offers', []).map((i) => by[i]).filter(Boolean); const out = $('#cmpo-out');
+      if (!sel.length) { out.innerHTML = '<p class="muted">Añade al menos una oferta.</p>'; return; }
+      const best = (f, low = true) => { const v = sel.map(f); const t = low ? Math.min(...v) : Math.max(...v); return (o) => (sel.length > 1 && f(o) === t ? ' class="best"' : ''); };
+      const rows = [['Barco', (o) => esc(o.sn)], ['Salida', (o) => `${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} desde ${esc(o.p)}`], ['Noches', (o) => o.n], ['Precio desde', (o) => eur(o.pr), best((o) => o.pr)], ['Precio real p.p.', (o) => eur(o.r), best((o) => o.r)], ['Real por noche', (o) => eur(Math.round(o.r / o.n)), best((o) => o.r / o.n)], ['Nota de la oferta', (o) => `<b class="scb ${o.sc >= 85 ? 'sc-a' : o.sc >= 70 ? 'sc-b' : o.sc >= 45 ? 'sc-c' : 'sc-e'}">${o.sc}</b>`, best((o) => o.sc, false)], ['Escalas', (o) => esc(o.pts.slice(1).join(', '))]];
+      out.innerHTML = `<div class="table-wrap"><table class="cmp-t"><thead><tr><th></th>${sel.map((o) => `<th>${o.img ? `<img src="${esc(o.img)}" alt="" width="200" height="120" loading="lazy">` : ''}<a href="${BASE}salidas/${o.i}/">${esc(o.t)}</a></th>`).join('')}</tr></thead><tbody>${rows.map(([l, f, b]) => `<tr><th scope="row">${l}</th>${sel.map((o) => `<td${b ? b(o) : ''}>${f(o)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    };
+    cf.addEventListener('submit', (e) => { e.preventDefault(); const o = all.find((x) => label(x) === cf.q.value); if (!o) return; const l = store.get('mc_cmp_offers', []).filter((x) => x !== o.i); l.unshift(o.i); store.set('mc_cmp_offers', l.slice(0, 3)); cf.reset(); render(); });
+    $('.js-cmpo-clear').addEventListener('click', () => { store.set('mc_cmp_offers', []); render(); });
+    render();
+  });
+
+  // Imagen de la oferta para compartir
+  $$('.js-offer-img').forEach((b) => b.addEventListener('click', () => card((g) => {
+    const d = b.dataset;
+    g.fillStyle = '#fff'; g.font = 'bold 60px Georgia,serif'; wrap(g, d.t, 70, 230, 940, 70);
+    g.fillStyle = '#cfe0f3'; g.font = '36px system-ui,sans-serif'; g.fillText(`${d.s} · ${d.d}`, 70, 420); g.fillText(`Salida desde ${d.p}`, 70, 470);
+    g.fillStyle = '#fbbf24'; g.font = 'bold 120px system-ui,sans-serif'; g.fillText(`${(+d.pr).toLocaleString('es-ES')} €`, 70, 650);
+    g.fillStyle = '#cfe0f3'; g.font = '32px system-ui,sans-serif'; g.fillText('por persona, desde', 70, 700);
+    g.fillStyle = scColor(+d.sc); g.fillRect(70, 760, 200, 140); g.fillStyle = '#fff'; g.font = 'bold 80px system-ui,sans-serif'; g.fillText(d.sc, 100, 860);
+    g.font = 'bold 40px system-ui,sans-serif'; g.fillText(d.l, 300, 830); g.font = '28px system-ui,sans-serif'; g.fillStyle = '#cfe0f3'; g.fillText('Nota de la oferta', 300, 875);
+  }, 'oferta-crucero')));
+
+  // Prerrellenar checklist y cuenta atrás desde una oferta
+  setTimeout(() => {
+    const ck = $('#chk-opts'); if (ck) { let any = false; for (const el of ck.elements) if (qs.get(el.name) === '1') { el.checked = true; any = true; } if (any) ck.dispatchEvent(new Event('change', { bubbles: true })); }
+    const cd = $('#cd-form'); if (cd && qs.get('fecha')) { cd.ship.value = qs.get('barco') || ''; cd.date.value = qs.get('fecha'); if (cd.port) cd.port.value = qs.get('puerto') || ''; }
+  }, 60);
+
+  // Contacto (se guarda como mensaje para el panel)
+  const ctf = $('#contact-form');
+  if (ctf) ctf.addEventListener('submit', async (e) => {
+    e.preventDefault(); const m = $('.form-msg', ctf); if (ctf.website.value) return;
+    try { await api('/report', { body: { target: 'contacto:' + ctf.email.value.trim(), reason: `[${ctf.kind.value}] ${ctf.msg.value.trim()}`, page: location.pathname } }); m.textContent = '¡Gracias! Te responderemos por email.'; ctf.reset(); }
+    catch { m.textContent = 'No se ha podido enviar. Inténtalo de nuevo en un rato.'; }
+  });
+
+  // Cruceros desde el puerto más cercano
+  const PORTS_ES = [['barcelona', 'Barcelona', 41.37, 2.18], ['palma', 'Palma', 39.56, 2.63], ['valencia', 'Valencia', 39.45, -0.32], ['malaga', 'Málaga', 36.71, -4.42], ['alicante', 'Alicante', 38.34, -0.48], ['cadiz', 'Cádiz', 36.53, -6.29], ['tarragona', 'Tarragona', 41.1, 1.24], ['tenerife', 'Tenerife', 28.47, -16.24], ['gran-canaria', 'Gran Canaria', 28.14, -15.41]];
+  $$('.js-near').forEach((b) => b.addEventListener('click', () => {
+    const out = $('.near-out'); if (!navigator.geolocation) { out.textContent = 'Tu navegador no permite la ubicación.'; return; }
+    out.textContent = 'Buscando…';
+    navigator.geolocation.getCurrentPosition((p) => {
+      const d = (a, c) => Math.hypot(a - p.coords.latitude, (c - p.coords.longitude) * Math.cos((a * Math.PI) / 180));
+      const n = [...PORTS_ES].sort((x, y) => d(x[2], x[3]) - d(y[2], y[3]))[0]; location.href = `${BASE}ofertas/desde-${n[0]}/`;
+    }, () => { out.textContent = 'No hemos podido saber tu ubicación. Elige tu puerto en los botones de arriba.'; }, { timeout: 8000, maximumAge: 3600000 });
+  }));
+
+  // Volver arriba, atajo "/" para buscar y sugerencia de email mal escrito
+  const tt = $('.to-top');
+  if (tt) { addEventListener('scroll', () => { tt.hidden = scrollY < 1200; }, { passive: true }); tt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' })); }
+  addEventListener('keydown', (e) => { if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement?.tagName || '')) { const i = $('#gq'); if (i) { e.preventDefault(); i.focus(); } } });
+  const TYPO = { 'gmial.com': 'gmail.com', 'gmal.com': 'gmail.com', 'gmail.co': 'gmail.com', 'gmail.es': 'gmail.com', 'hotmal.com': 'hotmail.com', 'hotmail.co': 'hotmail.com', 'hotmial.com': 'hotmail.com', 'yahoo.co': 'yahoo.com', 'outlok.com': 'outlook.com', 'outlook.co': 'outlook.com', 'telefonica.es': 'telefonica.net' };
+  document.addEventListener('blur', (e) => {
+    const i = e.target; if (!(i instanceof HTMLInputElement) || i.type !== 'email' || !i.value.includes('@')) return;
+    const [u, dom] = i.value.trim().split('@'); const fix = TYPO[dom?.toLowerCase()]; let h = i.parentElement.querySelector('.typo');
+    if (fix) { if (!h) { h = document.createElement('button'); h.type = 'button'; h.className = 'typo link'; i.after(h); } h.textContent = `¿Querías decir ${u}@${fix}?`; h.onclick = () => { i.value = `${u}@${fix}`; h.remove(); }; } else if (h) h.remove();
+  }, true);
 })();

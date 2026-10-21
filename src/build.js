@@ -97,7 +97,8 @@ function monthRange(ms) {
   for (let i = 1; i < ms.length; i++) if (ms[i] !== ms[i - 1] + 1) { start = ms[i]; end = ms[i - 1]; }
   return `${MONTHS[start - 1]} a ${MONTHS[end - 1]}`;
 }
-const destCard = (d, extra = '') => `<a class="dest" href="/destinos/${d.slug}/"><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b><span>Mejor época: ${monthRange(d.months)}</span>${extra}</a>`;
+const DEST_PHOTO = { 'mediterraneo-occidental': 'Barcelona', 'mediterraneo-oriental': 'Santorini', caribe: 'Guadalupe', 'fiordos-noruegos': 'Bergen', 'capitales-balticas': 'Hamburgo', 'canarias-y-madeira': 'Santa Cruz de Tenerife', alaska: 'Juneau', transatlanticos: 'Nueva York' };
+const destCard = (d, extra = '') => { const ph = portPhotos[DEST_PHOTO[d.slug]]; return `<a class="dest${ph ? ' dest-ph' : ''}" href="/destinos/${d.slug}/"${ph ? ` style="--ph:url('${BASE.replace(/\/$/, '')}${ph.thumb}')"` : ''}><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b><span>Mejor época: ${monthRange(d.months)}</span>${(() => { const n = sailings.filter((x) => x.destination === d.slug).length; return n ? `<span class="dest-n">${n} ofertas</span>` : ''; })()}${extra}</a>`; };
 
 // ---------- páginas ----------
 const featured = ['msc-world-europa', 'icon-of-the-seas', 'costa-smeralda', 'costa-toscana', 'msc-grandiosa', 'wonder-of-the-seas', 'msc-euribia', 'msc-seashore'].map((k) => bySlug[k]).filter(Boolean);
@@ -105,10 +106,12 @@ const heroShip = featured.find((s) => s.photo) || featured[0];
 const totalVideos = ships.reduce((a, s) => a + s.videos.length, 0);
 
 function home() {
+  const hp = portPhotos['Barcelona'];
+  const heroBg = hp ? { ...hp, label: 'Puerto de Barcelona' } : { ...heroShip.photo, label: heroShip.name };
   const roomiest = ships.filter((s) => s.ratio && s.pax > 1500).sort((a, b) => b.ratio - a.ratio).slice(0, 5);
   const deals = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score || OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 8);
   const body = `
-<section class="hero${heroShip.photo ? ' hero-photo' : ''}"${heroShip.photo ? ` style="--hero:url('${heroShip.photo.local ? BASE.replace(/\/$/, '') : ''}${esc(heroShip.photo.large || heroShip.photo.thumb)}')"` : ''}><div class="wrap hero-in">
+<section class="hero hero-photo" style="--hero:url('${BASE.replace(/\/$/, '')}${heroBg.large}')"><div class="wrap hero-in">
   <div class="hero-copy">
     <p class="kicker">El comparador de cruceros de España</p>
     <h1>Compara y elige tu mejor crucero <em>al mejor precio</em></h1>
@@ -122,8 +125,11 @@ function home() {
     <div class="chips"><a class="chip" href="/navieras/msc/">MSC</a><a class="chip" href="/navieras/costa/">Costa</a><a class="chip" href="/navieras/royal-caribbean/">Royal Caribbean</a><a class="chip" href="/puertos/barcelona/">Desde Barcelona</a><a class="chip" href="/guias/crucero-con-bebe/">Con bebé</a><a class="chip" href="/destinos/canarias-y-madeira/">Canarias en invierno</a></div>
   </div>
   <div class="hero-art" aria-hidden="true">${heroShip.photo ? '' : shipSvg(heroShip, 520)}</div>
-</div>${heroShip.photo ? `<p class="credit hero-credit">${esc(heroShip.name)} · Foto: ${esc(heroShip.photo.author || '')} (${esc(heroShip.photo.license || '')}), Wikimedia Commons</p>` : ''}</section>
+</div><p class="credit hero-credit">${esc(heroBg.label)} · Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons</p></section>
 
+${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas →</a></div><div class="chips"><a class="chip" href="/ofertas/chollos/">🔥 Chollos</a><a class="chip" href="/ultima-hora/">⏱️ Última hora</a><a class="chip" href="/ofertas/bajadas/">📉 Han bajado</a><a class="chip" href="/ofertas/nuevas/">🆕 Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid">${deals.map(sailingCard).join('')}</div>
+<p class="near"><button class="btn btn-ghost btn-sm js-near" type="button">📍 Cruceros desde el puerto más cercano a mí</button> <span class="near-out muted small" aria-live="polite"></span></p></section>` : ''}
+${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date) > new Date()).sort((a, b) => OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 4); return mini.length ? `<section class="wrap block"><div class="block-h"><h2>Minicruceros para un fin de semana o puente</h2><a href="/ofertas/minicruceros/">Ver todos →</a></div><div class="grid">${mini.map(sailingCard).join('')}</div></section>` : ''; })()}
 <section class="wrap block"><div class="sec-h"><h2>Ranking ${new Date().getFullYear()}: los mejores barcos con nota de 0 a 100</h2><a href="/rankings/">Ver ranking completo →</a></div>
 <p class="muted">Higiene oficial (CDC), espacio, tripulación, modernidad y opiniones verificadas. <a href="/metodologia/">Cómo puntuamos</a> · <button class="link-btn js-surprise" type="button">🎲 Sorpréndeme</button></p>
 <div class="chips">${BEST_FOR.map(([slug, , t]) => `<a class="chip" href="/rankings/${slug}/">${esc(t.replace('Los mejores ', '').replace('cruceros ', ''))}</a>`).join('')}</div>
@@ -138,7 +144,6 @@ function home() {
 
 <section class="wrap block mine" hidden><div class="block-h"><h2>Tus barcos</h2><a href="/mis-cruceros/">Mis cruceros →</a></div><div class="grid mine-grid"></div></section>
 
-${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas →</a></div><div class="grid">${deals.map(sailingCard).join('')}</div></section>` : ''}
 
 <section class="wrap block" id="videos"><div class="block-h"><h2>Los barcos más buscados, en vídeo</h2><a href="/barcos/">Ver los ${ships.length} barcos →</a></div>
 <div class="grid">${featured.map((s) => shipCard(s)).join('')}</div></section>
@@ -266,11 +271,13 @@ function shipPage(s) {
       <div><b>${fmt(s.pax)}</b><span>Pasajeros</span></div>
       <div><b>${dec(s.ratio)}</b><span>Espacio · ${spaceLabel(s.ratio)}</span></div>
     </div>
-    <div class="actions"><a class="btn" href="#reservar">Comparar precios</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
+    ${s.sailings.length ? `<p class="from-price">Ofertas desde <b>${eur(Math.min(...s.sailings.map(OFF.minPrice)))}</b> por persona · <a href="#salidas">${s.sailings.length} salidas</a></p>` : ''}
+    <div class="actions"><a class="btn" href="${s.sailings.length ? '#salidas' : '#reservar'}">${s.sailings.length ? 'Ver ofertas' : 'Comparar precios'}</a><a class="btn btn-ghost" href="#seguir">🔔 Seguir barco</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
   </div>
   <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.thumb)}"${s.photo.hi ? ` srcset="${esc(s.photo.thumb)} 640w, ${esc(s.photo.large)} 1280w" sizes="(max-width: 900px) 100vw, 560px"` : ''} alt="${esc(s.name)}" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
 </div></section>
 
+<nav class="tabs-nav wrap" aria-label="Secciones de la ficha"><a href="#nota">Nota</a>${s.sailings.length ? '<a href="#salidas">Ofertas</a>' : ''}<a href="#reservar">Dónde reservar</a><a href="#videos">Vídeos</a><a href="#foro">Opiniones</a><a href="#camarotes">Camarotes</a><a href="#ficha">Ficha técnica</a></nav>
 <div class="wrap ship-grid">
 <div class="ship-main">
   <section class="block forwhom"><h2>¿Es para ti?</h2><div class="fw"><div><h3 class="h-sm">👍 Ideal para</h3><ul>${fw.yes.map((x) => `<li>${esc(cap(x))}</li>`).join('')}</ul></div>${fw.no.length ? `<div><h3 class="h-sm">👎 Mejor no si…</h3><ul>${fw.no.map((x) => `<li>${esc(cap(x))}</li>`).join('')}</ul></div>` : ''}</div><p class="muted small">Orientación basada en el tamaño, la gama, la edad y el espacio del barco. Las opiniones de la comunidad, más abajo.</p></section>
@@ -290,7 +297,7 @@ function shipPage(s) {
   <div class="tip"><b>Antes de pagar:</b> calcula el <a href="/herramientas/precio-real/?linea=${s.lineSlug}">precio real con propinas y extras</a> y guarda tu reserva en la <a href="/herramientas/alerta-precio/?barco=${s.slug}">alerta de bajada de precio</a>.</div>
   <p class="muted small">🔗 Algunos enlaces son de afiliado: si reservas, el vendedor nos paga una comisión y <b>tú pagas lo mismo</b>. La comisión nunca cambia la nota ni el orden. <a href="/afiliacion/">Más info</a>.</p>
   <details class="book-help"><summary>🙋 ¿Prefieres que te ayudemos a reservarlo?</summary><p class="small">Déjanos tu email y la fecha aproximada: te mandamos las mejores opciones de las agencias para el ${esc(s.name)}.</p>${leadForm('reserva:' + s.slug, 'Quiero ayuda', '<label class="sr" for="bh-' + s.slug + '">Fecha aproximada</label><input id="bh-' + s.slug + '" type="month" name="month">')}</details>
-  <form class="follow" data-thread="barco:${s.slug}"><label><span>🔔 Avísame de ofertas del ${esc(s.name)}</span><input type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></label><button class="btn btn-sm" type="submit">Seguir barco</button><p class="form-msg" role="status" aria-live="polite"></p></form>
+  <form class="follow" id="seguir" data-thread="barco:${s.slug}"><label><span>🔔 Avísame de ofertas del ${esc(s.name)}</span><input type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></label><button class="btn btn-sm" type="submit">Seguir barco</button><p class="form-msg" role="status" aria-live="polite"></p></form>
   </section>
 
   <section id="videos" class="block"><h2>Vídeos del ${esc(s.name)}</h2>
@@ -304,7 +311,7 @@ function shipPage(s) {
   <div class="cabin-results" aria-live="polite"></div>
   <p class="muted small">Suelen dar problemas los camarotes bajo la discoteca o el teatro, junto a zonas de servicio o con vistas tapadas por botes salvavidas. <a href="/guias/como-elegir-camarote/">Guía para elegir camarote</a>.</p></section>
 
-  <section class="block"><h2>Ficha técnica</h2>
+  <section class="block" id="ficha"><h2>Ficha técnica</h2>
   <table class="spec"><tbody>
     <tr><th scope="row">Naviera</th><td><a href="/navieras/${s.lineSlug}/">${esc(L.short)}</a> · ${TIER[s.tier]}</td></tr>
     <tr><th scope="row">En servicio desde</th><td>${s.year} (${s.age <= 0 ? 'nuevo' : s.age === 1 ? '1 año' : s.age + ' años'})</td></tr>
@@ -334,6 +341,7 @@ function shipPage(s) {
 <aside class="ship-side">
   <div class="side-card"><h2>Comparte este barco</h2>${shareBar(`Mira el ${s.name} en MejorCrucero:`, page)}</div>
   ${s.sc != null ? `<div class="side-card"><h2>¿Tienes un blog o una agencia?</h2><p class="small">Pon la nota del ${esc(s.name)} en tu web:</p><textarea class="embed-code" readonly rows="3" aria-label="Código para insertar">&lt;iframe src="${SITE}/embed/${s.slug}/" width="300" height="120" style="border:0" title="MejorCrucero Score ${esc(s.name)}" loading="lazy"&gt;&lt;/iframe&gt;</textarea><button class="btn btn-sm btn-ghost js-copy-embed" type="button">Copiar código</button></div>` : ''}
+  ${(() => { const sis = ships.filter((o) => o.slug !== s.slug && o.line === s.line && Math.abs(o.gt - s.gt) / s.gt <= 0.015); return sis.length ? `<div class="side-card"><h2>Barcos gemelos</h2><p class="small">Misma naviera y tamaño casi idéntico: suelen ser de la misma clase.</p><ul class="mini">${sis.slice(0, 4).map((o) => `<li><a href="/herramientas/comparar/?b=${s.slug},${o.slug}"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${o.year} · comparar →</span></a></li>`).join('')}</ul></div>` : ''; })()}
   <div class="side-card"><h2>Barcos parecidos</h2><ul class="mini">${similar.map((o) => `<li><a href="/barcos/${o.slug}/"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${esc(o.lineShort)} · ${o.year} · ${fmt(o.gt)} GT</span></a></li>`).join('')}</ul>${s.sc != null && similar[0] ? `<a class="small" href="/herramientas/comparar/?b=${s.slug},${similar[0].slug}">Comparar con el ${esc(similar[0].name)} →</a>` : ''}</div>
   <div class="side-card"><h2>Guías útiles</h2><ul class="mini"><li><a href="/guias/como-elegir-camarote/"><b>Cómo elegir camarote</b><span>Y cuáles evitar</span></a></li><li><a href="/guias/propinas-y-cargos-de-servicio/"><b>Propinas y cargos</b><span>Cuánto se paga de verdad</span></a></li><li><a href="/guias/cuando-reservar-crucero/"><b>Cuándo reservar</b><span>Para pagar menos</span></a></li></ul></div>
 </aside>
@@ -572,6 +580,7 @@ const TOOLS = [
   ['alerta-precio', '🔔', 'Alerta de bajada de precio', 'Vigila tu reserva y genera el email para reclamar.'],
   ['que-crucero', '🧭', '¿Qué crucero es para mí?', 'Test de 7 preguntas con barcos y destinos recomendados.'],
   ['comparar', '⚖️', 'Comparar barcos', 'Hasta 3 barcos frente a frente.'],
+  ['comparar-ofertas', '⚖️', 'Comparar ofertas', 'Hasta 3 ofertas reales lado a lado, con precio real y nota.'],
   ['comparar-salidas', '📅', 'Comparar salidas', 'Dos salidas lado a lado, por precio por noche.'],
   ['checklist', '✅', 'Checklist del crucero', 'Maleta y documentos según tu itinerario.'],
   ['cuenta-atras', '⏳', 'Cuenta atrás y recordatorios', 'Días que faltan y avisos en tu calendario.'],
@@ -904,6 +913,30 @@ function admin() {
   return layout({ title: 'Panel de administración', desc: 'Panel interno.', url: '/admin/', body, noindex: true, crumbs: [['Inicio', '/'], ['Panel', '/admin/']] });
 }
 
+function trustPage() {
+  const body = `<section class="wrap block page-h narrow"><h1>Por qué fiarte de MejorCrucero</h1><p class="lead-p">Somos un comparador, no una agencia. Estas son nuestras reglas:</p>
+  <ol class="trust"><li><b>Precios reales y con fuente.</b> Leemos los precios de las webs oficiales de las navieras dos veces al día y mostramos la fecha y hora de cada comprobación.</li>
+  <li><b>Precio real, no solo el "desde".</b> Sumamos tasas portuarias y cuota de servicio para que compares lo que vas a pagar de verdad.</li>
+  <li><b>Notas con fórmula pública.</b> La nota del barco y la nota de cada oferta se calculan con datos que puedes comprobar. <a href="/metodologia/">Ver metodología</a>.</li>
+  <li><b>Las comisiones no compran posiciones.</b> Algunos enlaces son de afiliado (Booking, Holiday Autos…). Nunca cambian una nota ni el orden de un ranking. <a href="/afiliacion/">Cómo ganamos dinero</a>.</li>
+  <li><b>Nada inventado.</b> Si no tenemos un dato, lo decimos. Preferimos "sin datos" a un número inventado.</li>
+  <li><b>Opiniones de verdad.</b> Las opiniones verificadas llevan insignia y los mensajes ofensivos se retiran automáticamente.</li></ol>
+  <h2 id="correcciones">Política de correcciones</h2><p>Si ves un precio, un dato o una foto incorrectos, pulsa "Reportar un error" en la página o <a href="/contacto/">escríbenos</a>. Lo revisamos con la fuente delante y corregimos en menos de 48 horas.</p></section>`;
+  return layout({ title: 'Por qué fiarte de MejorCrucero', desc: 'Cómo comprobamos los precios, cómo calculamos las notas y cómo ganamos dinero sin que afecte a los rankings.', url: '/por-que-fiarte/', body, crumbs: [['Inicio', '/'], ['Por qué fiarte', '/por-que-fiarte/']] });
+}
+function contactPage() {
+  const body = `<section class="wrap block page-h narrow"><h1>Contacto</h1><p class="lead-p">¿Una duda, un error en un precio o quieres colaborar? Escríbenos y te respondemos por email.</p>
+  <form class="calc contact-form" id="contact-form"><label><span>Tu email</span><input type="email" name="email" required autocomplete="email"></label><label><span>Motivo</span><select name="kind"><option>Duda sobre un crucero</option><option>Error en un precio o dato</option><option>Colaboración / agencias</option><option>Otro</option></select></label><label class="f-wide"><span>Mensaje</span><textarea name="msg" rows="5" maxlength="2000" required></textarea></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Enviar</button><p class="form-msg" role="status" aria-live="polite"></p></form>
+  <p class="muted small">Titular: ${LEGAL_OWNER}.</p></section>`;
+  return layout({ title: 'Contacto', desc: 'Contacta con MejorCrucero: dudas, errores en precios y colaboraciones.', url: '/contacto/', body, crumbs: [['Inicio', '/'], ['Contacto', '/contacto/']] });
+}
+function toolCompareOffers() {
+  const body = `<section class="wrap block page-h"><h1>Comparar ofertas de cruceros</h1><p class="lead-p">Pon dos o tres ofertas lado a lado: precio real, precio por noche, escalas y nota.</p>
+  <form class="calc" id="cmpo-form"><label class="f-wide"><span>Busca una oferta (barco, destino o puerto)</span><input name="q" list="cmpo-dl" autocomplete="off" placeholder="Ej.: Costa Smeralda abril"></label><datalist id="cmpo-dl"></datalist><button class="btn" type="submit">Añadir</button><button class="btn btn-ghost js-cmpo-clear" type="button">Vaciar</button></form>
+  <div id="cmpo-out" aria-live="polite"><p class="muted">Añade ofertas desde aquí o con el botón "Comparar con otra oferta" de cada oferta.</p></div></section>`;
+  return layout({ title: 'Comparar ofertas de cruceros', desc: 'Compara ofertas de cruceros lado a lado: precio real con tasas, precio por noche, escalas y nota de la oferta.', url: '/herramientas/comparar-ofertas/', body, crumbs: toolCrumbs('Comparar ofertas', '/herramientas/comparar-ofertas/') });
+}
+
 // ---------- guías ----------
 function guidesIndex() {
   const body = `<section class="wrap block page-h"><h1>Guías para cruceristas</h1><p class="lead-p">Todo lo que nos habría gustado saber antes de nuestro primer crucero.</p>
@@ -924,6 +957,7 @@ function guidePage(g) {
   <div class="prose">${g.body}</div>
   <p>${reportBtn('guia:' + g.slug)}</p>
   ${shareBar(g.title, `/guias/${g.slug}/`)}
+  ${(() => { const top = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 3); return top.length ? `<aside class="block"><h2>Chollos de cruceros de hoy</h2><div class="grid grid-3">${top.map(sailingCard).join('')}</div><p><a href="/ofertas/">Ver todas las ofertas →</a></p></aside>` : ''; })()}
   <aside class="block"><h2>Sigue leyendo</h2><div class="grid grid-3">${others.map((o) => `<a class="card guide" href="/guias/${o.slug}/"><span class="guide-e">${o.emoji}</span><h3>${esc(o.title)}</h3></a>`).join('')}</div></aside>
   ${forumBlock('guia:' + g.slug, 'Preguntas sobre esta guía', { tabs: [['question', 'Preguntas'], ['comment', 'Comentarios']] })}
   <section class="cta-band cta-inline"><div class="cta-in"><div><h2>Chollos de cruceros en tu email</h2><p>Una vez por semana, con el precio real calculado.</p></div>${leadForm('newsletter-guia-' + g.slug)}</div></section></article>`;
@@ -1018,6 +1052,9 @@ write('comunidad/perfil/index.html', profileShell());
 write('comunidad/ranking/index.html', leaderboard());
 write('mis-cruceros/index.html', myCruises());
 write('admin/index.html', admin());
+write('por-que-fiarte/index.html', trustPage());
+write('contacto/index.html', contactPage());
+write('herramientas/comparar-ofertas/index.html', toolCompareOffers());
 write('guias/index.html', guidesIndex());
 GUIDES.forEach((g) => write(`guias/${g.slug}/index.html`, guidePage(g)));
 write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));

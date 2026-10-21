@@ -156,7 +156,7 @@ export function forumBlock(thread, title, opts = {}) {
 
 const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/rankings/', 'Ranking'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
 
-export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null }) {
+export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null }) {
   pages.push({ url, noindex });
   const fullTitle = url === '/' ? title : title.length > 62 ? title : `${title} | MejorCrucero`;
   const ld = [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'MejorCrucero', url: SITE, logo: SITE + '/icon-512.png', sameAs: [CONFIG.happyLowCost], founder: { '@type': 'Person', name: CONFIG.author.name } }, ...schema];
@@ -179,6 +179,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
 <script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}
 <link rel="stylesheet" href="/assets/style.css?v=${BUILD_DATE}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 </head>
@@ -192,7 +193,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button>
 <a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">🔔 Alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
-${[['/', 'Inicio'], ...NAV, ['/ofertas/', 'Ofertas'], ['/puertos/', 'Puertos'], ['/rankings/', 'Ranking 0-100'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
+${[['/', 'Inicio'], ['/ofertas/chollos/', '🔥 Chollos de hoy'], ...NAV, ['/ofertas/', 'Ofertas'], ['/puertos/', 'Puertos'], ['/rankings/', 'Ranking 0-100'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
 </ul></nav></details>
 </div></header>
 ${crumbHtml}
@@ -203,10 +204,12 @@ ${crumbHtml}
 <dialog class="modal" id="report-modal" aria-labelledby="rep-h"><form method="dialog" class="modal-x"><button aria-label="Cerrar">×</button></form><h2 id="rep-h">Reportar un error</h2><form class="report-form"><label><span>¿Qué dato está mal y cuál es el correcto?</span><textarea name="reason" rows="4" required maxlength="1000"></textarea></label><button class="btn" type="submit">Enviar</button><p class="form-msg" role="status" aria-live="polite"></p></form></dialog>
 <footer class="foot"><div class="wrap foot-in">
 <div><a class="logo logo-foot" href="/"><span>Mejor<b>Crucero</b></span></a><p>El comparador de cruceros en español hecho por cruceristas: barcos, vídeos, precio real y comunidad. De los creadores de <a href="${CONFIG.happyLowCost}" target="_blank" rel="noopener">Happy Low Cost</a>, más de 400.000 viajeros en Facebook.</p></div>
+<div><h2>Ofertas</h2><ul><li><a href="/ofertas/chollos/">Chollos</a></li><li><a href="/ultima-hora/">Última hora</a></li><li><a href="/ofertas/desde-barcelona/">Cruceros desde Barcelona</a></li><li><a href="/ofertas/desde-valencia/">Cruceros desde Valencia</a></li><li><a href="/ofertas/desde-malaga/">Cruceros desde Málaga</a></li><li><a href="/ofertas/canarias-y-madeira/">Cruceros por Canarias</a></li><li><a href="/ofertas/mediterraneo-oriental/">Islas griegas</a></li><li><a href="/ofertas/minicruceros/">Minicruceros</a></li></ul></div>
 <div><h2>Explorar</h2><ul><li><a href="/barcos/">Todos los barcos</a></li><li><a href="/destinos/">Destinos</a></li><li><a href="/meses/">Cruceros por mes</a></li><li><a href="/comparativas/">Comparativas</a></li><li><a href="/rankings/">Rankings</a></li><li><a href="/puertos/">Puertos</a></li><li><a href="/excursiones/">Excursiones</a></li></ul></div>
 <div><h2>Herramientas</h2><ul><li><a href="/herramientas/precio-real/">Precio real</a></li><li><a href="/herramientas/alerta-precio/">Alerta de precio</a></li><li><a href="/herramientas/asistente/">Asistente IA</a></li><li><a href="/herramientas/que-crucero/">¿Qué crucero es para mí?</a></li><li><a href="/herramientas/comparar/">Comparar barcos</a></li><li><a href="/herramientas/checklist/">Checklist</a></li><li><a href="/herramientas/">Todas</a></li></ul></div>
-<div><h2>MejorCrucero</h2><ul><li><a href="/sobre-nosotros/">Quiénes somos</a></li><li><a href="/afiliacion/">Cómo ganamos dinero</a></li><li><a href="/newsletter/">Newsletter</a></li><li><a href="/creadores/">Programa de creadores</a></li><li><a href="/aviso-legal/">Aviso legal</a></li><li><a href="/privacidad/">Privacidad</a></li><li><a href="/cookies/">Cookies</a></li></ul></div>
+<div><h2>MejorCrucero</h2><ul><li><a href="/sobre-nosotros/">Quiénes somos</a></li><li><a href="/por-que-fiarte/">Por qué fiarte</a></li><li><a href="/contacto/">Contacto</a></li><li><a href="/afiliacion/">Cómo ganamos dinero</a></li><li><a href="/newsletter/">Newsletter</a></li><li><a href="/creadores/">Programa de creadores</a></li><li><a href="/aviso-legal/">Aviso legal</a></li><li><a href="/privacidad/">Privacidad</a></li><li><a href="/cookies/">Cookies</a></li></ul></div>
 </div><p class="wrap fine">© ${new Date().getFullYear()} MejorCrucero.com · Algunos enlaces son de afiliado: si reservas a través de ellos podemos recibir una comisión, sin coste extra para ti. Los datos técnicos proceden de fuentes públicas citadas en cada página.</p></footer>
+<button class="to-top" type="button" aria-label="Volver arriba" hidden>↑</button>
 <script src="/assets/v3.js?v=${BUILD_DATE}" defer></script>
 <script src="/assets/app.js?v=${BUILD_DATE}" defer></script>
 ${CONFIG.cfBeacon ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CONFIG.cfBeacon}"}'></script>` : ''}
