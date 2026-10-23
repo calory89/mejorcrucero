@@ -264,6 +264,19 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   }
 
   // Páginas de listado: destino, puerto, mes, naviera y las mejores (por nota)
+  // Calendario de calor: precio más bajo por día de salida en los próximos meses (cada día enlaza a la salida más barata)
+  function heatmap(list, months = 4) {
+    const by = {}; for (const x of list) { const p = minPrice(x); if (!by[x.date] || p < minPrice(by[x.date])) by[x.date] = x; }
+    const yms = [...new Set(Object.keys(by).map((d) => d.slice(0, 7)))].sort().slice(0, months);
+    if (yms.length < 2) return '';
+    const vals = Object.values(by).map(minPrice).sort((a, b) => a - b), q = (f) => vals[Math.floor(f * (vals.length - 1))];
+    const lvl = (v) => (v <= q(0.25) ? 'h1' : v <= q(0.5) ? 'h2' : v <= q(0.75) ? 'h3' : 'h4');
+    const grid = (ym) => { const [Y, M] = ym.split('-').map(Number); const first = (new Date(Date.UTC(Y, M - 1, 1)).getUTCDay() + 6) % 7, days = new Date(Date.UTC(Y, M, 0)).getUTCDate();
+      let cells = Array.from({ length: first }, () => '<span></span>');
+      for (let d = 1; d <= days; d++) { const k = `${ym}-${String(d).padStart(2, '0')}`, x = by[k]; cells.push(x ? `<a class="${lvl(minPrice(x))}" href="${url(x)}" title="${d} ${MES[M - 1]}: desde ${eur(minPrice(x))} (${esc(shipName(x))}, ${x.nights} noches)"><b>${d}</b><small>${minPrice(x)}</small></a>` : `<span class="h0">${d}</span>`); }
+      return `<div class="hm-m"><h3 class="h-sm">${cap(MES[M - 1])} ${Y}</h3><div class="hm-g"><i>L</i><i>M</i><i>X</i><i>J</i><i>V</i><i>S</i><i>D</i>${cells.join('')}</div></div>`; };
+    return `<section class="wrap block"><h2>Calendario de precios</h2><p class="muted small">Precio más bajo por persona de las salidas de cada día (en €). Más verde, más barato. Toca un día para ver esa salida.</p><div class="hm">${yms.map(grid).join('')}</div></section>`;
+  }
   function monthTable(list) {
     const by = {}; for (const x of list) { const k = x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
     const rows = Object.entries(by).sort().map(([k, l]) => { const v = l.map(ppn).sort((a, b) => a - b); return [k, l.length, v[Math.floor(v.length / 2)], Math.min(...l.map(minPrice))]; });
@@ -301,8 +314,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     <p class="small"><button class="btn btn-ghost btn-sm js-save-search" type="button">⭐ Guardar esta búsqueda</button> <button class="btn btn-ghost btn-sm js-share-search" type="button">📤 Compartir esta búsqueda</button> <button class="btn btn-ghost btn-sm js-reset-filters" type="button" hidden>✖ Quitar filtros</button> <button class="btn btn-ghost btn-sm js-surprise-offer" type="button">🎲 Sorpréndeme con un chollo</button></p>
     ${extra}</section>
     <section class="wrap block"><h2 class="sr">Listado de ofertas</h2>${list.length ? `<div class="grid" id="offer-grid" data-all="${sorted.map((x) => x.id).join(',')}">${sorted.slice(0, 48).map(cardFull).join('')}</div>` : `<div class="tip">No hay salidas con precio ahora mismo. Crea una alerta y te avisamos.</div>${leadForm('ofertas-vacio', 'Avisadme')}`}</section>
-    ${list.length > 5 ? `<section class="wrap block">${monthTable(list)}</section>` : ''}${after}${hubFaq(list, what)}
-    <section class="wrap block"><p class="muted small">Precios por persona de las webs oficiales de las navieras, actualizados dos veces al día. Precio real = tarifa + tasas + cuota de servicio. <a href="/metodologia/#ofertas">Cómo calculamos la nota del precio</a>.</p></section>`;
+    ${list.length > 30 ? heatmap(list) : ''}${list.length > 5 ? `<section class="wrap block">${monthTable(list)}</section>` : ''}${after}${hubFaq(list, what)}
+    <section class="wrap block"><p class="muted small">Precios por persona de las webs oficiales de las navieras, actualizados dos veces al día. Precio real = tarifa + tasas + cuota de servicio. Por defecto ordenamos por nota del precio y, a igualdad, por el más barato; las comisiones nunca cambian el orden. <a href="/metodologia/#ofertas">Cómo calculamos la nota del precio</a>.</p></section>`;
     return layout({ title, desc: `${title}: ${list.length} salidas comparadas con precio real (tasas incluidas) y nota de 0 a 100. Elige tu mejor crucero al mejor precio.`, url: u, body, crumbs,
       schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: sorted.slice(0, 20).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + url(x), name: titleOf(x) })) }] });
   }

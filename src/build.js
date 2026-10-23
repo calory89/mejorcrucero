@@ -964,11 +964,30 @@ function guidesIndex() {
   return layout({ title: 'Guías de cruceros: consejos para acertar y pagar menos', desc: 'Guías prácticas de cruceros: primer crucero, camarotes, propinas, bebé, documentación, mareo, excursiones, destinos y navieras.', url: '/guias/', body, crumbs: [['Inicio', '/'], ['Guías', '/guias/']] });
 }
 
+// Enlaza la primera aparición de los términos del glosario dentro del texto de una guía (nunca dentro de enlaces o etiquetas)
+function linkGlossary(html, max = 6) {
+  const terms = GLOSSARY.map(([t, d]) => [t.split(/ \(| \//)[0].trim(), slugify(t), d]).filter(([w]) => w.length >= 5 && !/^(naviera|puerto|camarote|crucero|escala)$/i.test(w)).sort((a, b) => b[0].length - a[0].length);
+  const done = new Set(); let n = 0, inA = 0;
+  return html.split(/(<[^>]+>)/).map((part) => {
+    if (part.startsWith('<')) { if (/^<a[\s>]/i.test(part)) inA++; else if (/^<\/a>/i.test(part)) inA = Math.max(0, inA - 1); return part; }
+    if (inA || n >= max) return part;
+    for (const [w, id, d] of terms) {
+      if (done.has(id) || n >= max) continue;
+      const re = new RegExp(`(^|[^\\p{L}])(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(?![\\p{L}])`, 'iu');
+      const m = re.exec(part); if (!m) continue;
+      const at = m.index + m[1].length;
+      part = part.slice(0, at) + `<a class="gl" href="/herramientas/glosario/#${id}" title="${esc(d.slice(0, 140))}">${m[2]}</a>` + part.slice(at + m[2].length);
+      done.add(id); n++;
+      break; // un término por fragmento de texto, para no anidar enlaces
+    }
+    return part;
+  }).join('');
+}
 function guidePage(g) {
   const others = GUIDES.filter((o) => o.slug !== g.slug).slice(0, 3);
   const body = `<article class="wrap block prose-wrap"><header class="page-h"><span class="guide-e big-e">${g.emoji}</span><h1>${esc(g.title)}</h1><p class="lead-p">${esc(g.desc)}</p>
   <p class="byline">Por <a href="/sobre-nosotros/">${esc(CONFIG.author.name)}</a>, ${esc(CONFIG.author.role.charAt(0).toLowerCase() + CONFIG.author.role.slice(1))} · Actualizado: ${BUILD_DATE}</p></header>
-  <div class="prose">${g.body}</div>
+  <div class="prose">${linkGlossary(g.body)}</div>
   <p>${reportBtn('guia:' + g.slug)}</p>
   ${shareBar(g.title, `/guias/${g.slug}/`)}
   ${(() => { const top = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 3); return top.length ? `<aside class="block"><h2>Chollos de cruceros de hoy</h2><div class="grid grid-3">${top.map(sailingCard).join('')}</div><p><a href="/ofertas/">Ver todas las ofertas →</a></p></aside>` : ''; })()}
@@ -1099,6 +1118,24 @@ write('data/config.json', JSON.stringify({ api: CONFIG.api, ab: CONFIG.ab, fx })
 // sitemap + robots + service worker
 const sm = pages.filter((p) => !p.noindex).map((p) => `<url><loc>${SITE}${p.url}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join('');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sm}</urlset>`);
+// Datos abiertos: CSV del observatorio y página que explica los ficheros
+{
+  const med = (a) => { const v = [...a].sort((x, y) => x - y); return v.length ? v[Math.floor(v.length / 2)] : ''; };
+  const rows = [['destino', 'mes', 'salidas', 'mediana_precio_real_noche_eur', 'precio_minimo_pp_eur']];
+  const by = {}; for (const x of sailings) { const k = (x.destination || 'otros') + '|' + x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
+  for (const [k, l] of Object.entries(by).sort()) { const [d, m] = k.split('|'); rows.push([d, m, l.length, med(l.map(OFF.ppn)), Math.min(...l.map(OFF.minPrice))]); }
+  write('data/observatorio.csv', rows.map((r) => r.join(',')).join('\n') + '\n');
+  const body = `<section class="wrap block page-h narrow"><h1>Datos abiertos de MejorCrucero</h1><p class="lead-p">Los precios que publicamos, en ficheros que puedes reutilizar citando a MejorCrucero con un enlace. Se regeneran en cada actualización de precios.</p>
+  <div class="table-wrap"><table class="spec"><thead><tr><th>Fichero</th><th>Qué contiene</th><th>Formato</th></tr></thead><tbody>
+  <tr><td><a href="/data/ofertas.json">ofertas.json</a></td><td>Todas las salidas futuras: barco, fecha, noches, puerto, escalas, precio desde, precio real y nota del precio (${sailings.length} salidas)</td><td>JSON</td></tr>
+  <tr><td><a href="/data/chollos.json">chollos.json</a></td><td>Las 50 salidas con mejor nota del precio</td><td>JSON</td></tr>
+  <tr><td><a href="/data/observatorio.csv">observatorio.csv</a></td><td>Por destino y mes: salidas, mediana del precio real por noche y precio mínimo</td><td>CSV</td></tr>
+  <tr><td><a href="/ofertas/feed.xml">feed.xml</a></td><td>Chollos para lectores RSS</td><td>RSS</td></tr>
+  <tr><td><a href="/llms.txt">llms.txt</a></td><td>Resumen de la web para buscadores con IA</td><td>Texto</td></tr>
+  </tbody></table></div>
+  <p class="muted small">Precios por persona en euros, de las webs oficiales de las navieras. Precio real = tarifa + tasas + cuota de servicio. <a href="/metodologia/#ofertas">Metodología</a> · <a href="/ofertas/observatorio/">Observatorio de precios</a>.</p></section>`;
+  write('datos/index.html', layout({ title: 'Datos abiertos de precios de cruceros', desc: 'Descarga los precios de cruceros de MejorCrucero en JSON, CSV y RSS para reutilizarlos citando la fuente.', url: '/datos/', body, crumbs: [['Inicio', '/'], ['Datos abiertos', '/datos/']] }));
+}
 // Resumen legible para buscadores con IA: qué es la web, cómo se calculan las notas y dónde están los datos
 write('llms.txt', `# MejorCrucero\n\n> Comparador de cruceros en español: precio real (tarifa + tasas + cuota de servicio), nota del precio de 0 a 100 frente a cruceros parecidos y nota del barco (MejorCrucero Score) con datos públicos.\n\n- [Ofertas](${SITE}/ofertas/): ${sailings.length} salidas con precio real\n- [Ranking de barcos](${SITE}/rankings/): ${ships.filter((s) => s.sc != null).length} barcos con nota\n- [Metodología](${SITE}/metodologia/)\n- [Observatorio de precios](${SITE}/ofertas/observatorio/)\n- [Datos de ofertas en JSON](${SITE}/data/ofertas.json)\n- [Cómo ganamos dinero](${SITE}/afiliacion/)\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nDisallow: /admin/\nDisallow: /embed/\nSitemap: ${SITE}/sitemap.xml\n`);

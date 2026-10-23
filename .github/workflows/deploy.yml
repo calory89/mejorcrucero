@@ -50,6 +50,8 @@ jobs:
           BASE: ${{ vars.BASE || '/mejorcrucero/' }}
           CNAME: ${{ vars.CNAME }}
         run: node src/build.js
+      - name: Prueba rápida del resultado
+        run: node test/smoke.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
