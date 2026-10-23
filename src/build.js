@@ -230,6 +230,16 @@ function shipsIndex() {
   return layout({ title: 'Todos los barcos de crucero: fichas, vídeos y comparador', desc: `Fichas de ${ships.length} barcos de crucero de MSC, Costa, Royal Caribbean, Norwegian y más: tamaño, año, pasajeros, espacio, vídeos y foro.`, url: '/barcos/', body, crumbs: [['Inicio', '/'], ['Barcos', '/barcos/']] });
 }
 
+// Dónde estará el barco cada mes (solo con sus salidas publicadas) y cuántas salen de puertos españoles
+const MESES_C = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sept', 'oct', 'nov', 'dic'];
+function shipCalendar(s) {
+  const by = {}; for (const x of s.sailings) { const k = x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
+  const rows = Object.entries(by).sort();
+  if (rows.length < 2) return '';
+  const ES = ['barcelona', 'palma', 'valencia', 'malaga', 'alicante', 'cadiz', 'tarragona', 'bilbao', 'vigo', 'tenerife', 'gran-canaria'];
+  const fromEs = s.sailings.filter((x) => ES.includes(x.depart_port_slug)).length;
+  return `<h3 class="h-sm">Dónde estará el ${esc(s.name)}</h3><p class="muted small">${fromEs ? `${fromEs} de sus ${s.sailings.length} salidas publicadas empiezan en un puerto español.` : 'Ninguna de sus salidas publicadas empieza en un puerto español.'}</p><div class="table-wrap"><table class="rank-t"><thead><tr><th>Mes</th><th>Zona</th><th>Sale de</th><th>Salidas</th><th>Desde</th></tr></thead><tbody>${rows.map(([k, l]) => `<tr><td>${MESES_C[+k.slice(5) - 1]} ${k.slice(0, 4)}</td><td>${esc([...new Set(l.map((x) => OFF.destName(x.destination, x)))].join(', '))}</td><td>${esc([...new Set(l.map((x) => x.depart_port))].slice(0, 3).join(', '))}</td><td>${l.length}</td><td>${eur(Math.min(...l.map(OFF.minPrice)))}</td></tr>`).join('')}</tbody></table></div>`;
+}
 const sc_prov = (s) => (s.score?.coverage ?? 100) < 70;
 function scoreSection(s) {
   if (s.sc == null) return `<section class="block" id="nota"><h2>MejorCrucero Score</h2><p class="muted">Todavía no tenemos datos públicos suficientes para dar una nota fiable a este barco (necesitamos al menos el espacio por pasajero y otros dos indicadores). Preferimos no inventarla. <a href="/metodologia/">Cómo se calcula</a>.</p></section>`;
@@ -285,7 +295,7 @@ function shipPage(s) {
 
   ${scoreSection(s)}
 
-  ${s.sailings.length ? `<section class="block" id="salidas"><h2>Ofertas del ${esc(s.name)} (${s.sailings.length} salidas)</h2><div class="grid">${[...s.sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 6).map(sailingCard).join('')}</div>${s.sailings.length > 6 ? `<details class="az"><summary>Ver todas las fechas</summary><ul class="az-list">${s.sailings.map((x) => `<li><a href="/salidas/${x.id}/">${x.date} · ${x.nights} noches · ${esc(x.depart_port)} · ${eur(OFF.minPrice(x))}</a></li>`).join('')}</ul></details>` : ''}</section>${tripBox(s.sailings[0].depart_port.split(' (')[0], { sid: 'barco-' + s.slug, title: `¿Embarcas en ${s.sailings[0].depart_port}? Hotel, traslado y vuelo` })}` : ''}
+  ${s.sailings.length ? `<section class="block" id="salidas"><h2>Ofertas del ${esc(s.name)} (${s.sailings.length} salidas)</h2><div class="grid">${[...s.sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 6).map(sailingCard).join('')}</div>${s.sailings.length > 6 ? `<details class="az"><summary>Ver todas las fechas</summary><ul class="az-list">${s.sailings.map((x) => `<li><a href="/salidas/${x.id}/">${x.date} · ${x.nights} noches · ${esc(x.depart_port)} · ${eur(OFF.minPrice(x))}</a></li>`).join('')}</ul></details>` : ''}${shipCalendar(s)}</section>${tripBox(s.sailings[0].depart_port.split(' (')[0], { sid: 'barco-' + s.slug, title: `¿Embarcas en ${s.sailings[0].depart_port}? Hotel, traslado y vuelo` })}` : ''}
 
   <section id="reservar" class="block"><h2>Dónde reservar el ${esc(s.name)}</h2>
   <p class="muted">Compara la misma salida en la naviera y en las agencias.${s.sailings.length ? '' : ' Los precios en directo se están conectando: de momento te llevamos a la búsqueda de cada sitio.'}</p>
@@ -1086,6 +1096,8 @@ write('data/config.json', JSON.stringify({ api: CONFIG.api, ab: CONFIG.ab, fx })
 // sitemap + robots + service worker
 const sm = pages.filter((p) => !p.noindex).map((p) => `<url><loc>${SITE}${p.url}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join('');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sm}</urlset>`);
+// Resumen legible para buscadores con IA: qué es la web, cómo se calculan las notas y dónde están los datos
+write('llms.txt', `# MejorCrucero\n\n> Comparador de cruceros en español: precio real (tarifa + tasas + cuota de servicio), nota del precio de 0 a 100 frente a cruceros parecidos y nota del barco (MejorCrucero Score) con datos públicos.\n\n- [Ofertas](${SITE}/ofertas/): ${sailings.length} salidas con precio real\n- [Ranking de barcos](${SITE}/rankings/): ${ships.filter((s) => s.sc != null).length} barcos con nota\n- [Metodología](${SITE}/metodologia/)\n- [Observatorio de precios](${SITE}/ofertas/observatorio/)\n- [Datos de ofertas en JSON](${SITE}/data/ofertas.json)\n- [Cómo ganamos dinero](${SITE}/afiliacion/)\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nDisallow: /admin/\nDisallow: /embed/\nSitemap: ${SITE}/sitemap.xml\n`);
 write('sw.js', `const V='mc-${Date.now()}';const B='${BASE}';const CORE=[B,B+'offline/',B+'assets/style.css?v=${BUILD_DATE}',B+'assets/app.js?v=${BUILD_DATE}',B+'mis-cruceros/',B+'herramientas/checklist/',B+'herramientas/cuenta-atras/'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
