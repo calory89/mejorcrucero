@@ -6,6 +6,7 @@ import fs from 'node:fs';
 
 const OUT = process.argv[2] || 'src/data/sailings.json';
 const MAX = +(process.env.NCL_MAX || 0);
+const MONTHS = +(process.env.NCL_MONTHS || 18);
 const BASE = 'https://www.ncl.com/es/es';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 const slugify = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -75,10 +76,16 @@ async function main() {
       if (e.portInfo?.isTender) o.tender = true;
       ports.push(o);
     }
+    // Noche en puerto: el segundo día del mismo puerto solo trae la hora de salida
+    for (let i = 1; i < ports.length; i++) { const a = ports[i - 1], b = ports[i]; if (a.name === b.name && b.arrive && !b.depart && b.day === a.day + 1) { b.depart = b.arrive; delete b.arrive; if (a.depart && !a.arrive) { a.arrive = a.depart; delete a.depart; } } }
     const names = ports.map((p) => p.name).length ? ports.map((p) => p.name) : [PORT(it.embarkationPort?.title), ...(it.portsOfCall || []).map((p) => PORT(p.title)), PORT(it.disembarkationPort?.title)];
     const depart = PORT(it.embarkationPort?.title), arrive = PORT(it.disembarkationPort?.title);
     const destination = destOf(it, names);
-    for (const r of results) {
+    // Tamaño razonable: todas las fechas (hasta 12) si sale de Europa; las 3 más próximas si sale de otro continente
+    const europe = !!PORT_SLUG[depart] && !['buenos-aires', 'miami', 'port-canaveral', 'fort-lauderdale', 'san-juan'].includes(PORT_SLUG[depart]) || ['mediterraneo-occidental', 'mediterraneo-oriental', 'fiordos-noruegos', 'capitales-balticas', 'canarias-y-madeira'].includes(destination);
+    const horizon = new Date(Date.now() + MONTHS * 30.5 * 864e5).toISOString().slice(0, 10);
+    const keep = results.filter((r) => { const d = String(r.sailing?.sailStartDate || '').slice(0, 10); return d >= today && d <= horizon; }).sort((a, b) => String(a.sailing.sailStartDate).localeCompare(b.sailing.sailStartDate)).slice(0, europe ? 12 : 3);
+    for (const r of keep) {
       const date = String(r.sailing?.sailStartDate || '').slice(0, 10), end = String(r.sailing?.sailEndDate || '').slice(0, 10);
       if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < today) continue;
       const nights = Math.round((new Date(end) - new Date(date)) / 864e5); if (!(nights > 0)) continue;
