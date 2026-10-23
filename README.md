@@ -29,7 +29,8 @@ Regenerar fotos: `python3 tools/photos.py`. Imágenes para compartir: `python3 t
 2. **API**: secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` + variable `DEPLOY_API=true` (o desplegar desde el conector). Después, poner la URL del Worker en `CONFIG.api`.
 3. **Afiliados**: `CONFIG.affiliates.*.param`.
 4. **Feed de precios**: variable `FEED_URL` (ver `docs/feed.md`).
-5. **Emails salientes** (alertas, newsletter): proveedor de envío (Resend u otro) conectado al Worker.
+5. **MSC Cruceros**: secreto `APIFY_TOKEN` (cuenta de Apify; `tools/msc.js` usa el actor `sercul/msc-cruises-scraper`, mercado `es_ES` con precio por camarote). Sin el secreto, el paso se salta. Tras la primera ejecución, revisar `tools/msc-sample.json` para comprobar los campos.
+6. **Emails salientes** (alertas, newsletter): proveedor de envío (Resend u otro) conectado al Worker.
 
 ## MejorCrucero Score (nota 0–100)
 - Fórmula en `src/score.js`, explicada en `/metodologia/`. Datos:

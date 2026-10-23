@@ -19,9 +19,10 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   const cabinOf = (x) => Object.keys(x.prices || {}).find((k) => x.prices[k] === minPrice(x)) || 'interior';
   const real = (x) => {
     const p = minPrice(x), tasas = x.port_charges || 0, svc = x.service_included ? 0 : Math.round((x.service_night || 0) * x.nights);
-    return { tarifa: p, tasas, svc, total: p + tasas + svc };
+    return { tarifa: p, tasas, svc, total: p + tasas + svc, partial: x.port_charges == null };
   };
   const ppn = (x) => Math.round(real(x).total / x.nights);
+  const ppnT = (x) => Math.round(minPrice(x) / x.nights); // solo tarifa: para comparar salidas cuya fuente no publica las tasas
   // Nota del precio: precio real por noche frente a cruceros parecidos (mismo destino y duración, salidas a ±60 días),
   // más el descuento sobre el precio de catálogo y si está en su mínimo histórico.
   const peersOf = (x) => {
@@ -34,8 +35,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   const cache = new Map();
   const deal = (x) => {
     if (cache.has(x.id)) return cache.get(x.id);
-    const peers = peersOf(x), v = ppn(x);
-    const vals = peers.map(ppn).sort((a, b) => a - b);
+    const peers = peersOf(x), part = real(x).partial, f = part ? ppnT : ppn, v = f(x);
+    const vals = peers.map(f).sort((a, b) => a - b);
     const below = vals.filter((p) => p > v).length, pct = vals.length > 1 ? below / (vals.length - 1) : 0.5;
     const median = vals[Math.floor(vals.length / 2)] || v;
     const disc = x.base_price ? Math.round((1 - minPrice(x) / x.base_price) * 100) : 0;
@@ -75,6 +76,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   const daysOf = (x) => {
     if (dayCache.has(x.id)) return dayCache.get(x.id);
     const raw = x.itinerary?.ports || [];
+    if (x.itinerary?.flat) { const out = []; raw.forEach((p, i) => { const prev = out[out.length - 1]; if (!prev || prev.name !== p.name || i === raw.length - 1) out.push({ ...p, day: i + 1, to: i + 1, sea: false, stop: true }); }); dayCache.set(x.id, out); return out; }
     const last = Math.max(x.nights + 1, ...raw.map((p) => p.day || 1));
     const byDay = {};
     for (const p of raw) { const d = p.day || 1; (byDay[d] = byDay[d] || []); if (!isSea(p.name) && !byDay[d].some((q) => q.name === p.name)) byDay[d].push(p); }
@@ -86,7 +88,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     }
     dayCache.set(x.id, out); return out;
   };
-  const dayLabel = (e) => (e.to > e.day ? `Días ${e.day}-${e.to}` : `Día ${e.day}`);
+  const dayLabel = (e) => (e.stop ? `Parada ${e.day}` : e.to > e.day ? `Días ${e.day}-${e.to}` : `Día ${e.day}`);
   const seaCount = (x) => daysOf(x).filter((e) => e.sea).reduce((a, e) => a + e.to - e.day + 1, 0);
   const portsOf = (x) => daysOf(x).filter((e) => !e.sea);
   const photoOf = (x) => bySlug[x.ship]?.photo || null;
@@ -114,7 +116,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     <p class="muted small">${fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(x.depart_port)}${sameCount(x) ? ` · <span class="more-d">+${sameCount(x)} fecha${sameCount(x) > 1 ? 's' : ''}</span>` : ''}</p>
     <p class="muted small ports-line">${esc(portsOf(x).slice(1, 5).map((p) => p.name).join(' · '))}${portsOf(x).length > 5 ? ` <span class="more-p">+${portsOf(x).length - 5}</span>` : ''}</p>
     <p class="card-tags">${s?.sc != null ? `<span class="t-ship" title="Nota del barco (MejorCrucero Score)">Barco ${s.sc}/100</span>` : ''}${fromSpain(x) ? '<span class="t-noplane" title="Sale de un puerto español">Sin avión desde España</span>' : ''}${seaCount(x) ? `<span>${seaCount(x)} día${seaCount(x) > 1 ? 's' : ''} de mar</span>` : ''}</p>
-    <p class="price">desde <b>${eur(r.tarifa)}</b> <span class="muted small">p.p. · real ${eur(r.total)}</span>${d.disc >= 10 ? ` <span class="badge-drop">−${d.disc}%</span>` : ''}<span class="ppn-v"><b>${eur(ppn(x))}</b> por noche</span></p>${lowAvail(x) ? '<p class="low-av">Quedan pocas plazas, según la naviera</p>' : ''}
+    <p class="price">desde <b>${eur(r.tarifa)}</b> <span class="muted small">p.p. · ${r.partial ? 'tasas aparte' : `real ${eur(r.total)}`}</span>${d.disc >= 10 ? ` <span class="badge-drop">−${d.disc}%</span>` : ''}<span class="ppn-v"><b>${eur(r.partial ? ppnT(x) : ppn(x))}</b> por noche${r.partial ? ' sin tasas' : ''}</span></p>${lowAvail(x) ? '<p class="low-av">Quedan pocas plazas, según la naviera</p>' : ''}
     <p class="deal-l ${dcls(d.score)}-t">${esc(d.label)}${d.anomaly ? ' · ⚡ precio anómalo' : ''}${d.drop >= 3 ? ` · 📉 bajó ${d.drop}%` : ''}${spark(x.history || [])}</p>${x.updated ? `<p class="checked muted small">Precio comprobado el ${fdate(x.updated.slice(0, 10), { day: 'numeric', month: 'short' })}</p>` : ''}</div></a>`;
   }
 
@@ -180,7 +182,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     <p class="lead-p">${cap(fdate(x.date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))} · ${stops.length - 2 > 0 ? `${stops.length - 2} escala${stops.length - 2 > 1 ? 's' : ''}` : 'sin escalas'}${seaDays ? ` · ${seaDays} día${seaDays > 1 ? 's' : ''} de navegación` : ''}${x.countries ? ` · ${esc(x.countries)}` : ''}</p>
     ${lowAvail(x) ? '<p class="low-av">Quedan pocas plazas en esta salida, según la naviera</p>' : ''}
     <p class="offer-sum">${esc(summary(x, { s, d, r, stops, seaDays, dn, sn }))}</p>
-    <div class="stats"><div><b>${eur(r.tarifa)}</b><span>Desde, por persona</span></div><div><b>${eur(r.total)}</b><span>Precio real p.p.</span></div><div><b>${eur(ppn(x))}</b><span>Real por noche</span></div><div><b>${s?.sc ?? '—'}${s?.sc != null ? '<small>/100</small>' : ''}</b><span>Nota del barco</span></div></div>
+    <div class="stats"><div><b>${eur(r.tarifa)}</b><span>Desde, por persona</span></div><div><b>${r.partial ? '—' : eur(r.total)}</b><span>${r.partial ? 'Tasas sin publicar' : 'Precio real p.p.'}</span></div><div><b>${eur(r.partial ? ppnT(x) : ppn(x))}</b><span>${r.partial ? 'Por noche, sin tasas' : 'Real por noche'}</span></div><div><b>${s?.sc ?? '—'}${s?.sc != null ? '<small>/100</small>' : ''}</b><span>Nota del barco</span></div></div>
     <div class="actions">${official ? `<a class="btn" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio en ${esc(official.partner.replace(' (web oficial)', ''))} →</a>` : ''}<a class="btn btn-ghost" href="/herramientas/alerta-precio/?barco=${x.ship}&amp;fecha=${x.date}">🔔 Avísame si baja</a><button class="btn btn-ghost fav-inline js-save-offer" type="button" data-offer='${esc(JSON.stringify({ id: x.id, t: `${dn} · ${x.nights} noches · ${sn}`, d: x.date, p: r.tarifa }))}' aria-pressed="false">${ICON.heart} Guardar oferta</button></div>
   </div>
   <div class="ship-hero-art">${ph ? `<img src="${esc(ph.thumb)}"${ph.hi ? ` srcset="${esc(ph.thumb)} 640w, ${esc(ph.large)} 1280w" sizes="(max-width: 900px) 100vw, 560px"` : ''} alt="${esc(sn)}" width="640" height="${Math.round(640 / (ph.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">` : ''}</div>
@@ -192,7 +194,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     <tr><th scope="row">Tarifa (${esc(CABIN[cabinOf(x)].toLowerCase())}, por persona)</th><td>${eur(r.tarifa)}${x.base_price ? ` <s class="muted">${eur(x.base_price)}</s> <span class="badge-drop">−${d.disc}%</span>` : ''}</td></tr>
     <tr><th scope="row">Tasas portuarias</th><td>${x.port_charges ? eur(x.port_charges) : 'Consultar'}</td></tr>
     <tr><th scope="row">Cuota de servicio (${x.nights} noches)</th><td>${x.service_included ? 'Incluida' : r.svc ? eur(r.svc) : 'Consultar'}</td></tr>
-    <tr class="tot"><th scope="row">Precio real por persona</th><td><b>${eur(r.total)}</b></td></tr>
+    <tr class="tot"><th scope="row">${r.partial ? 'Total conocido por persona (faltan las tasas)' : 'Precio real por persona'}</th><td><b>${eur(r.total)}</b></td></tr>
     <tr><th scope="row">Para dos personas</th><td><b>${eur(r.total * 2)}</b></td></tr>
     ${x.allinc ? `<tr><th scope="row">Opción "todo incluido" (con bebidas)</th><td>desde ${eur(x.allinc)} p.p.</td></tr>` : ''}
   </tbody></table></div>
@@ -201,7 +203,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   ${x.offers?.length ? `<p class="small">Promociones activas: ${x.offers.map(esc).join(' · ')}</p>` : ''}
   <p class="muted small">✔️ Precio de la web oficial de ${esc(L?.short || 'la naviera')} comprobado el <time datetime="${x.updated || BUILD_DATE}">${fdate((x.updated || BUILD_DATE).slice(0, 10))}${x.updated ? ` a las ${new Date(x.updated).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}` : ''}</time> (hora de España). Los precios cambian: confírmalo antes de reservar.</p></section>
 
-  ${Object.keys(x.prices || {}).length > 1 ? `<section class="block" id="camarotes"><h2>Precio por tipo de camarote</h2><div class="table-wrap"><table class="spec"><thead><tr><th>Camarote</th><th>Tarifa p.p.</th><th>Precio real p.p.</th><th>Diferencia por noche</th></tr></thead><tbody>${['interior', 'exterior', 'balcon', 'suite'].filter((k) => x.prices[k]).map((k) => `<tr><th scope="row">${CABIN[k]}</th><td>${eur(x.prices[k])}</td><td>${eur(x.prices[k] + r.tasas + r.svc)}</td><td>${x.prices[k] === r.tarifa ? '—' : '+' + eur(Math.round((x.prices[k] - r.tarifa) / x.nights))}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Precios por persona en ocupación doble de la web oficial de la naviera.</p></section>` : ''}
+  ${Object.keys(x.prices || {}).length > 1 ? `<section class="block" id="camarotes"><h2>Precio por tipo de camarote</h2><div class="table-wrap"><table class="spec"><thead><tr><th>Camarote</th><th>Tarifa p.p.</th><th>Precio real p.p.</th><th>Diferencia por noche</th></tr></thead><tbody>${['interior', 'exterior', 'balcon', 'suite'].filter((k) => x.prices[k]).map((k) => `<tr><th scope="row">${CABIN[k]}</th><td>${eur(x.prices[k])}</td><td>${r.partial ? 'Tasas sin publicar' : eur(x.prices[k] + r.tasas + r.svc)}</td><td>${x.prices[k] === r.tarifa ? '—' : '+' + eur(Math.round((x.prices[k] - r.tarifa) / x.nights))}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Precios por persona en ocupación doble de la web oficial de la naviera.</p></section>` : ''}
   <section class="block" id="nota-oferta"><h2>Nota del precio: ${d.score}/100 · ${esc(d.label)}</h2><p class="muted small">Mide si esta salida está barata frente a cruceros parecidos. No valora el barco: para eso está la nota del barco${s?.sc != null ? ` (${s.sc}/100)` : ''}.</p>
   <ul class="bars"><li><span class="bar-l">Frente a cruceros parecidos</span><span class="bar"><i style="width:${Math.max(4, Math.min(100, 50 + d.vsMedian))}%"></i></span><b>${d.vsMedian >= 0 ? '−' : '+'}${Math.abs(d.vsMedian)}%</b><small>Media de ${d.peers} cruceros de ${esc(dn)} de duración parecida: ${eur(d.median)} reales por noche; este, ${eur(ppn(x))}.</small></li>
   ${d.disc ? `<li><span class="bar-l">Descuento de la naviera</span><span class="bar"><i style="width:${Math.min(100, d.disc * 2)}%"></i></span><b>−${d.disc}%</b><small>Sobre el precio de catálogo.</small></li>` : ''}
@@ -237,12 +239,12 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   ${forumBlock(`salida:${x.ship}:${x.date}`, `¿Vas en esta salida? Habla con otros pasajeros`, { tabs: [['question', 'Preguntas'], ['comment', 'Comentarios'], ['excursion', 'Excursiones']] })}
 </div>
 <aside class="ship-side">
-  <div class="side-card sticky-price"><p class="muted small">Desde, por persona</p><p class="big-num">${eur(r.tarifa)}</p><p class="small">Precio real ${eur(r.total)} · ${x.nights} noches</p>${official ? `<a class="btn btn-block" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio en ${esc((official.partner || '').replace(' (web oficial)', ''))} →</a>` : ''}<a class="btn btn-ghost btn-block" href="/herramientas/precio-real/?linea=${s?.lineSlug || ''}&amp;precio=${r.tarifa}&amp;noches=${x.nights}">Calcular mi precio</a></div>
+  <div class="side-card sticky-price"><p class="muted small">Desde, por persona</p><p class="big-num">${eur(r.tarifa)}</p><p class="small">${r.partial ? "Tasas aparte" : `Precio real ${eur(r.total)}`} · ${x.nights} noches</p>${official ? `<a class="btn btn-block" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio en ${esc((official.partner || '').replace(' (web oficial)', ''))} →</a>` : ''}<a class="btn btn-ghost btn-block" href="/herramientas/precio-real/?linea=${s?.lineSlug || ''}&amp;precio=${r.tarifa}&amp;noches=${x.nights}">Calcular mi precio</a></div>
   <div class="side-card"><h2>Comparte esta oferta</h2>${shareBar(`${dn} ${x.nights} noches en el ${sn} desde ${eur(r.tarifa)}:`, url(x))}</div>
   ${similar.length ? `<div class="side-card"><h2>Ofertas parecidas</h2><ul class="mini">${similar.map((o) => `<li><a href="${url(o)}"><b>${esc(shipName(o))} · ${eur(minPrice(o))}</b><span>${fdate(o.date, { day: 'numeric', month: 'short' })} · ${o.nights} noches · nota ${deal(o).score}</span></a></li>`).join('')}</ul></div>` : ''}
   <div class="side-card"><h2>¿No te convence?</h2><ul class="mini"><li><a href="/ofertas/${x.destination || ''}/"><b>Más ofertas de ${esc(dn)}</b><span>Ordenadas por nota</span></a></li>${x.depart_port_slug ? `<li><a href="/ofertas/desde-${x.depart_port_slug}/"><b>Cruceros desde ${esc(x.depart_port)}</b><span>Todas las fechas</span></a></li>` : ''}<li><a href="/ofertas/${MES[new Date(x.date).getMonth()]}-${x.date.slice(0, 4)}/"><b>Cruceros en ${MES[new Date(x.date).getMonth()]}</b><span>Todas las navieras</span></a></li></ul></div>
 </aside></div>
-<div class="m-cta"><div><b>${eur(r.tarifa)}</b><small>real ${eur(r.total)} p.p.</small></div>${official ? `<a class="btn btn-sm" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio</a>` : ''}</div></article>`;
+<div class="m-cta"><div><b>${eur(r.tarifa)}</b><small>${r.partial ? 'tasas aparte' : `real ${eur(r.total)} p.p.`}</small></div>${official ? `<a class="btn btn-sm" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio</a>` : ''}</div></article>`;
     return layout({
       title, desc: `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}: ${stops.slice(1, 6).map((p) => p.name).join(', ')}. Desde ${eur(r.tarifa)} (precio real ${eur(r.total)} con tasas). Nota del precio ${d.score}/100.`,
       url: url(x), body, ogType: 'product', og: ph ? `/og/${x.ship}.png` : '/og.png', preload: ph ? ph.thumb : null,
