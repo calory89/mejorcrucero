@@ -1,0 +1,4 @@
+{ norwegian: 761, costa: 813 }
+OK: 2298 páginas, 343 barcos, 255 vídeos, 331 fotos, 1574 salidas, fx=0.89342 (BASE=/)
+✔ Prueba rápida OK: 813 salidas, 120 páginas revisadas, 1574 tarjetas en el listado
+199M	dist
