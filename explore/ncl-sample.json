@@ -1,0 +1,216 @@
+{
+ "sample": {
+  "itinerary": {
+   "objectId": "23361659_CRUISE_INSIDE_2",
+   "bundleType": "cruise",
+   "code": "EPIC7PCVNPIMBJGECCZMPCV",
+   "packageId": "23361659",
+   "title": "7 días Caribe desde/hasta Orlando: Great Stirrup Cay y Cozumel",
+   "startingLocation": "Orlando (Port Canaveral), Florida",
+   "image": {
+    "src": "/content/dam/ncl/us/en/itineraries/bahamas-itineraries/1440_NCL_GSC_Aerial_Ship_Slide.jpg",
+    "alt": "cq5dam.thumbnail.319.319.png"
+   },
+   "captionTitles": [],
+   "destinations": [
+    {
+     "code": "CARIBBEAN",
+     "title": "Caribe"
+    }
+   ],
+   "embarkationPort": {
+    "code": "PCV",
+    "title": "Orlando (Port Canaveral), Florida"
+   },
+   "disembarkationPort": {
+    "code": "PCV",
+    "title": "Orlando (Port Canaveral), Florida"
+   },
+   "portsOfCall": [
+    {
+     "code": "NPI",
+     "title": "Great Stirrup Cay, Bahamas"
+    },
+    {
+     "code": "MBJ",
+     "title": "Bahía Montego, Jamaica"
+    },
+    {
+     "code": "GEC",
+     "title": "George Town, Gran Caimán"
+    },
+    {
+     "code": "CZM",
+     "title": "Cozumel, México"
+    }
+   ],
+   "ship": {
+    "code": "EPIC",
+    "title": "Norwegian Epic"
+   },
+   "duration": {
+    "days": 7,
+    "text": "7-day Cruise"
+   },
+   "currencyCode": "EUR",
+   "taxesAndFees": {
+    "text": ""
+   },
+   "combinedPrice": 329,
+   "basePrice": 459,
+   "weight": 999,
+   "deals": [
+    {
+     "code": "50-off-all-cruises-offer",
+     "title": "50% de descuento en todos los cruceros",
+     "weight": 5,
+     "featured": false
+    },
+    {
+     "code": "just-cruise-offer",
+     "title": "Solo crucero",
+     "weight": 5,
+     "featured": false
+    },
+    {
+     "code": "free-at-sea-upgrade-package-offer",
+     "title": "Reciba los 4 paquetes",
+     "weight": 7,
+     "featured": false
+    }
+   ]
+  },
+  "sailing": {
+   "sailing": {
+    "packageId": "23361658",
+    "sailingId": "59101",
+    "vacationStartDate": "2026-11-22T00:00:00",
+    "vacationEndDate": "2026-11-29T00:00:00",
+    "sailStartDate": "2026-11-22T00:00:00",
+    "sailEndDate": "2026-11-29T00:00:00"
+   },
+   "stateroomTypesPricing": [
+    {
+     "status": "AVAILABLE",
+     "code": "HAVEN",
+     "title": "The Haven",
+     "statusText": "Available",
+     "combinedPrice": 3049,
+     "basePrice": 5919
+    },
+    {
+     "status": "AVAILABLE",
+     "code": "MINISUITE",
+     "title": "Club Balcony Suite",
+     "statusText": "Available",
+     "combinedPrice": 919,
+     "basePrice": 1639
+    },
+    {
+     "status": "AVAILABLE",
+     "code": "BALCONY",
+     "title": "Camarote con balcón",
+     "statusText": "Available",
+     "combinedPrice": 864,
+     "basePrice": 1529
+    },
+    {
+     "status": "SOLD_OUT",
+     "code": "OCEANVIEW",
+     "title": "Camarote exterior",
+     "statusText": "Sold Out"
+    },
+    {
+     "status": "AVAILABLE",
+     "code": "INSIDE",
+     "title": "Camarote interior",
+     "statusText": "Available",
+     "combinedPrice": 669,
+     "basePrice": 1139
+    },
+    {
+     "status": "SOLO_GUEST_ONLY",
+     "code": "STUDIO",
+     "title": "Estudio",
+     "statusText": "Solo Guests Only"
+    }
+   ]
+  },
+  "events": [
+   {
+    "day": 1,
+    "events": [
+     {
+      "eventType": "PORT",
+      "date": "2026-11-22T16:00:00",
+      "order": 1,
+      "title": "Orlando (Port Canaveral), Florida",
+      "description": "<p>Los cruceros de NCL desde Port Canaveral ofrecen una escapada sin preocupaciones\na Las Bahamas y el Caribe desde una práctica ubicación céntrica en Florida. <a href=\"http://www.ncl.com/\" rel=\"nofollow\">Norwegian Cruise Line</a> se dedica a ofrecer\nescapadas sin esfuerzo — del tipo en el que cada persona puede crear sus propias vacaciones\nideales. A bordo, cada día ofrece algo para todos, con infinitas\noportunidades de hacer exactamente lo que te encanta — desde emociones de alta energía como\npistas de carreras y toboganes acuáticos hasta múltiples piscinas y jacuzzis, un spa de fama mundial,\nclubes infantiles gratuitos y más. Luego, todos pueden reunirse para\ndisfrutar de comidas compartidas en nuestros restaurantes galardonados. La aventura continúa\nen tierra mientras navegas de un hermoso destino al siguiente — incluso pasando un\ndía en nuestra exclusiva isla privada, Great Stirrup Cay. Y con los\nparques temáticos de fama mundial de Orlando y la Costa Espacial de Florida a solo un corto trayecto en coche desde el\npuerto, puedes añadir una excursión de un día de tu lista de deseos antes o después de tu travesía. Desde\ncrear recuerdos juntos mientras exploras destinos increíbles hasta hacer\nexactamente lo que te encanta a bordo, un crucero de NCL desde Port Canaveral lo hace fácil\npara que todos vacacionen a su manera.</p>",
+      "images": [
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/agnostic/NCL-Caribbean-Cruise-Rollercoaster.jpg",
+        "title": "NCL-Caribbean-Cruise-Rollercoaster.jpg",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       }
+      ],
+      "portInfo": {
+       "isTender": false,
+       "isEmbarkation": true,
+       "isDisembarkation": false,
+       "isOverNight": false,
+       "dailySchedule": "4:00 PM",
+       "code": "PCV"
+      }
+     }
+    ]
+   },
+   {
+    "day": 2,
+    "events": [
+     {
+      "eventType": "PORT",
+      "date": "2026-11-23T08:00:00",
+      "order": 1,
+      "title": "Great Stirrup Cay, Bahamas",
+      "description": "Great Stirrup Cay es un paraíso tropical, exclusivo de NCL\nhuéspedes. Ubicado en las hermosas Bahamas, aquí encontrará playas de arena blanca,\ndeliciosos bocados, villas privadas, Mandara Spa y esnórquel de talla mundial. ",
+      "images": [
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/bahamas/great-stirrup-cay/NCL-Bahamas-GSC-Cruise2.png",
+        "title": "NCL-Bahamas-GSC-Cruise2.png",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       }
+      ],
+      "portInfo": {
+       "isTender": false,
+       "isEmbarkation": false,
+       "isDisembarkation": false,
+       "isOverNight": false,
+       "dailySchedule": "8:00 AM - 5:00 PM",
+       "code": "NPI"
+      }
+     }
+    ]
+   },
+   {
+    "day": 3,
+    "events": [
+     {
+      "eventType": "AT_SEA",
+      "date": "2026-11-24T00:00:00",
+      "order": 1,
+      "title": "Disfrutar. Brindar. Vivir. Descubrir. Desconectar. Y repetir.",
+      "description": "Viajeros de todas las edades disfrutarán del Norwegian Epic® gracias al parque acuático, el imponente muro de escalada y a los muchos y deliciosos establecimientos de restauración. Disfruta de un cóctel al atardecer en Shaker’s Martini & Champagne Bar y luego deléitate con un exquisito plato de pasta en el elegante restaurante italiano La Cucina. Tómate un descanso en el Mandara Spa®, o disfruta de un momento solo para adultos en los clubes de playa Vibe y Spice H2O, un oasis de día y una fiesta de noche. ",
+      "images": [
+       {
+        "path": "/content/dam/ncl/us/en/lifestyle/homepage/ncl_Epic_Aerial At Sea 4.jpg",
+        "title": "ncl_Epic_Aerial At Sea 4.jpg",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "unknownCabins": []
+}
