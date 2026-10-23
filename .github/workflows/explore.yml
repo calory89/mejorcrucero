@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 22
       - run: npm i --no-save playwright@1 && npx playwright install --with-deps chromium
-      - run: node tools/explore.mjs
+      - run: NCL_MAX=40 node tools/ncl.js explore/ncl-test.json && cp tools/ncl-sample.json explore/ || true
       - name: Guardar resultados en la rama
         run: |
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
