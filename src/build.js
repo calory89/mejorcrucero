@@ -230,13 +230,14 @@ function shipsIndex() {
   return layout({ title: 'Todos los barcos de crucero: fichas, vídeos y comparador', desc: `Fichas de ${ships.length} barcos de crucero de MSC, Costa, Royal Caribbean, Norwegian y más: tamaño, año, pasajeros, espacio, vídeos y foro.`, url: '/barcos/', body, crumbs: [['Inicio', '/'], ['Barcos', '/barcos/']] });
 }
 
+const sc_prov = (s) => (s.score?.coverage ?? 100) < 70;
 function scoreSection(s) {
   if (s.sc == null) return `<section class="block" id="nota"><h2>MejorCrucero Score</h2><p class="muted">Todavía no tenemos datos públicos suficientes para dar una nota fiable a este barco (necesitamos al menos el espacio por pasajero y otros dos indicadores). Preferimos no inventarla. <a href="/metodologia/">Cómo se calcula</a>.</p></section>`;
   const sc = s.score;
-  return `<section class="block score-sec" id="nota"><h2>MejorCrucero Score: ${s.sc}/100</h2>
+  return `<section class="block score-sec" id="nota"><h2>MejorCrucero Score: ${s.sc}/100${sc_prov(s) ? ' <span class="tag-prov">provisional</span>' : ''}</h2>
   <div class="score-top">${scoreBadge(s.sc, true)}<p><b>${scoreLabel(s.sc)}</b>. Puesto <a href="/rankings/">${s.rank} de ${scored.length}</a> barcos con nota${(() => { const same = scored.filter((o) => o.line === s.line); const tier = scored.filter((o) => o.tier === s.tier); return (same.length > 1 ? `, ${same.findIndex((o) => o.slug === s.slug) + 1}º de ${same.length} en ${esc(s.lineShort)}` : '') + ` y ${tier.findIndex((o) => o.slug === s.slug) + 1}º de ${tier.length} en su gama (${TIER[s.tier].toLowerCase()})`; })()}.</p></div>
   <ul class="bars">${sc.parts.map((p) => `<li><span class="bar-l">${esc(p.label)}</span><span class="bar"><i style="width:${Math.round((p.pts / p.max) * 100)}%"></i></span><b>${String(p.pts).replace('.', ',')}/${p.max}</b><small>${esc(p.detail)}${p.source ? ` · <a href="${esc(p.source)}" target="_blank" rel="noopener">fuente</a>` : ''}</small></li>`).join('')}</ul>
-  ${sc.missing.length ? `<p class="muted small">Sin datos todavía de: ${sc.missing.join(', ')}. La nota se calcula sobre el ${sc.coverage}% de los puntos posibles y se reescala a 100.</p>` : ''}
+  ${sc.missing.length ? `<p class="${sc_prov(s) ? 'tip' : 'muted small'}">${sc_prov(s) ? '<b>Nota provisional.</b> ' : ''}Sin datos todavía de: ${sc.missing.join(', ')}. La nota se calcula sobre el ${sc.coverage}% de los puntos posibles y se reescala a 100${sc_prov(s) ? ': puede cambiar bastante cuando tengamos esos datos' : ''}.</p>` : ''}
   <p class="small"><a href="/metodologia/">Cómo calculamos la nota</a> · <a href="/rankings/">Ver el ranking completo</a></p>${shareBar(`El ${s.name} tiene un ${s.sc}/100 en MejorCrucero:`, '/barcos/' + s.slug + '/')}</section>`;
 }
 
@@ -261,7 +262,7 @@ function shipPage(s) {
   <div>
     <a class="eyebrow eyebrow-l" href="/navieras/${s.lineSlug}/">${esc(L.short)} · ${TIER[s.tier]}</a>
     <h1>${esc(s.name)}</h1>
-    ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>MejorCrucero Score · nº ${s.rank} de ${scored.length}</small></span></a>` : ''}
+    ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>Nota del barco${s.score?.coverage < 70 ? ' (provisional)' : ''} · nº ${s.rank} de ${scored.length} con nota</small></span></a>` : ''}
     ${s.tags.length ? `<p class="tags">${s.tags.map(([k, t]) => `<a class="tag" href="/barcos/?tag=${k}">${esc(t)}</a>`).join('')}</p>` : ''}
     <p class="match-box" data-slug="${s.slug}" hidden></p>
     <p class="lead-p">Barco ${s.size.toLowerCase()} de ${esc(L.short)} en servicio desde ${s.year}${s.pax ? `, con capacidad para unos ${fmt(s.pax)} pasajeros` : ''}. Vídeos, ficha técnica, dónde reservar y opiniones de cruceristas.</p>
@@ -488,7 +489,7 @@ function portPage(p) {
   const body = `<section class="wrap block page-h${pph ? ' port-h' : ''}"><div><span class="eyebrow">${esc(p.region)}</span><h1>Cruceros desde ${esc(p.name)}</h1><p class="lead-p">${esc(p.text)}</p><p><a class="btn" href="/ofertas/desde-${p.slug}/">Ver ofertas desde ${esc(city)}</a></p></div>${pph ? `<figure class="port-fig"><img src="${pph.thumb}" srcset="${pph.thumb} 640w, ${pph.large} 1280w" sizes="(max-width: 900px) 100vw, 520px" alt="Puerto de ${esc(city)}" width="640" height="${Math.round(640 / (pph.ratio || 1.5))}" fetchpriority="high"><figcaption class="credit">Foto: <a href="${esc(pph.page)}" target="_blank" rel="noopener">${esc(pph.author)}</a> · ${esc(pph.license)} · Wikimedia Commons</figcaption></figure>` : ''}</section>
   ${ps.length ? `<section class="wrap block"><h2>Próximas salidas desde ${esc(city)}</h2><div class="grid">${ps.slice(0, 12).map(sailingCard).join('')}</div></section>` : ''}
   <section class="wrap block grid grid-3">
-    <a class="tool tool-light" href="/ofertas/desde-${p.slug}/"><h2>Ofertas desde ${esc(city)}</h2><p>Todas las salidas con precio real y nota de la oferta.</p><span class="btn btn-sm">Ver ofertas →</span></a>
+    <a class="tool tool-light" href="/ofertas/desde-${p.slug}/"><h2>Ofertas desde ${esc(city)}</h2><p>Todas las salidas con precio real y nota del precio.</p><span class="btn btn-sm">Ver ofertas →</span></a>
     <a class="tool tool-light" href="/herramientas/precio-real/"><h2>Calcula el precio real</h2><p>Suma el traslado al puerto, el aparcamiento y los extras de a bordo.</p><span class="btn btn-sm">Calcular →</span></a>
     <a class="tool tool-light" href="/herramientas/tiempo-puerto/"><h2>El tiempo en ${esc(city)}</h2><p>Previsión de 14 días para el día de embarque.</p><span class="btn btn-sm">Ver tiempo →</span></a>
   </section>
@@ -934,7 +935,7 @@ function toolCompareOffers() {
   const body = `<section class="wrap block page-h"><h1>Comparar ofertas de cruceros</h1><p class="lead-p">Pon dos o tres ofertas lado a lado: precio real, precio por noche, escalas y nota.</p>
   <form class="calc" id="cmpo-form"><label class="f-wide"><span>Busca una oferta (barco, destino o puerto)</span><input name="q" list="cmpo-dl" autocomplete="off" placeholder="Ej.: Costa Smeralda abril"></label><datalist id="cmpo-dl"></datalist><button class="btn" type="submit">Añadir</button><button class="btn btn-ghost js-cmpo-clear" type="button">Vaciar</button></form>
   <div id="cmpo-out" aria-live="polite"><p class="muted">Añade ofertas desde aquí o con el botón "Comparar con otra oferta" de cada oferta.</p></div></section>`;
-  return layout({ title: 'Comparar ofertas de cruceros', desc: 'Compara ofertas de cruceros lado a lado: precio real con tasas, precio por noche, escalas y nota de la oferta.', url: '/herramientas/comparar-ofertas/', body, crumbs: toolCrumbs('Comparar ofertas', '/herramientas/comparar-ofertas/') });
+  return layout({ title: 'Comparar ofertas de cruceros', desc: 'Compara ofertas de cruceros lado a lado: precio real con tasas, precio por noche, escalas y nota del precio.', url: '/herramientas/comparar-ofertas/', body, crumbs: toolCrumbs('Comparar ofertas', '/herramientas/comparar-ofertas/') });
 }
 
 // ---------- guías ----------

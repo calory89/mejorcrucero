@@ -194,7 +194,7 @@ ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="hig
 <button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button>
 <a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">🔔 Alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
-${[['/', 'Inicio'], ['/ofertas/chollos/', '🔥 Chollos de hoy'], ...NAV, ['/ofertas/', 'Ofertas'], ['/puertos/', 'Puertos'], ['/rankings/', 'Ranking 0-100'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
+${[['/', 'Inicio'], ['/ofertas/chollos/', '🔥 Chollos de hoy'], ...NAV, ['/puertos/', 'Puertos'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
 </ul></nav></details>
 </div></header>
 ${crumbHtml}

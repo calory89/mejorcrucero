@@ -347,7 +347,7 @@
       const sel = store.get('mc_cmp_offers', []).map((i) => by[i]).filter(Boolean); const out = $('#cmpo-out');
       if (!sel.length) { out.innerHTML = '<p class="muted">Añade al menos una oferta.</p>'; return; }
       const best = (f, low = true) => { const v = sel.map(f); const t = low ? Math.min(...v) : Math.max(...v); return (o) => (sel.length > 1 && f(o) === t ? ' class="best"' : ''); };
-      const rows = [['Barco', (o) => esc(o.sn)], ['Salida', (o) => `${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} desde ${esc(o.p)}`], ['Noches', (o) => o.n], ['Precio desde', (o) => eur(o.pr), best((o) => o.pr)], ['Precio real p.p.', (o) => eur(o.r), best((o) => o.r)], ['Real por noche', (o) => eur(Math.round(o.r / o.n)), best((o) => o.r / o.n)], ['Nota de la oferta', (o) => `<b class="scb ${o.sc >= 85 ? 'sc-a' : o.sc >= 70 ? 'sc-b' : o.sc >= 45 ? 'sc-c' : 'sc-e'}">${o.sc}</b>`, best((o) => o.sc, false)], ['Escalas', (o) => esc(o.pts.slice(1).join(', '))]];
+      const rows = [['Barco', (o) => esc(o.sn)], ['Salida', (o) => `${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} desde ${esc(o.p)}`], ['Noches', (o) => o.n], ['Precio desde', (o) => eur(o.pr), best((o) => o.pr)], ['Precio real p.p.', (o) => eur(o.r), best((o) => o.r)], ['Real por noche', (o) => eur(Math.round(o.r / o.n)), best((o) => o.r / o.n)], ['Nota del precio', (o) => `<b class="scb ${o.sc >= 85 ? 'sc-a' : o.sc >= 70 ? 'sc-b' : o.sc >= 45 ? 'sc-c' : 'sc-e'}">${o.sc}</b>`, best((o) => o.sc, false)], ['Escalas', (o) => esc(o.pts.slice(1).join(', '))]];
       out.innerHTML = `<div class="table-wrap"><table class="cmp-t"><thead><tr><th></th>${sel.map((o) => `<th>${o.img ? `<img src="${esc(o.img)}" alt="" width="200" height="120" loading="lazy">` : ''}<a href="${BASE}salidas/${o.i}/">${esc(o.t)}</a></th>`).join('')}</tr></thead><tbody>${rows.map(([l, f, b]) => `<tr><th scope="row">${l}</th>${sel.map((o) => `<td${b ? b(o) : ''}>${f(o)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
     };
     cf.addEventListener('submit', (e) => { e.preventDefault(); const o = all.find((x) => label(x) === cf.q.value); if (!o) return; const l = store.get('mc_cmp_offers', []).filter((x) => x !== o.i); l.unshift(o.i); store.set('mc_cmp_offers', l.slice(0, 3)); cf.reset(); render(); });
@@ -363,7 +363,7 @@
     g.fillStyle = '#fbbf24'; g.font = 'bold 120px system-ui,sans-serif'; g.fillText(`${(+d.pr).toLocaleString('es-ES')} €`, 70, 650);
     g.fillStyle = '#cfe0f3'; g.font = '32px system-ui,sans-serif'; g.fillText('por persona, desde', 70, 700);
     g.fillStyle = scColor(+d.sc); g.fillRect(70, 760, 200, 140); g.fillStyle = '#fff'; g.font = 'bold 80px system-ui,sans-serif'; g.fillText(d.sc, 100, 860);
-    g.font = 'bold 40px system-ui,sans-serif'; g.fillText(d.l, 300, 830); g.font = '28px system-ui,sans-serif'; g.fillStyle = '#cfe0f3'; g.fillText('Nota de la oferta', 300, 875);
+    g.font = 'bold 40px system-ui,sans-serif'; g.fillText(d.l, 300, 830); g.font = '28px system-ui,sans-serif'; g.fillStyle = '#cfe0f3'; g.fillText('Nota del precio', 300, 875);
   }, 'oferta-crucero')));
 
   // Prerrellenar checklist y cuenta atrás desde una oferta
