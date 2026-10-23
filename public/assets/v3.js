@@ -361,6 +361,50 @@
       msg.textContent = '✅ Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
     } catch (err) { btn.disabled = false; msg.innerHTML = 'No hemos podido guardarla ahora. Inténtalo de nuevo o usa la <a href="' + BASE + 'herramientas/alerta-precio/">alerta de precio</a>.'; }
   }));
+// ---------- Tamaño del texto (100 %, 112,5 %, 125 %) ----------
+  $$('.js-textsize').forEach((b) => b.addEventListener('click', () => {
+    const steps = ['', '112.5%', '125%']; let cur = ''; try { cur = localStorage.getItem('mc_textsize') || ''; } catch {}
+    const next = steps[(steps.indexOf(cur) + 1) % steps.length]; document.documentElement.style.fontSize = next;
+    try { next ? localStorage.setItem('mc_textsize', next) : localStorage.removeItem('mc_textsize'); } catch {}
+    b.setAttribute('aria-label', `Tamaño del texto: ${next || '100%'}. Pulsa para cambiarlo`);
+  }));
+// ---------- Notas privadas por oferta (solo en este navegador) ----------
+  $$('.js-note').forEach((t) => { const all = store.get('mc_notes', {}); t.value = all[t.dataset.id] || ''; let tm; t.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { const a = store.get('mc_notes', {}); if (t.value.trim()) a[t.dataset.id] = t.value.slice(0, 2000); else delete a[t.dataset.id]; store.set('mc_notes', a); }, 400); }); });
+// ---------- Copiar presupuesto ----------
+  $$('.js-copy-budget').forEach((b) => b.addEventListener('click', async () => {
+    const txt = b.dataset.text; let ok = false;
+    try { await navigator.clipboard.writeText(txt); ok = true; } catch {}
+    if (!ok && navigator.share) { try { await navigator.share({ text: txt }); ok = true; } catch {} }
+    b.textContent = ok ? '✅ Presupuesto copiado' : '📋 No se pudo copiar'; setTimeout(() => { b.textContent = '📋 Copiar presupuesto'; }, 2500);
+  }));
+// ---------- Precarga de páginas internas al acercar el dedo o el ratón ----------
+  const pre = new Set();
+  const prefetch = (e) => { const a = e.target.closest?.('a[href]'); if (!a || a.origin !== location.origin || a.hash && a.pathname === location.pathname || pre.has(a.pathname) || pre.size > 30) return; if (navigator.connection?.saveData) return; pre.add(a.pathname); const l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.pathname; document.head.appendChild(l); };
+  document.addEventListener('pointerenter', prefetch, { capture: true, passive: true }); document.addEventListener('touchstart', prefetch, { capture: true, passive: true });
+// ---------- Portada: "Porque viste…" con ofertas parecidas a las últimas que miraste ----------
+  const fy = $('#for-you');
+  if (fy) { const rec = store.get('mc_offer_recent', []); if (rec.length) getJson('ofertas.json').then((all) => {
+    const by = Object.fromEntries(all.map((o) => [o.i, o])); const seen = rec.map((r) => by[r.id]).filter(Boolean); if (!seen.length) return;
+    const ids = new Set(rec.map((r) => r.id)); const base = seen[0];
+    const sim = all.filter((o) => !ids.has(o.i) && (o.dst === base.dst || o.s === base.s) && Math.abs(o.n - base.n) <= 3).sort((a, b) => b.sc - a.sc).slice(0, 6);
+    if (!sim.length) return;
+    fy.hidden = false; fy.innerHTML = `<div class="block-h"><h2>Porque viste ${esc(base.t)} en el ${esc(base.sn)}</h2><a href="${BASE}mis-cruceros/">Tus vistas y guardadas →</a></div><ul class="mini mini-grid">${sim.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`;
+  }).catch(() => {}); }
+// ---------- Mis cruceros: compartir la lista de ofertas guardadas ----------
+  const myo = $('#my-offers');
+  if (myo) {
+    const shared = (qs.get('lista') || '').split(',').filter((x) => /^[a-z0-9-]{5,80}$/.test(x)).slice(0, 30);
+    if (shared.length) getJson('ofertas.json').then((all) => {
+      const by = Object.fromEntries(all.map((o) => [o.i, o])); const l = shared.map((i) => by[i]).filter(Boolean);
+      const box = document.createElement('div'); box.className = 'tip';
+      box.innerHTML = l.length ? `<b>Te han compartido ${l.length} oferta${l.length > 1 ? 's' : ''}</b><ul class="mini">${l.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${o.d} · desde ${eur(o.pr)}</span></a></li>`).join('')}</ul><button class="btn btn-sm js-save-shared" type="button">Guardar todas en mi lista</button>` : 'Las ofertas de este enlace ya no están a la venta.';
+      myo.before(box);
+      $('.js-save-shared', box)?.addEventListener('click', (e) => { const f = store.get('mc_offer_favs', []); const have = new Set(f.map((x) => x.id)); l.filter((o) => !have.has(o.i)).forEach((o) => f.push({ id: o.i, t: `${o.t} · ${o.sn}`, d: o.d, p: o.pr })); store.set('mc_offer_favs', f.slice(0, 50)); e.target.textContent = '✅ Guardadas'; });
+    }).catch(() => {});
+    const favs = store.get('mc_offer_favs', []);
+    if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📤 Compartir mi lista'; myo.after(b);
+      b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = '✅ Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
+  }
 // ---------- Ficha de salida: total para el grupo ----------
   $$('.group-calc').forEach((g) => {
     const sel = $('.js-group', g), out = $('.js-group-out', g), real = +g.dataset.real;

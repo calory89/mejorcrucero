@@ -178,7 +178,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:type" content="${ogType}"><meta property="og:site_name" content="MejorCrucero"><meta property="og:title" content="${esc(fullTitle)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE}${url}"><meta property="og:image" content="${esc(ogImg)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
-<script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t;var z=localStorage.getItem('mc_textsize');if(z)document.documentElement.style.fontSize=z}catch(e){}</script>
 ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}
 <link rel="stylesheet" href="/assets/style.css?v=${BUILD_DATE}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
@@ -191,7 +191,7 @@ ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="hig
 <nav class="nav" aria-label="Principal"><ul>${NAV.map(([u, n]) => `<li><a href="${u}"${url.startsWith(u) ? ' aria-current="page"' : ''}>${n}</a></li>`).join('')}</ul></nav>
 <form class="gsearch" action="/buscar/" role="search"><label class="sr" for="gq">Buscar barco, naviera, destino o puerto</label><input id="gq" name="q" type="search" placeholder="Barco, destino, puerto…" autocomplete="off" aria-autocomplete="list" aria-controls="gq-list"><ul id="gq-list" class="ac" role="listbox" hidden></ul></form>
 <a class="notif" href="/mis-cruceros/#avisos" hidden aria-label="Tienes respuestas nuevas">💬<span></span></a>
-<button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button>
+<button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button><button class="icon-btn js-textsize" type="button" aria-label="Cambiar el tamaño del texto" title="Tamaño del texto"><span aria-hidden="true" style="font-weight:700">A<small>A</small></span></button>
 <a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">🔔 Alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
 ${[['/', 'Inicio'], ['/ofertas/chollos/', '🔥 Chollos de hoy'], ...NAV, ['/puertos/', 'Puertos'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
