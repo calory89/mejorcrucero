@@ -25,14 +25,16 @@ jobs:
         run: |
           node tools/costa.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
-          git add src/data/sailings.json tools/costa-sample.json 2>/dev/null; git add src/data/sailings.json && git commit -m "Ofertas: precios de Costa actualizados" && git pull --rebase -q && git push || echo "sin cambios en ofertas"
+          git add src/data/sailings.json; if [ -f tools/costa-sample.json ]; then git add tools/costa-sample.json; fi
+          if git diff --cached --quiet; then echo "sin cambios en ofertas"; else git commit -m "Ofertas: precios de Costa actualizados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
       - name: Importar ofertas de MSC Cruceros (si hay APIFY_TOKEN)
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: |
           node tools/msc.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
-          git add src/data/sailings.json tools/msc-sample.json 2>/dev/null; git add src/data/sailings.json && git commit -m "Ofertas: precios de MSC actualizados" && git pull --rebase -q && git push || echo "sin cambios en MSC"
+          git add src/data/sailings.json; if [ -f tools/msc-sample.json ]; then git add tools/msc-sample.json; fi
+          if git diff --cached --quiet; then echo "sin cambios en MSC"; else git commit -m "Ofertas: precios de MSC actualizados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
       - name: Importar feed de precios (si está configurado)
         if: ${{ vars.FEED_URL != '' }}
         env:
