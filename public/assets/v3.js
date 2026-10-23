@@ -269,27 +269,79 @@
   // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
   $$('.offer-filter').forEach((f) => {
     const g = $(f.dataset.target); if (!g) return;
+    $$('[data-open-wide]', f).forEach((d) => { if (innerWidth > 760) d.open = true; });
     const cards = [...g.children];
-    const apply = () => {
-      const o = f.o.value, n = f.n.value, b = +(f.b?.value || 0), es = f.es?.value, mo = f.m?.value, nl = nlParse(f.q?.value);
-      const key = { score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date }[o];
-      g.dataset.sort = o; cards.sort((a, b) => { const x = key(a), y = key(b); return x < y ? -1 : x > y ? 1 : 0; });
-      let shown = 0;
-      cards.forEach((c) => { c.hidden = (n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nl && !nl(c)); if (!c.hidden) shown++; g.appendChild(c); });
-      let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); } m.textContent = `${shown} ofertas`;
+    // El servidor pinta las primeras 48; el resto se carga una vez al filtrar o pedir más
+    const allIds = (g.dataset.all || '').split(',').filter(Boolean);
+    let full = cards.length >= allIds.length, loading = null;
+    const ensureAll = () => full ? Promise.resolve() : (loading = loading || getJson('cards.json').then((h) => {
+      const have = new Set(cards.map((c) => c.dataset.id)); const tmp = document.createElement('div');
+      tmp.innerHTML = allIds.filter((id) => !have.has(id) && h[id]).map((id) => h[id]).join('');
+      const extra = [...tmp.children]; extra.forEach((c) => { c.hidden = true; g.appendChild(c); }); cards.push(...extra); full = true;
+    }).catch(() => { full = true; }));
+    const PAGE = 24; let limit = PAGE;
+    const seenIds = new Set(store.get('mc_offer_recent', []).map((x) => x.id));
+    const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop }[o] || ((c) => -+c.dataset.score));
+    const moreBtn = document.createElement('button'); moreBtn.type = 'button'; moreBtn.className = 'btn btn-ghost btn-block js-more'; g.after(moreBtn);
+    moreBtn.addEventListener('click', () => { limit += PAGE; ensureAll().then(() => apply(true)); });
+    const reset = $('.js-reset-filters', f.parentNode);
+    const state = () => { const p = new URLSearchParams(); for (const el of f.elements) if (el.name && (el.type === 'checkbox' ? el.checked : el.value) && !(el.name === 'o' && el.value === 'score')) p.set(el.name, el.type === 'checkbox' ? '1' : el.value); return p; };
+    const apply = (keepLimit) => {
+      if (keepLimit !== true) limit = PAGE;
+      if (!full && [...f.elements].some((el) => el.name && el.name !== 'o' && (el.type === 'checkbox' ? el.checked : el.value)) || (!full && f.elements.o?.value !== 'score')) { ensureAll().then(() => apply(keepLimit)); }
+      const v = (n) => f.elements[n]?.value || '';
+      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q'));
+      const k = key(o);
+      g.dataset.sort = o; cards.sort((a, c) => { const x = k(a), y = k(c); return x < y ? -1 : x > y ? 1 : 0; });
+      let shown = 0, match = 0;
+      cards.forEach((c) => {
+        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (nl && !nl(c)));
+        if (ok) match++;
+        c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
+      });
+      let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); }
+      const total = full ? match : Math.max(match, allIds.length);
+      m.textContent = `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`;
+      moreBtn.hidden = total <= shown; match = total; moreBtn.textContent = `Ver ${Math.min(PAGE, match - shown)} ofertas más (quedan ${match - shown})`;
+      const p = state(); const qsNew = p.toString();
+      try { history.replaceState(null, '', location.pathname + (qsNew ? '?' + qsNew : '') + location.hash); } catch (e) {}
+      store.set('mc_filters', { ...store.get('mc_filters', {}), [location.pathname]: qsNew });
+      if (reset) reset.hidden = !qsNew;
+      const nf = [...p.keys()].filter((x) => !['o', 'q'].includes(x)).length; const fn = $('.f-n', f); if (fn) fn.textContent = nf ? `(${nf})` : '';
       let more = $('.nl-more', f.parentNode); if (more) more.remove();
-      if (nl && shown < 6) getJson('ofertas.json').then((all) => {
-        const vis = new Set(cards.filter((c) => !c.hidden).map((c) => c.querySelector('a[href*="/salidas/"]')?.getAttribute('href')));
-        const hits = all.filter((o) => !vis.has(`${BASE}salidas/${o.i}/`) && nl({ dataset: { price: o.pr, nights: o.n, m: o.d.slice(0, 7), q: [o.dst, o.sn, o.p, ...(o.pts || []), MESES[+o.d.slice(5, 7) - 1]].join(' ') } })).sort((a, b) => b.sc - a.sc).slice(0, 24);
+      if (!match) {
+        // Cero resultados: qué filtro quitar y cuántas saldrían
+        const tries = ['b', 'm', 'n', 'nv', 'sh', 'ssc', 'dsc', 'es', 'q'].filter((x) => f.elements[x]?.value).map((x) => {
+          const saved = f.elements[x].value; f.elements[x].value = '';
+          const nl2 = nlParse(v('q'));
+          const c2 = cards.filter((c) => !((v('n') && c.dataset.n !== v('n')) || (+v('b') && +c.dataset.price > +v('b')) || (v('es') === '1' && c.dataset.es !== '1') || (v('m') && c.dataset.m !== v('m')) || (v('nv') && c.dataset.line !== v('nv')) || (v('sh') && c.dataset.ship !== v('sh')) || (+v('ssc') && +c.dataset.ssc < +v('ssc')) || (+v('dsc') && +c.dataset.score < +v('dsc')) || (nl2 && !nl2(c)))).length;
+          f.elements[x].value = saved; return [x, c2];
+        }).filter(([, c2]) => c2 > 0).sort((a, c) => c[1] - a[1]);
+        const NAMES = { b: 'el presupuesto', m: 'el mes', n: 'las noches', nv: 'la naviera', sh: 'el barco', ssc: 'la nota del barco', dsc: 'la nota del precio', es: '"solo desde España"', q: 'el texto de búsqueda' };
+        if (tries.length) { const box = document.createElement('div'); box.className = 'nl-more tip'; box.innerHTML = `Ninguna oferta cumple todo. ${tries.slice(0, 3).map(([x, c2]) => `<button type="button" class="btn btn-sm btn-ghost" data-clear="${x}">Quitar ${NAMES[x]} (${c2})</button>`).join(' ')}`; g.before(box); box.addEventListener('click', (e) => { const x = e.target.dataset.clear; if (x) { f.elements[x].value = ''; apply(); } }); return; }
+      }
+      if (nl && match < 6) getJson('ofertas.json').then((all) => {
+        const vis = new Set(cards.filter((c) => !c.hidden).map((c) => c.getAttribute('href')));
+        const hits = all.filter((o) => !vis.has(`${BASE}salidas/${o.i}/`) && nl({ dataset: { price: o.pr, nights: o.n, m: o.d.slice(0, 7), q: [o.dst, o.sn, o.p, ...(o.pts || []), MESES[+o.d.slice(5, 7) - 1]].join(' ') } })).sort((a, c) => c.sc - a.sc).slice(0, 24);
         $('.nl-more', f.parentNode)?.remove();
+        if (!hits.length) return;
         const box = document.createElement('div'); box.className = 'nl-more';
-        box.innerHTML = hits.length ? `<h3 class="h-sm">${hits.length} ofertas más en otras fechas y destinos que encajan</h3><ul class="mini">${hits.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota ${o.sc}</span></a></li>`).join('')}</ul>` : (shown ? '' : '<p class="tip">No hay ofertas que cumplan todo. Prueba quitando el presupuesto, el mes o alguna palabra.</p>');
+        box.innerHTML = `<h3 class="h-sm">${hits.length} ofertas más en otras fechas y destinos que encajan</h3><ul class="mini">${hits.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota ${o.sc}</span></a></li>`).join('')}</ul>`;
         g.before(box);
       }).catch(() => {});
     };
-    f.addEventListener('input', apply); f.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
-    let any = false; for (const el of f.elements) if (el.name && qs.get(el.name)) { el.value = qs.get(el.name); any = true; } if (any) apply();
+    f.addEventListener('input', () => apply()); f.addEventListener('change', () => apply()); f.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
+    reset?.addEventListener('click', () => { for (const el of f.elements) if (el.name) { if (el.type === 'checkbox') el.checked = false; else if (el.name === 'o') el.value = 'score'; else el.value = ''; } apply(); });
+    // Filtros desde la URL o, si no hay, los últimos usados en esta página
+    const src = [...qs.keys()].length ? qs : new URLSearchParams(store.get('mc_filters', {})[location.pathname] || '');
+    for (const el of f.elements) if (el.name && src.get(el.name)) { if (el.type === 'checkbox') el.checked = true; else el.value = src.get(el.name); }
+    apply();
   });
+  $$('.js-share-search').forEach((b) => b.addEventListener('click', async () => {
+    const u = location.href, t = document.querySelector('h1')?.textContent.trim() || 'Ofertas de cruceros';
+    if (navigator.share) { try { await navigator.share({ title: t, url: u }); return; } catch (e) { return; } }
+    window.open(`https://wa.me/?text=${encodeURIComponent(t + ': ' + u)}`, '_blank', 'noopener');
+  }));
 // ---------- Ofertas guardadas y vistas ----------
   const so = $('.js-save-offer');
   if (so) {
