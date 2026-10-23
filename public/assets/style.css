@@ -380,3 +380,12 @@ fieldset .chk{grid-column:1/-1}
  .page-h p.small:has(.js-save-search){display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none}
  .page-h p.small:has(.js-save-search) .btn{flex:0 0 auto;white-space:nowrap}
 }
+.route{margin:1rem 0 .5rem}
+.route svg{width:100%;height:auto;background:linear-gradient(180deg,#e6f1fb,#d6e8f7);border-radius:14px;color:#0b2540}
+.route circle{fill:#e8492a;stroke:#fff;stroke-width:2}
+.route text{fill:#fff;font:700 11px system-ui,sans-serif}
+.route figcaption{display:flex;flex-wrap:wrap;gap:.3rem .8rem;margin-top:.4rem}
+.group-calc{margin:1rem 0;padding:.8rem 1rem;border-radius:12px;background:var(--soft,#eef3f8)}
+.group-calc label{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+@media (prefers-color-scheme:dark){.route svg{background:linear-gradient(180deg,#14304d,#0f2740);color:#cfe0f3}}
+.itin{list-style:none;padding-left:0}.itin li{padding:.25rem 0}

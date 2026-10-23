@@ -22,6 +22,18 @@ const PORT = (n) => {
 const PORT_SLUG = { Barcelona: 'barcelona', 'Palma de Mallorca': 'palma', Valencia: 'valencia', 'Málaga': 'malaga', Alicante: 'alicante', 'Cádiz': 'cadiz', Tarragona: 'tarragona', Bilbao: 'bilbao', Vigo: 'vigo', 'Santa Cruz de Tenerife': 'tenerife', 'Las Palmas de Gran Canaria': 'gran-canaria', 'Buenos Aires': 'buenos-aires' };
 const CABIN = (t) => (/suite/i.test(t) ? 'suite' : /balc/i.test(t) ? 'balcon' : /vista|exterior/i.test(t) ? 'exterior' : 'interior');
 
+// Precios por categoría de camarote si la fuente los publica (campos price_EUR_anonymous_<categoría>)
+function cabinPrices(c) {
+  const out = {};
+  for (const [k, v] of Object.entries(c)) {
+    const m = /^price_EUR_anonymous_(.+)$/i.exec(k); if (!m) continue;
+    const t = m[1].toLowerCase(); const n = num(v); if (!n) continue;
+    const cab = /suite/.test(t) ? 'suite' : /balc/.test(t) ? 'balcon' : /ocean|vista|exter|outside/.test(t) ? 'exterior' : /inside|inter|interior/.test(t) ? 'interior' : null;
+    if (cab && (!out[cab] || n < out[cab])) out[cab] = n;
+  }
+  return out;
+}
+
 async function main() {
   const q = `${BASE}/search/costa_es_ES/cruisesearch?&fq=(price_EUR_anonymous:[1%20TO%20*])&fq=soldOut:(false)&sort=departDate%20asc&rows=2000`;
   let data;
@@ -31,6 +43,8 @@ async function main() {
     data = await r.json();
   } catch (e) { console.error('Costa no disponible:', e.message, '— se mantienen los datos anteriores'); process.exit(0); }
   const rows = data.searchResults || [];
+  // Muestra del esquema de la fuente (2 salidas) para poder aprovechar campos nuevos sin adivinar
+  try { fs.writeFileSync('tools/costa-sample.json', JSON.stringify(rows.slice(0, 2), null, 1)); } catch {}
   if (rows.length < 50) { console.error('Respuesta sospechosa de Costa (' + rows.length + ' salidas): no se toca nada'); process.exit(0); }
   const prev = (() => { try { return JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { return []; } })();
   const prevById = Object.fromEntries(prev.map((x) => [x.id, x]));
@@ -44,7 +58,10 @@ async function main() {
     if (!price) continue;
     const m = /\((\d+)\s*noche/i.exec(c.dayAndNightName || '');
     const nights = m ? +m[1] : Math.max(1, (parseInt(c.duration) || 2) - 1);
-    const ports = (c.portsList || []).map((p) => ({ day: +p.dayIndicator, name: p.isSeaDestination ? 'Navegación' : PORT(p.portName) }));
+    // Horas de llegada y salida si la fuente las trae (nombres de campo variables: se toman los que encajan)
+    const hhmm = (v) => { const m = /(\d{1,2}):(\d{2})/.exec(String(v || '')); return m ? m[1].padStart(2, '0') + ':' + m[2] : null; };
+    const pick = (p, re) => { const k = Object.keys(p).find((z) => re.test(z) && hhmm(p[z])); return k ? hhmm(p[k]) : null; };
+    const ports = (c.portsList || []).map((p) => { const o = { day: +p.dayIndicator, name: p.isSeaDestination ? 'Navegación' : PORT(p.portName) }; if (!p.isSeaDestination) { const a = pick(p, /arriv/i), d = pick(p, /depart/i); if (a) o.arrive = a; if (d) o.depart = d; if (p.portCode || p.portId) o.code = String(p.portCode || p.portId); if (/tender/i.test(JSON.stringify(p))) o.tender = true; } return o; });
     // unir días de navegación repetidos y quitar duplicados del mismo día
     const seen = new Set(); const itin = ports.filter((p) => { const k = p.day + p.name; if (seen.has(k)) return false; seen.add(k); return true; });
     const ids = c.destinationIds || [];
@@ -64,7 +81,7 @@ async function main() {
       date, nights, depart_port: depart, depart_port_slug: PORT_SLUG[depart] || null, arrive_port: PORT(c.arrivalPortName),
       itinerary: { name: String(c.title || c.destinationName).replace(/desde (.+)$/, (m, q) => 'desde ' + PORT(q)), ports: itin },
       countries: c.visitingCountries || '',
-      prices: { [cabin]: price },
+      prices: { [cabin]: price, ...cabinPrices(c) },
       allinc, base_price: base && base > price ? base : null,
       port_charges: num(c.portCharges?.adultAmount), service_night: svc ? parseFloat(svc.adultAmount) : null, service_included: svcIncluded,
       offers, documents: c.documents || [], availability: c.availabilityStatus || null,

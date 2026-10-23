@@ -342,6 +342,21 @@
     if (navigator.share) { try { await navigator.share({ title: t, url: u }); return; } catch (e) { return; } }
     window.open(`https://wa.me/?text=${encodeURIComponent(t + ': ' + u)}`, '_blank', 'noopener');
   }));
+// ---------- Salida que ya no existe: proponer la próxima fecha del mismo itinerario ----------
+  const ns = $('.next-sail');
+  if (ns) { const m = /\/salidas\/([a-z]+)-([a-z0-9]{2})[a-z0-9]*-([a-z0-9]+)\/?$/.exec(location.pathname); if (m) getJson('ofertas.json').then((all) => {
+    const same = all.filter((o) => o.i.startsWith(m[1] + '-') && o.i.endsWith('-' + m[3])).sort((a, b) => a.d.localeCompare(b.d));
+    const ship = all.filter((o) => o.i.startsWith(`${m[1]}-${m[2]}`)).sort((a, b) => b.sc - a.sc).slice(0, 4);
+    const l = same.length ? same.slice(0, 6) : ship; if (!l.length) return;
+    ns.hidden = false; ns.className = 'next-sail tip';
+    ns.innerHTML = `<b>${same.length ? 'Esta salida ya no está disponible, pero el mismo itinerario sale también en:' : 'Esa salida ya no está disponible. Otras salidas del mismo barco:'}</b><ul class="mini">${l.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(o.pr)}</span></a></li>`).join('')}</ul>`;
+  }).catch(() => {}); }
+// ---------- Ficha de salida: total para el grupo ----------
+  $$('.group-calc').forEach((g) => {
+    const sel = $('.js-group', g), out = $('.js-group-out', g), real = +g.dataset.real;
+    const upd = () => { const n = +sel.value; out.innerHTML = n === 1 ? `Precio real por persona: <b>${eur(real)}</b>. Si viajas solo, la naviera aplica suplemento individual.` : `Total para ${n} adultos: <b>${eur(real * n)}</b> (tasas y cuota de servicio incluidas).`; store.set('mc_group', n); };
+    const saved = store.get('mc_group', 2); if (saved) sel.value = String(saved); sel.addEventListener('change', upd); upd();
+  });
 // ---------- Ofertas guardadas y vistas ----------
   const so = $('.js-save-offer');
   if (so) {
