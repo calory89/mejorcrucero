@@ -391,3 +391,4 @@ fieldset .chk{grid-column:1/-1}
 .itin{list-style:none;padding-left:0}.itin li{padding:.25rem 0}
 :focus-visible{outline:3px solid #e8492a;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.card-tags .t-min{background:#fde8e3;color:#9a2a12;font-weight:600}
