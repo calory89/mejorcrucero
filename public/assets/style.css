@@ -392,3 +392,7 @@ fieldset .chk{grid-column:1/-1}
 :focus-visible{outline:3px solid #e8492a;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 .card-tags .t-min{background:#fde8e3;color:#9a2a12;font-weight:600}
+.watch-form{display:flex;flex-wrap:wrap;gap:.75rem;align-items:end}
+.watch-form label{flex:1 1 200px;display:flex;flex-direction:column;gap:.25rem}
+.watch-form input{min-height:44px;border-radius:10px;padding:.5rem .75rem;border:1px solid #c9d6e3}
+.watch-form .watch-msg{flex-basis:100%;margin:0}

@@ -71,7 +71,7 @@ async function runAlerts(env) {
   const today = new Date().toISOString().slice(0, 10);
   const blocked = new Set((await env.DB.prepare('SELECT email FROM unsub').all()).results.map((x) => x.email));
   const stats = { price: 0, criteria: 0, follow: 0 };
-  const alerts = (await env.DB.prepare("SELECT id,email,kind,payload FROM alerts WHERE email IS NOT NULL AND kind IN ('price','criteria')").all()).results;
+  const alerts = (await env.DB.prepare("SELECT id,email,kind,payload FROM alerts WHERE email IS NOT NULL AND kind IN ('price','criteria','watch')").all()).results;
   for (const a of alerts) {
     if (blocked.has(a.email)) continue;
     let pl; try { pl = JSON.parse(a.payload); } catch { continue; }
@@ -79,6 +79,15 @@ async function runAlerts(env) {
     if (a.kind === 'price' && pl.ship && pl.date && pl.price) {
       for (const o of offers.filter((x) => x.d === pl.date && fold(x.sn) === fold(pl.ship) && x.pr < pl.price))
         stats.price += await enqueue(env, a.email, 'price', `price:${a.id}:${o.i}:${o.pr}`, `Tu crucero en el ${o.sn} ha bajado a ${eurF(o.pr)}`, `Pagaste ${eurF(pl.price)} por persona. Hoy la web oficial lo vende desde ${eurF(o.pr)}. Pregunta a tu agencia o a la naviera si tus condiciones permiten un ajuste de precio o crédito a bordo.`, [{ ...o, was: pl.price }]);
+    }
+    // Salida concreta vigilada: avisar si baja del precio que tenía al crear la alerta o del precio objetivo
+    if (a.kind === 'watch' && pl.id) {
+      const lim = +pl.target > 0 ? +pl.target : +pl.base - 1;
+      const o = offers.find((x) => x.i === pl.id);
+      if (o && lim > 0 && o.pr <= lim && !(await isSeen(env, `watch:${a.id}:${o.pr}`))) {
+        await markSeen(env, `watch:${a.id}:${o.pr}`);
+        stats.watch = (stats.watch || 0) + await enqueue(env, a.email, 'watch', `watch:${a.id}:${o.pr}`, `Ha bajado: ${o.t} en el ${o.sn}, ahora desde ${eurF(o.pr)}`, `Lo seguías desde ${eurF(+pl.base)}${+pl.target > 0 ? ` y querías que bajara de ${eurF(+pl.target)}` : ''}. Hoy la web oficial lo vende desde ${eurF(o.pr)} por persona.`, [{ ...o, was: +pl.base }]);
+      }
     }
     // Alerta por destino / mes / presupuesto
     if (a.kind === 'criteria' && (pl.destino || pl.max || pl.mes)) {

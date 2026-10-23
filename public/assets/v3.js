@@ -351,6 +351,16 @@
     ns.hidden = false; ns.className = 'next-sail tip';
     ns.innerHTML = `<b>${same.length ? 'Esta salida ya no está disponible, pero el mismo itinerario sale también en:' : 'Esa salida ya no está disponible. Otras salidas del mismo barco:'}</b><ul class="mini">${l.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(o.pr)}</span></a></li>`).join('')}</ul>`;
   }).catch(() => {}); }
+// ---------- Ficha de salida: vigilar el precio de esta salida ----------
+  $$('.watch-form').forEach((f) => f.addEventListener('submit', async (e) => {
+    e.preventDefault(); const msg = $('.watch-msg', f), btn = $('button', f);
+    btn.disabled = true;
+    try {
+      await api('/alert', { body: { kind: 'watch', id: f.dataset.id, base: +f.dataset.base, target: +f.target.value || null, email: f.email.value.trim(), website: f.website.value, page: location.pathname } });
+      const l = store.get('mc_watch', []).filter((x) => x.id !== f.dataset.id); l.unshift({ id: f.dataset.id, base: +f.dataset.base, target: +f.target.value || null, at: Date.now() }); store.set('mc_watch', l.slice(0, 50));
+      msg.textContent = '✅ Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
+    } catch (err) { btn.disabled = false; msg.innerHTML = 'No hemos podido guardarla ahora. Inténtalo de nuevo o usa la <a href="' + BASE + 'herramientas/alerta-precio/">alerta de precio</a>.'; }
+  }));
 // ---------- Ficha de salida: total para el grupo ----------
   $$('.group-calc').forEach((g) => {
     const sel = $('.js-group', g), out = $('.js-group-out', g), real = +g.dataset.real;
