@@ -1,11 +1,14 @@
 # Cómo funciona MejorCrucero
 
+MSC y Royal Caribbean bloquean el acceso automático desde GitHub (comprobado el 23-10-2026). No se usan servicios de terceros.
+
 Web estática generada con Node 22 sin dependencias. GitHub Actions la construye dos veces al día y la publica en GitHub Pages. La comunidad, las alertas y los emails viven en un Worker de Cloudflare con base de datos D1.
 
 ## Flujo de datos
 
 1. **Importadores** (`tools/`), en el workflow `Deploy`:
    - `costa.js`: buscador oficial de Costa Cruceros (España). Guarda una muestra del formato en `tools/costa-sample.json`.
+   - `ncl.js`: API pública del buscador de ncl.com/es/es (itinerarios, fechas, precio por camarote, escalas con horario). Todas las fechas a 18 meses si sale de Europa; las 3 próximas si no. Muestra en `tools/ncl-sample.json`.
    - `import-feed.js`: feed genérico (variable `FEED_URL`), formato en `docs/feed.md`.
    - Todos escriben en `src/data/sailings.json`, conservan las salidas de las demás fuentes y añaden `history` (un punto por cambio de precio). Si una fuente falla, no tocan el fichero.
 2. **Build** (`src/build.js`): genera `dist/` con todas las páginas. Las ofertas salen de `src/offers.js`.
