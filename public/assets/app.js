@@ -43,6 +43,13 @@
   // ---------- Service worker (PWA) ----------
   if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', () => navigator.serviceWorker.register(BASE + 'sw.js').catch(() => {}));
 
+  // ---------- Aviso de idioma y moneda para visitantes de fuera de España (una vez por navegador) ----------
+  try { const lang = (navigator.language || 'es-ES'); const CUR = { 'es-MX': 'MXN', 'es-AR': 'ARS', 'es-CO': 'COP', 'es-CL': 'CLP', 'es-PE': 'PEN', 'es-US': 'USD', 'en-US': 'USD', 'en-GB': 'GBP', 'es-UY': 'UYU', 'es-DO': 'DOP' }; const cur = CUR[lang];
+    if ((cur || !/^es\b/i.test(lang)) && !store.get('mc_locale_ok', 0)) { const bar = document.createElement('div'); bar.className = 'locale-bar small'; bar.setAttribute('role', 'status');
+      bar.innerHTML = `<span>${/^es\b/i.test(lang) ? 'Los precios están en euros (€).' : 'Esta web está en español y los precios en euros (€).'} <span class="js-fx"></span></span><button type="button" class="btn btn-ghost btn-sm" aria-label="Cerrar aviso">✕</button>`;
+      document.body.prepend(bar); $('button', bar).addEventListener('click', () => { store.set('mc_locale_ok', 1); bar.remove(); });
+      if (cur && cur !== 'EUR') fetch('https://api.frankfurter.app/latest?from=EUR&to=' + cur).then((r) => r.json()).then((j) => { const v = j?.rates?.[cur]; if (v) $('.js-fx', bar).textContent = `Hoy, 1 € ≈ ${new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2 }).format(v)} ${cur} (cambio del BCE).`; }).catch(() => {}); } } catch {}
+
   // ---------- Autocompletar global ----------
   const gq = $('#gq'), gl = $('#gq-list');
   if (gq) {
@@ -171,6 +178,8 @@
   if (mine) { const sl = [...new Set([...favs(), ...store.get('mc_recent', [])])].slice(0, 4); if (sl.length) { mine.hidden = false; fillShips($('.mine-grid', mine), sl); } }
   fillShips($('#my-favs'), favs());
   fillShips($('#my-recent'), store.get('mc_recent', []));
+  // Ficha de barco: los otros barcos que has visto hace poco
+  if (shipEl) { const other = store.get('mc_recent', []).filter((x) => x !== shipEl.dataset.ship).slice(0, 4); if (other.length) { const sec = document.createElement('section'); sec.className = 'block'; sec.innerHTML = '<h2 class="h-sm">Vistos recientemente</h2><div class="grid mine-grid"></div>'; shipEl.appendChild(sec); fillShips($('.mine-grid', sec), other); } }
 
   // ---------- Formularios de email ----------
   $$('form.lead').forEach((f) => f.addEventListener('submit', async (e) => {
@@ -666,7 +675,7 @@
   async function initForum(f) {
     const list = $('.forum-list', f), form = $('.forum-form', f);
     const kinds = f.dataset.kinds.split(',');
-    let kind = kinds[0], posts = [], replyTo = null;
+    let kind = kinds.includes(store.get('mc_tab', '')) ? store.get('mc_tab', '') : kinds[0], posts = [], replyTo = null;
     if (!(await hasApi())) { list?.remove(); form?.remove(); $('.tabs', f)?.remove(); $('.forum-soon', f).hidden = false; return; }
     const titles = { review: 'Escribe tu opinión', question: 'Haz una pregunta', cabin: 'Cuenta cómo era tu camarote', comment: 'Escribe un comentario', excursion: 'Propón una excursión compartida (puerto, día, plan y cuántos sois)', diary: 'Escribe en tu diario de viaje' };
     const setKind = (k) => {
@@ -691,7 +700,7 @@
         setKind(kind);
       } catch { list.innerHTML = '<p class="muted">No se ha podido cargar el foro. Inténtalo de nuevo más tarde.</p>'; }
     };
-    $$('.tab', f).forEach((t) => t.addEventListener('click', () => setKind(t.dataset.kind)));
+    $$('.tab', f).forEach((t) => t.addEventListener('click', () => { store.set('mc_tab', t.dataset.kind); setKind(t.dataset.kind); }));
     list.addEventListener('click', async (e) => {
       const v = e.target.dataset.vote, r = e.target.dataset.reply, rp = e.target.dataset.rep;
       if (v) { await api('/vote', { body: { id: +v } }).catch(() => {}); e.target.textContent = '👍 ¡Gracias!'; }

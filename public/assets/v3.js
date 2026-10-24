@@ -293,12 +293,12 @@
       if (keepLimit !== true) limit = PAGE;
       if (!full && [...f.elements].some((el) => el.name && el.name !== 'o' && (el.type === 'checkbox' ? el.checked : el.value)) || (!full && f.elements.o?.value !== 'score')) { ensureAll().then(() => apply(keepLimit)); }
       const v = (n) => f.elements[n]?.value || '';
-      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked; const cab = v('cab'), pais = v('pais'), escala = fold(v('esc')).trim(), sp = v('sp');
+      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked; const cab = v('cab'), pais = v('pais'), escala = fold(v('esc')).trim(), sp = v('sp'); const hidL = store.get('mc_hide_lines', []), hidS = store.get('mc_hide_ships', []);
       const k = key(o);
       g.dataset.sort = o; cards.sort((a, c) => { const x = k(a), y = k(c); return x < y ? -1 : x > y ? 1 : 0; });
       let shown = 0, match = 0;
       cards.forEach((c) => {
-        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (cab && !(c.dataset.cab || '').split(' ').includes(cab)) || (pais && !(c.dataset.q || '').includes(pais)) || (escala && !fold(c.dataset.q).includes(escala)) || (sp && !(c.dataset.sp || '').split(' ').includes(sp)) || (nl && !nl(c)));
+        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (cab && !(c.dataset.cab || '').split(' ').includes(cab)) || (pais && !(c.dataset.q || '').includes(pais)) || (escala && !fold(c.dataset.q).includes(escala)) || (sp && !(c.dataset.sp || '').split(' ').includes(sp)) || (!nv && hidL.includes(c.dataset.line)) || (!sh && hidS.includes(c.dataset.ship)) || (nl && !nl(c)));
         if (ok) match++;
         c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
       });
@@ -339,6 +339,13 @@
     // Filtros desde la URL o, si no hay, los últimos usados en esta página
     const src = [...qs.keys()].length ? qs : new URLSearchParams(store.get('mc_filters', {})[location.pathname] || '');
     for (const el of f.elements) if (el.name && src.get(el.name)) { if (el.type === 'checkbox') el.checked = true; else el.value = src.get(el.name); }
+    // Ocultar navieras o barcos que no te interesan (se recuerda en este navegador)
+    { const box = document.createElement('p'); box.className = 'small hide-ctl'; f.after(box);
+      const nameOf = (sel, v) => [...(f.elements[sel]?.options || [])].find((o) => o.value === v)?.textContent || v;
+      const draw = () => { const L = store.get('mc_hide_lines', []), S = store.get('mc_hide_ships', []), nv = f.elements.nv?.value, sh = f.elements.sh?.value;
+        box.innerHTML = `${nv ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="l">🙈 Ocultar ${esc(nameOf('nv', nv))} en los listados</button> ` : ''}${sh ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="s">🙈 Ocultar el ${esc(nameOf('sh', sh))}</button> ` : ''}${L.length + S.length ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="x">👁 Mostrar lo oculto (${L.length + S.length})</button>` : ''}`; };
+      box.addEventListener('click', (e) => { const k = e.target.dataset.hide; if (!k) return; if (k === 'l') { store.set('mc_hide_lines', [...new Set([...store.get('mc_hide_lines', []), f.elements.nv.value])]); f.elements.nv.value = ''; } if (k === 's') { store.set('mc_hide_ships', [...new Set([...store.get('mc_hide_ships', []), f.elements.sh.value])]); f.elements.sh.value = ''; } if (k === 'x') { store.set('mc_hide_lines', []); store.set('mc_hide_ships', []); } apply(); draw(); });
+      f.addEventListener('change', draw); draw(); }
     // Al volver atrás desde una ficha: mismas tarjetas cargadas y misma posición
     let back = null; try { back = JSON.parse(sessionStorage.getItem('mc_back') || 'null'); } catch {}
     g.addEventListener('click', (e) => { if (e.target.closest('a')) try { sessionStorage.setItem('mc_back', JSON.stringify({ p: location.pathname, q: location.search, y: scrollY, limit, t: Date.now() })); } catch {} });
@@ -377,7 +384,7 @@
 // ---------- Contador de guardadas en la barra inferior ----------
   { const n = store.get('mc_offer_favs', []).length; $$('.bn-count').forEach((b) => { if (n) { b.hidden = false; b.textContent = n > 9 ? '9+' : n; } }); }
 // ---------- Mis cruceros: exportar, importar y borrar los datos del navegador ----------
-  const MY_KEYS = ['mc_offer_favs', 'mc_offer_recent', 'mc_notes', 'mc_watch', 'mc_searches', 'mc_filters', 'mc_group', 'mc_recent_q', 'mc_prices'];
+  const MY_KEYS = ['mc_offer_favs', 'mc_offer_recent', 'mc_pref', 'mc_hide_lines', 'mc_hide_ships', 'mc_notes', 'mc_watch', 'mc_searches', 'mc_filters', 'mc_group', 'mc_recent_q', 'mc_prices'];
   $$('.js-export-my').forEach((b) => b.addEventListener('click', () => { const data = Object.fromEntries(MY_KEYS.map((k) => [k, store.get(k, null)]).filter(([, v]) => v != null)); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: 'mejorcrucero', v: 1, data }, null, 1)], { type: 'application/json' })); a.download = 'mis-cruceros.json'; a.click(); }));
   $$('.js-import-my').forEach((inp) => inp.addEventListener('change', async () => { const msg = $('.js-my-msg'); try { const j = JSON.parse(await inp.files[0].text()); if (j.app !== 'mejorcrucero') throw 0; for (const [k, v] of Object.entries(j.data || {})) if (MY_KEYS.includes(k)) store.set(k, v); msg.textContent = 'Datos cargados. Recargando…'; setTimeout(() => location.reload(), 600); } catch { msg.textContent = 'Ese fichero no es una copia de Mis cruceros.'; } }));
   $$('.js-clear-my').forEach((b) => b.addEventListener('click', () => { if (b.dataset.sure) { MY_KEYS.forEach((k) => { try { localStorage.removeItem(k); } catch {} }); $('.js-my-msg').textContent = 'Datos borrados de este navegador.'; setTimeout(() => location.reload(), 600); } else { b.dataset.sure = 1; b.textContent = '¿Seguro? Pulsa otra vez para borrar'; } }));
@@ -409,6 +416,12 @@
     const by = Object.fromEntries(all.map((o) => [o.i, o])); const seen = rec.map((r) => by[r.id]).filter(Boolean); if (!seen.length) return;
     const ids = new Set(rec.map((r) => r.id)); const base = seen[0];
     const sim = all.filter((o) => !ids.has(o.i) && (o.dst === base.dst || o.s === base.s) && Math.abs(o.n - base.n) <= 3).sort((a, b) => b.sc - a.sc).slice(0, 6);
+    // Preferencias deducidas de lo que miras: destino y puerto más vistos y presupuesto de tus filtros
+    const mode = (a) => { const c = {}; a.filter(Boolean).forEach((k) => { c[k] = (c[k] || 0) + 1; }); return Object.entries(c).sort((x, y) => y[1] - x[1])[0]?.[0]; };
+    const pDst = mode(seen.map((o) => o.dst)), pPort = mode(seen.map((o) => o.p)); const budgets = Object.values(store.get('mc_filters', {})).map((q) => +new URLSearchParams(q).get('b')).filter((v) => v > 0); const pB = budgets.length ? Math.max(...budgets) : 0;
+    store.set('mc_pref', { dst: pDst, port: pPort, b: pB });
+    const ideal = seen.length >= 2 ? all.filter((o) => !ids.has(o.i) && o.dst === pDst && o.p === pPort && (!pB || o.pr <= pB)).sort((a, b) => b.sc - a.sc).slice(0, 6) : [];
+    if (ideal.length) { const box = document.createElement('section'); box.className = 'wrap block'; box.innerHTML = `<div class="block-h"><h2>Para ti: ${esc(ideal[0].t.split(' · ')[0])} desde ${esc(pPort)}${pB ? ` por menos de ${eur(pB)}` : ''}</h2><button class="btn btn-ghost btn-sm js-forget-pref" type="button">Olvidar mis preferencias</button></div><p class="muted small">Lo deducimos de las salidas que has mirado en este navegador. No sale de tu dispositivo.</p><ul class="mini mini-grid">${ideal.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`; fy.before(box); $('.js-forget-pref', box).addEventListener('click', () => { ['mc_offer_recent', 'mc_pref'].forEach((k) => { try { localStorage.removeItem(k); } catch {} }); box.remove(); fy.hidden = true; }); }
     if (!sim.length) return;
     fy.hidden = false; fy.innerHTML = `<div class="block-h"><h2>Porque viste ${esc(base.t)} en el ${esc(base.sn)}</h2><a href="${BASE}mis-cruceros/">Tus vistas y guardadas →</a></div><ul class="mini mini-grid">${sim.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`;
   }).catch(() => {}); }
