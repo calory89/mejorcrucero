@@ -285,7 +285,7 @@
     const seenIds = new Set(store.get('mc_offer_recent', []).map((x) => x.id));
     const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop }[o] || ((c) => -+c.dataset.score));
     const moreBtn = document.createElement('button'); moreBtn.type = 'button'; moreBtn.className = 'btn btn-ghost btn-block js-more'; g.after(moreBtn);
-    moreBtn.addEventListener('click', () => { limit += PAGE; ensureAll().then(() => apply(true)); });
+    moreBtn.addEventListener('click', () => { limit += PAGE; if (!full) { g.insertAdjacentHTML('beforeend', '<div class="card skel" aria-hidden="true"></div>'.repeat(6)); g.setAttribute('aria-busy', 'true'); } ensureAll().then(() => { $$('.skel', g).forEach((x) => x.remove()); g.removeAttribute('aria-busy'); apply(true); }); });
     const reset = $('.js-reset-filters', f.parentNode);
     const state = () => { const p = new URLSearchParams(); for (const el of f.elements) if (el.name && (el.type === 'checkbox' ? el.checked : el.value) && !(el.name === 'o' && el.value === 'score')) p.set(el.name, el.type === 'checkbox' ? '1' : el.value); return p; };
     const apply = (keepLimit) => {
@@ -338,7 +338,14 @@
     // Filtros desde la URL o, si no hay, los últimos usados en esta página
     const src = [...qs.keys()].length ? qs : new URLSearchParams(store.get('mc_filters', {})[location.pathname] || '');
     for (const el of f.elements) if (el.name && src.get(el.name)) { if (el.type === 'checkbox') el.checked = true; else el.value = src.get(el.name); }
-    apply();
+    // Al volver atrás desde una ficha: mismas tarjetas cargadas y misma posición
+    let back = null; try { back = JSON.parse(sessionStorage.getItem('mc_back') || 'null'); } catch {}
+    g.addEventListener('click', (e) => { if (e.target.closest('a')) try { sessionStorage.setItem('mc_back', JSON.stringify({ p: location.pathname, q: location.search, y: scrollY, limit, t: Date.now() })); } catch {} });
+    if (back && back.p === location.pathname && back.q === location.search && Date.now() - back.t < 18e5) {
+      try { history.scrollRestoration = 'manual'; sessionStorage.removeItem('mc_back'); } catch {}
+      limit = Math.max(PAGE, back.limit || PAGE); const go = () => { apply(true); requestAnimationFrame(() => scrollTo(0, back.y)); };
+      if (limit > cards.length) { apply(true); ensureAll().then(go); } else go();
+    } else apply();
   });
   $$('.js-share-search').forEach((b) => b.addEventListener('click', async () => {
     const u = location.href, t = document.querySelector('h1')?.textContent.trim() || 'Ofertas de cruceros';

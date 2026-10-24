@@ -422,3 +422,8 @@ fieldset .chk{grid-column:1/-1}
 #offer-grid.as-list{grid-template-columns:1fr;gap:10px}#offer-grid.as-list .offer-card{display:grid;grid-template-columns:150px 1fr;align-items:stretch}#offer-grid.as-list .ship-art{aspect-ratio:auto;height:100%;min-height:110px}#offer-grid.as-list .card-body{padding:10px 14px}#offer-grid.as-list .ports-line{min-height:0}
 @media (max-width:560px){#offer-grid.as-list .offer-card{grid-template-columns:96px 1fr}}
 .days-n{font-weight:400;font-size:.8em;color:var(--muted,#667)}
+#gq-list .ac-g{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#667);padding:8px 12px 2px;pointer-events:none}
+/* Esqueleto de carga de tarjetas */
+.skel{min-height:300px;border-radius:14px;background:linear-gradient(90deg,var(--line,#e5e7eb) 0%,var(--bg-2,#f3f4f6) 50%,var(--line,#e5e7eb) 100%);background-size:200% 100%;animation:skel 1.2s ease-in-out infinite}
+@keyframes skel{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}

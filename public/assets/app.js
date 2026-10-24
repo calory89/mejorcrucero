@@ -65,7 +65,16 @@
       let hits = idx.filter((x) => x[3].includes(q)).sort((a, b) => a[3].indexOf(q) - b[3].indexOf(q) || a[0].length - b[0].length).slice(0, 8);
       if (!hits.length) { const ws = q.split(/\s+/).filter((w) => w.length >= 2); hits = idx.filter((x) => { const xw = x[3].split(/[^a-z0-9]+/); return ws.length && ws.every((w) => xw.some((y) => y.startsWith(w) || (w.length >= 5 && lev1(w, y)))); }).slice(0, 8); }
       active = -1;
-      gl.innerHTML = hits.map((h, i) => `<li role="option" id="ac-${i}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join('') || '<li class="muted">Sin resultados: pulsa Intro para buscar</li>';
+      // También salidas concretas (y las próximas del barco si se busca un barco)
+      let offs = [];
+      try { if (q.length >= 3) { const all = await (window.__mcOffers = window.__mcOffers || getJson('ofertas.json')); const ws = q.split(/\s+/).filter(Boolean);
+        offs = all.filter((o) => { const t = norm([o.sn, o.t, o.p, ...(o.pts || [])].join(' ')); return ws.every((w) => t.includes(w)); }).sort((a, c) => (norm(c.sn || '').includes(q) - norm(a.sn || '').includes(q)) || a.d.localeCompare(c.d)).slice(0, 4)
+          .map((o) => [`${o.sn}: ${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}, ${o.n} ${o.n === 1 ? "noche" : "noches"} desde ${o.p}`, `/salidas/${o.i}/`, `Salida · desde ${eur(o.pr)}`]); } } catch {}
+      // Resultados agrupados por tipo
+      const groups = {}; [...hits, ...offs].forEach((h) => { const u = h[1], g = /^\/salidas\//.test(u) ? 'Salidas' : /^\/barcos\//.test(u) ? 'Barcos' : /^\/destinos\/|^\/ofertas\/[a-z-]+\/$/.test(u) && /Destino|salidas/.test(h[2]) ? 'Destinos y ofertas' : /^\/puertos\/|escala|desde-/.test(u) ? 'Puertos' : /^\/guias\/|Guía/.test(u + h[2]) ? 'Guías' : 'Más'; (groups[g] = groups[g] || []).push(h); });
+      let n = 0; const order = ['Barcos', 'Salidas', 'Destinos y ofertas', 'Puertos', 'Guías', 'Más'];
+      gl.innerHTML = order.filter((g) => groups[g]).map((g) => `<li class="ac-g" role="presentation">${g}</li>` + groups[g].map((h) => `<li role="option" id="ac-${n++}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join('')).join('')
+        || `<li class="muted">Sin resultados. ¿Quizá alguno de estos destinos?</li>${[['Mediterráneo', '/ofertas/mediterraneo-occidental/'], ['Islas griegas', '/ofertas/mediterraneo-oriental/'], ['Caribe', '/ofertas/caribe/'], ['Fiordos noruegos', '/ofertas/fiordos-noruegos/'], ['Canarias', '/ofertas/canarias-y-madeira/']].map((h) => `<li role="option" id="ac-${n++}"><a href="${BASE}${h[1].slice(1)}"><b>${h[0]}</b><span>Destino</span></a></li>`).join('')}`;
       gl.hidden = false;
     };
     const saveQ = (a) => { const t = $('b', a)?.textContent || ''; const u = a.getAttribute('href').replace(BASE, '/'); const l = store.get('mc_recent_q', []).filter((r) => r[1] !== u); l.unshift([t, u]); store.set('mc_recent_q', l.slice(0, 5)); };
