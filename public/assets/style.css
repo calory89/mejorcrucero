@@ -413,3 +413,4 @@ fieldset .chk{grid-column:1/-1}
 .card-tags .t-new{background:#e6f0ff;color:#123e8a;font-weight:600}
 .card-tags .t-up{background:#fff1e0;color:#8a4b00}
 .itin-sum{background:var(--soft,#eef3f8);padding:.5rem .75rem;border-radius:10px}
+.ship-facts{list-style:none;padding:0;margin:.5rem 0 1rem}.ship-facts li{margin:.2rem 0}

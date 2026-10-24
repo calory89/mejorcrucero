@@ -339,6 +339,24 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   // Índice de escalas: puerto -> salidas que paran allí (sin contar el de salida)
   let escCache = null;
   const escalaIndex = () => { if (escCache) return escCache; escCache = {}; for (const x of sailings) { const seen = new Set(); for (const p of portsOf(x).slice(1, -1)) { if (p.name === x.depart_port || seen.has(p.name) || p.name.length < 3) continue; seen.add(p.name); (escCache[p.name] = escCache[p.name] || []).push(x); } } return escCache; };
+  // Datos de una escala: navieras, horas en tierra, lancha, noche en puerto y próxima salida
+  function escalaFacts(name, l) {
+    const mins = (t) => { const m = /(\d{2}):(\d{2})/.exec(t || ''); return m ? +m[1] * 60 + +m[2] : null; };
+    const stays = []; let tender = 0, over = 0;
+    for (const x of l) { const p = daysOf(x).find((e) => e.name === name); if (!p) continue; if (p.tender) tender++; if (p.to > p.day) over++; const a = mins(p.arrive), d = mins(p.depart); if (a != null && d != null && d > a && p.to === p.day) stays.push(d - a); }
+    const lines = [...new Set(l.map((x) => Object.values(LINES).find((z) => z.slug === x.line)?.short || x.line))];
+    const next = [...l].sort((a, b) => a.date.localeCompare(b.date))[0];
+    const avg = stays.length >= 3 ? Math.round(stays.reduce((a, b) => a + b, 0) / stays.length / 60 * 2) / 2 : null;
+    const ships_ = [...new Set(l.map((x) => shipName(x)))];
+    return `<section class="wrap block"><h2>${esc(name)} en crucero: lo que dicen los datos</h2><ul class="ship-facts">
+      <li><b>Navieras que paran:</b> ${esc(lines.join(', '))}</li>
+      <li><b>Barcos:</b> ${esc(ships_.slice(0, 12).join(', '))}${ships_.length > 12 ? ` y ${ships_.length - 12} más` : ''}</li>
+      ${avg ? `<li><b>Tiempo medio en tierra:</b> unas ${String(avg).replace('.', ',')} horas (según los horarios publicados)</li>` : ''}
+      ${tender ? `<li><b>Desembarco en lancha:</b> en ${tender} de ${l.length} salidas</li>` : ''}
+      ${over ? `<li><b>Noche en puerto:</b> en ${over} salidas</li>` : ''}
+      ${next ? `<li><b>Próxima salida que para aquí:</b> <a href="${url(next)}">${esc(shipName(next))}, ${fdate(next.date)}</a> desde ${eur(minPrice(next))}</li>` : ''}
+      <li><b>Precio desde:</b> ${eur(Math.min(...l.map(minPrice)))} por persona</li></ul></section>`;
+  }
   const escalaUrl = (name) => ((escalaIndex()[name] || []).length >= 6 ? `/ofertas/escala-${slugify(name)}/` : null);
   function hubs() {
     const out = [];
@@ -392,7 +410,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     // Cruceros con escala en un puerto (no cuenta el puerto de salida): páginas para cada escala frecuente
     for (const [name, l] of Object.entries(escalaIndex())) {
       if (l.length < 6) continue; const sl = slugify(name);
-      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
+      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, after: escalaFacts(name, l), crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
     }
     { const all = Object.entries(escalaIndex()).filter(([, l]) => l.length >= 6).sort((a, b) => a[0].localeCompare(b[0], 'es'));
       const body = `<section class="wrap block page-h"><h1>Cruceros por escala</h1><p class="lead-p">Elige el puerto que quieres visitar y mira todos los cruceros que paran allí, con su precio real. ${all.length} escalas.</p><ul class="az-list">${all.map(([n, l]) => `<li><a href="/ofertas/escala-${slugify(n)}/">${esc(n)}</a> <span class="muted small">(${l.length})</span></li>`).join('')}</ul></section>`;
