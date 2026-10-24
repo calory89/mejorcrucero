@@ -15,16 +15,7 @@ jobs:
         with:
           node-version: 22
       - run: npm i --no-save playwright@1 && npx playwright install --with-deps chromium
-      - name: NCL completo y build de prueba
-        run: |
-          cp src/data/sailings.json explore/merged.json
-          time node tools/ncl.js explore/merged.json
-          cp tools/ncl-sample.json explore/ || true
-          node -e "const d=require('./explore/merged.json');const c={};d.forEach(x=>c[x.line]=(c[x.line]||0)+1);console.log(c)" | tee explore/counts.txt
-          time SAILINGS=explore/merged.json BASE=/ node src/build.js | tee -a explore/counts.txt
-          node test/smoke.mjs | tee -a explore/counts.txt || true
-          du -sh dist dist/data/cards.json dist/salidas | tee -a explore/counts.txt
-          rm explore/merged.json
+      - run: node tools/explore.mjs
       - name: Guardar resultados en la rama
         run: |
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
