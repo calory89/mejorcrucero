@@ -353,7 +353,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     return links.length ? `<section class="wrap block"><h2 class="h-sm">Listados relacionados</h2><div class="chips">${links.map(([h, t]) => `<a class="chip" href="${h}">${esc(t)}</a>`).join('')}</div></section>` : '';
   }
   const HUB_URLS = new Set();
-  function hub({ url: u, title, h1, intro, list, crumbs, sortBy = 'score', extra = '', what = '', after = '' }) {
+  function hub({ url: u, title, h1, intro, list, crumbs, sortBy = 'score', extra = '', what = '', after = '', schemaExtra = null }) {
     const sorted = [...list].sort(sortBy === 'date' ? (a, b) => a.date.localeCompare(b.date) : (a, b) => deal(b).score - deal(a).score || minPrice(a) - minPrice(b));
     const cheapest = [...list].sort((a, b) => minPrice(a) - minPrice(b))[0];
     const body = `<section class="wrap block page-h"><h1>${esc(h1 || title)}</h1><p class="lead-p">${intro} ${list.length ? `${list.length} salidas${cheapest ? `, desde ${eur(minPrice(cheapest))} por persona` : ''}.` : ''}</p>
@@ -367,7 +367,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     ${related(list, u)}
     <section class="wrap block"><p class="muted small">Precios por persona de las webs oficiales de las navieras, actualizados dos veces al día. Precio real = tarifa + tasas + cuota de servicio. Por defecto ordenamos por nota del precio y, a igualdad, por el más barato; las comisiones nunca cambian el orden. <a href="/metodologia/#ofertas">Cómo calculamos la nota del precio</a>.</p></section>`;
     return layout({ title, desc: `${title}: ${list.length} salidas comparadas con precio real (tasas incluidas) y nota de 0 a 100. Elige tu mejor crucero al mejor precio.`, url: u, body, crumbs,
-      schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: sorted.slice(0, 20).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + url(x), name: titleOf(x) })) }] });
+      schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: sorted.slice(0, 20).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + url(x), name: titleOf(x) })) }, ...(schemaExtra ? [schemaExtra] : [])] });
   }
   // Índice de escalas: puerto -> salidas que paran allí (sin contar el de salida)
   let escCache = null;
@@ -389,6 +389,14 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
       ${over ? `<li><b>Noche en puerto:</b> en ${over} salidas</li>` : ''}
       ${next ? `<li><b>Próxima salida que para aquí:</b> <a href="${url(next)}">${esc(shipName(next))}, ${fdate(next.date)}</a> desde ${eur(minPrice(next))}</li>` : ''}
       <li><b>Precio desde:</b> ${eur(Math.min(...l.map(minPrice)))} por persona</li></ul></section>`;
+  }
+  const coordOf = (name) => coord[String(name).split(' (')[0].toLowerCase()] || null;
+  // Escalas cercanas (por distancia real entre coordenadas) con su propia página
+  function nearby(name) {
+    const c = coordOf(name); if (!c) return '';
+    const R = Math.PI / 180, km = (a, b) => 6371 * 2 * Math.asin(Math.sqrt(Math.sin((b[0] - a[0]) * R / 2) ** 2 + Math.cos(a[0] * R) * Math.cos(b[0] * R) * Math.sin((b[1] - a[1]) * R / 2) ** 2));
+    const l = Object.entries(escalaIndex()).filter(([n, xs]) => n !== name && xs.length >= 6 && coordOf(n)).map(([n, xs]) => [n, km(c, coordOf(n)), xs.length]).filter(([, d]) => d > 5 && d < 700).sort((a, b) => a[1] - b[1] || b[2] - a[2]).filter((r, i, a) => !a.slice(0, i).some((q) => Math.abs(q[1] - r[1]) < 0.5)).slice(0, 8);
+    return l.length ? `<section class="wrap block"><h2 class="h-sm">Escalas cercanas a ${esc(name)}</h2><div class="chips">${l.map(([n, d, k]) => `<a class="chip" href="/ofertas/escala-${slugify(n)}/">${esc(n)} <small>${Math.round(d)} km · ${k} salidas</small></a>`).join('')}</div></section>` : '';
   }
   const escalaUrl = (name) => ((escalaIndex()[name] || []).length >= 6 ? `/ofertas/escala-${slugify(name)}/` : null);
   function hubs() {
@@ -465,7 +473,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     // Cruceros con escala en un puerto (no cuenta el puerto de salida): páginas para cada escala frecuente
     for (const [name, l] of Object.entries(escalaIndex())) {
       if (l.length < 6) continue; const sl = slugify(name);
-      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, after: escalaFacts(name, l), crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
+      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, after: escalaFacts(name, l) + nearby(name), schemaExtra: (() => { const c = coordOf(name); return c ? { '@context': 'https://schema.org', '@type': 'Place', name, geo: { '@type': 'GeoCoordinates', latitude: c[0], longitude: c[1] }, url: SITE + `/ofertas/escala-${sl}/` } : null; })(), crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
     }
     { const all = Object.entries(escalaIndex()).filter(([, l]) => l.length >= 6).sort((a, b) => a[0].localeCompare(b[0], 'es'));
       const body = `<section class="wrap block page-h"><h1>Cruceros por escala</h1><p class="lead-p">Elige el puerto que quieres visitar y mira todos los cruceros que paran allí, con su precio real. ${all.length} escalas.</p><ul class="az-list">${all.map(([n, l]) => `<li><a href="/ofertas/escala-${slugify(n)}/">${esc(n)}</a> <span class="muted small">(${l.length})</span></li>`).join('')}</ul></section>`;
