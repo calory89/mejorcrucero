@@ -1282,6 +1282,28 @@ write('accesibilidad/index.html', layout({ title: 'Accesibilidad de MejorCrucero
   <li>Las etiquetas de precio llevan texto, no solo color. Respetamos la opción del sistema de reducir animaciones.</li>
   <li>Cada actualización pasa una prueba automática que revisa idioma, imágenes sin texto alternativo, botones sin nombre y campos sin etiqueta.</li></ul>
   <p>Sabemos que aún hay cosas que mejorar (por ejemplo, el mapa interactivo y algunos gráficos). Si encuentras una barrera, <a href="/contacto/">escríbenos</a> y lo arreglamos.</p><p class="muted small">Última revisión: ${new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</p></section>` }));
+// Salidas que ya no están a la venta: en lugar de un 404, una página que lleva a lo más parecido (180 días)
+{
+  const f = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data', 'vistas.json');
+  let seen = {}; try { seen = JSON.parse(fs.readFileSync(f, 'utf8')); } catch {}
+  const today = new Date().toISOString().slice(0, 10), live = new Set(sailings.map((x) => x.id));
+  for (const x of sailings) seen[x.id] = { s: x.ship, d: x.destination || null, n: x.nights, f: x.date, last: today };
+  const cutoff = new Date(Date.now() - 180 * 864e5).toISOString().slice(0, 10);
+  for (const [id, v] of Object.entries(seen)) if (v.last < cutoff) delete seen[id];
+  if (process.env.CI && !process.env.SAILINGS) fs.writeFileSync(f, JSON.stringify(seen));
+  const shipHub = new Set(Object.entries(sailings.reduce((a, x) => { a[x.ship] = (a[x.ship] || 0) + 1; return a; }, {})).filter(([, n]) => n >= 6).map(([k]) => k));
+  let gone = 0;
+  for (const [id, v] of Object.entries(seen)) {
+    if (live.has(id) || !/^[a-z0-9-]{5,90}$/.test(id)) continue;
+    const to = shipHub.has(v.s) ? `/ofertas/barco-${v.s}/` : v.d ? `/ofertas/${v.d}/` : '/ofertas/';
+    const sim = sailings.filter((x) => x.ship === v.s || (v.d && x.destination === v.d)).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 6);
+    const name = bySlug[v.s]?.name || v.s;
+    write(`salidas/${id}/index.html`, layout({ title: `Salida no disponible: ${name}`, desc: `Esta salida del ${name} ya no está a la venta. Mira las salidas parecidas con su precio de hoy.`, url: `/salidas/${id}/`, noindex: true,
+      body: `<section class="wrap block page-h narrow"><h1>Esta salida ya no está a la venta</h1><p class="lead-p">La salida del ${esc(name)}${v.f ? ` del ${new Date(v.f + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}` : ''} ha zarpado o la naviera ya no la vende. Te llevamos a lo más parecido.</p><p><a class="btn" href="${to}">Ver salidas parecidas →</a></p>${sim.length ? `<ul class="mini">${sim.map((x) => `<li><a href="/salidas/${x.id}/"><b>${esc(OFF.destName(x.destination, x))} · ${x.nights} noches</b><span>${esc(bySlug[x.ship]?.name || x.ship_name || x.ship)} · ${new Date(x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${eur(OFF.minPrice(x))}</span></a></li>`).join('')}</ul>` : ''}</section><script>setTimeout(()=>{location.replace('${BASE}${to.slice(1)}')},8000)</script>` }));
+    gone++;
+  }
+  if (gone) console.log(`Salidas retiradas con página de aviso: ${gone}`);
+}
 // Chollos de la semana: cada semana se guarda una foto de las mejores ofertas (src/data/semanas/) y se publica un archivo
 {
   const isoWeek = (d) => { const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())); const day = t.getUTCDay() || 7; t.setUTCDate(t.getUTCDate() + 4 - day); const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1)); return [t.getUTCFullYear(), Math.ceil(((t - y0) / 864e5 + 1) / 7)]; };

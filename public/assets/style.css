@@ -432,3 +432,4 @@ fieldset .chk{grid-column:1/-1}
 .poll-opts{display:grid;gap:6px}.poll-opts button{position:relative;text-align:left;padding:8px 12px;border:1px solid var(--line,#e5e7eb);border-radius:10px;background:var(--card,#fff);cursor:pointer;overflow:hidden;font:inherit;color:inherit}
 .poll.voted .poll-opts button{cursor:default;background:linear-gradient(90deg,var(--sea-l,#dbeafe) var(--pct,0%),var(--card,#fff) var(--pct,0%))}.poll-n{float:right;font-weight:700}
 .op-n{display:block;margin-top:4px;color:var(--muted,#667)}
+.pager{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:16px 0}.pager a{padding:4px 10px;border:1px solid var(--line,#e5e7eb);border-radius:8px;text-decoration:none}

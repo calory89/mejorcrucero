@@ -36,7 +36,7 @@ const bad = /(>[^<]*\b(undefined|NaN)\b[^<]*<)|null\s?€|€\s?null/;
 const pick = (dir, n) => { try { return fs.readdirSync(path.join(D, dir)).slice(0, n).map((d) => `${dir}/${d}/index.html`); } catch { return []; } };
 const sample = [...pick('salidas', 60), ...pick('barcos', 40), ...pick('ofertas', 20).filter((p) => fs.existsSync(path.join(D, p)))];
 for (const p of sample) { const t = read(p); const m = bad.exec(t); if (m) fails.push(`${p}: valor roto cerca de "${m[0].slice(0, 60)}"`); }
-const anySailing = pick('salidas', 1)[0]; if (anySailing) must(anySailing, 'Itinerario día a día', 'Nota del precio', 'id="vigilar"');
+const anySailing = pick('salidas', 200).find((p) => !/name="robots" content="noindex/.test(fs.readFileSync(path.join(D, p), 'utf8'))); if (anySailing) must(anySailing, 'Itinerario día a día', 'Nota del precio', 'id="vigilar"');
 
 // SEO básico en todas las páginas indexables: título y descripción únicos y de longitud razonable (avisos, no bloquean)
 const warns = [];

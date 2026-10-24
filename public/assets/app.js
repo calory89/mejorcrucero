@@ -734,7 +734,7 @@
         try {
           const key = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(36).padStart(2, '0')).join('').slice(0, 32);
           const send = (k2, txt) => api('/posts', { body: { key, proof: kind === 'review' ? form.proof?.value : '', thread: f.dataset.thread, kind: k2, parent: replyTo, name: form.name.value.trim(), body: txt, rating, cabin: kind === 'cabin' ? form.cabin?.value : '', video: kind === 'cabin' ? form.video?.value : '', user_id: uid(), website: form.website.value } });
-          const k0 = replyTo ? 'answer' : kind, t0 = form.body.value.trim();
+          const k0 = replyTo ? 'answer' : kind, t0 = (kind === 'diary' && form.day?.value ? `Día ${form.day.value} · ` : '') + form.body.value.trim();
           // Si la API aún no conoce las quedadas, se publica como comentario marcado
           const res = await send(k0, t0).catch((er) => (k0 === 'meetup' && er.message === 'datos' ? send('comment', '[Quedada] ' + t0) : Promise.reject(er)));
           if (res.id) { const mp = myPosts(); mp[res.id] = key; store.set('mc_my_posts', mp); }
