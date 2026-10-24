@@ -1313,6 +1313,39 @@ write('accesibilidad/index.html', layout({ title: 'Accesibilidad de MejorCrucero
   <p class="muted small">Precios por persona en euros, de las webs oficiales de las navieras. Precio real = tarifa + tasas + cuota de servicio. <a href="/metodologia/#ofertas">Metodología</a> · <a href="/ofertas/observatorio/">Observatorio de precios</a>.</p></section>`;
   write('datos/index.html', layout({ title: 'Datos abiertos de precios de cruceros', desc: 'Descarga los precios de cruceros de MejorCrucero en JSON, CSV y RSS para reutilizarlos citando la fuente.', url: '/datos/', body, crumbs: [['Inicio', '/'], ['Datos abiertos', '/datos/']] }));
 }
+// Sala de prensa: resumen mensual automático con las cifras del observatorio (sin inventar nada: todo sale de las salidas publicadas)
+{
+  const med = (a) => { const v = [...a].sort((x, y) => x - y); return v.length ? v[Math.floor(v.length / 2)] : 0; };
+  const now = new Date(), mesTxt = now.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const byD = {}; sailings.forEach((x) => { if (x.destination) (byD[x.destination] = byD[x.destination] || []).push(x); });
+  const dRows = Object.entries(byD).filter(([, l]) => l.length >= 10).map(([d, l]) => [d, med(l.map(OFF.ppn)), l.length]).sort((a, b) => a[1] - b[1]);
+  const byM = {}; sailings.forEach((x) => { (byM[x.date.slice(0, 7)] = byM[x.date.slice(0, 7)] || []).push(x); });
+  const mRows = Object.entries(byM).filter(([, l]) => l.length >= 10).map(([m, l]) => [m, med(l.map(OFF.ppn))]).sort((a, b) => a[1] - b[1]);
+  const drops = sailings.filter((x) => (x.history || []).length > 1 && OFF.minPrice(x) < Math.max(...x.history.map((h) => h.price)));
+  const lines_ = new Set(sailings.map((x) => x.line)).size, mm = (ym) => `${MONTHS[+ym.slice(5) - 1]} de ${ym.slice(0, 4)}`;
+  const facts = [`MejorCrucero sigue ${sailings.length} salidas de ${lines_} navieras, con precios comprobados dos veces al día en sus webs oficiales.`,
+    `La mediana del precio real (tarifa, tasas y cuota de servicio) es de ${eur(med(sailings.map(OFF.ppn)))} por persona y noche.`,
+    dRows.length > 1 ? `El destino más económico por noche es ${OFF.destName(dRows[0][0])} (${eur(dRows[0][1])}) y el más caro, ${OFF.destName(dRows[dRows.length - 1][0])} (${eur(dRows[dRows.length - 1][1])}).` : '',
+    mRows.length > 1 ? `El mes de salida más barato es ${mm(mRows[0][0])}, con una mediana de ${eur(mRows[0][1])} por noche.` : '',
+    `${drops.length} salidas han bajado de precio desde que empezamos a seguirlas.`].filter(Boolean);
+  const body = `<section class="wrap block page-h narrow"><h1>Sala de prensa de MejorCrucero</h1><p class="lead-p">Datos de precios de cruceros listos para citar, actualizados automáticamente con cada lectura de precios. Puedes usarlos citando a MejorCrucero con un enlace.</p>
+  <h2>Resumen de ${esc(mesTxt)}</h2><ul class="list">${facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+  <h2>Nota de prensa automática</h2><blockquote class="tip"><p><b>${now.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</b> ${esc(facts.join(' '))} Los datos completos por destino y mes están disponibles en abierto en mejorcrucero.com/datos/.</p></blockquote>
+  <p class="small"><button class="btn btn-ghost btn-sm js-copy-text" type="button" data-text="${esc(facts.join(' '))} Fuente: MejorCrucero (${SITE}/prensa/).">Copiar texto con la fuente</button></p>
+  <h2>Precio por noche por destino</h2><div class="table-wrap"><table class="rank-t"><thead><tr><th>Destino</th><th>Salidas</th><th>Mediana real por noche</th></tr></thead><tbody>${dRows.map(([d, v, n]) => `<tr><td><a href="/ofertas/${d}/">${esc(OFF.destName(d))}</a></td><td>${n}</td><td>${eur(v)}</td></tr>`).join('')}</tbody></table></div>
+  <h2>Más datos</h2><ul class="list"><li><a href="/ofertas/observatorio/">Observatorio de precios</a></li><li><a href="/datos/">Datos abiertos (JSON y CSV)</a></li><li><a href="/rankings/premios/">Premios MejorCrucero del año</a></li><li><a href="/metodologia/">Metodología</a></li><li>Para entrevistas o datos a medida, escríbenos desde <a href="/contacto/">contacto</a>.</li></ul></section>`;
+  write('prensa/index.html', layout({ title: `Sala de prensa: precios de cruceros en ${mesTxt}`, desc: `Cifras de precios de cruceros listas para citar: ${facts[1]}`.slice(0, 160), url: '/prensa/', body, crumbs: [['Inicio', '/'], ['Prensa', '/prensa/']] }));
+}
+// Novedades: salidas que las navieras han puesto a la venta en los últimos 7 días
+{
+  const wk = new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10);
+  const fresh = sailings.filter((x) => x.first_seen && x.first_seen >= wk);
+  const byL = {}; fresh.forEach((x) => { (byL[x.line] = byL[x.line] || []).push(x); });
+  const blocks = Object.entries(byL).sort((a, b) => b[1].length - a[1].length).map(([l, xs]) => { const L = lineList.find((z) => z.slug === l); const ds = [...new Set(xs.filter((x) => x.destination).map((x) => OFF.destName(x.destination)))];
+    return `<section class="wrap block"><h2>${esc(L?.short || l)}: ${xs.length} salida${xs.length > 1 ? 's' : ''} nueva${xs.length > 1 ? 's' : ''}</h2><p class="muted">${ds.length ? `Por ${esc(ds.slice(0, 5).join(', '))}.` : ''} ${L ? `<a href="/ofertas/naviera-${l}/">Todas las ofertas de ${esc(L.short)} →</a>` : ''}</p><ul class="mini">${[...xs].sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 8).map((x) => `<li><a href="/salidas/${x.id}/"><b>${esc(OFF.destName(x.destination, x))} · ${x.nights} noches</b><span>${esc(bySlug[x.ship]?.name || x.ship_name || x.ship)} · ${new Date(x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${eur(OFF.minPrice(x))}</span></a></li>`).join('')}</ul></section>`; }).join('');
+  const body = `<section class="wrap block page-h"><h1>Novedades de las navieras</h1><p class="lead-p">Salidas que han aparecido a la venta en los últimos 7 días: ${fresh.length} en total. Se actualiza dos veces al día.</p></section>${blocks || '<section class="wrap block"><p class="tip">Esta semana no han aparecido salidas nuevas.</p></section>'}`;
+  write('novedades/index.html', layout({ title: `Novedades de cruceros: ${fresh.length} salidas nuevas esta semana`, desc: `Las salidas de crucero que las navieras han puesto a la venta en los últimos 7 días, con su precio y su nota.`, url: '/novedades/', body, crumbs: [['Inicio', '/'], ['Novedades', '/novedades/']] }));
+}
 // Resumen legible para buscadores con IA: qué es la web, cómo se calculan las notas y dónde están los datos
 write('llms.txt', `# MejorCrucero\n\n> Comparador de cruceros en español: precio real (tarifa + tasas + cuota de servicio), nota del precio de 0 a 100 frente a cruceros parecidos y nota del barco (MejorCrucero Score) con datos públicos.\n\n- [Ofertas](${SITE}/ofertas/): ${sailings.length} salidas con precio real\n- [Ranking de barcos](${SITE}/rankings/): ${ships.filter((s) => s.sc != null).length} barcos con nota\n- [Metodología](${SITE}/metodologia/)\n- [Observatorio de precios](${SITE}/ofertas/observatorio/)\n- [Datos de ofertas en JSON](${SITE}/data/ofertas.json)\n- [Cómo ganamos dinero](${SITE}/afiliacion/)\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nDisallow: /admin/\nDisallow: /embed/\nSitemap: ${SITE}/sitemap.xml\n`);

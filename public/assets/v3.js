@@ -71,6 +71,7 @@
   if (rf) rf.addEventListener('input', () => { const l = rf.linea.value; $$('#top tbody tr').forEach((tr) => { tr.hidden = l && tr.dataset.line !== l; }); });
 
   // ---------- Copiar código para insertar ----------
+  $$('.js-copy-text').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.text); b.textContent = '¡Copiado!'; } catch {} }));
   $$('.js-copy-embed').forEach((b) => b.addEventListener('click', () => { const t = b.previousElementSibling; t.select(); navigator.clipboard?.writeText(t.value); b.textContent = '¡Copiado!'; }));
 
   // ---------- Referidos: los enlaces que compartes llevan tu código ----------
