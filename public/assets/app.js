@@ -80,7 +80,7 @@
       // Resultados agrupados por tipo
       const groups = {}; [...hits, ...offs].forEach((h) => { const u = h[1], g = /^\/salidas\//.test(u) ? 'Salidas' : /^\/barcos\//.test(u) ? 'Barcos' : /^\/destinos\/|^\/ofertas\/[a-z-]+\/$/.test(u) && /Destino|salidas/.test(h[2]) ? 'Destinos y ofertas' : /^\/puertos\/|escala|desde-/.test(u) ? 'Puertos' : /^\/guias\/|Guía/.test(u + h[2]) ? 'Guías' : 'Más'; (groups[g] = groups[g] || []).push(h); });
       let n = 0; const order = ['Barcos', 'Salidas', 'Destinos y ofertas', 'Puertos', 'Guías', 'Más'];
-      gl.innerHTML = order.filter((g) => groups[g]).map((g) => `<li class="ac-g" role="presentation">${g}</li>` + groups[g].map((h) => `<li role="option" id="ac-${n++}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join('')).join('')
+      gl.innerHTML = order.filter((g) => groups[g]).map((g) => `<li class="ac-g" role="presentation" data-g="${g.split(' ')[0].toLowerCase()}">${g}</li>` + groups[g].map((h) => `<li role="option" id="ac-${n++}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join('')).join('')
         || `<li class="muted">Sin resultados. ¿Quizá alguno de estos destinos?</li>${[['Mediterráneo', '/ofertas/mediterraneo-occidental/'], ['Islas griegas', '/ofertas/mediterraneo-oriental/'], ['Caribe', '/ofertas/caribe/'], ['Fiordos noruegos', '/ofertas/fiordos-noruegos/'], ['Canarias', '/ofertas/canarias-y-madeira/']].map((h) => `<li role="option" id="ac-${n++}"><a href="${BASE}${h[1].slice(1)}"><b>${h[0]}</b><span>Destino</span></a></li>`).join('')}`;
       gl.hidden = false;
     };

@@ -805,3 +805,28 @@ form .form-msg{font-weight:600;color:var(--ok)}
 /* Premios */
 .tool .eyebrow{color:#9A6B00;font-weight:700}
 @media (max-width:640px){.crumbs ol{display:flex;flex-wrap:nowrap;overflow:hidden}.crumbs li{flex:none;white-space:nowrap}.crumbs li:last-child{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}}
+/* Deslizador de presupuesto */
+.rng{display:flex;align-items:center;gap:10px;min-height:44px;border:1.5px solid var(--line);border-radius:8px;padding:0 10px;background:var(--card)}
+.rng input{flex:1;accent-color:var(--sea);min-height:auto;padding:0;border:0}.rng output{font-weight:700;font-size:.85rem;white-space:nowrap;min-width:84px;text-align:right;font-variant-numeric:tabular-nums}
+/* Barra fija del listado */
+.f-sticky{position:fixed;left:50%;transform:translate(-50%,120%);bottom:16px;z-index:45;display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:8px 8px 8px 16px;border-radius:999px;box-shadow:0 8px 24px rgba(7,26,48,.3);transition:transform .2s;font-weight:600;font-size:.9rem}
+.f-sticky.on{transform:translate(-50%,0)}.f-sticky .btn{background:#fff;color:var(--ink)}
+@media (max-width:760px){.f-sticky{bottom:calc(76px + env(safe-area-inset-bottom))}}
+@media (prefers-reduced-motion:reduce){.f-sticky{transition:none}}
+/* Sugerencias con icono por tipo */
+#gq-list .ac-g::before{content:'';display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:var(--sea)}
+#gq-list .ac-g[data-g=salidas]::before{background:#C99400}#gq-list .ac-g[data-g=destinos]::before{background:var(--ok)}#gq-list .ac-g[data-g=puertos]::before{background:#6B4FD8}#gq-list .ac-g[data-g=guías]::before{background:var(--muted)}
+/* Estados vacíos con dibujo */
+.nl-more.tip::before,#s-empty .tip::before{content:'';display:block;width:44px;height:28px;margin-bottom:8px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 28'%3E%3Cpath d='M4 18h36l-5 8H9z' fill='%230F5BD8'/%3E%3Cpath d='M10 17v-6h24v6zM16 10V5h12v5z' fill='%230F5BD8' opacity='.6'/%3E%3Cpath d='M0 27h44' stroke='%230F5BD8' stroke-width='1.5' stroke-dasharray='3 3'/%3E%3C/svg%3E")}
+/* Tarjetas mini con precio claro */
+.mini a b{font-weight:650}.mini span{font-variant-numeric:tabular-nums}
+/* Gráfico del historial */
+.chart svg,.price-chart svg{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.chart polyline,.price-chart polyline{stroke:var(--sea)!important;stroke-width:2.5}
+/* Otras fechas: tira desplazable */
+.cal{display:flex!important;overflow-x:auto;gap:8px;padding-bottom:6px;scrollbar-width:thin}.cal>*{flex:none}
+/* Escalas: fotos más grandes */
+.port-strip{gap:12px}.port-strip img{aspect-ratio:4/3;object-fit:cover;border-radius:10px;width:100%}
+/* Premios y prensa */
+.tool .eyebrow:first-child{display:inline-block;background:#FFF6DB;color:#7A5600;border-radius:6px;padding:2px 8px;font-size:.8rem}
+.page-h blockquote.tip{font-size:1.02rem}

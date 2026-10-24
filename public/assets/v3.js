@@ -316,7 +316,7 @@
         const items = [...p.keys()].filter((k) => k !== 'o').map((k) => { const el = f.elements[k]; if (!el) return ''; const lab = el.closest('label')?.querySelector('span')?.textContent?.trim() || k; const val = el.type === 'checkbox' ? '' : el.tagName === 'SELECT' ? el.selectedOptions[0]?.textContent : el.value; return `<button type="button" class="af-chip" data-k="${k}" aria-label="Quitar ${esc(lab)}">${esc(val ? `${lab}: ${val}` : lab)} <span aria-hidden="true">×</span></button>`; }).join('');
         af.innerHTML = items; af.hidden = !items;
         af.onclick = (ev) => { const b = ev.target.closest('.af-chip'); if (!b) return; const el = f.elements[b.dataset.k]; if (el.type === 'checkbox') el.checked = false; else el.value = ''; apply(); }; }
-      const nf = [...p.keys()].filter((x) => !['o', 'q'].includes(x)).length; const fn = $('.f-n', f); if (fn) fn.textContent = nf ? `(${nf})` : '';
+      const nf = [...p.keys()].filter((x) => !['o', 'q'].includes(x) && f.elements[x]?.closest?.('.more-f')).length; const fn = $('.f-n', f); if (fn) fn.textContent = nf ? `(${nf})` : '';
       let more = $('.nl-more', f.parentNode); if (more) more.remove();
       if (!match) {
         // Cero resultados: qué filtro quitar y cuántas saldrían
@@ -349,6 +349,15 @@
     ['n', 'es'].forEach((k) => { const sel = f.elements[k]; if (!sel || sel.tagName !== 'SELECT' || sel.options.length > 6) return; const seg = document.createElement('div'); seg.className = 'seg'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', sel.closest('label')?.querySelector('span')?.textContent || k);
       seg.innerHTML = [...sel.options].map((o) => `<button type="button" data-v="${esc(o.value)}" aria-pressed="false">${esc(o.value ? o.textContent.replace('Solo desde España', 'Desde España') : 'Todas')}</button>`).join(''); sel.after(seg); sel.classList.add('sr'); sel.tabIndex = -1;
       const sync = () => $$('button', seg).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === sel.value))); seg.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; sel.value = b.dataset.v; sel.dispatchEvent(new Event('change', { bubbles: true })); sync(); }); f.addEventListener('change', sync); sync(); });
+    // Presupuesto con deslizador (añade la opción al desplegable si hace falta)
+    { const sel = f.elements.b; if (sel && sel.tagName === 'SELECT') { const wrap = document.createElement('div'); wrap.className = 'rng'; wrap.innerHTML = '<input type="range" min="0" max="3000" step="100" aria-label="Presupuesto máximo por persona"><output></output>'; sel.after(wrap); sel.classList.add('sr'); sel.tabIndex = -1; const r = $('input', wrap), out = $('output', wrap);
+      const show = () => { const v = +sel.value || 0; r.value = v || 3000; out.textContent = v ? `Hasta ${v.toLocaleString('es-ES')} €` : 'Sin límite'; };
+      r.addEventListener('input', () => { const v = +r.value; const val = v >= 3000 ? '' : String(Math.max(100, v)); if (val && ![...sel.options].some((o) => o.value === val)) sel.add(new Option(`Hasta ${(+val).toLocaleString('es-ES')} €`, val)); sel.value = val; out.textContent = val ? `Hasta ${(+val).toLocaleString('es-ES')} €` : 'Sin límite'; });
+      r.addEventListener('change', () => sel.dispatchEvent(new Event('change', { bubbles: true }))); f.addEventListener('change', show); show(); } }
+    // Barra fija con el contador y acceso a los filtros al bajar por el listado
+    { const bar = document.createElement('div'); bar.className = 'f-sticky'; bar.innerHTML = '<span class="f-sticky-n"></span><button type="button" class="btn btn-sm">Filtros</button>'; document.body.append(bar);
+      $('button', bar).addEventListener('click', () => f.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      const io = new IntersectionObserver(([e]) => { bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); $('.f-sticky-n', bar).textContent = $('.offer-count', f)?.textContent || ''; }); io.observe(f); }
     // Meses como fila de botones desplazable
     { const sel = f.elements.m; if (sel && sel.tagName === 'SELECT' && sel.options.length > 2) { const row = document.createElement('div'); row.className = 'seg seg-scroll'; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Mes');
       row.innerHTML = [...sel.options].map((o) => `<button type="button" data-v="${esc(o.value)}" aria-pressed="false">${esc(o.value ? o.textContent.replace(/ (\d{4})$/, ' $1').replace(/^(\w{3})\w*/, '$1') : 'Todos')}</button>`).join(''); sel.after(row); sel.classList.add('sr'); sel.tabIndex = -1;
