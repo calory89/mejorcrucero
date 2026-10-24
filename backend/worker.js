@@ -112,8 +112,20 @@ async function runAlerts(env) {
   return { offers: offers.length, queued: stats, sent: await sendOutbox(env) };
 }
 // Envío con Resend cuando estén RESEND_KEY y MAIL_FROM; si no, los emails esperan en la cola (outbox).
+// Envío: por el puente de Supabase a Brevo (MC_EMAIL_URL + secreto MC_EMAIL_SECRET); si no está, Resend como antes.
 async function sendOutbox(env) {
-  if (!env.RESEND_KEY || !env.MAIL_FROM) return 'en cola (falta RESEND_KEY/MAIL_FROM)';
+  if (env.MC_EMAIL_URL && env.MC_EMAIL_SECRET) {
+    const rows = (await env.DB.prepare("SELECT * FROM outbox WHERE status='pending' ORDER BY id LIMIT 40").all()).results;
+    let ok = 0;
+    for (const m of rows) {
+      const u = m.text.match(/Darme de baja: (\S+)/)?.[1];
+      const res = await fetch(env.MC_EMAIL_URL + '/send', { method: 'POST', headers: { 'x-mc-secret': env.MC_EMAIL_SECRET, 'Content-Type': 'application/json' }, body: JSON.stringify({ to: m.email, subject: m.subject, html: m.html, text: m.text, unsubscribe: u }) });
+      if (res.ok) { ok++; await env.DB.prepare("UPDATE outbox SET status='sent', sent=datetime('now') WHERE id=?").bind(m.id).run(); }
+      else await env.DB.prepare("UPDATE outbox SET status='error', err=? WHERE id=?").bind((await res.text()).slice(0, 300), m.id).run();
+    }
+    return ok;
+  }
+  if (!env.RESEND_KEY || !env.MAIL_FROM) return 'en cola (falta el puente de email)';
   const rows = (await env.DB.prepare("SELECT * FROM outbox WHERE status='pending' ORDER BY id LIMIT 40").all()).results;
   let ok = 0;
   for (const m of rows) {
@@ -156,6 +168,11 @@ export default {
         if (await limited(env, 'lead:' + ipHash, 20, 60)) return R({ error: 'rate' }, 429);
         await env.DB.prepare('INSERT OR IGNORE INTO leads(email, source) VALUES(?,?)').bind(email, clean(body.source, 120)).run();
         return R({ ok: true });
+      }
+      // Operación interna: lanzar el motor de avisos ahora (protegido con el secreto del puente de email)
+      if (p === '/ops/run-alerts' && req.method === 'POST') {
+        if (!env.MC_EMAIL_SECRET || req.headers.get('x-mc-secret') !== env.MC_EMAIL_SECRET) return R({ error: 'forbidden' }, 403);
+        return R(await runAlerts(env));
       }
       if (p === '/alert' && req.method === 'POST') {
         if (body.website) return R({ ok: true });

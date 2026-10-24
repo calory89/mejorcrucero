@@ -5,6 +5,8 @@ workers_dev = true
 
 [vars]
 ALLOWED_ORIGINS = "https://mejorcrucero.com,https://www.mejorcrucero.com,https://calory89.github.io"
+# Puente de email a Brevo (función de Supabase); el secreto MC_EMAIL_SECRET va como secret del Worker
+MC_EMAIL_URL = "https://oykcsmextclpdnugixqz.supabase.co/functions/v1/mejorcrucero-email"
 
 [[d1_databases]]
 binding = "DB"
