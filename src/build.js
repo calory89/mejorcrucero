@@ -653,6 +653,7 @@ const TOOLS = [
   ['maleta', '🧳', 'Maleta según destino y mes', 'Lista de equipaje adaptada al clima de tu crucero.'],
   ['documentacion', '🛂', 'Documentación por destino', 'Qué papeles necesitas y dónde comprobarlo en fuentes oficiales.'],
   ['glosario', '📖', 'Glosario del crucerista', 'Tender, muster drill, todo incluido… explicado en cristiano.'],
+  ['mapa-escalas', '🗺️', 'Mapa de escalas', 'Dónde paran los cruceros de cada destino y cuántas salidas paran en cada puerto.'],
 ];
 const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'], [n, u]];
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
@@ -1164,6 +1165,9 @@ write('herramientas/tiempo-puerto/index.html', toolWeather());
 write('herramientas/maleta/index.html', toolPack());
 write('herramientas/documentacion/index.html', toolDocs());
 write('herramientas/glosario/index.html', glossary());
+{ const ds = [...new Set(sailings.map((x) => x.destination).filter(Boolean))].map((d) => [d, sailings.filter((x) => x.destination === d)]).sort((a, b) => b[1].length - a[1].length);
+  const maps = ds.map(([d, l]) => { const m = OFF.escalaMap(l, `por ${OFF.destName(d)}`); return m ? m.replace('<section class="wrap block">', `<section class="wrap block" id="${d}">`) : ''; }).filter(Boolean);
+  write('herramientas/mapa-escalas/index.html', layout({ title: 'Mapa de escalas de crucero por destino', desc: 'Mapa de las escalas en las que paran los cruceros de cada destino, con cuántas salidas paran en cada puerto.', url: '/herramientas/mapa-escalas/', body: `<section class="wrap block page-h"><h1>Mapa de escalas</h1><p class="lead-p">Dónde paran los cruceros de cada destino, según las ${sailings.length} salidas que comparamos. Toca una escala para ver sus cruceros.</p><div class="chips">${ds.map(([d]) => `<a class="chip" href="#${d}">${esc(OFF.destName(d))}</a>`).join('')}</div></section>${maps.join('')}`, crumbs: [['Inicio', '/'], ['Herramientas', '/herramientas/'], ['Mapa de escalas', '/herramientas/mapa-escalas/']] })); }
 write('comunidad/index.html', community());
 write('comunidad/salida/index.html', rollcallShell());
 write('comunidad/perfil/index.html', profileShell());

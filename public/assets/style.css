@@ -428,3 +428,4 @@ fieldset .chk{grid-column:1/-1}
 @keyframes skel{from{background-position:200% 0}to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.skel{animation:none}}
 .locale-bar{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:6px 16px;background:var(--sand,#fdf6e3);border-bottom:1px solid var(--line,#e5e7eb);text-align:center}
+.esc-map svg circle{fill:var(--coral,#e8604c);fill-opacity:.75;stroke:#fff;stroke-width:1.5}.esc-map svg a:hover circle{fill-opacity:1}.esc-map .esc-l{font-size:11px;fill:currentColor;paint-order:stroke;stroke:var(--bg,#fff);stroke-width:3px}
