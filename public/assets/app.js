@@ -885,4 +885,7 @@
     else if (v.rangeUnderflow) m = `El valor mínimo es ${el.min}.`; else if (v.rangeOverflow) m = `El valor máximo es ${el.max}.`;
     else if (v.tooShort) m = `Escribe al menos ${el.minLength} caracteres.`; else if (v.stepMismatch) m = 'Usa un número redondo.';
     if (m) { el.setCustomValidity(m); el.addEventListener('input', () => el.setCustomValidity(''), { once: true }); } }, true);
+
+  // Tablas con desplazamiento: accesibles con el teclado
+  $$('.table-wrap, .hub-sum').forEach((t) => { if (t.scrollWidth > t.clientWidth + 2 || t.classList.contains('table-wrap')) { t.tabIndex = 0; t.setAttribute('role', 'region'); if (!t.getAttribute('aria-label')) t.setAttribute('aria-label', t.querySelector('caption, th')?.textContent?.trim() ? 'Tabla: ' + (t.previousElementSibling?.textContent || 'datos').trim().slice(0, 60) : 'Tabla'); } });
 })();
