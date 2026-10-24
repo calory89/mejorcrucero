@@ -9,6 +9,16 @@
 -99.887,
 "https://es.wikipedia.org/wiki/Acapulco_de_Ju%C3%A1rez"
 ],
+"Adelaida": [
+-34.9275,
+138.6,
+"https://es.wikipedia.org/wiki/Adelaida_(Australia)"
+],
+"Akureyri": [
+65.6835,
+-18.0878,
+"https://es.wikipedia.org/wiki/Akureyri"
+],
 "Alicante": [
 38.3453,
 -0.4831,
@@ -19,6 +29,11 @@
 -171.8333,
 "https://es.wikipedia.org/wiki/Apia"
 ],
+"Arrecife": [
+28.9625,
+-13.5506,
+"https://es.wikipedia.org/wiki/Arrecife_(Espa%C3%B1a)"
+],
 "Aruba": [
 12.515,
 -69.975,
@@ -28,6 +43,11 @@
 -36.8492,
 174.7653,
 "https://es.wikipedia.org/wiki/Auckland"
+],
+"Bahía de las Islas": [
+-54.0333,
+-37.3333,
+"https://es.wikipedia.org/wiki/Bah%C3%ADa_de_las_Islas"
 ],
 "Baltimore": [
 39.2864,
@@ -129,6 +149,11 @@
 -79.75,
 "https://es.wikipedia.org/wiki/Canal_de_Panam%C3%A1"
 ],
+"Caribe holandés": [
+12.1833,
+-68.2333,
+"https://es.wikipedia.org/wiki/Caribe_Neerland%C3%A9s"
+],
 "Cartagena": [
 10.4236,
 -75.5253,
@@ -169,6 +194,11 @@
 12.5689,
 "https://es.wikipedia.org/wiki/Copenhague"
 ],
+"Corón": [
+11.9989,
+120.2053,
+"https://es.wikipedia.org/wiki/Cor%C3%B3n"
+],
 "Costa Esmeralda": [
 -37,
 -56.8,
@@ -184,10 +214,20 @@
 -6.2975,
 "https://es.wikipedia.org/wiki/C%C3%A1diz"
 ],
+"Dominica": [
+15.4167,
+-61.3333,
+"https://en.wikipedia.org/wiki/Dominica"
+],
 "Dover": [
 51.1347,
 1.3571,
 "https://es.wikipedia.org/wiki/Acantilados_de_Dover"
+],
+"Dravuni": [
+-18.7667,
+178.5333,
+"https://en.wikipedia.org/wiki/Dravuni"
 ],
 "Dublín": [
 53.3497,
@@ -203,6 +243,11 @@
 -29.8583,
 31.025,
 "https://es.wikipedia.org/wiki/Durban"
+],
+"Eastport": [
+45.1072,
+-85.35,
+"https://es.wikipedia.org/wiki/Eastport_(M%C3%ADchigan)"
 ],
 "Edimburgo": [
 55.9533,
@@ -234,10 +279,25 @@
 -75.1636,
 "https://es.wikipedia.org/wiki/Filadelfia"
 ],
+"Flåm": [
+60.86,
+7.1119,
+"https://es.wikipedia.org/wiki/Fl%C3%A5m"
+],
 "Fort Lauderdale": [
 26.1358,
 -80.1419,
 "https://es.wikipedia.org/wiki/Fort_Lauderdale"
+],
+"Fortaleza": [
+-3.7275,
+-38.5275,
+"https://es.wikipedia.org/wiki/Fortaleza_(Brasil)"
+],
+"Freeport": [
+26.52,
+-78.66,
+"https://es.wikipedia.org/wiki/Freeport_(Bahamas)"
 ],
 "Funchal": [
 32.65,
@@ -269,10 +329,20 @@
 -77.9,
 "https://es.wikipedia.org/wiki/Great_Stirrup_Cay"
 ],
+"Grenada": [
+33.775,
+-89.8089,
+"https://es.wikipedia.org/wiki/Grenada_(Misisipi)"
+],
 "Génova": [
 44.4072,
 8.9339,
 "https://es.wikipedia.org/wiki/G%C3%A9nova"
+],
+"Hakodate": [
+41.7687,
+140.7289,
+"https://es.wikipedia.org/wiki/Hakodate"
 ],
 "Halifax": [
 44.6478,
@@ -283,6 +353,11 @@
 16.4783,
 -88.4039,
 "https://en.wikipedia.org/wiki/Harvest_Caye"
+],
+"Haugesund": [
+59.4102,
+5.2755,
+"https://es.wikipedia.org/wiki/Haugesund"
 ],
 "Hellesylt": [
 62.0878,
@@ -324,6 +399,11 @@
 -135.4632,
 "https://en.wikipedia.org/wiki/Icy_Strait_Point"
 ],
+"Ilha Grande": [
+-2.8578,
+-41.8208,
+"https://es.wikipedia.org/wiki/Ilha_Grande_(Piau%C3%AD)"
+],
 "Ilhabela": [
 -23.815,
 -45.3706,
@@ -354,6 +434,16 @@
 -81.65,
 "https://es.wikipedia.org/wiki/Jacksonville_(Florida)"
 ],
+"Jeju": [
+33.3667,
+126.5333,
+"https://es.wikipedia.org/wiki/Provincia_de_Jeju"
+],
+"Kagoshima": [
+31.5968,
+130.5571,
+"https://es.wikipedia.org/wiki/Kagoshima"
+],
 "Kahului": [
 20.8817,
 -156.4675,
@@ -379,6 +469,16 @@
 135.7681,
 "https://es.wikipedia.org/wiki/Kioto"
 ],
+"Klaipeda": [
+55.7125,
+21.135,
+"https://es.wikipedia.org/wiki/Klaip%C4%97da"
+],
+"Ko Samui": [
+9.5478,
+100.0622,
+"https://es.wikipedia.org/wiki/Aeropuerto_de_Koh_Samui"
+],
 "Kochi": [
 9.9312,
 76.2673,
@@ -399,6 +499,11 @@
 13.7307,
 "https://es.wikipedia.org/wiki/Koper"
 ],
+"Kota Kinabalu": [
+5.975,
+116.0725,
+"https://es.wikipedia.org/wiki/Kota_Kinabalu"
+],
 "Kotor": [
 42.4254,
 18.7712,
@@ -409,10 +514,25 @@
 101.6953,
 "https://es.wikipedia.org/wiki/Kuala_Lumpur"
 ],
+"La Coruña": [
+43.3711,
+-8.3961,
+"https://es.wikipedia.org/wiki/La_Coru%C3%B1a"
+],
+"La Goulette": [
+36.8191,
+10.3064,
+"https://es.wikipedia.org/wiki/La_Goleta"
+],
 "La Paz": [
 -16.4958,
 -68.1333,
 "https://es.wikipedia.org/wiki/La_Paz"
+],
+"Langkawi": [
+6.35,
+99.8,
+"https://es.wikipedia.org/wiki/Archipi%C3%A9lago_Langkawi"
 ],
 "Las Palmas de Gran Canaria": [
 28.1272,
@@ -433,6 +553,11 @@
 38.708,
 -9.139,
 "https://es.wikipedia.org/wiki/Lisboa"
+],
+"Liverpool": [
+53.4072,
+-2.9917,
+"https://es.wikipedia.org/wiki/Liverpool"
 ],
 "Long Beach": [
 33.7681,
@@ -468,6 +593,11 @@
 -37.8142,
 144.9631,
 "https://es.wikipedia.org/wiki/Melbourne"
+],
+"Melilla": [
+35.2825,
+-2.9475,
+"https://es.wikipedia.org/wiki/Melilla"
 ],
 "Meteora": [
 39.7125,
@@ -509,10 +639,20 @@
 -3.5206,
 "https://es.wikipedia.org/wiki/Motril"
 ],
+"Muara": [
+4.9,
+114.9,
+"https://es.wikipedia.org/wiki/Distrito_de_Brun%C3%A9i_y_Muara"
+],
 "Málaga": [
 36.7167,
 -4.4167,
 "https://es.wikipedia.org/wiki/M%C3%A1laga"
+],
+"Måløy": [
+61.9333,
+5.1167,
+"https://es.wikipedia.org/wiki/M%C3%A5l%C3%B8y"
 ],
 "Nagasaki": [
 32.7495,
@@ -529,15 +669,30 @@
 -77.3386,
 "https://en.wikipedia.org/wiki/Nassau,_Bahamas"
 ],
+"Nauplia": [
+37.5658,
+22.8,
+"https://es.wikipedia.org/wiki/Nauplia"
+],
 "New Orleans": [
 29.9761,
 -90.0783,
 "https://en.wikipedia.org/wiki/New_Orleans"
 ],
+"Newcastle": [
+54.9778,
+-1.6133,
+"https://es.wikipedia.org/wiki/Newcastle_upon_Tyne"
+],
 "Nha Trang": [
 12.2411,
 109.1911,
 "https://es.wikipedia.org/wiki/Nha_Trang"
+],
+"Niza": [
+43.7019,
+7.2683,
+"https://es.wikipedia.org/wiki/Niza"
 ],
 "Niza/Mónaco": [
 43.6653,
@@ -553,6 +708,11 @@
 29.9761,
 -90.0783,
 "https://es.wikipedia.org/wiki/Nueva_Orleans"
+],
+"Nukualofa": [
+-21.1343,
+-175.2018,
+"https://es.wikipedia.org/wiki/Nukualofa"
 ],
 "Numea": [
 -22.2667,
@@ -609,6 +769,11 @@
 100.365,
 "https://es.wikipedia.org/wiki/Penang"
 ],
+"Phuket": [
+7.8881,
+98.3975,
+"https://es.wikipedia.org/wiki/Phuket"
+],
 "Ponta Delgada": [
 37.74,
 -25.67,
@@ -644,20 +809,50 @@
 -122.6792,
 "https://es.wikipedia.org/wiki/Portland"
 ],
+"Praia": [
+14.9177,
+-23.5092,
+"https://es.wikipedia.org/wiki/Praia"
+],
+"Prince Rupert": [
+54.3122,
+-130.3271,
+"https://es.wikipedia.org/wiki/Prince_Rupert"
+],
 "Provenza": [
 44,
 6,
 "https://es.wikipedia.org/wiki/Provenza"
+],
+"Puerto Caldera": [
+9.9433,
+-84.7167,
+"https://es.wikipedia.org/wiki/Puerto_Caldera"
 ],
 "Puerto Limón": [
 1.0268,
 -76.5415,
 "https://en.wikipedia.org/wiki/Puerto_Lim%C3%B3n,_Putumayo"
 ],
+"Puerto Madryn": [
+-42.773,
+-65.0366,
+"https://es.wikipedia.org/wiki/Puerto_Madryn"
+],
+"Puerto Montt": [
+-41.4718,
+-72.9396,
+"https://es.wikipedia.org/wiki/Puerto_Montt"
+],
 "Puerto Plata": [
 19.7958,
 -70.6944,
 "https://es.wikipedia.org/wiki/Puerto_Plata"
+],
+"Puerto Princesa": [
+9.74,
+118.744,
+"https://es.wikipedia.org/wiki/Puerto_Princesa"
 ],
 "Puerto Quetzal": [
 13.9206,
@@ -668,6 +863,11 @@
 20.6413,
 -105.2233,
 "https://es.wikipedia.org/wiki/Puerto_Vallarta"
+],
+"Punta del Este": [
+-34.9557,
+-54.9381,
+"https://es.wikipedia.org/wiki/Punta_del_Este"
 ],
 "Puntarenas": [
 9.9773,
@@ -683,6 +883,11 @@
 -16.82,
 -151.44,
 "https://es.wikipedia.org/wiki/Raiatea"
+],
+"Rarotonga": [
+-21.2333,
+-159.7833,
+"https://es.wikipedia.org/wiki/Rarotonga"
 ],
 "Recife": [
 -8.0539,
@@ -749,6 +954,11 @@
 -0.5253,
 "https://es.wikipedia.org/wiki/San_Vicente_del_Raspeig"
 ],
+"Santa Cruz (Islas Vírgenes)": [
+17.732,
+-64.748,
+"https://es.wikipedia.org/wiki/Santa_Cruz_(Islas_V%C3%ADrgenes)"
+],
 "Santa Cruz de Tenerife": [
 28.4667,
 -16.25,
@@ -758,6 +968,11 @@
 14.35,
 -91.0167,
 "https://en.wikipedia.org/wiki/Santa_Luc%C3%ADa_Cotzumalguapa"
+],
+"Santiago": [
+-33.4375,
+-70.65,
+"https://es.wikipedia.org/wiki/Santiago_de_Chile"
 ],
 "Santo Tomás": [
 19.1781,
@@ -769,10 +984,20 @@
 25.4325,
 "https://es.wikipedia.org/wiki/Santorini"
 ],
+"Sasebo": [
+33.18,
+129.715,
+"https://es.wikipedia.org/wiki/Sasebo"
+],
 "Seattle": [
 47.605,
 -122.33,
 "https://es.wikipedia.org/wiki/Seattle"
+],
+"Sendai": [
+38.2682,
+140.8694,
+"https://es.wikipedia.org/wiki/Sendai"
 ],
 "Sevilla": [
 37.3886,
@@ -783,6 +1008,11 @@
 37.56,
 126.99,
 "https://es.wikipedia.org/wiki/Se%C3%BAl"
+],
+"Shizuoka": [
+34.9756,
+138.3825,
+"https://es.wikipedia.org/wiki/Shizuoka"
 ],
 "Singapur": [
 1.3525,
@@ -844,6 +1074,16 @@
 176.1667,
 "https://es.wikipedia.org/wiki/Tauranga"
 ],
+"Tesalónica": [
+40.6837,
+23.2786,
+"https://es.wikipedia.org/wiki/Unidad_metropolitana_de_Tesal%C3%B3nica"
+],
+"Tierra del Fuego": [
+-54,
+-70,
+"https://es.wikipedia.org/wiki/Archipi%C3%A9lago_de_Tierra_del_Fuego"
+],
 "Timaru": [
 -44.4016,
 171.247,
@@ -853,6 +1093,11 @@
 35.6894,
 139.6917,
 "https://es.wikipedia.org/wiki/Tokio"
+],
+"Ushuaia": [
+-54.8072,
+-68.3081,
+"https://es.wikipedia.org/wiki/Ushuaia"
 ],
 "Valencia": [
 39.47,
@@ -884,10 +1129,25 @@
 14.5069,
 "https://es.wikipedia.org/wiki/Walvis_Bay"
 ],
+"Warnemünde": [
+54.1753,
+12.0883,
+"https://es.wikipedia.org/wiki/Warnem%C3%BCnde"
+],
+"Whittier": [
+33.9656,
+-118.0244,
+"https://es.wikipedia.org/wiki/Whittier_(California)"
+],
 "Willemstad": [
 12.108,
 -68.935,
 "https://es.wikipedia.org/wiki/Willemstad"
+],
+"Zeebrugge": [
+51.3308,
+3.2075,
+"https://es.wikipedia.org/wiki/Zeebrugge"
 ],
 "Ámsterdam": [
 52.3667,
