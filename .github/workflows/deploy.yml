@@ -50,15 +50,18 @@ jobs:
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/ships_extra.csv; if [ -f src/data/port_coords.json ]; then git add src/data/port_coords.json; fi
           if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Datos: fichas de barco y coordenadas nuevas" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
-      - name: Importar feed de precios (si está configurado)
-        if: ${{ vars.FEED_URL != '' }}
+      - name: Importar feed de agencia (si está configurado)
+        if: ${{ vars.FEED_URL != '' && github.event_name != 'push' }}
         env:
           FEED_URL: ${{ vars.FEED_URL }}
+          FEED_PARTNER: ${{ vars.FEED_PARTNER }}
+          FEED_PREFIX: ${{ vars.FEED_PREFIX }}
           FEED_TOKEN: ${{ secrets.FEED_TOKEN }}
         run: |
           node tools/import-feed.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
-          git add src/data/sailings.json && git commit -m "Actualizar precios (feed diario)" && git push || echo "sin cambios"
+          git add src/data/sailings.json
+          if git diff --cached --quiet; then echo "sin cambios en el feed"; else git commit -m "Ofertas: feed de agencia actualizado" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
       - name: Build
         env:
           # Con dominio propio: crear variables de repo BASE="/" y CNAME="mejorcrucero.com"
@@ -71,6 +74,17 @@ jobs:
           python3 tools/og-offers.py || echo "sin imágenes de ofertas"
       - name: Prueba rápida del resultado
         run: node test/smoke.mjs
+      - name: Publicar chollos nuevos en Telegram (apagado hasta que exista TELEGRAM_BOT_TOKEN)
+        if: ${{ github.event_name != 'push' }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHAT_ID }}
+          SITE: https://${{ vars.CNAME || 'mejorcrucero.com' }}
+        run: |
+          node tools/telegram.js || true
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          if [ -f src/data/telegram-posted.json ]; then git add src/data/telegram-posted.json; fi
+          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Telegram: chollos publicados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
       - name: Guardar la foto semanal de chollos
         run: |
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"

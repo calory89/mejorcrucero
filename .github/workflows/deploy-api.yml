@@ -19,11 +19,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Comprobar credenciales de Cloudflare
+        id: cf
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "Faltan los secretos CLOUDFLARE_API_TOKEN y CLOUDFLARE_ACCOUNT_ID: no se despliega desde aquí"; echo "ok=no" >> $GITHUB_OUTPUT; else echo "ok=si" >> $GITHUB_OUTPUT; fi
       - name: Base de datos D1
+        if: steps.cf.outputs.ok == 'si'
         run: |
           npx --yes wrangler@4 d1 create mejorcrucero || true
           ID=$(npx --yes wrangler@4 d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).find(d=>d.name==='mejorcrucero').uuid))")
           sed -i "s/__D1_ID__/$ID/" wrangler.toml
           npx --yes wrangler@4 d1 execute mejorcrucero --remote --file schema.sql
       - name: Publicar Worker
+        if: steps.cf.outputs.ok == 'si'
         run: npx --yes wrangler@4 deploy
