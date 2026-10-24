@@ -890,11 +890,16 @@
     else if (v.typeMismatch && el.type === 'url') m = 'Pega el enlace completo, empezando por https://';
     else if (v.rangeUnderflow) m = `El valor mínimo es ${el.min}.`; else if (v.rangeOverflow) m = `El valor máximo es ${el.max}.`;
     else if (v.tooShort) m = `Escribe al menos ${el.minLength} caracteres.`; else if (v.stepMismatch) m = 'Usa un número redondo.';
-    if (m) { el.setCustomValidity(m); el.addEventListener('input', () => el.setCustomValidity(''), { once: true }); } }, true);
+    if (m) { el.setCustomValidity(m); let er = el.parentNode.querySelector('.f-err'); if (!er) { er = document.createElement('p'); er.className = 'f-err'; er.setAttribute('role', 'alert'); el.after(er); } er.textContent = m; el.setAttribute('aria-invalid', 'true'); el.addEventListener('input', () => { el.setCustomValidity(''); er.remove(); el.removeAttribute('aria-invalid'); }, { once: true }); } }, true);
 
   // Tablas con desplazamiento: accesibles con el teclado
   $$('.table-wrap, .hub-sum').forEach((t) => { if (t.scrollWidth > t.clientWidth + 2 || t.classList.contains('table-wrap')) { t.tabIndex = 0; t.setAttribute('role', 'region'); if (!t.getAttribute('aria-label')) t.setAttribute('aria-label', t.querySelector('caption, th')?.textContent?.trim() ? 'Tabla: ' + (t.previousElementSibling?.textContent || 'datos').trim().slice(0, 60) : 'Tabla'); } });
 
   // Cabecera más baja al desplazarse
   { const t = $('.top'); if (t) { const on = () => t.classList.toggle('scrolled', scrollY > 40); addEventListener('scroll', on, { passive: true }); on(); } }
+
+  // Campos con euros: sufijo dentro del campo
+  $$('.calc label').forEach((l) => { const sp = l.querySelector('span'), inp = l.querySelector('input[type=number]'); if (!sp || !inp || !/\(€\)$/.test(sp.textContent.trim())) return; sp.textContent = sp.textContent.replace(/\s*\(€\)$/, ''); const w = document.createElement('span'); w.className = 'sfx'; inp.replaceWith(w); w.append(inp); const u = document.createElement('i'); u.textContent = '€'; u.setAttribute('aria-hidden', 'true'); w.append(u); inp.setAttribute('aria-label', sp.textContent + ', en euros'); });
+  // Guías: índice lateral con los apartados
+  { const art = $('.prose-wrap'); const hs = art ? $$('h2', art) : []; if (hs.length >= 4 && innerWidth > 1100) { const nav = document.createElement('nav'); nav.className = 'toc'; nav.setAttribute('aria-label', 'En esta guía'); nav.innerHTML = '<b>En esta guía</b>' + hs.map((h, i) => { if (!h.id) h.id = 'g' + (i + 1); return `<a href="#${h.id}">${esc(h.textContent)}</a>`; }).join(''); art.classList.add('has-toc'); art.prepend(nav); } }
 })();

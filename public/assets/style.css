@@ -830,3 +830,14 @@ form .form-msg{font-weight:600;color:var(--ok)}
 /* Premios y prensa */
 .tool .eyebrow:first-child{display:inline-block;background:#FFF6DB;color:#7A5600;border-radius:6px;padding:2px 8px;font-size:.8rem}
 .page-h blockquote.tip{font-size:1.02rem}
+.f-err{color:var(--warn);font-size:.85rem;font-weight:600;margin:4px 0 0}
+[aria-invalid=true]{border-color:var(--warn)!important}
+.sfx{position:relative;display:block}.sfx input{padding-right:34px}.sfx i{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted);font-weight:600;pointer-events:none}
+.prose-wrap.has-toc{display:grid;grid-template-columns:220px minmax(0,1fr);gap:0 40px}.prose-wrap.has-toc>*:not(.toc){grid-column:2}
+.toc{grid-column:1;grid-row:1/span 200;position:sticky;top:84px;align-self:start;display:flex;flex-direction:column;gap:2px;font-size:.88rem;border-left:2px solid var(--line);padding-left:12px}
+.toc b{margin-bottom:6px}.toc a{color:var(--ink-2);text-decoration:none;padding:3px 0}.toc a:hover{color:var(--sea)}
+.nov-l h2{border-left:4px solid var(--lc);padding-left:10px}
+/* Pregunta a la IA flotante en escritorio */
+@media (min-width:1000px){.ask-sail{position:fixed;right:84px;bottom:20px;z-index:44;max-width:380px;margin:0!important;padding:0!important}
+.ask-sail>summary{list-style:none;background:var(--ink);color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;box-shadow:0 8px 24px rgba(7,26,48,.3)}.ask-sail>summary::-webkit-details-marker{display:none}
+.ask-sail[open]{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(7,26,48,.25);padding:0 16px 16px!important}.ask-sail[open]>summary{margin:0 -16px 12px;border-radius:16px 16px 0 0}}
