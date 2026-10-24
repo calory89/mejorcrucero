@@ -622,3 +622,31 @@ label>span{font-weight:600;font-size:.88rem;color:var(--ink-2)}
 .crumbs{background:none}
 .ship-side .sticky-price{position:static}
 .calc-out{background:var(--ink)}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tools-strip .tool{padding:18px}.tools-strip .tool h3{margin-bottom:6px}.tools-strip .tool p{font-size:.92rem;color:var(--muted);margin:0}
+/* Bajadas de la semana como lista de salidas */
+.drops-sec .mini-grid{gap:0 24px}
+.drops-sec .mini a{padding:12px 0;gap:3px}.drops-sec .mini a b{font-weight:650}
+.drops-sec .mini span{font-variant-numeric:tabular-nums}
+/* Mosaico de destinos */
+.dest-grid{gap:12px}
+.dest{border-radius:12px!important}
+/* Ranking de portada */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.hero-fig img{aspect-ratio:4/4.4}
+/* Tarjeta de barco */
+.ship-card .ship-art{aspect-ratio:3/2}.ship-card .ship-art img{width:100%;height:100%;object-fit:cover}
+.ship-card .card-body{padding:14px 16px 16px}.ship-card h3{margin:0}.ship-card .card-sub{margin:2px 0 10px}.ship-card .card-sub span{margin:0}
+.facts-dl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0;border-top:1px solid var(--line);padding-top:10px}
+.facts-dl div{display:flex;flex-direction:column}.facts-dl dt{font-size:.72rem;color:var(--muted)}.facts-dl dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+.has-offers{margin:10px 0 0;font-size:.85rem;font-weight:600;color:var(--ok)}
+.ship-card .scb{left:10px;right:auto}
+.fav{background:rgba(255,255,255,.92)!important}
+.pill-video{background:rgba(7,26,48,.75)!important;color:#fff!important;border-radius:6px!important;font-weight:600}
+.cmp-add{font-weight:600;color:var(--sea)}
+.dest.has-photo .dest-e,.dest-e{display:none}
+.ship-hero .actions{display:flex;flex-wrap:wrap;gap:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .btn{color:#071A30}:root:not([data-theme=light]) .btn:hover{color:#071A30}}
+:root[data-theme=dark] .btn,:root[data-theme=dark] .btn:hover{color:#071A30}
+:root[data-theme=dark] .btn-ghost,:root[data-theme=dark] .btn-ghost:hover{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .btn-ghost{color:var(--ink)}}

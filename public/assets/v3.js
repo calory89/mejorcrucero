@@ -117,7 +117,7 @@
   // Duelo de barcos compartible (comparador)
   const cmp = $('#cmp-form');
   if (cmp) {
-    const b = document.createElement('p'); b.innerHTML = '<button class="btn btn-ghost btn-sm" type="button">📸 Imagen del duelo para compartir</button>'; cmp.after(b);
+    const b = document.createElement('p'); b.innerHTML = '<button class="btn btn-ghost btn-sm" type="button">Imagen del duelo para compartir</button>'; cmp.after(b);
     b.firstChild.addEventListener('click', async () => {
       const ships = await getShips();
       const sel = [0, 1, 2].map((i) => cmp['s' + i].value).filter(Boolean).map((x) => ships.find((s) => s.slug === x)).filter(Boolean).slice(0, 3);
@@ -152,7 +152,7 @@
       const RETOS = [['Primer crucero', log.length >= 1], ['5 cruceros', log.length >= 5], ['10 cruceros', log.length >= 10], ['3 navieras', lines.size >= 3], ['5 navieras', lines.size >= 5], ['Barco gigante (200.000 GT+)', log.some((x) => by[x.slug].gt >= 200000)], ['Crucero de lujo', log.some((x) => by[x.slug].tier === 'lujo')], ['Barco con nota 85+', log.some((x) => (by[x.slug].sc ?? 0) >= 85)], ['Barco pequeño', log.some((x) => by[x.slug].gt < 60000)]];
       $('#wrapped').innerHTML = log.length ? `<div class="stats"><div><b>${log.length}</b><span>cruceros</span></div><div><b>${lines.size}</b><span>navieras</span></div><div><b>${(gt / 1000).toLocaleString('es-ES', { maximumFractionDigits: 0 })}k</b><span>GT navegados</span></div><div><b>${best && by[best.slug].sc != null ? by[best.slug].sc : '–'}</b><span>tu mejor nota</span></div></div>
         <h3 class="h-sm">Retos</h3><ul class="retos">${RETOS.map(([t, ok]) => `<li class="${ok ? 'ok' : ''}">${ok ? '🏅' : '⬜'} ${esc(t)}</li>`).join('')}</ul>
-        <button class="btn js-wrapped" type="button">📸 Compartir mi resumen</button>` : '';
+        <button class="btn js-wrapped" type="button">Compartir mi resumen</button>` : '';
       $('.js-wrapped')?.addEventListener('click', () => card((g) => {
         g.fillStyle = '#fff'; g.font = 'bold 72px Georgia,serif'; g.fillText('Mis cruceros', 70, 230);
         [[log.length, 'cruceros'], [lines.size, 'navieras'], [Math.round(gt / 1000) + 'k', 'GT navegados']].forEach(([v, l], i) => { g.fillStyle = '#12345a'; g.fillRect(70 + i * 320, 300, 290, 200); g.fillStyle = '#fff'; g.font = 'bold 80px system-ui,sans-serif'; g.fillText(v, 95 + i * 320, 410); g.fillStyle = '#cfe0f3'; g.font = '30px system-ui,sans-serif'; g.fillText(l, 95 + i * 320, 465); });
@@ -348,7 +348,7 @@
     { const box = document.createElement('p'); box.className = 'small hide-ctl'; f.after(box);
       const nameOf = (sel, v) => [...(f.elements[sel]?.options || [])].find((o) => o.value === v)?.textContent || v;
       const draw = () => { const L = store.get('mc_hide_lines', []), S = store.get('mc_hide_ships', []), nv = f.elements.nv?.value, sh = f.elements.sh?.value;
-        box.innerHTML = `${nv ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="l">🙈 Ocultar ${esc(nameOf('nv', nv))} en los listados</button> ` : ''}${sh ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="s">🙈 Ocultar el ${esc(nameOf('sh', sh))}</button> ` : ''}${L.length + S.length ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="x">👁 Mostrar lo oculto (${L.length + S.length})</button>` : ''}`; };
+        box.innerHTML = `${nv ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="l">Ocultar ${esc(nameOf('nv', nv))} en los listados</button> ` : ''}${sh ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="s">Ocultar el ${esc(nameOf('sh', sh))}</button> ` : ''}${L.length + S.length ? `<button class="btn btn-ghost btn-sm" type="button" data-hide="x">Mostrar lo oculto (${L.length + S.length})</button>` : ''}`; };
       box.addEventListener('click', (e) => { const k = e.target.dataset.hide; if (!k) return; if (k === 'l') { store.set('mc_hide_lines', [...new Set([...store.get('mc_hide_lines', []), f.elements.nv.value])]); f.elements.nv.value = ''; } if (k === 's') { store.set('mc_hide_ships', [...new Set([...store.get('mc_hide_ships', []), f.elements.sh.value])]); f.elements.sh.value = ''; } if (k === 'x') { store.set('mc_hide_lines', []); store.set('mc_hide_ships', []); } apply(); draw(); });
       f.addEventListener('change', draw); draw(); }
     // Al volver atrás desde una ficha: mismas tarjetas cargadas y misma posición
@@ -381,7 +381,7 @@
     try {
       await api('/alert', { body: { kind: 'watch', id: f.dataset.id, date: f.dataset.date, nights: +f.dataset.nights || null, ship: f.dataset.ship, base: +f.dataset.base, target: +f.target.value || null, email: f.email.value.trim(), website: f.website.value, page: location.pathname } });
       const l = store.get('mc_watch', []).filter((x) => x.id !== f.dataset.id); l.unshift({ id: f.dataset.id, base: +f.dataset.base, target: +f.target.value || null, at: Date.now() }); store.set('mc_watch', l.slice(0, 50));
-      msg.textContent = '✅ Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
+      msg.textContent = 'Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
     } catch (err) { btn.disabled = false; msg.innerHTML = 'No hemos podido guardarla ahora. Inténtalo de nuevo o usa la <a href="' + BASE + 'herramientas/alerta-precio/">alerta de precio</a>.'; }
   }));
 // ---------- "Comprobado hace X horas" ----------
@@ -409,7 +409,7 @@
     const txt = b.dataset.text; let ok = false;
     try { await navigator.clipboard.writeText(txt); ok = true; } catch {}
     if (!ok && navigator.share) { try { await navigator.share({ text: txt }); ok = true; } catch {} }
-    b.textContent = ok ? '✅ Presupuesto copiado' : '📋 No se pudo copiar'; setTimeout(() => { b.textContent = '📋 Copiar presupuesto'; }, 2500);
+    b.textContent = ok ? '✅ Presupuesto copiado' : '📋 No se pudo copiar'; setTimeout(() => { b.textContent = 'Copiar presupuesto'; }, 2500);
   }));
 // ---------- Precarga de páginas internas al acercar el dedo o el ratón ----------
   const pre = new Set();
@@ -439,15 +439,15 @@
       const box = document.createElement('div'); box.className = 'tip';
       box.innerHTML = l.length ? `<b>Te han compartido ${l.length} oferta${l.length > 1 ? 's' : ''}</b><ul class="mini">${l.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${o.d} · desde ${eur(o.pr)}</span></a></li>`).join('')}</ul><button class="btn btn-sm js-save-shared" type="button">Guardar todas en mi lista</button>` : 'Las ofertas de este enlace ya no están a la venta.';
       myo.before(box);
-      $('.js-save-shared', box)?.addEventListener('click', (e) => { const f = store.get('mc_offer_favs', []); const have = new Set(f.map((x) => x.id)); l.filter((o) => !have.has(o.i)).forEach((o) => f.push({ id: o.i, t: `${o.t} · ${o.sn}`, d: o.d, p: o.pr })); store.set('mc_offer_favs', f.slice(0, 50)); e.target.textContent = '✅ Guardadas'; });
+      $('.js-save-shared', box)?.addEventListener('click', (e) => { const f = store.get('mc_offer_favs', []); const have = new Set(f.map((x) => x.id)); l.filter((o) => !have.has(o.i)).forEach((o) => f.push({ id: o.i, t: `${o.t} · ${o.sn}`, d: o.d, p: o.pr })); store.set('mc_offer_favs', f.slice(0, 50)); e.target.textContent = 'Guardadas'; });
     }).catch(() => {});
     const favs = store.get('mc_offer_favs', []);
     if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = 'Compartir mi lista'; myo.after(b);
-      b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = '✅ Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
+      b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = 'Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
   }
 // ---------- Mis cruceros: salidas vigiladas ----------
   { const box = $('#my-offers'); const w = store.get('mc_watch', []); if (box && w.length) getJson('ofertas.json').then((all) => { const by = Object.fromEntries(all.map((o) => [o.i, o])); const rows = w.map((x) => ({ x, o: by[x.id] })).filter((r) => r.o);
-    if (rows.length) box.insertAdjacentHTML('beforebegin', `<div class="tip"><b>🔔 Salidas que vigilas</b><ul class="mini">${rows.map(({ x, o }) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>Al empezar: ${eur(x.base)} · hoy: ${eur(o.pr)}${o.pr < x.base ? ` (📉 −${eur(x.base - o.pr)})` : o.pr > x.base ? ' (📈 ha subido)' : ''}${x.target ? ` · objetivo ${eur(x.target)}` : ''}</span></a></li>`).join('')}</ul></div>`); }).catch(() => {}); }
+    if (rows.length) box.insertAdjacentHTML('beforebegin', `<div class="tip"><b>Salidas que vigilas</b><ul class="mini">${rows.map(({ x, o }) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>Al empezar: ${eur(x.base)} · hoy: ${eur(o.pr)}${o.pr < x.base ? ` (📉 −${eur(x.base - o.pr)})` : o.pr > x.base ? ' (📈 ha subido)' : ''}${x.target ? ` · objetivo ${eur(x.target)}` : ''}</span></a></li>`).join('')}</ul></div>`); }).catch(() => {}); }
 // ---------- Mis cruceros: guardadas que salen pronto, las que ya no están a la venta y calendario (.ics) ----------
   { const box = $('#my-offers'); const favs = store.get('mc_offer_favs', []);
     if (box && favs.length) getJson('ofertas.json').then((all) => {
@@ -458,7 +458,7 @@
       if (gone.length) parts.push(`<div class="tip"><b>Ya no están a la venta:</b> ${gone.map((f) => esc(f.t)).join(', ')}. <button type="button" class="btn btn-sm btn-ghost js-drop-gone">Quitarlas de mi lista</button></div>`);
       box.insertAdjacentHTML('beforebegin', parts.join(''));
       $('.js-drop-gone')?.addEventListener('click', () => { store.set('mc_offer_favs', favs.filter((f) => live.has(f.id))); location.reload(); });
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📅 Añadir mis guardadas al calendario'; box.after(b);
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = 'Añadir mis guardadas al calendario'; box.after(b);
       b.addEventListener('click', () => { const by = Object.fromEntries(all.map((o) => [o.i, o])); const d8 = (d) => d.replace(/-/g, '');
         const ev = favs.filter((f) => by[f.id]).map((f) => { const o = by[f.id]; const end = new Date(new Date(o.d + 'T12:00').getTime() + (o.n + 1) * 864e5).toISOString().slice(0, 10); return `BEGIN:VEVENT\r\nUID:${o.i}@mejorcrucero.com\r\nDTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z\r\nDTSTART;VALUE=DATE:${d8(o.d)}\r\nDTEND;VALUE=DATE:${d8(end)}\r\nSUMMARY:Crucero ${o.t} · ${o.sn}\r\nDESCRIPTION:Desde ${o.p}. Precio guardado desde ${o.pr} €.\r\nURL:${location.origin}${BASE}salidas/${o.i}/\r\nEND:VEVENT`; });
         const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MejorCrucero//ES\r\n${ev.join('\r\n')}\r\nEND:VCALENDAR`; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'mis-cruceros.ics'; a.click(); });
@@ -492,7 +492,7 @@
     const f = $('.offer-filter'); const params = new URLSearchParams();
     if (f) for (const el of f.elements) if (el.name && el.value) params.set(el.name, el.value);
     const item = { u: location.pathname + (params.toString() ? '?' + params : ''), t: document.querySelector('h1')?.textContent.trim() + (f?.q?.value ? ` · "${f.q.value}"` : ''), at: Date.now() };
-    const l = store.get('mc_searches', []).filter((x) => x.u !== item.u); l.unshift(item); store.set('mc_searches', l.slice(0, 20)); b.textContent = '⭐ Guardada en Mis cruceros';
+    const l = store.get('mc_searches', []).filter((x) => x.u !== item.u); l.unshift(item); store.set('mc_searches', l.slice(0, 20)); b.textContent = 'Guardada en Mis cruceros';
   }));
   $$('.js-surprise-offer').forEach((b) => b.addEventListener('click', async () => {
     const vis = [...document.querySelectorAll('#offer-grid > a:not([hidden])')].filter((c) => +c.dataset.score >= 70);

@@ -4,7 +4,7 @@ export function makeTools2({ layout, esc, eur, sailings, OFF, DESTINATIONS, tool
   const out = [];
   const B = BASE || '/';
   // Script común: guarda el formulario en la URL (para compartir el resultado) y lo restaura al abrir
-  const share = (formId) => `<p class="small"><button class="btn btn-ghost btn-sm js-tool-share" type="button" data-form="${formId}">📤 Compartir este resultado</button></p>
+  const share = (formId) => `<p class="small"><button class="btn btn-ghost btn-sm js-tool-share" type="button" data-form="${formId}">Compartir este resultado</button></p>
   <script>(()=>{const f=document.getElementById('${formId}');if(!f)return;const q=new URLSearchParams(location.search);for(const el of f.elements)if(el.name&&q.has(el.name))el.value=q.get(el.name);
   const sync=()=>{const p=new URLSearchParams();for(const el of f.elements)if(el.name&&el.value!=='')p.set(el.name,el.value);try{history.replaceState(null,'',location.pathname+'?'+p)}catch(e){}};f.addEventListener('input',sync);
   document.querySelector('.js-tool-share[data-form="${formId}"]')?.addEventListener('click',async(e)=>{sync();const u=location.href;try{if(navigator.share)await navigator.share({title:document.title,url:u});else{await navigator.clipboard.writeText(u);e.target.textContent='¡Enlace copiado!'}}catch(_){}})})();</script>`;

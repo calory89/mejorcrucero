@@ -170,50 +170,37 @@ function home() {
 <section class="wrap block" id="recent-reviews" hidden></section>
 <section class="wrap block" id="my-searches" hidden></section>
 ${(() => { const wk = Date.now() - 7 * 864e5; const drops = sailings.map((x) => { const h = (x.history || []).filter((p) => new Date(p.date) >= wk); if (h.length < 1 || !(x.history || []).length) return null; const prev = Math.max(...(x.history || []).filter((p) => new Date(p.date) < new Date(TODAY)).map((p) => p.price), 0); const now = OFF.minPrice(x); return prev > now ? { x, prev, now, pct: Math.round((1 - now / prev) * 100) } : null; }).filter((d) => d && d.pct >= 5).sort((a, b) => b.pct - a.pct).slice(0, 6);
-  return drops.length ? `<section class="wrap block"><div class="block-h"><h2>Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas</a></div><ul class="mini mini-grid">${drops.map((d) => `<li><a href="/salidas/${d.x.id}/"><b>${esc(OFF.destName(d.x.destination, d.x))} · ${d.x.nights} noches · ${esc(bySlug[d.x.ship]?.name || d.x.ship_name)}</b><span>${eur(d.prev)} <b>${eur(d.now)}</b> (−${d.pct}%) · ${new Date(d.x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span></a></li>`).join('')}</ul></section>` : ''; })()}
+  return drops.length ? `<section class="wrap block drops-sec"><div class="block-h"><h2>Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas</a></div><ul class="mini mini-grid">${drops.map((d) => `<li><a href="/salidas/${d.x.id}/"><b>${esc(OFF.destName(d.x.destination, d.x))} · ${d.x.nights} noches · ${esc(bySlug[d.x.ship]?.name || d.x.ship_name)}</b><span>${eur(d.prev)} <b>${eur(d.now)}</b> (−${d.pct}%) · ${new Date(d.x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span></a></li>`).join('')}</ul></section>` : ''; })()}
 ${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas</a></div><div class="chips scroll"><a class="chip" href="/ofertas/chollos/">Chollos</a><a class="chip" href="/ultima-hora/">Última hora</a><a class="chip" href="/ofertas/bajadas/">Han bajado</a><a class="chip" href="/ofertas/nuevas/">Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid">${deals.map(sailingCard).join('')}</div>
-<p class="near"><button class="btn btn-ghost btn-sm js-near" type="button">📍 Cruceros desde el puerto más cercano a mí</button> <span class="near-out muted small" aria-live="polite"></span></p></section>` : ''}
+<p class="near"><button class="btn btn-ghost btn-sm js-near" type="button">Cruceros desde el puerto más cercano</button> <span class="near-out muted small" aria-live="polite"></span></p></section>` : ''}
 ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date) > new Date()).sort((a, b) => OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 4); return mini.length ? `<section class="wrap block"><div class="block-h"><h2>Minicruceros para un fin de semana o puente</h2><a href="/ofertas/minicruceros/">Ver todos</a></div><div class="grid">${mini.map(sailingCard).join('')}</div></section>` : ''; })()}
-<section class="wrap block"><div class="sec-h"><h2>Ranking ${new Date().getFullYear()}: los mejores barcos con nota de 0 a 100</h2><a href="/rankings/">Ver ranking completo</a></div>
+<section class="wrap block"><div class="sec-h"><h2>Los mejores barcos de ${new Date().getFullYear()}</h2><a href="/rankings/">Ver ranking completo</a></div>
 <p class="muted">Higiene oficial (CDC), espacio, tripulación, modernidad y opiniones verificadas. <a href="/metodologia/">Cómo puntuamos</a> · <button class="link-btn js-surprise" type="button">Sorpréndeme</button></p>
 <div class="chips scroll">${BEST_FOR.map(([slug, , t]) => `<a class="chip" href="/rankings/${slug}/">${esc(t.replace('Los mejores ', '').replace('cruceros ', ''))}</a>`).join('')}</div>
 <div class="grid">${scored.filter((s) => s.photo).slice(0, 4).map((s) => shipCard(s)).join('')}</div></section>
 
-<section class="wrap usp" aria-label="Por qué MejorCrucero">
-  <a class="usp-i" href="/herramientas/precio-real/"><span class="usp-e">💶</span><h2>Precio real</h2><p>Sumamos propinas, bebidas, excursiones y traslados. Sin sorpresas al desembarcar.</p></a>
-  <a class="usp-i" href="/herramientas/alerta-precio/"><span class="usp-e">🔔</span><h2>¿Ha bajado tu crucero?</h2><p>Guarda tu reserva, vigila el precio y reclama la diferencia.</p></a>
-  <a class="usp-i" href="#videos"><span class="usp-e">🎬</span><h2>Vídeos de cada barco</h2><p>${totalVideos} vídeos de camarotes, bufé, piscinas y opiniones sinceras.</p></a>
-  <a class="usp-i" href="/comunidad/"><span class="usp-e">💬</span><h2>Foro por barco y salida</h2><p>Conoce a tus compañeros de viaje antes de embarcar.</p></a>
-</section>
+
 
 <section class="wrap block mine" hidden><div class="block-h"><h2>Tus barcos</h2><a href="/mis-cruceros/">Mis cruceros</a></div><div class="grid mine-grid"></div></section>
 
 
-<section class="wrap block" id="videos"><div class="block-h"><h2>Los barcos más buscados, en vídeo</h2><a href="/barcos/">Ver los ${ships.length} barcos</a></div>
-<div class="grid">${featured.map((s) => shipCard(s)).join('')}</div></section>
+
 
 <section class="wrap block"><div class="block-h"><h2>¿Adónde quieres ir?</h2><a href="/destinos/">Todos los destinos</a></div>
 <div class="dest-grid">${DESTINATIONS.map((d) => destCard(d)).join('')}</div></section>
 
-<section class="band"><div class="wrap block tools">
-  <div class="block-h"><h2>Herramientas que nadie más te da</h2><a class="on-dark" href="/herramientas/">Ver las 12</a></div>
-  <div class="grid grid-3">
-    <a class="tool" href="/herramientas/asistente/"><h3>Asistente IA</h3><p>Cuéntale cómo quieres viajar y te recomienda barcos con sus motivos.</p><span class="btn btn-sm">Preguntar</span></a>
-    <a class="tool" href="/herramientas/precio-real/"><h3>Calculadora del precio real</h3><p>Compara dos ofertas con propinas, bebidas y extras, y compártelo.</p><span class="btn btn-sm">Calcular</span></a>
-    <a class="tool" href="/herramientas/mareometro/"><h3>Mareómetro</h3><p>Qué zonas y meses suelen estar más movidos, para elegir bien si te mareas.</p><span class="btn btn-sm">Consultar</span></a>
-  </div>
-</div></section>
+<section class="wrap block tools-strip"><div class="block-h"><h2>Herramientas para planificar</h2><a href="/herramientas/">Ver todas</a></div>
+  <div class="grid grid-4">
+    <a class="tool" href="/herramientas/presupuesto-total/"><h3>Presupuesto total</h3><p>Lo que cuesta de verdad, con viaje, hotel, bebidas y propinas.</p></a>
+    <a class="tool" href="/herramientas/vacaciones/"><h3>Cruceros en vacaciones</h3><p>Salidas que caben en Navidad, Semana Santa o verano.</p></a>
+    <a class="tool" href="/herramientas/comparar-destinos/"><h3>Comparar destinos</h3><p>Época, duración y precio de hasta tres destinos.</p></a>
+    <a class="tool" href="/herramientas/asistente/"><h3>Asistente</h3><p>Cuéntale cómo quieres viajar y te propone salidas reales.</p></a>
+  </div></section>
 
 <section class="wrap block"><div class="block-h"><h2>Embarca sin salir de España</h2><a href="/puertos/">Todos los puertos</a></div>
 <div class="ports">${HOME_PORTS.map((p) => `<a class="port" href="/puertos/${p.slug}/"><b>${esc(p.name)}</b><span>${esc(p.region)}</span></a>`).join('')}</div></section>
 
-<section class="wrap block split">
-  <div><div class="block-h"><h2>Los barcos con más espacio</h2></div>
-  <ol class="rank">${roomiest.map((s, i) => `<li><span class="rank-n">${i + 1}</span><a href="/barcos/${s.slug}/">${esc(s.name)}</a><span class="rank-v">${dec(s.ratio)}</span></li>`).join('')}</ol>
-  <p class="muted small">Índice de espacio = arqueo bruto ÷ pasajeros (barcos de más de 1.500 pasajeros). <a href="/rankings/">Ver rankings</a>.</p></div>
-  <div><div class="block-h"><h2>Comparativas</h2><a href="/comparativas/">Todas</a></div>
-  <ul class="cmp-links">${COMPARISONS.slice(0, 6).map(([a, b]) => lineBySlug[a] && lineBySlug[b] ? `<li><a href="/comparativas/${a}-vs-${b}/">${esc(lineBySlug[a].short)} <span>vs</span> ${esc(lineBySlug[b].short)}</a></li>` : '').join('')}</ul></div>
-</section>
+
 
 <section class="wrap block"><div class="block-h"><h2>Guías para cruceristas</h2><a href="/guias/">Todas las guías</a></div>
 <div class="grid grid-3">${GUIDES.slice(0, 6).map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e">${g.emoji}</span><h3>${esc(g.title)}</h3><p>${esc(g.desc)}</p></a>`).join('')}</div></section>
@@ -295,7 +282,7 @@ function scoreSection(s) {
   if (s.sc == null) return `<section class="block" id="nota"><h2>MejorCrucero Score</h2><p class="muted">Todavía no tenemos datos públicos suficientes para dar una nota fiable a este barco (necesitamos al menos el espacio por pasajero y otros dos indicadores). Preferimos no inventarla. <a href="/metodologia/">Cómo se calcula</a>.</p></section>`;
   const sc = s.score;
   return `<section class="block score-sec" id="nota"><h2>MejorCrucero Score: ${s.sc}/100${sc_prov(s) ? ' <span class="tag-prov">provisional</span>' : ''}</h2>
-  ${ratings['barco:' + s.slug]?.n >= 1 ? `<p class="small"><a href="#foro">💬 Opiniones de la comunidad: <b>${String(ratings['barco:' + s.slug].avg).replace('.', ',')} / 5</b> (${ratings['barco:' + s.slug].n} opinión${ratings['barco:' + s.slug].n > 1 ? 'es' : ''}${ratings['barco:' + s.slug].v ? `, ${ratings['barco:' + s.slug].v} verificadas` : ''})</a></p>` : ''}<div class="score-top">${scoreBadge(s.sc, true)}<p><b>${scoreLabel(s.sc)}</b>. Puesto <a href="/rankings/">${s.rank} de ${scored.length}</a> barcos con nota${(() => { const same = scored.filter((o) => o.line === s.line); const tier = scored.filter((o) => o.tier === s.tier); return (same.length > 1 ? `, ${same.findIndex((o) => o.slug === s.slug) + 1}º de ${same.length} en ${esc(s.lineShort)}` : '') + ` y ${tier.findIndex((o) => o.slug === s.slug) + 1}º de ${tier.length} en su gama (${TIER[s.tier].toLowerCase()})`; })()}.</p></div>
+  ${ratings['barco:' + s.slug]?.n >= 1 ? `<p class="small"><a href="#foro">Opiniones de la comunidad: <b>${String(ratings['barco:' + s.slug].avg).replace('.', ',')} / 5</b> (${ratings['barco:' + s.slug].n} opinión${ratings['barco:' + s.slug].n > 1 ? 'es' : ''}${ratings['barco:' + s.slug].v ? `, ${ratings['barco:' + s.slug].v} verificadas` : ''})</a></p>` : ''}<div class="score-top">${scoreBadge(s.sc, true)}<p><b>${scoreLabel(s.sc)}</b>. Puesto <a href="/rankings/">${s.rank} de ${scored.length}</a> barcos con nota${(() => { const same = scored.filter((o) => o.line === s.line); const tier = scored.filter((o) => o.tier === s.tier); return (same.length > 1 ? `, ${same.findIndex((o) => o.slug === s.slug) + 1}º de ${same.length} en ${esc(s.lineShort)}` : '') + ` y ${tier.findIndex((o) => o.slug === s.slug) + 1}º de ${tier.length} en su gama (${TIER[s.tier].toLowerCase()})`; })()}.</p></div>
   <ul class="bars">${sc.parts.map((p) => `<li><span class="bar-l">${esc(p.label)}</span><span class="bar"><i style="width:${Math.round((p.pts / p.max) * 100)}%"></i></span><b>${String(p.pts).replace('.', ',')}/${p.max}</b><small>${esc(p.detail)}${(() => { const peers = scored.filter((o) => o.tier === s.tier && o.slug !== s.slug).map((o) => o.score.parts.find((q) => q.k === p.k)).filter(Boolean); if (peers.length < 5) return ''; const below = peers.filter((q) => q.pts / q.max < p.pts / p.max).length; const pc = Math.round((below / peers.length) * 100); return pc < 10 ? ' · entre los más bajos de su gama' : pc >= 90 ? ' · entre los mejores de su gama' : ` · mejor que el ${pc}% de su gama`; })()}${p.source ? ` · <a href="${esc(p.source)}" target="_blank" rel="noopener">fuente</a>` : ''}</small></li>`).join('')}</ul>
   ${sc.missing.length ? `<p class="${sc_prov(s) ? 'tip' : 'muted small'}">${sc_prov(s) ? '<b>Nota provisional.</b> ' : ''}Sin datos todavía de: ${sc.missing.join(', ')}. La nota se calcula sobre el ${sc.coverage}% de los puntos posibles y se reescala a 100${sc_prov(s) ? ': puede cambiar bastante cuando tengamos esos datos' : ''}.</p>` : ''}
   <p class="small"><a href="/metodologia/">Cómo calculamos la nota</a> · <a href="/rankings/">Ver el ranking completo</a></p>${shareBar(`El ${s.name} tiene un ${s.sc}/100 en MejorCrucero:`, '/barcos/' + s.slug + '/')}</section>`;
@@ -333,7 +320,7 @@ function shipPage(s) {
       <div><b>${dec(s.ratio)}</b><span>Espacio · ${spaceLabel(s.ratio)}</span></div>
     </div>
     ${s.sailings.length ? `<p class="from-price">Ofertas desde <b>${eur(Math.min(...s.sailings.map(OFF.minPrice)))}</b> por persona · <a href="#salidas">${s.sailings.length} salidas</a></p>` : ''}
-    <div class="actions"><a class="btn" href="${s.sailings.length ? '#salidas' : '#reservar'}">${s.sailings.length ? 'Ver ofertas' : 'Comparar precios'}</a><a class="btn btn-ghost" href="#seguir">🔔 Seguir barco</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
+    <div class="actions"><a class="btn" href="${s.sailings.length ? '#salidas' : '#reservar'}">${s.sailings.length ? 'Ver ofertas' : 'Comparar precios'}</a><a class="btn btn-ghost" href="#seguir">Seguir barco</a>${s.videos.length ? '<a class="btn btn-ghost" href="#videos">Ver vídeos</a>' : ''}<button class="btn btn-ghost" type="button" data-cmp="${s.slug}">+ Comparar</button><button class="btn btn-ghost fav fav-inline" type="button" data-fav="${s.slug}" aria-pressed="false" aria-label="Guardar en favoritos">${ICON.heart} Guardar</button></div>
   </div>
   <div class="ship-hero-art">${s.photo ? `<img src="${esc(s.photo.thumb)}"${s.photo.hi ? ` srcset="${esc(s.photo.thumb)} 640w, ${esc(s.photo.large)} 1280w" sizes="(max-width: 900px) 100vw, 560px"` : ''} alt="${esc(s.name)}" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" fetchpriority="high" decoding="async" class="ship-photo">${photoCredit(s)}` : `<div aria-hidden="true">${shipSvg(s, 460)}</div>`}</div>
 </div></section>
@@ -356,9 +343,9 @@ function shipPage(s) {
     ${partnerLink({ href: affLink('vayacruceros'), key: 'vayacruceros', title: 'VayaCruceros', sub: 'Especialista en cruceros', page })}
   </div>
   <div class="tip"><b>Antes de pagar:</b> calcula el <a href="/herramientas/precio-real/?linea=${s.lineSlug}">precio real con propinas y extras</a> y guarda tu reserva en la <a href="/herramientas/alerta-precio/?barco=${s.slug}">alerta de bajada de precio</a>.</div>
-  <p class="muted small">🔗 Algunos enlaces son de afiliado: si reservas, el vendedor nos paga una comisión y <b>tú pagas lo mismo</b>. La comisión nunca cambia la nota ni el orden. <a href="/afiliacion/">Más info</a>.</p>
+  <p class="muted small">Algunos enlaces son de afiliado: si reservas, el vendedor nos paga una comisión y <b>tú pagas lo mismo</b>. La comisión nunca cambia la nota ni el orden. <a href="/afiliacion/">Más info</a>.</p>
   <details class="book-help"><summary>¿Prefieres que te ayudemos a reservarlo?</summary><p class="small">Déjanos tu email y la fecha aproximada: te mandamos las mejores opciones de las agencias para el ${esc(s.name)}.</p>${leadForm('reserva:' + s.slug, 'Quiero ayuda', '<label class="sr" for="bh-' + s.slug + '">Fecha aproximada</label><input id="bh-' + s.slug + '" type="month" name="month">')}</details>
-  <form class="follow" id="seguir" data-thread="barco:${s.slug}"><label><span>🔔 Avísame de ofertas del ${esc(s.name)}</span><input type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></label><button class="btn btn-sm" type="submit">Seguir barco</button><p class="form-msg" role="status" aria-live="polite"></p></form>
+  <form class="follow" id="seguir" data-thread="barco:${s.slug}"><label><span>Avísame de ofertas del ${esc(s.name)}</span><input type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></label><button class="btn btn-sm" type="submit">Seguir barco</button><p class="form-msg" role="status" aria-live="polite"></p></form>
   </section>
 
   <section id="videos" class="block"><h2>Vídeos del ${esc(s.name)}</h2>
@@ -991,7 +978,7 @@ function myCruises() {
   <section class="wrap block"><h2>Favoritos</h2><div class="grid" id="my-favs"><p class="muted">Pulsa el corazón en cualquier barco para guardarlo aquí.</p></div></section>
   <section class="wrap block" id="my-recs" hidden></section>
   <section class="wrap block"><h2>Ofertas guardadas y vistas</h2><div id="my-offers"><p class="muted">Pulsa "Guardar oferta" en cualquier oferta para tenerla aquí.</p></div></section>
-  <section class="wrap block"><h2>Tus datos</h2><p class="small">Todo lo de esta página (guardadas, vistas, notas, filtros y alertas vigiladas) se guarda solo en este navegador. No hace falta cuenta.</p><p><button class="btn btn-ghost btn-sm js-export-my" type="button">⬇️ Descargar mis datos</button> <label class="btn btn-ghost btn-sm">⬆️ Cargar desde fichero<input type="file" accept="application/json" class="js-import-my" hidden></label> <button class="btn btn-ghost btn-sm js-clear-my" type="button">🗑️ Borrar todo</button></p><p class="small muted js-my-msg" aria-live="polite"></p> <p class="small"><button class="btn btn-ghost btn-sm js-export-posts" type="button">💬 Descargar mis mensajes de la comunidad</button></p></section>
+  <section class="wrap block"><h2>Tus datos</h2><p class="small">Todo lo de esta página (guardadas, vistas, notas, filtros y alertas vigiladas) se guarda solo en este navegador. No hace falta cuenta.</p><p><button class="btn btn-ghost btn-sm js-export-my" type="button">⬇️ Descargar mis datos</button> <label class="btn btn-ghost btn-sm">⬆️ Cargar desde fichero<input type="file" accept="application/json" class="js-import-my" hidden></label> <button class="btn btn-ghost btn-sm js-clear-my" type="button">Borrar todo</button></p><p class="small muted js-my-msg" aria-live="polite"></p> <p class="small"><button class="btn btn-ghost btn-sm js-export-posts" type="button">Descargar mis mensajes de la comunidad</button></p></section>
   <section class="wrap block"><h2>Vistos recientemente</h2><div class="grid" id="my-recent"><p class="muted">Todavía no has visto ningún barco.</p></div></section>
   <section class="wrap block" id="avisos"><h2>Avisos</h2><div id="my-notifs"><p class="muted">Cargando…</p></div></section>
   <section class="wrap block split"><div><h2>Barcos en los que he navegado</h2><form class="calc" id="log-form"><label><span>Barco</span><input name="ship" list="log-ships" required autocomplete="off"></label><label><span>Año</span><input name="year" type="number" min="1970" max="2030" inputmode="numeric"></label><button class="btn" type="submit">Añadir</button><p class="form-msg" role="status"></p></form>${shipDatalist('log-ships')}<div id="log-out"></div></div><div><h2>Mi resumen y retos</h2><div id="wrapped"><p class="muted">Añade tus cruceros para ver tu resumen.</p></div></div></section>

@@ -78,9 +78,9 @@ export const scoreBadge = (n, big = false) => (n == null ? '' : `<span class="sc
 
 export function shipCard(s, opts = {}) {
   return `<article class="card ship-card" data-name="${esc(s.name.toLowerCase())}" data-line="${s.lineSlug}" data-size="${s.size}" data-gt="${s.gt}" data-year="${s.year}" data-ratio="${s.ratio ?? 0}" data-pax="${s.pax ?? 0}" data-tier="${s.tier}" data-sc="${s.sc ?? -1}" data-slug="${s.slug}">
-  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">▶ Vídeos</span>' : ''}${scoreBadge(s.sc)}</div>
-  <div class="card-body"><span class="eyebrow">${esc(s.lineShort)}</span><h3>${esc(s.name)}</h3>
-  <ul class="facts"><li><b>${s.year}</b> año</li><li><b>${fmt(s.pax)}</b> pasajeros</li><li><b>${dec(s.ratio)}</b> espacio</li></ul>${s.sailings?.length ? `<p class="has-offers small">🏷️ ${s.sailings.length} salida${s.sailings.length > 1 ? 's' : ''} a la venta</p>` : ''}</div></a>
+  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">Vídeos</span>' : ''}${scoreBadge(s.sc)}</div>
+  <div class="card-body"><h3>${esc(s.name)}</h3><p class="card-sub"><span>${esc(s.lineShort)}</span></p>
+  <dl class="facts-dl"><div><dt>Año</dt><dd>${s.year}</dd></div><div><dt>Pasajeros</dt><dd>${fmt(s.pax)}</dd></div><div><dt>Espacio</dt><dd>${dec(s.ratio)}</dd></div></dl>${s.sailings?.length ? `<p class="has-offers">${s.sailings.length} salida${s.sailings.length > 1 ? 's' : ''} a la venta</p>` : ''}</div></a>
   <button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false">${ICON.heart}</button>
   ${opts.compare !== false ? `<button class="cmp-add" type="button" data-cmp="${s.slug}">+ Comparar<span class="sr"> ${esc(s.name)}</span></button>` : ''}
 </article>`;
@@ -136,7 +136,7 @@ export function shareBar(text, url) {
 }
 
 export function reportBtn(target) {
-  return `<button class="link-btn js-report" type="button" data-target="${esc(target)}">⚑ Reportar un error en estos datos</button>`;
+  return `<button class="link-btn js-report" type="button" data-target="${esc(target)}">Reportar un error en estos datos</button>`;
 }
 
 // Foro / reseñas / preguntas nativos (API propia). Sin API: modo "abre pronto".
@@ -206,7 +206,7 @@ ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="hig
 <nav class="nav" aria-label="Principal"><ul>${NAV.map(([u, n]) => `<li><a href="${u}"${url.startsWith(u) ? ' aria-current="page"' : ''}>${n}</a></li>`).join('')}</ul></nav>
 <form class="gsearch" action="/buscar/" role="search"><label class="sr" for="gq">Buscar barco, naviera, destino o puerto</label><input id="gq" name="q" type="search" placeholder="Barco, destino, puerto…" autocomplete="off" aria-autocomplete="list" aria-controls="gq-list"><ul id="gq-list" class="ac" role="listbox" hidden></ul></form>
 <a class="notif" href="/mis-cruceros/#avisos" hidden aria-label="Tienes respuestas nuevas">💬<span></span></a>
-<details class="settings"><summary class="icon-btn" aria-label="Ajustes de lectura" title="Ajustes de lectura"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 7h10v2H4zm12 0h4v2h-4v2h-2V5h2zM4 15h4v2H4zm6 0h10v2H10v2H8v-6h2z"/></svg></summary><div class="settings-pop"><button class="set-btn js-theme" type="button">${ICON.moon}<span>Modo oscuro</span></button><button class="set-btn js-contrast" type="button" aria-pressed="false"><span aria-hidden="true" class="set-i">◐</span><span>Alto contraste</span></button><button class="set-btn js-textsize" type="button"><span aria-hidden="true" class="set-i">A</span><span>Texto más grande</span></button></div></details>
+<details class="settings"><summary class="icon-btn" aria-label="Ajustes de lectura" title="Ajustes de lectura"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 7h10v2H4zm12 0h4v2h-4v2h-2V5h2zM4 15h4v2H4zm6 0h10v2H10v2H8v-6h2z"/></svg></summary><div class="settings-pop"><button class="set-btn js-theme" type="button">${ICON.moon}<span>Modo oscuro</span></button><button class="set-btn js-contrast" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span>Alto contraste</span></button><button class="set-btn js-textsize" type="button"><span aria-hidden="true" class="set-i">A</span><span>Texto más grande</span></button></div></details>
 <a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">Crear alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
 ${[['/', 'Inicio'], ['/ofertas/chollos/', 'Chollos de hoy'], ...NAV, ['/navieras/', 'Navieras'], ['/rankings/', 'Rankings'], ['/guias/', 'Guías'], ['/puertos/', 'Puertos'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
