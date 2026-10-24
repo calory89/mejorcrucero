@@ -36,10 +36,11 @@ def lookup(name):
 def main():
     have = json.load(open(OUT, encoding='utf-8')) if os.path.exists(OUT) else {}
     sailings = json.load(open('src/data/sailings.json', encoding='utf-8'))
+    alias = {k: v for k, v in json.load(open('src/data/port_alias.json', encoding='utf-8')).items() if not k.startswith('_')}
     names = {}
     for x in sailings:
         for p in (x.get('itinerary') or {}).get('ports', []):
-            n = p.get('name', '').strip()
+            n = re.sub(r'\s{2,}', ' ', re.sub(r'[™®]', '', p.get('name', ''))).strip(); n = alias.get(n, n)
             if n and not SKIP.search(n) and n not in have and p.get('lat') is None: names[n] = names.get(n, 0) + 1
     known = set()
     try:
@@ -51,8 +52,9 @@ def main():
     found = 0
     for n in todo[:limit]:
         r = lookup(n)
-        if r: have[n] = r; found += 1; print('ok', n, r[:2])
-        else: print('no', n)
+        if r: have[n] = r; found += 1; print('ok', n, r[:2], flush=True)
+        else: print('no', n, flush=True)
+        if found and found % 10 == 0: json.dump(dict(sorted(have.items())), open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
     json.dump(dict(sorted(have.items())), open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
     print(f'{found} coordenadas nuevas; {len(have)} en total; {len(todo) - found} sin encontrar')
 
