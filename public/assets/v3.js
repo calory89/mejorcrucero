@@ -127,7 +127,7 @@
         sel.forEach((s, i) => {
           const y = 300 + i * 200; g.fillStyle = '#12345a'; g.fillRect(70, y, 940, 170);
           g.fillStyle = s.sc != null ? scColor(s.sc) : '#475569'; g.fillRect(90, y + 25, 120, 120);
-          g.fillStyle = '#fff'; g.font = 'bold 56px system-ui,sans-serif'; g.fillText(s.sc != null ? s.sc : '—', s.sc >= 100 ? 95 : 112, y + 105);
+          g.fillStyle = '#fff'; g.font = 'bold 56px system-ui,sans-serif'; g.fillText(s.sc != null ? s.sc : '–', s.sc >= 100 ? 95 : 112, y + 105);
           g.font = 'bold 44px system-ui,sans-serif'; g.fillText((s === win ? '🏆 ' : '') + s.name, 240, y + 75);
           g.fillStyle = '#cfe0f3'; g.font = '30px system-ui,sans-serif'; g.fillText(`${s.lineShort} · ${s.year} · ${s.gt.toLocaleString('es-ES')} GT`, 240, y + 125);
         });
@@ -149,7 +149,7 @@
       const gt = log.reduce((a, x) => a + by[x.slug].gt, 0);
       const best = [...log].sort((a, z) => (by[z.slug].sc ?? -1) - (by[a.slug].sc ?? -1))[0];
       const RETOS = [['Primer crucero', log.length >= 1], ['5 cruceros', log.length >= 5], ['10 cruceros', log.length >= 10], ['3 navieras', lines.size >= 3], ['5 navieras', lines.size >= 5], ['Barco gigante (200.000 GT+)', log.some((x) => by[x.slug].gt >= 200000)], ['Crucero de lujo', log.some((x) => by[x.slug].tier === 'lujo')], ['Barco con nota 85+', log.some((x) => (by[x.slug].sc ?? 0) >= 85)], ['Barco pequeño', log.some((x) => by[x.slug].gt < 60000)]];
-      $('#wrapped').innerHTML = log.length ? `<div class="stats"><div><b>${log.length}</b><span>cruceros</span></div><div><b>${lines.size}</b><span>navieras</span></div><div><b>${(gt / 1000).toLocaleString('es-ES', { maximumFractionDigits: 0 })}k</b><span>GT navegados</span></div><div><b>${best && by[best.slug].sc != null ? by[best.slug].sc : '—'}</b><span>tu mejor nota</span></div></div>
+      $('#wrapped').innerHTML = log.length ? `<div class="stats"><div><b>${log.length}</b><span>cruceros</span></div><div><b>${lines.size}</b><span>navieras</span></div><div><b>${(gt / 1000).toLocaleString('es-ES', { maximumFractionDigits: 0 })}k</b><span>GT navegados</span></div><div><b>${best && by[best.slug].sc != null ? by[best.slug].sc : '–'}</b><span>tu mejor nota</span></div></div>
         <h3 class="h-sm">Retos</h3><ul class="retos">${RETOS.map(([t, ok]) => `<li class="${ok ? 'ok' : ''}">${ok ? '🏅' : '⬜'} ${esc(t)}</li>`).join('')}</ul>
         <button class="btn js-wrapped" type="button">📸 Compartir mi resumen</button>` : '';
       $('.js-wrapped')?.addEventListener('click', () => card((g) => {
@@ -230,7 +230,7 @@
         const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&timezone=auto&forecast_days=14`);
         const j = await r.json(); const d = j.daily;
         const icon = (c) => (c <= 1 ? '☀️' : c <= 3 ? '⛅' : c <= 48 ? '🌫️' : c <= 67 ? '🌧️' : c <= 77 ? '❄️' : c <= 82 ? '🌦️' : '⛈️');
-        out.innerHTML = `<h2 class="h-sm">Próximos 14 días en ${esc(name)}</h2><div class="wx">${d.time.map((t, i) => `<div><b>${new Date(t).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' })}</b><span class="wx-i">${icon(d.weather_code[i])}</span><span>${Math.round(d.temperature_2m_max[i])}° / ${Math.round(d.temperature_2m_min[i])}°</span><small>💧${d.precipitation_probability_max[i] ?? '—'}% · 💨${Math.round(d.wind_speed_10m_max[i])} km/h</small></div>`).join('')}</div><p class="muted small">Previsión de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. El viento fuerte (más de 40 km/h) puede hacer que el barco se mueva o que se cancele una escala con lanchas.</p>`;
+        out.innerHTML = `<h2 class="h-sm">Próximos 14 días en ${esc(name)}</h2><div class="wx">${d.time.map((t, i) => `<div><b>${new Date(t).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' })}</b><span class="wx-i">${icon(d.weather_code[i])}</span><span>${Math.round(d.temperature_2m_max[i])}° / ${Math.round(d.temperature_2m_min[i])}°</span><small>💧${d.precipitation_probability_max[i] ?? '–'}% · 💨${Math.round(d.wind_speed_10m_max[i])} km/h</small></div>`).join('')}</div><p class="muted small">Previsión de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. El viento fuerte (más de 40 km/h) puede hacer que el barco se mueva o que se cancele una escala con lanchas.</p>`;
       } catch { out.innerHTML = '<p class="muted">No se ha podido cargar la previsión. Inténtalo más tarde.</p>'; }
     };
     if (qs.get('lat') && qs.get('lon')) { const o = document.createElement('option'); o.value = `${qs.get('lat')}|${qs.get('lon')}|${qs.get('n') || 'Puerto'}`; o.textContent = qs.get('n') || 'Puerto'; wF.port.prepend(o); wF.port.value = o.value; }

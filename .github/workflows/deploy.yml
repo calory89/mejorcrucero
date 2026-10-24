@@ -56,6 +56,11 @@ jobs:
         run: node src/build.js
       - name: Prueba rápida del resultado
         run: node test/smoke.mjs
+      - name: Guardar la foto semanal de chollos
+        run: |
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/semanas
+          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Chollos de la semana: foto actualizada" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -68,3 +73,18 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: ${{ vars.CNAME != '' }}
+    steps:
+      - name: Avisar a los buscadores (IndexNow) de las páginas nuevas o cambiadas
+        run: |
+          sleep 60
+          curl -s -m 60 "https://${{ vars.CNAME }}/data/urls-hoy.txt" -o urls.txt || exit 0
+          node -e "const u=require('fs').readFileSync('urls.txt','utf8').split('\n').filter(Boolean).slice(0,9000);require('fs').writeFileSync('body.json',JSON.stringify({host:process.env.H,key:process.env.K,keyLocation:'https://'+process.env.H+'/'+process.env.K+'.txt',urlList:u}));console.log(u.length,'URL')"
+          curl -s -m 60 -o /dev/null -w "IndexNow: %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' --data @body.json || true
+        env:
+          H: ${{ vars.CNAME }}
+          K: 2637a01b514170ca374a6377bdacb219
+

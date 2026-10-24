@@ -409,3 +409,7 @@ fieldset .chk{grid-column:1/-1}
 .hm-g a b{font-size:.75rem}.hm-g a small{font-size:.6rem;opacity:.85}
 .hm-g .h0{opacity:.35}
 .hm-g .h1{background:#1f8a4c;color:#fff}.hm-g .h2{background:#8fcf9f}.hm-g .h3{background:#f3d38a}.hm-g .h4{background:#efa58f}
+.week-list li{margin:.5rem 0;line-height:1.5}
+.card-tags .t-new{background:#e6f0ff;color:#123e8a;font-weight:600}
+.card-tags .t-up{background:#fff1e0;color:#8a4b00}
+.itin-sum{background:var(--soft,#eef3f8);padding:.5rem .75rem;border-radius:10px}

@@ -12,8 +12,8 @@
   const eur = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slugify = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const dec = (r) => (r == null ? '—' : String(r).replace('.', ','));
-  const num = (n) => (n == null ? '—' : Number(n).toLocaleString('es-ES'));
+  const dec = (r) => (r == null ? '–' : String(r).replace('.', ','));
+  const num = (n) => (n == null ? '–' : Number(n).toLocaleString('es-ES'));
   const memo = {};
   const getJson = (f) => memo[f] || (memo[f] = fetch(BASE + 'data/' + f).then((r) => r.json()));
   const getShips = () => getJson('ships.json');
@@ -53,17 +53,30 @@
     const render = async () => {
       await loadIdx();
       const q = norm(gq.value.trim());
-      if (q.length < 2) { gl.hidden = true; return; }
-      const hits = idx.filter((x) => x[3].includes(q)).sort((a, b) => a[3].indexOf(q) - b[3].indexOf(q)).slice(0, 8);
+      if (q.length < 2) {
+        // Campo vacío: búsquedas recientes y atajos populares
+        const rec = store.get('mc_recent_q', []);
+        const pop = [['Chollos de cruceros', '/ofertas/chollos/', 'Ofertas'], ['Cruceros desde Barcelona', '/ofertas/desde-barcelona/', 'Ofertas'], ['Islas griegas', '/ofertas/mediterraneo-oriental/', 'Ofertas'], ['Caribe', '/ofertas/caribe/', 'Ofertas'], ['Fiordos noruegos', '/ofertas/fiordos-noruegos/', 'Ofertas']];
+        const items = [...rec.map((r) => [r[0], r[1], 'Reciente']), ...pop].slice(0, 8);
+        gl.innerHTML = items.map((h, i) => `<li role="option" id="ac-${i}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join(''); gl.hidden = !items.length; active = -1; return;
+      }
+      // Coincidencia exacta de texto; si no hay, tolera una letra de diferencia por palabra (faltas de ortografía)
+      const lev1 = (a, b) => { if (Math.abs(a.length - b.length) > 1) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (a.length < b.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
+      let hits = idx.filter((x) => x[3].includes(q)).sort((a, b) => a[3].indexOf(q) - b[3].indexOf(q) || a[0].length - b[0].length).slice(0, 8);
+      if (!hits.length) { const ws = q.split(/\s+/).filter((w) => w.length >= 2); hits = idx.filter((x) => { const xw = x[3].split(/[^a-z0-9]+/); return ws.length && ws.every((w) => xw.some((y) => y.startsWith(w) || (w.length >= 5 && lev1(w, y)))); }).slice(0, 8); }
       active = -1;
       gl.innerHTML = hits.map((h, i) => `<li role="option" id="ac-${i}"><a href="${BASE}${h[1].slice(1)}"><b>${esc(h[0])}</b><span>${esc(h[2])}</span></a></li>`).join('') || '<li class="muted">Sin resultados: pulsa Intro para buscar</li>';
       gl.hidden = false;
     };
+    const saveQ = (a) => { const t = $('b', a)?.textContent || ''; const u = a.getAttribute('href').replace(BASE, '/'); const l = store.get('mc_recent_q', []).filter((r) => r[1] !== u); l.unshift([t, u]); store.set('mc_recent_q', l.slice(0, 5)); };
+    gl.addEventListener('click', (e) => { const a = e.target.closest('a'); if (a) saveQ(a); });
+    gq.addEventListener('focus', render);
+    document.addEventListener('keydown', (e) => { if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement?.tagName || '') && !document.activeElement?.isContentEditable) { e.preventDefault(); gq.focus(); } });
     gq.addEventListener('input', render);
     gq.addEventListener('keydown', (e) => {
       const items = $$('li[role=option]', gl);
       if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && items.length) { e.preventDefault(); active = (active + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length; items.forEach((li, i) => li.classList.toggle('on', i === active)); gq.setAttribute('aria-activedescendant', 'ac-' + active); }
-      if (e.key === 'Enter' && active >= 0 && items[active]) { e.preventDefault(); location.href = $('a', items[active]).href; }
+      if (e.key === 'Enter' && active >= 0 && items[active]) { e.preventDefault(); const a = $('a', items[active]); saveQ(a); location.href = a.href; }
       if (e.key === 'Escape') gl.hidden = true;
     });
     document.addEventListener('click', (e) => { if (!e.target.closest('.gsearch')) gl.hidden = true; });
@@ -300,15 +313,15 @@
       const rows = [
         ['MejorCrucero Score', (s) => (s.sc != null ? `<b class="scb ${s.sc >= 85 ? 'sc-a' : s.sc >= 75 ? 'sc-b' : s.sc >= 65 ? 'sc-c' : s.sc >= 50 ? 'sc-d' : 'sc-e'}">${s.sc}</b>` : 'Sin nota'), (s) => s.sc ?? -1],
         ...(window.MC_profile && window.MC_profile() ? [['Encaje contigo', (s) => window.MC_match(s, window.MC_profile()) + '%', (s) => window.MC_match(s, window.MC_profile())]] : []),
-        ['Higiene CDC (/25)', (s) => (s.p?.higiene != null ? dec(s.p.higiene) : '—'), (s) => s.p?.higiene ?? -1],
-        ['Tripulación', (s) => (s.crew ? num(s.crew) + ` (${dec(Math.round((s.pax / s.crew) * 100) / 100)} pax/trip.)` : '—'), (s) => (s.crew && s.pax ? -s.pax / s.crew : -99)],
+        ['Higiene CDC (/25)', (s) => (s.p?.higiene != null ? dec(s.p.higiene) : '–'), (s) => s.p?.higiene ?? -1],
+        ['Tripulación', (s) => (s.crew ? num(s.crew) + ` (${dec(Math.round((s.pax / s.crew) * 100) / 100)} pax/trip.)` : '–'), (s) => (s.crew && s.pax ? -s.pax / s.crew : -99)],
         ['Naviera', (s) => esc(s.lineShort)],
         ['Gama', (s) => ({ estandar: 'Precio medio', premium: 'Premium', lujo: 'Lujo' }[s.tier])],
         ['Año', (s) => s.year, (s) => s.year],
         ['Arqueo (GT)', (s) => num(s.gt), (s) => s.gt],
         ['Pasajeros', (s) => num(s.pax)],
         ['Espacio por pasajero', (s) => dec(s.ratio), (s) => s.ratio || 0],
-        ['Vídeos', (s) => s.v || '—'],
+        ['Vídeos', (s) => s.v || '–'],
         ['Cargo servicio/noche (ref.)', (s) => (s.tip ? String(s.tip).replace('.', ',') + ' $' : 'Consultar')],
         ['Español a bordo (Med.)', (s) => (s.es ? 'Sí' : 'Consultar')],
       ];

@@ -10,16 +10,21 @@ export const OUT = path.resolve(path.dirname(new URL(import.meta.url).pathname),
 
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const slugify = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-export const dec = (r) => (r == null ? '—' : String(r).replace('.', ','));
-export const fmt = (n) => (n == null || n === '' ? '—' : Number(n).toLocaleString('es-ES'));
+export const dec = (r) => (r == null ? '–' : String(r).replace('.', ','));
+export const fmt = (n) => (n == null || n === '' ? '–' : Number(n).toLocaleString('es-ES'));
 export const eur = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 export const pages = [];
+// HTML más ligero: quita la sangría al principio de línea (fuera de <pre>, <textarea> y <script>)
+function slim(html) {
+  const keep = []; const t = html.replace(/<(pre|textarea|script)\b[\s\S]*?<\/\1>/gi, (m) => { keep.push(m); return `\u0000${keep.length - 1}\u0000`; });
+  return t.replace(/\n[ \t]+/g, '\n').replace(/\n{2,}/g, '\n').replace(/\u0000(\d+)\u0000/g, (_, i) => keep[+i]);
+}
 export function write(rel, html) {
   const file = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, rel.endsWith('.html') ? slim(html) : html);
 }
 export function rebase(html) {
   if (BASE === '/') return html;
@@ -141,7 +146,7 @@ export function forumBlock(thread, title, opts = {}) {
   <div class="forum-list"><div class="skel"></div><div class="skel"></div></div>
   <form class="forum-form" novalidate>
     <h3 class="h-sm forum-form-title">Escribe tu opinión</h3>
-    <div class="rating-row" data-for="review">${[['general', 'General'], ['comida', 'Comida'], ['camarote', 'Camarote'], ['animacion', 'Animación'], ['ninos', 'Niños'], ['limpieza', 'Limpieza']].map(([k, n]) => `<label><span>${n}</span><select name="r_${k}"><option value="">—</option>${[5, 4, 3, 2, 1].map((v) => `<option value="${v}">${'★'.repeat(v)}</option>`).join('')}</select></label>`).join('')}<label><span>¿Repetirías?</span><select name="r_repetiria"><option value="">—</option><option value="1">Sí</option><option value="0">No</option></select></label></div>
+    <div class="rating-row" data-for="review">${[['general', 'General'], ['comida', 'Comida'], ['camarote', 'Camarote'], ['animacion', 'Animación'], ['ninos', 'Niños'], ['limpieza', 'Limpieza']].map(([k, n]) => `<label><span>${n}</span><select name="r_${k}"><option value="">–</option>${[5, 4, 3, 2, 1].map((v) => `<option value="${v}">${'★'.repeat(v)}</option>`).join('')}</select></label>`).join('')}<label><span>¿Repetirías?</span><select name="r_repetiria"><option value="">–</option><option value="1">Sí</option><option value="0">No</option></select></label></div>
     <div class="cabin-row" data-for="cabin"><label><span>Nº de camarote</span><input name="cabin" inputmode="numeric" maxlength="8" placeholder="Ej.: 12045"></label><label><span>Vídeo de YouTube (opcional)</span><input name="video" type="url" placeholder="https://youtube.com/…"></label></div>
     <details class="proof" data-for="review"><summary>✅ Verifica tu opinión (opcional)</summary><label><span>Pega aquí el email de confirmación de tu reserva. Solo comprobamos que es de este barco: no se guarda ni se publica.</span><textarea name="proof" rows="3" maxlength="6000"></textarea></label></details>
     <label><span>Tu nombre</span><input name="name" maxlength="40" autocomplete="nickname" required></label>

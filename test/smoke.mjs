@@ -21,7 +21,7 @@ const of = must('ofertas/index.html', 'id="offer-grid"', 'class="hub-sum"');
 must('metodologia/index.html', 'MejorCrucero Score');
 must('404.html', 'class="next-sail"');
 must('datos/index.html', 'observatorio.csv');
-must('sitemap.xml', '<urlset');
+must('sitemap.xml', '<sitemapindex');
 must('robots.txt', 'Sitemap:');
 
 // El listado declara todas las salidas y cards.json tiene una tarjeta por cada una
@@ -37,5 +37,31 @@ const sample = [...pick('salidas', 60), ...pick('barcos', 40), ...pick('ofertas'
 for (const p of sample) { const t = read(p); const m = bad.exec(t); if (m) fails.push(`${p}: valor roto cerca de "${m[0].slice(0, 60)}"`); }
 const anySailing = pick('salidas', 1)[0]; if (anySailing) must(anySailing, 'Itinerario día a día', 'Nota del precio', 'id="vigilar"');
 
+// SEO básico en todas las páginas indexables: título y descripción únicos y de longitud razonable (avisos, no bloquean)
+const warns = [];
+const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(dir, e.name)) : e.name === 'index.html' ? [path.join(dir, e.name)] : []);
+const titles = new Map(), descs = new Map(); let pages = 0;
+for (const f of walk(D)) {
+  const t = fs.readFileSync(f, 'utf8'); if (/name="robots" content="noindex/.test(t)) continue; pages++;
+  const ti = /<title>([^<]*)<\/title>/.exec(t)?.[1] || ''; const de = /<meta name="description" content="([^"]*)"/.exec(t)?.[1] || '';
+  if (!ti) fails.push(`${f}: sin título`); if (!de) warns.push(`${f}: sin descripción`);
+  titles.set(ti, [...(titles.get(ti) || []), f]); descs.set(de, [...(descs.get(de) || []), f]);
+  const vis = t.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<option[^>]*>—<\/option>/g, '');
+  if (/—/.test(vis.replace(/<[^>]+>/g, ' '))) warns.push(`${f}: raya larga en el texto`);
+}
+const dupT = [...titles].filter(([k, v]) => k && v.length > 1), dupD = [...descs].filter(([k, v]) => k && v.length > 1);
+if (dupT.length) warns.push(`${dupT.length} títulos repetidos (p. ej. "${dupT[0][0].slice(0, 60)}" en ${dupT[0][1].length} páginas)`);
+if (dupD.length) warns.push(`${dupD.length} descripciones repetidas`);
+// El sitemap solo debe listar páginas que existen
+const smIndex = read('sitemap.xml'); const smFiles = [...smIndex.matchAll(/<loc>https?:\/\/[^/]+\/([^<]*\.xml)<\/loc>/g)].map((m) => m[1]); if (!smFiles.length) fails.push('sitemap.xml no es un índice de sitemaps');
+const locs = smFiles.flatMap((f) => [...read(f).matchAll(/<loc>https?:\/\/[^/]+(\/[^<]*)<\/loc>/g)].map((m) => m[1]));
+const missingSm = locs.filter((u) => !fs.existsSync(path.join(D, decodeURIComponent(u), u.endsWith('/') ? 'index.html' : ''))).slice(0, 10);
+if (missingSm.length) fails.push(`sitemap con páginas que no existen: ${missingSm.join(', ')}`);
+// Enlaces internos de una muestra de páginas
+const linkMiss = new Set();
+for (const p of sample.slice(0, 40)) { const t = read(p); for (const m of t.matchAll(/href="(\/[^"#?]*)"/g)) { const u = m[1]; if (/^\/(data|assets|og|img)\//.test(u) || /\.[a-z0-9]{2,5}$/.test(u)) continue; if (!fs.existsSync(path.join(D, u, 'index.html')) && !fs.existsSync(path.join(D, u))) linkMiss.add(`${u} (en ${p})`); } }
+if (linkMiss.size) fails.push(`enlaces internos rotos: ${[...linkMiss].slice(0, 10).join(', ')}`);
+if (warns.length) console.warn(`⚠ Avisos (${warns.length}):\n- ` + warns.slice(0, 15).join('\n- '));
+console.log(`SEO: ${pages} páginas indexables, ${locs.length} URL en el sitemap`);
 if (fails.length) { console.error(`✖ Prueba rápida: ${fails.length} fallos\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
 console.log(`✔ Prueba rápida OK: ${sailings.length} salidas, ${sample.length} páginas revisadas, ${all.length} tarjetas en el listado`);
