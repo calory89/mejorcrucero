@@ -19,3 +19,8 @@ binding = "AI"
 # Avisos por email: después de cada actualización de precios en GitHub (05:17 y 17:17 UTC)
 [triggers]
 crons = ["45 5 * * *", "45 17 * * *"]
+
+# Fotos de las opiniones (se publican solo tras aprobarlas en /admin/)
+[[r2_buckets]]
+binding = "FOTOS"
+bucket_name = "mejorcrucero-fotos"

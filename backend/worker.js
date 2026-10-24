@@ -259,8 +259,8 @@ export default {
         if (!THREAD.test(thread) && !thread.endsWith(':*')) return R({ error: 'thread' }, 400);
         const like = thread.endsWith(':*');
         const q = like
-          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
-          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
+          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert,CASE WHEN photo_ok=1 THEN photo END photo FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
+          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert,CASE WHEN photo_ok=1 THEN photo END photo FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
         const r = await q.all();
         const members = like ? { n: 0 } : await env.DB.prepare('SELECT COUNT(*) n FROM members WHERE thread=?').bind(thread).first();
         const summary = like ? null : await env.DB.prepare('SELECT body, posts FROM summaries WHERE thread=?').bind(thread).first();
@@ -306,9 +306,10 @@ export default {
           } catch {}
         }
         const key = clean(body.key, 64), eh = /^[a-z0-9]{20,64}$/.test(key) ? await sha('edit:' + key) : null;
-        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified,edit_hash) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
-          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified, eh).first();
-        return R({ ok: true, id: r.id, held: !!hidden, verified: !!verified });
+        const photo = /^op\/[a-f0-9]{32}\.(jpg|png|webp)$/.test(String(body.photo || '')) ? body.photo : null;
+        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified,edit_hash,photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
+          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified, eh, photo).first();
+        return R({ ok: true, id: r.id, held: !!hidden, verified: !!verified, photoPending: !!photo });
       }
       // Editar (15 minutos) o borrar tu mensaje: solo con la clave secreta que guardó tu navegador al publicarlo
       if ((p === '/posts/edit' || p === '/posts/delete') && req.method === 'POST') {
@@ -329,6 +330,25 @@ export default {
         if (req.method === 'POST') { const opt = clean(body.option, 40); if (!/^[a-z0-9-]{1,40}$/.test(opt)) return R({ error: 'datos' }, 400); await env.DB.prepare('INSERT OR IGNORE INTO polls(poll, option, voter) VALUES(?,?,?)').bind(poll, opt, ipHash).run(); }
         const r = await env.DB.prepare('SELECT option, COUNT(*) n FROM polls WHERE poll=? GROUP BY option').bind(poll).all();
         return R({ results: Object.fromEntries(r.results.map((x) => [x.option, x.n])) });
+      }
+      // Fotos de opiniones: se suben aquí (máx. 1,5 MB, JPG/PNG/WebP) y solo se ven cuando el administrador las aprueba
+      if (p === '/photo' && req.method === 'POST') {
+        if (!env.FOTOS) return R({ error: 'nofotos' }, 503);
+        if (await limited(env, 'photo:' + ipHash, 10, 60)) return R({ error: 'rate' }, 429);
+        const m = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(body.data || ''));
+        if (!m) return R({ error: 'formato' }, 400);
+        const bin = Uint8Array.from(atob(m[2]), (c) => c.charCodeAt(0));
+        if (bin.length > 1.5e6 || bin.length < 2000) return R({ error: 'tamano' }, 400);
+        const key = 'op/' + (await sha(ipHash + Date.now() + Math.random())) + '.' + (m[1] === 'jpeg' ? 'jpg' : m[1]);
+        await env.FOTOS.put(key, bin, { httpMetadata: { contentType: 'image/' + m[1] } });
+        return R({ ok: true, key });
+      }
+      if (p.startsWith('/foto/op/') && env.FOTOS) {
+        const key = p.slice(6);
+        const ok = await env.DB.prepare('SELECT 1 FROM posts WHERE photo=? AND photo_ok=1 AND hidden=0').bind(key).first();
+        if (!ok) return new Response('No disponible', { status: 404 });
+        const o = await env.FOTOS.get(key); if (!o) return new Response('No disponible', { status: 404 });
+        return new Response(o.body, { headers: { 'Content-Type': o.httpMetadata?.contentType || 'image/jpeg', 'Cache-Control': 'public, max-age=604800', 'X-Content-Type-Options': 'nosniff', 'Access-Control-Allow-Origin': '*' } });
       }
       // Cuántas personas vigilan una salida (para la ficha)
       if (p === '/watchers') {
@@ -440,6 +460,9 @@ export default {
       // --- Administración
       if (p.startsWith('/admin/')) {
         if (!env.ADMIN_TOKEN || req.headers.get('Authorization') !== 'Bearer ' + env.ADMIN_TOKEN) return R({ error: 'auth' }, 401);
+        if (p === '/admin/photos') return R((await env.DB.prepare('SELECT id,thread,name,photo FROM posts WHERE photo IS NOT NULL AND photo_ok=0 AND hidden=0 ORDER BY id DESC LIMIT 100').all()).results);
+        if (p === '/admin/photo-raw') { const o = env.FOTOS && await env.FOTOS.get(clean(url.searchParams.get('k'), 80)); return o ? new Response(o.body, { headers: { 'Content-Type': o.httpMetadata?.contentType || 'image/jpeg', 'Access-Control-Allow-Origin': origin } }) : R({ error: 'no' }, 404); }
+        if (p === '/admin/photo') { await env.DB.prepare('UPDATE posts SET photo_ok=? WHERE id=?').bind(body.ok ? 1 : -1, parseInt(body.id)).run(); return R({ ok: true }); }
         if (p === '/admin/expert') { await env.DB.prepare('UPDATE users SET expert=? WHERE id=?').bind(body.expert ? 1 : 0, clean(body.user_id, 40)).run(); return R({ ok: true }); }
         if (p === '/admin/hide') { await env.DB.prepare('UPDATE posts SET hidden=? WHERE id=?').bind(body.hidden ? 1 : 0, parseInt(body.id)).run(); return R({ ok: true }); }
         if (p === '/admin/overview') {
