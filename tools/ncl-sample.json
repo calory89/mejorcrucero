@@ -1,14 +1,14 @@
 {
  "sample": {
   "itinerary": {
-   "objectId": "24223959_CRUISE_INSIDE_2",
+   "objectId": "23379735_CRUISE_INSIDE_2",
    "bundleType": "cruise",
-   "code": "GETAWAY4MIANPINASMIA",
-   "packageId": "24223959",
+   "code": "JOY4MIANPINASMIA",
+   "packageId": "23379735",
    "title": "4 días Bahamas desde/hasta Miami: Great Stirrup Cay y Nassau",
    "startingLocation": "Miami, Florida, EE.",
    "image": {
-    "src": "/content/dam/ncl/us/en/blog-images/1000x667bahamasnassau.jpg",
+    "src": "/content/dam/ncl/us/en/itineraries/drupal_gem/1440_GSC_AQUA2MIANPIMIA.jpg",
     "alt": "cq5dam.thumbnail.319.319.png"
    },
    "captionTitles": [],
@@ -37,8 +37,8 @@
     }
    ],
    "ship": {
-    "code": "GETAWAY",
-    "title": "Norwegian Getaway"
+    "code": "JOY",
+    "title": "Norwegian Joy"
    },
    "duration": {
     "days": 4,
@@ -48,8 +48,8 @@
    "taxesAndFees": {
     "text": ""
    },
-   "combinedPrice": 280,
-   "basePrice": 399,
+   "combinedPrice": 207,
+   "basePrice": 249,
    "weight": 1000,
    "deals": [
     {
@@ -65,6 +65,12 @@
      "featured": false
     },
     {
+     "code": "Past-Guest-Offer",
+     "title": "Oferta para huéspedes anteriores",
+     "weight": 4,
+     "featured": true
+    },
+    {
      "code": "free-at-sea-upgrade-package-offer",
      "title": "Reciba los 4 paquetes",
      "weight": 7,
@@ -74,12 +80,12 @@
   },
   "sailing": {
    "sailing": {
-    "packageId": "24223955",
-    "sailingId": "60516",
-    "vacationStartDate": "2027-04-12T00:00:00",
-    "vacationEndDate": "2027-04-16T00:00:00",
-    "sailStartDate": "2027-04-12T00:00:00",
-    "sailEndDate": "2027-04-16T00:00:00"
+    "packageId": "23379735",
+    "sailingId": "59357",
+    "vacationStartDate": "2026-11-16T00:00:00",
+    "vacationEndDate": "2026-11-20T00:00:00",
+    "sailStartDate": "2026-11-16T00:00:00",
+    "sailEndDate": "2026-11-20T00:00:00"
    },
    "stateroomTypesPricing": [
     {
@@ -87,46 +93,48 @@
      "code": "HAVEN",
      "title": "The Haven",
      "statusText": "Available",
-     "combinedPrice": 1875,
-     "basePrice": 3609
+     "combinedPrice": 1712,
+     "basePrice": 3279
+    },
+    {
+     "status": "AVAILABLE",
+     "code": "SUITE",
+     "title": "Suite",
+     "statusText": "Available",
+     "combinedPrice": 497,
+     "basePrice": 849
     },
     {
      "status": "AVAILABLE",
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
      "statusText": "Available",
-     "combinedPrice": 450,
-     "basePrice": 739
+     "combinedPrice": 302,
+     "basePrice": 439
     },
     {
      "status": "AVAILABLE",
      "code": "BALCONY",
      "title": "Camarote con balcón",
      "statusText": "Available",
-     "combinedPrice": 360,
-     "basePrice": 559
+     "combinedPrice": 262,
+     "basePrice": 359
     },
     {
      "status": "AVAILABLE",
      "code": "OCEANVIEW",
      "title": "Camarote exterior",
      "statusText": "Available",
-     "combinedPrice": 330,
-     "basePrice": 499
+     "combinedPrice": 317,
+     "basePrice": 489
     },
     {
      "status": "AVAILABLE",
      "code": "INSIDE",
      "title": "Camarote interior",
      "statusText": "Available",
-     "combinedPrice": 305,
-     "basePrice": 449
-    },
-    {
-     "status": "SOLO_GUEST_ONLY",
-     "code": "STUDIO",
-     "title": "Estudio",
-     "statusText": "Solo Guests Only"
+     "combinedPrice": 207,
+     "basePrice": 249
     }
    ]
   },
@@ -136,7 +144,7 @@
     "events": [
      {
       "eventType": "PORT",
-      "date": "2027-04-12T16:00:00",
+      "date": "2026-11-16T16:00:00",
       "order": 1,
       "title": "Miami, Florida, EE.",
       "description": "La sorprendente combinación de culturas y ambientes urbanos llamativos de Miami la convierten en un lugar para ver. Visite el moderno distrito Art Decó de South Beach, Calle Ocho en Little Havana, los vecindarios de primera categoría de Coconut Grove y Coral Gables y el ecosistema único de los Everglades.\n\n¿Busca un crucero desde Miami?  Consulte nuestra selección de cruceros por el Caribe.",
@@ -173,7 +181,7 @@
     "events": [
      {
       "eventType": "PORT",
-      "date": "2027-04-13T07:00:00",
+      "date": "2026-11-17T08:00:00",
       "order": 1,
       "title": "Great Stirrup Cay, Bahamas",
       "description": "Great Stirrup Cay es un paraíso tropical, exclusivo de NCL\nhuéspedes. Ubicado en las hermosas Bahamas, aquí encontrará playas de arena blanca,\ndeliciosos bocados, villas privadas, Mandara Spa y esnórquel de talla mundial. ",
@@ -189,7 +197,7 @@
        "isEmbarkation": false,
        "isDisembarkation": false,
        "isOverNight": false,
-       "dailySchedule": "7:00 AM - 5:00 PM",
+       "dailySchedule": "8:00 AM - 6:00 PM",
        "code": "NPI"
       }
      }
@@ -199,18 +207,26 @@
     "day": 3,
     "events": [
      {
-      "eventType": "AT_SEA",
-      "date": "2027-04-14T00:00:00",
+      "eventType": "PORT",
+      "date": "2026-11-18T08:00:00",
       "order": 1,
-      "title": "Disfrutar. Brindar. Vivir. Descubrir. Desconectar. Y repetir.",
-      "description": "Disfruta de unas vistas increíbles en The Waterfront, mientras comes en magníficos restaurantes como Cagney’s Steakhouse y Sugarcane Mojito Bar. Juega con tus amigos en el complejo deportivo, donde la actividad nunca se detiene, y vive emociones fuertes en los toboganes acuáticos The Whip y Free Fall. O bien relájate en el Mandara Spa. Y cuando se pone el sol, comienza el entretenimiento: ¡musicales, comedia, concursos y mucho más!",
+      "title": "Nassau, Bahamas",
+      "description": "Desde la costa hasta el final de Bay Street, encontrará algunas de las mejores tiendas libres de impuestos y una encantadora combinación de arquitectura, tanto antigua como nueva. Pero hay mucho para hacer además de ir de compras: nadar con los delfines, probar suerte en un casino o bucear con peces coloridos. Explore todas las actividades que puede disfrutar en sus vacaciones en crucero por las Bahamas noruegas.",
       "images": [
        {
-        "path": "/content/dam/ncl/us/en/lifestyle/homepage/ncl_Gtwy_Ocho_Rios_8.jpg",
-        "title": "ncl_Gtwy_Ocho_Rios_8.jpg",
-        "alt": "cq5dam.thumbnail.319.319.png"
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/bahamas/nassau/NCL-Nassau-Cruise-Underwater.jpg",
+        "title": "NCL-Nassau-Cruise-Underwater.jpg",
+        "alt": "8da9c6190de66ecfbd110fb678518297fd97efb4.png"
        }
-      ]
+      ],
+      "portInfo": {
+       "isTender": false,
+       "isEmbarkation": false,
+       "isDisembarkation": false,
+       "isOverNight": false,
+       "dailySchedule": "8:00 AM - 6:00 PM",
+       "code": "NAS"
+      }
      }
     ]
    }
