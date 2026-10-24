@@ -27,21 +27,21 @@ jobs:
           node tools/costa.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/sailings.json; if [ -f tools/costa-sample.json ]; then git add tools/costa-sample.json; fi
-          if git diff --cached --quiet; then echo "sin cambios en ofertas"; else git commit -m "Ofertas: precios de Costa actualizados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios en ofertas"; else git commit -m "Ofertas: precios de Costa actualizados" || true; fi
       - name: Importar ofertas de Norwegian Cruise Line (web oficial)
         if: ${{ github.event_name != 'push' }}
         run: |
           node tools/ncl.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/sailings.json; if [ -f tools/ncl-sample.json ]; then git add tools/ncl-sample.json; fi
-          if git diff --cached --quiet; then echo "sin cambios en NCL"; else git commit -m "Ofertas: precios de NCL actualizados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios en NCL"; else git commit -m "Ofertas: precios de NCL actualizados" || true; fi
       - name: Importar ofertas de Carnival (web oficial EE. UU.)
         if: ${{ github.event_name != 'push' }}
         run: |
           node tools/carnival.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/sailings.json; if [ -f tools/carnival-sample.json ]; then git add tools/carnival-sample.json; fi
-          if git diff --cached --quiet; then echo "sin cambios en Carnival"; else git commit -m "Ofertas: precios de Carnival actualizados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios en Carnival"; else git commit -m "Ofertas: precios de Carnival actualizados" || true; fi
       - name: Completar fichas de barco y coordenadas de escalas (Wikipedia)
         if: ${{ github.event_name != 'push' }}
         run: |
@@ -49,7 +49,7 @@ jobs:
           timeout 600 python3 tools/port-coords.py 60 || true
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/ships_extra.csv; if [ -f src/data/port_coords.json ]; then git add src/data/port_coords.json; fi
-          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Datos: fichas de barco y coordenadas nuevas" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Datos: fichas de barco y coordenadas nuevas" || true; fi
       - name: Importar feed de agencia (si está configurado)
         if: ${{ vars.FEED_URL != '' && github.event_name != 'push' }}
         env:
@@ -61,7 +61,7 @@ jobs:
           node tools/import-feed.js
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/sailings.json
-          if git diff --cached --quiet; then echo "sin cambios en el feed"; else git commit -m "Ofertas: feed de agencia actualizado" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios en el feed"; else git commit -m "Ofertas: feed de agencia actualizado" || true; fi
       - name: Build
         env:
           # Con dominio propio: crear variables de repo BASE="/" y CNAME="mejorcrucero.com"
@@ -84,12 +84,16 @@ jobs:
           node tools/telegram.js || true
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           if [ -f src/data/telegram-posted.json ]; then git add src/data/telegram-posted.json; fi
-          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Telegram: chollos publicados" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Telegram: chollos publicados" || true; fi
       - name: Guardar la foto semanal de chollos
         run: |
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/semanas
-          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Chollos de la semana: foto actualizada" && git pull --rebase -q && git push || echo "no se pudo subir"; fi
+          if git diff --cached --quiet; then echo "sin cambios"; else git commit -m "Chollos de la semana: foto actualizada" || true; fi
+      - name: Subir los datos nuevos (solo si la prueba rápida ha pasado)
+        run: |
+          git pull --rebase -q -X theirs || { git rebase --abort; true; }
+          git push || echo "no se pudo subir"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

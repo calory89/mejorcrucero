@@ -53,6 +53,8 @@ for (const f of walk(D)) {
   for (const m of t.matchAll(/<img\b(?![^>]*\balt=)[^>]*>/g)) { warns.push(`${f}: imagen sin alt`); break; }
   for (const m of t.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)) { const txt = m[2].replace(/<[^>]+>/g, '').trim(); if (!txt && !/aria-label=/.test(m[1])) { warns.push(`${f}: botón sin nombre`); break; } }
   for (const m of t.matchAll(/<(input|select|textarea)\b([^>]*)>/g)) { const a = m[2]; if (/type="(hidden|submit|button|checkbox|radio)"|class="hp"|aria-label=|aria-hidden/.test(a)) continue; const id = /id="([^"]+)"/.exec(a)?.[1]; if (id && t.includes(`for="${id}"`)) continue; const before = t.slice(Math.max(0, m.index - 400), m.index); if (/<label\b[^>]*>(?:(?!<\/label>)[\s\S])*$/.test(before)) continue; warns.push(`${f}: campo sin etiqueta (${(/name="([^"]+)"/.exec(a) || [])[1] || m[1]})`); break; }
+  // Nunca un teléfono en la web (ni enlaces tel:/wa.me ni números de móvil españoles visibles)
+  if (/href="(tel:|https?:\/\/(wa\.me|api\.whatsapp\.com\/send\?phone=)\/?[+\d])/i.test(t) || /(?<![\d.,])(\+34[\s.]?)?[67]\d{2}[\s.]?\d{3}[\s.]?\d{3}(?![\d.,])/.test(t.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, ' '))) fails.push(`${f}: parece contener un teléfono`);
   const vis = t.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<option[^>]*>—<\/option>/g, '');
   if (/—/.test(vis.replace(/<[^>]+>/g, ' '))) warns.push(`${f}: raya larga en el texto`);
 }

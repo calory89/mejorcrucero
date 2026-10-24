@@ -266,6 +266,8 @@
     const words = t.replace(/\b(crucero|cruceros|en|de|del|la|el|los|las|por|desde|con|y|a|para|un|una|barato|baratos|baratas|islas|oferta|ofertas|euros?)\b/g, ' ').split(/\s+/).filter((w) => w.length > 2).map((w) => (w.length > 5 ? w.slice(0, -1) : w));
     return (c) => (!max || +c.dataset.price <= max) && (!nights || Math.abs(+c.dataset.nights - nights) <= 1) && (month < 0 || +String(c.dataset.m).slice(5) === month + 1) && words.every((w) => fold(c.dataset.q).includes(w));
   };
+  // ---------- Ofertas: vista lista o tarjetas (se recuerda) ----------
+  $$('.js-view').forEach((b) => { const g = $('#offer-grid'); if (!g) return; const set = (on) => { g.classList.toggle('as-list', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? '▦ Vista tarjetas' : '☰ Vista lista'; }; set(store.get('mc_view', '') === 'list'); b.addEventListener('click', () => { const on = !g.classList.contains('as-list'); store.set('mc_view', on ? 'list' : ''); set(on); }); });
   // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
   $$('.offer-filter').forEach((f) => {
     const g = $(f.dataset.target); if (!g) return;
@@ -290,12 +292,12 @@
       if (keepLimit !== true) limit = PAGE;
       if (!full && [...f.elements].some((el) => el.name && el.name !== 'o' && (el.type === 'checkbox' ? el.checked : el.value)) || (!full && f.elements.o?.value !== 'score')) { ensureAll().then(() => apply(keepLimit)); }
       const v = (n) => f.elements[n]?.value || '';
-      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked;
+      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked; const cab = v('cab'), pais = v('pais'), escala = fold(v('esc')).trim(), sp = v('sp');
       const k = key(o);
       g.dataset.sort = o; cards.sort((a, c) => { const x = k(a), y = k(c); return x < y ? -1 : x > y ? 1 : 0; });
       let shown = 0, match = 0;
       cards.forEach((c) => {
-        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (nl && !nl(c)));
+        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (cab && !(c.dataset.cab || '').split(' ').includes(cab)) || (pais && !(c.dataset.q || '').includes(pais)) || (escala && !fold(c.dataset.q).includes(escala)) || (sp && !(c.dataset.sp || '').split(' ').includes(sp)) || (nl && !nl(c)));
         if (ok) match++;
         c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
       });
