@@ -89,12 +89,10 @@
    },
    "stateroomTypesPricing": [
     {
-     "status": "AVAILABLE",
+     "status": "SOLD_OUT",
      "code": "HAVEN",
      "title": "The Haven",
-     "statusText": "Available",
-     "combinedPrice": 1712,
-     "basePrice": 3279
+     "statusText": "Sold Out"
     },
     {
      "status": "AVAILABLE",
@@ -109,8 +107,8 @@
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
      "statusText": "Available",
-     "combinedPrice": 302,
-     "basePrice": 439
+     "combinedPrice": 307,
+     "basePrice": 449
     },
     {
      "status": "AVAILABLE",
@@ -125,8 +123,8 @@
      "code": "OCEANVIEW",
      "title": "Camarote exterior",
      "statusText": "Available",
-     "combinedPrice": 317,
-     "basePrice": 489
+     "combinedPrice": 282,
+     "basePrice": 419
     },
     {
      "status": "AVAILABLE",
