@@ -374,7 +374,7 @@
     e.preventDefault(); const msg = $('.watch-msg', f), btn = $('button', f);
     btn.disabled = true;
     try {
-      await api('/alert', { body: { kind: 'watch', id: f.dataset.id, base: +f.dataset.base, target: +f.target.value || null, email: f.email.value.trim(), website: f.website.value, page: location.pathname } });
+      await api('/alert', { body: { kind: 'watch', id: f.dataset.id, date: f.dataset.date, nights: +f.dataset.nights || null, ship: f.dataset.ship, base: +f.dataset.base, target: +f.target.value || null, email: f.email.value.trim(), website: f.website.value, page: location.pathname } });
       const l = store.get('mc_watch', []).filter((x) => x.id !== f.dataset.id); l.unshift({ id: f.dataset.id, base: +f.dataset.base, target: +f.target.value || null, at: Date.now() }); store.set('mc_watch', l.slice(0, 50));
       msg.textContent = '✅ Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
     } catch (err) { btn.disabled = false; msg.innerHTML = 'No hemos podido guardarla ahora. Inténtalo de nuevo o usa la <a href="' + BASE + 'herramientas/alerta-precio/">alerta de precio</a>.'; }

@@ -677,11 +677,12 @@
   $$('.js-ago').forEach((t) => { t.textContent = ago(t.getAttribute('datetime')); });
   const stars = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
   const LBL = { general: 'General', comida: 'Comida', camarote: 'Camarote', animacion: 'Animación', ninos: 'Niños', limpieza: 'Limpieza' };
-  const postHtml = (p, all) => `<article class="post" id="p${p.id}"><header><b>${p.user_id ? `<a href="${BASE}comunidad/perfil/?id=${esc(p.user_id)}">${esc(p.name)}</a>` : esc(p.name)}</b>${p.verified ? ' <span class="verif" title="Opinión verificada con la confirmación de reserva">✅ Verificada</span>' : ''} <span class="muted small">${ago(p.created)}${p.cabin ? ' · camarote ' + esc(p.cabin) : ''}</span></header>
+  const myPosts = () => store.get('mc_my_posts', {});
+  const postHtml = (p, all) => `<article class="post" id="p${p.id}"><header><b>${p.user_id ? `<a href="${BASE}comunidad/perfil/?id=${esc(p.user_id)}">${esc(p.name)}</a>` : esc(p.name)}</b>${p.verified ? ' <span class="verif" title="Opinión verificada con la confirmación de reserva">✅ Verificada</span>' : ''}${p.expert ? ' <span class="verif" title="Miembro con experiencia reconocida por MejorCrucero">⭐ Experto</span>' : ''} <span class="muted small">${ago(p.created)}${p.cabin ? ' · camarote ' + esc(p.cabin) : ''}</span></header>
     ${p.rating ? `<p class="stars">${Object.entries(p.rating).filter(([k]) => LBL[k]).map(([k, v]) => `<span>${LBL[k]} <b aria-label="${v} de 5">${stars(v)}</b></span>`).join('')}${p.rating.repetiria != null ? `<span>${p.rating.repetiria ? '👍 Repetiría' : '👎 No repetiría'}</span>` : ''}</p>` : ''}
     ${p.body ? `<p>${esc(p.body).replace(/\n/g, '<br>')}</p>` : ''}
     ${p.video ? `<button class="yt yt-sm" type="button" data-id="${esc(p.video)}" aria-label="Reproducir vídeo de ${esc(p.name)}"><img src="https://i.ytimg.com/vi/${esc(p.video)}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play">▶</span></button>` : ''}
-    <footer><button class="link-btn" type="button" data-vote="${p.id}">👍 Útil (${p.votes})</button>${p.kind === 'question' ? `<button class="link-btn" type="button" data-reply="${p.id}">Responder</button>` : ''}<button class="link-btn" type="button" data-rep="${p.id}">Reportar</button></footer>
+    <footer><button class="link-btn" type="button" data-vote="${p.id}">👍 Útil (${p.votes})</button>${p.kind === 'question' ? `<button class="link-btn" type="button" data-reply="${p.id}">Responder</button>` : ''}<button class="link-btn" type="button" data-rep="${p.id}">Reportar</button>${['review', 'cabin', 'diary'].includes(p.kind) && p.body ? `<a class="link-btn" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(`${p.name} en MejorCrucero: «${p.body.slice(0, 180)}${p.body.length > 180 ? '…' : ''}» ${location.origin}${location.pathname}#p${p.id}`)}">Compartir</a>` : ''}${myPosts()[p.id] ? `${Date.now() - new Date(String(p.created).replace(' ', 'T') + 'Z').getTime() < 15 * 6e4 ? `<button class="link-btn" type="button" data-edit="${p.id}">Editar</button>` : ''}<button class="link-btn" type="button" data-del="${p.id}">Borrar</button>` : ''}</footer>
     ${all.filter((r) => r.parent === p.id).map((r) => `<div class="reply"><b>${esc(r.name)}</b> <span class="muted small">${ago(r.created)}</span><p>${esc(r.body)}</p></div>`).join('')}</article>`;
 
   async function initForum(f) {
@@ -689,12 +690,12 @@
     const kinds = f.dataset.kinds.split(',');
     let kind = kinds.includes(store.get('mc_tab', '')) ? store.get('mc_tab', '') : kinds[0], posts = [], replyTo = null;
     if (!(await hasApi())) { list?.remove(); form?.remove(); $('.tabs', f)?.remove(); $('.forum-soon', f).hidden = false; return; }
-    const titles = { review: 'Escribe tu opinión', question: 'Haz una pregunta', cabin: 'Cuenta cómo era tu camarote', comment: 'Escribe un comentario', excursion: 'Propón una excursión compartida (puerto, día, plan y cuántos sois)', diary: 'Escribe en tu diario de viaje' };
+    const titles = { meetup: 'Propón una quedada (dónde, cuándo y para qué: cena, copa, excursión…)', review: 'Escribe tu opinión', question: 'Haz una pregunta', cabin: 'Cuenta cómo era tu camarote', comment: 'Escribe un comentario', excursion: 'Propón una excursión compartida (puerto, día, plan y cuántos sois)', diary: 'Escribe en tu diario de viaje' };
     const setKind = (k) => {
       kind = k; replyTo = null;
       $$('.tab', f).forEach((t) => t.setAttribute('aria-selected', t.dataset.kind === k));
       if (form) { $('.forum-form-title', f).textContent = titles[k]; $$('[data-for]', form).forEach((r) => { r.hidden = r.dataset.for !== k; }); }
-      const shown = posts.filter((p) => p.kind === k && !p.parent);
+      const shown = posts.filter((p) => (p.kind === k || (k === 'meetup' && p.kind === 'comment' && /^\[Quedada\]/.test(p.body || ''))) && !p.parent);
       list.innerHTML = shown.length ? shown.map((p) => postHtml(p, posts)).join('') : `<p class="muted">Todavía no hay nada aquí. ¡Sé el primero!</p>`;
     };
     const load = async () => {
@@ -710,11 +711,15 @@
           api('/summary?thread=' + encodeURIComponent(thread)).then((s) => { if (s.summary) { const b = $('.forum-summary', f); b.hidden = false; b.innerHTML = `<h3 class="h-sm">Resumen de opiniones (IA)</h3><p>${esc(s.summary).replace(/\n/g, '<br>')}</p><p class="muted small">Resumen automático de las opiniones publicadas; puede contener errores.</p>`; } }).catch(() => {});
         }
         setKind(kind);
-      } catch { list.innerHTML = '<p class="muted">No se ha podido cargar el foro. Inténtalo de nuevo más tarde.</p>'; }
+      } catch { if (f.dataset.optional) { f.remove(); return; } list.innerHTML = '<p class="muted">No se ha podido cargar el foro. Inténtalo de nuevo más tarde.</p>'; }
     };
     $$('.tab', f).forEach((t) => t.addEventListener('click', () => { store.set('mc_tab', t.dataset.kind); setKind(t.dataset.kind); }));
     list.addEventListener('click', async (e) => {
       const v = e.target.dataset.vote, r = e.target.dataset.reply, rp = e.target.dataset.rep;
+      const ed = e.target.dataset.edit, del = e.target.dataset.del;
+      if (ed) { const art = $('#p' + ed); const pEl = art && [...art.children].find((c) => c.tagName === 'P' && !c.classList.contains('stars')); const ta = document.createElement('textarea'); ta.rows = 4; ta.value = pEl ? pEl.innerText : ''; ta.setAttribute('aria-label', 'Editar mensaje'); const ok = document.createElement('button'); ok.type = 'button'; ok.className = 'btn btn-sm'; ok.textContent = 'Guardar cambios'; e.target.after(ta, ok);
+        ok.addEventListener('click', async () => { try { await api('/posts/edit', { body: { id: +ed, key: myPosts()[ed], body: ta.value.trim() } }); load(); } catch (err) { ok.textContent = err.message === 'tarde' ? 'Ya han pasado 15 minutos' : 'No se ha podido guardar'; } }); }
+      if (del) { if (e.target.dataset.sure) { try { await api('/posts/delete', { body: { id: +del, key: myPosts()[del] } }); const mp = myPosts(); delete mp[del]; store.set('mc_my_posts', mp); load(); } catch { e.target.textContent = 'No se ha podido borrar'; } } else { e.target.dataset.sure = 1; e.target.textContent = 'Pulsa otra vez para borrar'; } }
       if (v) { await api('/vote', { body: { id: +v } }).catch(() => {}); e.target.textContent = '👍 ¡Gracias!'; }
       if (r && form) { replyTo = +r; $('.forum-form-title', f).textContent = 'Tu respuesta'; form.body.focus(); }
       if (rp) { await api('/report', { body: { target: 'post:' + rp, reason: 'Reportado desde el foro', page: PAGE } }).catch(() => {}); e.target.textContent = 'Reportado'; }
@@ -727,12 +732,17 @@
         if (form.name.value.trim().length < 2 || (form.body.value.trim().length < 3 && !form.video?.value)) { msg.textContent = 'Escribe tu nombre y un mensaje.'; return; }
         const rating = kind === 'review' ? Object.fromEntries(['general', 'comida', 'camarote', 'animacion', 'ninos', 'limpieza', 'repetiria'].map((k) => [k, form['r_' + k].value]).filter(([, x]) => x !== '').map(([k, x]) => [k, k === 'repetiria' ? x === '1' : +x])) : null;
         try {
-          const res = await api('/posts', { body: { proof: kind === 'review' ? form.proof?.value : '', thread: f.dataset.thread, kind: replyTo ? 'answer' : kind, parent: replyTo, name: form.name.value.trim(), body: form.body.value.trim(), rating, cabin: kind === 'cabin' ? form.cabin?.value : '', video: kind === 'cabin' ? form.video?.value : '', user_id: uid(), website: form.website.value } });
+          const key = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(36).padStart(2, '0')).join('').slice(0, 32);
+          const send = (k2, txt) => api('/posts', { body: { key, proof: kind === 'review' ? form.proof?.value : '', thread: f.dataset.thread, kind: k2, parent: replyTo, name: form.name.value.trim(), body: txt, rating, cabin: kind === 'cabin' ? form.cabin?.value : '', video: kind === 'cabin' ? form.video?.value : '', user_id: uid(), website: form.website.value } });
+          const k0 = replyTo ? 'answer' : kind, t0 = form.body.value.trim();
+          // Si la API aún no conoce las quedadas, se publica como comentario marcado
+          const res = await send(k0, t0).catch((er) => (k0 === 'meetup' && er.message === 'datos' ? send('comment', '[Quedada] ' + t0) : Promise.reject(er)));
+          if (res.id) { const mp = myPosts(); mp[res.id] = key; store.set('mc_my_posts', mp); }
           store.set('mc_me', { ...me(), name: form.name.value.trim() });
           api('/user', { body: { id: uid(), name: form.name.value.trim(), cruises: me().cruises || 0, lines: me().lines || '' } }).catch(() => {});
           msg.textContent = res.held ? 'Gracias. Tu mensaje queda pendiente de revisión.' : res.verified ? '¡Publicado como opinión verificada! ✅' : '¡Publicado!'; if (form.proof) form.proof.value = ''; form.body.value = ''; if (form.video) form.video.value = ''; replyTo = null; load();
           track('post', kind);
-        } catch (err) { msg.textContent = err.message === 'rate' ? 'Has publicado mucho en poco tiempo: espera un poco.' : 'No se ha podido publicar. Revisa el mensaje e inténtalo de nuevo.'; }
+        } catch (err) { msg.textContent = err.message === 'repetido' ? 'Ese mismo texto ya está publicado. Escribe tu propia experiencia.' : err.message === 'rate' ? 'Has publicado mucho en poco tiempo: espera un poco.' : 'No se ha podido publicar. Revisa el mensaje e inténtalo de nuevo.'; }
       });
     }
     if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '300px' }); io.observe(f); } else load();
@@ -821,4 +831,21 @@
     s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box)); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); const ll = pts.map((p) => [p[0], p[1]]); pts.forEach((p) => L.marker([p[0], p[1]]).addTo(m).bindPopup(p[2])); L.polyline(ll, { color: '#c93b1f' }).addTo(m); m.fitBounds(ll, { padding: [30, 30] }); };
     document.head.append(s);
   });
+
+  // ---------- Comunidad viva: opiniones recientes, actividad, preguntas sin responder, encuestas ----------
+  const tName = (t) => { const [k, ...r] = String(t).split(':'); const v = r.join(':'); return { barco: 'barcos/' + v + '/#foro', puerto: 'puertos/' + v + '/#foro', guia: 'guias/' + v + '/#foro', naviera: 'navieras/' + v + '/#foro', escala: 'ofertas/escala-' + v + '/#foro' }[k] || 'comunidad/'; };
+  const prettyT = (t) => String(t).split(':').slice(1).join(' ').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const feed = async (prefixes) => { const out = []; for (const pf of prefixes) { try { const j = await api('/posts?thread=' + encodeURIComponent(pf + ':*')); out.push(...(j.posts || [])); } catch {} } return out.sort((a, b) => b.id - a.id); };
+  const mini = (p) => `<li><a href="${BASE}${tName(p.thread)}"><b>${esc(p.name)} · ${esc(prettyT(p.thread))}</b><span>${esc(String(p.body || '').slice(0, 140))}${String(p.body || '').length > 140 ? '…' : ''} · ${ago(p.created)}</span></a></li>`;
+  { const rr = $('#recent-reviews'); if (rr) hasApi().then(async (ok) => { if (!ok) return; const l = (await feed(['barco'])).filter((p) => p.kind === 'review' && p.body).slice(0, 4); if (!l.length) return; rr.hidden = false; rr.innerHTML = `<div class="block-h"><h2>Opiniones recientes de cruceristas</h2><a href="${BASE}comunidad/">Comunidad →</a></div><ul class="mini mini-grid">${l.map(mini).join('')}</ul>`; }); }
+  { const act = $('#com-activity'), una = $('#com-unanswered'); if (act || una) hasApi().then(async (ok) => { if (!ok) return; const all = await feed(['barco', 'salida', 'puerto', 'guia', 'naviera', 'escala']);
+    if (act && all.length) { act.hidden = false; act.innerHTML = `<h2>Actividad reciente</h2><ul class="mini">${all.filter((p) => p.body && p.thread.indexOf('salida:') !== 0).slice(0, 10).map(mini).join('')}</ul>`; }
+    const q = all.filter((p) => p.kind === 'question' && !all.some((r) => r.parent === p.id)).slice(0, 8); if (una && q.length) { una.hidden = false; una.innerHTML = `<h2>Preguntas sin responder</h2><p class="muted small">¿Sabes la respuesta? Ayuda a otro crucerista.</p><ul class="mini">${q.map(mini).join('')}</ul>`; } }); }
+  { const sr = $('.same-ship-reviews'); if (sr) hasApi().then(async (ok) => { if (!ok) return; try { const j = await api('/posts?thread=' + encodeURIComponent(sr.dataset.thread)); const l = (j.posts || []).filter((p) => p.kind === 'review' && p.body).slice(0, 3); if (!l.length) return; sr.hidden = false; sr.innerHTML = `<h2 class="h-sm">Lo que dicen del ${esc(sr.dataset.name)}</h2>${l.map((p) => `<blockquote class="tip"><p>${esc(p.body.slice(0, 300))}${p.body.length > 300 ? '…' : ''}</p><footer class="small">${esc(p.name)}${p.verified ? ' · ✅ verificada' : ''}${p.rating?.general ? ` · ${stars(p.rating.general)}` : ''}</footer></blockquote>`).join('')}<p class="small"><a href="${BASE}barcos/${esc(sr.dataset.ship)}/#foro">Todas las opiniones del barco →</a></p>`; } catch {} }); }
+  { const lr = $('.line-rating'); if (lr) hasApi().then(async (ok) => { if (!ok) return; try { const r = await api('/ratings'); const ships = lr.dataset.ships.split(','); let n = 0, s2 = 0, v = 0; ships.forEach((sl) => { const x = r['barco:' + sl]; if (x) { n += x.n; s2 += x.avg * x.n; v += x.v; } }); if (!n) return; lr.hidden = false; lr.innerHTML = `<div class="stats stats-light"><div><b>${(s2 / n).toFixed(1).replace('.', ',')} / 5</b><span>Nota media de la comunidad</span></div><div><b>${n}</b><span>opiniones de sus barcos</span></div><div><b>${v}</b><span>verificadas</span></div></div>`; } catch {} }); }
+  { const grid = $('#ship-grid') || $('.ship-grid'); if (grid) hasApi().then(async (ok) => { if (!ok) return; try { const r = await api('/ratings'); $$('[data-slug]', grid).forEach((el) => { const x = r['barco:' + el.dataset.slug]; const card = el.closest('.card'); if (x && card && !$('.op-n', card)) { const sp = document.createElement('span'); sp.className = 'op-n small'; sp.textContent = `💬 ${x.n} opinión${x.n > 1 ? 'es' : ''} · ${String(x.avg).replace('.', ',')}/5`; ($('.card-body', card) || card).append(sp); } }); } catch {} }); }
+  $$('.poll').forEach((pl) => { const id = pl.dataset.poll; const draw = (res) => { const tot = Object.values(res || {}).reduce((a, b) => a + b, 0); $$('button[data-opt]', pl).forEach((b) => { const n = res?.[b.dataset.opt] || 0; b.querySelector('.poll-n').textContent = tot ? ` ${Math.round(n / tot * 100)} %` : ''; b.style.setProperty('--pct', tot ? (n / tot * 100) + '%' : '0%'); }); const t = $('.poll-tot', pl); if (t) t.textContent = tot ? `${tot} voto${tot > 1 ? 's' : ''}` : ''; };
+    hasApi().then(async (ok) => { if (!ok) { pl.hidden = true; return; } try { const voted = store.get('mc_polls', {}); if (voted[id]) { pl.classList.add('voted'); draw((await api('/poll?poll=' + id)).results); } } catch { pl.hidden = true; } });
+    pl.addEventListener('click', async (e) => { const b = e.target.closest('button[data-opt]'); if (!b || pl.classList.contains('voted')) return; try { const j = await api('/poll', { body: { poll: id, option: b.dataset.opt } }); const v = store.get('mc_polls', {}); v[id] = b.dataset.opt; store.set('mc_polls', v); pl.classList.add('voted'); draw(j.results); } catch { $('.poll-tot', pl).textContent = 'Las encuestas se activan en breve.'; } }); });
+  $$('.js-export-posts').forEach((b) => b.addEventListener('click', async () => { try { const j = await api('/user?id=' + encodeURIComponent(uid())); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: 'mejorcrucero', exported: new Date().toISOString(), user: j.user, posts: j.posts }, null, 2)], { type: 'application/json' })); a.download = 'mis-mensajes-mejorcrucero.json'; a.click(); } catch { b.textContent = 'Todavía no has publicado nada desde este navegador'; } }));
 })();

@@ -141,8 +141,9 @@ export function reportBtn(target) {
 
 // Foro / reseñas / preguntas nativos (API propia). Sin API: modo "abre pronto".
 export function forumBlock(thread, title, opts = {}) {
+  const opt = opts.optional ? ' data-optional="1"' : '';
   const tabs = opts.tabs || [['review', 'Opiniones'], ['question', 'Preguntas'], ['cabin', 'Camarotes'], ['comment', 'Comentarios']];
-  return `<section class="forum" id="foro" aria-labelledby="foro-h" data-thread="${esc(thread)}" data-kinds="${tabs.map((t) => t[0]).join(',')}">
+  return `<section class="forum" id="foro" aria-labelledby="foro-h"${opt} data-thread="${esc(thread)}" data-kinds="${tabs.map((t) => t[0]).join(',')}">
   <div class="forum-h"><h2 id="foro-h">${esc(title)}</h2><span class="forum-count" aria-live="polite"></span></div>
   <div class="forum-stats" hidden></div>
   <div class="forum-summary" hidden></div>
@@ -157,7 +158,7 @@ export function forumBlock(thread, title, opts = {}) {
     <label><span>Tu mensaje</span><textarea name="body" rows="4" maxlength="4000" required></textarea></label>
     <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn" type="submit">Publicar</button><p class="form-msg" role="status" aria-live="polite"></p>
-    <p class="muted small">Sin registro. Publica con tu nombre; la comunidad puede reportar mensajes inapropiados.</p>
+    <p class="muted small">Sin registro. Tu nombre y tu mensaje serán públicos: no escribas tu teléfono, tu email ni tu número de reserva. Puedes editar tu mensaje durante 15 minutos y borrarlo cuando quieras desde este navegador. La comunidad puede reportar mensajes inapropiados. <a href="/privacidad/">Privacidad</a>.</p>
   </form>
   <div class="forum-soon" hidden><p><strong>El foro se abre muy pronto.</strong> Apúntate y te avisamos.</p>${leadForm('foro:' + thread, 'Avisadme')}</div>
 </section>`;

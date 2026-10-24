@@ -6,8 +6,8 @@ const json = (data, status = 200, origin = '*') => new Response(status === 204 ?
 const clean = (s, max = 2000) => String(s ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').trim().slice(0, max);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
 const YT = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
-const KINDS = new Set(['comment', 'review', 'question', 'answer', 'cabin', 'excursion', 'diary', 'poll']);
-const THREAD = /^(barco|salida|camarote|perfil|guia|naviera|puerto):[a-z0-9:-]{1,120}$/;
+const KINDS = new Set(['comment', 'review', 'question', 'answer', 'cabin', 'excursion', 'diary', 'poll', 'meetup']);
+const THREAD = /^(barco|salida|camarote|perfil|guia|naviera|puerto|escala):[a-z0-9:-]{1,120}$/;
 
 async function sha(s) {
   const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
@@ -28,6 +28,9 @@ function badges(u) {
   if (u.posts >= 50) b.push('Experto');
   if (u.cruises >= 1) b.push(`${u.cruises} crucero${u.cruises > 1 ? 's' : ''}`);
   if (u.cruises >= 10) b.push('Lobo de mar');
+  if (u.reviews >= 1) b.push('Primera opinión');
+  if (u.cruises >= 5) b.push('Crucerista frecuente');
+  if (u.expert) b.push('Experto de MejorCrucero');
   if (u.cabins >= 1) b.push('Reportero de camarotes');
   if (u.verified >= 1) b.push('Opinión verificada');
   if (u.refs >= 3) b.push('Embajador');
@@ -57,7 +60,7 @@ async function mailBody(env, email, title, intro, items) {
   return { html, text };
 }
 async function enqueue(env, email, kind, key, subject, intro, items) {
-  if (!items.length) return 0;
+  if (!items.length && kind !== 'review') return 0;
   const m = await mailBody(env, email, subject, intro, items.slice(0, 8));
   const r = await env.DB.prepare('INSERT OR IGNORE INTO outbox(email,kind,subject,html,text,k) VALUES(?,?,?,?,?,?)').bind(email, kind, subject, m.html, m.text, key).run();
   return r.meta?.changes || 0;
@@ -79,6 +82,12 @@ async function runAlerts(env) {
     if (a.kind === 'price' && pl.ship && pl.date && pl.price) {
       for (const o of offers.filter((x) => x.d === pl.date && fold(x.sn) === fold(pl.ship) && x.pr < pl.price))
         stats.price += await enqueue(env, a.email, 'price', `price:${a.id}:${o.i}:${o.pr}`, `Tu crucero en el ${o.sn} ha bajado a ${eurF(o.pr)}`, `Pagaste ${eurF(pl.price)} por persona. Hoy la web oficial lo vende desde ${eurF(o.pr)}. Pregunta a tu agencia o a la naviera si tus condiciones permiten un ajuste de precio o crédito a bordo.`, [{ ...o, was: pl.price }]);
+    }
+    // Recordatorio para opinar al volver del crucero (una sola vez, entre 1 y 10 días después de la vuelta)
+    if ((a.kind === 'price' || a.kind === 'watch') && /^\d{4}-\d{2}-\d{2}$/.test(String(pl.date || ''))) {
+      const back = new Date(new Date(pl.date + 'T12:00:00Z').getTime() + ((+pl.nights || 7) + 1) * 864e5), age = (Date.now() - back.getTime()) / 864e5;
+      if (age >= 0 && age <= 10 && !(await isSeen(env, `review:${a.id}`))) { await markSeen(env, `review:${a.id}`);
+        stats.review = (stats.review || 0) + await enqueue(env, a.email, 'review', `review:${a.id}`, `¿Qué tal tu crucero${pl.ship ? ' en el ' + pl.ship : ''}?`, 'Has vuelto hace poco. Tu opinión ayuda a otros cruceristas a elegir: cuéntala en MejorCrucero en dos minutos (y si pegas tu confirmación, sale como opinión verificada): ' + SITE + '/barcos/' + (pl.ship ? String(pl.ship).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '/' : '') + '#foro', []); }
     }
     // Salida concreta vigilada: avisar si baja del precio que tenía al crear la alerta o del precio objetivo
     if (a.kind === 'watch' && pl.id) {
@@ -203,13 +212,13 @@ export default {
       }
       if (p === '/user' && req.method === 'GET') {
         const id = clean(url.searchParams.get('id'), 40);
-        const u = await env.DB.prepare('SELECT id,name,cruises,lines,created FROM users WHERE id=?').bind(id).first();
+        const u = await env.DB.prepare('SELECT id,name,cruises,lines,created,expert FROM users WHERE id=?').bind(id).first();
         if (!u) return R({ error: 'no' }, 404);
-        const st = await env.DB.prepare("SELECT COUNT(*) posts, SUM(kind='cabin') cabins FROM posts WHERE user_id=? AND hidden=0").bind(id).first();
+        const st = await env.DB.prepare("SELECT COUNT(*) posts, SUM(kind='cabin') cabins, SUM(kind='review') reviews FROM posts WHERE user_id=? AND hidden=0").bind(id).first();
         const posts = await env.DB.prepare('SELECT id,thread,kind,body,created FROM posts WHERE user_id=? AND hidden=0 ORDER BY id DESC LIMIT 30').bind(id).all();
         const refs = await env.DB.prepare("SELECT COUNT(DISTINCT variant) n FROM events WHERE name='ref' AND target=?").bind(id).first();
         const ver = await env.DB.prepare('SELECT COUNT(*) n FROM posts WHERE user_id=? AND verified=1 AND hidden=0').bind(id).first();
-        const full = { ...u, posts: st.posts || 0, cabins: st.cabins || 0, refs: refs.n || 0, verified: ver.n || 0 };
+        const full = { ...u, posts: st.posts || 0, cabins: st.cabins || 0, reviews: st.reviews || 0, refs: refs.n || 0, verified: ver.n || 0 };
         return R({ user: { ...full, badges: badges(full) }, posts: posts.results });
       }
       if (p === '/leaderboard') {
@@ -223,8 +232,8 @@ export default {
         if (!THREAD.test(thread) && !thread.endsWith(':*')) return R({ error: 'thread' }, 400);
         const like = thread.endsWith(':*');
         const q = like
-          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
-          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
+          ? env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert FROM posts WHERE thread LIKE ? AND hidden=0 ORDER BY id DESC LIMIT 300').bind(thread.slice(0, -1) + '%')
+          : env.DB.prepare('SELECT id,thread,parent,user_id,name,kind,body,rating,cabin,video,votes,verified,created,(SELECT expert FROM users WHERE users.id=posts.user_id) expert FROM posts WHERE thread=? AND hidden=0 ORDER BY votes DESC, id DESC LIMIT 300').bind(thread);
         const r = await q.all();
         const members = like ? { n: 0 } : await env.DB.prepare('SELECT COUNT(*) n FROM members WHERE thread=?').bind(thread).first();
         const summary = like ? null : await env.DB.prepare('SELECT body, posts FROM summaries WHERE thread=?').bind(thread).first();
@@ -239,6 +248,8 @@ export default {
         if (text.length < 3 && !vm) return R({ error: 'texto' }, 400);
         if (/(https?:\/\/(?!(www\.)?(youtube\.com|youtu\.be)))/i.test(text) && text.split('http').length > 3) return R({ error: 'spam' }, 400);
         if (await limited(env, 'post:' + ipHash, 15, 60)) return R({ error: 'rate' }, 429);
+        // Opiniones repetidas: el mismo texto (largo) ya publicado en los últimos 90 días
+        if (text.length >= 40) { const dup = await env.DB.prepare("SELECT id FROM posts WHERE body=? AND created > datetime('now','-90 days') LIMIT 1").bind(text).first(); if (dup) return R({ error: 'repetido' }, 409); }
         let rating = null;
         if (body.rating && typeof body.rating === 'object') {
           rating = {};
@@ -267,9 +278,30 @@ export default {
             if (sh && sh.length > 3 && (slug.includes(sh) || sh.includes(slug.replace(/^msc-/, '')))) verified = 1;
           } catch {}
         }
-        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
-          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified).first();
+        const key = clean(body.key, 64), eh = /^[a-z0-9]{20,64}$/.test(key) ? await sha('edit:' + key) : null;
+        const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified,edit_hash) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
+          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified, eh).first();
         return R({ ok: true, id: r.id, held: !!hidden, verified: !!verified });
+      }
+      // Editar (15 minutos) o borrar tu mensaje: solo con la clave secreta que guardó tu navegador al publicarlo
+      if ((p === '/posts/edit' || p === '/posts/delete') && req.method === 'POST') {
+        const id = parseInt(body.id), key = clean(body.key, 64);
+        if (!id || !/^[a-z0-9]{20,64}$/.test(key)) return R({ error: 'datos' }, 400);
+        const row = await env.DB.prepare("SELECT id, edit_hash, created > datetime('now','-15 minutes') fresh FROM posts WHERE id=?").bind(id).first();
+        if (!row || !row.edit_hash || row.edit_hash !== await sha('edit:' + key)) return R({ error: 'permiso' }, 403);
+        if (p === '/posts/delete') { await env.DB.prepare("UPDATE posts SET hidden=1, mod='borrado por su autor' WHERE id=?").bind(id).run(); return R({ ok: true }); }
+        if (!row.fresh) return R({ error: 'tarde' }, 403);
+        const text = clean(body.body, 4000); if (text.length < 3) return R({ error: 'texto' }, 400);
+        await env.DB.prepare('UPDATE posts SET body=? WHERE id=?').bind(text, id).run();
+        return R({ ok: true });
+      }
+      // Encuestas rápidas: un voto por persona (hash de la IP), resultados agregados
+      if (p === '/poll') {
+        const poll = clean(req.method === 'POST' ? body.poll : url.searchParams.get('poll'), 40);
+        if (!/^[a-z0-9-]{3,40}$/.test(poll)) return R({ error: 'datos' }, 400);
+        if (req.method === 'POST') { const opt = clean(body.option, 40); if (!/^[a-z0-9-]{1,40}$/.test(opt)) return R({ error: 'datos' }, 400); await env.DB.prepare('INSERT OR IGNORE INTO polls(poll, option, voter) VALUES(?,?,?)').bind(poll, opt, ipHash).run(); }
+        const r = await env.DB.prepare('SELECT option, COUNT(*) n FROM polls WHERE poll=? GROUP BY option').bind(poll).all();
+        return R({ results: Object.fromEntries(r.results.map((x) => [x.option, x.n])) });
       }
       if (p === '/vote' && req.method === 'POST') {
         const id = parseInt(body.id);
@@ -368,6 +400,7 @@ export default {
       // --- Administración
       if (p.startsWith('/admin/')) {
         if (!env.ADMIN_TOKEN || req.headers.get('Authorization') !== 'Bearer ' + env.ADMIN_TOKEN) return R({ error: 'auth' }, 401);
+        if (p === '/admin/expert') { await env.DB.prepare('UPDATE users SET expert=? WHERE id=?').bind(body.expert ? 1 : 0, clean(body.user_id, 40)).run(); return R({ ok: true }); }
         if (p === '/admin/hide') { await env.DB.prepare('UPDATE posts SET hidden=? WHERE id=?').bind(body.hidden ? 1 : 0, parseInt(body.id)).run(); return R({ ok: true }); }
         if (p === '/admin/overview') {
           const one = async (sql) => (await env.DB.prepare(sql).first()).n;

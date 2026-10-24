@@ -16,3 +16,5 @@ CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY, target TEXT, reason 
 CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, name TEXT, page TEXT, target TEXT, variant TEXT, created TEXT DEFAULT (datetime('now')));
 CREATE TABLE IF NOT EXISTS ratelimit (key TEXT PRIMARY KEY, n INTEGER, window TEXT);
 CREATE TABLE IF NOT EXISTS summaries (thread TEXT PRIMARY KEY, body TEXT, posts INTEGER, created TEXT DEFAULT (datetime('now')));
+-- 004 (24-oct-2026): encuestas rápidas. Las columnas posts.edit_hash y users.expert se añadieron con migrations/004_comunidad.sql
+CREATE TABLE IF NOT EXISTS polls (poll TEXT NOT NULL, option TEXT NOT NULL, voter TEXT NOT NULL, created TEXT DEFAULT (datetime('now')), PRIMARY KEY (poll, voter));
