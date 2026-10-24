@@ -167,6 +167,8 @@ const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'D
 
 export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null }) {
   pages.push({ url, noindex });
+  // Descripción de 160 caracteres como máximo, cortada por palabra
+  if (desc && desc.length > 160) desc = desc.slice(0, 157).replace(/\s+\S*$/, '').replace(/[,;:·\s]+$/, '') + '…';
   const fullTitle = url === '/' ? title : title.length > 62 ? title : `${title} | MejorCrucero`;
   const ld = [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'MejorCrucero', url: SITE, logo: SITE + '/icon-512.png', sameAs: [CONFIG.happyLowCost], founder: { '@type': 'Person', name: CONFIG.author.name } }, ...schema];
   if (crumbs) ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: crumbs.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) });

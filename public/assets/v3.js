@@ -290,12 +290,12 @@
       if (keepLimit !== true) limit = PAGE;
       if (!full && [...f.elements].some((el) => el.name && el.name !== 'o' && (el.type === 'checkbox' ? el.checked : el.value)) || (!full && f.elements.o?.value !== 'score')) { ensureAll().then(() => apply(keepLimit)); }
       const v = (n) => f.elements[n]?.value || '';
-      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q'));
+      const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked;
       const k = key(o);
       g.dataset.sort = o; cards.sort((a, c) => { const x = k(a), y = k(c); return x < y ? -1 : x > y ? 1 : 0; });
       let shown = 0, match = 0;
       cards.forEach((c) => {
-        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (nl && !nl(c)));
+        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (nl && !nl(c)));
         if (ok) match++;
         c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
       });
@@ -417,6 +417,9 @@
     if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📤 Compartir mi lista'; myo.after(b);
       b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = '✅ Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
   }
+// ---------- Mis cruceros: salidas vigiladas ----------
+  { const box = $('#my-offers'); const w = store.get('mc_watch', []); if (box && w.length) getJson('ofertas.json').then((all) => { const by = Object.fromEntries(all.map((o) => [o.i, o])); const rows = w.map((x) => ({ x, o: by[x.id] })).filter((r) => r.o);
+    if (rows.length) box.insertAdjacentHTML('beforebegin', `<div class="tip"><b>🔔 Salidas que vigilas</b><ul class="mini">${rows.map(({ x, o }) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>Al empezar: ${eur(x.base)} · hoy: ${eur(o.pr)}${o.pr < x.base ? ` (📉 −${eur(x.base - o.pr)})` : o.pr > x.base ? ' (📈 ha subido)' : ''}${x.target ? ` · objetivo ${eur(x.target)}` : ''}</span></a></li>`).join('')}</ul></div>`); }).catch(() => {}); }
 // ---------- Mis cruceros: guardadas que salen pronto, las que ya no están a la venta y calendario (.ics) ----------
   { const box = $('#my-offers'); const favs = store.get('mc_offer_favs', []);
     if (box && favs.length) getJson('ofertas.json').then((all) => {
@@ -464,6 +467,8 @@
     const l = store.get('mc_searches', []).filter((x) => x.u !== item.u); l.unshift(item); store.set('mc_searches', l.slice(0, 20)); b.textContent = '⭐ Guardada en Mis cruceros';
   }));
   $$('.js-surprise-offer').forEach((b) => b.addEventListener('click', async () => {
+    const vis = [...document.querySelectorAll('#offer-grid > a:not([hidden])')].filter((c) => +c.dataset.score >= 70);
+    if (vis.length && location.search) { location.href = vis[Math.floor(Math.random() * vis.length)].href; return; }
     const l = (await getOffers()).filter((o) => o.sc >= 80); const o = l[Math.floor(Math.random() * l.length)]; if (o) location.href = `${BASE}salidas/${o.i}/`;
   }));
 

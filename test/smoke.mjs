@@ -41,11 +41,12 @@ const anySailing = pick('salidas', 1)[0]; if (anySailing) must(anySailing, 'Itin
 // SEO básico en todas las páginas indexables: título y descripción únicos y de longitud razonable (avisos, no bloquean)
 const warns = [];
 const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(dir, e.name)) : e.name === 'index.html' ? [path.join(dir, e.name)] : []);
-const titles = new Map(), descs = new Map(); let pages = 0;
+const titles = new Map(), descs = new Map(); let pages = 0, longT = 0, longD = 0;
 for (const f of walk(D)) {
   const t = fs.readFileSync(f, 'utf8'); if (t.length > 400000) warns.push(`${f}: pesa ${Math.round(t.length / 1024)} KB (más de 400 KB)`); if (/name="robots" content="noindex/.test(t)) continue; pages++;
   const ti = /<title>([^<]*)<\/title>/.exec(t)?.[1] || ''; const de = /<meta name="description" content="([^"]*)"/.exec(t)?.[1] || '';
   if (!ti) fails.push(`${f}: sin título`); if (!de) warns.push(`${f}: sin descripción`);
+  if (ti.length > 75) longT++; if (de.length > 170) longD++;
   titles.set(ti, [...(titles.get(ti) || []), f]); descs.set(de, [...(descs.get(de) || []), f]);
   // Accesibilidad básica: idioma, imágenes con alt, botones con nombre, campos con etiqueta
   if (!/<html lang="es/.test(t)) warns.push(`${f}: sin idioma declarado`);
@@ -58,6 +59,7 @@ for (const f of walk(D)) {
 const dupT = [...titles].filter(([k, v]) => k && v.length > 1), dupD = [...descs].filter(([k, v]) => k && v.length > 1);
 if (dupT.length) warns.push(`${dupT.length} títulos repetidos (p. ej. "${dupT[0][0].slice(0, 60)}" en ${dupT[0][1].length} páginas)`);
 if (dupD.length) warns.push(`${dupD.length} descripciones repetidas`);
+if (longT) warns.push(`${longT} títulos de más de 75 caracteres`); if (longD) warns.push(`${longD} descripciones de más de 170 caracteres`);
 // El sitemap solo debe listar páginas que existen
 const smIndex = read('sitemap.xml'); const smFiles = [...smIndex.matchAll(/<loc>https?:\/\/[^/]+\/([^<]*\.xml)<\/loc>/g)].map((m) => m[1]); if (!smFiles.length) fails.push('sitemap.xml no es un índice de sitemaps');
 const locs = smFiles.flatMap((f) => [...read(f).matchAll(/<loc>https?:\/\/[^/]+(\/[^<]*)<\/loc>/g)].map((m) => m[1]));
