@@ -591,9 +591,21 @@
         try { answer = (await api('/ask', { body: { q, context: ctx } })).answer; } catch {}
       }
       wait.innerHTML = linkify(answer || local(q, ships), ships);
+      // Salidas reales que encajan con la pregunta, con su precio y la fecha en que lo comprobamos
+      try { const all = await getJson('ofertas.json'); const t = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); const MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']; const mo = MES.findIndex((m) => t.includes(m)); const money = /(\d{3,5})\s*(€|eur)|menos de (\d{3,5})/.exec(t); const max = money ? +(money[1] || money[3]) : 0;
+        const words = t.split(/[^a-z0-9]+/).filter((w) => w.length > 4 && !/(queremos|quiero|somos|adultos|crucero|cruceros|salir|desde|barco|barcos|gastar|mucho|ninos|tranquilo)/.test(w));
+        const hits = all.filter((o) => (mo < 0 || +o.d.slice(5, 7) === mo + 1) && (!max || o.pr <= max) && (!words.length || words.some((w) => [o.t, o.sn, o.p, ...(o.pts || [])].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(w.slice(0, -1))))).sort((a, b) => b.sc - a.sc).slice(0, 4);
+        if (hits.length && (mo >= 0 || max || words.length)) add('bot', '<b>Salidas a la venta que encajan:</b><ul class="mini">' + hits.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · precio comprobado el ${new Date((o.u || o.d) + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</span></a></li>`).join('') + '</ul>'); } catch {}
       track('ask');
     };
     chatF.addEventListener('submit', (e) => { e.preventDefault(); const q = chatF.q.value.trim(); if (q) { ask(q); chatF.reset(); } });
+  }
+  // ---------- Pregunta a la IA sobre una salida concreta (la salida va como contexto) ----------
+  { const box = $('.ask-sail'); const af = $('.js-ask-sail');
+    if (box && af) { const outEl = $('.js-ask-sail-out', box);
+      af.addEventListener('submit', async (e) => { e.preventDefault(); const q = af.q.value.trim(); if (!q) return; const u = document.createElement('div'); u.className = 'msg user'; u.textContent = q; outEl.append(u); const w = document.createElement('div'); w.className = 'msg bot'; w.innerHTML = '<span class="dots">Pensando</span>'; outEl.append(w); af.reset();
+        let a = null; try { if (await hasApi()) a = (await api('/ask', { body: { q, context: box.dataset.ctx } })).answer; } catch {}
+        w.innerHTML = a ? esc(a).replace(/\n/g, '<br>') : 'Ahora mismo no puedo responder. Mira el itinerario y el desglose del precio en esta página, o pregunta en la comunidad.'; track('ask_sailing'); }); }
     $$('.js-ask').forEach((b) => b.addEventListener('click', () => ask(b.textContent)));
   }
 
