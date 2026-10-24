@@ -9,6 +9,7 @@ import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
 import { scoreBadge } from './lib.js';
 import { cj, tripBox, bookingHotels } from './lib.js';
 import { makeOffers } from './offers.js';
+import { makeTools2 } from './tools2.js';
 import { AV, SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
 const D = (f) => path.join(path.dirname(new URL(import.meta.url).pathname), 'data', f);
@@ -654,6 +655,16 @@ const TOOLS = [
   ['documentacion', '🛂', 'Documentación por destino', 'Qué papeles necesitas y dónde comprobarlo en fuentes oficiales.'],
   ['glosario', '📖', 'Glosario del crucerista', 'Tender, muster drill, todo incluido… explicado en cristiano.'],
   ['mapa-escalas', '🗺️', 'Mapa de escalas', 'Dónde paran los cruceros de cada destino y cuántas salidas paran en cada puerto.'],
+  ['presupuesto-total', '🧮', 'Presupuesto puerta a puerta', 'El coste total de tu crucero: viaje, hotel, excursiones, bebidas y propinas.'],
+  ['gasto-a-bordo', '💳', 'Gasto a bordo', 'Cuánto llevar para bebidas, cafés, wifi y excursiones.'],
+  ['suplemento-individual', '🧍', 'Suplemento individual', 'Cuánto pagas si viajas solo.'],
+  ['pago-a-plazos', '📆', 'Pago a plazos', 'Cuota mensual e intereses si financias el crucero.'],
+  ['dias-libres', '🗓️', 'Días libres', 'Cuántos días de vacaciones necesitas pedir.'],
+  ['vacaciones', '🎒', 'Cruceros en vacaciones', 'Salidas que caben en Navidad, Semana Santa o verano.'],
+  ['sin-avion', '🚗', 'Sin avión desde tu provincia', 'Los puertos más cercanos a tu provincia y sus ofertas.'],
+  ['comparar-destinos', '🧭', 'Comparar destinos', 'Época, duración y precio de hasta tres destinos.'],
+  ['comparar-camarotes', '🛏️', 'Comparar camarotes', 'Cuánto más cuesta un balcón o una suite.'],
+  ['camarote-mareo', '🌊', 'Camarote si te mareas', 'Dónde reservar si te mareas.'],
 ];
 const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'], [n, u]];
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
@@ -1164,6 +1175,7 @@ write('herramientas/presupuesto-compartido/index.html', toolSplit());
 write('herramientas/tiempo-puerto/index.html', toolWeather());
 write('herramientas/maleta/index.html', toolPack());
 write('herramientas/documentacion/index.html', toolDocs());
+{ const T2 = makeTools2({ layout, esc, eur, sailings, OFF, DESTINATIONS, toolCrumbs, lineList, BASE }); T2.pages.forEach(([p, h]) => write(p, h)); }
 write('herramientas/glosario/index.html', glossary());
 { const ds = [...new Set(sailings.map((x) => x.destination).filter(Boolean))].map((d) => [d, sailings.filter((x) => x.destination === d)]).sort((a, b) => b[1].length - a[1].length);
   const maps = ds.map(([d, l]) => { const m = OFF.escalaMap(l, `por ${OFF.destName(d)}`); return m ? m.replace('<section class="wrap block">', `<section class="wrap block" id="${d}">`) : ''; }).filter(Boolean);
@@ -1295,7 +1307,10 @@ write('accesibilidad/index.html', layout({ title: 'Accesibilidad de MejorCrucero
   ${Object.keys(QA.descartadas).length ? `<p><b>Descartadas:</b> ${Object.entries(QA.descartadas).map(([k, n]) => `${esc(k)} (${n})`).join(', ')}.</p>` : '<p>No se ha descartado ninguna salida.</p>'}
   ${Object.keys(QA.avisos).length ? `<p><b>Avisos:</b> ${Object.entries(QA.avisos).map(([k, n]) => `${esc(k)} (${n})`).join(', ')}.</p>` : ''}
   <h2>Escalas sin coordenadas (${Object.keys(noCoord).length})</h2><p class="small">${Object.entries(noCoord).sort((a, b) => b[1] - a[1]).slice(0, 80).map(([n, c]) => `${esc(n)} (${c})`).join(', ') || 'Ninguna.'}</p>
-  <h2>Barcos sin ficha (${noShip.length})</h2><p class="small">${noShip.map(esc).join(', ') || 'Ninguno.'}</p></section>`;
+  <h2>Barcos sin ficha (${noShip.length})</h2><p class="small">${noShip.map(esc).join(', ') || 'Ninguno.'}</p>
+  <h2>Velocidad de la web desde tu conexión</h2><div id="speed" class="stats stats-light"><div><b>…</b><span>Midiendo</span></div></div><p class="muted small">Medido ahora en tu navegador: carga de esta página y descarga del fichero de ofertas. Depende de tu conexión.</p>
+  <script>addEventListener('load',()=>setTimeout(async()=>{const n=performance.getEntriesByType('navigation')[0]||{};const ms=(v)=>v>0?(v>=1000?(v/1000).toFixed(1).replace('.',',')+' s':Math.round(v)+' ms'):'–';let dl=0,kb=0;try{const t=performance.now();const r=await fetch(document.querySelector('link[rel=icon]')?'${BASE}data/estado.json?'+Date.now():'${BASE}data/estado.json',{cache:'no-store'});const b=await r.arrayBuffer();dl=performance.now()-t;kb=Math.round(b.byteLength/1024)}catch(e){}
+  document.getElementById('speed').innerHTML='<div><b>'+ms(n.responseStart-n.requestStart)+'</b><span>Respuesta del servidor</span></div><div><b>'+ms(n.domContentLoadedEventEnd)+'</b><span>Página lista</span></div><div><b>'+ms(n.loadEventEnd||performance.now())+'</b><span>Carga completa</span></div><div><b>'+ms(dl)+'</b><span>Descarga de datos ('+kb+' KB)</span></div>'},50))</script></section>`;
   write('estado/index.html', layout({ title: 'Estado de los datos de MejorCrucero', desc: 'Cobertura por naviera, frescura de los precios y control de calidad de los datos.', url: '/estado/', noindex: true, body, crumbs: [['Inicio', '/'], ['Estado de los datos', '/estado/']] }));
   write('data/estado.json', JSON.stringify({ when: new Date().toISOString(), recibidas: rawSailings.length, publicadas: sailings.length, porNaviera: Object.fromEntries(Object.entries(byLine).map(([k, l]) => [k, { salidas: l.n, ultima: l.upd }])), descartadas: QA.descartadas, avisos: QA.avisos, stale: stale.map(([k]) => k) }));
 }
