@@ -135,7 +135,7 @@
       if (!vars) return;
       const ab = store.get('mc_ab', {});
       if (ab[key] == null) { ab[key] = Math.floor(Math.random() * vars.length); store.set('mc_ab', ab); }
-      el.textContent = vars[ab[key]];
+      el.textContent = String(vars[ab[key]]).replace('{n}', el.dataset.n || '');
       track('ab_view', key, String(ab[key]));
       el.addEventListener('click', () => track('ab_click', key, String(ab[key])));
     });
@@ -192,7 +192,7 @@
       if (f.dataset.source === 'creadores') ok = !!(await api('/alert', { body: { kind: 'creator', email, website: f.website?.value, ...extra } }));
       else ok = !!(await api('/lead', { body: { email, source: f.dataset.source, website: f.website?.value } }));
     } catch { const l = store.get('mc_leads', []); l.push({ email, source: f.dataset.source, ...extra }); store.set('mc_leads', l); }
-    msg.textContent = ok ? '¡Hecho! Te escribiremos pronto.' : '¡Apuntado! Te escribiremos en cuanto lancemos los envíos.';
+    msg.innerHTML = (ok ? '¡Hecho! Si te llega un correo para confirmar tu email, púlsalo.' : '¡Apuntado! Te escribiremos en cuanto lancemos los envíos.') + ` <a href="${BASE}gracias/">Siguientes pasos →</a>`;
     f.reset();
     const em = $('#exit-modal'); if (em?.open) setTimeout(() => em.close(), 1200);
   }));
@@ -209,7 +209,7 @@
     let ok = false;
     try { ok = !!(await api('/alert', { body: { kind: 'criteria', email: f.email.value.trim(), website: f.website?.value, ...crit } })); } catch {}
     const l = store.get('mc_crit', []); l.push(crit); store.set('mc_crit', l);
-    $('.form-msg', f).textContent = ok ? 'Alerta creada: te escribiremos cuando haya cruceros así.' : 'Alerta guardada. Te escribiremos en cuanto activemos los avisos por email.';
+    $('.form-msg', f).innerHTML = (ok ? 'Alerta creada: te escribiremos cuando haya cruceros así.' : 'Alerta guardada. Te escribiremos en cuanto activemos los avisos por email.') + ` <a href="${BASE}gracias/">Siguientes pasos →</a>`;
     f.reset();
   }));
 
@@ -852,4 +852,13 @@
   // ---------- Cuántos vigilan esta salida y medición de compartidos ----------
   { const wf = $('.watch-form'); if (wf) hasApi().then(async (ok) => { if (!ok) return; try { const j = await api('/watchers?id=' + encodeURIComponent(wf.dataset.id)); if (j.n >= 2) { const p = document.createElement('p'); p.className = 'small muted'; p.textContent = `👀 ${j.n} personas vigilan el precio de esta salida.`; wf.before(p); } } catch {} }); }
   document.addEventListener('click', (e) => { const a = e.target.closest('a[href]'); if (!a) return; const h = a.getAttribute('href'); const net = /wa\.me|whatsapp/.test(h) ? 'whatsapp' : /facebook\.com\/sharer/.test(h) ? 'facebook' : /twitter\.com\/intent|x\.com\/intent/.test(h) ? 'x' : /t\.me\/share|telegram\.me/.test(h) ? 'telegram' : /^mailto:\?/.test(h) ? 'email' : ''; if (net) track('share_link', net, PAGE); }, { capture: true });
+
+  // ---------- Tras ir a la web de la naviera: una pregunta y recordatorio de vigilar el precio ----------
+  { const wf = $('.watch-form'); let clicked = false;
+    document.addEventListener('click', (e) => { if (e.target.closest('a[data-aff]') && wf) clicked = true; });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'visible' || !clicked || $('.post-click')) return; clicked = false;
+      const box = document.createElement('div'); box.className = 'post-click tip'; box.setAttribute('role', 'status');
+      box.innerHTML = `<p><b>¿Has encontrado lo que buscabas?</b> <button type="button" class="btn btn-sm btn-ghost" data-pc="si">Sí</button> <button type="button" class="btn btn-sm btn-ghost" data-pc="no">No</button></p><p class="small">Si reservas, guarda el precio: te avisamos si baja para que puedas reclamar la diferencia. <a href="${BASE}herramientas/alerta-precio/">Vigilar mi reserva →</a></p>`;
+      wf.closest('section')?.before(box) || document.body.append(box);
+      box.addEventListener('click', (ev) => { const a = ev.target.dataset.pc; if (!a) return; track('post_click_survey', a, PAGE); box.querySelector('p').innerHTML = a === 'si' ? '¡Genial! Buen viaje.' : 'Gracias. Mira las salidas parecidas más abajo o crea una alerta y te avisamos.'; }); }); }
 })();
