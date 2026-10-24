@@ -15,6 +15,7 @@ for (const x of sailings) {
 }
 const ids = new Set(); for (const x of sailings) { if (ids.has(x.id)) fails.push(`salida duplicada: ${x.id}`); ids.add(x.id); }
 
+const dataSize = fs.statSync(process.env.SAILINGS || 'src/data/sailings.json').size; if (dataSize > 25e6) fails.push(`el fichero de salidas pesa ${Math.round(dataSize / 1e6)} MB (máximo 25)`); else if (dataSize > 15e6) console.warn(`⚠ El fichero de salidas pesa ${Math.round(dataSize / 1e6)} MB`);
 // Páginas clave
 must('index.html', '<title>', 'Chollos de cruceros de hoy');
 const of = must('ofertas/index.html', 'id="offer-grid"', 'class="hub-sum"');

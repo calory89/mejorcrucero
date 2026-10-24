@@ -1,0 +1,352 @@
+{
+"Alicante": [
+38.3453,
+-0.4831,
+"https://es.wikipedia.org/wiki/Alicante"
+],
+"Aruba": [
+12.515,
+-69.975,
+"https://es.wikipedia.org/wiki/Aruba"
+],
+"Barcelona": [
+41.3825,
+2.1769,
+"https://es.wikipedia.org/wiki/Barcelona"
+],
+"Boston": [
+42.3603,
+-71.0578,
+"https://es.wikipedia.org/wiki/Boston"
+],
+"Buenos Aires": [
+-34.5997,
+-58.3819,
+"https://es.wikipedia.org/wiki/Buenos_Aires"
+],
+"Busan": [
+35.18,
+129.075,
+"https://es.wikipedia.org/wiki/Busan"
+],
+"Cabo San Lucas": [
+22.8947,
+-109.9153,
+"https://es.wikipedia.org/wiki/Cabo_San_Lucas"
+],
+"Cartagena": [
+10.4236,
+-75.5253,
+"https://es.wikipedia.org/wiki/Cartagena_de_Indias"
+],
+"Ciudad Ho Chi Minh": [
+10.7756,
+106.7019,
+"https://es.wikipedia.org/wiki/Ciudad_Ho_Chi_Minh"
+],
+"Copenhague": [
+55.6761,
+12.5689,
+"https://es.wikipedia.org/wiki/Copenhague"
+],
+"Cozumel": [
+20.43,
+-87.02,
+"https://es.wikipedia.org/wiki/Municipio_de_Cozumel"
+],
+"Cádiz": [
+36.535,
+-6.2975,
+"https://es.wikipedia.org/wiki/C%C3%A1diz"
+],
+"Dubrovnik": [
+42.6403,
+18.1083,
+"https://es.wikipedia.org/wiki/Dubrovnik"
+],
+"Estambul": [
+41.01,
+28.9603,
+"https://es.wikipedia.org/wiki/Estambul"
+],
+"Falmouth": [
+50.15,
+-5.0667,
+"https://es.wikipedia.org/wiki/Falmouth"
+],
+"Filadelfia": [
+39.9528,
+-75.1636,
+"https://es.wikipedia.org/wiki/Filadelfia"
+],
+"Fort Lauderdale": [
+26.1358,
+-80.1419,
+"https://es.wikipedia.org/wiki/Fort_Lauderdale"
+],
+"Gran Caimán": [
+19.33,
+-81.24,
+"https://es.wikipedia.org/wiki/Gran_Caim%C3%A1n"
+],
+"Great Stirrup Cay": [
+25.8333,
+-77.9,
+"https://es.wikipedia.org/wiki/Great_Stirrup_Cay"
+],
+"Génova": [
+44.4072,
+8.9339,
+"https://es.wikipedia.org/wiki/G%C3%A9nova"
+],
+"Halifax": [
+44.6478,
+-63.5714,
+"https://es.wikipedia.org/wiki/Halifax"
+],
+"Harvest Caye": [
+16.4783,
+-88.4039,
+"https://en.wikipedia.org/wiki/Harvest_Caye"
+],
+"Hilo": [
+19.7056,
+-155.0858,
+"https://es.wikipedia.org/wiki/Hilo_(Haw%C3%A1i)"
+],
+"Hong Kong": [
+22.2783,
+114.1586,
+"https://es.wikipedia.org/wiki/Hong_Kong"
+],
+"Honolulu": [
+21.3,
+-157.85,
+"https://en.wikipedia.org/wiki/Honolulu"
+],
+"Jacksonville": [
+30.3167,
+-81.65,
+"https://es.wikipedia.org/wiki/Jacksonville_(Florida)"
+],
+"Kiel": [
+54.3233,
+10.1394,
+"https://es.wikipedia.org/wiki/Kiel"
+],
+"Kotor": [
+42.4254,
+18.7712,
+"https://es.wikipedia.org/wiki/Kotor"
+],
+"Las Palmas de Gran Canaria": [
+28.1272,
+-15.4314,
+"https://es.wikipedia.org/wiki/Las_Palmas_de_Gran_Canaria"
+],
+"Lisboa": [
+38.708,
+-9.139,
+"https://es.wikipedia.org/wiki/Lisboa"
+],
+"Los Ángeles": [
+34.0522,
+-118.2437,
+"https://es.wikipedia.org/wiki/Los_%C3%81ngeles"
+],
+"Marsella": [
+43.2967,
+5.3764,
+"https://es.wikipedia.org/wiki/Marsella"
+],
+"Melbourne": [
+-37.8142,
+144.9631,
+"https://es.wikipedia.org/wiki/Melbourne"
+],
+"Miami": [
+25.7742,
+-80.1936,
+"https://es.wikipedia.org/wiki/Miami"
+],
+"Motril": [
+36.7453,
+-3.5206,
+"https://es.wikipedia.org/wiki/Motril"
+],
+"Málaga": [
+36.7167,
+-4.4167,
+"https://es.wikipedia.org/wiki/M%C3%A1laga"
+],
+"Nagasaki": [
+32.7495,
+129.8796,
+"https://es.wikipedia.org/wiki/Nagasaki"
+],
+"Nassau": [
+25.0781,
+-77.3386,
+"https://en.wikipedia.org/wiki/Nassau,_Bahamas"
+],
+"Niza/Mónaco": [
+43.6653,
+7.215,
+"https://es.wikipedia.org/wiki/Aeropuerto_Internacional_de_Niza-Costa_Azul"
+],
+"Nápoles": [
+40.8358,
+14.2486,
+"https://es.wikipedia.org/wiki/N%C3%A1poles"
+],
+"Olimpia": [
+37.6383,
+21.63,
+"https://es.wikipedia.org/wiki/Olimpia"
+],
+"Palma de Mallorca": [
+39.5667,
+2.6497,
+"https://es.wikipedia.org/wiki/Palma_de_Mallorca"
+],
+"Port Canaveral": [
+28.41,
+-80.61,
+"https://en.wikipedia.org/wiki/Port_Canaveral"
+],
+"Provenza": [
+44,
+6,
+"https://es.wikipedia.org/wiki/Provenza"
+],
+"Puerto Plata": [
+19.7958,
+-70.6944,
+"https://es.wikipedia.org/wiki/Puerto_Plata"
+],
+"Puerto Quetzal": [
+13.9206,
+-90.7878,
+"https://es.wikipedia.org/wiki/Puerto_Quetzal"
+],
+"Puerto Vallarta": [
+20.6413,
+-105.2233,
+"https://es.wikipedia.org/wiki/Puerto_Vallarta"
+],
+"Roatán": [
+16.3834,
+-86.4178,
+"https://es.wikipedia.org/wiki/Roat%C3%A1n"
+],
+"Roma (Civitavecchia)": [
+41.8722,
+12.4664,
+"https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_Roma_Trastevere"
+],
+"Royal Naval Dockyard": [
+44.6566,
+-63.5791,
+"https://en.wikipedia.org/wiki/Royal_Naval_Dockyard,_Halifax"
+],
+"Salerno": [
+40.6806,
+14.7594,
+"https://es.wikipedia.org/wiki/Salerno"
+],
+"San Diego": [
+32.715,
+-117.1625,
+"https://es.wikipedia.org/wiki/San_Diego_(California)"
+],
+"San Francisco": [
+37.6547,
+-122.2375,
+"https://es.wikipedia.org/wiki/Bah%C3%ADa_de_San_Francisco"
+],
+"San Juan": [
+-31.5375,
+-68.5364,
+"https://es.wikipedia.org/wiki/San_Juan_(Argentina)"
+],
+"Santa Cruz de Tenerife": [
+28.4667,
+-16.25,
+"https://es.wikipedia.org/wiki/Santa_Cruz_de_Tenerife"
+],
+"Santa Lucía": [
+14.35,
+-91.0167,
+"https://en.wikipedia.org/wiki/Santa_Luc%C3%ADa_Cotzumalguapa"
+],
+"Santo Tomás": [
+19.1781,
+-100.2917,
+"https://es.wikipedia.org/wiki/Municipio_de_Santo_Tom%C3%A1s"
+],
+"Santorini": [
+36.415,
+25.4325,
+"https://es.wikipedia.org/wiki/Santorini"
+],
+"Seattle": [
+47.605,
+-122.33,
+"https://es.wikipedia.org/wiki/Seattle"
+],
+"Sevilla": [
+37.3886,
+-5.995,
+"https://es.wikipedia.org/wiki/Sevilla"
+],
+"Singapur": [
+1.3525,
+103.7689,
+"https://es.wikipedia.org/wiki/Batalla_de_Singapur"
+],
+"Suva": [
+-18.1333,
+178.4333,
+"https://es.wikipedia.org/wiki/Suva"
+],
+"São Vicente": [
+16.85,
+-24.97,
+"https://es.wikipedia.org/wiki/S%C3%A3o_Vicente_(Cabo_Verde)"
+],
+"Sídney": [
+-33.8678,
+151.21,
+"https://es.wikipedia.org/wiki/S%C3%ADdney"
+],
+"Taipéi": [
+25.0375,
+121.5625,
+"https://es.wikipedia.org/wiki/Taip%C3%A9i"
+],
+"Tampa": [
+27.9475,
+-82.4586,
+"https://es.wikipedia.org/wiki/Tampa"
+],
+"Tokio": [
+35.6894,
+139.6917,
+"https://es.wikipedia.org/wiki/Tokio"
+],
+"Valencia": [
+39.47,
+-0.3764,
+"https://es.wikipedia.org/wiki/Valencia"
+],
+"Willemstad": [
+12.108,
+-68.935,
+"https://es.wikipedia.org/wiki/Willemstad"
+],
+"Ámsterdam": [
+52.3667,
+4.8833,
+"https://es.wikipedia.org/wiki/%C3%81msterdam"
+]
+}

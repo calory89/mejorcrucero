@@ -318,6 +318,7 @@
           f.elements[x].value = saved; return [x, c2];
         }).filter(([, c2]) => c2 > 0).sort((a, c) => c[1] - a[1]);
         const NAMES = { b: 'el presupuesto', m: 'el mes', n: 'las noches', nv: 'la naviera', sh: 'el barco', ssc: 'la nota del barco', dsc: 'la nota del precio', es: '"solo desde España"', q: 'el texto de búsqueda' };
+        try { if (!f.dataset.zt) { f.dataset.zt = 1; fetch && cfg().then((c) => c.api && fetch(c.api + '/evt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'search_zero', page: location.pathname, target: String(location.search).slice(0, 200) }) })).catch(() => {}); } } catch {}
         if (tries.length) { const box = document.createElement('div'); box.className = 'nl-more tip'; box.innerHTML = `Ninguna oferta cumple todo. ${tries.slice(0, 3).map(([x, c2]) => `<button type="button" class="btn btn-sm btn-ghost" data-clear="${x}">Quitar ${NAMES[x]} (${c2})</button>`).join(' ')}`; g.before(box); box.addEventListener('click', (e) => { const x = e.target.dataset.clear; if (x) { f.elements[x].value = ''; apply(); } }); return; }
       }
       if (nl && match < 6) getJson('ofertas.json').then((all) => {
@@ -416,6 +417,21 @@
     if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📤 Compartir mi lista'; myo.after(b);
       b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = '✅ Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
   }
+// ---------- Mis cruceros: guardadas que salen pronto, las que ya no están a la venta y calendario (.ics) ----------
+  { const box = $('#my-offers'); const favs = store.get('mc_offer_favs', []);
+    if (box && favs.length) getJson('ofertas.json').then((all) => {
+      const live = new Set(all.map((o) => o.i)); const today = new Date();
+      const gone = favs.filter((f) => !live.has(f.id)); const soon = favs.filter((f) => live.has(f.id) && f.d && (new Date(f.d) - today) / 864e5 <= 30 && new Date(f.d) >= today);
+      const parts = [];
+      if (soon.length) parts.push(`<div class="tip tip-ok"><b>Salen en menos de 30 días:</b> ${soon.map((f) => `<a href="${BASE}salidas/${esc(f.id)}/">${esc(f.t)}</a>`).join(', ')}</div>`);
+      if (gone.length) parts.push(`<div class="tip"><b>Ya no están a la venta:</b> ${gone.map((f) => esc(f.t)).join(', ')}. <button type="button" class="btn btn-sm btn-ghost js-drop-gone">Quitarlas de mi lista</button></div>`);
+      box.insertAdjacentHTML('beforebegin', parts.join(''));
+      $('.js-drop-gone')?.addEventListener('click', () => { store.set('mc_offer_favs', favs.filter((f) => live.has(f.id))); location.reload(); });
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📅 Añadir mis guardadas al calendario'; box.after(b);
+      b.addEventListener('click', () => { const by = Object.fromEntries(all.map((o) => [o.i, o])); const d8 = (d) => d.replace(/-/g, '');
+        const ev = favs.filter((f) => by[f.id]).map((f) => { const o = by[f.id]; const end = new Date(new Date(o.d + 'T12:00').getTime() + (o.n + 1) * 864e5).toISOString().slice(0, 10); return `BEGIN:VEVENT\r\nUID:${o.i}@mejorcrucero.com\r\nDTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z\r\nDTSTART;VALUE=DATE:${d8(o.d)}\r\nDTEND;VALUE=DATE:${d8(end)}\r\nSUMMARY:Crucero ${o.t} · ${o.sn}\r\nDESCRIPTION:Desde ${o.p}. Precio guardado desde ${o.pr} €.\r\nURL:${location.origin}${BASE}salidas/${o.i}/\r\nEND:VEVENT`; });
+        const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MejorCrucero//ES\r\n${ev.join('\r\n')}\r\nEND:VCALENDAR`; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'mis-cruceros.ics'; a.click(); });
+    }).catch(() => {}); }
 // ---------- Ficha de salida: total para el grupo ----------
   $$('.group-calc').forEach((g) => {
     const sel = $('.js-group', g), out = $('.js-group-out', g), real = +g.dataset.real;

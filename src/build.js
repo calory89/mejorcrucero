@@ -58,6 +58,9 @@ const sailings = [];
     seenIds.add(x.id);
     x.ship_name = cleanName(x.ship_name); x.depart_port = cleanName(x.depart_port); x.arrive_port = cleanName(x.arrive_port);
     if (x.itinerary) { x.itinerary.name = cleanName(x.itinerary.name); x.itinerary.ports = (x.itinerary.ports || []).map((p) => (JUNK_PORT.test(p.name) ? { ...p, name: 'Navegación' } : { ...p, name: portName(p.name) })); }
+    // Nombres que existen en dos continentes: se distinguen por el destino del crucero
+    const AMER = ['caribe', 'canal-de-panama', 'riviera-mexicana', 'sudamerica', 'bermudas', 'canada-nueva-inglaterra', 'alaska', 'hawai'];
+    if (AMER.includes(x.destination) && x.itinerary) for (const p of x.itinerary.ports) { if (p.name === 'Cartagena') p.name = 'Cartagena de Indias'; if (p.name === 'Falmouth') p.name = 'Falmouth (Jamaica)'; }
     x.depart_port = portName(x.depart_port); x.arrive_port = portName(x.arrive_port);
     sailings.push(x);
   }
@@ -1226,6 +1229,16 @@ write('data/config.json', JSON.stringify({ api: CONFIG.api, ab: CONFIG.ab, fx })
   <script>(function(){var f=document.getElementById('wg-form'),pv=document.getElementById('wg-prev'),c=document.getElementById('wg-code');function up(){var q=new URLSearchParams();['d','p','n'].forEach(function(k){if(f[k].value)q.set(k,f[k].value)});var s='${SITE}/embed/chollos/?'+q;pv.src='${BASE}embed/chollos/?'+q;c.value='<iframe src="'+s+'" width="100%" height="'+(80+70*(+f.n.value))+'" style="border:0;max-width:480px" title="Chollos de cruceros" loading="lazy"></iframe>'}f.addEventListener('change',up);up();document.querySelector('.js-copy-wg').addEventListener('click',function(e){navigator.clipboard&&navigator.clipboard.writeText(c.value);e.target.textContent='Copiado'})})();</script>`;
   write('herramientas/widget-chollos/index.html', layout({ title: 'Widget de chollos de cruceros para tu web (gratis)', desc: 'Inserta en tu blog o agencia una lista de chollos de cruceros que se actualiza sola, filtrada por destino o puerto de salida.', url: '/herramientas/widget-chollos/', body, crumbs: [['Inicio', '/'], ['Herramientas', '/herramientas/'], ['Widget de chollos', '/herramientas/widget-chollos/']] }));
 }
+// Declaración de accesibilidad (lo que se hace de verdad y cómo avisar de un problema)
+write('accesibilidad/index.html', layout({ title: 'Accesibilidad de MejorCrucero', desc: 'Qué hacemos para que MejorCrucero se pueda usar con teclado, lector de pantalla, texto grande y modo oscuro, y cómo avisarnos de un problema.', url: '/accesibilidad/', crumbs: [['Inicio', '/'], ['Accesibilidad', '/accesibilidad/']],
+  body: `<section class="wrap block page-h narrow prose"><h1>Accesibilidad</h1><p class="lead-p">Queremos que cualquiera pueda comparar cruceros aquí. Esto es lo que hacemos hoy:</p><ul>
+  <li>Se puede navegar con teclado, con foco visible y un enlace para saltar al contenido. La tecla <kbd>/</kbd> abre el buscador.</li>
+  <li>Botón para agrandar el texto (A A, arriba) y modo oscuro.</li>
+  <li>Imágenes con texto alternativo; iconos decorativos ocultos a los lectores de pantalla.</li>
+  <li>Cada oferta tiene una descripción completa para lectores de pantalla (destino, noches, barco, fecha, puerto, precio y nota).</li>
+  <li>Las etiquetas de precio llevan texto, no solo color. Respetamos la opción del sistema de reducir animaciones.</li>
+  <li>Cada actualización pasa una prueba automática que revisa idioma, imágenes sin texto alternativo, botones sin nombre y campos sin etiqueta.</li></ul>
+  <p>Sabemos que aún hay cosas que mejorar (por ejemplo, el mapa interactivo y algunos gráficos). Si encuentras una barrera, <a href="/contacto/">escríbenos</a> y lo arreglamos.</p><p class="muted small">Última revisión: ${new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</p></section>` }));
 // Chollos de la semana: cada semana se guarda una foto de las mejores ofertas (src/data/semanas/) y se publica un archivo
 {
   const isoWeek = (d) => { const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())); const day = t.getUTCDay() || 7; t.setUTCDate(t.getUTCDate() + 4 - day); const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1)); return [t.getUTCFullYear(), Math.ceil(((t - y0) / 864e5 + 1) / 7)]; };
