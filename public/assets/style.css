@@ -414,3 +414,6 @@ fieldset .chk{grid-column:1/-1}
 .card-tags .t-up{background:#fff1e0;color:#8a4b00}
 .itin-sum{background:var(--soft,#eef3f8);padding:.5rem .75rem;border-radius:10px}
 .ship-facts{list-style:none;padding:0;margin:.5rem 0 1rem}.ship-facts li{margin:.2rem 0}
+.cta-note{margin:.4rem 0 0;opacity:.9}.cta-note a{color:inherit}
+.bn-my{position:relative}.bn-count{position:absolute;top:2px;right:calc(50% - 22px);background:#e8492a;color:#fff;font-style:normal;font-size:.65rem;font-weight:700;min-width:16px;height:16px;line-height:16px;border-radius:99px;text-align:center;padding:0 3px}
+.recent-strip{margin:0 0 1rem}

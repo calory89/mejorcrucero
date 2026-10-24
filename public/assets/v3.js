@@ -361,6 +361,17 @@
       msg.textContent = '✅ Hecho. Te avisaremos si baja. Puedes darte de baja desde cualquier email.'; if (typeof track === 'function') track('watch_alert');
     } catch (err) { btn.disabled = false; msg.innerHTML = 'No hemos podido guardarla ahora. Inténtalo de nuevo o usa la <a href="' + BASE + 'herramientas/alerta-precio/">alerta de precio</a>.'; }
   }));
+// ---------- "Comprobado hace X horas" ----------
+  $$('.js-checked-ago').forEach((el) => { const t = el.dataset.t && new Date(el.dataset.t); if (!t || isNaN(t)) return; const h = Math.round((Date.now() - t) / 36e5); el.textContent = h < 1 ? ', hace menos de una hora' : h < 48 ? `, hace ${h} ${h === 1 ? 'hora' : 'horas'}` : `, hace ${Math.round(h / 24)} días`; });
+// ---------- Contador de guardadas en la barra inferior ----------
+  { const n = store.get('mc_offer_favs', []).length; $$('.bn-count').forEach((b) => { if (n) { b.hidden = false; b.textContent = n > 9 ? '9+' : n; } }); }
+// ---------- Mis cruceros: exportar, importar y borrar los datos del navegador ----------
+  const MY_KEYS = ['mc_offer_favs', 'mc_offer_recent', 'mc_notes', 'mc_watch', 'mc_searches', 'mc_filters', 'mc_group', 'mc_recent_q', 'mc_prices'];
+  $$('.js-export-my').forEach((b) => b.addEventListener('click', () => { const data = Object.fromEntries(MY_KEYS.map((k) => [k, store.get(k, null)]).filter(([, v]) => v != null)); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: 'mejorcrucero', v: 1, data }, null, 1)], { type: 'application/json' })); a.download = 'mis-cruceros.json'; a.click(); }));
+  $$('.js-import-my').forEach((inp) => inp.addEventListener('change', async () => { const msg = $('.js-my-msg'); try { const j = JSON.parse(await inp.files[0].text()); if (j.app !== 'mejorcrucero') throw 0; for (const [k, v] of Object.entries(j.data || {})) if (MY_KEYS.includes(k)) store.set(k, v); msg.textContent = 'Datos cargados. Recargando…'; setTimeout(() => location.reload(), 600); } catch { msg.textContent = 'Ese fichero no es una copia de Mis cruceros.'; } }));
+  $$('.js-clear-my').forEach((b) => b.addEventListener('click', () => { if (b.dataset.sure) { MY_KEYS.forEach((k) => { try { localStorage.removeItem(k); } catch {} }); $('.js-my-msg').textContent = 'Datos borrados de este navegador.'; setTimeout(() => location.reload(), 600); } else { b.dataset.sure = 1; b.textContent = '¿Seguro? Pulsa otra vez para borrar'; } }));
+// ---------- Ofertas: vistas recientemente encima del listado ----------
+  { const og = $('#offer-grid'); const rec = store.get('mc_offer_recent', []).slice(0, 6); if (og && rec.length >= 2 && location.pathname.replace(BASE, '/') === '/ofertas/') { const box = document.createElement('div'); box.className = 'recent-strip'; box.innerHTML = `<h2 class="h-sm">Vistas recientemente</h2><ul class="mini mini-grid">${rec.map((x) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d)} · desde ${eur(x.p)}</span></a></li>`).join('')}</ul>`; og.parentNode.insertBefore(box, og); } }
 // ---------- Tamaño del texto (100 %, 112,5 %, 125 %) ----------
   $$('.js-textsize').forEach((b) => b.addEventListener('click', () => {
     const steps = ['', '112.5%', '125%']; let cur = ''; try { cur = localStorage.getItem('mc_textsize') || ''; } catch {}
