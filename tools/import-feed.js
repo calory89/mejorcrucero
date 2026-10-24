@@ -12,6 +12,7 @@ if (!url) { console.log('Sin FEED_URL: no se importa nada'); process.exit(0); }
 const OUT = process.argv[2] || 'src/data/sailings.json';
 const PREFIX = (process.env.FEED_PREFIX || 'feed').replace(/[^a-z0-9-]/gi, '').toLowerCase();
 const PARTNER = process.env.FEED_PARTNER || 'Agencia';
+const ALIAS = (() => { try { return JSON.parse(fs.readFileSync('src/data/ship_alias.json', 'utf8')); } catch { return {}; } })();
 const slugify = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const num = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isFinite(n) && n > 0 ? Math.round(n) : null; };
 
@@ -50,7 +51,7 @@ const own = [], merged = new Set();
 for (const x of raw) {
   if (!x.ship || !/^\d{4}-\d{2}-\d{2}$/.test(String(x.date)) || x.date < today || !(x.nights > 0) || !x.prices) continue;
   const prices = Object.fromEntries(Object.entries(x.prices).filter(([, v]) => v > 0)); if (!Object.keys(prices).length) continue;
-  const ship = slugify(x.ship); const src = { partner: x.partner || PARTNER, url: x.url || (x.sources || [])[0]?.url || null, prices };
+  const ship = ALIAS[slugify(x.ship)] || slugify(x.ship); const src = { partner: x.partner || PARTNER, url: x.url || (x.sources || [])[0]?.url || null, prices };
   const twin = byShipDate.get(`${ship}|${x.date}`);
   if (twin) { twin.sources = [...(twin.sources || []).filter((s) => s.partner !== src.partner), src]; merged.add(twin.id); continue; }
   const id = `${PREFIX}-${slugify(x.id || `${ship}-${x.date}`)}`;

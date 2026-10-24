@@ -1,0 +1,35 @@
+name: Revisiones periódicas
+# Día 1 de cada mes: revisión de alias de puertos y destinos sin asignar (abre una incidencia con el informe).
+# Además, el 1 de enero, abril, julio y octubre: revisión trimestral de la lista de 1000 mejoras con las cifras reales.
+on:
+  schedule:
+    - cron: '17 7 1 * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  revision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Informe mensual de datos
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node tools/review.mjs > informe.md
+          gh issue create --title "Revisión mensual de datos $(date +%Y-%m)" --body-file informe.md || cat informe.md
+      - name: Revisión trimestral de las 1000 mejoras
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          M=$(date +%m)
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] || [ "$M" = "01" ] || [ "$M" = "04" ] || [ "$M" = "07" ] || [ "$M" = "10" ]; then
+            curl -s https://mejorcrucero.com/data/estado.json -o estado.json || true
+            N=$(node -e "try{const e=require('./estado.json');console.log(e.publicadas||'?')}catch{console.log('?')}")
+            printf '%s\n' "Toca la revisión trimestral del documento de 1000 mejoras con las cifras reales de tráfico." "" "- Salidas publicadas hoy: $N" "- Informe semanal de visitas y clics: llega cada lunes por email (cuando la API está desplegada)." "- Documento: https://claude.ai/artifact/53G1jt6A4Y4xvubYK6RdUX" "" "Qué revisar: mejoras que no mueven tráfico, páginas sin visitas, navieras nuevas posibles y lo que pide la comunidad." > trimestral.md
+            gh issue create --title "Revisión trimestral de mejoras $(date +%Y)-T$(( (10#$M - 1) / 3 + 1 ))" --body-file trimestral.md || cat trimestral.md
+          fi

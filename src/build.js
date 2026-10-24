@@ -37,6 +37,8 @@ const QA = { descartadas: {}, avisos: {} };
 const qaMark = (bag, k) => { QA[bag][k] = (QA[bag][k] || 0) + 1; };
 const TODAY = new Date().toISOString().slice(0, 10);
 const PORT_ALIAS = readJson('port_alias.json', {});
+// Mismo barco con nombre distinto según la fuente (naviera, agencia): todas apuntan a la misma ficha
+const SHIP_ALIAS = readJson('ship_alias.json', {});
 const cleanName = (t) => String(t || '').replace(/[™®]/g, '').replace(/\s{2,}/g, ' ').trim();
 const portName = (t) => { const n = cleanName(t); return PORT_ALIAS[n] || n; };
 const JUNK_PORT = /meetup|cruise tracy|cruise endicott|scenic cruising|^cruise /i;
@@ -57,6 +59,7 @@ const sailings = [];
     if (x.port_charges == null) qaMark('avisos', 'sin tasas publicadas');
     if (x.updated && (Date.now() - new Date(x.updated)) / 864e5 > 3) qaMark('avisos', 'precio sin comprobar más de 3 días');
     seenIds.add(x.id);
+    if (SHIP_ALIAS[x.ship]) { x.ship = SHIP_ALIAS[x.ship]; qaMark('avisos', 'barco unificado con alias'); }
     x.ship_name = cleanName(x.ship_name); x.depart_port = cleanName(x.depart_port); x.arrive_port = cleanName(x.arrive_port);
     if (x.itinerary) { x.itinerary.name = cleanName(x.itinerary.name); x.itinerary.ports = (x.itinerary.ports || []).map((p) => (JUNK_PORT.test(p.name) ? { ...p, name: 'Navegación' } : { ...p, name: portName(p.name) })); }
     // Nombres que existen en dos continentes: se distinguen por el destino del crucero
@@ -165,6 +168,7 @@ function home() {
 
 <section class="wrap block for-you" id="for-you" hidden></section>
 <section class="wrap block" id="recent-reviews" hidden></section>
+<section class="wrap block" id="my-searches" hidden></section>
 ${(() => { const wk = Date.now() - 7 * 864e5; const drops = sailings.map((x) => { const h = (x.history || []).filter((p) => new Date(p.date) >= wk); if (h.length < 1 || !(x.history || []).length) return null; const prev = Math.max(...(x.history || []).filter((p) => new Date(p.date) < new Date(TODAY)).map((p) => p.price), 0); const now = OFF.minPrice(x); return prev > now ? { x, prev, now, pct: Math.round((1 - now / prev) * 100) } : null; }).filter((d) => d && d.pct >= 5).sort((a, b) => b.pct - a.pct).slice(0, 6);
   return drops.length ? `<section class="wrap block"><div class="block-h"><h2>📉 Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas →</a></div><ul class="mini mini-grid">${drops.map((d) => `<li><a href="/salidas/${d.x.id}/"><b>${esc(OFF.destName(d.x.destination, d.x))} · ${d.x.nights} noches · ${esc(bySlug[d.x.ship]?.name || d.x.ship_name)}</b><span>${eur(d.prev)} → <b>${eur(d.now)}</b> (−${d.pct}%) · ${new Date(d.x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span></a></li>`).join('')}</ul></section>` : ''; })()}
 ${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas →</a></div><div class="chips"><a class="chip" href="/ofertas/chollos/">🔥 Chollos</a><a class="chip" href="/ultima-hora/">⏱️ Última hora</a><a class="chip" href="/ofertas/bajadas/">📉 Han bajado</a><a class="chip" href="/ofertas/nuevas/">🆕 Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid">${deals.map(sailingCard).join('')}</div>
@@ -981,6 +985,7 @@ function leaderboard() {
 function myCruises() {
   const body = `<section class="wrap block page-h"><h1>Mis cruceros</h1><p class="lead-p">Tus favoritos, lo último que has visto, tus alertas y tu cuenta atrás. Se guarda en este dispositivo, sin registro.</p></section>
   <section class="wrap block"><h2>❤️ Favoritos</h2><div class="grid" id="my-favs"><p class="muted">Pulsa el corazón en cualquier barco para guardarlo aquí.</p></div></section>
+  <section class="wrap block" id="my-recs" hidden></section>
   <section class="wrap block"><h2>🛳️ Ofertas guardadas y vistas</h2><div id="my-offers"><p class="muted">Pulsa "Guardar oferta" en cualquier oferta para tenerla aquí.</p></div></section>
   <section class="wrap block"><h2>Tus datos</h2><p class="small">Todo lo de esta página (guardadas, vistas, notas, filtros y alertas vigiladas) se guarda solo en este navegador. No hace falta cuenta.</p><p><button class="btn btn-ghost btn-sm js-export-my" type="button">⬇️ Descargar mis datos</button> <label class="btn btn-ghost btn-sm">⬆️ Cargar desde fichero<input type="file" accept="application/json" class="js-import-my" hidden></label> <button class="btn btn-ghost btn-sm js-clear-my" type="button">🗑️ Borrar todo</button></p><p class="small muted js-my-msg" aria-live="polite"></p> <p class="small"><button class="btn btn-ghost btn-sm js-export-posts" type="button">💬 Descargar mis mensajes de la comunidad</button></p></section>
   <section class="wrap block"><h2>🕘 Vistos recientemente</h2><div class="grid" id="my-recent"><p class="muted">Todavía no has visto ningún barco.</p></div></section>

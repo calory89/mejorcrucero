@@ -1,0 +1,5 @@
+{
+ "_nota": "Slug del barco tal como llega de cada fuente -> slug de su ficha (src/data/ships.csv). Lo aplica src/build.js.",
+ "celestyal-cruises-journey": "celestyal-journey",
+ "celestyal-cruises-discovery": "celestyal-discovery"
+}

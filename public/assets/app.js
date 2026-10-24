@@ -643,7 +643,7 @@
   const renderCd = (el) => {
     if (!el) return;
     const list = store.get('mc_cd', []);
-    if (list.length) el.innerHTML = list.map(cdHtml).join('');
+    if (list.length) el.innerHTML = list.map(cdHtml).join('') + `<p class="muted small">Fechas y horas en tu zona horaria: ${esc(Intl.DateTimeFormat().resolvedOptions().timeZone || 'local')}. A bordo, el barco usa a menudo la hora del puerto: mira el <a href="${BASE}herramientas/conversor-horario/">conversor horario</a>.</p>`;
     el.onclick = (e) => {
       const ic = e.target.dataset.ics, del = e.target.dataset.cdDel;
       if (ic) { const [i, j] = ic.split(':').map(Number); const r = reminders(store.get('mc_cd', [])[i])[j]; ics(r[0], r[1], r[2]); }
@@ -861,4 +861,28 @@
       box.innerHTML = `<p><b>¿Has encontrado lo que buscabas?</b> <button type="button" class="btn btn-sm btn-ghost" data-pc="si">Sí</button> <button type="button" class="btn btn-sm btn-ghost" data-pc="no">No</button></p><p class="small">Si reservas, guarda el precio: te avisamos si baja para que puedas reclamar la diferencia. <a href="${BASE}herramientas/alerta-precio/">Vigilar mi reserva →</a></p>`;
       wf.closest('section')?.before(box) || document.body.append(box);
       box.addEventListener('click', (ev) => { const a = ev.target.dataset.pc; if (!a) return; track('post_click_survey', a, PAGE); box.querySelector('p').innerHTML = a === 'si' ? '¡Genial! Buen viaje.' : 'Gracias. Mira las salidas parecidas más abajo o crea una alerta y te avisamos.'; }); }); }
+
+  // ---------- Mis cruceros: recomendaciones; portada: atajos a tus búsquedas guardadas ----------
+  { const mr = $('#my-recs'); if (mr) { const rec = store.get('mc_offer_recent', []), fav = store.get('mc_offer_favs', []); if (rec.length + fav.length) getJson('ofertas.json').then((all) => { const by = Object.fromEntries(all.map((o) => [o.i, o])); const base = [...fav, ...rec].map((r) => by[r.id]).filter(Boolean); if (!base.length) return; const ids = new Set([...fav, ...rec].map((r) => r.id)); const dsts = new Set(base.map((o) => o.dst)), ships = new Set(base.map((o) => o.s));
+      const l = all.filter((o) => !ids.has(o.i) && (dsts.has(o.dst) || ships.has(o.s))).sort((a, b) => b.sc - a.sc).slice(0, 6); if (!l.length) return; mr.hidden = false; mr.innerHTML = `<h2>Te pueden gustar</h2><p class="muted small">Parecidas a las que has guardado o mirado, con la mejor nota del precio.</p><ul class="mini mini-grid">${l.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(o.pr)} · nota ${o.sc}</span></a></li>`).join('')}</ul>`; }).catch(() => {}); } }
+  { const ms = $('#my-searches'); const ss = store.get('mc_searches', []); if (ms && ss.length) { ms.hidden = false; ms.innerHTML = `<div class="block-h"><h2>Tus búsquedas guardadas</h2><a href="${BASE}mis-cruceros/">Gestionar →</a></div><div class="chips">${ss.slice(0, 8).map((x) => `<a class="chip" href="${BASE}${String(x.u).replace(/^\//, '')}">${esc(String(x.t || x.u).slice(0, 60))}</a>`).join('')}</div>`; } }
+
+  // ---------- Ficha de salida en el móvil: secciones secundarias plegables ----------
+  if ($('#itinerario') && matchMedia('(max-width: 700px)').matches) {
+    const keep = new Set(['precio', 'vigilar', 'nota-oferta', 'itinerario']);
+    $$('#itinerario ~ section.block, #itinerario ~ * section.block').forEach((sec) => { const h = sec.querySelector(':scope > h2'); if (!h || keep.has(sec.id) || sec.classList.contains('faq')) return;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'fold-btn'; b.setAttribute('aria-expanded', 'false'); b.innerHTML = h.innerHTML; h.textContent = ''; h.append(b); sec.classList.add('folded');
+      b.addEventListener('click', () => { const open = sec.classList.toggle('folded') === false; b.setAttribute('aria-expanded', String(open)); }); });
+  }
+  // ---------- Alto contraste (se recuerda) ----------
+  { const set = (on) => { document.documentElement.toggleAttribute('data-contrast', on); $$('.js-contrast').forEach((b) => b.setAttribute('aria-pressed', String(on))); }; set(!!store.get('mc_contrast', 0));
+    $$('.js-contrast').forEach((b) => b.addEventListener('click', () => { const on = !document.documentElement.hasAttribute('data-contrast'); store.set('mc_contrast', on ? 1 : 0); set(on); })); }
+  // ---------- Errores de formulario con la solución, en español ----------
+  document.addEventListener('invalid', (e) => { const el = e.target; if (!el.validity) return; const v = el.validity; let m = '';
+    if (v.valueMissing) m = el.type === 'email' ? 'Escribe tu email para poder avisarte.' : el.type === 'date' ? 'Elige una fecha.' : 'Este campo es obligatorio: rellénalo para continuar.';
+    else if (v.typeMismatch && el.type === 'email') m = 'Ese email no parece válido. Revisa que tenga @ y un dominio, por ejemplo nombre@gmail.com.';
+    else if (v.typeMismatch && el.type === 'url') m = 'Pega el enlace completo, empezando por https://';
+    else if (v.rangeUnderflow) m = `El valor mínimo es ${el.min}.`; else if (v.rangeOverflow) m = `El valor máximo es ${el.max}.`;
+    else if (v.tooShort) m = `Escribe al menos ${el.minLength} caracteres.`; else if (v.stepMismatch) m = 'Usa un número redondo.';
+    if (m) { el.setCustomValidity(m); el.addEventListener('input', () => el.setCustomValidity(''), { once: true }); } }, true);
 })();

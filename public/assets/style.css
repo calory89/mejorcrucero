@@ -427,9 +427,17 @@ fieldset .chk{grid-column:1/-1}
 .skel-card{min-height:300px;border-radius:14px;background:linear-gradient(90deg,var(--line,#e5e7eb) 0%,var(--bg-2,#f3f4f6) 50%,var(--line,#e5e7eb) 100%);background-size:200% 100%;animation:skel 1.2s ease-in-out infinite}
 @keyframes skel{from{background-position:200% 0}to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.skel-card{animation:none}}
-.locale-bar{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:6px 16px;background:var(--sand,#fdf6e3);border-bottom:1px solid var(--line,#e5e7eb);text-align:center}
+.locale-bar{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:nowrap;padding:6px 16px;font-size:.85rem;background:var(--sand,#fdf6e3);border-bottom:1px solid var(--line,#e5e7eb);text-align:center}
 .esc-map svg circle{fill:var(--coral,#e8604c);fill-opacity:.75;stroke:#fff;stroke-width:1.5}.esc-map svg a:hover circle{fill-opacity:1}.esc-map .esc-l{font-size:11px;fill:currentColor;paint-order:stroke;stroke:var(--bg,#fff);stroke-width:3px}
 .poll-opts{display:grid;gap:6px}.poll-opts button{position:relative;text-align:left;padding:8px 12px;border:1px solid var(--line,#e5e7eb);border-radius:10px;background:var(--card,#fff);cursor:pointer;overflow:hidden;font:inherit;color:inherit}
 .poll.voted .poll-opts button{cursor:default;background:linear-gradient(90deg,var(--sea-l,#dbeafe) var(--pct,0%),var(--card,#fff) var(--pct,0%))}.poll-n{float:right;font-weight:700}
 .op-n{display:block;margin-top:4px;color:var(--muted,#667)}
 .pager{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:16px 0}.pager a{padding:4px 10px;border:1px solid var(--line,#e5e7eb);border-radius:8px;text-decoration:none}
+/* Secciones plegables en la ficha (móvil) */
+.fold-btn{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;gap:8px}.fold-btn::after{content:'▾';font-size:.8em;transition:transform .2s}.folded .fold-btn::after{transform:rotate(-90deg)}
+section.folded>:not(h2){display:none!important}
+/* Alto contraste */
+:root[data-contrast]{--ink:#000;--muted:#1f2937;--line:#000;--bg:#fff;--card:#fff;--coral:#9a2a12;--coral-d:#7a1f0c;--sea:#003a70}
+:root[data-contrast] body{background:#fff;color:#000}:root[data-contrast] a{color:#00336b;text-decoration:underline}:root[data-contrast] .muted,:root[data-contrast] .small{color:#111!important}:root[data-contrast] .card,:root[data-contrast] .tool,:root[data-contrast] .chip,:root[data-contrast] .btn-ghost{border:2px solid #000!important}:root[data-contrast] :focus-visible{outline:3px solid #000!important;outline-offset:2px}
+.locale-bar .btn{flex:none;min-height:32px;padding:4px 10px}
+@media (max-width:420px){.js-contrast{display:none}}

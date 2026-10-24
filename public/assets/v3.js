@@ -284,7 +284,7 @@
     }).catch(() => { full = true; }));
     const PAGE = 24; let limit = PAGE;
     const seenIds = new Set(store.get('mc_offer_recent', []).map((x) => x.id));
-    const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop }[o] || ((c) => -+c.dataset.score));
+    const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop, fit: (c) => { const pf = store.get('mc_pref', {}); return -(+c.dataset.score + (pf.dst && c.dataset.dst === pf.dst ? 30 : 0) + (pf.port && c.dataset.port === pf.port ? 20 : 0) + (pf.b && +c.dataset.price <= pf.b ? 15 : 0)); } }[o] || ((c) => -+c.dataset.score));
     const moreBtn = document.createElement('button'); moreBtn.type = 'button'; moreBtn.className = 'btn btn-ghost btn-block js-more'; g.after(moreBtn);
     moreBtn.addEventListener('click', () => { limit += PAGE; if (!full) { g.insertAdjacentHTML('beforeend', '<div class="card skel-card" aria-hidden="true"></div>'.repeat(6)); g.setAttribute('aria-busy', 'true'); } ensureAll().then(() => { $$('.skel-card', g).forEach((x) => x.remove()); g.removeAttribute('aria-busy'); apply(true); }); });
     const reset = $('.js-reset-filters', f.parentNode);
