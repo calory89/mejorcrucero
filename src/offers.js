@@ -110,6 +110,9 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     return parts.join(' ');
   }
 
+  // Las 300 mejores ofertas tienen imagen propia para compartir (tools/og-offers.py la dibuja en el build)
+  const ogSet = new Set([...sailings].sort((a, b) => deal(b).score - deal(a).score).slice(0, 300).map((x) => x.id));
+  const ogOf = (x) => (ogSet.has(x.id) ? `/og/salidas/${x.id}.png` : null);
   function card(x) {
     const s = bySlug[x.ship], d = deal(x), r = real(x), ph = photoOf(x);
     return `<a class="card sail-card offer-card" href="${url(x)}" aria-label="${esc(`${destName(x.destination, x)}, ${x.nights} noches en el ${shipName(x)}, ${fdate(x.date)}, desde ${x.depart_port}, desde ${eur(r.tarifa)} por persona. Nota del precio ${d.score}: ${d.label}`)}">${ph ? `<div class="ship-art has-photo"><img src="${esc(ph.thumb)}" alt="${esc(shipName(x))}" loading="lazy" decoding="async" width="640" height="${Math.round(640 / (ph.ratio || 1.6))}" class="ship-photo"><span class="scb ${dcls(d.score)}" title="Nota del precio ${d.score}/100"><b>${d.score}</b></span></div>` : ''}<div class="card-body"><span class="eyebrow">${esc(s?.lineShort || '')} · ${esc(shipName(x))}</span><h3>${esc(destName(x.destination, x))} · ${x.nights} noches</h3>
@@ -266,7 +269,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
 <div class="m-cta"><div><b>${eur(r.tarifa)}</b><small>${r.partial ? 'tasas aparte' : `real ${eur(r.total)} p.p.`}</small></div>${official ? `<a class="btn btn-sm" href="${esc(official.url)}" target="_blank" rel="noopener" data-aff="${esc(official.partner)}" data-page="${url(x)}">Ver precio</a>` : ''}</div></article>`;
     return layout({
       title, desc: `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}: ${stops.slice(1, 6).map((p) => p.name).join(', ')}. Desde ${eur(r.tarifa)} (precio real ${eur(r.total)} con tasas). Nota del precio ${d.score}/100.`,
-      url: url(x), body, ogType: 'product', og: ph ? `/og/${x.ship}.png` : '/og.png', preload: ph ? ph.thumb : null,
+      url: url(x), body, ogType: 'product', og: ogOf(x) || (ph ? `/og/${x.ship}.png` : '/og.png'), preload: ph ? ph.thumb : null,
       crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [dn, `/ofertas/${x.destination || ''}/`], [`${sn} ${x.date}`, url(x)]],
       schema: [
         { '@context': 'https://schema.org', '@type': 'Product', name: `${titleOf(x)} (${x.date})`, brand: { '@type': 'Brand', name: L?.short || '' }, image: ph ? SITE + ph.thumb : undefined, description: `${x.nights} noches: ${stops.map((p) => p.name).join(', ')}`,
@@ -430,7 +433,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const json = top.map((x) => ({ id: x.id, title: titleOf(x), url: SITE + url(x), date: x.date, nights: x.nights, depart_port: x.depart_port, ship: shipName(x), price: minPrice(x), real_price: real(x).total, score: deal(x).score, label: deal(x).label, image: photoOf(x) ? SITE + photoOf(x).thumb : null }));
     const lite = sailings.filter((x) => new Date(x.date) > new Date()).map((x) => ({ i: x.id, t: `${destName(x.destination, x)} · ${x.nights} noches`, s: x.ship, sn: shipName(x), d: x.date, n: x.nights, p: x.depart_port, ps: x.depart_port_slug, dst: x.destination, pr: minPrice(x), r: real(x).total, sc: deal(x).score, dis: deal(x).disc, pts: portsOf(x).map((q) => q.name), img: photoOf(x)?.thumb || null }));
     const cards = Object.fromEntries(sailings.map((x) => [x.id, cardFull(x)]));
-    return [['ofertas/feed.xml', rss], ['data/chollos.json', JSON.stringify(json)], ['data/ofertas.json', JSON.stringify(lite)], ['data/cards.json', JSON.stringify(cards)]];
+    const og = [...ogSet].map((id) => sailings.find((x) => x.id === id)).filter(Boolean).map((x) => { const d = deal(x), r = real(x); return { id: x.id, title: `${destName(x.destination, x)} · ${x.nights} noches`, sub: `${shipName(x)} · desde ${x.depart_port}`, when: fdate(x.date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }), price: r.tarifa, per: r.partial ? 'por persona, tasas aparte' : `p.p. · real ${eur(r.total)}`, score: d.score, label: d.label, cls: dcls(d.score).slice(3) }; });
+    return [['data/og-offers.json', JSON.stringify(og)], ['ofertas/feed.xml', rss], ['data/chollos.json', JSON.stringify(json)], ['data/ofertas.json', JSON.stringify(lite)], ['data/cards.json', JSON.stringify(cards)]];
   }
   return { feeds, card, page, hubs, deal, real, minPrice, ppn, destName, url, escalaIndex, portsOf };
 }
