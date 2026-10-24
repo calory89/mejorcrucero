@@ -902,4 +902,7 @@
   $$('.calc label').forEach((l) => { const sp = l.querySelector('span'), inp = l.querySelector('input[type=number]'); if (!sp || !inp || !/\(€\)$/.test(sp.textContent.trim())) return; sp.textContent = sp.textContent.replace(/\s*\(€\)$/, ''); const w = document.createElement('span'); w.className = 'sfx'; inp.replaceWith(w); w.append(inp); const u = document.createElement('i'); u.textContent = '€'; u.setAttribute('aria-hidden', 'true'); w.append(u); inp.setAttribute('aria-label', sp.textContent + ', en euros'); });
   // Guías: índice lateral con los apartados
   { const art = $('.prose-wrap'); const hs = art ? $$('h2', art) : []; if (hs.length >= 4 && innerWidth > 1100) { const nav = document.createElement('nav'); nav.className = 'toc'; nav.setAttribute('aria-label', 'En esta guía'); nav.innerHTML = '<b>En esta guía</b>' + hs.map((h, i) => { if (!h.id) h.id = 'g' + (i + 1); return `<a href="#${h.id}">${esc(h.textContent)}</a>`; }).join(''); art.classList.add('has-toc'); art.prepend(nav); } }
+
+  // Ayudas emergentes propias en vez del título del navegador (también con teclado)
+  $$('.shore[title], .hero-score [title], .card-tags span[title], .t-noplane[title]').forEach((el) => { el.dataset.tip = el.title; el.removeAttribute('title'); if (!el.closest('a,button')) el.tabIndex = 0; });
 })();

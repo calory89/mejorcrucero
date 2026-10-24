@@ -98,16 +98,16 @@ p{margin:0 0 1em}.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 .cmp-add{position:absolute;top:56px;right:8px;border:0;border-radius:999px;background:rgba(11,37,64,.85);color:#fff;font:600 .72rem var(--sans);padding:6px 10px;cursor:pointer;opacity:0;transition:opacity .2s}
 .card:hover .cmp-add,.cmp-add:focus,.cmp-add.on{opacity:1}.cmp-add.on{background:var(--sea)}
 @media (hover:none){.cmp-add{opacity:1}}
-.usp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding-top:16px;padding-bottom:8px}
+
 @media (max-width:900px){.usp{grid-template-columns:1fr 1fr}}@media (max-width:480px){.usp{grid-template-columns:1fr}}
-.usp-i{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-decoration:none;color:var(--ink)}
-.usp-i:hover{border-color:var(--coral);color:var(--ink)}.usp-i h2{font-size:1.1rem;margin:.4em 0 .3em}.usp-i p{font-size:.9rem;color:var(--muted);margin:0}.usp-e{font-size:1.6rem}
-.band{background:var(--ink);color:#fff}.band h2,.band h3{color:#fff}
-:root[data-theme=dark] .band{background:#06101c}
+
+
+
+
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .band{background:#06101c}}
 .tool{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-decoration:none;color:var(--ink)}
-.band .tool{background:#12345a;border-color:#1e4672;color:#fff}.band .tool p{color:#cfe0f3}
-.tool:hover{border-color:var(--coral);color:var(--ink)}.band .tool:hover{color:#fff}.tool h2,.tool h3{font-size:1.2rem}.tool p{color:var(--muted)}
+
+.tool:hover{border-color:var(--coral);color:var(--ink)}.tool h2,.tool h3{font-size:1.2rem}.tool p{color:var(--muted)}
 .tool-light h2{font-size:1.15rem}
 .ports{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px}
 .port{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--ink)}
@@ -118,7 +118,7 @@ p{margin:0 0 1em}.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:32px}@media (max-width:860px){.split{grid-template-columns:1fr}}
 .rank{list-style:none;margin:0 0 10px;padding:0}.rank li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .rank-n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sea-2);color:var(--sea);font-weight:700;flex-shrink:0}
-.rank a{flex:1;color:var(--ink);font-weight:600;text-decoration:none}.rank-v{font-weight:700;color:var(--coral)}
+.rank a{flex:1;color:var(--ink);font-weight:600;text-decoration:none}
 .cmp-links{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .cmp-links a{display:block;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;color:var(--ink);font-weight:600}
 .cmp-links a span{color:var(--coral);font-style:italic;margin:0 4px}.cmp-links a:hover{border-color:var(--coral)}
@@ -295,7 +295,7 @@ fieldset .chk{grid-column:1/-1}
 .trip-a{display:flex;flex-direction:column;gap:2px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
 .trip-a:hover{border-color:var(--sea);color:var(--ink)}.trip-i{font-size:1.5rem}.trip-a small{color:var(--muted)}
 .offer-card .ship-art{aspect-ratio:16/9}.offer-card .ports-line{min-height:1.4em}
-.deal-l{font:700 .8rem/1 var(--sans);margin:.4em 0 0}.sc-a-t{color:#065f46}.sc-b-t{color:#166534}.sc-c-t{color:#92400e}.sc-e-t{color:#991b1b}
+.sc-a-t{color:#065f46}.sc-b-t{color:#166534}.sc-c-t{color:#92400e}.sc-e-t{color:#991b1b}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .sc-a-t,:root:not([data-theme=light]) .sc-b-t{color:#6ee7b7}:root:not([data-theme=light]) .sc-c-t{color:#fcd34d}:root:not([data-theme=light]) .sc-e-t{color:#fca5a5}}
 :root[data-theme=dark] .sc-a-t,:root[data-theme=dark] .sc-b-t{color:#6ee7b7}:root[data-theme=dark] .sc-c-t{color:#fcd34d}:root[data-theme=dark] .sc-e-t{color:#fca5a5}
 .spec tr.tot th,.spec tr.tot td{border-top:2px solid var(--ink)}
@@ -421,7 +421,7 @@ fieldset .chk{grid-column:1/-1}
 /* Vista lista del listado de ofertas */
 #offer-grid.as-list{grid-template-columns:1fr;gap:10px}#offer-grid.as-list .offer-card{display:grid;grid-template-columns:150px 1fr;align-items:stretch}#offer-grid.as-list .ship-art{aspect-ratio:auto;height:100%;min-height:110px}#offer-grid.as-list .card-body{padding:10px 14px}#offer-grid.as-list .ports-line{min-height:0}
 @media (max-width:560px){#offer-grid.as-list .offer-card{grid-template-columns:96px 1fr}}
-.days-n{font-weight:400;font-size:.8em;color:var(--muted,#667)}
+
 #gq-list .ac-g{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#667);padding:8px 12px 2px;pointer-events:none}
 /* Esqueleto de carga de tarjetas */
 .skel-card{min-height:300px;border-radius:14px;background:linear-gradient(90deg,var(--line,#e5e7eb) 0%,var(--bg-2,#f3f4f6) 50%,var(--line,#e5e7eb) 100%);background-size:200% 100%;animation:skel 1.2s ease-in-out infinite}
@@ -786,12 +786,12 @@ form .form-msg{font-weight:600;color:var(--ok)}
 #vigilar{background:var(--sea-2);border-radius:14px;padding:20px!important;margin:12px 0}
 #vigilar h2{font-size:1.3rem}
 /* Otras fechas como tira desplazable */
-.dates-strip,.other-dates{display:flex;overflow-x:auto;gap:8px;scrollbar-width:thin}
+
 /* Escalas: fotos más grandes */
-.see-grid img,.escala-ph img{aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+
 /* Asistente y cuenta atrás */
 .chat{border-radius:14px;border:1px solid var(--line);background:var(--card)}.msg.user{background:var(--sea);color:#fff}.msg.bot{background:var(--soft)}
-.cd-num,.countdown b{font:800 2.2rem/1 var(--sans);font-stretch:110%;font-variant-numeric:tabular-nums}
+
 /* Modales */
 .modal{border:0;border-radius:16px;box-shadow:0 20px 60px rgba(7,26,48,.3);padding:24px}.modal::backdrop{background:rgba(7,26,48,.45)}
 /* Vídeos en carrusel en el móvil */
@@ -841,3 +841,8 @@ form .form-msg{font-weight:600;color:var(--ok)}
 @media (min-width:1000px){.ask-sail{position:fixed;right:84px;bottom:20px;z-index:44;max-width:380px;margin:0!important;padding:0!important}
 .ask-sail>summary{list-style:none;background:var(--ink);color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;box-shadow:0 8px 24px rgba(7,26,48,.3)}.ask-sail>summary::-webkit-details-marker{display:none}
 .ask-sail[open]{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(7,26,48,.25);padding:0 16px 16px!important}.ask-sail[open]>summary{margin:0 -16px 12px;border-radius:16px 16px 0 0}}
+/* Ficha de salida: la caja de precio ya está arriba, la columna lateral queda para enlaces útiles */
+.offer .ship-side .sticky-price{display:none}
+/* Ayudas emergentes accesibles */
+[data-tip]{position:relative}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;left:0;top:calc(100% + 6px);z-index:50;width:max-content;max-width:260px;background:var(--ink);color:#fff;font:500 .8rem/1.35 var(--sans);padding:7px 10px;border-radius:8px;white-space:normal;box-shadow:var(--shadow)}
