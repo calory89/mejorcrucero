@@ -122,7 +122,7 @@ export function civLink(slug) {
 }
 export function partnerLink({ href, key, title, sub, page }) {
   const aff = key ? isAff(key) : false;
-  return `<a class="partner" href="${href}" target="_blank" rel="${key ? 'sponsored ' : ''}noopener" data-aff="${esc(key || 'oficial')}" data-page="${esc(page)}"><b>${esc(title)}</b><span>${esc(sub)}</span><span class="go">Ver precios →</span><small class="comm">${aff ? 'Enlace de afiliado: podemos cobrar comisión' : 'Sin comisión para nosotros'}</small></a>`;
+  return `<a class="partner" href="${href}" target="_blank" rel="${key ? 'sponsored ' : ''}noopener" data-aff="${esc(key || 'oficial')}" data-page="${esc(page)}"><b>${esc(title)}</b><span>${esc(sub)}</span><span class="go">Ver precios</span><small class="comm">${aff ? 'Enlace de afiliado: podemos cobrar comisión' : 'Sin comisión para nosotros'}</small></a>`;
 }
 
 export function leadForm(source, cta = 'Quiero los chollos', extra = '') {
@@ -154,7 +154,7 @@ export function forumBlock(thread, title, opts = {}) {
     <div class="rating-row" data-for="review">${[['general', 'General'], ['comida', 'Comida'], ['camarote', 'Camarote'], ['animacion', 'Animación'], ['ninos', 'Niños'], ['limpieza', 'Limpieza']].map(([k, n]) => `<label><span>${n}</span><select name="r_${k}"><option value="">–</option>${[5, 4, 3, 2, 1].map((v) => `<option value="${v}">${'★'.repeat(v)}</option>`).join('')}</select></label>`).join('')}<label><span>¿Repetirías?</span><select name="r_repetiria"><option value="">–</option><option value="1">Sí</option><option value="0">No</option></select></label></div>
     <div class="photo-row" data-for="review"><label><span>Foto (opcional, se publica cuando la revisamos)</span><input name="photo" type="file" accept="image/jpeg,image/png,image/webp"></label></div>
     <div class="cabin-row" data-for="cabin"><label><span>Nº de camarote</span><input name="cabin" inputmode="numeric" maxlength="8" placeholder="Ej.: 12045"></label><label><span>Vídeo de YouTube (opcional)</span><input name="video" type="url" placeholder="https://youtube.com/…"></label></div>
-    <details class="proof" data-for="review"><summary>✅ Verifica tu opinión (opcional)</summary><label><span>Pega aquí el email de confirmación de tu reserva. Solo comprobamos que es de este barco: no se guarda ni se publica.</span><textarea name="proof" rows="3" maxlength="6000"></textarea></label></details>
+    <details class="proof" data-for="review"><summary>Verifica tu opinión (opcional)</summary><label><span>Pega aquí el email de confirmación de tu reserva. Solo comprobamos que es de este barco: no se guarda ni se publica.</span><textarea name="proof" rows="3" maxlength="6000"></textarea></label></details>
     <div class="diary-row" data-for="diary"><label><span>Día del crucero</span><select name="day"><option value="">Sin día</option>${Array.from({ length: 30 }, (_, i) => `<option value="${i + 1}">Día ${i + 1}</option>`).join('')}</select></label></div>
     <label><span>Tu nombre</span><input name="name" maxlength="40" autocomplete="nickname" required></label>
     <label><span>Tu mensaje</span><textarea name="body" rows="4" maxlength="4000" required></textarea></label>
@@ -166,7 +166,7 @@ export function forumBlock(thread, title, opts = {}) {
 </section>`;
 }
 
-const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/navieras/', 'Navieras'], ['/rankings/', 'Ranking'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad'], ['/guias/', 'Guías']];
+const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad']];
 
 export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null }) {
   pages.push({ url, noindex });
@@ -194,6 +194,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
 <script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t;var z=localStorage.getItem('mc_textsize');if(z)document.documentElement.style.fontSize=z}catch(e){}</script>
 ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v=${AV('style.css')}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wqn50nb6kp");clarity("consentv2",{ad_Storage:"denied",analytics_Storage:"denied"});clarity("set","site","mejorcrucero");</script>
@@ -201,14 +202,14 @@ ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="hig
 <body data-base="/" data-page="${esc(url)}">
 <a class="skip" href="#main">Saltar al contenido</a>
 <header class="top"><div class="wrap top-in">
-<a class="logo" href="/" aria-label="MejorCrucero, inicio"><svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#0b2540"/><path d="M8 24h24l-3 6H11z" fill="#e8492a"/><path d="M12 23v-4h16v4zM15 18v-4h10v4z" fill="#fff"/><path d="M19 13V9h3v4z" fill="#e8492a"/></svg><span>Mejor<b>Crucero</b></span></a>
+<a class="logo" href="/" aria-label="MejorCrucero, inicio"><svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0F5BD8"/><path d="M9 23h22l-3.5 6.5h-15z" fill="#fff"/><path d="M13 22v-4.5h14V22z" fill="#fff" opacity=".85"/><path d="M17 16.5V12h6v4.5z" fill="#FFC400"/></svg><span>MejorCrucero</span></a>
 <nav class="nav" aria-label="Principal"><ul>${NAV.map(([u, n]) => `<li><a href="${u}"${url.startsWith(u) ? ' aria-current="page"' : ''}>${n}</a></li>`).join('')}</ul></nav>
 <form class="gsearch" action="/buscar/" role="search"><label class="sr" for="gq">Buscar barco, naviera, destino o puerto</label><input id="gq" name="q" type="search" placeholder="Barco, destino, puerto…" autocomplete="off" aria-autocomplete="list" aria-controls="gq-list"><ul id="gq-list" class="ac" role="listbox" hidden></ul></form>
 <a class="notif" href="/mis-cruceros/#avisos" hidden aria-label="Tienes respuestas nuevas">💬<span></span></a>
-<button class="icon-btn js-theme" type="button" aria-label="Cambiar modo claro u oscuro">${ICON.moon}</button><button class="icon-btn js-contrast" type="button" aria-pressed="false" aria-label="Alto contraste" title="Alto contraste"><span aria-hidden="true" style="font-weight:700">◐</span></button><button class="icon-btn js-textsize" type="button" aria-label="Cambiar el tamaño del texto" title="Tamaño del texto"><span aria-hidden="true" style="font-weight:700">A<small>A</small></span></button>
-<a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">🔔 Alerta</a>
+<details class="settings"><summary class="icon-btn" aria-label="Ajustes de lectura" title="Ajustes de lectura"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 7h10v2H4zm12 0h4v2h-4v2h-2V5h2zM4 15h4v2H4zm6 0h10v2H10v2H8v-6h2z"/></svg></summary><div class="settings-pop"><button class="set-btn js-theme" type="button">${ICON.moon}<span>Modo oscuro</span></button><button class="set-btn js-contrast" type="button" aria-pressed="false"><span aria-hidden="true" class="set-i">◐</span><span>Alto contraste</span></button><button class="set-btn js-textsize" type="button"><span aria-hidden="true" class="set-i">A</span><span>Texto más grande</span></button></div></details>
+<a class="btn btn-sm nav-cta" href="/herramientas/alerta-precio/">Crear alerta</a>
 <details class="burger"><summary aria-label="Abrir menú">${ICON.menu}</summary><nav class="burger-nav" aria-label="Menú completo"><ul>
-${[['/', 'Inicio'], ['/ofertas/chollos/', '🔥 Chollos de hoy'], ...NAV, ['/puertos/', 'Puertos'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
+${[['/', 'Inicio'], ['/ofertas/chollos/', 'Chollos de hoy'], ...NAV, ['/navieras/', 'Navieras'], ['/rankings/', 'Rankings'], ['/guias/', 'Guías'], ['/puertos/', 'Puertos'], ['/metodologia/', 'Cómo puntuamos'], ['/comparativas/', 'Comparativas de navieras'], ['/meses/', 'Cruceros por mes'], ['/excursiones/', 'Excursiones'], ['/mis-cruceros/', 'Mis cruceros y favoritos'], ['/herramientas/asistente/', 'Asistente IA']].map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join('')}
 </ul></nav></details>
 </div></header>
 ${crumbHtml}

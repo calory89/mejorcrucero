@@ -268,7 +268,7 @@
     return (c) => (!max || +c.dataset.price <= max) && (!nights || Math.abs(+c.dataset.nights - nights) <= 1) && (month < 0 || +String(c.dataset.m).slice(5) === month + 1) && words.every((w) => fold(c.dataset.q).includes(w));
   };
   // ---------- Ofertas: vista lista o tarjetas (se recuerda) ----------
-  $$('.js-view').forEach((b) => { const g = $('#offer-grid'); if (!g) return; const set = (on) => { g.classList.toggle('as-list', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? '▦ Vista tarjetas' : '☰ Vista lista'; }; set(store.get('mc_view', '') === 'list'); b.addEventListener('click', () => { const on = !g.classList.contains('as-list'); store.set('mc_view', on ? 'list' : ''); set(on); }); });
+  $$('.js-view').forEach((b) => { const g = $('#offer-grid'); if (!g) return; const set = (on) => { g.classList.toggle('as-list', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? 'Vista tarjetas' : 'Vista lista'; }; set(store.get('mc_view', '') === 'list'); b.addEventListener('click', () => { const on = !g.classList.contains('as-list'); store.set('mc_view', on ? 'list' : ''); set(on); }); });
   // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
   $$('.offer-filter').forEach((f) => {
     const g = $(f.dataset.target); if (!g) return;
@@ -310,6 +310,11 @@
       try { history.replaceState(null, '', location.pathname + (qsNew ? '?' + qsNew : '') + location.hash); } catch (e) {}
       store.set('mc_filters', { ...store.get('mc_filters', {}), [location.pathname]: qsNew });
       if (reset) reset.hidden = !qsNew;
+      // Filtros activos como etiquetas que se quitan con una x
+      { let af = $('.active-f', f.parentNode); if (!af) { af = document.createElement('div'); af.className = 'active-f'; f.after(af); }
+        const items = [...p.keys()].filter((k) => k !== 'o').map((k) => { const el = f.elements[k]; if (!el) return ''; const lab = el.closest('label')?.querySelector('span')?.textContent?.trim() || k; const val = el.type === 'checkbox' ? '' : el.tagName === 'SELECT' ? el.selectedOptions[0]?.textContent : el.value; return `<button type="button" class="af-chip" data-k="${k}" aria-label="Quitar ${esc(lab)}">${esc(val ? `${lab}: ${val}` : lab)} <span aria-hidden="true">×</span></button>`; }).join('');
+        af.innerHTML = items; af.hidden = !items;
+        af.onclick = (ev) => { const b = ev.target.closest('.af-chip'); if (!b) return; const el = f.elements[b.dataset.k]; if (el.type === 'checkbox') el.checked = false; else el.value = ''; apply(); }; }
       const nf = [...p.keys()].filter((x) => !['o', 'q'].includes(x)).length; const fn = $('.f-n', f); if (fn) fn.textContent = nf ? `(${nf})` : '';
       let more = $('.nl-more', f.parentNode); if (more) more.remove();
       if (!match) {
@@ -423,7 +428,7 @@
     const ideal = seen.length >= 2 ? all.filter((o) => !ids.has(o.i) && o.dst === pDst && o.p === pPort && (!pB || o.pr <= pB)).sort((a, b) => b.sc - a.sc).slice(0, 6) : [];
     if (ideal.length) { const box = document.createElement('section'); box.className = 'wrap block'; box.innerHTML = `<div class="block-h"><h2>Para ti: ${esc(ideal[0].t.split(' · ')[0])} desde ${esc(pPort)}${pB ? ` por menos de ${eur(pB)}` : ''}</h2><button class="btn btn-ghost btn-sm js-forget-pref" type="button">Olvidar mis preferencias</button></div><p class="muted small">Lo deducimos de las salidas que has mirado en este navegador. No sale de tu dispositivo.</p><ul class="mini mini-grid">${ideal.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`; fy.before(box); $('.js-forget-pref', box).addEventListener('click', () => { ['mc_offer_recent', 'mc_pref'].forEach((k) => { try { localStorage.removeItem(k); } catch {} }); box.remove(); fy.hidden = true; }); }
     if (!sim.length) return;
-    fy.hidden = false; fy.innerHTML = `<div class="block-h"><h2>Porque viste ${esc(base.t)} en el ${esc(base.sn)}</h2><a href="${BASE}mis-cruceros/">Tus vistas y guardadas →</a></div><ul class="mini mini-grid">${sim.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`;
+    fy.hidden = false; fy.innerHTML = `<div class="block-h"><h2>Porque viste ${esc(base.t)} en el ${esc(base.sn)}</h2><a href="${BASE}mis-cruceros/">Tus vistas y guardadas</a></div><ul class="mini mini-grid">${sim.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · desde ${esc(o.p)} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`;
   }).catch(() => {}); }
 // ---------- Mis cruceros: compartir la lista de ofertas guardadas ----------
   const myo = $('#my-offers');
@@ -437,7 +442,7 @@
       $('.js-save-shared', box)?.addEventListener('click', (e) => { const f = store.get('mc_offer_favs', []); const have = new Set(f.map((x) => x.id)); l.filter((o) => !have.has(o.i)).forEach((o) => f.push({ id: o.i, t: `${o.t} · ${o.sn}`, d: o.d, p: o.pr })); store.set('mc_offer_favs', f.slice(0, 50)); e.target.textContent = '✅ Guardadas'; });
     }).catch(() => {});
     const favs = store.get('mc_offer_favs', []);
-    if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = '📤 Compartir mi lista'; myo.after(b);
+    if (favs.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = 'Compartir mi lista'; myo.after(b);
       b.addEventListener('click', async () => { const u = `${location.origin}${BASE}mis-cruceros/?lista=${favs.map((x) => x.id).join(',')}`; if (navigator.share) { try { await navigator.share({ title: 'Mis cruceros guardados', url: u }); return; } catch { return; } } try { await navigator.clipboard.writeText(u); b.textContent = '✅ Enlace copiado'; } catch { window.open(`https://wa.me/?text=${encodeURIComponent('Mira estos cruceros: ' + u)}`, '_blank', 'noopener'); } }); }
   }
 // ---------- Mis cruceros: salidas vigiladas ----------
@@ -509,7 +514,7 @@
     const changes = favs.filter((f) => by[f.id] && f.p && by[f.id].pr !== f.p).map((f) => `<li><a href="${BASE}salidas/${f.id}/"><b>${esc(f.t)}</b><span>${by[f.id].pr < f.p ? '📉 ha bajado' : '📈 ha subido'} de ${eur(f.p)} a ${eur(by[f.id].pr)}</span></a></li>`);
     if (changes.length) mo2.insertAdjacentHTML('afterbegin', `<div class="tip"><b>Cambios de precio en tus ofertas guardadas</b><ul class="mini">${changes.join('')}</ul></div>`);
     const ss = store.get('mc_searches', []);
-    if (ss.length) mo2.insertAdjacentHTML('beforeend', `<h3 class="h-sm">⭐ Búsquedas guardadas</h3><ul class="mini">${ss.map((x) => `<li><a href="${esc(x.u)}"><b>${esc(x.t)}</b><span>${new Date(x.at).toLocaleDateString('es-ES')}</span></a></li>`).join('')}</ul>`);
+    if (ss.length) mo2.insertAdjacentHTML('beforeend', `<h3 class="h-sm">Búsquedas guardadas</h3><ul class="mini">${ss.map((x) => `<li><a href="${esc(x.u)}"><b>${esc(x.t)}</b><span>${new Date(x.at).toLocaleDateString('es-ES')}</span></a></li>`).join('')}</ul>`);
   }).catch(() => {});
 
   // Comparar ofertas

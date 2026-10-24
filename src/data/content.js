@@ -19,7 +19,7 @@ export const CONFIG = {
   // Cloudflare Web Analytics (sin cookies). Vacío = desactivado.
   cfBeacon: '37bd2ff83b984ab597913eaa6ba0d248',
   // Tests A/B: variantes de texto que se reparten al azar y se miden con /evt
-  ab: { heroCta: ['Buscar', 'Encontrar mi crucero'], salidaCta: ['Ver precio en {n} →', 'Reservar en {n} →', 'Ver disponibilidad en {n} →'] },
+  ab: { heroCta: ['Ver cruceros', 'Buscar cruceros'], salidaCta: ['Ver precio en {n}', 'Reservar en {n}', 'Ver disponibilidad en {n}'] },
   author: { name: 'Carlos de Ory', role: 'Fundador de MejorCrucero y de Happy Low Cost' },
   // Foro y opiniones con Giscus (GitHub Discussions). Activar tras instalar https://github.com/apps/giscus en el repo.
   giscus: {
