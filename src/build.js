@@ -9,7 +9,7 @@ import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
 import { scoreBadge } from './lib.js';
 import { cj, tripBox, bookingHotels } from './lib.js';
 import { makeOffers } from './offers.js';
-import { SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
+import { AV, SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
 const D = (f) => path.join(path.dirname(new URL(import.meta.url).pathname), 'data', f);
 const readJson = (f, d) => { try { return JSON.parse(fs.readFileSync(D(f), 'utf8')); } catch { return d; } };
@@ -760,7 +760,7 @@ function toolCompare() {
 
 function toolCompareSailings() {
   const body = `<section class="wrap block page-h"><h1>Comparar dos salidas</h1><p class="lead-p">Pon dos salidas lado a lado: fechas, noches, escalas y precio por noche.</p>
-  ${sailings.length ? `<form class="cmp-form" id="cmps-form">${[0, 1].map((i) => `<label><span>Salida ${i + 1}</span><select name="x${i}"><option value="">–</option>${sailings.map((x) => `<option value="${x.id}">${esc((bySlug[x.ship]?.name || x.ship) + ' · ' + x.date + ' · ' + (x.itinerary?.name || ''))}</option>`).join('')}</select></label>`).join('')}</form><div id="cmps-out" class="cmp-out"></div>` : `<div class="tip">Esta herramienta se activa en cuanto conectemos los precios en directo. Mientras tanto, compara dos ofertas que ya tengas en la <a href="/herramientas/precio-real/">calculadora del precio real</a> (ofertas A y B).</div>`}</section>`;
+  ${sailings.length ? `<form class="cmp-form" id="cmps-form">${[0, 1].map((i) => `<label><span>Salida ${i + 1}</span><select name="x${i}" class="js-sail-select"><option value="">Cargando salidas…</option></select></label>`).join('')}</form><div id="cmps-out" class="cmp-out"></div>` : `<div class="tip">Esta herramienta se activa en cuanto conectemos los precios en directo. Mientras tanto, compara dos ofertas que ya tengas en la <a href="/herramientas/precio-real/">calculadora del precio real</a> (ofertas A y B).</div>`}</section>`;
   return layout({ title: 'Comparar dos salidas de crucero', desc: 'Compara dos salidas de crucero por precio por noche, escalas y fechas.', url: '/herramientas/comparar-salidas/', body, crumbs: toolCrumbs('Comparar salidas', '/herramientas/comparar-salidas/') });
 }
 
@@ -1287,7 +1287,7 @@ write('data/config.json', JSON.stringify({ api: CONFIG.api, ab: CONFIG.ab, fx })
 // Resumen legible para buscadores con IA: qué es la web, cómo se calculan las notas y dónde están los datos
 write('llms.txt', `# MejorCrucero\n\n> Comparador de cruceros en español: precio real (tarifa + tasas + cuota de servicio), nota del precio de 0 a 100 frente a cruceros parecidos y nota del barco (MejorCrucero Score) con datos públicos.\n\n- [Ofertas](${SITE}/ofertas/): ${sailings.length} salidas con precio real\n- [Ranking de barcos](${SITE}/rankings/): ${ships.filter((s) => s.sc != null).length} barcos con nota\n- [Metodología](${SITE}/metodologia/)\n- [Observatorio de precios](${SITE}/ofertas/observatorio/)\n- [Datos de ofertas en JSON](${SITE}/data/ofertas.json)\n- [Cómo ganamos dinero](${SITE}/afiliacion/)\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /comunidad/salida/\nDisallow: /comunidad/perfil/\nDisallow: /admin/\nDisallow: /embed/\nSitemap: ${SITE}/sitemap.xml\n`);
-write('sw.js', `const V='mc-${Date.now()}';const B='${BASE}';const CORE=[B,B+'offline/',B+'assets/style.css?v=${BUILD_DATE}',B+'assets/app.js?v=${BUILD_DATE}',B+'mis-cruceros/',B+'herramientas/checklist/',B+'herramientas/cuenta-atras/'];
+write('sw.js', `const V='mc-${Date.now()}';const B='${BASE}';const CORE=[B,B+'offline/',B+'assets/style.css?v=${AV('style.css')}',B+'assets/app.js?v=${AV('app.js')}',B+'assets/v3.js?v=${AV('v3.js')}',B+'mis-cruceros/',B+'herramientas/checklist/',B+'herramientas/cuenta-atras/'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;

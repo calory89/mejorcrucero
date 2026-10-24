@@ -1,6 +1,7 @@
 // Utilidades y piezas compartidas del generador
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { CONFIG } from './data/content.js';
 
 export const SITE = CONFIG.siteUrl;
@@ -21,6 +22,9 @@ function slim(html) {
   const keep = []; const t = html.replace(/<(pre|textarea|script)\b[\s\S]*?<\/\1>/gi, (m) => { keep.push(m); return `\u0000${keep.length - 1}\u0000`; });
   return t.replace(/\n[ \t]+/g, '\n').replace(/\n{2,}/g, '\n').replace(/\u0000(\d+)\u0000/g, (_, i) => keep[+i]);
 }
+// Versión de cada fichero de assets según su contenido: la caché se renueva solo cuando el fichero cambia
+const AVC = {};
+export const AV = (f) => AVC[f] || (AVC[f] = (() => { try { return createHash('sha1').update(fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', 'public', 'assets', f))).digest('hex').slice(0, 10); } catch { return BUILD_DATE; } })());
 export function write(rel, html) {
   const file = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -185,7 +189,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
 <script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t;var z=localStorage.getItem('mc_textsize');if(z)document.documentElement.style.fontSize=z}catch(e){}</script>
 ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}
-<link rel="stylesheet" href="/assets/style.css?v=${BUILD_DATE}">
+<link rel="stylesheet" href="/assets/style.css?v=${AV('style.css')}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wqn50nb6kp");clarity("consentv2",{ad_Storage:"denied",analytics_Storage:"denied"});clarity("set","site","mejorcrucero");</script>
 </head>
@@ -216,8 +220,8 @@ ${crumbHtml}
 <div><h2>MejorCrucero</h2><ul><li><a href="/sobre-nosotros/">Quiénes somos</a></li><li><a href="/por-que-fiarte/">Por qué fiarte</a></li><li><a href="/datos/">Datos abiertos</a></li><li><a href="/contacto/">Contacto</a></li><li><a href="/afiliacion/">Cómo ganamos dinero</a></li><li><a href="/newsletter/">Newsletter</a></li><li><a href="/creadores/">Programa de creadores</a></li><li><a href="/aviso-legal/">Aviso legal</a></li><li><a href="/privacidad/">Privacidad</a></li><li><a href="/cookies/">Cookies</a></li></ul></div>
 </div><p class="wrap fine">© ${new Date().getFullYear()} MejorCrucero.com · Algunos enlaces son de afiliado: si reservas a través de ellos podemos recibir una comisión, sin coste extra para ti. Los datos técnicos proceden de fuentes públicas citadas en cada página.</p></footer>
 <button class="to-top" type="button" aria-label="Volver arriba" hidden>↑</button>
-<script src="/assets/v3.js?v=${BUILD_DATE}" defer></script>
-<script src="/assets/app.js?v=${BUILD_DATE}" defer></script>
+<script src="/assets/v3.js?v=${AV('v3.js')}" defer></script>
+<script src="/assets/app.js?v=${AV('app.js')}" defer></script>
 ${CONFIG.cfBeacon ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CONFIG.cfBeacon}"}'></script>` : ''}
 </body></html>`);
 }

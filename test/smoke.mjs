@@ -42,7 +42,7 @@ const warns = [];
 const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(dir, e.name)) : e.name === 'index.html' ? [path.join(dir, e.name)] : []);
 const titles = new Map(), descs = new Map(); let pages = 0;
 for (const f of walk(D)) {
-  const t = fs.readFileSync(f, 'utf8'); if (/name="robots" content="noindex/.test(t)) continue; pages++;
+  const t = fs.readFileSync(f, 'utf8'); if (t.length > 400000) warns.push(`${f}: pesa ${Math.round(t.length / 1024)} KB (más de 400 KB)`); if (/name="robots" content="noindex/.test(t)) continue; pages++;
   const ti = /<title>([^<]*)<\/title>/.exec(t)?.[1] || ''; const de = /<meta name="description" content="([^"]*)"/.exec(t)?.[1] || '';
   if (!ti) fails.push(`${f}: sin título`); if (!de) warns.push(`${f}: sin descripción`);
   titles.set(ti, [...(titles.get(ti) || []), f]); descs.set(de, [...(descs.get(de) || []), f]);

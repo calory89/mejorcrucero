@@ -338,6 +338,13 @@
   // ---------- Comparar salidas ----------
   const cmps = $('#cmps-form');
   if (cmps) {
+    // Las opciones se cargan del JSON de salidas (antes iban en el HTML y la página pesaba 650 KB)
+    getJson('sailings.json').then((sails) => getShips().then((ships) => {
+      const nm = Object.fromEntries(ships.map((s) => [s.slug, s.name]));
+      const opts = '<option value="">Elige una salida</option>' + [...sails].sort((a, b) => (nm[a.ship] || a.ship).localeCompare(nm[b.ship] || b.ship) || a.date.localeCompare(b.date)).map((x) => `<option value="${esc(x.id)}">${esc((nm[x.ship] || x.ship_name || x.ship) + ' · ' + x.date + ' · ' + (x.itinerary?.name || ''))}</option>`).join('');
+      $$('.js-sail-select', cmps).forEach((s) => { s.innerHTML = opts; const v = qs.get(s.name); if (v) s.value = v; });
+      if (qs.get('x0') || qs.get('x1')) cmps.dispatchEvent(new Event('input'));
+    })).catch(() => {});
     const render = async () => {
       const [sails, ships] = await Promise.all([getJson('sailings.json'), getShips()]);
       const sel = [cmps.x0.value, cmps.x1.value].map((id) => sails.find((x) => x.id === id)).filter(Boolean);
