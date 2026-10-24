@@ -1,8 +1,23 @@
 {
+"Aarhus": [
+56.1564,
+10.2097,
+"https://es.wikipedia.org/wiki/Aarhus"
+],
+"Acapulco": [
+16.8629,
+-99.887,
+"https://es.wikipedia.org/wiki/Acapulco_de_Ju%C3%A1rez"
+],
 "Alicante": [
 38.3453,
 -0.4831,
 "https://es.wikipedia.org/wiki/Alicante"
+],
+"Apia": [
+-13.8333,
+-171.8333,
+"https://es.wikipedia.org/wiki/Apia"
 ],
 "Aruba": [
 12.515,
@@ -19,15 +34,35 @@
 -76.615,
 "https://es.wikipedia.org/wiki/Baltimore"
 ],
+"Bangkok": [
+13.75,
+100.5167,
+"https://es.wikipedia.org/wiki/Bangkok"
+],
 "Barcelona": [
 41.3825,
 2.1769,
 "https://es.wikipedia.org/wiki/Barcelona"
 ],
+"Belfast": [
+54.5967,
+-5.93,
+"https://es.wikipedia.org/wiki/Belfast"
+],
 "Belize": [
 -4.65,
 12.7667,
 "https://es.wikipedia.org/wiki/Belize_(Angola)"
+],
+"Bergen": [
+60.3925,
+5.3233,
+"https://es.wikipedia.org/wiki/Bergen"
+],
+"Berlín": [
+52.5167,
+13.3833,
+"https://es.wikipedia.org/wiki/Berl%C3%ADn"
 ],
 "Bimini": [
 25.7333,
@@ -64,6 +99,11 @@
 -58.3819,
 "https://es.wikipedia.org/wiki/Buenos_Aires"
 ],
+"Burnie": [
+-41.0636,
+145.8919,
+"https://es.wikipedia.org/wiki/Burnie"
+],
 "Busan": [
 35.18,
 129.075,
@@ -78,6 +118,11 @@
 -16.9256,
 145.7753,
 "https://es.wikipedia.org/wiki/Cairns"
+],
+"Camboriú": [
+-27.025,
+-48.6539,
+"https://es.wikipedia.org/wiki/Cambori%C3%BA"
 ],
 "Canal de Panamá": [
 9.12,
@@ -99,6 +144,11 @@
 -60.9894,
 "https://es.wikipedia.org/wiki/Castries"
 ],
+"Charlottetown": [
+46.2353,
+-63.1267,
+"https://es.wikipedia.org/wiki/Charlottetown"
+],
 "Ciudad Ho Chi Minh": [
 10.7756,
 106.7019,
@@ -119,6 +169,11 @@
 12.5689,
 "https://es.wikipedia.org/wiki/Copenhague"
 ],
+"Costa Esmeralda": [
+-37,
+-56.8,
+"https://es.wikipedia.org/wiki/Costa_Esmeralda"
+],
 "Cozumel": [
 20.43,
 -87.02,
@@ -134,6 +189,11 @@
 1.3571,
 "https://es.wikipedia.org/wiki/Acantilados_de_Dover"
 ],
+"Dublín": [
+53.3497,
+-6.2603,
+"https://es.wikipedia.org/wiki/Dubl%C3%ADn"
+],
 "Dubrovnik": [
 42.6403,
 18.1083,
@@ -144,10 +204,25 @@
 31.025,
 "https://es.wikipedia.org/wiki/Durban"
 ],
+"Edimburgo": [
+55.9533,
+-3.1892,
+"https://es.wikipedia.org/wiki/Edimburgo"
+],
+"Esmirna": [
+38.4127,
+27.1384,
+"https://es.wikipedia.org/wiki/Esmirna"
+],
 "Estambul": [
 41.01,
 28.9603,
 "https://es.wikipedia.org/wiki/Estambul"
+],
+"Estocolmo": [
+59.3294,
+18.0686,
+"https://es.wikipedia.org/wiki/Estocolmo"
 ],
 "Falmouth": [
 50.15,
@@ -164,10 +239,20 @@
 -80.1419,
 "https://es.wikipedia.org/wiki/Fort_Lauderdale"
 ],
+"Funchal": [
+32.65,
+-16.9167,
+"https://es.wikipedia.org/wiki/Funchal"
+],
 "Galveston": [
 29.3014,
 -94.795,
 "https://es.wikipedia.org/wiki/Galveston"
+],
+"Gdynia": [
+54.5175,
+18.54,
+"https://es.wikipedia.org/wiki/Gdynia"
 ],
 "Geiranger": [
 62.0997,
@@ -199,6 +284,16 @@
 -88.4039,
 "https://en.wikipedia.org/wiki/Harvest_Caye"
 ],
+"Hellesylt": [
+62.0878,
+6.8606,
+"https://es.wikipedia.org/wiki/Hellesylt"
+],
+"Helsinki": [
+60.1708,
+24.9375,
+"https://es.wikipedia.org/wiki/Helsinki"
+],
 "Heraclión": [
 35.3403,
 25.1344,
@@ -208,6 +303,11 @@
 19.7056,
 -155.0858,
 "https://es.wikipedia.org/wiki/Hilo_(Haw%C3%A1i)"
+],
+"Hiroshima": [
+34.3914,
+132.4519,
+"https://es.wikipedia.org/wiki/Hiroshima"
 ],
 "Hong Kong": [
 22.2783,
@@ -223,6 +323,16 @@
 58.1293,
 -135.4632,
 "https://en.wikipedia.org/wiki/Icy_Strait_Point"
+],
+"Ilhabela": [
+-23.815,
+-45.3706,
+"https://es.wikipedia.org/wiki/Ilhabela"
+],
+"Inverness": [
+57.4839,
+-4.2258,
+"https://es.wikipedia.org/wiki/Inverness"
 ],
 "Isla Catalina (California)": [
 33.3834,
@@ -264,6 +374,26 @@
 10.1394,
 "https://es.wikipedia.org/wiki/Kiel"
 ],
+"Kioto": [
+35.0116,
+135.7681,
+"https://es.wikipedia.org/wiki/Kioto"
+],
+"Kochi": [
+9.9312,
+76.2673,
+"https://en.wikipedia.org/wiki/Kochi"
+],
+"Koh Samui": [
+9.5478,
+100.0622,
+"https://es.wikipedia.org/wiki/Aeropuerto_de_Koh_Samui"
+],
+"Kona": [
+19.7389,
+-156.0456,
+"https://es.wikipedia.org/wiki/Aeropuerto_Internacional_de_Kona"
+],
 "Koper": [
 45.5475,
 13.7307,
@@ -279,10 +409,25 @@
 101.6953,
 "https://es.wikipedia.org/wiki/Kuala_Lumpur"
 ],
+"La Paz": [
+-16.4958,
+-68.1333,
+"https://es.wikipedia.org/wiki/La_Paz"
+],
 "Las Palmas de Gran Canaria": [
 28.1272,
 -15.4314,
 "https://es.wikipedia.org/wiki/Las_Palmas_de_Gran_Canaria"
+],
+"Lautoka": [
+-17.6242,
+177.4528,
+"https://es.wikipedia.org/wiki/Lautoka"
+],
+"Limón": [
+10.03,
+-83.22,
+"https://es.wikipedia.org/wiki/Provincia_de_Lim%C3%B3n"
 ],
 "Lisboa": [
 38.708,
@@ -298,6 +443,11 @@
 34.0522,
 -118.2437,
 "https://es.wikipedia.org/wiki/Los_%C3%81ngeles"
+],
+"Maceió": [
+-9.6658,
+-35.735,
+"https://es.wikipedia.org/wiki/Macei%C3%B3"
 ],
 "Manhattan": [
 40.7283,
@@ -319,6 +469,11 @@
 144.9631,
 "https://es.wikipedia.org/wiki/Melbourne"
 ],
+"Meteora": [
+39.7125,
+21.6267,
+"https://es.wikipedia.org/wiki/Meteora"
+],
 "Miami": [
 25.7742,
 -80.1936,
@@ -338,6 +493,11 @@
 30.4428,
 -88.0092,
 "https://es.wikipedia.org/wiki/Bah%C3%ADa_de_Mobile"
+],
+"Monte Fuji": [
+35.3606,
+138.7275,
+"https://es.wikipedia.org/wiki/Monte_Fuji"
 ],
 "Moorea": [
 -17.535,
@@ -359,6 +519,11 @@
 129.8796,
 "https://es.wikipedia.org/wiki/Nagasaki"
 ],
+"Nagoya": [
+35.1814,
+136.9064,
+"https://es.wikipedia.org/wiki/Nagoya"
+],
 "Nassau": [
 25.0781,
 -77.3386,
@@ -368,6 +533,11 @@
 29.9761,
 -90.0783,
 "https://en.wikipedia.org/wiki/New_Orleans"
+],
+"Nha Trang": [
+12.2411,
+109.1911,
+"https://es.wikipedia.org/wiki/Nha_Trang"
 ],
 "Niza/Mónaco": [
 43.6653,
@@ -394,6 +564,11 @@
 14.2486,
 "https://es.wikipedia.org/wiki/N%C3%A1poles"
 ],
+"Nāwiliwili": [
+21.9592,
+-159.3528,
+"https://en.wikipedia.org/wiki/N%C4%81wiliwili_Beach_Park"
+],
 "Ocho Rios": [
 18.3994,
 -77.1031,
@@ -403,6 +578,11 @@
 37.6383,
 21.63,
 "https://es.wikipedia.org/wiki/Olimpia"
+],
+"Oporto": [
+41.15,
+-8.6108,
+"https://es.wikipedia.org/wiki/Oporto"
 ],
 "Palma de Mallorca": [
 39.5667,
@@ -429,10 +609,20 @@
 100.365,
 "https://es.wikipedia.org/wiki/Penang"
 ],
+"Ponta Delgada": [
+37.74,
+-25.67,
+"https://es.wikipedia.org/wiki/Ponta_Delgada"
+],
 "Port Canaveral": [
 28.41,
 -80.61,
 "https://en.wikipedia.org/wiki/Port_Canaveral"
+],
+"Port Chalmers": [
+-45.8167,
+170.6,
+"https://es.wikipedia.org/wiki/Port_Chalmers"
 ],
 "Port Elizabeth": [
 -33.99,
@@ -443,6 +633,16 @@
 -20.1619,
 57.4989,
 "https://es.wikipedia.org/wiki/Port_Louis"
+],
+"Portimão": [
+37.1333,
+-8.5333,
+"https://es.wikipedia.org/wiki/Portim%C3%A3o"
+],
+"Portland": [
+45.515,
+-122.6792,
+"https://es.wikipedia.org/wiki/Portland"
 ],
 "Provenza": [
 44,
@@ -484,6 +684,26 @@
 -151.44,
 "https://es.wikipedia.org/wiki/Raiatea"
 ],
+"Recife": [
+-8.0539,
+-34.8808,
+"https://es.wikipedia.org/wiki/Recife"
+],
+"Reikiavik": [
+64.1475,
+-21.935,
+"https://es.wikipedia.org/wiki/Reikiavik"
+],
+"Riga": [
+56.9475,
+24.1069,
+"https://es.wikipedia.org/wiki/Riga"
+],
+"Rijeka": [
+45.3333,
+14.4333,
+"https://es.wikipedia.org/wiki/Rijeka"
+],
 "Roatán": [
 16.3834,
 -86.4178,
@@ -524,6 +744,11 @@
 -68.5364,
 "https://es.wikipedia.org/wiki/San_Juan_(Argentina)"
 ],
+"San Vicente": [
+38.3964,
+-0.5253,
+"https://es.wikipedia.org/wiki/San_Vicente_del_Raspeig"
+],
 "Santa Cruz de Tenerife": [
 28.4667,
 -16.25,
@@ -554,15 +779,30 @@
 -5.995,
 "https://es.wikipedia.org/wiki/Sevilla"
 ],
+"Seúl": [
+37.56,
+126.99,
+"https://es.wikipedia.org/wiki/Se%C3%BAl"
+],
 "Singapur": [
 1.3525,
 103.7689,
 "https://es.wikipedia.org/wiki/Batalla_de_Singapur"
 ],
+"St. John's": [
+47.5614,
+-52.7119,
+"https://en.wikipedia.org/wiki/St._John%27s,_Newfoundland_and_Labrador"
+],
 "Suva": [
 -18.1333,
 178.4333,
 "https://es.wikipedia.org/wiki/Suva"
+],
+"São Paulo": [
+-23.5504,
+-46.6339,
+"https://es.wikipedia.org/wiki/S%C3%A3o_Paulo"
 ],
 "São Vicente": [
 16.85,
@@ -604,6 +844,11 @@
 176.1667,
 "https://es.wikipedia.org/wiki/Tauranga"
 ],
+"Timaru": [
+-44.4016,
+171.247,
+"https://es.wikipedia.org/wiki/Bas%C3%ADlica_del_Sagrado_Coraz%C3%B3n_(Timaru)"
+],
 "Tokio": [
 35.6894,
 139.6917,
@@ -614,10 +859,25 @@
 -0.3764,
 "https://es.wikipedia.org/wiki/Valencia"
 ],
+"Valletta": [
+35.8983,
+14.5125,
+"https://en.wikipedia.org/wiki/Valletta"
+],
+"Vancouver": [
+49.2608,
+-123.1139,
+"https://es.wikipedia.org/wiki/Vancouver"
+],
 "Venecia": [
 45.4397,
 12.3319,
 "https://es.wikipedia.org/wiki/Venecia"
+],
+"Vigo": [
+42.2358,
+-8.7267,
+"https://es.wikipedia.org/wiki/Vigo"
 ],
 "Walvis Bay": [
 -22.9494,
@@ -633,5 +893,10 @@
 52.3667,
 4.8833,
 "https://es.wikipedia.org/wiki/%C3%81msterdam"
+],
+"Ålesund": [
+62.4712,
+6.1542,
+"https://es.wikipedia.org/wiki/%C3%85lesund"
 ]
 }
