@@ -1,0 +1,46 @@
+name: Vigilancia
+# Cada 6 horas comprueba la web en vivo. Si algo falla (páginas caídas, precios sin actualizar o despliegue fallido),
+# abre o actualiza una incidencia "ALERTA MejorCrucero" en este repositorio; GitHub avisa por email al propietario.
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  actions: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comprobar la web
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE: https://${{ vars.CNAME || 'mejorcrucero.com' }}
+        run: |
+          problems=""
+          for p in / /ofertas/ /ofertas/chollos/ /barcos/ /sitemap.xml /data/ofertas.json /data/estado.json; do
+            code=$(curl -s -o /dev/null -m 30 -w '%{http_code}' "$SITE$p")
+            [ "$code" = "200" ] || problems="$problems\n- $p responde $code"
+          done
+          curl -s -m 30 "$SITE/data/estado.json" -o estado.json || true
+          node -e "
+            const e=require('./estado.json'); const out=[];
+            const h=(Date.now()-new Date(e.when))/36e5; if(h>30) out.push('- La web no se reconstruye desde hace '+Math.round(h)+' horas');
+            if((e.stale||[]).length) out.push('- Navieras sin actualizar más de 2 días: '+e.stale.join(', '));
+            if(e.publicadas<500) out.push('- Solo '+e.publicadas+' salidas publicadas');
+            require('fs').writeFileSync('p2.txt', out.join('\n'));
+          " || echo "- No se pudo leer estado.json" > p2.txt
+          [ -s p2.txt ] && problems="$problems\n$(cat p2.txt)"
+          last=$(gh run list -R "$GITHUB_REPOSITORY" -w Deploy -L 3 --json conclusion -q '[.[]|select(.conclusion=="failure")]|length')
+          [ "$last" -ge 2 ] && problems="$problems\n- $last de los últimos 3 despliegues han fallado"
+          if [ -n "$problems" ]; then
+            body=$(printf "Comprobación automática del %s:\n%b\n\nDetalle: $SITE/estado/" "$(date -u '+%d-%m-%Y %H:%M UTC')" "$problems")
+            n=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "ALERTA MejorCrucero in:title" --json number -q '.[0].number')
+            if [ -n "$n" ]; then gh issue comment "$n" -R "$GITHUB_REPOSITORY" --body "$body"; else gh issue create -R "$GITHUB_REPOSITORY" --title "ALERTA MejorCrucero" --body "$body"; fi
+            echo -e "$problems"
+          else
+            echo "Todo correcto"
+            n=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "ALERTA MejorCrucero in:title" --json number -q '.[0].number')
+            [ -n "$n" ] && gh issue close "$n" -R "$GITHUB_REPOSITORY" --comment "Resuelto: la comprobación automática vuelve a estar bien." || true
+          fi

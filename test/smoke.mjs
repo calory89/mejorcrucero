@@ -46,6 +46,11 @@ for (const f of walk(D)) {
   const ti = /<title>([^<]*)<\/title>/.exec(t)?.[1] || ''; const de = /<meta name="description" content="([^"]*)"/.exec(t)?.[1] || '';
   if (!ti) fails.push(`${f}: sin título`); if (!de) warns.push(`${f}: sin descripción`);
   titles.set(ti, [...(titles.get(ti) || []), f]); descs.set(de, [...(descs.get(de) || []), f]);
+  // Accesibilidad básica: idioma, imágenes con alt, botones con nombre, campos con etiqueta
+  if (!/<html lang="es/.test(t)) warns.push(`${f}: sin idioma declarado`);
+  for (const m of t.matchAll(/<img\b(?![^>]*\balt=)[^>]*>/g)) { warns.push(`${f}: imagen sin alt`); break; }
+  for (const m of t.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)) { const txt = m[2].replace(/<[^>]+>/g, '').trim(); if (!txt && !/aria-label=/.test(m[1])) { warns.push(`${f}: botón sin nombre`); break; } }
+  for (const m of t.matchAll(/<(input|select|textarea)\b([^>]*)>/g)) { const a = m[2]; if (/type="(hidden|submit|button|checkbox|radio)"|class="hp"|aria-label=|aria-hidden/.test(a)) continue; const id = /id="([^"]+)"/.exec(a)?.[1]; if (id && t.includes(`for="${id}"`)) continue; const before = t.slice(Math.max(0, m.index - 400), m.index); if (/<label\b[^>]*>(?:(?!<\/label>)[\s\S])*$/.test(before)) continue; warns.push(`${f}: campo sin etiqueta (${(/name="([^"]+)"/.exec(a) || [])[1] || m[1]})`); break; }
   const vis = t.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<option[^>]*>—<\/option>/g, '');
   if (/—/.test(vis.replace(/<[^>]+>/g, ' '))) warns.push(`${f}: raya larga en el texto`);
 }
