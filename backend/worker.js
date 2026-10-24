@@ -1,7 +1,7 @@
 // MejorCrucero API — Cloudflare Worker + D1 (+ Workers AI opcional)
 // Bindings: DB (D1), AI (Workers AI, opcional), ADMIN_TOKEN (secret), ALLOWED_ORIGINS (texto, separado por comas)
 const json = (data, status = 200, origin = '*') => new Response(status === 204 ? null : JSON.stringify(data), {
-  status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Access-Control-Max-Age': '86400', 'Vary': 'Origin', 'Cache-Control': 'no-store' },
+  status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Access-Control-Max-Age': '86400', 'Vary': 'Origin', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Frame-Options': 'DENY', 'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'", 'Strict-Transport-Security': 'max-age=31536000' },
 });
 const clean = (s, max = 2000) => String(s ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').trim().slice(0, max);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
@@ -51,6 +51,14 @@ const SITE = 'https://mejorcrucero.com';
 const fold = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const eurF = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
 const fecha = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const confirmToken = async (env, email) => (await sha((env.SALT || 'mc') + ':confirm:' + email)).slice(0, 20);
+// Correo de confirmación (una vez por email): hasta confirmarlo, no se envían avisos de alertas nuevas
+async function askConfirm(env, email) {
+  if (!email || (await env.DB.prepare('SELECT 1 FROM confirmed WHERE email=?').bind(email).first())) return;
+  const link = `https://mejorcrucero-api.mejorcrucero.workers.dev/confirm?e=${encodeURIComponent(email)}&t=${await confirmToken(env, email)}`;
+  const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:600px;margin:auto;color:#0f172a"><p style="font:700 22px Georgia,serif;color:#0b2540">MejorCrucero</p><h1 style="font-size:20px">Confirma tu email</h1><p>Has pedido avisos de cruceros en MejorCrucero. Pulsa para confirmar que este email es tuyo:</p><p><a href="${link}" style="display:inline-block;background:#c2410c;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Confirmar mi email</a></p><p style="color:#64748b;font-size:13px">Si no has sido tú, ignora este correo: no te escribiremos más.</p></div>`;
+  await env.DB.prepare('INSERT OR IGNORE INTO outbox(email,kind,subject,html,text,k) VALUES(?,?,?,?,?,?)').bind(email, 'confirm', 'Confirma tu email para recibir los avisos', html, `Confirma tu email para recibir los avisos de MejorCrucero: ${link}`, 'confirm:' + email).run();
+}
 const unsubToken = async (env, email) => (await sha((env.SALT || 'mc') + ':unsub:' + email)).slice(0, 20);
 async function mailBody(env, email, title, intro, items) {
   const u = `https://mejorcrucero-api.mejorcrucero.workers.dev/unsub?e=${encodeURIComponent(email)}&t=${await unsubToken(env, email)}`;
@@ -74,9 +82,12 @@ async function runAlerts(env) {
   const today = new Date().toISOString().slice(0, 10);
   const blocked = new Set((await env.DB.prepare('SELECT email FROM unsub').all()).results.map((x) => x.email));
   const stats = { price: 0, criteria: 0, follow: 0 };
-  const alerts = (await env.DB.prepare("SELECT id,email,kind,payload FROM alerts WHERE email IS NOT NULL AND kind IN ('price','criteria','watch')").all()).results;
+  const alerts = (await env.DB.prepare("SELECT id,email,kind,payload,created FROM alerts WHERE email IS NOT NULL AND kind IN ('price','criteria','watch')").all()).results;
+  const okMail = new Set((await env.DB.prepare('SELECT email FROM confirmed').all()).results.map((x) => x.email));
+  const SWITCH = '2026-10-25'; // las alertas anteriores a la doble confirmación siguen funcionando
   for (const a of alerts) {
     if (blocked.has(a.email)) continue;
+    if (String(a.created) >= SWITCH && !okMail.has(a.email)) continue;
     let pl; try { pl = JSON.parse(a.payload); } catch { continue; }
     // Crucero ya reservado: avisar si la web oficial lo vende más barato que lo que pagó
     if (a.kind === 'price' && pl.ship && pl.date && pl.price) {
@@ -118,6 +129,20 @@ async function runAlerts(env) {
     if (first) await markSeen(env, init);
     else stats.follow += await enqueue(env, f.email, 'follow', `follow:${f.email}:${slug}:${today}`, `Nuevas salidas del ${fresh[0]?.sn || 'barco que sigues'}`, 'Han salido a la venta nuevas fechas del barco que sigues en MejorCrucero.', fresh);
   }
+  // Lunes: resumen semanal de chollos para la newsletter y informe de visitas y clics para el administrador
+  if (new Date().getUTCDay() === 1) {
+    const wk = today; const top = [...offers].sort((x, y) => y.sc - x.sc).slice(0, 8);
+    const subs = (await env.DB.prepare("SELECT DISTINCT email FROM leads WHERE created < ?").bind(SWITCH).all()).results.map((x) => x.email).concat((await env.DB.prepare('SELECT l.email FROM leads l JOIN confirmed c ON c.email=l.email').all()).results.map((x) => x.email));
+    for (const e of [...new Set(subs)]) if (!blocked.has(e)) stats.weekly = (stats.weekly || 0) + await enqueue(env, e, 'weekly', `weekly:${e}:${wk}`, `Los ${top.length} chollos de cruceros de la semana`, 'Las salidas con mejor nota del precio esta semana, con el precio de la web oficial de cada naviera.', top);
+    const admin = (await env.DB.prepare("SELECT value FROM settings WHERE key='admin_email'").first().catch(() => null))?.value;
+    if (admin && !(await isSeen(env, 'report:' + wk))) { await markSeen(env, 'report:' + wk);
+      const ev = (await env.DB.prepare("SELECT name, COUNT(*) n FROM events WHERE created > datetime('now','-7 days') GROUP BY name ORDER BY n DESC LIMIT 15").all()).results;
+      const pg = (await env.DB.prepare("SELECT page, COUNT(*) n FROM events WHERE created > datetime('now','-7 days') AND name='aff' GROUP BY page ORDER BY n DESC LIMIT 10").all()).results;
+      const nl = await env.DB.prepare("SELECT (SELECT COUNT(*) FROM leads WHERE created > datetime('now','-7 days')) leads, (SELECT COUNT(*) FROM alerts WHERE created > datetime('now','-7 days')) alerts, (SELECT COUNT(*) FROM posts WHERE created > datetime('now','-7 days')) posts, (SELECT COUNT(*) FROM outbox WHERE sent > datetime('now','-7 days')) mails").first();
+      const rows = (l, k) => l.map((x) => `<tr><td style="padding:4px 8px">${String(x[k] || '-').replace(/</g, '&lt;')}</td><td style="padding:4px 8px;text-align:right">${x.n}</td></tr>`).join('');
+      const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:640px;margin:auto"><h1 style="font-size:20px">MejorCrucero: informe semanal</h1><p>Últimos 7 días: ${nl.leads} suscriptores nuevos, ${nl.alerts} alertas, ${nl.posts} mensajes en la comunidad y ${nl.mails} emails enviados. ${offers.length} salidas publicadas.</p><h2 style="font-size:16px">Eventos</h2><table>${rows(ev, 'name')}</table><h2 style="font-size:16px">Páginas con más clics a naviera o agencia</h2><table>${rows(pg, 'page')}</table></div>`;
+      await env.DB.prepare('INSERT OR IGNORE INTO outbox(email,kind,subject,html,text,k) VALUES(?,?,?,?,?,?)').bind(admin, 'report', `MejorCrucero: informe de la semana (${nl.leads} suscriptores, ${nl.alerts} alertas)`, html, html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '), 'report:' + wk).run(); }
+  }
   return { offers: offers.length, queued: stats, sent: await sendOutbox(env) };
 }
 // Envío con Resend cuando estén RESEND_KEY y MAIL_FROM; si no, los emails esperan en la cola (outbox).
@@ -148,7 +173,7 @@ async function sendOutbox(env) {
 }
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const allowed = (env.ALLOWED_ORIGINS || '*').split(',').map((s) => s.trim());
     const reqOrigin = req.headers.get('Origin') || '';
     const origin = allowed.includes('*') ? '*' : allowed.includes(reqOrigin) ? reqOrigin : allowed[0];
@@ -176,6 +201,7 @@ export default {
         if (!EMAIL.test(email)) return R({ error: 'email' }, 400);
         if (await limited(env, 'lead:' + ipHash, 20, 60)) return R({ error: 'rate' }, 429);
         await env.DB.prepare('INSERT OR IGNORE INTO leads(email, source) VALUES(?,?)').bind(email, clean(body.source, 120)).run();
+        await askConfirm(env, email); ctx.waitUntil(sendOutbox(env).catch(() => {}));
         return R({ ok: true });
       }
       // Operación interna: lanzar el motor de avisos ahora (protegido con el secreto del puente de email)
@@ -190,6 +216,7 @@ export default {
         if (await limited(env, 'alert:' + ipHash, 30, 60)) return R({ error: 'rate' }, 429);
         const { website, email: _e, ...rest } = body;
         await env.DB.prepare('INSERT INTO alerts(email, kind, payload) VALUES(?,?,?)').bind(email || null, clean(body.kind || 'price', 40), JSON.stringify(rest).slice(0, 4000)).run();
+        if (email) { await askConfirm(env, email); ctx.waitUntil(sendOutbox(env).catch(() => {})); }
         return R({ ok: true });
       }
       if (p === '/follow' && req.method === 'POST') {
@@ -302,6 +329,19 @@ export default {
         if (req.method === 'POST') { const opt = clean(body.option, 40); if (!/^[a-z0-9-]{1,40}$/.test(opt)) return R({ error: 'datos' }, 400); await env.DB.prepare('INSERT OR IGNORE INTO polls(poll, option, voter) VALUES(?,?,?)').bind(poll, opt, ipHash).run(); }
         const r = await env.DB.prepare('SELECT option, COUNT(*) n FROM polls WHERE poll=? GROUP BY option').bind(poll).all();
         return R({ results: Object.fromEntries(r.results.map((x) => [x.option, x.n])) });
+      }
+      // Cuántas personas vigilan una salida (para la ficha)
+      if (p === '/watchers') {
+        const id = clean(url.searchParams.get('id'), 120);
+        const r = await env.DB.prepare("SELECT COUNT(DISTINCT email) n FROM alerts WHERE kind='watch' AND json_extract(payload,'$.id')=?").bind(id).first();
+        return R({ n: r?.n || 0 });
+      }
+      // Doble confirmación del email: el enlace del correo de bienvenida lo marca como confirmado
+      if (p === '/confirm') {
+        const e = clean(url.searchParams.get('e'), 254).toLowerCase();
+        if (!EMAIL.test(e) || url.searchParams.get('t') !== (await confirmToken(env, e))) return new Response('Enlace no válido', { status: 400 });
+        await env.DB.prepare('INSERT OR IGNORE INTO confirmed(email) VALUES(?)').bind(e).run();
+        return new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Email confirmado</title><body style="font-family:system-ui;max-width:520px;margin:60px auto;padding:0 16px"><h1>¡Email confirmado!</h1><p>Ya te llegarán los avisos que has pedido. Puedes darte de baja desde cualquier correo.</p><p><a href="' + SITE + '/">Volver a MejorCrucero</a></p>', { headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff' } });
       }
       if (p === '/vote' && req.method === 'POST') {
         const id = parseInt(body.id);

@@ -18,3 +18,6 @@ CREATE TABLE IF NOT EXISTS ratelimit (key TEXT PRIMARY KEY, n INTEGER, window TE
 CREATE TABLE IF NOT EXISTS summaries (thread TEXT PRIMARY KEY, body TEXT, posts INTEGER, created TEXT DEFAULT (datetime('now')));
 -- 004 (24-oct-2026): encuestas rápidas. Las columnas posts.edit_hash y users.expert se añadieron con migrations/004_comunidad.sql
 CREATE TABLE IF NOT EXISTS polls (poll TEXT NOT NULL, option TEXT NOT NULL, voter TEXT NOT NULL, created TEXT DEFAULT (datetime('now')), PRIMARY KEY (poll, voter));
+-- 005 (24-oct-2026): doble confirmación del email y ajustes (admin_email se guarda en la base, no en el repo)
+CREATE TABLE IF NOT EXISTS confirmed (email TEXT PRIMARY KEY, created TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
