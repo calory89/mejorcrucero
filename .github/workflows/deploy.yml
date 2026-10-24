@@ -42,6 +42,13 @@ jobs:
           git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
           git add src/data/sailings.json; if [ -f tools/carnival-sample.json ]; then git add tools/carnival-sample.json; fi
           if git diff --cached --quiet; then echo "sin cambios en Carnival"; else git commit -m "Ofertas: precios de Carnival actualizados" || true; fi
+      - name: Importar ofertas de Celestyal (web oficial, en euros)
+        if: ${{ github.event_name != 'push' }}
+        run: |
+          node tools/celestyal.js
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/sailings.json
+          if git diff --cached --quiet; then echo "sin cambios en Celestyal"; else git commit -m "Ofertas: precios de Celestyal actualizados" || true; fi
       - name: Completar fichas de barco y coordenadas de escalas (Wikipedia)
         if: ${{ github.event_name != 'push' }}
         run: |

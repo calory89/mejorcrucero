@@ -10,6 +10,7 @@ Web estática generada con Node 22 sin dependencias. GitHub Actions la construye
    - `costa.js`: buscador oficial de Costa Cruceros (España). Guarda una muestra del formato en `tools/costa-sample.json`.
    - `ncl.js`: API pública del buscador de ncl.com/es/es (itinerarios, fechas, precio por camarote, escalas con horario). Todas las fechas a 18 meses si sale de Europa; las 3 próximas si no. Muestra en `tools/ncl-sample.json`.
    - `carnival.js`: API pública del buscador de carnival.com (mercado EE. UU., USD). Guarda `price_usd` y convierte a euros al cambio del BCE del día. 3 fechas por itinerario.
+   - `celestyal.js`: ficheros públicos de celestyal.com (precios en euros del mercado GRC e itinerarios en español). Por cada itinerario y mes, Celestyal publica el precio más bajo de cada camarote y su fecha: solo guardamos en cada salida los camarotes cuyo precio es de esa fecha.
    - `dest.js`: traduce el nombre de zona de cada naviera a nuestros destinos.
    - `ships-wiki.py`: añade a `ships_extra.csv` los barcos nuevos leyendo su artículo de Wikipedia (año, GT, pasajeros, con fuente).
    - `import-feed.js`: feed genérico (variable `FEED_URL`), formato en `docs/feed.md`.
