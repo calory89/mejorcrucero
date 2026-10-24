@@ -188,7 +188,7 @@ export function layout({ title, desc, url, body, schema = [], ogType = 'website'
 <link rel="alternate" hreflang="es-ES" href="${SITE}${url}"><link rel="alternate" hreflang="x-default" href="${SITE}${url}">
 <meta property="og:locale" content="es_ES"><meta name="geo.region" content="ES"><link rel="alternate" type="application/rss+xml" title="Chollos de cruceros" href="/ofertas/feed.xml">
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
-<meta name="theme-color" content="#0b2540">
+<meta name="theme-color" content="#0F5BD8">
 <meta property="og:type" content="${ogType}"><meta property="og:site_name" content="MejorCrucero"><meta property="og:title" content="${esc(fullTitle)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE}${url}"><meta property="og:image" content="${esc(ogImg)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">

@@ -668,7 +668,10 @@ const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
 
 function toolsIndex() {
-  const body = `<section class="wrap block page-h"><h1>Herramientas para cruceristas</h1><p class="lead-p">Gratis y sin registro.</p><div class="grid grid-3">${TOOLS.map(([s, e, n, d]) => `<a class="tool tool-light" href="/herramientas/${s}/"><span class="tool-i" aria-hidden="true">${e}</span><h2>${esc(n)}</h2><p>${esc(d)}</p></a>`).join('')}</div></section>`;
+  const GROUPS = [['Precio y dinero', ['precio-real', 'presupuesto-total', 'gasto-a-bordo', 'propinas', 'paquete-bebidas', 'suplemento-individual', 'pago-a-plazos', 'presupuesto-compartido', 'alerta-precio', 'reclamar']], ['Elegir crucero', ['asistente', 'que-crucero', 'comparar', 'comparar-ofertas', 'comparar-salidas', 'comparar-destinos', 'comparar-camarotes', 'camarotes', 'camarote-mareo', 'mareometro', 'vacaciones', 'sin-avion', 'mapa-escalas']], ['Preparar el viaje', ['checklist', 'maleta', 'documentacion', 'cuenta-atras', 'dias-libres', 'tiempo-puerto', 'conversor-horario', 'glosario']], ['Para tu web', ['widget-chollos']]];
+  const tcard = ([s, e, n, d]) => `<a class="tool tool-light" href="/herramientas/${s}/"><span class="tool-i" aria-hidden="true">${e}</span><h3>${esc(n)}</h3><p>${esc(d)}</p></a>`;
+  const used = new Set(GROUPS.flatMap((g) => g[1]));
+  const body = `<section class="wrap block page-h"><h1>Herramientas para cruceristas</h1><p class="lead-p">Gratis y sin registro.</p>${GROUPS.map(([g, l]) => { const items = l.map((k) => TOOLS.find((t) => t[0] === k)).filter(Boolean); return items.length ? `<h2 class="tools-g">${g}</h2><div class="grid grid-3">${items.map(tcard).join('')}</div>` : ''; }).join('')}${TOOLS.some((t) => !used.has(t[0])) ? `<h2 class="tools-g">Más</h2><div class="grid grid-3">${TOOLS.filter((t) => !used.has(t[0])).map(tcard).join('')}</div>` : ''}</section>`;
   return layout({ title: 'Herramientas para cruceros', desc: 'Calculadora del precio real, alertas de precio, asistente IA, comparadores, checklist, mareómetro y más.', url: '/herramientas/', body, crumbs: [['Inicio', '/'], ['Herramientas', '/herramientas/']] });
 }
 

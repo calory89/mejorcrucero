@@ -894,4 +894,7 @@
 
   // Tablas con desplazamiento: accesibles con el teclado
   $$('.table-wrap, .hub-sum').forEach((t) => { if (t.scrollWidth > t.clientWidth + 2 || t.classList.contains('table-wrap')) { t.tabIndex = 0; t.setAttribute('role', 'region'); if (!t.getAttribute('aria-label')) t.setAttribute('aria-label', t.querySelector('caption, th')?.textContent?.trim() ? 'Tabla: ' + (t.previousElementSibling?.textContent || 'datos').trim().slice(0, 60) : 'Tabla'); } });
+
+  // Cabecera más baja al desplazarse
+  { const t = $('.top'); if (t) { const on = () => t.classList.toggle('scrolled', scrollY > 40); addEventListener('scroll', on, { passive: true }); on(); } }
 })();
