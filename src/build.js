@@ -203,7 +203,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
 
 
 <section class="wrap block"><div class="block-h"><h2>Guías para cruceristas</h2><a href="/guias/">Todas las guías</a></div>
-<div class="grid grid-3">${GUIDES.slice(0, 6).map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e">${g.emoji}</span><h3>${esc(g.title)}</h3><p>${esc(g.desc)}</p></a>`).join('')}</div></section>
+<div class="grid grid-3">${GUIDES.slice(0, 6).map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e" aria-hidden="true">${g.emoji}</span><h3>${esc(g.title)}</h3><p>${esc(g.desc)}</p><span class="guide-t">${readMin(g)} min de lectura</span></a>`).join('')}</div></section>
 
 <section class="cta-band"><div class="wrap cta-in">
   <div><h2>Chollos de cruceros en tu email</h2><p>Una selección semanal de las mejores ofertas, con el precio real calculado. <a class="on-dark" href="/newsletter/">Mira cómo es</a>.</p></div>
@@ -664,6 +664,7 @@ const TOOLS = [
   ['comparar-camarotes', '🛏️', 'Comparar camarotes', 'Cuánto más cuesta un balcón o una suite.'],
   ['camarote-mareo', '🌊', 'Camarote si te mareas', 'Dónde reservar si te mareas.'],
 ];
+const readMin = (g) => Math.max(2, Math.round(JSON.stringify(g).replace(/<[^>]+>/g, ' ').split(/\s+/).length / 230));
 const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'], [n, u]];
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
 
@@ -1023,7 +1024,7 @@ function toolCompareOffers() {
 // ---------- guías ----------
 function guidesIndex() {
   const body = `<section class="wrap block page-h"><h1>Guías para cruceristas</h1><p class="lead-p">Todo lo que nos habría gustado saber antes de nuestro primer crucero.</p>
-  <div class="grid grid-3">${GUIDES.map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e">${g.emoji}</span><h2>${esc(g.title)}</h2><p>${esc(g.desc)}</p></a>`).join('')}</div>
+  <div class="grid grid-3">${GUIDES.map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e" aria-hidden="true">${g.emoji}</span><h2>${esc(g.title)}</h2><p>${esc(g.desc)}</p><span class="guide-t">${readMin(g)} min de lectura</span></a>`).join('')}</div>
   <h2>Más guías</h2><div class="grid grid-3">
   <a class="card guide" href="/destinos/"><span class="guide-e">🗺️</span><h3>${DESTINATIONS.length} guías de destinos</h3><p>Mejor época, puertos, mar y consejos.</p></a>
   <a class="card guide" href="/meses/"><span class="guide-e">📅</span><h3>Cruceros mes a mes</h3><p>Adónde ir en cada época del año.</p></a>

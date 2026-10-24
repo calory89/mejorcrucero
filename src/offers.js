@@ -203,7 +203,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   <div>
     <a class="eyebrow eyebrow-l" href="/ofertas/${x.destination || ''}/">${esc(dn)} · Oferta de crucero</a>
     <h1>${esc(dn)}: ${x.nights} noches en el ${esc(sn)} desde ${esc(x.depart_port)}</h1>
-    <a class="hero-score" href="#nota-oferta"><span class="scb scb-big ${dcls(d.score)}"><b>${d.score}</b><small>/100</small></span><span><b>${esc(d.label)}</b><small>Nota del precio</small></span></a>
+    <a class="hero-score" href="#nota-oferta"><span class="scb scb-big ${dcls(d.score)}"><b>${d.score}</b><small>/100</small></span><span><b>${esc(d.label)}</b><small>Nota del precio</small></span></a><div class="meter" role="img" aria-label="Nota del precio ${d.score} de 100" style="--x:${d.score}%"><i></i><span style="left:45%"></span><span style="left:70%"></span><span style="left:85%"></span></div>
     ${s?.sc != null ? `<p class="two-scores small">${shipNoteLine(s, d)}</p>` : ''}
     <p class="match-box" data-slug="${x.ship}" hidden></p><p class="price-change" data-id="${x.id}" data-price="${r.tarifa}" hidden></p>
     ${d.anomaly ? '<p class="tip tip-hot"><b>Precio anormalmente bajo</b> frente a cruceros parecidos. Compruébalo en la web de la naviera cuanto antes.</p>' : ''}

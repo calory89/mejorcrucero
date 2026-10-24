@@ -345,6 +345,16 @@
     // Filtros desde la URL o, si no hay, los últimos usados en esta página
     const src = [...qs.keys()].length ? qs : new URLSearchParams(store.get('mc_filters', {})[location.pathname] || '');
     for (const el of f.elements) if (el.name && src.get(el.name)) { if (el.type === 'checkbox') el.checked = true; else el.value = src.get(el.name); }
+    // Noches y salida como botones (el desplegable sigue guardando el valor)
+    ['n', 'es'].forEach((k) => { const sel = f.elements[k]; if (!sel || sel.tagName !== 'SELECT' || sel.options.length > 6) return; const seg = document.createElement('div'); seg.className = 'seg'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', sel.closest('label')?.querySelector('span')?.textContent || k);
+      seg.innerHTML = [...sel.options].map((o) => `<button type="button" data-v="${esc(o.value)}" aria-pressed="false">${esc(o.value ? o.textContent.replace('Solo desde España', 'Desde España') : 'Todas')}</button>`).join(''); sel.after(seg); sel.classList.add('sr'); sel.tabIndex = -1;
+      const sync = () => $$('button', seg).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === sel.value))); seg.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; sel.value = b.dataset.v; sel.dispatchEvent(new Event('change', { bubbles: true })); sync(); }); f.addEventListener('change', sync); sync(); });
+    // Meses como fila de botones desplazable
+    { const sel = f.elements.m; if (sel && sel.tagName === 'SELECT' && sel.options.length > 2) { const row = document.createElement('div'); row.className = 'seg seg-scroll'; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Mes');
+      row.innerHTML = [...sel.options].map((o) => `<button type="button" data-v="${esc(o.value)}" aria-pressed="false">${esc(o.value ? o.textContent.replace(/ (\d{4})$/, ' $1').replace(/^(\w{3})\w*/, '$1') : 'Todos')}</button>`).join(''); sel.after(row); sel.classList.add('sr'); sel.tabIndex = -1;
+      const sync = () => $$('button', row).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === sel.value))); row.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; sel.value = b.dataset.v; sel.dispatchEvent(new Event('change', { bubbles: true })); sync(); }); f.addEventListener('change', sync); sync(); } }
+    // Más filtros en hoja inferior en el móvil, con botón para ver los resultados
+    { const mf = $('.more-f', f); if (mf) { const inn = $('.more-f-in', mf); const done = document.createElement('button'); done.type = 'button'; done.className = 'btn btn-block sheet-done'; inn.append(done); const upd = () => { done.textContent = 'Ver ' + ($('.offer-count', f)?.textContent.split(' ')[0] || '') + ' cruceros'; }; f.addEventListener('change', () => setTimeout(upd, 50)); mf.addEventListener('toggle', upd); done.addEventListener('click', () => { mf.open = false; g.scrollIntoView({ behavior: 'smooth' }); }); } }
     // Ocultar navieras o barcos que no te interesan (se recuerda en este navegador)
     { const box = document.createElement('p'); box.className = 'small hide-ctl'; f.after(box);
       const nameOf = (sel, v) => [...(f.elements[sel]?.options || [])].find((o) => o.value === v)?.textContent || v;

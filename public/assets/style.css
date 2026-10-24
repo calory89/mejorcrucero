@@ -753,3 +753,55 @@ form .form-msg{font-weight:600;color:var(--ok)}
 /* Anclas de la oferta */
 .offer .tabs-nav{margin-top:0}
 .tabs-nav a{font-weight:600;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:8px;white-space:nowrap}.tabs-nav a:hover{background:var(--soft);color:var(--sea)}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;min-height:44px;background:var(--card)}
+.seg button{flex:1;border:0;background:none;font:600 .88rem var(--sans);color:var(--ink-2);cursor:pointer;padding:0 6px;border-left:1px solid var(--line)}
+.seg button:first-child{border-left:0}.seg button[aria-pressed=true]{background:var(--sea);color:#fff}
+/* Meses desplazables */
+.seg-scroll{overflow-x:auto;scrollbar-width:thin}.seg-scroll button{flex:none;padding:0 12px;white-space:nowrap}
+.offer-filter .main-f label:has(.seg-scroll){min-width:0}
+/* Hoja inferior de filtros en el móvil */
+.sheet-done{display:none}
+@media (max-width:760px){.offer-filter .more-f[open]>.more-f-in{position:fixed;left:0;right:0;bottom:0;max-height:78vh;overflow:auto;background:var(--card);z-index:70;padding:18px 16px calc(16px + env(safe-area-inset-bottom));border-radius:18px 18px 0 0;box-shadow:0 -10px 40px rgba(7,26,48,.25);grid-template-columns:1fr}
+.offer-filter .more-f[open]>summary{position:fixed;left:0;right:0;bottom:78vh;z-index:71;background:var(--card);border-radius:18px 18px 0 0;padding:14px 16px 4px;margin:0}
+.offer-filter .more-f[open]>summary::before{content:'×';border:0;font-size:1.4rem}
+.sheet-done{display:flex;position:sticky;bottom:0;min-height:52px}}
+/* Medidor de la nota del precio */
+.meter{position:relative;height:8px;border-radius:999px;background:linear-gradient(90deg,#D93A3F 0 45%,#C99400 45% 70%,#2F7D4E 70% 85%,#087A50 85%);max-width:320px;margin:4px 0 14px;opacity:.9}
+.meter i{position:absolute;top:-4px;height:16px;width:3px!important;background:var(--ink);border-radius:2px;left:0;transform:translateX(-1px)}
+.meter i{left:var(--x)}.meter span{display:none}
+/* Guías */
+.guide-t{display:block;margin-top:auto;font-size:.82rem;color:var(--muted);font-weight:600}
+.guide{display:flex;flex-direction:column;padding:18px;gap:4px}.guide-e{font-size:1.4rem}
+.stars-s{color:#C99400;letter-spacing:1px}
+/* Texto pequeño mínimo 13 px */
+.small{font-size:.875rem}.card-tags span{font-size:.8rem}.checked{font-size:.8rem}
+/* Enlaces subrayados solo en el texto */
+.crumbs a,.chips a,.mini a,.foot a,.tool,.card{text-decoration:none}
+/* Menú móvil a pantalla completa */
+@media (max-width:760px){.burger[open] .burger-nav{position:fixed;inset:64px 0 0 0;width:auto;border-radius:0;border:0;overflow:auto;padding:12px 16px 90px;z-index:60}.burger-nav a{display:block;padding:14px 4px;font-size:1.05rem;font-weight:600;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}}
+/* Newsletter */
+.cta-band{border-radius:18px;background:var(--ink)!important}.cta-band h2{color:#fff}
+.lead{display:flex;gap:8px;flex-wrap:wrap}.lead input[type=email]{flex:1 1 220px}
+/* Vigilar el precio destacado */
+#vigilar{background:var(--sea-2);border-radius:14px;padding:20px!important;margin:12px 0}
+#vigilar h2{font-size:1.3rem}
+/* Otras fechas como tira desplazable */
+.dates-strip,.other-dates{display:flex;overflow-x:auto;gap:8px;scrollbar-width:thin}
+/* Escalas: fotos más grandes */
+.see-grid img,.escala-ph img{aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+/* Asistente y cuenta atrás */
+.chat{border-radius:14px;border:1px solid var(--line);background:var(--card)}.msg.user{background:var(--sea);color:#fff}.msg.bot{background:var(--soft)}
+.cd-num,.countdown b{font:800 2.2rem/1 var(--sans);font-stretch:110%;font-variant-numeric:tabular-nums}
+/* Modales */
+.modal{border:0;border-radius:16px;box-shadow:0 20px 60px rgba(7,26,48,.3);padding:24px}.modal::backdrop{background:rgba(7,26,48,.45)}
+/* Vídeos en carrusel en el móvil */
+@media (max-width:640px){.videos{display:flex!important;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory}.videos>*{flex:0 0 80%;scroll-snap-align:start}}
+/* Botones fijos sin tapar contenido */
+@media (max-width:760px){body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}body:has(.m-cta){padding-bottom:calc(140px + env(safe-area-inset-bottom))}}
+/* Página de búsqueda con el mismo estilo de filtros */
+.search-form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+/* Esqueletos con la forma de la tarjeta */
+.skel-card{min-height:440px}
+/* Premios */
+.tool .eyebrow{color:#9A6B00;font-weight:700}
+@media (max-width:640px){.crumbs ol{display:flex;flex-wrap:nowrap;overflow:hidden}.crumbs li{flex:none;white-space:nowrap}.crumbs li:last-child{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}}
