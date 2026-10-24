@@ -725,3 +725,31 @@ form .form-msg{font-weight:600;color:var(--ok)}
 .sc-d{background:#9A4A0E!important}
 .hm-g .h0{color:#5A6B82}
 .ship-card .ship-art .scb b,.scb:not(:has(i)) b{background:none!important;padding:0!important}
+/* Barra inferior: activo resaltado */
+.bottom-nav a[aria-current=page]{color:var(--sea)}.bottom-nav a[aria-current=page] svg{stroke-width:2.4}
+.bottom-nav a{font-weight:600}
+/* Migas en una línea en el móvil */
+@media (max-width:640px){.crumbs ol,.crumbs{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+/* Atajo de teclado del buscador */
+.gsearch{position:relative}.gq-k{position:absolute;right:10px;top:50%;transform:translateY(-50%);font:600 .75rem var(--sans);color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--card);pointer-events:none}
+.gsearch:focus-within .gq-k{display:none}@media (max-width:900px){.gq-k{display:none}}
+/* Saltar al contenido */
+.skip:focus{background:var(--sea);color:#fff;font-weight:700;border-radius:8px;padding:10px 14px}
+/* Vista lista con precio a la derecha */
+#offer-grid.as-list .card-body{display:grid;grid-template-columns:1fr auto;column-gap:16px}
+#offer-grid.as-list .card-body>*{grid-column:1}#offer-grid.as-list .card-foot{grid-column:2;grid-row:1/span 5;border:0;margin:0;padding:0;align-self:center}
+#offer-grid.as-list .ship-art .scb i{display:none}
+/* Vista y guardada */
+.offer-card.is-seen .card-body h3::after{content:'Vista';margin-left:8px;font:600 .7rem var(--sans);color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px;vertical-align:2px}
+.offer-card.is-saved .ship-art::before{content:'Guardada';position:absolute;right:10px;top:10px;z-index:2;background:#fff;color:var(--ink);font:700 .72rem var(--sans);padding:4px 8px;border-radius:6px}
+/* Leyenda del calendario */
+.hm-leg{display:flex;gap:6px;flex-wrap:wrap}.hm-leg span{padding:2px 8px;border-radius:5px;font-weight:600}.hm-leg .h1{background:#156b39;color:#fff}.hm-leg .h2{background:#8fcf9f;color:#0A2A4F}.hm-leg .h3{background:#f3d38a;color:#0A2A4F}.hm-leg .h4{background:#efa58f;color:#0A2A4F}
+/* Botón ver más */
+.js-more{margin-top:16px;min-height:52px;font-size:1rem}
+/* Estados de botones */
+.btn[disabled],.btn[aria-busy=true]{opacity:.6;cursor:progress}
+/* Barra de precio fija en el móvil */
+.m-cta{padding-top:10px!important;padding-bottom:10px!important;border-top:1px solid var(--line)}.m-cta b{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}.m-cta .btn{min-height:46px;padding:0 20px}
+/* Anclas de la oferta */
+.offer .tabs-nav{margin-top:0}
+.tabs-nav a{font-weight:600;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:8px;white-space:nowrap}.tabs-nav a:hover{background:var(--soft);color:var(--sea)}

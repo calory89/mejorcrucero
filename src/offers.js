@@ -217,6 +217,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   </div></div>
 </div></section>
 
+<nav class="tabs-nav wrap" aria-label="Secciones de la oferta"><a href="#precio">Precio</a><a href="#vigilar">Vigilar</a><a href="#nota-oferta">Nota</a><a href="#itinerario">Itinerario</a><a href="#foro">Pasajeros</a></nav>
 <div class="wrap ship-grid"><div class="ship-main">
   <section class="block" id="precio"><h2>${r.partial ? 'Precio de este crucero' : 'Precio real de este crucero'}</h2>
   <div class="table-wrap"><table class="spec"><tbody>
@@ -322,7 +323,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
       let cells = Array.from({ length: first }, () => '<span></span>');
       for (let d = 1; d <= days; d++) { const k = `${ym}-${String(d).padStart(2, '0')}`, x = by[k]; cells.push(x ? `<a class="${lvl(minPrice(x))}" href="${url(x)}" title="${d} ${MES[M - 1]}: desde ${eur(minPrice(x))} (${esc(shipName(x))}, ${x.nights} noches)"><b>${d}</b><small>${minPrice(x)}</small></a>` : `<span class="h0">${d}</span>`); }
       return `<div class="hm-m"><h3 class="h-sm">${cap(MES[M - 1])} ${Y}</h3><div class="hm-g"><i>L</i><i>M</i><i>X</i><i>J</i><i>V</i><i>S</i><i>D</i>${cells.join('')}</div></div>`; };
-    return `<section class="wrap block"><h2>Calendario de precios</h2><p class="muted small">Precio más bajo por persona de las salidas de cada día (en €). Más verde, más barato. Toca un día para ver esa salida.</p><div class="hm">${yms.map(grid).join('')}</div></section>`;
+    return `<section class="wrap block"><h2>Calendario de precios</h2><p class="muted small">Precio más bajo por persona de las salidas de cada día (en €). Toca un día para ver esa salida.</p><p class="hm-leg small"><span class="h1">Más barato</span><span class="h2">Barato</span><span class="h3">Normal</span><span class="h4">Caro</span></p><div class="hm">${yms.map(grid).join('')}</div></section>`;
   }
   function monthTable(list) {
     const by = {}; for (const x of list) { const k = x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
