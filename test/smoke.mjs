@@ -59,7 +59,7 @@ const missingSm = locs.filter((u) => !fs.existsSync(path.join(D, decodeURICompon
 if (missingSm.length) fails.push(`sitemap con páginas que no existen: ${missingSm.join(', ')}`);
 // Enlaces internos de una muestra de páginas
 const linkMiss = new Set();
-for (const p of sample.slice(0, 40)) { const t = read(p); for (const m of t.matchAll(/href="(\/[^"#?]*)"/g)) { const u = m[1]; if (/^\/(data|assets|og|img)\//.test(u) || /\.[a-z0-9]{2,5}$/.test(u)) continue; if (!fs.existsSync(path.join(D, u, 'index.html')) && !fs.existsSync(path.join(D, u))) linkMiss.add(`${u} (en ${p})`); } }
+for (const p of sample.slice(0, 40)) { const t = read(p); for (const m of t.matchAll(/href="(\/[^"#?]*)"/g)) { const B = (process.env.BASE || '/').replace(/\/$/, ''); const u = B && m[1].startsWith(B + '/') ? m[1].slice(B.length) : m[1]; if (/^\/(data|assets|og|img)\//.test(u) || /\.[a-z0-9]{2,5}$/.test(u)) continue; if (!fs.existsSync(path.join(D, u, 'index.html')) && !fs.existsSync(path.join(D, u))) linkMiss.add(`${u} (en ${p})`); } }
 if (linkMiss.size) fails.push(`enlaces internos rotos: ${[...linkMiss].slice(0, 10).join(', ')}`);
 if (warns.length) console.warn(`⚠ Avisos (${warns.length}):\n- ` + warns.slice(0, 15).join('\n- '));
 console.log(`SEO: ${pages} páginas indexables, ${locs.length} URL en el sitemap`);
