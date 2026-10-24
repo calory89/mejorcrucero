@@ -523,6 +523,17 @@
       return { s, p };
     }).sort((x, y) => y.p - x.p).slice(0, 6);
     $('#quiz-out').innerHTML = `<h2 class="full">Tus barcos recomendados</h2>` + scored.map(({ s }) => miniCard(s)).join('');
+    // Ofertas reales que encajan: barcos recomendados o destinos para ti, en los meses elegidos y sin avión si lo pides
+    getJson('ofertas.json').then((all) => {
+      const top = new Set(scored.map(({ s }) => s.slug));
+      const ES = ['barcelona', 'palma', 'valencia', 'malaga', 'alicante', 'cadiz', 'tarragona', 'bilbao', 'vigo', 'tenerife', 'gran-canaria'];
+      const dset = new Set(goodDest.map((d) => d.slug));
+      const hits = all.filter((o) => (top.has(o.s) || dset.has(o.dst)) && (!monthsFor.length || monthsFor.includes(+o.d.slice(5, 7))) && (a.plane === 'yes' || ES.includes(o.ps))).sort((x, y) => (top.has(y.s) - top.has(x.s)) || y.sc - x.sc).slice(0, 8);
+      if (!hits.length) return;
+      const box = document.createElement('div'); box.className = 'quiz-offers';
+      box.innerHTML = `<h2>Ofertas que encajan contigo</h2><ul class="mini mini-grid">${hits.map((o) => `<li><a href="${BASE}salidas/${o.i}/"><b>${esc(o.t)} · ${esc(o.sn)}</b><span>${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} desde ${esc(o.p)} · ${eur(o.pr)} · nota del precio ${o.sc}</span></a></li>`).join('')}</ul>`;
+      $('#quiz-out').after(box);
+    }).catch(() => {});
     ($('#quiz-dest').firstChild ? $('#quiz-dest') : $('#quiz-out')).scrollIntoView({ behavior: 'smooth' });
     track('quiz_done');
   });
