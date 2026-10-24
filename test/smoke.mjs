@@ -9,7 +9,7 @@ const read = (p) => { try { return fs.readFileSync(path.join(D, p), 'utf8'); } c
 const must = (p, ...needles) => { const t = read(p); for (const n of needles) if (t && !t.includes(n)) fails.push(`${p}: no contiene "${n}"`); return t; };
 
 // Datos de salidas: forma mínima
-const sailings = JSON.parse(fs.readFileSync('src/data/sailings.json', 'utf8'));
+const sailings = JSON.parse(fs.readFileSync(process.env.SAILINGS || 'src/data/sailings.json', 'utf8'));
 for (const x of sailings) {
   if (!x.id || !x.ship || !/^\d{4}-\d{2}-\d{2}$/.test(x.date) || !(x.nights > 0) || !x.prices || !Object.values(x.prices).some((v) => v > 0)) fails.push(`salida mal formada: ${x.id || JSON.stringify(x).slice(0, 80)}`);
 }

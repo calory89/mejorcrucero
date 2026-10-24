@@ -3,11 +3,13 @@
 // Sin servicios de terceros. Uso: node tools/ncl.js [ruta_salida]   ·   NCL_MAX=40 limita los itinerarios (para pruebas).
 // Si la fuente no responde o devuelve poco, NO toca el fichero (se mantienen los datos anteriores).
 import fs from 'node:fs';
+import { destFromName } from './dest.js';
 
 const OUT = process.argv[2] || 'src/data/sailings.json';
 const MAX = +(process.env.NCL_MAX || 0);
 const MONTHS = +(process.env.NCL_MONTHS || 18);
 const BASE = 'https://www.ncl.com/es/es';
+// Nota: con 2 peticiones a la vez y pausas, la lectura completa tarda unos minutos; es lo que pide la cortesía con la web.
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 const slugify = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const num = (v) => { const n = parseFloat(v); return Number.isFinite(n) && n > 0 ? Math.round(n) : null; };
@@ -62,8 +64,11 @@ async function main() {
   const prev = (() => { try { return JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { return []; } })();
   const prevById = Object.fromEntries(prev.map((x) => [x.id, x]));
   const out = []; const unknownCabins = new Set(); let sample = null;
-  await pool(its, 3, async (it) => {
-    const s = await get(`/api/vacation-builder/v2/itinerary/${encodeURIComponent(it.code)}/sailings?numberOfGuests=2`);
+  const failed = [], done = new Set();
+  const doIt = async (it) => {
+    const s = await get(`/api/vacation-builder/v2/itinerary/${encodeURIComponent(it.code)}/sailings?numberOfGuests=2`, 5);
+    if (!s) { failed.push(it); return; }
+    done.add(it.code);
     const results = s?.results || []; if (!results.length) return;
     const ev = await get(`/api/vacation-builder/itinerary/${encodeURIComponent(it.code)}/package/${encodeURIComponent(results[0].sailing.packageId)}/events`);
     if (!sample) sample = { itinerary: it, sailing: { ...results[0], stateroomTypesPricing: (results[0].stateroomTypesPricing || []).map(({ offerGroups, ...r }) => r) }, events: (ev || []).slice(0, 3) };
@@ -80,7 +85,7 @@ async function main() {
     for (let i = 1; i < ports.length; i++) { const a = ports[i - 1], b = ports[i]; if (a.name === b.name && b.arrive && !b.depart && b.day === a.day + 1) { b.depart = b.arrive; delete b.arrive; if (a.depart && !a.arrive) { a.arrive = a.depart; delete a.depart; } } }
     const names = ports.map((p) => p.name).length ? ports.map((p) => p.name) : [PORT(it.embarkationPort?.title), ...(it.portsOfCall || []).map((p) => PORT(p.title)), PORT(it.disembarkationPort?.title)];
     const depart = PORT(it.embarkationPort?.title), arrive = PORT(it.disembarkationPort?.title);
-    const destination = destOf(it, names);
+    const destination = destOf(it, names) || destFromName((it.destinations || []).map((d) => d.title).join(' '), names);
     // Tamaño razonable: todas las fechas (hasta 12) si sale de Europa; las 3 más próximas si sale de otro continente
     const europe = !!PORT_SLUG[depart] && !['buenos-aires', 'miami', 'port-canaveral', 'fort-lauderdale', 'san-juan'].includes(PORT_SLUG[depart]) || ['mediterraneo-occidental', 'mediterraneo-oriental', 'fiordos-noruegos', 'capitales-balticas', 'canarias-y-madeira'].includes(destination);
     const horizon = new Date(Date.now() + MONTHS * 30.5 * 864e5).toISOString().slice(0, 10);
@@ -100,7 +105,7 @@ async function main() {
       const id = 'ncl-' + slugify(`${it.code}-${r.sailing.sailingId || date}`);
       const urlB = `https://www.ncl.com/es/es/vacation-builder?itineraryCode=${encodeURIComponent(it.code)}`;
       const x = {
-        id, line: 'norwegian', ship: slugify(it.ship?.title || ''), ship_name: it.ship?.title, destination, dest_name: (it.destinations || [])[0]?.title || null,
+        id, line: 'norwegian', ncl_code: it.code, ship: slugify(it.ship?.title || ''), ship_name: it.ship?.title, destination, dest_name: (it.destinations || [])[0]?.title || null,
         date, nights, depart_port: depart, depart_port_slug: PORT_SLUG[depart] || null, arrive_port: arrive,
         itinerary: { name: String(it.title || ''), ports: ports.length ? ports : names.map((n, i) => ({ name: n, order: i + 1 })), flat: !ports.length },
         prices, base_price: base && base > price ? base : null, port_charges: null, service_night: null, service_included: false,
@@ -112,11 +117,17 @@ async function main() {
       x.history = history.slice(-90); x.first_seen = old?.first_seen || today; x.updated = now;
       out.push(x);
     }
-  });
+  };
+  await pool(its, 2, doIt);
+  // Segunda pasada, de una en una y más despacio, para los itinerarios que fallaron (límites de la web)
+  const retry = failed.splice(0); for (const it of retry) { await sleep(1500); await doIt(it); }
   try { fs.writeFileSync('tools/ncl-sample.json', JSON.stringify({ sample, unknownCabins: [...unknownCabins].slice(0, 40) }, null, 1)); } catch {}
   if (out.length < (MAX ? 5 : 100)) { console.error(`Solo ${out.length} salidas válidas de NCL (${its.length} itinerarios): no se toca nada`); process.exit(0); }
+  // Itinerarios que no se pudieron leer hoy: se conservan sus salidas anteriores (no se borra lo que ya teníamos)
+  const kept = prev.filter((x) => String(x.id).startsWith('ncl-') && x.date >= today && x.ncl_code && !done.has(x.ncl_code));
+  out.push(...kept);
   const others = prev.filter((x) => !String(x.id).startsWith('ncl-') && x.date >= today);
   fs.writeFileSync(OUT, JSON.stringify([...others, ...out].sort((a, b) => a.date.localeCompare(b.date))));
-  console.log(`NCL: ${out.length} salidas importadas de ${its.length} itinerarios. Otras fuentes: ${others.length}. Camarotes sin mapear: ${unknownCabins.size}.`);
+  console.log(`NCL: ${out.length} salidas importadas de ${its.length} itinerarios. Otras fuentes: ${others.length}. Camarotes sin mapear: ${unknownCabins.size}. Sin leer hoy: ${failed.length} (conservadas ${kept.length} salidas anteriores).`);
 }
 main();

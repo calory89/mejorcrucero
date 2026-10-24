@@ -408,7 +408,7 @@
 // ---------- Ficha de salida: total para el grupo ----------
   $$('.group-calc').forEach((g) => {
     const sel = $('.js-group', g), out = $('.js-group-out', g), real = +g.dataset.real;
-    const upd = () => { const n = +sel.value; out.innerHTML = n === 1 ? `Precio real por persona: <b>${eur(real)}</b>. Si viajas solo, la naviera aplica suplemento individual.` : `Total para ${n} adultos: <b>${eur(real * n)}</b> (tasas y cuota de servicio incluidas).`; store.set('mc_group', n); };
+    const upd = () => { const n = +sel.value; const pt = g.dataset.partial ? 'sin tasas, que la naviera no publica aquí' : 'tasas y cuota de servicio incluidas'; out.innerHTML = n === 1 ? `Precio por persona: <b>${eur(real)}</b> (${pt}). Si viajas solo, la naviera aplica suplemento individual.` : `Total para ${n} adultos: <b>${eur(real * n)}</b> (${pt}).`; store.set('mc_group', n); };
     const saved = store.get('mc_group', 2); if (saved) sel.value = String(saved); sel.addEventListener('change', upd); upd();
   });
 // ---------- Ofertas guardadas y vistas ----------

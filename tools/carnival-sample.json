@@ -1,0 +1,227 @@
+{
+ "itinerary": {
+  "roundtrip": true,
+  "leadSailing": {
+   "fromPrice": 183,
+   "fromPriceCurrency": "USD",
+   "taxesAndFees": 0,
+   "departureDate": "2026-10-26T00:00:00.000Z",
+   "arrivalDate": "2026-10-29T00:00:00.000Z",
+   "leadMetaCode": "IS",
+   "embarkPortCode": "MIA",
+   "departureMmmDdYyyy": "Oct 26, 2026",
+   "departureMmmDYyyy": "Oct 26, 2026",
+   "arrivalMmmDdYyyy": "Oct 29, 2026",
+   "arrivalMmmDYyyy": "Oct 29, 2026",
+   "schedule": [
+    {
+     "id": 0,
+     "day": 1,
+     "date": "2026-10-26T00:00:00+00:00",
+     "portCode": "MIA",
+     "port": "Miami",
+     "portOverviewDescription": null,
+     "arrive": null,
+     "depart": "2026-10-26T15:30:00+00:00",
+     "dateDayOfWeek": "Mon",
+     "dateDayOfWeekFull": "Monday",
+     "arriveTimeHMmTt": null,
+     "arriveDayOfWeek": null,
+     "arriveDayOfWeekFull": null,
+     "departTimeHMmTt": "3:30 PM",
+     "departDayOfWeek": "Mon",
+     "departDayOfWeekFull": "Monday"
+    },
+    {
+     "id": 1,
+     "day": 2,
+     "date": "2026-10-27T00:00:00+00:00",
+     "portCode": "FS1",
+     "port": "Fun Day At Sea",
+     "portOverviewDescription": null,
+     "arrive": null,
+     "depart": null,
+     "dateDayOfWeek": "Tue",
+     "dateDayOfWeekFull": "Tuesday",
+     "arriveTimeHMmTt": null,
+     "arriveDayOfWeek": null,
+     "arriveDayOfWeekFull": null,
+     "departTimeHMmTt": null,
+     "departDayOfWeek": null,
+     "departDayOfWeekFull": null
+    },
+    {
+     "id": 2,
+     "day": 3,
+     "date": "2026-10-28T00:00:00+00:00",
+     "portCode": "CBK",
+     "port": "Celebration Key™",
+     "portOverviewDescription": null,
+     "arrive": "2026-10-28T08:00:00+00:00",
+     "depart": "2026-10-28T16:00:00+00:00",
+     "dateDayOfWeek": "Wed",
+     "dateDayOfWeekFull": "Wednesday",
+     "arriveTimeHMmTt": "8:00 AM",
+     "arriveDayOfWeek": "Wed",
+     "arriveDayOfWeekFull": "Wednesday",
+     "departTimeHMmTt": "4:00 PM",
+     "departDayOfWeek": "Wed",
+     "departDayOfWeekFull": "Wednesday"
+    },
+    {
+     "id": 3,
+     "day": 4,
+     "date": "2026-10-29T00:00:00+00:00",
+     "portCode": "MIA",
+     "port": "Miami",
+     "portOverviewDescription": null,
+     "arrive": "2026-10-29T08:00:00+00:00",
+     "depart": null,
+     "dateDayOfWeek": "Thu",
+     "dateDayOfWeekFull": "Thursday",
+     "arriveTimeHMmTt": "8:00 AM",
+     "arriveDayOfWeek": "Thu",
+     "arriveDayOfWeekFull": "Thursday",
+     "departTimeHMmTt": null,
+     "departDayOfWeek": null,
+     "departDayOfWeekFull": null
+    }
+   ],
+   "departureDayOfWeek": "Mon",
+   "departureDayOfWeekFull": "Monday",
+   "arrivalDayOfWeek": "Thu",
+   "arrivalDayOfWeekFull": "Thursday"
+  },
+  "taxesAndFeesRange": {
+   "minTaxesAndFees": 0
+  },
+  "sailings": [
+   {
+    "departureDate": "2026-10-26T00:00:00.000Z",
+    "arrivalDate": "2026-10-29T00:00:00.000Z",
+    "rooms": {
+     "interior": {
+      "metacode": "IS",
+      "price": 183,
+      "priceCurrency": "USD",
+      "taxesAndFees": 0,
+      "taxesAndFeesCurrency": "USD",
+      "soldOut": false,
+      "rateCode": "PSV",
+      "offerId": 243845,
+      "categoryCode": "IS",
+      "upgradeFrom": "IS",
+      "extraSavingsType": null,
+      "couponCode": ""
+     },
+     "oceanview": {
+      "metacode": "OS",
+      "price": 231,
+      "priceCurrency": "USD",
+      "taxesAndFees": 0,
+      "taxesAndFeesCurrency": "USD",
+      "soldOut": false,
+      "rateCode": "G3J",
+      "offerId": 264335,
+      "categoryCode": "6B",
+      "upgradeFrom": "6B",
+      "extraSavingsType": null,
+      "couponCode": ""
+     },
+     "balcony": {
+      "metacode": "OB",
+      "price": 0,
+      "priceCurrency": null,
+      "taxesAndFees": null,
+      "taxesAndFeesCurrency": null,
+      "soldOut": true,
+      "rateCode": "",
+      "offerId": 0,
+      "categoryCode": null,
+      "upgradeFrom": null,
+      "extraSavingsType": null,
+      "couponCode": ""
+     },
+     "suite": {
+      "metacode": "SU",
+      "price": 0,
+      "priceCurrency": null,
+      "taxesAndFees": null,
+      "taxesAndFeesCurrency": null,
+      "soldOut": true,
+      "rateCode": "",
+      "offerId": 0,
+      "categoryCode": null,
+      "upgradeFrom": null,
+      "extraSavingsType": null,
+      "couponCode": ""
+     }
+    },
+    "lowestPrice": 183,
+    "sailingId": "22871",
+    "sailingURL": "/booking?embkCode=MIA&itinCode=BAW&durDays=3&shipCode=CQ&subRegionCode=BH&sailingID=22871&sailDate=10262026&numGuests=2&isMilitary=N&isOver55=N&isPastGuest=N&stateCode=&couponCode=&evsel=&locality=1&currency=USD",
+    "departureArrival": "Oct 26 - 29",
+    "departureArrivalDays": "Mon - Thu",
+    "departureYear": "2026",
+    "isLeadSailing": true
+   }
+  ],
+  "hasExtraValue": false,
+  "itineraryURLWithSailing": "/itinerary/3-day-the-bahamas-cruise/miami/conquest/3-days/baw?itinportcode=MIA&sailDate=10262026&numGuests=2&military=N&senior=N&pastGuest=N&evsel=&hideSailingEvents=true&locality=1&currency=USD&roomType=IS",
+  "itineraryTitleFormatted": "3-Day The Bahamas from Miami, FL",
+  "imageUrl": "/service/GetItineraryRandomImage.aspx?RegionCode=BH&Key=3DaysBAWTheBahamasCarnivalConquest&format=image",
+  "id": "BAW_MIA_CQ_3_Mon",
+  "code": "BAW",
+  "image": "/-/media/Images/explore/destinations/ports/carnival-bahamas-port-celebration-key-search-4.jpg?useCustomFunctions=1&centerCrop=1",
+  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-bahamas-port-celebration-key-search-4.jpg?useCustomFunctions=1&centerCrop=1",
+  "stateroomMetaInformation": [
+   {
+    "metacode": "IS",
+    "title": "Interior",
+    "description": "Interior Description",
+    "isAvailable": true,
+    "images": []
+   },
+   {
+    "metacode": "OS",
+    "title": "Ocean View",
+    "description": "Ocean View Description",
+    "isAvailable": true,
+    "images": []
+   },
+   {
+    "metacode": "OB",
+    "title": "Balcony",
+    "description": "Balcony Description",
+    "isAvailable": true,
+    "images": []
+   },
+   {
+    "metacode": "SU",
+    "title": "Suite",
+    "description": "Suite Description",
+    "isAvailable": true,
+    "images": []
+   }
+  ],
+  "specialScoops": [],
+  "imageRandomizationInfo": {
+   "crop": "Center",
+   "metaTag": "carnival-bahamas-port-celebration-key-1",
+   "photoCredit": null
+  },
+  "itineraryTitle": "3-Day The Bahamas from Miami, FL",
+  "departurePortCode": "MIA",
+  "departurePortName": "Miami, FL",
+  "regionCode": "BH",
+  "regionName": "The Bahamas",
+  "dur": 3,
+  "shipCode": "CQ",
+  "shipName": "Carnival Conquest",
+  "portsToDisplay": [
+   "Miami",
+   "Celebration Key™"
+  ],
+  "itineraryURL": "/itinerary/3-day-the-bahamas-cruise/miami/conquest/3-days/baw?itinportcode=MIA&military=N&senior=N&pastGuest=N&evsel=&hideSailingEvents=true&locality=1&currency=USD"
+ }
+}
