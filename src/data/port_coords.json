@@ -14,6 +14,16 @@
 138.6,
 "https://es.wikipedia.org/wiki/Adelaida_(Australia)"
 ],
+"Airlie Beach": [
+-20.2744,
+148.715,
+"https://en.wikipedia.org/wiki/Airlie_Beach,_Queensland"
+],
+"Ajaccio": [
+41.9256,
+8.7364,
+"https://es.wikipedia.org/wiki/Ajaccio"
+],
 "Akita": [
 39.7199,
 140.1026,
@@ -33,6 +43,11 @@
 38.3453,
 -0.4831,
 "https://es.wikipedia.org/wiki/Alicante"
+],
+"Aomori": [
+40.8228,
+140.7469,
+"https://es.wikipedia.org/wiki/Aomori_(Aomori)"
 ],
 "Apia": [
 -13.8333,
@@ -83,6 +98,11 @@
 -4.65,
 12.7667,
 "https://es.wikipedia.org/wiki/Belize_(Angola)"
+],
+"Benoa": [
+-8.7583,
+115.2194,
+"https://en.wikipedia.org/wiki/Tanjung_Benoa"
 ],
 "Beppu": [
 33.2846,
@@ -229,6 +249,11 @@
 18.4239,
 "https://es.wikipedia.org/wiki/Ciudad_del_Cabo"
 ],
+"Cobh": [
+51.851,
+-8.2967,
+"https://es.wikipedia.org/wiki/Cobh"
+],
 "Colombo": [
 6.9267,
 79.8606,
@@ -238,6 +263,11 @@
 55.6761,
 12.5689,
 "https://es.wikipedia.org/wiki/Copenhague"
+],
+"Corcho": [
+18.1361,
+-66.676,
+"https://en.wikipedia.org/wiki/Corcho_River"
 ],
 "Cork": [
 51.9,
@@ -263,6 +293,11 @@
 36.535,
 -6.2975,
 "https://es.wikipedia.org/wiki/C%C3%A1diz"
+],
+"Denarau": [
+-17.777,
+177.3723,
+"https://es.wikipedia.org/wiki/Denarau"
 ],
 "Dominica": [
 15.4167,
@@ -349,6 +384,11 @@
 -78.66,
 "https://es.wikipedia.org/wiki/Freeport_(Bahamas)"
 ],
+"Fremantle": [
+-32.0542,
+115.7475,
+"https://es.wikipedia.org/wiki/Fremantle"
+],
 "Funchal": [
 32.65,
 -16.9167,
@@ -358,6 +398,11 @@
 29.3014,
 -94.795,
 "https://es.wikipedia.org/wiki/Galveston"
+],
+"Gdańsk": [
+54.3679,
+18.6211,
+"https://es.wikipedia.org/wiki/Lechia_Gda%C5%84sk"
 ],
 "Gdynia": [
 54.5175,
@@ -369,10 +414,25 @@
 7.205,
 "https://es.wikipedia.org/wiki/Geiranger"
 ],
+"Genoa": [
+44.4072,
+8.9339,
+"https://en.wikipedia.org/wiki/Genoa"
+],
 "Gotemburgo": [
 57.7075,
 11.9675,
 "https://es.wikipedia.org/wiki/Gotemburgo"
+],
+"Gothenburg": [
+40.9317,
+-100.1594,
+"https://es.wikipedia.org/wiki/Gothenburg_(Nebraska)"
+],
+"Gotland": [
+57.6153,
+18.2806,
+"https://es.wikipedia.org/wiki/Municipio_de_Gotland"
 ],
 "Gran Caimán": [
 19.33,
@@ -393,6 +453,11 @@
 33.775,
 -89.8089,
 "https://es.wikipedia.org/wiki/Grenada_(Misisipi)"
+],
+"Guadeloupe": [
+16.25,
+-61.5,
+"https://es.wikipedia.org/wiki/Guadalupe_(Francia)"
 ],
 "Génova": [
 44.4072,
@@ -454,6 +519,11 @@
 147.3167,
 "https://es.wikipedia.org/wiki/Hobart"
 ],
+"Holyhead": [
+53.3167,
+-4.6333,
+"https://es.wikipedia.org/wiki/Holyhead"
+],
 "Hong Kong": [
 22.2783,
 114.1586,
@@ -504,6 +574,11 @@
 161,
 "https://es.wikipedia.org/wiki/Isla_Malaita"
 ],
+"Isla de Pascua": [
+-27.12,
+-109.35,
+"https://es.wikipedia.org/wiki/Isla_de_Pascua"
+],
 "Islas Lofoten": [
 68.3331,
 14.6664,
@@ -544,6 +619,11 @@
 136.6565,
 "https://es.wikipedia.org/wiki/Kanazawa"
 ],
+"Kaohsiung": [
+22.615,
+120.2975,
+"https://es.wikipedia.org/wiki/Kaohsiung"
+],
 "Katákolo": [
 37.6518,
 21.3162,
@@ -568,6 +648,11 @@
 35.0116,
 135.7681,
 "https://es.wikipedia.org/wiki/Kioto"
+],
+"Kirkwall": [
+58.9811,
+-2.96,
+"https://es.wikipedia.org/wiki/Kirkwall"
 ],
 "Klaipeda": [
 55.7125,
@@ -618,6 +703,11 @@
 42.4254,
 18.7712,
 "https://es.wikipedia.org/wiki/Kotor"
+],
+"Kralendijk": [
+12.1508,
+-68.2767,
+"https://es.wikipedia.org/wiki/Kralendijk"
 ],
 "Kristiansund": [
 63.1115,
@@ -674,6 +764,11 @@
 -8.6848,
 "https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_Leix%C3%B5es"
 ],
+"Lifou": [
+-20.9667,
+167.233,
+"https://es.wikipedia.org/wiki/Lifou"
+],
 "Limasol": [
 34.675,
 33.0443,
@@ -694,6 +789,11 @@
 -2.9917,
 "https://es.wikipedia.org/wiki/Liverpool"
 ],
+"Livorno": [
+43.55,
+10.3167,
+"https://es.wikipedia.org/wiki/Livorno"
+],
 "Long Beach": [
 33.7681,
 -118.1956,
@@ -708,6 +808,11 @@
 -9.6658,
 -35.735,
 "https://es.wikipedia.org/wiki/Macei%C3%B3"
+],
+"Maloy": [
+40.675,
+-94.4131,
+"https://es.wikipedia.org/wiki/Maloy_(Iowa)"
 ],
 "Manhattan": [
 40.7283,
@@ -754,10 +859,20 @@
 24.4325,
 "https://es.wikipedia.org/wiki/Milo"
 ],
+"Miyakojima": [
+24.7901,
+125.2949,
+"https://es.wikipedia.org/wiki/Miyakojima"
+],
 "Mobile": [
 30.4428,
 -88.0092,
 "https://es.wikipedia.org/wiki/Bah%C3%ADa_de_Mobile"
+],
+"Mont Saint-Michel": [
+48.6358,
+-1.5103,
+"https://es.wikipedia.org/wiki/Monte_Saint-Michel_(comuna)"
 ],
 "Monte Fuji": [
 35.3606,
@@ -834,10 +949,20 @@
 7.215,
 "https://es.wikipedia.org/wiki/Aeropuerto_Internacional_de_Niza-Costa_Azul"
 ],
+"Nordfjordeid": [
+61.9061,
+5.9914,
+"https://es.wikipedia.org/wiki/Nordfjordeid"
+],
 "Norfolk": [
 52.6725,
 0.95,
 "https://es.wikipedia.org/wiki/Norfolk"
+],
+"Nouméa": [
+-22.2758,
+166.458,
+"https://en.wikipedia.org/wiki/Noum%C3%A9a"
 ],
 "Nueva Orleans": [
 29.9761,
@@ -894,6 +1019,11 @@
 10.7389,
 "https://es.wikipedia.org/wiki/Oslo"
 ],
+"Pago Pago": [
+-14.2794,
+-170.7006,
+"https://es.wikipedia.org/wiki/Pago_Pago"
+],
 "Palma de Mallorca": [
 39.5667,
 2.6497,
@@ -929,10 +1059,20 @@
 100.365,
 "https://es.wikipedia.org/wiki/Penang"
 ],
+"Philip Island": [
+-38.5031,
+145.236,
+"https://es.wikipedia.org/wiki/Circuito_de_Phillip_Island"
+],
 "Phuket": [
 7.8881,
 98.3975,
 "https://es.wikipedia.org/wiki/Phuket"
+],
+"Pitcairn": [
+-25.0678,
+-130.1046,
+"https://es.wikipedia.org/wiki/Islas_Pitcairn"
 ],
 "Ponta Delgada": [
 37.74,
@@ -969,6 +1109,11 @@
 -122.6792,
 "https://es.wikipedia.org/wiki/Portland"
 ],
+"Porto Grande": [
+0.7128,
+-51.4128,
+"https://es.wikipedia.org/wiki/Porto_Grande"
+],
 "Portree": [
 57.4131,
 -6.1936,
@@ -989,10 +1134,20 @@
 6,
 "https://es.wikipedia.org/wiki/Provenza"
 ],
+"Puerto Argentino/Stanley": [
+-51.6939,
+-57.8496,
+"https://es.wikipedia.org/wiki/Puerto_Argentino/Stanley"
+],
 "Puerto Caldera": [
 9.9433,
 -84.7167,
 "https://es.wikipedia.org/wiki/Puerto_Caldera"
+],
+"Puerto Chacabuco": [
+-45.4616,
+-72.8135,
+"https://es.wikipedia.org/wiki/Puerto_Chacabuco"
 ],
 "Puerto Limón": [
 1.0268,
@@ -1028,6 +1183,11 @@
 20.6413,
 -105.2233,
 "https://es.wikipedia.org/wiki/Puerto_Vallarta"
+],
+"Puerto Williams": [
+-54.9341,
+-67.6109,
+"https://es.wikipedia.org/wiki/Puerto_Williams"
 ],
 "Punta Arenas": [
 -53.1625,
@@ -1089,10 +1249,25 @@
 12.4664,
 "https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_Roma_Trastevere"
 ],
+"Ronne": [
+-77.8592,
+-61.2992,
+"https://es.wikipedia.org/wiki/Barrera_de_hielo_Filchner-Ronne"
+],
 "Royal Naval Dockyard": [
 44.6566,
 -63.5791,
 "https://en.wikipedia.org/wiki/Royal_Naval_Dockyard,_Halifax"
+],
+"Róterdam": [
+51.92,
+4.48,
+"https://es.wikipedia.org/wiki/R%C3%B3terdam"
+],
+"Safaga": [
+26.7517,
+33.9344,
+"https://es.wikipedia.org/wiki/Safaga"
 ],
 "Saguenay": [
 48.4167,
@@ -1194,6 +1369,11 @@
 -5.995,
 "https://es.wikipedia.org/wiki/Sevilla"
 ],
+"Seyðisfjörður": [
+65.2601,
+-14.0058,
+"https://es.wikipedia.org/wiki/Sey%C3%B0isfj%C3%B6r%C3%B0ur"
+],
 "Seúl": [
 37.56,
 126.99,
@@ -1224,6 +1404,16 @@
 5.1667,
 "https://es.wikipedia.org/wiki/Fiordo_de_Sogn"
 ],
+"South Queensferry": [
+55.9875,
+-3.4,
+"https://es.wikipedia.org/wiki/South_Queensferry"
+],
+"St. George's": [
+-34.7236,
+-58.2412,
+"https://es.wikipedia.org/wiki/St._George%27s_College_(Quilmes)"
+],
 "St. John's": [
 47.5614,
 -52.7119,
@@ -1238,6 +1428,11 @@
 58.97,
 5.7314,
 "https://es.wikipedia.org/wiki/Stavanger"
+],
+"Stornoway": [
+58.209,
+-6.387,
+"https://es.wikipedia.org/wiki/Stornoway"
 ],
 "Suva": [
 -18.1333,
@@ -1314,6 +1509,21 @@
 139.6917,
 "https://es.wikipedia.org/wiki/Tokio"
 ],
+"Tokushima": [
+34.0703,
+134.5549,
+"https://es.wikipedia.org/wiki/Tokushima_(Tokushima)"
+],
+"Tolón": [
+43.125,
+5.9306,
+"https://es.wikipedia.org/wiki/Tol%C3%B3n"
+],
+"Tromsø": [
+69.6496,
+18.957,
+"https://es.wikipedia.org/wiki/Troms%C3%B8"
+],
 "Ushuaia": [
 -54.8072,
 -68.3081,
@@ -1348,6 +1558,11 @@
 36.8506,
 -75.9779,
 "https://es.wikipedia.org/wiki/Virginia_Beach"
+],
+"Visby": [
+57.629,
+18.3071,
+"https://es.wikipedia.org/wiki/Visby"
 ],
 "Volos": [
 39.3611,
