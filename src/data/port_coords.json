@@ -14,10 +14,20 @@
 138.6,
 "https://es.wikipedia.org/wiki/Adelaida_(Australia)"
 ],
+"Akita": [
+39.7199,
+140.1026,
+"https://es.wikipedia.org/wiki/Akita_(Akita)"
+],
 "Akureyri": [
 65.6835,
 -18.0878,
 "https://es.wikipedia.org/wiki/Akureyri"
+],
+"Alejandría": [
+31.1975,
+29.8925,
+"https://es.wikipedia.org/wiki/Alejandr%C3%ADa"
 ],
 "Alicante": [
 38.3453,
@@ -74,6 +84,11 @@
 12.7667,
 "https://es.wikipedia.org/wiki/Belize_(Angola)"
 ],
+"Beppu": [
+33.2846,
+131.4913,
+"https://es.wikipedia.org/wiki/Beppu_(%C5%8Cita)"
+],
 "Bergen": [
 60.3925,
 5.3233,
@@ -83,6 +98,11 @@
 52.5167,
 13.3833,
 "https://es.wikipedia.org/wiki/Berl%C3%ADn"
+],
+"Bilbao": [
+43.2631,
+-2.935,
+"https://es.wikipedia.org/wiki/Bilbao"
 ],
 "Bimini": [
 25.7333,
@@ -109,6 +129,11 @@
 -59.6167,
 "https://es.wikipedia.org/wiki/Bridgetown"
 ],
+"Brisbane": [
+-27.4678,
+153.0278,
+"https://es.wikipedia.org/wiki/Brisbane"
+],
 "Bruselas / Brujas": [
 50.4592,
 4.4538,
@@ -119,6 +144,11 @@
 -58.3819,
 "https://es.wikipedia.org/wiki/Buenos_Aires"
 ],
+"Burdeos": [
+44.8378,
+-0.5794,
+"https://es.wikipedia.org/wiki/Burdeos"
+],
 "Burnie": [
 -41.0636,
 145.8919,
@@ -128,6 +158,11 @@
 35.18,
 129.075,
 "https://es.wikipedia.org/wiki/Busan"
+],
+"Cabo Norte": [
+71.1725,
+25.7844,
+"https://es.wikipedia.org/wiki/Cabo_Norte"
 ],
 "Cabo San Lucas": [
 22.8947,
@@ -179,6 +214,16 @@
 106.7019,
 "https://es.wikipedia.org/wiki/Ciudad_Ho_Chi_Minh"
 ],
+"Ciudad de Panamá": [
+8.9711,
+-79.5347,
+"https://es.wikipedia.org/wiki/Ciudad_de_Panam%C3%A1"
+],
+"Ciudad de Quebec": [
+46.8161,
+-71.2242,
+"https://es.wikipedia.org/wiki/Quebec_(ciudad)"
+],
 "Ciudad del Cabo": [
 -33.9253,
 18.4239,
@@ -193,6 +238,11 @@
 55.6761,
 12.5689,
 "https://es.wikipedia.org/wiki/Copenhague"
+],
+"Cork": [
+51.9,
+-8.4731,
+"https://es.wikipedia.org/wiki/Cork"
 ],
 "Corón": [
 11.9989,
@@ -319,6 +369,11 @@
 7.205,
 "https://es.wikipedia.org/wiki/Geiranger"
 ],
+"Gotemburgo": [
+57.7075,
+11.9675,
+"https://es.wikipedia.org/wiki/Gotemburgo"
+],
 "Gran Caimán": [
 19.33,
 -81.24,
@@ -328,6 +383,11 @@
 25.8333,
 -77.9,
 "https://es.wikipedia.org/wiki/Great_Stirrup_Cay"
+],
+"Greenock": [
+55.95,
+-4.7667,
+"https://es.wikipedia.org/wiki/Greenock"
 ],
 "Grenada": [
 33.775,
@@ -348,6 +408,11 @@
 44.6478,
 -63.5714,
 "https://es.wikipedia.org/wiki/Halifax"
+],
+"Hanói": [
+21.0245,
+105.8412,
+"https://es.wikipedia.org/wiki/Han%C3%B3i"
 ],
 "Harvest Caye": [
 16.4783,
@@ -384,6 +449,11 @@
 132.4519,
 "https://es.wikipedia.org/wiki/Hiroshima"
 ],
+"Hobart": [
+-42.8833,
+147.3167,
+"https://es.wikipedia.org/wiki/Hobart"
+],
 "Hong Kong": [
 22.2783,
 114.1586,
@@ -409,6 +479,11 @@
 -45.3706,
 "https://es.wikipedia.org/wiki/Ilhabela"
 ],
+"Ilhéus": [
+-14.7889,
+-39.0489,
+"https://es.wikipedia.org/wiki/Ilh%C3%A9us"
+],
 "Inverness": [
 57.4839,
 -4.2258,
@@ -419,15 +494,30 @@
 -118.4176,
 "https://es.wikipedia.org/wiki/Isla_Santa_Catalina_(California)"
 ],
+"Isla Kangaroo": [
+-35.8,
+137.3,
+"https://es.wikipedia.org/wiki/Isla_Canguro"
+],
 "Isla Tropicale": [
 -9,
 161,
 "https://es.wikipedia.org/wiki/Isla_Malaita"
 ],
+"Islas Lofoten": [
+68.3331,
+14.6664,
+"https://es.wikipedia.org/wiki/Islas_Lofoten"
+],
 "Islas de la Lealtad": [
 -20.9961,
 167.2722,
 "https://es.wikipedia.org/wiki/Islas_de_la_Lealtad"
+],
+"Itajaí": [
+-26.9078,
+-48.6619,
+"https://es.wikipedia.org/wiki/Itaja%C3%AD"
 ],
 "Jacksonville": [
 30.3167,
@@ -449,10 +539,20 @@
 -156.4675,
 "https://es.wikipedia.org/wiki/Kahului"
 ],
+"Kanazawa": [
+36.5611,
+136.6565,
+"https://es.wikipedia.org/wiki/Kanazawa"
+],
 "Katákolo": [
 37.6518,
 21.3162,
 "https://es.wikipedia.org/wiki/Kat%C3%A1kolo"
+],
+"Kavala": [
+40.9396,
+24.4069,
+"https://es.wikipedia.org/wiki/Kavala"
 ],
 "Key West": [
 38.3903,
@@ -499,6 +599,16 @@
 13.7307,
 "https://es.wikipedia.org/wiki/Koper"
 ],
+"Korčula": [
+42.95,
+16.9,
+"https://es.wikipedia.org/wiki/Kor%C4%8Dula_(isla)"
+],
+"Kos": [
+36.85,
+27.2333,
+"https://en.wikipedia.org/wiki/Kos"
+],
 "Kota Kinabalu": [
 5.975,
 116.0725,
@@ -508,6 +618,11 @@
 42.4254,
 18.7712,
 "https://es.wikipedia.org/wiki/Kotor"
+],
+"Kristiansund": [
+63.1115,
+7.732,
+"https://es.wikipedia.org/wiki/Kristiansund"
 ],
 "Kuala Lumpur": [
 3.1478,
@@ -529,10 +644,20 @@
 -68.1333,
 "https://es.wikipedia.org/wiki/La_Paz"
 ],
+"La Spezia": [
+44.108,
+9.8289,
+"https://es.wikipedia.org/wiki/La_Spezia"
+],
 "Langkawi": [
 6.35,
 99.8,
 "https://es.wikipedia.org/wiki/Archipi%C3%A9lago_Langkawi"
+],
+"Las Palmas": [
+28.1272,
+-15.4314,
+"https://es.wikipedia.org/wiki/Las_Palmas_de_Gran_Canaria"
 ],
 "Las Palmas de Gran Canaria": [
 28.1272,
@@ -543,6 +668,16 @@
 -17.6242,
 177.4528,
 "https://es.wikipedia.org/wiki/Lautoka"
+],
+"Leixões": [
+41.19,
+-8.6848,
+"https://es.wikipedia.org/wiki/Estaci%C3%B3n_de_Leix%C3%B5es"
+],
+"Limasol": [
+34.675,
+33.0443,
+"https://es.wikipedia.org/wiki/Limasol"
 ],
 "Limón": [
 10.03,
@@ -719,6 +854,11 @@
 166.45,
 "https://es.wikipedia.org/wiki/Numea"
 ],
+"Nynäshamn": [
+58.9076,
+17.9446,
+"https://es.wikipedia.org/wiki/Nyn%C3%A4shamn"
+],
 "Nápoles": [
 40.8358,
 14.2486,
@@ -744,10 +884,25 @@
 -8.6108,
 "https://es.wikipedia.org/wiki/Oporto"
 ],
+"Orcadas": [
+59,
+-3,
+"https://es.wikipedia.org/wiki/Orcadas"
+],
+"Oslo": [
+59.9133,
+10.7389,
+"https://es.wikipedia.org/wiki/Oslo"
+],
 "Palma de Mallorca": [
 39.5667,
 2.6497,
 "https://es.wikipedia.org/wiki/Palma_de_Mallorca"
+],
+"Panama Canal Transit": [
+9.12,
+-79.75,
+"https://es.wikipedia.org/wiki/Canal_de_Panam%C3%A1"
 ],
 "Papeete": [
 -17.5397,
@@ -758,6 +913,11 @@
 48.8567,
 2.3522,
 "https://es.wikipedia.org/wiki/Par%C3%ADs"
+],
+"Patagonia": [
+-41.8102,
+-68.9063,
+"https://es.wikipedia.org/wiki/Patagonia"
 ],
 "Patmos": [
 37.325,
@@ -808,6 +968,11 @@
 45.515,
 -122.6792,
 "https://es.wikipedia.org/wiki/Portland"
+],
+"Portree": [
+57.4131,
+-6.1936,
+"https://es.wikipedia.org/wiki/Portree"
 ],
 "Praia": [
 14.9177,
@@ -863,6 +1028,11 @@
 20.6413,
 -105.2233,
 "https://es.wikipedia.org/wiki/Puerto_Vallarta"
+],
+"Punta Arenas": [
+-53.1625,
+-70.9081,
+"https://es.wikipedia.org/wiki/Punta_Arenas"
 ],
 "Punta del Este": [
 -34.9557,
@@ -924,6 +1094,11 @@
 -63.5791,
 "https://en.wikipedia.org/wiki/Royal_Naval_Dockyard,_Halifax"
 ],
+"Saguenay": [
+48.4167,
+-71.0667,
+"https://es.wikipedia.org/wiki/Saguenay"
+],
 "Saint John": [
 45.2796,
 -66.0628,
@@ -933,6 +1108,11 @@
 40.6806,
 14.7594,
 "https://es.wikipedia.org/wiki/Salerno"
+],
+"Samana": [
+19.2053,
+-69.3364,
+"https://es.wikipedia.org/wiki/Saman%C3%A1"
 ],
 "San Diego": [
 32.715,
@@ -974,6 +1154,11 @@
 -70.65,
 "https://es.wikipedia.org/wiki/Santiago_de_Chile"
 ],
+"Santiago de Compostela": [
+42.8833,
+-8.5333,
+"https://es.wikipedia.org/wiki/Santiago_de_Compostela"
+],
 "Santo Tomás": [
 19.1781,
 -100.2917,
@@ -988,6 +1173,11 @@
 33.18,
 129.715,
 "https://es.wikipedia.org/wiki/Sasebo"
+],
+"Savusavu": [
+-16.7808,
+179.3331,
+"https://en.wikipedia.org/wiki/Savusavu"
 ],
 "Seattle": [
 47.605,
@@ -1009,6 +1199,11 @@
 126.99,
 "https://es.wikipedia.org/wiki/Se%C3%BAl"
 ],
+"Shimonoseki": [
+33.9579,
+130.9413,
+"https://es.wikipedia.org/wiki/Shimonoseki"
+],
 "Shizuoka": [
 34.9756,
 138.3825,
@@ -1019,10 +1214,30 @@
 103.7689,
 "https://es.wikipedia.org/wiki/Batalla_de_Singapur"
 ],
+"Siracusa": [
+37.0692,
+15.2875,
+"https://es.wikipedia.org/wiki/Siracusa"
+],
+"Sognefjord": [
+61.1,
+5.1667,
+"https://es.wikipedia.org/wiki/Fiordo_de_Sogn"
+],
 "St. John's": [
 47.5614,
 -52.7119,
 "https://en.wikipedia.org/wiki/St._John%27s,_Newfoundland_and_Labrador"
+],
+"Stanley": [
+-51.6939,
+-57.8496,
+"https://es.wikipedia.org/wiki/Puerto_Argentino/Stanley"
+],
+"Stavanger": [
+58.97,
+5.7314,
+"https://es.wikipedia.org/wiki/Stavanger"
 ],
 "Suva": [
 -18.1333,
@@ -1068,6 +1283,11 @@
 27.9475,
 -82.4586,
 "https://es.wikipedia.org/wiki/Tampa"
+],
+"Tarragona": [
+41.1175,
+1.2528,
+"https://es.wikipedia.org/wiki/Tarragona"
 ],
 "Tauranga": [
 -37.6858,
@@ -1123,6 +1343,16 @@
 42.2358,
 -8.7267,
 "https://es.wikipedia.org/wiki/Vigo"
+],
+"Virginia Beach": [
+36.8506,
+-75.9779,
+"https://es.wikipedia.org/wiki/Virginia_Beach"
+],
+"Volos": [
+39.3611,
+22.9425,
+"https://es.wikipedia.org/wiki/Volos"
 ],
 "Walvis Bay": [
 -22.9494,
