@@ -19,6 +19,11 @@
 148.715,
 "https://en.wikipedia.org/wiki/Airlie_Beach,_Queensland"
 ],
+"Aitutaki": [
+-18.85,
+-159.79,
+"https://es.wikipedia.org/wiki/Aitutaki"
+],
 "Ajaccio": [
 41.9256,
 8.7364,
@@ -73,6 +78,11 @@
 -54.0333,
 -37.3333,
 "https://es.wikipedia.org/wiki/Bah%C3%ADa_de_las_Islas"
+],
+"Bali": [
+-8.5,
+115,
+"https://es.wikipedia.org/wiki/Provincia_de_Bali"
 ],
 "Baltimore": [
 39.2864,
@@ -139,6 +149,11 @@
 -151.736,
 "https://es.wikipedia.org/wiki/Bora_Bora_(atol%C3%B3n)"
 ],
+"Boracay": [
+11.9689,
+121.9239,
+"https://en.wikipedia.org/wiki/Boracay"
+],
 "Boston": [
 42.3603,
 -71.0578,
@@ -153,6 +168,11 @@
 -27.4678,
 153.0278,
 "https://es.wikipedia.org/wiki/Brisbane"
+],
+"Brujas": [
+51.2089,
+3.2242,
+"https://es.wikipedia.org/wiki/Brujas"
 ],
 "Bruselas / Brujas": [
 50.4592,
@@ -194,6 +214,11 @@
 145.7753,
 "https://es.wikipedia.org/wiki/Cairns"
 ],
+"Callao": [
+-12.0522,
+-77.1392,
+"https://es.wikipedia.org/wiki/Callao"
+],
 "Camboriú": [
 -27.025,
 -48.6539,
@@ -234,6 +259,11 @@
 106.7019,
 "https://es.wikipedia.org/wiki/Ciudad_Ho_Chi_Minh"
 ],
+"Ciudad de Belice": [
+17.4986,
+-88.1886,
+"https://es.wikipedia.org/wiki/Ciudad_de_Belice"
+],
 "Ciudad de Panamá": [
 8.9711,
 -79.5347,
@@ -264,6 +294,11 @@
 12.5689,
 "https://es.wikipedia.org/wiki/Copenhague"
 ],
+"Coquimbo": [
+-29.9532,
+-71.338,
+"https://es.wikipedia.org/wiki/Coquimbo"
+],
 "Corcho": [
 18.1361,
 -66.676,
@@ -273,6 +308,11 @@
 51.9,
 -8.4731,
 "https://es.wikipedia.org/wiki/Cork"
+],
+"Cornualles": [
+50.3,
+-4.9,
+"https://es.wikipedia.org/wiki/Cornualles"
 ],
 "Corón": [
 11.9989,
@@ -303,6 +343,11 @@
 15.4167,
 -61.3333,
 "https://en.wikipedia.org/wiki/Dominica"
+],
+"Dorset": [
+50.8333,
+-2.3333,
+"https://es.wikipedia.org/wiki/Dorset"
 ],
 "Dover": [
 51.1347,
@@ -419,6 +464,11 @@
 8.9339,
 "https://en.wikipedia.org/wiki/Genoa"
 ],
+"Gijón": [
+43.5293,
+-5.6773,
+"https://es.wikipedia.org/wiki/Gij%C3%B3n"
+],
 "Gotemburgo": [
 57.7075,
 11.9675,
@@ -463,6 +513,16 @@
 44.4072,
 8.9339,
 "https://es.wikipedia.org/wiki/G%C3%A9nova"
+],
+"Haines": [
+59.16,
+-135.44,
+"https://es.wikipedia.org/wiki/Borough_de_Haines"
+],
+"Hakata": [
+34.2049,
+133.1137,
+"https://es.wikipedia.org/wiki/Hakata_(Ehime)"
 ],
 "Hakodate": [
 41.7687,
@@ -534,6 +594,11 @@
 -157.85,
 "https://en.wikipedia.org/wiki/Honolulu"
 ],
+"Horta": [
+41.4131,
+2.1664,
+"https://es.wikipedia.org/wiki/Distrito_de_Horta-Guinard%C3%B3"
+],
 "Icy Strait Point": [
 58.1293,
 -135.4632,
@@ -558,6 +623,11 @@
 57.4839,
 -4.2258,
 "https://es.wikipedia.org/wiki/Inverness"
+],
+"Ishigaki": [
+24.4033,
+124.1936,
+"https://es.wikipedia.org/wiki/Isla_Ishigaki"
 ],
 "Isla Catalina (California)": [
 33.3834,
@@ -709,6 +779,11 @@
 -68.2767,
 "https://es.wikipedia.org/wiki/Kralendijk"
 ],
+"Kristiansand": [
+58.1467,
+7.9956,
+"https://es.wikipedia.org/wiki/Kristiansand"
+],
 "Kristiansund": [
 63.1115,
 7.732,
@@ -734,6 +809,11 @@
 -68.1333,
 "https://es.wikipedia.org/wiki/La_Paz"
 ],
+"La Rochelle": [
+46.1594,
+-1.1514,
+"https://es.wikipedia.org/wiki/La_Rochelle"
+],
 "La Spezia": [
 44.108,
 9.8289,
@@ -758,6 +838,11 @@
 -17.6242,
 177.4528,
 "https://es.wikipedia.org/wiki/Lautoka"
+],
+"Le Verdon": [
+45.5464,
+-1.0617,
+"https://es.wikipedia.org/wiki/Le_Verdon-sur-Mer"
 ],
 "Leixões": [
 41.19,
@@ -819,6 +904,11 @@
 -73.9942,
 "https://es.wikipedia.org/wiki/Manhattan"
 ],
+"Manta": [
+-0.95,
+-80.7162,
+"https://es.wikipedia.org/wiki/Manta_(Ecuador)"
+],
 "Marsella": [
 43.2967,
 5.3764,
@@ -869,6 +959,11 @@
 -88.0092,
 "https://es.wikipedia.org/wiki/Bah%C3%ADa_de_Mobile"
 ],
+"Molde": [
+62.7333,
+7.1833,
+"https://es.wikipedia.org/wiki/Molde_(M%C3%B8re_og_Romsdal)"
+],
 "Mont Saint-Michel": [
 48.6358,
 -1.5103,
@@ -914,6 +1009,11 @@
 136.9064,
 "https://es.wikipedia.org/wiki/Nagoya"
 ],
+"Napier": [
+55.9229,
+-3.228,
+"https://es.wikipedia.org/wiki/Universidad_Napier_de_Edimburgo"
+],
 "Nassau": [
 25.0781,
 -77.3386,
@@ -938,6 +1038,11 @@
 12.2411,
 109.1911,
 "https://es.wikipedia.org/wiki/Nha_Trang"
+],
+"Niigata": [
+37.9162,
+139.0364,
+"https://es.wikipedia.org/wiki/Niigata_(Niigata)"
 ],
 "Niza": [
 43.7019,
@@ -1013,6 +1118,11 @@
 59,
 -3,
 "https://es.wikipedia.org/wiki/Orcadas"
+],
+"Osaka": [
+34.6938,
+135.5021,
+"https://es.wikipedia.org/wiki/Osaka"
 ],
 "Oslo": [
 59.9133,
@@ -1099,6 +1209,11 @@
 57.4989,
 "https://es.wikipedia.org/wiki/Port_Louis"
 ],
+"Port Said": [
+31.2711,
+32.2914,
+"https://es.wikipedia.org/wiki/Estadio_de_Port_Said"
+],
 "Portimão": [
 37.1333,
 -8.5333,
@@ -1113,6 +1228,11 @@
 0.7128,
 -51.4128,
 "https://es.wikipedia.org/wiki/Porto_Grande"
+],
+"Portoferraio": [
+42.8167,
+10.3167,
+"https://es.wikipedia.org/wiki/Portoferraio"
 ],
 "Portree": [
 57.4131,
@@ -1239,6 +1359,11 @@
 14.4333,
 "https://es.wikipedia.org/wiki/Rijeka"
 ],
+"Ringaskiddy": [
+51.8333,
+-8.3167,
+"https://es.wikipedia.org/wiki/Ringaskiddy-Loughbeg"
+],
 "Roatán": [
 16.3834,
 -86.4178,
@@ -1253,6 +1378,16 @@
 -77.8592,
 -61.2992,
 "https://es.wikipedia.org/wiki/Barrera_de_hielo_Filchner-Ronne"
+],
+"Roseau": [
+15.3,
+-61.3833,
+"https://es.wikipedia.org/wiki/Roseau"
+],
+"Rotterdam": [
+51.8828,
+4.4881,
+"https://es.wikipedia.org/wiki/Rotterdam_Ahoy"
 ],
 "Royal Naval Dockyard": [
 44.6566,
@@ -1278,6 +1413,11 @@
 45.2796,
 -66.0628,
 "https://es.wikipedia.org/wiki/Saint_John_(Nuevo_Brunswick)"
+],
+"Sakaiminato": [
+35.5396,
+133.2316,
+"https://es.wikipedia.org/wiki/Sakaiminato_(Tottori)"
 ],
 "Salerno": [
 40.6806,
@@ -1323,6 +1463,11 @@
 14.35,
 -91.0167,
 "https://en.wikipedia.org/wiki/Santa_Luc%C3%ADa_Cotzumalguapa"
+],
+"Santa Marta": [
+11.2361,
+-74.2017,
+"https://es.wikipedia.org/wiki/Santa_Marta_(Colombia)"
 ],
 "Santiago": [
 -33.4375,
@@ -1379,6 +1524,16 @@
 126.99,
 "https://es.wikipedia.org/wiki/Se%C3%BAl"
 ],
+"Sharm el Sheikh": [
+27.8519,
+34.305,
+"https://es.wikipedia.org/wiki/Sharm_el-Sheij"
+],
+"Shetland": [
+60.3567,
+-1.2606,
+"https://es.wikipedia.org/wiki/Shetland"
+],
 "Shimonoseki": [
 33.9579,
 130.9413,
@@ -1403,6 +1558,16 @@
 61.1,
 5.1667,
 "https://es.wikipedia.org/wiki/Fiordo_de_Sogn"
+],
+"Sokhna": [
+29.6,
+32.3167,
+"https://en.wikipedia.org/wiki/Ain_Sokhna"
+],
+"Souda": [
+48.7394,
+4.3114,
+"https://es.wikipedia.org/wiki/Soud%C3%A9"
 ],
 "South Queensferry": [
 55.9875,
@@ -1519,10 +1684,20 @@
 5.9306,
 "https://es.wikipedia.org/wiki/Tol%C3%B3n"
 ],
+"Trapani": [
+38.0175,
+12.515,
+"https://es.wikipedia.org/wiki/Trapani"
+],
 "Tromsø": [
 69.6496,
 18.957,
 "https://es.wikipedia.org/wiki/Troms%C3%B8"
+],
+"Trondheim": [
+63.44,
+10.4,
+"https://es.wikipedia.org/wiki/Trondheim"
 ],
 "Ushuaia": [
 -54.8072,
@@ -1578,6 +1753,11 @@
 54.1753,
 12.0883,
 "https://es.wikipedia.org/wiki/Warnem%C3%BCnde"
+],
+"Wellington": [
+-41.2889,
+174.7772,
+"https://es.wikipedia.org/wiki/Wellington"
 ],
 "Whittier": [
 33.9656,
