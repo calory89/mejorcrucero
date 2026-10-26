@@ -4,6 +4,11 @@
 10.2097,
 "https://es.wikipedia.org/wiki/Aarhus"
 ],
+"Abu Dhabi": [
+23.6667,
+54,
+"https://es.wikipedia.org/wiki/Abu_Dabi"
+],
 "Acapulco": [
 16.8629,
 -99.887,
@@ -39,6 +44,11 @@
 -18.0878,
 "https://es.wikipedia.org/wiki/Akureyri"
 ],
+"Albany": [
+42.65,
+-73.7667,
+"https://es.wikipedia.org/wiki/Albany"
+],
 "Alejandría": [
 31.1975,
 29.8925,
@@ -48,6 +58,11 @@
 38.3453,
 -0.4831,
 "https://es.wikipedia.org/wiki/Alicante"
+],
+"Alta": [
+19.1941,
+-99.0215,
+"https://es.wikipedia.org/wiki/Milpa_Alta"
 ],
 "Aomori": [
 40.8228,
@@ -59,6 +74,11 @@
 -171.8333,
 "https://es.wikipedia.org/wiki/Apia"
 ],
+"Aqaba": [
+29.5319,
+35.0056,
+"https://en.wikipedia.org/wiki/Aqaba"
+],
 "Arrecife": [
 28.9625,
 -13.5506,
@@ -68,6 +88,11 @@
 12.515,
 -69.975,
 "https://es.wikipedia.org/wiki/Aruba"
+],
+"Astoria": [
+40.7761,
+-73.9107,
+"https://es.wikipedia.org/wiki/Astoria%E2%80%93Ditmars_Boulevard_(l%C3%ADnea_Astoria)"
 ],
 "Auckland": [
 -36.8492,
@@ -199,6 +224,11 @@
 129.075,
 "https://es.wikipedia.org/wiki/Busan"
 ],
+"Busselton": [
+-33.6478,
+115.3458,
+"https://es.wikipedia.org/wiki/Busselton"
+],
 "Cabo Norte": [
 71.1725,
 25.7844,
@@ -219,6 +249,11 @@
 -77.1392,
 "https://es.wikipedia.org/wiki/Callao"
 ],
+"Cam Ranh": [
+11.9136,
+109.1369,
+"https://es.wikipedia.org/wiki/Cam_Ranh"
+],
 "Camboriú": [
 -27.025,
 -48.6539,
@@ -228,6 +263,11 @@
 9.12,
 -79.75,
 "https://es.wikipedia.org/wiki/Canal_de_Panam%C3%A1"
+],
+"Cannes": [
+43.5525,
+7.0214,
+"https://es.wikipedia.org/wiki/Cannes"
 ],
 "Caribe holandés": [
 12.1833,
@@ -334,10 +374,20 @@
 -6.2975,
 "https://es.wikipedia.org/wiki/C%C3%A1diz"
 ],
+"Darwin": [
+-12.4381,
+130.8411,
+"https://es.wikipedia.org/wiki/Darwin_(Australia)"
+],
 "Denarau": [
 -17.777,
 177.3723,
 "https://es.wikipedia.org/wiki/Denarau"
+],
+"Doha": [
+25.2861,
+51.5294,
+"https://es.wikipedia.org/wiki/Doha"
 ],
 "Dominica": [
 15.4167,
@@ -369,6 +419,11 @@
 18.1083,
 "https://es.wikipedia.org/wiki/Dubrovnik"
 ],
+"Dubái": [
+25.2644,
+55.3117,
+"https://es.wikipedia.org/wiki/Dub%C3%A1i"
+],
 "Durban": [
 -29.8583,
 31.025,
@@ -388,6 +443,16 @@
 38.4127,
 27.1384,
 "https://es.wikipedia.org/wiki/Esmirna"
+],
+"Esperance": [
+42.7472,
+-74.3053,
+"https://es.wikipedia.org/wiki/Esperance_(Nueva_York)"
+],
+"Estadios Punta Arenas": [
+-53.1541,
+-70.8955,
+"https://es.wikipedia.org/wiki/Estadio_Fiscal_Antonio_R%C3%ADspoli_D%C3%ADaz"
 ],
 "Estambul": [
 41.01,
@@ -468,6 +533,11 @@
 43.5293,
 -5.6773,
 "https://es.wikipedia.org/wiki/Gij%C3%B3n"
+],
+"Glaciar Hubbard": [
+60.3139,
+-139.3708,
+"https://es.wikipedia.org/wiki/Glaciar_Hubbard"
 ],
 "Gotemburgo": [
 57.7075,
@@ -598,6 +668,11 @@
 41.4131,
 2.1664,
 "https://es.wikipedia.org/wiki/Distrito_de_Horta-Guinard%C3%B3"
+],
+"Huatulco": [
+15.8,
+-96.2167,
+"https://es.wikipedia.org/wiki/Municipio_de_Santa_Mar%C3%ADa_Huatulco"
 ],
 "Icy Strait Point": [
 58.1293,
@@ -889,10 +964,20 @@
 -118.2437,
 "https://es.wikipedia.org/wiki/Los_%C3%81ngeles"
 ],
+"Lyttelton": [
+-43.6,
+172.7167,
+"https://es.wikipedia.org/wiki/Lyttelton"
+],
 "Maceió": [
 -9.6658,
 -35.735,
 "https://es.wikipedia.org/wiki/Macei%C3%B3"
+],
+"Maizuru": [
+35.4748,
+135.386,
+"https://es.wikipedia.org/wiki/Maizuru_(Kioto)"
 ],
 "Maloy": [
 40.675,
@@ -909,10 +994,25 @@
 -80.7162,
 "https://es.wikipedia.org/wiki/Manta_(Ecuador)"
 ],
+"Manzanillo": [
+19.0532,
+-104.3164,
+"https://es.wikipedia.org/wiki/Manzanillo"
+],
 "Marsella": [
 43.2967,
 5.3764,
 "https://es.wikipedia.org/wiki/Marsella"
+],
+"Mascate": [
+23.6139,
+58.5922,
+"https://es.wikipedia.org/wiki/Mascate"
+],
+"Matsuyama": [
+33.8392,
+132.7656,
+"https://es.wikipedia.org/wiki/Matsuyama"
 ],
 "Mazatlán": [
 23.2167,
@@ -1009,6 +1109,11 @@
 136.9064,
 "https://es.wikipedia.org/wiki/Nagoya"
 ],
+"Naha": [
+26.2122,
+127.6792,
+"https://es.wikipedia.org/wiki/Naha"
+],
 "Napier": [
 55.9229,
 -3.228,
@@ -1033,6 +1138,11 @@
 54.9778,
 -1.6133,
 "https://es.wikipedia.org/wiki/Newcastle_upon_Tyne"
+],
+"Newport": [
+51.5886,
+-2.9978,
+"https://es.wikipedia.org/wiki/Newport"
 ],
 "Nha Trang": [
 12.2411,
@@ -1129,6 +1239,11 @@
 10.7389,
 "https://es.wikipedia.org/wiki/Oslo"
 ],
+"Otaru": [
+43.1907,
+140.9944,
+"https://es.wikipedia.org/wiki/Otaru_(Hokkaid%C5%8D)"
+],
 "Pago Pago": [
 -14.2794,
 -170.7006,
@@ -1213,6 +1328,11 @@
 31.2711,
 32.2914,
 "https://es.wikipedia.org/wiki/Estadio_de_Port_Said"
+],
+"Port of Spain": [
+10.6555,
+-61.5234,
+"https://es.wikipedia.org/wiki/Port_of_Spain_Port_Area"
 ],
 "Portimão": [
 37.1333,
@@ -1599,6 +1719,11 @@
 -6.387,
 "https://es.wikipedia.org/wiki/Stornoway"
 ],
+"Surabaya": [
+-7.2463,
+112.7378,
+"https://es.wikipedia.org/wiki/Surabaya"
+],
 "Suva": [
 -18.1333,
 178.4333,
@@ -1643,6 +1768,11 @@
 27.9475,
 -82.4586,
 "https://es.wikipedia.org/wiki/Tampa"
+],
+"Tangier": [
+37.8256,
+-75.9919,
+"https://es.wikipedia.org/wiki/Tangier_(Virginia)"
 ],
 "Tarragona": [
 41.1175,
@@ -1769,10 +1899,20 @@
 -68.935,
 "https://es.wikipedia.org/wiki/Willemstad"
 ],
+"Yeda": [
+21.5292,
+39.1611,
+"https://es.wikipedia.org/wiki/Yeda"
+],
 "Zeebrugge": [
 51.3308,
 3.2075,
 "https://es.wikipedia.org/wiki/Zeebrugge"
+],
+"Zihuatanejo": [
+17.6434,
+-101.5521,
+"https://es.wikipedia.org/wiki/Zihuatanejo"
 ],
 "Ámsterdam": [
 52.3667,
