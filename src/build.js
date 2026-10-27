@@ -1207,6 +1207,12 @@ write('herramientas/comparar-ofertas/index.html', toolCompareOffers());
 write('guias/index.html', guidesIndex());
 GUIDES.forEach((g) => write(`guias/${g.slug}/index.html`, guidePage(g)));
 write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));
+{ // Créditos de todas las fotos (licencias CC piden atribución también cuando la foto sale en una tarjeta)
+  const row = (name, v) => `<li><b>${esc(name)}</b>: <a href="${esc(v.page)}" target="_blank" rel="noopener">${esc(v.author || 'Wikimedia Commons')}</a> · ${esc(v.license || '')}</li>`;
+  const shipRows = ships.filter((s) => photos[s.slug]).map((s) => row(s.name, photos[s.slug])).join('');
+  const portRows = Object.entries(portPhotos).sort(([a], [b]) => a.localeCompare(b, 'es')).map(([n, v]) => row(n, v) + (v.more || []).map((m, i) => row(`${n} (${i + 2})`, m)).join('')).join('');
+  write('creditos-fotos/index.html', simplePage('/creditos-fotos/', 'Créditos de las fotos', 'Autor y licencia de cada foto de barcos y escalas de MejorCrucero.', `<p>Todas las fotos de barcos y escalas proceden de Wikimedia Commons y se usan bajo su licencia libre (CC0, dominio público, CC BY o CC BY-SA). Las fotos se han redimensionado. Si eres el autor de alguna y quieres cambiar la atribución, <a href="/contacto/">escríbenos</a>.</p><h2>Barcos</h2><ul class="credits">${shipRows}</ul><h2>Escalas y puertos</h2><ul class="credits">${portRows}</ul>`));
+}
 write('afiliacion/index.html', simplePage('/afiliacion/', 'Cómo ganamos dinero', 'Transparencia sobre los enlaces de afiliación de MejorCrucero.', affiliation));
 write('newsletter/index.html', simplePage('/newsletter/', 'La newsletter de MejorCrucero', 'Qué recibirás en la newsletter semanal de chollos de cruceros.', newsletter));
 write('creadores/index.html', simplePage('/creadores/', 'Programa de creadores', 'Colabora con MejorCrucero con tus vídeos de cruceros.', creators));

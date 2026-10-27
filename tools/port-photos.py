@@ -116,5 +116,37 @@ for n in todo:
     print(f'+ {n}: {got["file"]} ({got["license"]})', flush=True)
     if added % 20 == 0: json.dump(photos, open(D('port_photos.json'), 'w'), ensure_ascii=False, indent=1)
 
+# Fotos extra (campo "more") para las escalas más visitadas: así un listado con 48 salidas de la misma ruta no repite foto
+EXTRA = int(os.environ.get('EXTRA', '3')); TOPN = int(os.environ.get('EXTRA_TOP', '150'))
+for n in [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n in photos and n in coords][:TOPN]:
+    cur = photos[n]; more = cur.setdefault('more', [])
+    if len(more) >= EXTRA: continue
+    wurl = coords[n][2] if len(coords[n]) > 2 else ''
+    m = re.match(r'https://(\w+)\.wikipedia\.org/wiki/(.+)', wurl or '')
+    tries = ([(m.group(1), urllib.parse.unquote(m.group(2)).replace('_', ' '))] if m else []) + [('en', n)]
+    seen = {cur.get('page')} | {z.get('page') for z in more}
+    for lang, title in tries:
+        co, files = candidates(lang, title); time.sleep(0.6)
+        if co and km(coords[n][0], coords[n][1], co['lat'], co['lon']) > 80: continue
+        for f in files[:30]:
+            if len(more) >= EXTRA: break
+            ii = get('https://commons.wikimedia.org/w/api.php', {'action': 'query', 'format': 'json', 'titles': 'File:' + f, 'prop': 'imageinfo', 'iiprop': 'url|extmetadata|size|mime', 'iiurlwidth': 1280}); time.sleep(0.4)
+            pg = next(iter((ii or {}).get('query', {}).get('pages', {}).values()), {})
+            info = (pg.get('imageinfo') or [None])[0]
+            if not info or info.get('mime') != 'image/jpeg': continue
+            w, h = info.get('width', 0), info.get('height', 0)
+            if w < 1200 or h < 600 or not (1.25 <= w / max(h, 1) <= 2.2): continue
+            md = info.get('extmetadata', {}); lic = strip(md.get('LicenseShortName', {}).get('value', ''))
+            if not FREE.match(lic) or info.get('descriptionurl') in seen or info.get('descriptionurl') in used: continue
+            b = get(info.get('thumburl') or info['url'], raw=True)
+            try: im = Image.open(io.BytesIO(b)).convert('RGB')
+            except Exception: continue
+            k = len(more) + 2; s2 = f"{cur['slug']}-{k}"; ratio = round(im.width / im.height, 3)
+            im.resize((640, round(640 / ratio)), Image.LANCZOS).save(os.path.join(IMG, f'{s2}-640.webp'), 'WEBP', quality=76, method=6)
+            more.append({'thumb': f'/img/puertos/{s2}-640.webp', 'ratio': ratio, 'author': strip(md.get('Artist', {}).get('value', ''))[:80] or 'Wikimedia Commons', 'license': lic, 'page': info['descriptionurl']})
+            seen.add(info['descriptionurl']); used.add(info['descriptionurl']); print(f'+ extra {n}: {f}', flush=True)
+        if len(more) >= EXTRA: break
+    if not more: cur.pop('more', None)
+
 json.dump(photos, open(D('port_photos.json'), 'w'), ensure_ascii=False, indent=1)
 print(f'OK: {added} fotos nuevas, {len(photos)} escalas con foto')

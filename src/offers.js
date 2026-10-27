@@ -119,7 +119,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   function cardImg(x, ph) {
     const names = [...new Set(portsOf(x).map((p) => p.name))];
     const order = [...names.filter((n) => n !== x.depart_port), ...names.filter((n) => n === x.depart_port)];
-    const alts = order.map((n) => [portPhotos[n]?.thumb, n]).filter(([u]) => u);
+    const alts = [...order.map((n) => [portPhotos[n]?.thumb, n]), ...order.flatMap((n) => (portPhotos[n]?.more || []).map((m) => [m.thumb, n]))].filter(([u]) => u);
     if (ph) alts.push([ph.thumb, '']);
     if (!alts.length) return '';
     return `<img src="${esc(alts[0][0])}" data-alt="${esc(alts.map(([u, n]) => `${u}::${n}`).join('|'))}" alt="" loading="lazy" decoding="async" width="640" height="427" class="ship-photo"><span class="ph-cap"></span>`;
