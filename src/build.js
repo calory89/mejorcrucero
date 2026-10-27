@@ -169,7 +169,7 @@ function home() {
       <button class="btn js-ab" data-ab="heroCta" type="submit">Ver cruceros</button>
     </form>
     <p class="hero-ideas">Ideas: <a href="/ofertas/chollos/">chollos de hoy</a>, <a href="/ofertas/desde-barcelona/">desde Barcelona</a>, <a href="/ofertas/canarias-y-madeira/">Canarias</a>, <a href="/ofertas/mediterraneo-oriental/">islas griegas</a>, <a href="/ofertas/minicruceros/">minicruceros</a> y <a href="/guias/crucero-con-bebe/">con bebé</a>.</p>
-    <ul class="hero-trust"><li><b>${ships.length}</b> barcos con nota de 0 a 100</li><li><b>Precio real</b> con tasas, no solo la tarifa</li><li><b>Sin comisiones</b> que cambien el orden</li></ul>
+    <ul class="hero-trust"><li><b>Precios comprobados</b> ${(() => { const d = new Date(sailings.reduce((m, x) => (x.updated && x.updated > m ? x.updated : m), '') || Date.now()); return `el ${d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' })} a las ${d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}`; })()}</li><li><b>${ships.length}</b> barcos con nota de 0 a 100</li><li><b>Precio real</b> con tasas, no solo la tarifa</li><li><b>Sin comisiones</b> que cambien el orden</li></ul>
   </div>
   <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}"${heroShip.photo?.thumb ? ` srcset="${heroShip.photo.thumb} 640w, ${heroShip.photo.large} 1280w" sizes="(max-width: 900px) 100vw, 600px"` : ''} alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
 </div></section>
@@ -345,7 +345,7 @@ function shipPage(s) {
   <section id="reservar" class="block"><h2>Dónde reservar el ${esc(s.name)}</h2>
   <p class="muted">Compara la misma salida en la naviera y en las agencias.${s.sailings.length ? '' : ' Los precios en directo se están conectando: de momento te llevamos a la búsqueda de cada sitio.'}</p>
   <div class="partners">
-    ${cdLink(L.slug, s.slug) ? partnerLink({ href: cdLink(L.slug, s.slug, null, 'barco-' + s.slug), key: cdAff() ? 'cruisedirect' : null, title: 'CruiseDirect', sub: `Todas las salidas del ${s.name}`, page }) : ''}
+    ${cdLink(L.slug, s.slug) ? partnerLink({ href: cdLink(L.slug, s.slug, null, 'barco-' + s.slug), key: cdAff() ? 'cruisedirect' : null, title: 'CruiseDirect', sub: L.slug === 'carnival' ? `Todas las salidas del ${s.name}` : 'Agencia de EE. UU., precios en dólares', page }) : ''}
     ${L.web ? partnerLink({ href: L.web, title: `Web oficial de ${L.short}`, sub: 'Precio de la naviera', page }) : ''}
     ${partnerLink({ href: affLink('logitravel'), key: 'logitravel', title: 'Logitravel', sub: 'Agencia online', page })}
     ${partnerLink({ href: affLink('crucerosnet'), key: 'crucerosnet', title: 'Crucerosnet', sub: 'Especialista en cruceros', page })}
