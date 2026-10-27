@@ -297,9 +297,11 @@
       const o = v('o'), n = v('n'), b = +v('b'), es = v('es'), mo = v('m'), nv = v('nv'), sh = v('sh'), ssc = +v('ssc'), dsc = +v('dsc'), hv = f.elements.hv?.checked, nl = nlParse(v('q')), sea = v('sea'), rt = f.elements.rt?.checked, tx = f.elements.tx?.checked, wk = f.elements.wk?.checked, eu = f.elements.eu?.checked; const cab = v('cab'), pais = v('pais'), escala = fold(v('esc')).trim(), sp = v('sp'); const hidL = store.get('mc_hide_lines', []), hidS = store.get('mc_hide_ships', []);
       const k = key(o);
       g.dataset.sort = o; cards.sort((a, c) => { const x = k(a), y = k(c); return x < y ? -1 : x > y ? 1 : 0; });
-      let shown = 0, match = 0;
+      let shown = 0, match = 0, grouped = 0; const seenIt = new Set(), allDates = f.elements.alld?.checked;
       cards.forEach((c) => {
-        const ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (cab && !(c.dataset.cab || '').split(' ').includes(cab)) || (pais && !(c.dataset.q || '').includes(pais)) || (escala && !fold(c.dataset.q).includes(escala)) || (sp && !(c.dataset.sp || '').split(' ').includes(sp)) || (!nv && hidL.includes(c.dataset.line)) || (!sh && hidS.includes(c.dataset.ship)) || (nl && !nl(c)));
+        let ok = !((n && c.dataset.n !== n) || (b && +c.dataset.price > b) || (es === '1' && c.dataset.es !== '1') || (mo && c.dataset.m !== mo) || (nv && c.dataset.line !== nv) || (sh && c.dataset.ship !== sh) || (ssc && +c.dataset.ssc < ssc) || (dsc && +c.dataset.score < dsc) || (hv && seenIds.has(c.dataset.id)) || (sea !== '' && +c.dataset.sea > +sea) || (rt && c.dataset.rt !== '1') || (tx && c.dataset.tax !== '1') || (wk && c.dataset.wk !== '1') || (eu && c.dataset.cur !== 'EUR') || (cab && !(c.dataset.cab || '').split(' ').includes(cab)) || (pais && !(c.dataset.q || '').includes(pais)) || (escala && !fold(c.dataset.q).includes(escala)) || (sp && !(c.dataset.sp || '').split(' ').includes(sp)) || (!nv && hidL.includes(c.dataset.line)) || (!sh && hidS.includes(c.dataset.ship)) || (nl && !nl(c)));
+        // Una tarjeta por crucero (mismo barco, ruta y noches): las demás fechas se ven en la ficha ("+N fechas")
+        if (ok && !allDates && c.dataset.it) { if (seenIt.has(c.dataset.it)) { ok = false; grouped++; } else seenIt.add(c.dataset.it); }
         if (ok) match++;
         c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
       });
@@ -313,7 +315,7 @@
           const cap = im.nextElementSibling; if (cap && cap.classList.contains('ph-cap')) { cap.textContent = best[1] || ''; cap.hidden = !best[1]; } }); }
       let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); }
       const total = full ? match : Math.max(match, allIds.length);
-      m.textContent = `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`;
+      m.textContent = grouped ? (full ? `${total} cruceros (${total + grouped} fechas)${total > shown ? ` · mostrando ${shown}` : ''}` : `${total} ofertas · mostrando ${shown} cruceros distintos`) : `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`;
       moreBtn.hidden = total <= shown; match = total; moreBtn.textContent = `Ver ${Math.min(PAGE, match - shown)} ofertas más (quedan ${match - shown})`;
       const p = state(); const qsNew = p.toString();
       try { history.replaceState(null, '', location.pathname + (qsNew ? '?' + qsNew : '') + location.hash); } catch (e) {}

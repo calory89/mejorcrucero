@@ -73,5 +73,10 @@ for (const p of sample.slice(0, 40)) { const t = read(p); for (const m of t.matc
 if (linkMiss.size) fails.push(`enlaces internos rotos: ${[...linkMiss].slice(0, 10).join(', ')}`);
 if (warns.length) console.warn(`⚠ Avisos (${warns.length}):\n- ` + warns.slice(0, 15).join('\n- '));
 console.log(`SEO: ${pages} páginas indexables, ${locs.length} URL en el sitemap`);
+// Todo bloque JSON incrustado (JSON-LD, speculationrules, datos) debe ser JSON válido
+for (const p of ['index.html', 'ofertas/index.html', 'barcos/index.html', ...(anySailing ? [anySailing] : [])]) {
+  const h = read(p);
+  for (const m of h.matchAll(/<script type="(application\/ld\+json|speculationrules|application\/json)"[^>]*>([\s\S]*?)<\/script>/g)) { try { JSON.parse(m[2]); } catch (e) { fails.push(`JSON inválido (${m[1]}) en ${p}: ${e.message.slice(0, 80)}`); } }
+}
 if (fails.length) { console.error(`✖ Prueba rápida: ${fails.length} fallos\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
 console.log(`✔ Prueba rápida OK: ${sailings.length} salidas, ${sample.length} páginas revisadas, ${all.length} tarjetas en el listado`);
