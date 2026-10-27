@@ -303,6 +303,14 @@
         if (ok) match++;
         c.hidden = !ok || match > limit; if (!c.hidden) shown++; g.appendChild(c);
       });
+      // Tras ordenar o filtrar, que dos tarjetas visibles no repitan foto (cada una trae sus fotos candidatas en data-alt)
+      { const used = new Map(), last = new Map(); let k = 0; const cost = (u) => (used.get(u) || 0) * 1e6 + (last.has(u) ? last.get(u) : -1e6);
+        cards.forEach((c) => { if (c.hidden) return; const im = c.querySelector('img[data-alt]'); if (!im) return;
+          const alts = im.dataset.alt.split('|').map((z) => z.split('::'));
+          const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => (cost(b[0]) < cost(a[0]) ? b : a));
+          used.set(best[0], (used.get(best[0]) || 0) + 1); last.set(best[0], k++);
+          if (im.getAttribute('src') !== best[0]) im.setAttribute('src', best[0]);
+          const cap = im.nextElementSibling; if (cap && cap.classList.contains('ph-cap')) { cap.textContent = best[1] || ''; cap.hidden = !best[1]; } }); }
       let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); }
       const total = full ? match : Math.max(match, allIds.length);
       m.textContent = `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`;
@@ -357,7 +365,7 @@
     // Barra fija con el contador y acceso a los filtros al bajar por el listado
     { const bar = document.createElement('div'); bar.className = 'f-sticky'; bar.innerHTML = '<span class="f-sticky-n"></span><button type="button" class="btn btn-sm">Filtros</button>'; document.body.append(bar);
       $('button', bar).addEventListener('click', () => f.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-      const io = new IntersectionObserver(([e]) => { bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); $('.f-sticky-n', bar).textContent = $('.offer-count', f)?.textContent || ''; }); io.observe(f); }
+      const io = new IntersectionObserver(([e]) => { bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); $('.f-sticky-n', bar).textContent = ($('.offer-count', f)?.textContent || '').split(' · ')[0]; }); io.observe(f); }
     // Meses como fila de botones desplazable
     { const sel = f.elements.m; if (sel && sel.tagName === 'SELECT' && sel.options.length > 2) { const row = document.createElement('div'); row.className = 'seg seg-scroll'; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Mes');
       row.innerHTML = [...sel.options].map((o) => `<button type="button" data-v="${esc(o.value)}" aria-pressed="false">${esc(o.value ? o.textContent.replace(/ (\d{4})$/, ' $1').replace(/^(\w{3})\w*/, '$1') : 'Todos')}</button>`).join(''); sel.after(row); sel.classList.add('sr'); sel.tabIndex = -1;

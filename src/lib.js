@@ -29,12 +29,14 @@ export const AV = (f) => AVC[f] || (AVC[f] = (() => { try { return createHash('s
 // y si todas están ya usadas, la menos repetida. Así un listado de 48 salidas del mismo barco no repite foto.
 export function pickPhotos(html) {
   if (!html.includes('data-alt="')) return html;
-  const used = new Map();
+  const used = new Map(), last = new Map(); let k = 0;
   return html.replace(/<img src="[^"]*" data-alt="([^"]*)"([^>]*)><span class="ph-cap"><\/span>/g, (m, list, rest) => {
     const alts = list.split('|').map((z) => z.split('::'));
-    const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => ((used.get(b[0]) || 0) < (used.get(a[0]) || 0) ? b : a));
-    used.set(best[0], (used.get(best[0]) || 0) + 1);
-    return `<img src="${best[0]}"${rest}>${best[1] ? `<span class="ph-cap">${best[1]}</span>` : ''}`;
+    // Primero una foto sin usar; si no queda ninguna, la menos usada y, a igualdad, la que se usó hace más tiempo
+    const cost = ([u]) => (used.get(u) || 0) * 1e6 + (last.get(u) ?? -1e6);
+    const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => (cost(b) < cost(a) ? b : a));
+    used.set(best[0], (used.get(best[0]) || 0) + 1); last.set(best[0], k++);
+    return `<img src="${best[0]}" data-alt="${list}"${rest}><span class="ph-cap"${best[1] ? '' : ' hidden'}>${best[1]}</span>`;
   });
 }
 export function write(rel, html) {

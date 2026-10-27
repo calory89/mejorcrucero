@@ -847,3 +847,5 @@ form .form-msg{font-weight:600;color:var(--ok)}
 [data-tip]{position:relative}
 [data-tip]:hover::after,[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;left:0;top:calc(100% + 6px);z-index:50;width:max-content;max-width:260px;background:var(--ink);color:#fff;font:500 .8rem/1.35 var(--sans);padding:7px 10px;border-radius:8px;white-space:normal;box-shadow:var(--shadow)}
 .ship-art .ph-cap{position:absolute;left:8px;bottom:8px;z-index:1;background:rgba(10,25,50,.72);color:#fff;font-size:.72rem;font-weight:600;padding:3px 8px;border-radius:999px;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.f-sticky{white-space:nowrap;max-width:calc(100vw - 32px)}
+.tool-row{display:flex;flex-wrap:wrap;gap:4px 6px;margin:8px 0 0}.tool-row{max-width:none}.tool-row .btn{margin:0;padding:6px 10px;font-size:.9rem;min-height:36px}.page-h:has(.offer-filter){padding-bottom:0}.page-h:has(.offer-filter)+.block{padding-top:12px}
