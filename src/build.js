@@ -141,10 +141,10 @@ function monthRange(ms) {
   return `${MONTHS[start - 1]} a ${MONTHS[end - 1]}`;
 }
 const DEST_PHOTO = { 'mediterraneo-occidental': 'Barcelona', 'mediterraneo-oriental': 'Santorini', caribe: 'Guadalupe', 'fiordos-noruegos': 'Bergen', 'capitales-balticas': 'Hamburgo', 'canarias-y-madeira': 'Santa Cruz de Tenerife', alaska: 'Juneau', transatlanticos: 'Nueva York' };
-const destCard = (d, extra = '') => { const ph = portPhotos[DEST_PHOTO[d.slug]]; return `<a class="dest${ph ? ' dest-ph' : ''}" href="/destinos/${d.slug}/"${ph ? ` style="--ph:url('${BASE.replace(/\/$/, '')}${ph.thumb}')"` : ''}><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b><span>Mejor época: ${monthRange(d.months)}</span>${(() => { const n = sailings.filter((x) => x.destination === d.slug).length; return n ? `<span class="dest-n">${n} ofertas</span>` : ''; })()}${extra}</a>`; };
+const destCard = (d, extra = '') => { const ph = portPhotos[DEST_PHOTO[d.slug]] || (() => { for (const x of sailings) if (x.destination === d.slug) for (const q of x.itinerary?.ports || []) { const v = portPhotos[portName(q.name)]; if (v) return v; } return null; })(); return `<a class="dest${ph ? ' dest-ph' : ''}" href="/destinos/${d.slug}/"${ph ? ` style="--ph:url('${BASE.replace(/\/$/, '')}${ph.thumb}')"` : ''}><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b><span>Mejor época: ${monthRange(d.months)}</span>${(() => { const n = sailings.filter((x) => x.destination === d.slug).length; return n ? `<span class="dest-n">${fmt(n)} ofertas</span>` : ''; })()}${extra}</a>`; };
 
 // ---------- páginas ----------
-const featured = ['msc-world-europa', 'icon-of-the-seas', 'costa-smeralda', 'costa-toscana', 'msc-grandiosa', 'wonder-of-the-seas', 'msc-euribia', 'msc-seashore'].map((k) => bySlug[k]).filter(Boolean);
+const featured = ['costa-smeralda', 'norwegian-prima', 'carnival-celebration', 'msc-world-europa', 'icon-of-the-seas', 'costa-toscana', 'msc-grandiosa', 'wonder-of-the-seas', 'msc-euribia', 'msc-seashore'].map((k) => bySlug[k]).filter(Boolean);
 const heroShip = featured.find((s) => s.photo) || featured[0];
 const totalVideos = ships.reduce((a, s) => a + s.videos.length, 0);
 
@@ -152,36 +152,36 @@ function home() {
   const hp = portPhotos['Barcelona'];
   const heroBg = hp ? { ...hp, label: 'Puerto de Barcelona' } : { ...heroShip.photo, label: heroShip.name };
   const roomiest = ships.filter((s) => s.ratio && s.pax > 1500).sort((a, b) => b.ratio - a.ratio).slice(0, 5);
-  const deals = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score || OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 8);
+  const deals = (() => { const seenShip = new Set(), perDest = {}; return [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score || OFF.minPrice(a) - OFF.minPrice(b)).filter((x) => { if (seenShip.has(x.ship) || (perDest[x.destination] || 0) >= 2) return false; seenShip.add(x.ship); perDest[x.destination] = (perDest[x.destination] || 0) + 1; return true; }).slice(0, 8); })();
   const body = `
 <section class="hero hero-v4"><div class="wrap hero-in">
   <div class="hero-copy">
     <h1>Compara cruceros con el precio que de verdad pagarás</h1>
-    <p class="lead-p">Tasas y cuota de servicio incluidas. ${sailings.length} salidas de ${new Set(sailings.map((x) => x.line)).size} navieras, comprobadas dos veces al día en sus webs oficiales.</p>
+    <p class="lead-p">Tasas y cuota de servicio incluidas. ${fmt(sailings.length)} salidas de ${new Set(sailings.map((x) => x.line)).size} navieras, comprobadas dos veces al día en sus webs oficiales.</p>
     <form class="search search-big" action="/buscar/" role="search">
       <label><span>Destino</span><select name="destino"><option value="">Cualquiera</option>${DESTINATIONS.map((d) => `<option value="${d.slug}">${esc(d.name)}</option>`).join('')}</select></label>
       <label><span>Mes</span><select name="mes"><option value="">Cualquiera</option>${MONTHS.map((m, i) => `<option value="${i + 1}">${cap(m)}</option>`).join('')}</select></label>
-      <label><span>Salida</span><select name="puerto"><option value="">Cualquier puerto</option>${allPorts.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join('')}</select></label>
+      <label><span>Salida</span><select name="puerto"><option value="">Cualquiera</option>${allPorts.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join('')}</select></label>
       <button class="btn js-ab" data-ab="heroCta" type="submit">Ver cruceros</button>
     </form>
     <p class="hero-ideas">Ideas: <a href="/ofertas/chollos/">chollos de hoy</a>, <a href="/ofertas/desde-barcelona/">desde Barcelona</a>, <a href="/ofertas/canarias-y-madeira/">Canarias</a>, <a href="/ofertas/mediterraneo-oriental/">islas griegas</a>, <a href="/ofertas/minicruceros/">minicruceros</a> y <a href="/guias/crucero-con-bebe/">con bebé</a>.</p>
     <ul class="hero-trust"><li><b>${ships.length}</b> barcos con nota de 0 a 100</li><li><b>Precio real</b> con tasas, no solo la tarifa</li><li><b>Sin comisiones</b> que cambien el orden</li></ul>
   </div>
-  <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}" alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
+  <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}"${heroShip.photo?.thumb ? ` srcset="${heroShip.photo.thumb} 640w, ${heroShip.photo.large} 1280w" sizes="(max-width: 900px) 100vw, 600px"` : ''} alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
 </div></section>
 
 <section class="wrap block for-you" id="for-you" hidden></section>
 <section class="wrap block" id="recent-reviews" hidden></section>
 <section class="wrap block" id="my-searches" hidden></section>
 ${(() => { const wk = Date.now() - 7 * 864e5; const drops = sailings.map((x) => { const h = (x.history || []).filter((p) => new Date(p.date) >= wk); if (h.length < 1 || !(x.history || []).length) return null; const prev = Math.max(...(x.history || []).filter((p) => new Date(p.date) < new Date(TODAY)).map((p) => p.price), 0); const now = OFF.minPrice(x); return prev > now ? { x, prev, now, pct: Math.round((1 - now / prev) * 100) } : null; }).filter((d) => d && d.pct >= 5).sort((a, b) => b.pct - a.pct).slice(0, 6);
-  return drops.length ? `<section class="wrap block drops-sec"><div class="block-h"><h2>Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas</a></div><ul class="mini mini-grid">${drops.map((d) => `<li><a href="/salidas/${d.x.id}/"><b>${esc(OFF.destName(d.x.destination, d.x))} · ${d.x.nights} noches · ${esc(bySlug[d.x.ship]?.name || d.x.ship_name)}</b><span>${eur(d.prev)} <b>${eur(d.now)}</b> (−${d.pct}%) · ${new Date(d.x.date + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span></a></li>`).join('')}</ul></section>` : ''; })()}
-${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${sailings.length} ofertas</a></div><div class="chips scroll"><a class="chip" href="/ofertas/chollos/">Chollos</a><a class="chip" href="/ultima-hora/">Última hora</a><a class="chip" href="/ofertas/bajadas/">Han bajado</a><a class="chip" href="/ofertas/nuevas/">Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid carousel-m">${deals.map(sailingCard).join('')}</div>
+  return drops.length ? `<section class="wrap block drops-sec"><div class="block-h"><h2>Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas</a></div><div class="grid carousel-m">${drops.slice(0, 4).map((d) => sailingCard(d.x)).join('')}</div></section>` : ''; })()}
+${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${fmt(sailings.length)} ofertas</a></div><div class="chips scroll"><a class="chip" href="/ofertas/chollos/">Chollos</a><a class="chip" href="/ultima-hora/">Última hora</a><a class="chip" href="/ofertas/bajadas/">Han bajado</a><a class="chip" href="/ofertas/nuevas/">Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid carousel-m">${deals.map(sailingCard).join('')}</div>
 <p class="near"><button class="btn btn-ghost btn-sm js-near" type="button">Cruceros desde el puerto más cercano</button> <span class="near-out muted small" aria-live="polite"></span></p></section>` : ''}
-${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date) > new Date()).sort((a, b) => OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 4); return mini.length ? `<section class="wrap block"><div class="block-h"><h2>Minicruceros para un fin de semana o puente</h2><a href="/ofertas/minicruceros/">Ver todos</a></div><div class="grid carousel-m">${mini.map(sailingCard).join('')}</div></section>` : ''; })()}
-<section class="wrap block"><div class="sec-h"><h2>Los mejores barcos de ${new Date().getFullYear()}</h2><a href="/rankings/">Ver ranking completo</a></div>
+${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date) > new Date() && OFF.deal(x).score >= 55).sort((a, b) => OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 4); return mini.length ? `<section class="wrap block"><div class="block-h"><h2>Minicruceros para un fin de semana o puente</h2><a href="/ofertas/minicruceros/">Ver todos</a></div><div class="grid carousel-m">${mini.map(sailingCard).join('')}</div></section>` : ''; })()}
+<section class="wrap block"><div class="sec-h"><h2>Los mejores barcos que puedes reservar hoy</h2><a href="/rankings/">Ver ranking completo</a></div>
 <p class="muted">Higiene oficial (CDC), espacio, tripulación, modernidad y opiniones verificadas. <a href="/metodologia/">Cómo puntuamos</a> · <button class="link-btn js-surprise" type="button">Sorpréndeme</button></p>
 <div class="chips scroll">${BEST_FOR.map(([slug, , t]) => `<a class="chip" href="/rankings/${slug}/">${esc(t.replace('Los mejores ', '').replace('cruceros ', ''))}</a>`).join('')}</div>
-<div class="grid carousel-m">${scored.filter((s) => s.photo).slice(0, 4).map((s) => shipCard(s)).join('')}</div></section>
+<div class="grid carousel-m">${(() => { const per = {}; return scored.filter((s) => s.photo && s.sailings?.some((x) => new Date(x.date) > new Date())).filter((s) => (per[s.line] = (per[s.line] || 0) + 1) <= 1).slice(0, 4); })().map((s) => shipCard(s)).join('')}</div></section>
 
 
 
@@ -202,7 +202,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
   </div></section>
 
 <section class="wrap block"><div class="block-h"><h2>Embarca sin salir de España</h2><a href="/puertos/">Todos los puertos</a></div>
-<div class="ports">${HOME_PORTS.map((p) => `<a class="port" href="/puertos/${p.slug}/"><b>${esc(p.name)}</b><span>${esc(p.region)}</span></a>`).join('')}</div></section>
+<div class="ports">${HOME_PORTS.map((p) => { const n = sailings.filter((x) => x.depart_port_slug === p.slug && new Date(x.date) > new Date()).length; return `<a class="port" href="/puertos/${p.slug}/"><b>${esc(p.name)}</b><span>${esc(p.region)}${n ? ` · <strong>${n} salida${n > 1 ? 's' : ''}</strong>` : ''}</span></a>`; }).join('')}</div></section>
 
 
 
@@ -235,7 +235,7 @@ function searchPage() {
     <label class="span2"><span>Texto (barco, naviera, puerto)</span><input name="q" type="search" placeholder="Ej.: MSC, Santorini, Icon…"></label>
   </form>
   <p class="muted small" id="s-count" aria-live="polite"></p>
-  <div class="grid" id="s-results"></div>
+  <h2 class="sr">Salidas que encajan</h2><div class="grid" id="s-results"></div>
   <div id="s-empty">
     <div class="tip"><b>Estamos conectando los precios en directo de navieras y agencias.</b> Mientras tanto te enseñamos destinos, barcos y puertos que encajan con tu búsqueda, y te avisamos en cuanto haya salidas con esos filtros.</div>
     <div id="s-alt"><h2>Destinos que encajan</h2><div class="dest-grid">${DESTINATIONS.map((d) => `<a class="dest" href="/destinos/${d.slug}/"><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b></a>`).join('')}</div><h2>Barcos más nuevos</h2><div class="grid">${[...ships].sort((a, b) => b.year - a.year).slice(0, 8).map((s) => shipCard(s, { compare: false })).join('')}</div></div>
@@ -1439,4 +1439,10 @@ if (process.env.CNAME) write('CNAME', process.env.CNAME + '\n');
   const p = path.join(OUT, 'assets/style.css');
   fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}'));
 }
+// JS minificado si esbuild está instalado (en CI: npm i --no-save esbuild). Si no, se sirve tal cual.
+try {
+  const { transformSync } = await import('esbuild');
+  { const p = path.join(OUT, 'assets', 'style.css'); fs.writeFileSync(p, transformSync(fs.readFileSync(p, 'utf8'), { loader: 'css', minify: true, target: 'chrome100' }).code); }
+  for (const f of ['app.js', 'v3.js', 'admin.js']) { const p = path.join(OUT, 'assets', f); if (fs.existsSync(p)) fs.writeFileSync(p, transformSync(fs.readFileSync(p, 'utf8'), { minify: true, target: 'es2019', legalComments: 'none' }).code); }
+} catch (e) { if (!/Cannot find (package|module)/.test(e.message)) throw e; }
 console.log(`OK: ${pages.length} páginas, ${ships.length} barcos, ${totalVideos} vídeos, ${Object.keys(photos).length} fotos, ${sailings.length} salidas, fx=${fx ? fx.usdEur : 'no'} (BASE=${BASE})`);

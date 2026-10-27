@@ -363,7 +363,7 @@
       r.addEventListener('input', () => { const v = +r.value; const val = v >= 3000 ? '' : String(Math.max(100, v)); if (val && ![...sel.options].some((o) => o.value === val)) sel.add(new Option(`Hasta ${(+val).toLocaleString('es-ES')} €`, val)); sel.value = val; out.textContent = val ? `Hasta ${(+val).toLocaleString('es-ES')} €` : 'Sin límite'; });
       r.addEventListener('change', () => sel.dispatchEvent(new Event('change', { bubbles: true }))); f.addEventListener('change', show); show(); } }
     // Barra fija con el contador y acceso a los filtros al bajar por el listado
-    { const bar = document.createElement('div'); bar.className = 'f-sticky'; bar.innerHTML = '<span class="f-sticky-n"></span><button type="button" class="btn btn-sm">Filtros</button>'; document.body.append(bar);
+    { const bar = document.createElement('div'); bar.className = 'f-sticky'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Filtros rápidos'); bar.innerHTML = '<span class="f-sticky-n"></span><button type="button" class="btn btn-sm">Filtros</button>'; document.body.append(bar);
       $('button', bar).addEventListener('click', () => f.scrollIntoView({ behavior: 'smooth', block: 'start' }));
       const io = new IntersectionObserver(([e]) => { bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); $('.f-sticky-n', bar).textContent = ($('.offer-count', f)?.textContent || '').split(' · ')[0]; }); io.observe(f); }
     // Meses como fila de botones desplazable

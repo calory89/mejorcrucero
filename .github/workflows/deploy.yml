@@ -74,7 +74,9 @@ jobs:
           # Con dominio propio: crear variables de repo BASE="/" y CNAME="mejorcrucero.com"
           BASE: ${{ vars.BASE || '/mejorcrucero/' }}
           CNAME: ${{ vars.CNAME }}
-        run: node src/build.js
+        run: |
+          npm i --no-save --no-audit --no-fund esbuild@0.24 >/dev/null 2>&1 || echo "sin esbuild: JS sin minificar"
+          node src/build.js
       - name: Imágenes para compartir de las mejores ofertas
         run: |
           python3 -c "import PIL" 2>/dev/null || pip install -q pillow
