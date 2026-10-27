@@ -201,7 +201,10 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const official = (x.sources || []).find((z) => z.official) || (x.sources || [])[0];
     const portSlug = (n) => allPorts.find((p) => p.name === n || p.name.startsWith(n))?.slug;
     const fw = s ? forWhom(s) : { yes: [], no: [] };
-    const title = `${sn}: ${dn}, ${x.nights} noches · ${fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' })} · ${eur(r.tarifa)}`;
+    // Título de máximo ~70 caracteres: si no cabe, destino corto (antes de " e " o de la coma) y luego sin año
+    const title = (() => { const d1 = fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' }), d2 = fdate(x.date, { day: 'numeric', month: 'short' }), ds = dn.split(/ e | y |, /)[0];
+      const opts = [`${sn}: ${dn}, ${x.nights} noches · ${d1} · ${eur(r.tarifa)}`, `${sn}: ${ds}, ${x.nights} noches · ${d1} · ${eur(r.tarifa)}`, `${sn}: ${ds}, ${x.nights} noches · ${d2} · ${eur(r.tarifa)}`];
+      return opts.find((t) => t.length <= 70) || opts[2]; })();
     const faqs = [
       ['¿Qué incluye el precio?', `El precio desde ${eur(r.tarifa)} por persona es la tarifa de la web oficial de ${L?.short || 'la naviera'} para un ${CABIN[cabinOf(x)].toLowerCase()} en ocupación doble. ${x.port_charges ? `Las tasas portuarias (${eur(x.port_charges)} por adulto) se pagan aparte. ` : ''}${x.service_included ? 'La cuota de servicio está incluida en esta tarifa.' : x.service_night ? `La cuota de servicio (${String(x.service_night).replace('.', ',')} € por adulto y noche) no está incluida.` : ''} Bebidas, excursiones y restaurantes de pago van aparte salvo que elijas un paquete.`],
       ['¿Cuánto cuesta en total para dos personas?', `Unos ${eur(r.total * 2)} para dos adultos (tarifa + tasas${r.svc ? ' + cuota de servicio' : ''}), sin vuelos ni extras. Calcula tu caso en la calculadora de precio real.`],
