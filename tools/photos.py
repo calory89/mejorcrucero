@@ -21,7 +21,9 @@ for f in ['ships.csv', 'ships_extra.csv']:
     p = os.path.join(ROOT, 'src/data', f)
     if os.path.exists(p): ships += list(csv.DictReader(open(p)))
 res = json.load(open(OUT)) if os.path.exists(OUT) else {}
-todo = [s for s in ships if slugify(s['name']) not in res]
+# Barcos cuya foto de Wikipedia es de OTRO barco (nombre reutilizado o gemelo): sin foto mejor que foto falsa
+WRONG = {'star-princess', 'rotterdam', 'msc-world-america'}
+todo = [s for s in ships if slugify(s['name']) not in res and slugify(s['name']) not in WRONG]
 img = {}
 for variant in ['{} (ship)', 'MS {}', '{}', 'MV {}']:
     pend = [s for s in todo if slugify(s['name']) not in img]

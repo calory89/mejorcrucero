@@ -19,16 +19,6 @@
 "page": "https://commons.wikimedia.org/wiki/File:Wind_Star_at_Kusadasi_2012_DSCF1907bearb..jpg",
 "local": true
 },
-"star-princess": {
-"thumb": "/img/barcos/star-princess-640.webp",
-"large": "/img/barcos/star-princess-1280.webp",
-"hi": true,
-"ratio": 1.5,
-"author": "Guillaume Baviere",
-"license": "CC BY 2.0",
-"page": "https://commons.wikimedia.org/wiki/File:Star_Princess_(ship,_2002)_001.jpg",
-"local": true
-},
 "carnival-encounter": {
 "thumb": "/img/barcos/carnival-encounter-640.webp",
 "large": "/img/barcos/carnival-encounter-1280.webp",
@@ -769,16 +759,6 @@
 "page": "https://commons.wikimedia.org/wiki/File:Carnival_Paradise_in_Carnival_Cruise_Line%27s_new_livery.jpg",
 "local": true
 },
-"rotterdam": {
-"thumb": "/img/barcos/rotterdam-640.webp",
-"large": "/img/barcos/rotterdam-1280.webp",
-"hi": true,
-"ratio": 1.333,
-"author": "Estevoaei",
-"license": "CC BY-SA 4.0",
-"page": "https://commons.wikimedia.org/wiki/File:Cruceiro_Borealis_na_Coru%C3%B1a_-_proa.jpg",
-"local": true
-},
 "borealis": {
 "thumb": "/img/barcos/borealis-640.webp",
 "large": "/img/barcos/borealis-1280.webp",
@@ -1162,16 +1142,6 @@
 "msc-world-europa": {
 "thumb": "/img/barcos/msc-world-europa-640.webp",
 "large": "/img/barcos/msc-world-europa-1280.webp",
-"hi": true,
-"ratio": 1.776,
-"author": "ND44",
-"license": "CC BY-SA 4.0",
-"page": "https://commons.wikimedia.org/wiki/File:MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg",
-"local": true
-},
-"msc-world-america": {
-"thumb": "/img/barcos/msc-world-america-640.webp",
-"large": "/img/barcos/msc-world-america-1280.webp",
 "hi": true,
 "ratio": 1.776,
 "author": "ND44",
