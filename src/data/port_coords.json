@@ -1059,6 +1059,11 @@
 24.4325,
 "https://es.wikipedia.org/wiki/Milo"
 ],
+"Miyako": [
+24.7794,
+125.3189,
+"https://es.wikipedia.org/wiki/Isla_Miyako"
+],
 "Miyakojima": [
 24.7901,
 125.2949,
@@ -1549,6 +1554,11 @@
 133.2316,
 "https://es.wikipedia.org/wiki/Sakaiminato_(Tottori)"
 ],
+"Sakata": [
+38.9149,
+139.8367,
+"https://es.wikipedia.org/wiki/Sakata_(Yamagata)"
+],
 "Salerno": [
 40.6806,
 14.7594,
@@ -1868,6 +1878,11 @@
 35.8983,
 14.5125,
 "https://en.wikipedia.org/wiki/Valletta"
+],
+"Valparaiso": [
+-33.0461,
+-71.6197,
+"https://es.wikipedia.org/wiki/Valpara%C3%ADso"
 ],
 "Vancouver": [
 49.2608,
