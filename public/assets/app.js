@@ -725,7 +725,7 @@
         ok.addEventListener('click', async () => { try { await api('/posts/edit', { body: { id: +ed, key: myPosts()[ed], body: ta.value.trim() } }); load(); } catch (err) { ok.textContent = err.message === 'tarde' ? 'Ya han pasado 15 minutos' : 'No se ha podido guardar'; } }); }
       if (del) { if (e.target.dataset.sure) { try { await api('/posts/delete', { body: { id: +del, key: myPosts()[del] } }); const mp = myPosts(); delete mp[del]; store.set('mc_my_posts', mp); load(); } catch { e.target.textContent = 'No se ha podido borrar'; } } else { e.target.dataset.sure = 1; e.target.textContent = 'Pulsa otra vez para borrar'; } }
       if (v) { await api('/vote', { body: { id: +v } }).catch(() => {}); e.target.textContent = '¡Gracias!'; }
-      if (r && form) { replyTo = +r; $('.forum-form-title', f).textContent = 'Tu respuesta'; form.body.focus(); }
+      if (r && form) { replyTo = +r; form.closest('details')?.setAttribute('open', ''); $('.forum-form-title', f).textContent = 'Tu respuesta'; form.body.focus(); }
       if (rp) { await api('/report', { body: { target: 'post:' + rp, reason: 'Reportado desde el foro', page: PAGE } }).catch(() => {}); e.target.textContent = 'Reportado'; }
     });
     if (form) {

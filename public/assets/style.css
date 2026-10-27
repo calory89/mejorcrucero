@@ -859,3 +859,18 @@ form .form-msg{font-weight:600;color:var(--ok)}
 @media (prefers-reduced-motion:reduce){.logo svg{transition:none}.logo:hover svg{transform:none}}
 @media (min-width:801px){.foot-in{grid-template-columns:1.5fr 1fr 1fr 1fr 1fr}}
 .ship-art .pill-video{position:absolute;left:10px;bottom:10px;top:auto;right:auto;z-index:1;font-size:.72rem;padding:3px 8px}
+.cheaper-date{margin:10px 0 0;padding:10px 12px;border-radius:10px;background:#E6F5EE;color:#064E33;font-size:.9rem}.cheaper-date a{color:#064E33;font-weight:700}
+.forum-write{margin-top:14px}.forum-write>summary{list-style:none;cursor:pointer;display:inline-flex}.forum-write>summary::-webkit-details-marker{display:none}.forum-write[open]>summary{margin-bottom:12px}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cheaper-date{background:#0E3A2A;color:#BFF0D6}:root:not([data-theme=light]) .cheaper-date a{color:#BFF0D6}}
+:root[data-theme=dark] .cheaper-date{background:#0E3A2A;color:#BFF0D6}:root[data-theme=dark] .cheaper-date a{color:#BFF0D6}
+.seg button{white-space:nowrap}@media (max-width:420px){.seg button{padding-left:8px;padding-right:8px;font-size:.88rem}}
+/* Pulido 2026-10 */
+:where(section,h2,h3)[id],[id].block{scroll-margin-top:84px}
+::selection{background:#CFE0FF;color:#0A2A4F}
+h1,h2,h3,.card h3{text-wrap:balance}.lead-p,.card p,.muted{text-wrap:pretty}
+a,button,select,summary,label{touch-action:manipulation}
+.foot,.faq,.forum{content-visibility:auto;contain-intrinsic-size:auto 600px}
+.chip{min-height:40px;display:inline-flex;align-items:center}
+.sail-card:focus-visible,.ship-card .card-link:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.ship-art img{background:linear-gradient(160deg,#dbe8fb,#eef4fd)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) ::selection{background:#1E4C8F;color:#fff}}

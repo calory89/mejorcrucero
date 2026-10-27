@@ -216,7 +216,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
   return layout({
     title: 'MejorCrucero: compara y elige tu mejor crucero al mejor precio',
     desc: `El comparador de cruceros de España: ${sailings.length} ofertas con precio real y nota de 0 a 100, ${ships.length} barcos puntuados, vídeos y opiniones. Cruceros desde Barcelona, Valencia, Málaga, Palma y Canarias.`,
-    url: '/', body,
+    url: '/', body, preload: heroShip.photo ? heroShip.photo.large : null,
     schema: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'MejorCrucero', url: SITE, inLanguage: 'es-ES', potentialAction: { '@type': 'SearchAction', target: SITE + '/buscar/?q={q}', 'query-input': 'required name=q' } }],
   });
 }

@@ -30,14 +30,16 @@ export const AV = (f) => AVC[f] || (AVC[f] = (() => { try { return createHash('s
 export function pickPhotos(html) {
   if (!html.includes('data-alt="')) return html;
   const used = new Map(), last = new Map(); let k = 0;
-  return html.replace(/<img src="[^"]*" data-alt="([^"]*)"([^>]*)><span class="ph-cap"><\/span>/g, (m, list, rest) => {
+  html = html.replace(/<img src="[^"]*" data-alt="([^"]*)"([^>]*)><span class="ph-cap"><\/span>/g, (m, list, rest) => {
     const alts = list.split('|').map((z) => z.split('::'));
     // Primero una foto sin usar; si no queda ninguna, la menos usada y, a igualdad, la que se usó hace más tiempo
     const cost = ([u]) => (used.get(u) || 0) * 1e6 + (last.get(u) ?? -1e6);
     const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => (cost(b) < cost(a) ? b : a));
     used.set(best[0], (used.get(best[0]) || 0) + 1); last.set(best[0], k++);
-    return `<img src="${best[0]}" data-alt="${list}"${rest}><span class="ph-cap"${best[1] ? '' : ' hidden'}>${best[1]}</span>`;
+    const r = k <= 2 ? rest.replace(' loading="lazy"', ' fetchpriority="high"') : rest;
+    return `<img src="${best[0]}" data-alt="${list}"${r}><span class="ph-cap"${best[1] ? '' : ' hidden'}>${best[1]}</span>`;
   });
+  return html;
 }
 export function write(rel, html) {
   const file = path.join(OUT, rel);
@@ -179,6 +181,7 @@ export function forumBlock(thread, title, opts = {}) {
   <div class="forum-summary" hidden></div>
   <div class="tabs" role="tablist">${tabs.map(([k, n], i) => `<button role="tab" type="button" class="tab" data-kind="${k}" aria-selected="${i === 0}">${n}</button>`).join('')}</div>
   <div class="forum-list"><div class="skel"></div><div class="skel"></div></div>
+  <details class="forum-write"><summary class="btn btn-ghost">Escribir en el foro</summary>
   <form class="forum-form" novalidate>
     <h3 class="h-sm forum-form-title">Escribe tu opinión</h3>
     <div class="rating-row" data-for="review">${[['general', 'General'], ['comida', 'Comida'], ['camarote', 'Camarote'], ['animacion', 'Animación'], ['ninos', 'Niños'], ['limpieza', 'Limpieza']].map(([k, n]) => `<label><span>${n}</span><select name="r_${k}"><option value="">–</option>${[5, 4, 3, 2, 1].map((v) => `<option value="${v}">${'★'.repeat(v)}</option>`).join('')}</select></label>`).join('')}<label><span>¿Repetirías?</span><select name="r_repetiria"><option value="">–</option><option value="1">Sí</option><option value="0">No</option></select></label></div>
@@ -191,7 +194,7 @@ export function forumBlock(thread, title, opts = {}) {
     <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn" type="submit">Publicar</button><p class="form-msg" role="status" aria-live="polite"></p>
     <p class="muted small">Sin registro. Tu nombre y tu mensaje serán públicos: no escribas tu teléfono, tu email ni tu número de reserva. Puedes editar tu mensaje durante 15 minutos y borrarlo cuando quieras desde este navegador. La comunidad puede reportar mensajes inapropiados. <a href="/privacidad/">Privacidad</a>.</p>
-  </form>
+  </form></details>
   <div class="forum-soon" hidden><p><strong>El foro se abre muy pronto.</strong> Apúntate y te avisamos.</p>${leadForm('foro:' + thread, 'Avisadme')}</div>
 </section>`;
 }
@@ -223,7 +226,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
 <script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t;var z=localStorage.getItem('mc_textsize');if(z)document.documentElement.style.fontSize=z}catch(e){}</script>
-${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}
+${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css?v=${AV('style.css')}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
