@@ -148,7 +148,7 @@ const DEST_PHOTO = { 'mediterraneo-occidental': 'Barcelona', 'mediterraneo-orien
 const destCard = (d, extra = '') => { const ph = portPhotos[DEST_PHOTO[d.slug]] || (() => { for (const x of sailings) if (x.destination === d.slug) for (const q of x.itinerary?.ports || []) { const v = portPhotos[portName(q.name)]; if (v) return v; } return null; })(); return `<a class="dest${ph ? ' dest-ph' : ''}" href="/destinos/${d.slug}/"${ph ? ` style="--ph:url('${BASE.replace(/\/$/, '')}${ph.thumb}')"` : ''}><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b><span>Mejor época: ${monthRange(d.months)}</span>${(() => { const n = sailings.filter((x) => x.destination === d.slug).length; return n ? `<span class="dest-n">${fmt(n)} ofertas</span>` : ''; })()}${extra}</a>`; };
 
 // ---------- páginas ----------
-const featured = ['costa-smeralda', 'norwegian-prima', 'carnival-celebration', 'msc-world-europa', 'icon-of-the-seas', 'costa-toscana', 'msc-grandiosa', 'wonder-of-the-seas', 'msc-euribia', 'msc-seashore'].map((k) => bySlug[k]).filter(Boolean);
+const featured = ['norwegian-prima', 'costa-smeralda', 'carnival-celebration', 'msc-world-europa', 'icon-of-the-seas', 'costa-toscana', 'msc-grandiosa', 'wonder-of-the-seas', 'msc-euribia', 'msc-seashore'].map((k) => bySlug[k]).filter(Boolean);
 const heroShip = featured.find((s) => s.photo) || featured[0];
 const totalVideos = ships.reduce((a, s) => a + s.videos.length, 0);
 
