@@ -315,7 +315,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     return layout({
       title, desc: `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}: ${stops.slice(1, 6).map((p) => p.name).join(', ')}. Desde ${eur(r.tarifa)} (precio real ${eur(r.total)} con tasas). Nota del precio ${d.score}/100.`,
       url: url(x), body, ogType: 'product', og: ogOf(x) || (ph ? `/og/${x.ship}.png` : '/og.png'), preload: ph ? ph.thumb : null,
-      crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [dn, `/ofertas/${x.destination || ''}/`], [`${sn} ${x.date}`, url(x)]],
+      crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [dn, `/ofertas/${x.destination || ''}/`], [`${sn} · ${fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' })}`, url(x)]],
       schema: [
         { '@context': 'https://schema.org', '@type': 'Product', name: `${titleOf(x)} (${x.date})`, brand: { '@type': 'Brand', name: L?.short || '' }, image: ph ? SITE + ph.thumb : undefined, description: `${x.nights} noches: ${stops.map((p) => p.name).join(', ')}`,
           offers: { '@type': 'Offer', price: r.tarifa, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: official?.url, validFrom: (x.updated || BUILD_DATE).slice(0, 10), seller: { '@type': 'Organization', name: official?.partner || L?.short } } },
