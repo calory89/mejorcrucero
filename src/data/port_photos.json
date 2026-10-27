@@ -6,7 +6,30 @@
   "ratio": 1.494,
   "author": "Felix König",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Geb%C3%A4ude_Port_Vell_Barcelona_2013.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Geb%C3%A4ude_Port_Vell_Barcelona_2013.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/barcelona-2-640.webp",
+    "ratio": 1.333,
+    "author": "Sergi Larripa (User:SergiL)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:050529_Barcelona_060_edited.jpg"
+   },
+   {
+    "thumb": "/img/puertos/barcelona-3-640.webp",
+    "ratio": 1.885,
+    "author": "Enfo",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:06_SEAT_zona_franca,_amb_els_laboratoris_a_la_dreta.jpg"
+   },
+   {
+    "thumb": "/img/puertos/barcelona-4-640.webp",
+    "ratio": 1.333,
+    "author": "Enric",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:112_Palau_de_la_Generalitat_de_Catalunya,_pl._Sant_Jaume_(Barcelona),_Sant_Jordi_2016.jpg"
+   }
+  ]
  },
  "Savona": {
   "slug": "savona",
@@ -24,7 +47,30 @@
   "ratio": 1.57,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Auditorio_de_Tenerife,_Santa_Cruz_de_Tenerife,_Espa%C3%B1a,_2012-12-15,_DD_02.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Auditorio_de_Tenerife,_Santa_Cruz_de_Tenerife,_Espa%C3%B1a,_2012-12-15,_DD_02.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/santa-cruz-de-tenerife-2-640.webp",
+    "ratio": 1.333,
+    "author": "CARLOS TEIXIDOR CADENAS",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Actividad_en_el_puerto_de_Santa_Cruz_de_Tenerife,_Canarias,_Espa%C3%B1a.JPG"
+   },
+   {
+    "thumb": "/img/puertos/santa-cruz-de-tenerife-3-640.webp",
+    "ratio": 1.501,
+    "author": "Photograph by Mike Peel (www.mikepeel.net).",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:At_Palmetum_de_Santa_Cruz_de_Tenerife_2022_028.jpg"
+   },
+   {
+    "thumb": "/img/puertos/santa-cruz-de-tenerife-4-640.webp",
+    "ratio": 1.664,
+    "author": "Photograph by Mike Peel (www.mikepeel.net).",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:At_Plaza_de_Espa%C3%B1a,_Santa_Cruz_de_Tenerife_2019_009_edited.jpg"
+   }
+  ]
  },
  "Roma (Civitavecchia)": {
   "slug": "roma-civitavecchia",
@@ -33,7 +79,16 @@
   "ratio": 1.704,
   "author": "Diliff",
   "license": "CC BY-SA 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome,_Italy_-_April_2007.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome,_Italy_-_April_2007.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/roma-civitavecchia-2-640.webp",
+    "ratio": 1.501,
+    "author": "Marmolada48",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Stazione_di_Roma_Trastevere_Marzo_2024.jpg"
+   }
+  ]
  },
  "Las Palmas de Gran Canaria": {
   "slug": "las-palmas-de-gran-canaria",
@@ -42,7 +97,30 @@
   "ratio": 1.371,
   "author": "Martin Falbisoner",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Santa_Ana,_Las_Palmas_de_Gran_Canaria,_May_2018.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Santa_Ana,_Las_Palmas_de_Gran_Canaria,_May_2018.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/las-palmas-de-gran-canaria-2-640.webp",
+    "ratio": 1.333,
+    "author": "User:Alavisan",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:8-2-08_Noche_de_la_Salsa_con_%C3%93scar_de_Le%C3%B3n.JPG"
+   },
+   {
+    "thumb": "/img/puertos/las-palmas-de-gran-canaria-3-640.webp",
+    "ratio": 1.499,
+    "author": "Bengt Nyman from Vaxholm, Sweden",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alfredo_Kraus_auditorium_D81_5105_(39597837581).jpg"
+   },
+   {
+    "thumb": "/img/puertos/las-palmas-de-gran-canaria-4-640.webp",
+    "ratio": 1.504,
+    "author": "Pepelopex",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Auditorio_alfredo_kraus_las_palmas_de_gran_canaria.jpg"
+   }
+  ]
  },
  "Marsella": {
   "slug": "marsella",
@@ -51,7 +129,30 @@
   "ratio": 1.333,
   "author": "Jiròni Picas",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Marseille_le_vieux_port.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Marseille_le_vieux_port.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/marsella-2-640.webp",
+    "ratio": 1.501,
+    "author": "Margarita.lukjanska",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2014_Marseille_Chateau_Borely.JPG"
+   },
+   {
+    "thumb": "/img/puertos/marsella-3-640.webp",
+    "ratio": 1.501,
+    "author": "Ladislaus Hoffner",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_Marseille_-_Cath%C3%A9drale_La_Major.jpg"
+   },
+   {
+    "thumb": "/img/puertos/marsella-4-640.webp",
+    "ratio": 1.517,
+    "author": "José Luiz",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Basilique_Notre-Dame_de_la_Garde_-_Marseille_2014_(3).JPG"
+   }
+  ]
  },
  "La Romana / Santo Domingo": {
   "slug": "la-romana-santo-domingo",
@@ -78,7 +179,30 @@
   "ratio": 1.507,
   "author": "kallerna",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Ponte_di_Rialto_Venice_1.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Ponte_di_Rialto_Venice_1.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/venecia-2-640.webp",
+    "ratio": 1.333,
+    "author": "collection by DanieleDF1995 (talk)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Collage_Venezia.jpg"
+   },
+   {
+    "thumb": "/img/puertos/venecia-3-640.webp",
+    "ratio": 1.333,
+    "author": "MarcoS31 at Italian Wikipedia",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Aeroporto_di_Treviso_A_Canova.jpg"
+   },
+   {
+    "thumb": "/img/puertos/venecia-4-640.webp",
+    "ratio": 1.333,
+    "author": "Threecharlie",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aeroporto_di_Venezia-Tessera_Marco_Polo,_lato_sud.JPG"
+   }
+  ]
  },
  "Génova": {
   "slug": "genova",
@@ -87,7 +211,30 @@
   "ratio": 1.6,
   "author": "Timothy A. Gonsalves",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Sail_Boats_Old_Harbour_Genoa_Sep23_A7C_06652.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Sail_Boats_Old_Harbour_Genoa_Sep23_A7C_06652.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/genova-2-640.webp",
+    "ratio": 1.333,
+    "author": "collection by DanieleDF1995 (talk)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Collage_Genova.jpg"
+   },
+   {
+    "thumb": "/img/puertos/genova-3-640.webp",
+    "ratio": 1.333,
+    "author": "Davide Papalini",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aeroporto_di_Genova.JPG"
+   },
+   {
+    "thumb": "/img/puertos/genova-4-640.webp",
+    "ratio": 1.446,
+    "author": "Jean-Baptiste Camille Corot",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jean-Baptiste-Camille_Corot_-_Vue_de_G%C3%AAnes_(1834).jpg"
+   }
+  ]
  },
  "Bari": {
   "slug": "bari",
@@ -123,7 +270,30 @@
   "ratio": 1.746,
   "author": "Grez",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Puerto_de_M%C3%A1laga_090308.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Puerto_de_M%C3%A1laga_090308.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/malaga-2-640.webp",
+    "ratio": 1.572,
+    "author": "Bogdan Migulski",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alameda_Navidad.jpg"
+   },
+   {
+    "thumb": "/img/puertos/malaga-3-640.webp",
+    "ratio": 1.501,
+    "author": "paolotrabattoni.it",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alcazaba_Catedral_Malaga.jpg"
+   },
+   {
+    "thumb": "/img/puertos/malaga-4-640.webp",
+    "ratio": 1.333,
+    "author": "Bollofino",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_M%C3%A1laga.jpg"
+   }
+  ]
  },
  "Palma de Mallorca": {
   "slug": "palma-de-mallorca",
@@ -132,7 +302,30 @@
   "ratio": 1.876,
   "author": "Wolfgang Moroder",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Palma_de_Mallorca_Royal_Palace_La_Almudaina_Cathedral.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Palma_de_Mallorca_Royal_Palace_La_Almudaina_Cathedral.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/palma-de-mallorca-2-640.webp",
+    "ratio": 1.501,
+    "author": "L. Vadillo - MaLéPhotoSpain",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:05042024-20240405_PALMA_(1).jpg"
+   },
+   {
+    "thumb": "/img/puertos/palma-de-mallorca-3-640.webp",
+    "ratio": 1.499,
+    "author": "Ladislaus Hoffner",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_Palma_de_Mallorca.jpg"
+   },
+   {
+    "thumb": "/img/puertos/palma-de-mallorca-4-640.webp",
+    "ratio": 1.427,
+    "author": "Enric",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:287_Mercat_de_l%27Olivar_(Palma).jpg"
+   }
+  ]
  },
  "Palermo": {
   "slug": "palermo",
@@ -168,7 +361,30 @@
   "ratio": 1.909,
   "author": "Diego Delso",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Vista_de_C%C3%A1diz,_Espa%C3%B1a,_2015-12-08,_DD_78.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Vista_de_C%C3%A1diz,_Espa%C3%B1a,_2015-12-08,_DD_78.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/cadiz-2-640.webp",
+    "ratio": 1.518,
+    "author": "Noël del.Daudet sculp.",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1806-1820,_Voyage_pittoresque_et_historique_de_l%27Espagne,_tomo_II,_Vista_general_de_C%C3%A1diz_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/cadiz-3-640.webp",
+    "ratio": 1.333,
+    "author": "Feranza",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bodega_en_C%C3%A1diz.JPG"
+   },
+   {
+    "thumb": "/img/puertos/cadiz-4-640.webp",
+    "ratio": 2.0,
+    "author": "Solundir",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cadiz_Quay_and_Cathedral_modified.jpg"
+   }
+  ]
  },
  "Hamburgo": {
   "slug": "hamburgo",
@@ -204,7 +420,30 @@
   "ratio": 1.778,
   "author": "DXR",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge,_southeast_view_20230224_1.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge,_southeast_view_20230224_1.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sidney-2-640.webp",
+    "ratio": 2.0,
+    "author": "Benh LIEU SONG (Flickr)",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge_Dusk_(2)_2019-06-21.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sidney-3-640.webp",
+    "ratio": 1.333,
+    "author": "Gavin Anderson",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:ANZ_Stadium,_Essendon.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sidney-4-640.webp",
+    "ratio": 1.333,
+    "author": "Maksym Kozlenko",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Archibald_Fountain_(cropped).jpg"
+   }
+  ]
  },
  "Río de Janeiro": {
   "slug": "rio-de-janeiro",
@@ -222,7 +461,30 @@
   "ratio": 1.494,
   "author": "Matti Blume",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Alfama,_Lisbon_(DSC03367).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Alfama,_Lisbon_(DSC03367).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/lisboa-2-640.webp",
+    "ratio": 1.934,
+    "author": "Deensel",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lisbon_(36831596786)_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/lisboa-3-640.webp",
+    "ratio": 1.333,
+    "author": "Allie_Caulfield",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2002-10-26_11-15_(Andalusien_%26_Lissabon_283)_Lissabon,_Se_Patriarcal.jpg"
+   },
+   {
+    "thumb": "/img/puertos/lisboa-4-640.webp",
+    "ratio": 1.333,
+    "author": "Kent Wang",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arco_Triunfal_da_Rua_Augusta_from_Pra%C3%A7a_do_Com%C3%A9rcio_41.jpg"
+   }
+  ]
  },
  "Nápoles": {
   "slug": "napoles",
@@ -231,7 +493,30 @@
   "ratio": 1.498,
   "author": "Wolfgang Moroder",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Naples_from_the_Castello_Sant_Elmo_with_Abbazia_San_Martino_the_port_and_the_Vesuv.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Naples_from_the_Castello_Sant_Elmo_with_Abbazia_San_Martino_the_port_and_the_Vesuv.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/napoles-2-640.webp",
+    "ratio": 2.065,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Castillo_del_Huevo,_N%C3%A1poles,_Italia,_2023-03-25,_DD_234-236_HDR.jpg"
+   },
+   {
+    "thumb": "/img/puertos/napoles-3-640.webp",
+    "ratio": 1.494,
+    "author": "Salvatore Serafino from Napoli, Italia",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Centro_Direzionale_-_Napoli.jpg"
+   },
+   {
+    "thumb": "/img/puertos/napoles-4-640.webp",
+    "ratio": 1.501,
+    "author": "Angelo DeSantis from Berkeley, US",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_ship_in_Naples_(8097207647).jpg"
+   }
+  ]
  },
  "Valencia": {
   "slug": "valencia",
@@ -240,7 +525,30 @@
   "ratio": 1.644,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Museo_Pr%C3%ADncipe_Felipe,_Ciudad_de_las_Artes_y_las_Ciencias,_Valencia,_Espa%C3%B1a,_2014-06-29,_DD_59.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Museo_Pr%C3%ADncipe_Felipe,_Ciudad_de_las_Artes_y_las_Ciencias,_Valencia,_Espa%C3%B1a,_2014-06-29,_DD_59.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/valencia-2-640.webp",
+    "ratio": 1.333,
+    "author": "Enfo",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:107_Bas%C3%ADlica_dels_Desemparats,_pl._Mare_de_D%C3%A9u_(Val%C3%A8ncia).JPG"
+   },
+   {
+    "thumb": "/img/puertos/valencia-3-640.webp",
+    "ratio": 1.333,
+    "author": "Enric",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:154_Jard%C3%AD_del_T%C3%BAria_(Val%C3%A8ncia),_des_del_pont_dels_Serrans,_al_fons_el_Museu_de_Belles_Arts.jpg"
+   },
+   {
+    "thumb": "/img/puertos/valencia-4-640.webp",
+    "ratio": 1.466,
+    "author": "François Liger / Jean-Baptiste Réville / M. A. Benoist",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1806-1820,_Voyage_pittoresque_et_historique_de_l%27Espagne,_tomo_I,_Plaza_del_Mercado_de_Valencia_(cropped).jpg"
+   }
+  ]
  },
  "San Francisco": {
   "slug": "san-francisco",
@@ -249,7 +557,30 @@
   "ratio": 1.6,
   "author": "Frank Schulenburg",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/san-francisco-2-640.webp",
+    "ratio": 1.497,
+    "author": "Sarah Wilkin",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:CalfDawnBreachWindsurfers.jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-francisco-3-640.webp",
+    "ratio": 1.501,
+    "author": "Robert Campbell",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:San_Francisco_Bay_aerial_view.jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-francisco-4-640.webp",
+    "ratio": 1.333,
+    "author": "Craig Howell from San Carlos, CA, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Zeppelin-ride-020100925-195_(5029394846).jpg"
+   }
+  ]
  },
  "Fuerteventura": {
   "slug": "fuerteventura",
@@ -294,7 +625,30 @@
   "ratio": 1.333,
   "author": "Ermell",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Buenos_Aires_Puente_de_la_Mujer_1030985.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Buenos_Aires_Puente_de_la_Mujer_1030985.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/buenos-aires-2-640.webp",
+    "ratio": 1.778,
+    "author": "Fernando",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CABA_-_Avenida_9_de_Julio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/buenos-aires-3-640.webp",
+    "ratio": 1.336,
+    "author": "Wikimedia Commons",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:20060128_-_Catedral_Metropolitana_de_Buenos_Aires.jpg"
+   },
+   {
+    "thumb": "/img/puertos/buenos-aires-4-640.webp",
+    "ratio": 1.501,
+    "author": "Ricardo Patiño",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_view_-_Recoleta,_Buenos_Aires.jpg"
+   }
+  ]
  },
  "Santorini": {
   "slug": "santorini",
@@ -303,7 +657,30 @@
   "ratio": 1.5,
   "author": "Giles Laurent",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/santorini-2-640.webp",
+    "ratio": 1.509,
+    "author": "Norbert Nagel",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Crater_rim_alley_-_Fira_-_Santorini_-_Greece_-_08.jpg"
+   },
+   {
+    "thumb": "/img/puertos/santorini-3-640.webp",
+    "ratio": 1.394,
+    "author": "Berard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Imerovigli_02.jpg"
+   },
+   {
+    "thumb": "/img/puertos/santorini-4-640.webp",
+    "ratio": 1.501,
+    "author": "logopop",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Santorini,_Greece_-_panoramio_(79).jpg"
+   }
+  ]
  },
  "Corfú": {
   "slug": "corfu",
@@ -339,7 +716,30 @@
   "ratio": 2.096,
   "author": "Mike McBey",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Istanbul_skyline_(39926058353).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Istanbul_skyline_(39926058353).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/estambul-2-640.webp",
+    "ratio": 1.945,
+    "author": "Alexxx Malev",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bosphorus_Bridge_(235499411).jpeg"
+   },
+   {
+    "thumb": "/img/puertos/estambul-3-640.webp",
+    "ratio": 1.283,
+    "author": "Probst, Georg Matthäus (17..-1788 ; graveur). GraveurVerleger :  Cum Gratia et p",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1780_engraving_of_Constantinople.jpg"
+   },
+   {
+    "thumb": "/img/puertos/estambul-4-640.webp",
+    "ratio": 2.181,
+    "author": "Btian P. Dorsam",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bogazici_Universitesi_metro.jpg"
+   }
+  ]
  },
  "Mykonos": {
   "slug": "mykonos",
@@ -357,7 +757,30 @@
   "ratio": 1.5,
   "author": "kallerna",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Bay_of_Kotor_3.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Bay_of_Kotor_3.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kotor-2-640.webp",
+    "ratio": 2.123,
+    "author": "Chensiyuan",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kotor_Montenegro_panorama_2016.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kotor-3-640.webp",
+    "ratio": 1.501,
+    "author": "Marcin Konsek",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cytadela_w_obr%C4%99bie_mur%C3%B3w_miejskich_w_Kotorze_02.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kotor-4-640.webp",
+    "ratio": 1.546,
+    "author": "Miguel Garrido",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Iglesia_ortodoxa_de_San_Nicol%C3%A1s.jpg"
+   }
+  ]
  },
  "San Martín": {
   "slug": "san-martin",
@@ -393,7 +816,30 @@
   "ratio": 1.798,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Vista_de_Alicante,_Espa%C3%B1a,_2014-07-04,_DD_49.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Vista_de_Alicante,_Espa%C3%B1a,_2014-07-04,_DD_49.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/alicante-2-640.webp",
+    "ratio": 1.908,
+    "author": "Federico Ruiz / Tomás Carlos Capuz",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1858-06-15,_El_Museo_Universal,_Inauguraci%C3%B3n_del_ferro-carril_de_Alicante.jpg"
+   },
+   {
+    "thumb": "/img/puertos/alicante-3-640.webp",
+    "ratio": 1.553,
+    "author": "Alfred Guesdon",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Alacant,_gravat_d%27Alfred_Guesdon_(1808-1876),_ca._1832.jpg"
+   },
+   {
+    "thumb": "/img/puertos/alicante-4-640.webp",
+    "ratio": 1.333,
+    "author": "Joanbanjo",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Alacant_018.jpg"
+   }
+  ]
  },
  "Creta": {
   "slug": "creta",
@@ -420,7 +866,30 @@
   "ratio": 1.778,
   "author": "David Kernan",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Minato_City,_Tokyo,_Japan.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Minato_City,_Tokyo,_Japan.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/tokio-2-640.webp",
+    "ratio": 1.555,
+    "author": "鋸香具師",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Shinjuku_central_park_southwest.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tokio-3-640.webp",
+    "ratio": 1.37,
+    "author": "Wiiii",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bank_of_Japan_2010.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tokio-4-640.webp",
+    "ratio": 1.778,
+    "author": "jreysp",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cloudy_Sens%C5%8D-ji.jpg"
+   }
+  ]
  },
  "São Vicente": {
   "slug": "sao-vicente",
@@ -429,7 +898,16 @@
   "ratio": 1.333,
   "author": "Herbert wie",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Mansa_Floating_Hub_Mindelo,_Cabo_Verde.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Mansa_Floating_Hub_Mindelo,_Cabo_Verde.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sao-vicente-2-640.webp",
+    "ratio": 1.333,
+    "author": "Cuenqui",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mindelo_panoramica.JPG"
+   }
+  ]
  },
  "Antigua": {
   "slug": "antigua",
@@ -510,7 +988,30 @@
   "ratio": 1.558,
   "author": "Levi Clancy",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Los_Angeles,_Downtown_Los_Angeles,_California_13.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Los_Angeles,_Downtown_Los_Angeles,_California_13.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/los-angeles-2-640.webp",
+    "ratio": 1.501,
+    "author": "Gnaphron",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hollywood_sign_(8485145044).jpg"
+   },
+   {
+    "thumb": "/img/puertos/los-angeles-3-640.webp",
+    "ratio": 1.411,
+    "author": "Jelson25",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_Getty_Museum.jpg"
+   },
+   {
+    "thumb": "/img/puertos/los-angeles-4-640.webp",
+    "ratio": 1.333,
+    "author": "Photographed and uploaded by Geographer at en.wikipedia",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Cal_Trans_District7_HD.jpg"
+   }
+  ]
  },
  "Ciudad del Cabo": {
   "slug": "ciudad-del-cabo",
@@ -519,7 +1020,30 @@
   "ratio": 1.506,
   "author": "Josep M. Gracia",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:CT_-_V%26A_Waterfront_with_Table_Mountain,_Cape_Town,_South_Africa,_2017.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:CT_-_V%26A_Waterfront_with_Table_Mountain,_Cape_Town,_South_Africa,_2017.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ciudad-del-cabo-2-640.webp",
+    "ratio": 1.333,
+    "author": "Self",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_CBD.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ciudad-del-cabo-3-640.webp",
+    "ratio": 1.322,
+    "author": "Charles Davidson Bell",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_Bell_-_Jan_van_Riebeeck_se_aankoms_aan_die_Kaap.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ciudad-del-cabo-4-640.webp",
+    "ratio": 1.529,
+    "author": "Vladimiramax",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:City_hall_CT.JPG"
+   }
+  ]
  },
  "Taormina": {
   "slug": "taormina",
@@ -618,7 +1142,30 @@
   "ratio": 1.333,
   "author": "Ftaaffe",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Suva_harbour_fiji.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Suva_harbour_fiji.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/suva-2-640.webp",
+    "ratio": 1.501,
+    "author": "Maksym Kozlenko",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nadi_Airport_-_International_Departures.jpg"
+   },
+   {
+    "thumb": "/img/puertos/suva-3-640.webp",
+    "ratio": 1.501,
+    "author": "Maksym Kozlenko",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Suva,_Fiji_77.jpg"
+   },
+   {
+    "thumb": "/img/puertos/suva-4-640.webp",
+    "ratio": 1.821,
+    "author": "User:Matthias Süßen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Carnegie_Library_Suva_MatthiasSuessen-8049.jpg"
+   }
+  ]
  },
  "Gibraltar": {
   "slug": "gibraltar",
@@ -645,7 +1192,30 @@
   "ratio": 1.5,
   "author": "Bernard Gagnon",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Cairns_(Queensland).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Cairns_(Queensland).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/cairns-2-640.webp",
+    "ratio": 1.333,
+    "author": "The original uploader was Adz at English Wikipedia.",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CairnsQueensland.jpg"
+   },
+   {
+    "thumb": "/img/puertos/cairns-3-640.webp",
+    "ratio": 1.329,
+    "author": "Rob and Stephanie Levy from Townsville, Australia",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cairns,_Queensland,_Australia.jpg"
+   },
+   {
+    "thumb": "/img/puertos/cairns-4-640.webp",
+    "ratio": 1.333,
+    "author": "Frances76 at English Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cairns-Lagoon.JPG"
+   }
+  ]
  },
  "Half Moon Cay": {
   "slug": "half-moon-cay",
@@ -663,7 +1233,30 @@
   "ratio": 1.837,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-14,_DD_04.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-14,_DD_04.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/dubrovnik-2-640.webp",
+    "ratio": 1.72,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-13,_DD_03.JPG"
+   },
+   {
+    "thumb": "/img/puertos/dubrovnik-3-640.webp",
+    "ratio": 2.102,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-14,_DD_09.JPG"
+   },
+   {
+    "thumb": "/img/puertos/dubrovnik-4-640.webp",
+    "ratio": 1.61,
+    "author": "FOTO:Fortepan — ID 74331: Adományozó/Donor: Romák Éva.",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dubrovnik_1965,_Kik%C3%B6t%C5%91._Fortepan_74331.jpg"
+   }
+  ]
  },
  "Walvis Bay": {
   "slug": "walvis-bay",
@@ -672,7 +1265,30 @@
   "ratio": 1.5,
   "author": "Diego Delso",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Flamencos_comunes_(Phoenicopterus_roseus),_Walvis_Bay,_Namibia,_2018-08-05,_DD_23.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Flamencos_comunes_(Phoenicopterus_roseus),_Walvis_Bay,_Namibia,_2018-08-05,_DD_23.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/walvis-bay-2-640.webp",
+    "ratio": 1.608,
+    "author": "Olga Ernst",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bird_Island,_Walvis_Bay_(Namibia).jpg"
+   },
+   {
+    "thumb": "/img/puertos/walvis-bay-3-640.webp",
+    "ratio": 1.509,
+    "author": "Olga Ernst  &  Hp.Baumeler",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Flughafen_Walfish_Bay_Luftaufnahme.jpg"
+   },
+   {
+    "thumb": "/img/puertos/walvis-bay-4-640.webp",
+    "ratio": 1.333,
+    "author": "Bgabel",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:NA-walvis-2.jpg"
+   }
+  ]
  },
  "Florencia": {
   "slug": "florencia",
@@ -690,7 +1306,30 @@
   "ratio": 1.506,
   "author": "Frank Schulenburg",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Waikiki_Beach_(2024)-L1004709.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Waikiki_Beach_(2024)-L1004709.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/honolulu-2-640.webp",
+    "ratio": 1.501,
+    "author": "Farragutful",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2022_Views_from_Diamond_Head_02.jpg"
+   },
+   {
+    "thumb": "/img/puertos/honolulu-3-640.webp",
+    "ratio": 1.501,
+    "author": "Daniel Ramirez from Honolulu, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alewa_Heights_during_a_cloudy_day._(16975876705).jpg"
+   },
+   {
+    "thumb": "/img/puertos/honolulu-4-640.webp",
+    "ratio": 1.893,
+    "author": "Reweaver33",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aliiolani_Hale,_Oahu,_Hawaii.jpg"
+   }
+  ]
  },
  "Hilo": {
   "slug": "hilo",
@@ -699,7 +1338,30 @@
   "ratio": 1.5,
   "author": "AlaskaDave",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Hilo_Bay_from_Liliu%27okalani_Park.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Hilo_Bay_from_Liliu%27okalani_Park.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/hilo-2-640.webp",
+    "ratio": 1.333,
+    "author": "KanoaWithington at English Wikipedia (Kanoa Withington)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hilo.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hilo-3-640.webp",
+    "ratio": 1.298,
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Distant_view_of_the_suburbs_of_Hilo,_Hawaii,_1907_(CHS-427).jpg"
+   },
+   {
+    "thumb": "/img/puertos/hilo-4-640.webp",
+    "ratio": 1.326,
+    "author": "Unknown authorUnknown author or not provided",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hawaii_-_Hilo_-_NARA_-_23937301_(cropped).jpg"
+   }
+  ]
  },
  "Rabaul": {
   "slug": "rabaul",
@@ -708,7 +1370,16 @@
   "ratio": 1.333,
   "author": "Stefan Krasowski from New York, NY, USA",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Rabaul_from_Vulcanology_Observatory.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Rabaul_from_Vulcanology_Observatory.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/rabaul-2-640.webp",
+    "ratio": 1.502,
+    "author": "Masalai",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rabaul_volcanos_2011.jpg"
+   }
+  ]
  },
  "Kobe (Kioto)": {
   "slug": "kobe-kioto",
@@ -726,7 +1397,30 @@
   "ratio": 1.333,
   "author": "Averette at English Wikipedia",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Atlantiscondominium.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Atlantiscondominium.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/miami-2-640.webp",
+    "ratio": 1.333,
+    "author": "Averette",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Brickell_Avenue_20100203.jpg"
+   },
+   {
+    "thumb": "/img/puertos/miami-3-640.webp",
+    "ratio": 1.333,
+    "author": "Averette at English Wikipedia",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Calleocho.jpg"
+   },
+   {
+    "thumb": "/img/puertos/miami-4-640.webp",
+    "ratio": 1.778,
+    "author": "Averette",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Central_Downtown_Miami_20090513.jpg"
+   }
+  ]
  },
  "Port Canaveral": {
   "slug": "port-canaveral",
@@ -735,7 +1429,23 @@
   "ratio": 5.0,
   "author": "Timothy J. Quill",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Port_Canaveral_Panorama_10-2019.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Port_Canaveral_Panorama_10-2019.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/port-canaveral-2-640.webp",
+    "ratio": 1.504,
+    "author": "NASA",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:STS-114_booster_recovery.jpg"
+   },
+   {
+    "thumb": "/img/puertos/port-canaveral-3-640.webp",
+    "ratio": 1.919,
+    "author": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tugboats,_Port_Canaveral,_Florida.jpg"
+   }
+  ]
  },
  "Nassau": {
   "slug": "nassau",
@@ -744,7 +1454,30 @@
   "ratio": 1.667,
   "author": "Quintin Soloviev",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Nassau,_Bahamas_aerial_view_(cropped).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Nassau,_Bahamas_aerial_view_(cropped).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/nassau-2-640.webp",
+    "ratio": 1.335,
+    "author": "qwesy qwesy",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Nassau_-_panoramio_(6).jpg"
+   },
+   {
+    "thumb": "/img/puertos/nassau-3-640.webp",
+    "ratio": 1.333,
+    "author": "BrokenSphere",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fort_Charlotte,_Nassau_walls_5.JPG"
+   },
+   {
+    "thumb": "/img/puertos/nassau-4-640.webp",
+    "ratio": 1.359,
+    "author": "ParsonsPhotographyNL",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hilton_resort_Nassau.jpg"
+   }
+  ]
  },
  "Cozumel": {
   "slug": "cozumel",
@@ -753,7 +1486,30 @@
   "ratio": 1.333,
   "author": "Gabriel Alfaro Ortíz",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Isla_Cozumel,_M%C3%A9xico_-_panoramio.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Isla_Cozumel,_M%C3%A9xico_-_panoramio.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/cozumel-2-640.webp",
+    "ratio": 1.333,
+    "author": "Matthew T Rader",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arrecifes_de_Cozumel_National_Park.jpg"
+   },
+   {
+    "thumb": "/img/puertos/cozumel-3-640.webp",
+    "ratio": 1.333,
+    "author": "Adam Jones",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Church_Facade_and_Bunting_-_El_Cedral_-_Cozumel_-_Mexico.jpg"
+   },
+   {
+    "thumb": "/img/puertos/cozumel-4-640.webp",
+    "ratio": 1.499,
+    "author": "Ricraider",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port_San_Miguel.jpg"
+   }
+  ]
  },
  "Great Stirrup Cay": {
   "slug": "great-stirrup-cay",
@@ -762,7 +1518,30 @@
   "ratio": 1.333,
   "author": "Ekem",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Greatstrirrupcay.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Greatstrirrupcay.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/great-stirrup-cay-2-640.webp",
+    "ratio": 1.333,
+    "author": "User516",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:GreatStirrupCayBlock.jpg"
+   },
+   {
+    "thumb": "/img/puertos/great-stirrup-cay-3-640.webp",
+    "ratio": 1.333,
+    "author": "User516",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:GreatStirrupCayCubes.jpg"
+   },
+   {
+    "thumb": "/img/puertos/great-stirrup-cay-4-640.webp",
+    "ratio": 1.333,
+    "author": "User516",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:GreatStirrupCayHelipad.jpg"
+   }
+  ]
  },
  "Galveston": {
   "slug": "galveston",
@@ -771,7 +1550,30 @@
   "ratio": 1.366,
   "author": "Nsaum75 (talk)",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:BHSGalvEntrance.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:BHSGalvEntrance.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/galveston-2-640.webp",
+    "ratio": 1.775,
+    "author": "Nsaum75",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:GISD_Lovenberg_Admin_Bldg,_Galveston.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-3-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. Onboleman~commonswiki assumed (based on cop",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Galveston_beach_sunset.JPG"
+   },
+   {
+    "thumb": "/img/puertos/galveston-4-640.webp",
+    "ratio": 1.41,
+    "author": "Farragutful",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ashton_Villa_-_Galveston.jpg"
+   }
+  ]
  },
  "San Juan": {
   "slug": "san-juan",
@@ -780,7 +1582,30 @@
   "ratio": 1.501,
   "author": "Miguel",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Nueva_Catedral_de_San_Juan_(11426785093).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Nueva_Catedral_de_San_Juan_(11426785093).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/san-juan-2-640.webp",
+    "ratio": 1.501,
+    "author": "Miguel",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Auditorio_Juan_Victoria_(11426827724).jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-juan-3-640.webp",
+    "ratio": 1.333,
+    "author": "Enrique Guardia",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Autopista_014,_San_Juan,_Argentina.JPG"
+   },
+   {
+    "thumb": "/img/puertos/san-juan-4-640.webp",
+    "ratio": 2.109,
+    "author": "Enrique Guardia",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Av._Libertador_General_San_Mart%C3%ADn_entre_Rivadavia_y_Marquesado,_provincia_de_San_Juan,_Argentina.jpg"
+   }
+  ]
  },
  "Long Beach": {
   "slug": "long-beach",
@@ -789,7 +1614,30 @@
   "ratio": 1.333,
   "author": "Jakesoriano23",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Aquarium_of_the_Pacific.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Aquarium_of_the_Pacific.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/long-beach-2-640.webp",
+    "ratio": 1.333,
+    "author": "Vmenkov",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:E9198-Long-Beach-lighthouse.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-3-640.webp",
+    "ratio": 1.501,
+    "author": "Regular Daddy",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:LongBeachLongView.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-4-640.webp",
+    "ratio": 1.506,
+    "author": "Don Ramey Logan",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Long_Beach_CA_Photo_Don_Ramey_Logan.jpg"
+   }
+  ]
  },
  "Tampa": {
   "slug": "tampa",
@@ -798,7 +1646,30 @@
   "ratio": 1.333,
   "author": "TampAGS, for AGS Media",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Centro_Espa%C3%B1ol_de_Tampa.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Centro_Espa%C3%B1ol_de_Tampa.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/tampa-2-640.webp",
+    "ratio": 1.741,
+    "author": "Clément Bardot",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Tampa,_Florida.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tampa-3-640.webp",
+    "ratio": 1.375,
+    "author": "SPUI",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:60_west_at_15th.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tampa-4-640.webp",
+    "ratio": 1.381,
+    "author": "Wknight94 talk",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_west_Tampa,_Florida.jpg"
+   }
+  ]
  },
  "Santo Tomás": {
   "slug": "santo-tomas",
@@ -807,7 +1678,23 @@
   "ratio": 1.333,
   "author": "Jorge RosasA",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:C%C3%BApula_de_Iglesia_Santo_Tom%C3%A1s_de_los_Pl%C3%A1tanos.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:C%C3%BApula_de_Iglesia_Santo_Tom%C3%A1s_de_los_Pl%C3%A1tanos.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/santo-tomas-2-640.webp",
+    "ratio": 1.501,
+    "author": "Valeria González Padilla",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cascada_del_R%C3%ADo_Santo_Desierto.jpg"
+   },
+   {
+    "thumb": "/img/puertos/santo-tomas-3-640.webp",
+    "ratio": 1.328,
+    "author": "Sachavir Salvador Barrera",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rodilla_del_Diablo_Parque_nacional_Barranca_del_Cupatizio_Uruapan.JPG"
+   }
+  ]
  },
  "Puerto Plata": {
   "slug": "puerto-plata",
@@ -816,7 +1703,30 @@
   "ratio": 1.333,
   "author": "Jusunx",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Poli_deportivo_Puerto_plata.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Poli_deportivo_Puerto_plata.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/puerto-plata-2-640.webp",
+    "ratio": 1.778,
+    "author": "Jusunx",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Puerto_Plata_-_Vistapop25.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-plata-3-640.webp",
+    "ratio": 1.571,
+    "author": "https://www.flickr.com/photos/scubabix/",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Puerto_Plata_Dominican_Republic_Architecture.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-plata-4-640.webp",
+    "ratio": 1.572,
+    "author": "https://www.flickr.com/photos/scubabix/",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Puerto_Plata_Dominican_Republic_Cafe.jpg"
+   }
+  ]
  },
  "Jacksonville": {
   "slug": "jacksonville",
@@ -825,7 +1735,30 @@
   "ratio": 1.333,
   "author": "J.M.",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Football_field_at_D._B._Milne_Field,_Jacksonville_University.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Football_field_at_D._B._Milne_Field,_Jacksonville_University.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/jacksonville-2-640.webp",
+    "ratio": 1.553,
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-3-640.webp",
+    "ratio": 1.588,
+    "author": "Mary Whitworth",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Baptist_Health_System.jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-4-640.webp",
+    "ratio": 1.333,
+    "author": "Mathew105601",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Building_A,_FSCJ.JPG"
+   }
+  ]
  },
  "Aruba": {
   "slug": "aruba",
@@ -834,7 +1767,30 @@
   "ratio": 1.499,
   "author": "Carlos Naranjo",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:00_Stadhuis.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:00_Stadhuis.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/aruba-2-640.webp",
+    "ratio": 1.501,
+    "author": "Lance Cpl. Brian Bolin Jr.",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Caribbean_245th_06.jpg"
+   },
+   {
+    "thumb": "/img/puertos/aruba-3-640.webp",
+    "ratio": 1.501,
+    "author": "Aruba Paradise Photos",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Archaeological_Museum_Oranjestad_Aruba.jpg"
+   },
+   {
+    "thumb": "/img/puertos/aruba-4-640.webp",
+    "ratio": 1.333,
+    "author": "Caribiana",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aruba_Aloe_Factory_00_17_56_166000.jpeg"
+   }
+  ]
  },
  "Cabo San Lucas": {
   "slug": "cabo-san-lucas",
@@ -843,7 +1799,30 @@
   "ratio": 1.501,
   "author": "Shane Smith",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Land%27s_Edge_-_panoramio_(1).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Land%27s_Edge_-_panoramio_(1).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/cabo-san-lucas-2-640.webp",
+    "ratio": 1.333,
+    "author": "Adamina",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Beach_(49904130422).jpg"
+   },
+   {
+    "thumb": "/img/puertos/cabo-san-lucas-3-640.webp",
+    "ratio": 1.333,
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cabo_San_Lucas_bay.jpg"
+   },
+   {
+    "thumb": "/img/puertos/cabo-san-lucas-4-640.webp",
+    "ratio": 2.0,
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cabo_San_Lucas_overview.jpg"
+   }
+  ]
  },
  "Norfolk": {
   "slug": "norfolk",
@@ -852,7 +1831,30 @@
   "ratio": 1.333,
   "author": "Adam Smith",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Britpieryarmouth.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Britpieryarmouth.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/norfolk-2-640.webp",
+    "ratio": 1.417,
+    "author": "Bs0u10e01",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Holt_railway_station_heritage_2022.jpg"
+   },
+   {
+    "thumb": "/img/puertos/norfolk-3-640.webp",
+    "ratio": 1.682,
+    "author": "Cameron Self",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:NorwichPlayhouse_(cropped).JPG"
+   },
+   {
+    "thumb": "/img/puertos/norfolk-4-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. Angmering assumed (based on copyright claim",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:NorwichRCC.JPG"
+   }
+  ]
  },
  "Isla Tropicale": {
   "slug": "isla-tropicale",
@@ -870,7 +1872,30 @@
   "ratio": 1.506,
   "author": "Joe Mabel",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Amazon_Spheres_05.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Amazon_Spheres_05.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/seattle-2-640.webp",
+    "ratio": 1.548,
+    "author": "Joe Mabel",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Eagles_Auditorium_pano_1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/seattle-3-640.webp",
+    "ratio": 1.494,
+    "author": "Steve Morgan",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Link_trains_at_University_St_station_in_2010.jpg"
+   },
+   {
+    "thumb": "/img/puertos/seattle-4-640.webp",
+    "ratio": 1.494,
+    "author": "Adbar",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:McCaw_Hall_Kreielsheimer_Promenade.JPG"
+   }
+  ]
  },
  "Mobile": {
   "slug": "mobile",
@@ -888,7 +1913,30 @@
   "ratio": 1.78,
   "author": "Meihe Chen",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:BenjaminFranklinParkway2017.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:BenjaminFranklinParkway2017.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/filadelfia-2-640.webp",
+    "ratio": 1.333,
+    "author": "Photo: Mr. Kjetil Ree.",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Elfreth%27s_Alley.JPG"
+   },
+   {
+    "thumb": "/img/puertos/filadelfia-3-640.webp",
+    "ratio": 1.329,
+    "author": "Rdsmith4",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Independence_Hall.jpg"
+   },
+   {
+    "thumb": "/img/puertos/filadelfia-4-640.webp",
+    "ratio": 1.328,
+    "author": "Wikimedia Commons",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Phila_nBroad02.jpg"
+   }
+  ]
  },
  "New Orleans": {
   "slug": "new-orleans",
@@ -897,7 +1945,30 @@
   "ratio": 1.32,
   "author": "George Bannister",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:New_Orleans_from_the_Air_September_2019_-_Central_Business_District_Skyline_(cropped).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:New_Orleans_from_the_Air_September_2019_-_Central_Business_District_Skyline_(cropped).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/new-orleans-2-640.webp",
+    "ratio": 1.296,
+    "author": "Adrien de Pauger",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Archives_nationales_d%E2%80%99outre-mer_-_Louisiane_-_Adrien_de_Pauger_-_1724_-_001.jpg"
+   },
+   {
+    "thumb": "/img/puertos/new-orleans-3-640.webp",
+    "ratio": 1.353,
+    "author": "Edward Percy Moran",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Battle_of_New_Orleans.jpg"
+   },
+   {
+    "thumb": "/img/puertos/new-orleans-4-640.webp",
+    "ratio": 1.66,
+    "author": "Infrogmation of New Orleans",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BethIsraelCarondeletFrontA.JPG"
+   }
+  ]
  },
  "Patmos": {
   "slug": "patmos",
@@ -906,7 +1977,30 @@
   "ratio": 1.333,
   "author": "Chris Vlachos",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Chora-of-Patmos.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Chora-of-Patmos.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/patmos-2-640.webp",
+    "ratio": 1.501,
+    "author": "Francesco Bini",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Patmos,_grotta_dell%27apocalisse,_chiesa_nella_grotta,_02.jpg"
+   },
+   {
+    "thumb": "/img/puertos/patmos-3-640.webp",
+    "ratio": 1.333,
+    "author": "Chris Vlachos",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Skala-of-patmos.JPG"
+   },
+   {
+    "thumb": "/img/puertos/patmos-4-640.webp",
+    "ratio": 1.494,
+    "author": "Diakidou sophia/ Diakidou sophia at Greek Wikipedia. Original file is/was here",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Chora_of_Patmos1.jpg"
+   }
+  ]
  },
  "Hong Kong": {
   "slug": "hong-kong",
@@ -915,7 +2009,30 @@
   "ratio": 1.333,
   "author": "Yym1997",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:070915HK_Air_Pollution.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:070915HK_Air_Pollution.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/hong-kong-2-640.webp",
+    "ratio": 1.391,
+    "author": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20091004_lion_dance_Hong_Kong_Kowloon_6779.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hong-kong-3-640.webp",
+    "ratio": 1.569,
+    "author": "Fighting Irish 1977",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bridge_of_Hong_Kong_harbor.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hong-kong-4-640.webp",
+    "ratio": 1.349,
+    "author": "ystsoi",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cheung_Shan_-_The_Hong_Kong-Zhuhai-Macau_Bridge_View_(40574256105).jpg"
+   }
+  ]
  },
  "Copenhague": {
   "slug": "copenhague",
@@ -924,7 +2041,30 @@
   "ratio": 1.656,
   "author": "Thomas Rousing from Copenhagen, Denmark",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Amager_Strandpark_2014.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Amager_Strandpark_2014.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/copenhague-2-640.webp",
+    "ratio": 1.333,
+    "author": "Gerda Arendt",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Copenhagen,_park_with_pond_in_fall_colours.jpg"
+   },
+   {
+    "thumb": "/img/puertos/copenhague-3-640.webp",
+    "ratio": 1.494,
+    "author": "caspermoller  (https://www.flickr.com/photos/caspermoller/)",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nyhavns_P%C3%B8lser,_Copenhagen_2008.jpg"
+   },
+   {
+    "thumb": "/img/puertos/copenhague-4-640.webp",
+    "ratio": 1.336,
+    "author": "Leif Jørgensen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gammel_Kongevej.JPG"
+   }
+  ]
  },
  "Salerno": {
   "slug": "salerno",
@@ -933,7 +2073,30 @@
   "ratio": 2.218,
   "author": "Cabalist12",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Panorama_of_salerno_from_arechi.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Panorama_of_salerno_from_arechi.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/salerno-2-640.webp",
+    "ratio": 1.506,
+    "author": "Leandro Neumann Ciuffo",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cattedrale_di_Salerno_(9696860040).jpg"
+   },
+   {
+    "thumb": "/img/puertos/salerno-3-640.webp",
+    "ratio": 2.055,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Salerno-PanoramaMazzoDellaSignora.jpg"
+   },
+   {
+    "thumb": "/img/puertos/salerno-4-640.webp",
+    "ratio": 1.333,
+    "author": "Giaros",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:SalernoVerdiTheatre.jpg"
+   }
+  ]
  },
  "Royal Naval Dockyard": {
   "slug": "royal-naval-dockyard",
@@ -942,7 +2105,30 @@
   "ratio": 1.47,
   "author": "Dan Conlin",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Admiralty_House_Halifax.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Admiralty_House_Halifax.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-2-640.webp",
+    "ratio": 1.333,
+    "author": "Ekem",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BMMentry.JPG"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-3-640.webp",
+    "ratio": 1.506,
+    "author": "Jerrye and Roy Klotz MD",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:COMMISSIONER%27S_HOUSE_IN_THE_ROYAL_DOCKYARD,_BERMUDA.jpg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
+    "ratio": 1.481,
+    "author": "Nilfanion",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chatham_Clock_Tower_Building_from_HMS_Cavalier.jpg"
+   }
+  ]
  },
  "Heraclión": {
   "slug": "heraclion",
@@ -951,7 +2137,30 @@
   "ratio": 2.495,
   "author": "Pitichinaccio",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:2011_Dimos_Irakliou.png"
+  "page": "https://commons.wikimedia.org/wiki/File:2011_Dimos_Irakliou.png",
+  "more": [
+   {
+    "thumb": "/img/puertos/heraclion-2-640.webp",
+    "ratio": 1.333,
+    "author": "Beemwej",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arsena%C5%82_Iraklio_864.JPG"
+   },
+   {
+    "thumb": "/img/puertos/heraclion-3-640.webp",
+    "ratio": 1.445,
+    "author": "böhringer friedrich",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:HeraklionStadt05.JPG"
+   },
+   {
+    "thumb": "/img/puertos/heraclion-4-640.webp",
+    "ratio": 1.333,
+    "author": "Florian Waßmann",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:KMV_Tu_204-100_in_Heraklion.JPG"
+   }
+  ]
  },
  "Cartagena": {
   "slug": "cartagena",
@@ -960,7 +2169,30 @@
   "ratio": 1.504,
   "author": "poirpom",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Cartagena_skyline,_Colombia.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Cartagena_skyline,_Colombia.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/cartagena-2-640.webp",
+    "ratio": 1.333,
+    "author": "David Shankbone",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:010_Fuerte_San_Fernando_Cartagena_Colombia.JPG"
+   },
+   {
+    "thumb": "/img/puertos/cartagena-3-640.webp",
+    "ratio": 1.333,
+    "author": "David Shankbone",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:012_Playa_Blanca_from_the_Boat.JPG"
+   },
+   {
+    "thumb": "/img/puertos/cartagena-4-640.webp",
+    "ratio": 1.333,
+    "author": "David Shankbone",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:013_Playa_Blanca_2_from_the_Boat.JPG"
+   }
+  ]
  },
  "Belize": {
   "slug": "belize",
@@ -978,7 +2210,30 @@
   "ratio": 1.6,
   "author": "Ajay Suresh from New York, NY, USA",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Boston_-Massachusetts_State_House_(48718911666).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Boston_-Massachusetts_State_House_(48718911666).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/boston-2-640.webp",
+    "ratio": 1.333,
+    "author": "Bobak Ha'Eri",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:03-30-07-BostonCityHall.jpg"
+   },
+   {
+    "thumb": "/img/puertos/boston-3-640.webp",
+    "ratio": 1.333,
+    "author": "AbhiSuryawanshi",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_View_Parkman_Bandstand_at_Boston_Common_2.jpg"
+   },
+   {
+    "thumb": "/img/puertos/boston-4-640.webp",
+    "ratio": 1.474,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BCburnslawnsunset.jpg"
+   }
+  ]
  },
  "Fort Lauderdale": {
   "slug": "fort-lauderdale",
@@ -987,7 +2242,30 @@
   "ratio": 1.501,
   "author": "KeanoManu",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Fort_Lauderdale,_Nov-15.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Fort_Lauderdale,_Nov-15.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/fort-lauderdale-2-640.webp",
+    "ratio": 1.333,
+    "author": "Ulises Icardi",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Acceso_a_la_Ruta_Interestatal_95_(%22I95%22)_desde_el_centro_de_Fort_Lauderdale).jpg"
+   },
+   {
+    "thumb": "/img/puertos/fort-lauderdale-3-640.webp",
+    "ratio": 1.604,
+    "author": "Ulises Icardi",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aeropuerto_Internacional_de_Fort_Lauderdale.jpg"
+   },
+   {
+    "thumb": "/img/puertos/fort-lauderdale-4-640.webp",
+    "ratio": 1.333,
+    "author": "Ulises Icardi",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bulevar_Seabreeze_y_sus_hoteles_de_diferentes_cadenas_frente_al_mar.jpg"
+   }
+  ]
  },
  "Baltimore": {
   "slug": "baltimore",
@@ -996,7 +2274,30 @@
   "ratio": 1.303,
   "author": "Flickr user: Doc Searls Maywood https://www.flickr.com/people/docsearls/",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Fell%27s_Point_waterfront2.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Fell%27s_Point_waterfront2.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/baltimore-2-640.webp",
+    "ratio": 1.506,
+    "author": "Marylandstater",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1city_hall_baltimore.jpg"
+   },
+   {
+    "thumb": "/img/puertos/baltimore-3-640.webp",
+    "ratio": 1.546,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BaltimoraInnerHarbor1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/baltimore-4-640.webp",
+    "ratio": 1.504,
+    "author": "Fletcher6",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Baltimore_Aerial.JPG"
+   }
+  ]
  },
  "Santa Lucía": {
   "slug": "santa-lucia",
@@ -1023,7 +2324,30 @@
   "ratio": 1.333,
   "author": "Esteban Folch",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Atardecer_en_una_playa_de_Puerto_Vallarta.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Atardecer_en_una_playa_de_Puerto_Vallarta.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/puerto-vallarta-2-640.webp",
+    "ratio": 1.333,
+    "author": "Cintyafloars",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Caballito_de_mar,_Puerto_Vallarta.jpeg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-vallarta-3-640.webp",
+    "ratio": 1.333,
+    "author": "KABAYEK",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Marina_vallarta_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-vallarta-4-640.webp",
+    "ratio": 1.509,
+    "author": "Corderomx",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Muelle_Puerto_Vallarta.jpg"
+   }
+  ]
  },
  "Milos": {
   "slug": "milos",
@@ -1032,7 +2356,30 @@
   "ratio": 1.496,
   "author": "Wikimedia Commons",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Milos.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Milos.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/milos-2-640.webp",
+    "ratio": 1.333,
+    "author": "Oliwan",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Milos-10.jpg"
+   },
+   {
+    "thumb": "/img/puertos/milos-3-640.webp",
+    "ratio": 1.333,
+    "author": "Παρασκευόπουλος Δημήτρης / Dparaskevop at Greek Wikipedia",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Milos_ancient_theatre.JPG"
+   },
+   {
+    "thumb": "/img/puertos/milos-4-640.webp",
+    "ratio": 1.333,
+    "author": "pastitio",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chora_Milos.jpg"
+   }
+  ]
  },
  "Casablanca": {
   "slug": "casablanca",
@@ -1041,7 +2388,30 @@
   "ratio": 1.333,
   "author": "Antony Stanley from Gloucester, UK",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Casablanca_(5281127436).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Casablanca_(5281127436).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/casablanca-2-640.webp",
+    "ratio": 1.501,
+    "author": "L. Vadillo - MaLéPhotoSpain",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20190809_CASABLANCA_143-1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/casablanca-3-640.webp",
+    "ratio": 1.501,
+    "author": "L. Vadillo - MaLéPhotoSpain",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20190814_CASABLANCA_58.jpg"
+   },
+   {
+    "thumb": "/img/puertos/casablanca-4-640.webp",
+    "ratio": 1.501,
+    "author": "L. Vadillo - MaLéPhotoSpain",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20190814_CASABLANCA_69.jpg"
+   }
+  ]
  },
  "Manhattan": {
   "slug": "manhattan",
@@ -1050,7 +2420,30 @@
   "ratio": 1.683,
   "author": "unidentified illustrator",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Castle_Garden_aerial_view_ca1880.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Castle_Garden_aerial_view_ca1880.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/manhattan-2-640.webp",
+    "ratio": 1.66,
+    "author": "Irving Underhill",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Manhattan_Bridge_Construction_1909.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-3-640.webp",
+    "ratio": 1.526,
+    "author": "user:AngMoKio",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Manhattan_amk.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-4-640.webp",
+    "ratio": 1.333,
+    "author": "Daniel Schwen",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:NYC_Times_Square_wide_angle.jpg"
+   }
+  ]
  },
  "Harvest Caye": {
   "slug": "harvest-caye",
@@ -1068,7 +2461,30 @@
   "ratio": 1.501,
   "author": "Coolcaesar",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Handelskade_in_Willemstad.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Handelskade_in_Willemstad.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/willemstad-2-640.webp",
+    "ratio": 1.417,
+    "author": "Niels Karsdorp, Dh3201",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cura%C3%A7ao_Sea_Aquarium_Dolphin_Show.jpg"
+   },
+   {
+    "thumb": "/img/puertos/willemstad-3-640.webp",
+    "ratio": 2.169,
+    "author": "Martin Falbisoner",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Facades_of_Handelskade,_Willemstad,_Cura%C3%A7ao_-_February_2020.jpg"
+   },
+   {
+    "thumb": "/img/puertos/willemstad-4-640.webp",
+    "ratio": 1.612,
+    "author": "Niels Karsdorp, Dh3201",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fort_Amsterdam.jpg"
+   }
+  ]
  },
  "Katákolo": {
   "slug": "katakolo",
@@ -1077,7 +2493,30 @@
   "ratio": 1.333,
   "author": "Boboseiptu",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Katakolo.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Katakolo.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/katakolo-2-640.webp",
+    "ratio": 1.501,
+    "author": "Wknight94 talk",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Katakolo_dock_2010_6.jpg"
+   },
+   {
+    "thumb": "/img/puertos/katakolo-3-640.webp",
+    "ratio": 1.494,
+    "author": "Mstyslav Chernov",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Katakolo_esplanade._Pyrgos,_Western_Elis,_Greece.jpg"
+   },
+   {
+    "thumb": "/img/puertos/katakolo-4-640.webp",
+    "ratio": 1.333,
+    "author": "sarapappa",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_Ship_Costa_Fortuna_in_Katakolo_-_April_2009.jpg"
+   }
+  ]
  },
  "Halifax": {
   "slug": "halifax",
@@ -1095,7 +2534,30 @@
   "ratio": 1.499,
   "author": "Andrés Barrios",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png"
+  "page": "https://commons.wikimedia.org/wiki/File:Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png",
+  "more": [
+   {
+    "thumb": "/img/puertos/amsterdam-2-640.webp",
+    "ratio": 1.501,
+    "author": "Jorge Royan",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Channel_-_1124.jpg"
+   },
+   {
+    "thumb": "/img/puertos/amsterdam-3-640.webp",
+    "ratio": 1.553,
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_1912_Damrak.jpg"
+   },
+   {
+    "thumb": "/img/puertos/amsterdam-4-640.webp",
+    "ratio": 1.501,
+    "author": "Peter K Burian",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_Canal_Tour.jpg"
+   }
+  ]
  },
  "Kiel": {
   "slug": "kiel",
@@ -1104,7 +2566,30 @@
   "ratio": 1.333,
   "author": "Klaas Ole Kürtz (Drbashir117)",
   "license": "CC BY-SA 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:KielerStadtzentrumLuftaufnahme.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:KielerStadtzentrumLuftaufnahme.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kiel-2-640.webp",
+    "ratio": 1.501,
+    "author": "Pressestelle Uni Kiel",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bah1001x.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kiel-3-640.webp",
+    "ratio": 1.501,
+    "author": "Nordenfan",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kiel_Stadtsicht.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kiel-4-640.webp",
+    "ratio": 1.501,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Museo_mar%C3%ADtimo,_Kiel,_Alemania,_2019-08-30,_DD_01.jpg"
+   }
+  ]
  },
  "Motril": {
   "slug": "motril",
@@ -1113,7 +2598,30 @@
   "ratio": 1.333,
   "author": "Veinticuatro de Jahén",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Calahonda_24J_03.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Calahonda_24J_03.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/motril-2-640.webp",
+    "ratio": 1.778,
+    "author": "Veinticuatro de Jahén",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Carchuna,_en_el_municipio_de_Motril_(Granada,_Espa%C3%B1a).jpg"
+   },
+   {
+    "thumb": "/img/puertos/motril-3-640.webp",
+    "ratio": 1.333,
+    "author": "Rosa F. Seguido",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:FUENTE_DE_ENTRADA_A_MOTRIL.jpg"
+   },
+   {
+    "thumb": "/img/puertos/motril-4-640.webp",
+    "ratio": 1.438,
+    "author": "Zarateman",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Motril_-_Convento_de_las_Nazarenas_12.jpg"
+   }
+  ]
  },
  "Roatán": {
   "slug": "roatan",
@@ -1122,7 +2630,30 @@
   "ratio": 1.608,
   "author": "Unknown authorUnknown author",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Coxen%27s_Hole,_Roat%C3%A1n_1910-1920.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Coxen%27s_Hole,_Roat%C3%A1n_1910-1920.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/roatan-2-640.webp",
+    "ratio": 1.6,
+    "author": "Guerrero ?",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Coxen%27s_Hole,_Roat%C3%A1n_1910-1925.jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-3-640.webp",
+    "ratio": 1.763,
+    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port_~_Isla_Roatan_(31089485956).jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-4-640.webp",
+    "ratio": 1.684,
+    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Isla_Roatan_~_Honduras_(31597566445).jpg"
+   }
+  ]
  },
  "San Diego": {
   "slug": "san-diego",
@@ -1131,7 +2662,30 @@
   "ratio": 1.654,
   "author": "--Microsomen 04:01, 24 May 2005 (UTC)",
   "license": "CC BY 1.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Crystal_peer_san_diego.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Crystal_peer_san_diego.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/san-diego-2-640.webp",
+    "ratio": 1.552,
+    "author": "Dirk Hansen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:La_Jolla_Shores_view_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-diego-3-640.webp",
+    "ratio": 1.494,
+    "author": "Port of San Diego",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2012_Festival_of_Sail_934278934983.jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-diego-4-640.webp",
+    "ratio": 1.91,
+    "author": "Official U.S. Navy Page from United States of America\n\nMass Communication Specia",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:An_MH-60R_Sea_Hawk_helicopter_flies_over_San_Diego._(24546100368)_(cropped).jpg"
+   }
+  ]
  },
  "Singapur": {
   "slug": "singapur",
@@ -1140,7 +2694,30 @@
   "ratio": 1.47,
   "author": "Photographer not identified. \"Official photograph\".\n\nPost-Work: User:W.wolny",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Surrender_Singapore.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Surrender_Singapore.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/singapur-2-640.webp",
+    "ratio": 1.432,
+    "author": "Wikimedia Commons",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alexandra_Hospital,_Singapore._Wellcome_L0026874.jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-3-640.webp",
+    "ratio": 1.778,
+    "author": "Unknown authorUnknown author, Japanese official photographer",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:BritishSurrender.jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-4-640.webp",
+    "ratio": 1.402,
+    "author": "British official photograph no. FLM. 903. United States. Office of War Informati",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_Singapore_with_smoke_in_early_1942.jpg"
+   }
+  ]
  },
  "Provenza": {
   "slug": "provenza",
@@ -1158,7 +2735,30 @@
   "ratio": 1.586,
   "author": "José Demaría López",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:1916-04-29,_La_Esfera,_Panoramas_espa%C3%B1oles.%E2%80%94Vista_de_Sevilla,_tomada_desde_la_Giralda_(cropped).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:1916-04-29,_La_Esfera,_Panoramas_espa%C3%B1oles.%E2%80%94Vista_de_Sevilla,_tomada_desde_la_Giralda_(cropped).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sevilla-2-640.webp",
+    "ratio": 1.333,
+    "author": "CARLOS TEIXIDOR CADENAS",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:AVE_en_Sevilla,_en_la_estaci%C3%B3n_de_Santa_Justa,_tren_Serie_100_de_Renfe.JPG"
+   },
+   {
+    "thumb": "/img/puertos/sevilla-3-640.webp",
+    "ratio": 1.333,
+    "author": "Frobles",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:AeropuertoSevilla.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sevilla-4-640.webp",
+    "ratio": 1.501,
+    "author": "Anual",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Antigua_Audiencia_de_Sevila.jpg"
+   }
+  ]
  },
  "Ciudad Ho Chi Minh": {
   "slug": "ciudad-ho-chi-minh",
@@ -1167,7 +2767,30 @@
   "ratio": 1.537,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento,_Ciudad_Ho_Chi_Minh,_Vietnam,_2013-08-14,_DD_09.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento,_Ciudad_Ho_Chi_Minh,_Vietnam,_2013-08-14,_DD_09.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/ciudad-ho-chi-minh-2-640.webp",
+    "ratio": 1.494,
+    "author": "alex.ch from Zurich, Switzerland",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Duxton_Hotel,_HCMC.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ciudad-ho-chi-minh-3-640.webp",
+    "ratio": 1.513,
+    "author": "Original uploader was Andre Lettau (talk) at de.wikipedia",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:HCM-City_Verkehr.JPG"
+   },
+   {
+    "thumb": "/img/puertos/ciudad-ho-chi-minh-4-640.webp",
+    "ratio": 1.333,
+    "author": "Lerdsuwa",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:HCMC_Quan_Am.jpg"
+   }
+  ]
  },
  "Melbourne": {
   "slug": "melbourne",
@@ -1176,7 +2799,30 @@
   "ratio": 1.466,
   "author": "PreciousBytes",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:2013_ANZAC_Day_Ceremony_at_the_Shrine_of_Remembrance.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:2013_ANZAC_Day_Ceremony_at_the_Shrine_of_Remembrance.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/melbourne-2-640.webp",
+    "ratio": 1.501,
+    "author": "jkfjellestad",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_of_Melbourne%27s_Central_Business_District_(CBD).jpg"
+   },
+   {
+    "thumb": "/img/puertos/melbourne-3-640.webp",
+    "ratio": 1.333,
+    "author": "AussieNickuss at en.wikipedia",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Fed_Square_August_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/melbourne-4-640.webp",
+    "ratio": 1.387,
+    "author": "Victoria State Transport Authority, restored by Adam Cuerden",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Flinders_Street_Station,_Melbourne,_at_the_intersection_of_Swanston_Street_and_Flinders_Street,_1927_-_Glass_plate.jpg"
+   }
+  ]
  },
  "Puerto Quetzal": {
   "slug": "puerto-quetzal",
@@ -1185,7 +2831,30 @@
   "ratio": 1.501,
   "author": "Gobierno de Guatemala",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:INGUAT_recibe_crucero_de_turistas_en_Puerto_Quetzal,_Escuintla._20241005_-_54050584205.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:INGUAT_recibe_crucero_de_turistas_en_Puerto_Quetzal,_Escuintla._20241005_-_54050584205.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/puerto-quetzal-2-640.webp",
+    "ratio": 1.333,
+    "author": "pete",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amazonas_I_at_Puerto_Quetzal_-_IMO_9204178_(3325968977).jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-quetzal-3-640.webp",
+    "ratio": 1.501,
+    "author": "User:Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Puerto_Quetzal_and_Volcano_Fuego.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-quetzal-4-640.webp",
+    "ratio": 1.504,
+    "author": "U.S. Navy photo by Chief Mass Communication Specialist Terry L. Rhedin",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:US_Navy_070203-N-8797R-048_A_Sailor_assigned_to_Beach_Master_Unit_One_(BMU-1)_directs_the_offload_of_a_container_from_a_barge_ferry_in_Puerto_Quetzal,_Guatemala,_for_Humanitarian_Support_over_the_Shore_(HSOTS)_2007.jpg"
+   }
+  ]
  },
  "Kahului": {
   "slug": "kahului",
@@ -1212,7 +2881,30 @@
   "ratio": 1.501,
   "author": "Tomio344456",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Nagasaki_City_View_from_Glover_Garden,_Nagasaki_2014.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Nagasaki_City_View_from_Glover_Garden,_Nagasaki_2014.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/nagasaki-2-640.webp",
+    "ratio": 1.501,
+    "author": "663highland",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Nagasaki_City_view_from_Hamahira01s3.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nagasaki-3-640.webp",
+    "ratio": 1.333,
+    "author": "STA3816",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fountain_at_Nagasaki_Peace_Park.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nagasaki-4-640.webp",
+    "ratio": 1.333,
+    "author": "Christophe95",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Glover_House_in_evening_light.jpg"
+   }
+  ]
  },
  "Busan": {
   "slug": "busan",
@@ -1221,7 +2913,30 @@
   "ratio": 1.333,
   "author": "LERK",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Busan-subway-1000-45th-unit-20090223.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Busan-subway-1000-45th-unit-20090223.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/busan-2-640.webp",
+    "ratio": 1.501,
+    "author": "Cheolstar",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Busan_Sajik_Stadium_20080706.JPG"
+   },
+   {
+    "thumb": "/img/puertos/busan-3-640.webp",
+    "ratio": 1.501,
+    "author": "bryan...",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Busan_South_Korea_Republic_of_Korea_ROK_Daehan_Minguk_(31877197338).jpg"
+   },
+   {
+    "thumb": "/img/puertos/busan-4-640.webp",
+    "ratio": 1.333,
+    "author": "Brit in Seoul",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dongbaekseom_island,_Busan.jpg"
+   }
+  ]
  },
  "Taipéi": {
   "slug": "taipei",
@@ -1230,7 +2945,30 @@
   "ratio": 1.778,
   "author": "Heeheemalu",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:20260204_Taipei,_Taiwan_Skyline.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:20260204_Taipei,_Taiwan_Skyline.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/taipei-2-640.webp",
+    "ratio": 1.501,
+    "author": "Titoni Thomas",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bellavita_and_CPCCT_head_office_20100907.jpg"
+   },
+   {
+    "thumb": "/img/puertos/taipei-3-640.webp",
+    "ratio": 1.333,
+    "author": "玄史生",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CUST_Taipei_Campus_West_Entrance_20120721.JPG"
+   },
+   {
+    "thumb": "/img/puertos/taipei-4-640.webp",
+    "ratio": 1.333,
+    "author": "Chongkian",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_Library,_National_Chengchi_University_20120826.jpg"
+   }
+  ]
  },
  "Niza/Mónaco": {
   "slug": "niza-monaco",
@@ -1248,7 +2986,30 @@
   "ratio": 1.495,
   "author": "Bob Keefer",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Hoonah_Packing_Company_plant.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Hoonah_Packing_Company_plant.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/icy-strait-point-2-640.webp",
+    "ratio": 1.494,
+    "author": "Moira Dunworth",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Icy_Strait_Point,_Alaska.jpg"
+   },
+   {
+    "thumb": "/img/puertos/icy-strait-point-3-640.webp",
+    "ratio": 1.501,
+    "author": "Enrico Blasutto",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Icy_Strait_Point_ENBLA03.jpg"
+   },
+   {
+    "thumb": "/img/puertos/icy-strait-point-4-640.webp",
+    "ratio": 1.501,
+    "author": "Jonathan Schilling",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tlingit_garbed_people_and_items_at_Icy_Strait_Point_2009.jpg"
+   }
+  ]
  },
  "Mazatlán": {
   "slug": "mazatlan",
@@ -1257,7 +3018,30 @@
   "ratio": 1.778,
   "author": "Dennis Sylvester Hurd",
   "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Mazatl%C3%A1nPanor%C3%A1mica.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Mazatl%C3%A1nPanor%C3%A1mica.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/mazatlan-2-640.webp",
+    "ratio": 1.501,
+    "author": "Gzzz",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Angel_Flores_Mazatl%C3%A1n.jpg"
+   },
+   {
+    "thumb": "/img/puertos/mazatlan-3-640.webp",
+    "ratio": 1.501,
+    "author": "panza.rayada",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Catedral_de_Mazatl%C3%A1n_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/mazatlan-4-640.webp",
+    "ratio": 1.475,
+    "author": "El Nuevo Doge",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Central_de_autobuses_de_Mazatl%C3%A1n,_11_de_septiembre_de_2022.jpg"
+   }
+  ]
  },
  "Bridgetown": {
   "slug": "bridgetown",
@@ -1266,7 +3050,30 @@
   "ratio": 1.522,
   "author": "Wikimedia Commons",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Bridgetown2.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Bridgetown2.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bridgetown-2-640.webp",
+    "ratio": 1.501,
+    "author": "CaribDigita",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Barbados_Mutual_Life_Assurance_Society_building,_Bridgetown.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bridgetown-3-640.webp",
+    "ratio": 1.333,
+    "author": "ROxBo at English Wikipedia",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bridgetown,_Barbados,_April_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bridgetown-4-640.webp",
+    "ratio": 1.504,
+    "author": "Pgbk1987",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bridgetown,_Barbados..JPG"
+   }
+  ]
  },
  "Saint John": {
   "slug": "saint-john",
@@ -1284,7 +3091,30 @@
   "ratio": 1.333,
   "author": "Rodtico21",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Capitan%C3%ADa_de_Puntarenas._Costa_Rica.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Capitan%C3%ADa_de_Puntarenas._Costa_Rica.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/puntarenas-2-640.webp",
+    "ratio": 1.778,
+    "author": "Rodtico21",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Antigua_Aduana._Puntarenas._Costa_Rica.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puntarenas-3-640.webp",
+    "ratio": 1.333,
+    "author": "Rodtico21",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Antigua_comandancia_de_Puntarenas._Costa_Rica.JPG"
+   },
+   {
+    "thumb": "/img/puertos/puntarenas-4-640.webp",
+    "ratio": 1.501,
+    "author": "Mariordo (Mario Roberto Duran Ortiz)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CRI_04_2013_Cruceros_Puntarenas_6300.JPG"
+   }
+  ]
  },
  "Dover": {
   "slug": "dover",
@@ -1293,7 +3123,30 @@
   "ratio": 1.333,
   "author": "Pkuczynski",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:White_Cliffs_of_Dover_3_(Piotr_Kuczynski).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:White_Cliffs_of_Dover_3_(Piotr_Kuczynski).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/dover-2-640.webp",
+    "ratio": 1.384,
+    "author": "Dave Croker",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dover_from_the_top_of_Dover_Castle_-_geograph.org.uk_-_4061940.jpg"
+   },
+   {
+    "thumb": "/img/puertos/dover-3-640.webp",
+    "ratio": 1.333,
+    "author": "Hajotthu 13:39, 11. Jun. 2009 (CEST)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:DoverRathaus.JPG"
+   },
+   {
+    "thumb": "/img/puertos/dover-4-640.webp",
+    "ratio": 1.501,
+    "author": "Suicasmo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dover_20180901-2.jpg"
+   }
+  ]
  },
  "Kuala Lumpur": {
   "slug": "kuala-lumpur",
@@ -1302,7 +3155,30 @@
   "ratio": 1.775,
   "author": "Renek78",
   "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Bukit_Bintang_junction_in_2024_2.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Bukit_Bintang_junction_in_2024_2.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kuala-lumpur-2-640.webp",
+    "ratio": 1.32,
+    "author": "User:Two hundred percent.",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jalan_Sultan_Sulaiman_cluster,_Kuala_Lumpur.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kuala-lumpur-3-640.webp",
+    "ratio": 1.35,
+    "author": "Wikimedia Commons",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Japanese_troops_mopping_up_in_Kuala_Lumpur.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kuala-lumpur-4-640.webp",
+    "ratio": 1.333,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Jlntuankuabdulrahman.jpg"
+   }
+  ]
  },
  "Penang": {
   "slug": "penang",
@@ -1311,7 +3187,30 @@
   "ratio": 3.026,
   "author": "Goh PS",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:A1_Dawn_View.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:A1_Dawn_View.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/penang-2-640.webp",
+    "ratio": 1.333,
+    "author": "HundenvonPenang",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_George_Town,_Penang_at_night_November_2024_23-9.jpg"
+   },
+   {
+    "thumb": "/img/puertos/penang-3-640.webp",
+    "ratio": 1.506,
+    "author": "shankar s. from sharjah, united arab emirates",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Hindu_temple_in_Penang_Malaysia.jpg"
+   },
+   {
+    "thumb": "/img/puertos/penang-4-640.webp",
+    "ratio": 1.333,
+    "author": "HundenvonPenang",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Andaman_Island_in_George_Town,_Penang_2024.jpg"
+   }
+  ]
  },
  "Colombo": {
   "slug": "colombo",
@@ -1320,7 +3219,30 @@
   "ratio": 1.775,
   "author": "T Chamika",
   "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Colombo_skyline_2024.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Colombo_skyline_2024.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/colombo-2-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. Soman assumed (based on copyright claims).",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Colombo0713.JPG"
+   },
+   {
+    "thumb": "/img/puertos/colombo-3-640.webp",
+    "ratio": 1.778,
+    "author": "Rehman Abubakr",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:ColomboSkyline_-_November_2017_(1).jpg"
+   },
+   {
+    "thumb": "/img/puertos/colombo-4-640.webp",
+    "ratio": 1.501,
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Colombo_02.jpg"
+   }
+  ]
  },
  "Port Louis": {
   "slug": "port-louis",
@@ -1329,7 +3251,30 @@
   "ratio": 1.501,
   "author": "Peter Kuchar (pkuchar)",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Evening_Port_Louis.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Evening_Port_Louis.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/port-louis-2-640.webp",
+    "ratio": 1.333,
+    "author": "Sputniktilt",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bluepenny_museum_port_louis.jpg"
+   },
+   {
+    "thumb": "/img/puertos/port-louis-3-640.webp",
+    "ratio": 1.506,
+    "author": "Simisa (talk · contribs)",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mauritius_23.08.2009_06-07-46.jpg"
+   },
+   {
+    "thumb": "/img/puertos/port-louis-4-640.webp",
+    "ratio": 1.328,
+    "author": "Karsten Ratzke",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Port_Louis_Theatre.JPG"
+   }
+  ]
  },
  "Durban": {
   "slug": "durban",
@@ -1338,7 +3283,30 @@
   "ratio": 1.333,
   "author": "---=XEON=---",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Durban_-_panoramio_-_---%3DXEON%3D---.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Durban_-_panoramio_-_---%3DXEON%3D---.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/durban-2-640.webp",
+    "ratio": 1.501,
+    "author": "Yann Macherez",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Civilisation.jpg"
+   },
+   {
+    "thumb": "/img/puertos/durban-3-640.webp",
+    "ratio": 1.333,
+    "author": "Mister-E (https://www.flickr.com/photos/mister-e/)",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Durban_TownHall.jpg"
+   },
+   {
+    "thumb": "/img/puertos/durban-4-640.webp",
+    "ratio": 1.34,
+    "author": "Akidjoh",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:ICC_Durban-20140315.jpg"
+   }
+  ]
  },
  "Port Elizabeth": {
   "slug": "port-elizabeth",
@@ -1347,7 +3315,30 @@
   "ratio": 1.333,
   "author": "NJR ZA",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Impala_Mk1-PE_Airport.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Impala_Mk1-PE_Airport.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/port-elizabeth-2-640.webp",
+    "ratio": 1.501,
+    "author": "Leo za1",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:City_Hall_Port_Elizabeth-003.jpg"
+   },
+   {
+    "thumb": "/img/puertos/port-elizabeth-3-640.webp",
+    "ratio": 1.34,
+    "author": "Mwgielink",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cape_Recife_Lighthouse_01.jpg"
+   },
+   {
+    "thumb": "/img/puertos/port-elizabeth-4-640.webp",
+    "ratio": 1.34,
+    "author": "Leo za1",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cathedral_Church_of_Saint_Mary_the_Virgin_Port_Elizabeth-001.jpg"
+   }
+  ]
  },
  "Bruselas / Brujas": {
   "slug": "bruselas-brujas",
@@ -1356,7 +3347,16 @@
   "ratio": 1.372,
   "author": "Jean-Pol GRANDMONT",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:1920_-_Lef%C3%A9bure_Marcel_-_Terrain_d%27aviation_de_Gosselies.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:1920_-_Lef%C3%A9bure_Marcel_-_Terrain_d%27aviation_de_Gosselies.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bruselas-brujas-2-640.webp",
+    "ratio": 1.839,
+    "author": "Ad Meskens",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Charleroi_brussels_south_main_hall.jpg"
+   }
+  ]
  },
  "Bonaire": {
   "slug": "bonaire",
@@ -1365,7 +3365,30 @@
   "ratio": 1.499,
   "author": "Chris Favero from USA",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Crystal_Clear_waters_of_Bonaire_(13256547653).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Crystal_Clear_waters_of_Bonaire_(13256547653).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bonaire-2-640.webp",
+    "ratio": 1.255,
+    "author": "Betty Wills, (Atsme on Wikipedia)",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:August_sunset.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bonaire-3-640.webp",
+    "ratio": 1.506,
+    "author": "Bgabel",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BONAIRE-kralendijk-kaya-grandi-1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bonaire-4-640.webp",
+    "ratio": 1.501,
+    "author": "dronepicr",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Beach_Klein_Bonaire_(36653868946).jpg"
+   }
+  ]
  },
  "Koper": {
   "slug": "koper",
@@ -1374,7 +3397,30 @@
   "ratio": 1.402,
   "author": "Unknown authorUnknown author",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Capodistria_1900.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Capodistria_1900.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/koper-2-640.webp",
+    "ratio": 1.515,
+    "author": "TICKoper",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Koper,_mesto.jpg"
+   },
+   {
+    "thumb": "/img/puertos/koper-3-640.webp",
+    "ratio": 1.328,
+    "author": "domjisch from Graz, Austria",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blick_auf_den_Hafen_von_Koper_Capodistria_(52976883311).jpg"
+   },
+   {
+    "thumb": "/img/puertos/koper-4-640.webp",
+    "ratio": 1.527,
+    "author": "Sailko",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Capodistria,_palazzo_pretorio,_01.jpg"
+   }
+  ]
  },
  "Bora Bora": {
   "slug": "bora-bora",
@@ -1383,7 +3429,30 @@
   "ratio": 1.25,
   "author": "NASA Johnson Space Center",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Bora_Bora_ISS006.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Bora_Bora_ISS006.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bora-bora-2-640.webp",
+    "ratio": 1.333,
+    "author": "Samuel Etienne",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BoraBora_SEtienne.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bora-bora-3-640.webp",
+    "ratio": 1.333,
+    "author": "rachel_thecat",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bora_Bora_-_Motu_Toopua_%5E_Vaitape_from_above_-_Flickr_-_rachel_thecat.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bora-bora-4-640.webp",
+    "ratio": 1.511,
+    "author": "rachel_thecat",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bora_Bora_-_Mt_Otemanu.jpg"
+   }
+  ]
  },
  "Papeete": {
   "slug": "papeete",
@@ -1392,7 +3461,30 @@
   "ratio": 1.333,
   "author": "Sergio Calleja (Life is a trip) from Barcelona, Spain",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:A_view_from_the_AR_72_airplane_(Over_Society_Islands_-_French_Polynesia).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:A_view_from_the_AR_72_airplane_(Over_Society_Islands_-_French_Polynesia).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/papeete-2-640.webp",
+    "ratio": 1.333,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Drapeaux.Archipels.Papeete.JPG"
+   },
+   {
+    "thumb": "/img/puertos/papeete-3-640.webp",
+    "ratio": 1.333,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:March%C3%A9_Papeete.jpg"
+   },
+   {
+    "thumb": "/img/puertos/papeete-4-640.webp",
+    "ratio": 1.333,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Port.Papeete.JPG"
+   }
+  ]
  },
  "Canal de Panamá": {
   "slug": "canal-de-panama",
@@ -1401,7 +3493,30 @@
   "ratio": 1.501,
   "author": "Paul Harrison",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Vessels_locking_into_the_Panama_Canal.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Vessels_locking_into_the_Panama_Canal.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/canal-de-panama-2-640.webp",
+    "ratio": 1.734,
+    "author": "Elemaki",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:07._Museo_del_Canal_(6)_Draga_Corozal.JPG"
+   },
+   {
+    "thumb": "/img/puertos/canal-de-panama-3-640.webp",
+    "ratio": 1.333,
+    "author": "United Kingdom Hydrographic Office",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Admiralty_Chart_No_657_Isthmus_of_Panama_Showing_The_Proposed_Panama_Canal_and_the_Railway_._._._,_Published_1885.jpg"
+   },
+   {
+    "thumb": "/img/puertos/canal-de-panama-4-640.webp",
+    "ratio": 1.501,
+    "author": "Mariordo (Mario Roberto Durán Ortiz)",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Agua_Clara_Locks_09_2019_0822.jpg"
+   }
+  ]
  },
  "Castries": {
   "slug": "castries",
@@ -1410,7 +3525,30 @@
   "ratio": 1.333,
   "author": "UpstateNYer",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:CastriesStLucia.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:CastriesStLucia.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/castries-2-640.webp",
+    "ratio": 1.501,
+    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Castries_Cruise_Port_(23678144863).jpg"
+   },
+   {
+    "thumb": "/img/puertos/castries-3-640.webp",
+    "ratio": 1.333,
+    "author": "David Lytle from San Francisco, CA, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fire_Station_Castries.jpg"
+   },
+   {
+    "thumb": "/img/puertos/castries-4-640.webp",
+    "ratio": 2.003,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_Castries_Saint_Lucia_Day248bdriveb.jpg"
+   }
+  ]
  },
  "Nueva Orleans": {
   "slug": "nueva-orleans",
@@ -1419,7 +3557,30 @@
   "ratio": 1.501,
   "author": "Vegasjon",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Duncan_Plaza_and_City_Hall_in_New_Orleans.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Duncan_Plaza_and_City_Hall_in_New_Orleans.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/nueva-orleans-2-640.webp",
+    "ratio": 1.499,
+    "author": "Falkue at German Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Elaborate_ironwork_galleries_on_the_corner_of_Royal_and_St._Peter_streets_New_Orleans.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nueva-orleans-3-640.webp",
+    "ratio": 1.49,
+    "author": "Marvin Nauman",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:FEMA_-_21590_-_Photograph_by_Marvin_Nauman_taken_on_01-21-2006_in_Louisiana.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nueva-orleans-4-640.webp",
+    "ratio": 1.333,
+    "author": "Infrogmation of New Orleans",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_Superdome_Poydras_1.JPG"
+   }
+  ]
  },
  "París": {
   "slug": "paris",
@@ -1428,7 +3589,30 @@
   "ratio": 1.6,
   "author": "Yann Caradec from Paris, France",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques,_Paris_ao%C3%BBt_2014_(2).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques,_Paris_ao%C3%BBt_2014_(2).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/paris-2-640.webp",
+    "ratio": 1.333,
+    "author": "Syced",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:April_2008_Montmartre_3.jpg"
+   },
+   {
+    "thumb": "/img/puertos/paris-3-640.webp",
+    "ratio": 1.501,
+    "author": "Kainet",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe_HDR_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/paris-4-640.webp",
+    "ratio": 1.501,
+    "author": "Josh Hallett",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Avenue_des_Champs-%C3%89lys%C3%A9es_July_24,_2009_N1.jpg"
+   }
+  ]
  },
  "Sète": {
   "slug": "sete",
@@ -1437,7 +3621,30 @@
   "ratio": 1.6,
   "author": "Christian Ferrer",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:La_Grace_(ship,_2010),_S%C3%A8te,_H%C3%A9rault_01.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:La_Grace_(ship,_2010),_S%C3%A8te,_H%C3%A9rault_01.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sete-2-640.webp",
+    "ratio": 1.509,
+    "author": "Christian Ferrer",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Maritime_weather,_S%C3%A8te,_H%C3%A9rault.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sete-3-640.webp",
+    "ratio": 1.509,
+    "author": "Christian Ferrer",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Phare_du_Mont-Saint-Clair,_S%C3%A8te,_H%C3%A9rault.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sete-4-640.webp",
+    "ratio": 1.91,
+    "author": "Christian Ferrer",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pont_du_Tivoli,_S%C3%A8te,_H%C3%A9rault_10.jpg"
+   }
+  ]
  },
  "Numea": {
   "slug": "numea",
@@ -1446,7 +3653,30 @@
   "ratio": 1.333,
   "author": "Torbenbrinker",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Noum%C3%A9aCentre.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Noum%C3%A9aCentre.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/numea-2-640.webp",
+    "ratio": 1.333,
+    "author": "Breebooks",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arrecife_de_Numea1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/numea-3-640.webp",
+    "ratio": 1.333,
+    "author": "Brewbooks",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Costa_de_Numea.jpg"
+   },
+   {
+    "thumb": "/img/puertos/numea-4-640.webp",
+    "ratio": 1.363,
+    "author": "Louis Le Breton",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:No02p04_nelle_caledonie-e04-vue_de_la_rade_de_port-de-france.jpg"
+   }
+  ]
  },
  "Tahití": {
   "slug": "tahiti",
@@ -1455,7 +3685,30 @@
   "ratio": 1.333,
   "author": "Vanderven",
   "license": "CC BY-SA 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:Air_tahiti.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Air_tahiti.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/tahiti-2-640.webp",
+    "ratio": 1.413,
+    "author": "William Hodges",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hodges,_Resolution_and_Adventure_in_Matavai_Bay.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tahiti-3-640.webp",
+    "ratio": 1.331,
+    "author": "dalbera from Paris, France",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:La_f%C3%AAte_de_la_musique_%C3%A0_la_maison_de_Tahiti_(Paris)_(7418457592).jpg"
+   },
+   {
+    "thumb": "/img/puertos/tahiti-4-640.webp",
+    "ratio": 1.333,
+    "author": "Gautier B.",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mairie_Paea.jpg"
+   }
+  ]
  },
  "Isla Catalina (California)": {
   "slug": "isla-catalina-california",
@@ -1464,7 +3717,23 @@
   "ratio": 1.255,
   "author": "Jesse Allen and Robert Simmon, NASA Earth Observatory",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Santa_Catalina_NASA_EO.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Santa_Catalina_NASA_EO.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/isla-catalina-california-2-640.webp",
+    "ratio": 1.343,
+    "author": "Don Ramey Logan",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Avalon_Catalina_Island_California_by_Don_Ramey_Logan.jpg"
+   },
+   {
+    "thumb": "/img/puertos/isla-catalina-california-3-640.webp",
+    "ratio": 1.981,
+    "author": "Don Ramey Logan",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Catalina_Islands_West_End_by_Don_Ramey_Logan.jpg"
+   }
+  ]
  },
  "Tauranga": {
   "slug": "tauranga",
@@ -1473,7 +3742,30 @@
   "ratio": 1.499,
   "author": "Own work by Shellzzy",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Mt_Maunganui_2006.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Mt_Maunganui_2006.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/tauranga-2-640.webp",
+    "ratio": 2.0,
+    "author": "Ulrich Lange, Bochum, Germany",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tauranga_Harbour_and_City.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tauranga-3-640.webp",
+    "ratio": 1.5,
+    "author": "Ed Kruger",
+    "license": "CC BY 3.0 nz",
+    "page": "https://commons.wikimedia.org/wiki/File:Classic_car_show_in_Tauranga,_New_Zealand,_in_November_2010.jpg"
+   },
+   {
+    "thumb": "/img/puertos/tauranga-4-640.webp",
+    "ratio": 1.778,
+    "author": "Bahnfrend",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Maunganui_Road,_Mount_Maunganui,_2013_(01).jpg"
+   }
+  ]
  },
  "Auckland": {
   "slug": "auckland",
@@ -1482,7 +3774,30 @@
   "ratio": 1.842,
   "author": "elpinto007",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Auckland_skyline_-_May_2024_(2).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Auckland_skyline_-_May_2024_(2).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/auckland-2-640.webp",
+    "ratio": 1.425,
+    "author": "Elemaki",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:11._AucklandFerryHarbour.jpg"
+   },
+   {
+    "thumb": "/img/puertos/auckland-3-640.webp",
+    "ratio": 1.501,
+    "author": "Follash",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:AKL_airport.JPG"
+   },
+   {
+    "thumb": "/img/puertos/auckland-4-640.webp",
+    "ratio": 1.481,
+    "author": "Photograph by Greg O'Beirne",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:AucklandMuseum_gobeirne.jpg"
+   }
+  ]
  },
  "Vigo": {
   "slug": "vigo",
@@ -1491,7 +3806,30 @@
   "ratio": 2.393,
   "author": "Patricio Bocconi Camirani / Manuel Nao / Bernardo Rico",
   "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:1877-08-15,_La_Ilustraci%C3%B3n_Espa%C3%B1ola_y_Americana,_Viaje_de_S._M._el_rey_a_las_provincias_del_noroeste_(cropped)_Vigo,_Vista_general_de_la_ciudad_y_del_puerto,_visitados_por_S._M._el_2_del_actual.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:1877-08-15,_La_Ilustraci%C3%B3n_Espa%C3%B1ola_y_Americana,_Viaje_de_S._M._el_rey_a_las_provincias_del_noroeste_(cropped)_Vigo,_Vista_general_de_la_ciudad_y_del_puerto,_visitados_por_S._M._el_2_del_actual.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/vigo-2-640.webp",
+    "ratio": 1.509,
+    "author": "Ploetzlich (Diskussion) 11:55, 27. Okt. 2014 (CET)",
+    "license": "CC BY-SA 3.0 de",
+    "page": "https://commons.wikimedia.org/wiki/File:2014-10-18_-_Ayuntamiento_-_Vigo_-_Spain.JPG"
+   },
+   {
+    "thumb": "/img/puertos/vigo-3-640.webp",
+    "ratio": 1.509,
+    "author": "Ploetzlich (Diskussion) 15:56, 20. Okt. 2014 (CEST)",
+    "license": "CC BY-SA 3.0 de",
+    "page": "https://commons.wikimedia.org/wiki/File:2014-10-18_-_Monumento_a_Jules_Verne_-_Jose_Moreno_2005_-_Vigo_-_Spain2.JPG"
+   },
+   {
+    "thumb": "/img/puertos/vigo-4-640.webp",
+    "ratio": 1.77,
+    "author": "Vauxford",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2020_Peugeot_e-2008_GT_Line.jpg"
+   }
+  ]
  },
  "Geiranger": {
   "slug": "geiranger",
@@ -1500,7 +3838,30 @@
   "ratio": 2.025,
   "author": "Ximonic (Simo Räsänen)",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:View_to_Geiranger_from_Flydalsjuvet,_2013_June.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:View_to_Geiranger_from_Flydalsjuvet,_2013_June.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/geiranger-2-640.webp",
+    "ratio": 1.497,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fiordo_de_Geiranger_desde_Flydalsjuvet,_Noruega,_2019-09-07,_DD_59.jpg"
+   },
+   {
+    "thumb": "/img/puertos/geiranger-3-640.webp",
+    "ratio": 1.737,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Geiranger,_Noruega,_2019-09-07,_DD_75.jpg"
+   },
+   {
+    "thumb": "/img/puertos/geiranger-4-640.webp",
+    "ratio": 1.501,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Geiranger,_Noruega,_2019-09-07,_DD_76.jpg"
+   }
+  ]
  },
  "Tallin": {
   "slug": "tallin",
@@ -1509,7 +3870,30 @@
   "ratio": 1.438,
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Calle_Kooli,_Tallin,_Estonia,_2012-08-05,_DD_01.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Calle_Kooli,_Tallin,_Estonia,_2012-08-05,_DD_01.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/tallin-2-640.webp",
+    "ratio": 1.432,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Eesti_Pank_Museum_(Banco_Estonio),_Tallin,_Estonia,_2012-08-05,_DD_04.JPG"
+   },
+   {
+    "thumb": "/img/puertos/tallin-3-640.webp",
+    "ratio": 1.362,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gran_Puerta_Costera,_Tallinn,_Estonia,_2012-08-05,_DD_03.JPG"
+   },
+   {
+    "thumb": "/img/puertos/tallin-4-640.webp",
+    "ratio": 2.045,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jard%C3%ADn_Bot%C3%A1nico_de_Tallinn,_Estonia,_2012-08-12,_DD_02.JPG"
+   }
+  ]
  },
  "Raiatea": {
   "slug": "raiatea",
@@ -1518,7 +3902,30 @@
   "ratio": 1.333,
   "author": "David Broad",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Raiatea,_Tahiti_-_panoramio.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Raiatea,_Tahiti_-_panoramio.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/raiatea-2-640.webp",
+    "ratio": 2.199,
+    "author": "Drdisque",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:RaiateaAirportTerminal.JPG"
+   },
+   {
+    "thumb": "/img/puertos/raiatea-3-640.webp",
+    "ratio": 1.494,
+    "author": "United144",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Raiatea_2008.JPG"
+   },
+   {
+    "thumb": "/img/puertos/raiatea-4-640.webp",
+    "ratio": 1.494,
+    "author": "United144",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Raiatea_2008ville.jpg"
+   }
+  ]
  },
  "Moorea": {
   "slug": "moorea",
@@ -1527,7 +3934,30 @@
   "ratio": 1.501,
   "author": "Remi Jouan",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Moorea_-_Vue_avion_(1).JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Moorea_-_Vue_avion_(1).JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/moorea-2-640.webp",
+    "ratio": 1.639,
+    "author": "Verodemortillet",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Champ_ananas_Moorea.jpg"
+   },
+   {
+    "thumb": "/img/puertos/moorea-3-640.webp",
+    "ratio": 2.13,
+    "author": "Fanny98716",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Moorea_-_Tortue_imbriqu%C3%A9e_%C3%A0_Tiahura.jpg"
+   },
+   {
+    "thumb": "/img/puertos/moorea-4-640.webp",
+    "ratio": 1.501,
+    "author": "Garegnani Denis",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Soleil_sur_Moorea.jpg"
+   }
+  ]
  },
  "Aarhus": {
   "slug": "aarhus",
@@ -1536,7 +3966,30 @@
   "ratio": 1.527,
   "author": "Niels Elgaard Larsen - User: (WT-shared) Elgaard at  wts wikivoyage",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:AArhusStroget.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:AArhusStroget.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/aarhus-2-640.webp",
+    "ratio": 1.333,
+    "author": "Ralbisser at German Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aarhus_DK_Gastronimie_am_Kanal_Feb_04.jpg"
+   },
+   {
+    "thumb": "/img/puertos/aarhus-3-640.webp",
+    "ratio": 1.4,
+    "author": "SmartDrones Aarhus",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Drone_photo_of_Dokk1_in_Aarhus,_Denmark.jpg"
+   },
+   {
+    "thumb": "/img/puertos/aarhus-4-640.webp",
+    "ratio": 1.333,
+    "author": "JakobSR",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aarhus_Cathedral_-_April_2022.jpg"
+   }
+  ]
  },
  "Bergen": {
   "slug": "bergen",
@@ -1545,7 +3998,30 @@
   "ratio": 1.501,
   "author": "TomasEE",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Bergen_panorama_at_night_-_panoramio_(1).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Bergen_panorama_at_night_-_panoramio_(1).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bergen-2-640.webp",
+    "ratio": 1.333,
+    "author": "Hans Olav Lien",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:06.05.25_16_Fra_Nordnes_i_Bergen.JPG"
+   },
+   {
+    "thumb": "/img/puertos/bergen-3-640.webp",
+    "ratio": 1.492,
+    "author": "Holger Uwe Schmitt",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:1885_bis_1907_lebte_hier_der_Komponist_Edvard_Grieg._02.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bergen-4-640.webp",
+    "ratio": 1.501,
+    "author": "Svein-Magne Tunli - tunliweb.no",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bergen_Sandviken,_Norway_at_night.jpg"
+   }
+  ]
  },
  "Helsinki": {
   "slug": "helsinki",
@@ -1554,7 +4030,30 @@
   "ratio": 1.333,
   "author": "Image tube",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Embassy_of_Spain_in_Helsinki_2.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Embassy_of_Spain_in_Helsinki_2.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/helsinki-2-640.webp",
+    "ratio": 1.255,
+    "author": "Alvesgaspar",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Helsinki_July_2013-27a.jpg"
+   },
+   {
+    "thumb": "/img/puertos/helsinki-3-640.webp",
+    "ratio": 1.333,
+    "author": "Vadelmavene",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mall_of_Tripla_sis%C3%A4kuvia_2.jpg"
+   },
+   {
+    "thumb": "/img/puertos/helsinki-4-640.webp",
+    "ratio": 1.318,
+    "author": "Photograph by Mikko PaananenModified by -Majestic- and Ilmari Karonen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Suurkirkko_Helsinki_maaliskuu_2002_IMG_0629.JPG"
+   }
+  ]
  },
  "Reikiavik": {
   "slug": "reikiavik",
@@ -1563,7 +4062,23 @@
   "ratio": 1.266,
   "author": "Christian Bickel fingalo",
   "license": "CC BY-SA 2.0 de",
-  "page": "https://commons.wikimedia.org/wiki/File:74Skolav%C3%B6rdustigur.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:74Skolav%C3%B6rdustigur.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/reikiavik-2-640.webp",
+    "ratio": 1.333,
+    "author": "Fingalo (Christian Bickel)",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Austurstr%C3%A6ti01.jpg"
+   },
+   {
+    "thumb": "/img/puertos/reikiavik-3-640.webp",
+    "ratio": 1.333,
+    "author": "Christian Bickel fingalo",
+    "license": "CC BY-SA 2.0 de",
+    "page": "https://commons.wikimedia.org/wiki/File:Austurstr%C3%A6ti_1.JPG"
+   }
+  ]
  },
  "Oporto": {
   "slug": "oporto",
@@ -1572,7 +4087,30 @@
   "ratio": 1.494,
   "author": "Rititaneves",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:O_Porto_(visto_da_Ponte_Dom_Luis_I).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:O_Porto_(visto_da_Ponte_Dom_Luis_I).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/oporto-2-640.webp",
+    "ratio": 2.13,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cais_da_Ribeira,_Oporto,_Portugal,_2012-05-09,_DD_10.JPG"
+   },
+   {
+    "thumb": "/img/puertos/oporto-3-640.webp",
+    "ratio": 1.506,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cais_da_Ribeira,_Oporto,_Portugal,_2012-05-09,_DD_17.JPG"
+   },
+   {
+    "thumb": "/img/puertos/oporto-4-640.webp",
+    "ratio": 1.501,
+    "author": "François  Philipp from Darmstadt, Germany",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dom_Lu%C3%ADs_Bridge,_Porto_(10247552584)_edited.jpg"
+   }
+  ]
  },
  "Monte Fuji": {
   "slug": "monte-fuji",
@@ -1581,7 +4119,30 @@
   "ratio": 2.045,
   "author": "Suicasmo",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/monte-fuji-2-640.webp",
+    "ratio": 1.501,
+    "author": "https://www.flickr.com/photos/reggiepen/",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chuurei-tou_Fujiyoshida_17025277650_c59733d6ba_o.jpg"
+   },
+   {
+    "thumb": "/img/puertos/monte-fuji-3-640.webp",
+    "ratio": 1.335,
+    "author": "Nicky Pallas from Mamaroneck, New York, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fuji677.jpg"
+   },
+   {
+    "thumb": "/img/puertos/monte-fuji-4-640.webp",
+    "ratio": 1.345,
+    "author": "neworion (Neworion)",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Fuji_Sengen_Shrine,_Mt_Fuji,_Japan.jpg"
+   }
+  ]
  },
  "Ilhabela": {
   "slug": "ilhabela",
@@ -1590,7 +4151,30 @@
   "ratio": 1.333,
   "author": "Jurema Oliveira",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Ilha_Bela_022.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Ilha_Bela_022.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ilhabela-2-640.webp",
+    "ratio": 1.333,
+    "author": "Jurema Oliveira",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ilha_Bela_019.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ilhabela-3-640.webp",
+    "ratio": 1.333,
+    "author": "Jurema Oliveira",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ilha_Bela_023.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ilhabela-4-640.webp",
+    "ratio": 1.333,
+    "author": "DARIO SEVERI",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Praia_do_Pereque.1.jpg"
+   }
+  ]
  },
  "Portimão": {
   "slug": "portimao",
@@ -1599,7 +4183,30 @@
   "ratio": 1.408,
   "author": "Vitor Oliveira from Torres Vedras, PORTUGAL",
   "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Portim%C3%A3o_-_Portugal_(49757631447).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Portim%C3%A3o_-_Portugal_(49757631447).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/portimao-2-640.webp",
+    "ratio": 1.518,
+    "author": "Steven Fruitsmaak",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Apartment_buildings_at_Praia_da_Rocha,_Portim%C3%A3o.jpg"
+   },
+   {
+    "thumb": "/img/puertos/portimao-3-640.webp",
+    "ratio": 1.501,
+    "author": "Joseolgon",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Col%C3%A9gio_dos_Jesu%C3%ADtas_(2).jpg"
+   },
+   {
+    "thumb": "/img/puertos/portimao-4-640.webp",
+    "ratio": 1.354,
+    "author": "Jose A.",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aqua_Shopping_centre,_Portim%C3%A3o_(2).jpg"
+   }
+  ]
  },
  "Estocolmo": {
   "slug": "estocolmo",
@@ -1608,7 +4215,30 @@
   "ratio": 1.25,
   "author": "Arild Vågen",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Dramaten_September_2012.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Dramaten_September_2012.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/estocolmo-2-640.webp",
+    "ratio": 1.333,
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Airport_Arlanda_Sweden.jpg"
+   },
+   {
+    "thumb": "/img/puertos/estocolmo-3-640.webp",
+    "ratio": 1.333,
+    "author": "Mats Sjödin",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Autumn_sea_bay_in_Nyn%C3%A4shamn_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/estocolmo-4-640.webp",
+    "ratio": 1.761,
+    "author": "Windwhistler",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento_de_Estocolmo.jpg"
+   }
+  ]
  },
  "Ålesund": {
   "slug": "alesund",
@@ -1617,7 +4247,30 @@
   "ratio": 1.333,
   "author": "Jorgecft",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Alesund_Prestegata_Kirkegata.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Alesund_Prestegata_Kirkegata.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/alesund-2-640.webp",
+    "ratio": 1.317,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Iglesia_parroquial,_%C3%85lesund,_Noruega,_2019-09-01,_DD_77.jpg"
+   },
+   {
+    "thumb": "/img/puertos/alesund-3-640.webp",
+    "ratio": 1.704,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_de_%C3%85lesund_desde_Aksla,_Noruega,_2019-09-01,_DD_16.jpg"
+   },
+   {
+    "thumb": "/img/puertos/alesund-4-640.webp",
+    "ratio": 1.333,
+    "author": "Ysgrimor",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:View_on_%C3%85lesund.jpg"
+   }
+  ]
  },
  "Portland": {
   "slug": "portland",
@@ -1626,7 +4279,30 @@
   "ratio": 3.855,
   "author": "Cacophony",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:HawthorneBridge-Pano.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:HawthorneBridge-Pano.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/portland-2-640.webp",
+    "ratio": 1.333,
+    "author": "Hawk00eyed",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jeld-Wen_Field_2013.jpg"
+   },
+   {
+    "thumb": "/img/puertos/portland-3-640.webp",
+    "ratio": 1.453,
+    "author": "M.O. Stevens",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:OMSI_entrance_outside_-_Portland,_Oregon.JPG"
+   },
+   {
+    "thumb": "/img/puertos/portland-4-640.webp",
+    "ratio": 1.501,
+    "author": "Tony Webster from Portland, Oregon",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Portland_Riverbank_Skyline_at_Night_(17872048486).jpg"
+   }
+  ]
  },
  "Nha Trang": {
   "slug": "nha-trang",
@@ -1635,7 +4311,16 @@
   "ratio": 1.333,
   "author": "Vinhtantran",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Crown_Convention_Center.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Crown_Convention_Center.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/nha-trang-2-640.webp",
+    "ratio": 1.333,
+    "author": "Kaz Ish",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nha_Trang_,_Vietnam_-_panoramio_(35).jpg"
+   }
+  ]
  },
  "Koh Samui": {
   "slug": "koh-samui",
@@ -1644,7 +4329,30 @@
   "ratio": 1.333,
   "author": "MNXANL",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:202402_Check-in_Drop-Off_Area_of_USM.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:202402_Check-in_Drop-Off_Area_of_USM.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/koh-samui-2-640.webp",
+    "ratio": 1.333,
+    "author": "Thajsko",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ape_collecting_coconut_-_vycvi%C4%8Den%C3%A1_opice_trh%C3%A1_kokosy_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-3-640.webp",
+    "ratio": 1.429,
+    "author": "Maksim Sundukov",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_Temple_(Wat_Phra_Yai).jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-4-640.webp",
+    "ratio": 1.501,
+    "author": "Maksim Sundukov",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_in_Big_Buddha_Temple_(Wat_Phra_Yai).jpg"
+   }
+  ]
  },
  "Limón": {
   "slug": "limon",
@@ -1662,7 +4370,30 @@
   "ratio": 1.509,
   "author": "Wikimedia Commons",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Meteore.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Meteore.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/meteora-2-640.webp",
+    "ratio": 1.504,
+    "author": "Berthold Werner",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Moni_Agiou_Stephanou_BW_2017-10-07_10-59-13.jpg"
+   },
+   {
+    "thumb": "/img/puertos/meteora-3-640.webp",
+    "ratio": 1.499,
+    "author": "Stathis floros",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Meteora%27s_monastery_2.jpg"
+   },
+   {
+    "thumb": "/img/puertos/meteora-4-640.webp",
+    "ratio": 1.494,
+    "author": "Jean Housen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20140414_meteora134.JPG"
+   }
+  ]
  },
  "Vancouver": {
   "slug": "vancouver",
@@ -1671,7 +4402,30 @@
   "ratio": 1.494,
   "author": "Alasdair McLellan",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Burrard_Otter_with_Vancouver_skyline_2.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Burrard_Otter_with_Vancouver_skyline_2.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/vancouver-2-640.webp",
+    "ratio": 1.78,
+    "author": "Thorfinn Stainforth",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Stanley_Park_1999_Rain.jpg"
+   },
+   {
+    "thumb": "/img/puertos/vancouver-3-640.webp",
+    "ratio": 1.333,
+    "author": "Alejandro Erickson",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Vancouver_International_Airport_Aerial.JPG"
+   },
+   {
+    "thumb": "/img/puertos/vancouver-4-640.webp",
+    "ratio": 1.667,
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Skyline_of_Vancouver,_Canada.jpg"
+   }
+  ]
  },
  "Rijeka": {
   "slug": "rijeka",
@@ -1680,7 +4434,30 @@
   "ratio": 1.322,
   "author": "Antonio199cro",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:RijekaCroatiaAerial2.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:RijekaCroatiaAerial2.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/rijeka-2-640.webp",
+    "ratio": 1.333,
+    "author": "Antonio199cro",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Korzodayrijeka.jpg"
+   },
+   {
+    "thumb": "/img/puertos/rijeka-3-640.webp",
+    "ratio": 1.875,
+    "author": "Francesco Slocovich",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:The_celebration_of_the_birthday_of_the_Italian_King_Vittorio_Emanuele_III_on_November_11,_1918.jpg"
+   },
+   {
+    "thumb": "/img/puertos/rijeka-4-640.webp",
+    "ratio": 1.333,
+    "author": "Djoko",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Theatre_of_Ivan_pl._Zajc,_Rijeka.jpg"
+   }
+  ]
  },
  "Ponta Delgada": {
   "slug": "ponta-delgada",
@@ -1689,7 +4466,30 @@
   "ratio": 1.718,
   "author": "Diego Delso",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-29,_DD_126-128_HDR.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-29,_DD_126-128_HDR.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ponta-delgada-2-640.webp",
+    "ratio": 1.506,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ejemplar_de_pohutukawa_(Metrosideros_excelsa),_Campo_de_San_Francisco,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-28,_DD_09.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ponta-delgada-3-640.webp",
+    "ratio": 2.078,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fuerte_de_San_Blas,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-30,_DD_79.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ponta-delgada-4-640.webp",
+    "ratio": 1.391,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Iglesia_del_colegio_de_los_Jesuitas,_Ponta_Delgada,_isla_de_San_Miguel,_Azores,_Portugal,_2020-07-30,_DD_02.jpg"
+   }
+  ]
  },
  "Kioto": {
   "slug": "kioto",
@@ -1698,7 +4498,30 @@
   "ratio": 1.501,
   "author": "663highland",
   "license": "CC BY 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:170128_Koshoji_Kyoto_Japan03s3.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:170128_Koshoji_Kyoto_Japan03s3.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kioto-2-640.webp",
+    "ratio": 1.501,
+    "author": "663highland",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:170216_Nishi_Honganji_Kyoto_Japan03s4.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kioto-3-640.webp",
+    "ratio": 1.333,
+    "author": "Wikiwikiyarou",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Daidairi_of_Heiankyo.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kioto-4-640.webp",
+    "ratio": 1.333,
+    "author": "J_o",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gozanokuribi_Daimonji2.jpg"
+   }
+  ]
  },
  "Hiroshima": {
   "slug": "hiroshima",
@@ -1707,7 +4530,30 @@
   "ratio": 1.555,
   "author": "DXR",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Atomic_Bomb_Dome_and_Motoyaso_River,_Hiroshima,_Northwest_view_20190417_1.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Atomic_Bomb_Dome_and_Motoyaso_River,_Hiroshima,_Northwest_view_20190417_1.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/hiroshima-2-640.webp",
+    "ratio": 1.333,
+    "author": "Taisyo at Japanese Wikipedia",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hiroden-5100-2.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hiroshima-3-640.webp",
+    "ratio": 1.501,
+    "author": "Aude",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hiroden_no6.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hiroshima-4-640.webp",
+    "ratio": 1.455,
+    "author": "I took the photo",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:HiroshimaFountain.jpg"
+   }
+  ]
  },
  "San Vicente": {
   "slug": "san-vicente",
@@ -1716,7 +4562,30 @@
   "ratio": 1.333,
   "author": "Dilema",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Antigua_Estaci%C3%B3n_de_tren_de_San_Vicente_del_Raspeig.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Antigua_Estaci%C3%B3n_de_tren_de_San_Vicente_del_Raspeig.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/san-vicente-2-640.webp",
+    "ratio": 1.333,
+    "author": "Dilema",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Auditorio_del_Centro_Social_de_San_Vicente_del_Raspeig.JPG"
+   },
+   {
+    "thumb": "/img/puertos/san-vicente-3-640.webp",
+    "ratio": 1.333,
+    "author": "Dilema",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ayuntamiento_de_San_Vicente_del_Raspeig.JPG"
+   },
+   {
+    "thumb": "/img/puertos/san-vicente-4-640.webp",
+    "ratio": 1.333,
+    "author": "Dilema",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Campo_de_f%C3%BAtbol_de_la_Ciudad_Deportiva_de_San_Vicente_del_Raspeig.JPG"
+   }
+  ]
  },
  "Belfast": {
   "slug": "belfast",
@@ -1725,7 +4594,30 @@
   "ratio": 1.333,
   "author": "Dom0803",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:A_view_of_Belfast_from_the_Lower_Braniel_road_-_DSCF7460.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:A_view_of_Belfast_from_the_Lower_Braniel_road_-_DSCF7460.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/belfast-2-640.webp",
+    "ratio": 1.333,
+    "author": "Stubacca",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belfast_Castle.JPG"
+   },
+   {
+    "thumb": "/img/puertos/belfast-3-640.webp",
+    "ratio": 1.333,
+    "author": "Wknight94",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belfast_City_Hall_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belfast-4-640.webp",
+    "ratio": 1.394,
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:RMS_Titanic_sea_trials_April_2,_1912.jpg"
+   }
+  ]
  },
  "Hellesylt": {
   "slug": "hellesylt",
@@ -1734,7 +4626,23 @@
   "ratio": 1.643,
   "author": "Diego Delso",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Hellesyltfoss,_Hellesylt,_Noruega,_2019-09-07,_DD_01.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Hellesyltfoss,_Hellesylt,_Noruega,_2019-09-07,_DD_01.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/hellesylt-2-640.webp",
+    "ratio": 1.749,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Iglesia_de_Sunnylven,_Hellesylt,_Noruega,_2019-09-07,_DD_08.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hellesylt-3-640.webp",
+    "ratio": 1.333,
+    "author": "Mario Falcetti",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Norvegia-_cascata_a_Hellesylt,_sul_fiordo_di_Geiranger.jpg"
+   }
+  ]
  },
  "Kona": {
   "slug": "kona",
@@ -1752,7 +4660,30 @@
   "ratio": 1.506,
   "author": "Teotonio Vilela",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Centro_de_Macei%C3%B3.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Centro_de_Macei%C3%B3.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/maceio-2-640.webp",
+    "ratio": 1.494,
+    "author": "Cícero R. C. Omena",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Praia_de_Ipioca_-_Macei%C3%B3_-_Alagoas_(11394603505).jpg"
+   },
+   {
+    "thumb": "/img/puertos/maceio-3-640.webp",
+    "ratio": 2.058,
+    "author": "Ajmcbarreto",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aeroporto_Internacional_Zumbi_dos_Palmares_-_03.jpg"
+   },
+   {
+    "thumb": "/img/puertos/maceio-4-640.webp",
+    "ratio": 1.778,
+    "author": "André Lage Freitas",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Avenida_Entrecoqueiros.JPG"
+   }
+  ]
  },
  "Nagoya": {
   "slug": "nagoya",
@@ -1761,7 +4692,30 @@
   "ratio": 1.333,
   "author": "Nryate",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Station_at_night01.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Nagoya_Station_at_night01.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/nagoya-2-640.webp",
+    "ratio": 1.778,
+    "author": "zaopharm",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_Japan_Nagoya_81_(33038233234).jpg"
+   },
+   {
+    "thumb": "/img/puertos/nagoya-3-640.webp",
+    "ratio": 1.333,
+    "author": "Nryate",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:@NAGOYA.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nagoya-4-640.webp",
+    "ratio": 1.501,
+    "author": "Cesar I. Martins from Jundiai, Brazil",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aquarium_%2B_Giant_wheel_%2B_Fuji_Icebreaker_-_view_from_the_lighthouse_-_Nagoya_Port_-_Japan_(15676490678).jpg"
+   }
+  ]
  },
  "St. John's": {
   "slug": "st-john-s",
@@ -1770,7 +4724,30 @@
   "ratio": 1.667,
   "author": "Quintin Soloviev",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:St._John%27s,_Newfoundland_and_Labrador_aerial_view_of_downtown_(cropped).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:St._John%27s,_Newfoundland_and_Labrador_aerial_view_of_downtown_(cropped).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/st-john-s-2-640.webp",
+    "ratio": 1.602,
+    "author": "Joanna Poe from Munith, MI, USA",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Basilica_of_St_John_the_Baptist,_St_John%27s_2010.jpg"
+   },
+   {
+    "thumb": "/img/puertos/st-john-s-3-640.webp",
+    "ratio": 1.836,
+    "author": "D. Gordon E. Robertson",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CCGS_Henry_Larsen,_Medium_Icebreaker.jpg"
+   },
+   {
+    "thumb": "/img/puertos/st-john-s-4-640.webp",
+    "ratio": 1.509,
+    "author": "Mollyaspen",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cabot_Tower,_St._John%27s,_NL.JPG"
+   }
+  ]
  },
  "Berlín": {
   "slug": "berlin",
@@ -1779,7 +4756,30 @@
   "ratio": 1.716,
   "author": "File:Museumsinsel Berlin Juli 2021 1 (cropped).jpg: Kasa Fue\nderivative work: Ge",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Museumsinsel_Berlin_Juli_2021_1_(cropped)_b.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Museumsinsel_Berlin_Juli_2021_1_(cropped)_b.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/berlin-2-640.webp",
+    "ratio": 1.501,
+    "author": "Ansgar Koreng",
+    "license": "CC BY 3.0 de",
+    "page": "https://commons.wikimedia.org/wiki/File:150418_Konzerthaus_Berlin_Gendarmenmarkt.jpg"
+   },
+   {
+    "thumb": "/img/puertos/berlin-3-640.webp",
+    "ratio": 1.501,
+    "author": "Ralf Roletschek",
+    "license": "CC BY-SA 3.0 at",
+    "page": "https://commons.wikimedia.org/wiki/File:16-07-04-Abflug-Berlin-DSC_0122.jpg"
+   },
+   {
+    "thumb": "/img/puertos/berlin-4-640.webp",
+    "ratio": 1.504,
+    "author": "Wolfgang Staudt from Saarbruecken, Germany",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:17_20_pm_(570903628).jpg"
+   }
+  ]
  },
  "Charlottetown": {
   "slug": "charlottetown",
@@ -3759,7 +6759,30 @@
   "ratio": 2.222,
   "author": "AndSalx95",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n_-_Panoramic_view_from_Downtown_Lim%C3%B3n.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n_-_Panoramic_view_from_Downtown_Lim%C3%B3n.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/puerto-limon-2-640.webp",
+    "ratio": 1.333,
+    "author": "AndSalx95",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n%27s_House_of_Culture.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-limon-3-640.webp",
+    "ratio": 1.778,
+    "author": "AndSalx95",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n_-_2023_Christmas_season_-_Balvanero_Vargas_park.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-limon-4-640.webp",
+    "ratio": 1.333,
+    "author": "AndSalx95",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n_-_Catedral.jpg"
+   }
+  ]
  },
  "Key West": {
   "slug": "key-west",
@@ -3768,7 +6791,30 @@
   "ratio": 1.756,
   "author": "Tore Sætre",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Key_west_2001.JPG"
+  "page": "https://commons.wikimedia.org/wiki/File:Key_west_2001.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/key-west-2-640.webp",
+    "ratio": 1.333,
+    "author": "Marc Averette",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Fortzacharytaylor.jpg"
+   },
+   {
+    "thumb": "/img/puertos/key-west-3-640.webp",
+    "ratio": 1.501,
+    "author": "Radomianin",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Southernmost_point_buoy,_NE_view.jpg"
+   },
+   {
+    "thumb": "/img/puertos/key-west-4-640.webp",
+    "ratio": 1.773,
+    "author": "Unknown authorUnknown author or not provided",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:An_Accurate_Chart_of_the_Tortugas_and_Florida_Kays_or_Martyrs_-_NARA_-_102278726_(page_2).jpg"
+   }
+  ]
  },
  "Ronne": {
   "slug": "ronne",
