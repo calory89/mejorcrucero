@@ -66,6 +66,8 @@ const sailings = [];
     const AMER = ['caribe', 'canal-de-panama', 'riviera-mexicana', 'sudamerica', 'bermudas', 'canada-nueva-inglaterra', 'alaska', 'hawai'];
     if (AMER.includes(x.destination) && x.itinerary) for (const p of x.itinerary.ports) { if (p.name === 'Cartagena') p.name = 'Cartagena de Indias'; if (p.name === 'Falmouth') p.name = 'Falmouth (Jamaica)'; }
     x.depart_port = portName(x.depart_port); x.arrive_port = portName(x.arrive_port);
+    // Un punto del historial muy por encima del precio actual suele ser otro tipo de camarote (p. ej. solo había suite a la venta): no es una bajada real
+    if (Array.isArray(x.history) && vals.length) { const lo = Math.min(...vals); const h = x.history.filter((p) => !(p.price > lo * 2.5)); if (h.length !== x.history.length) { qaMark('avisos', 'historial con camarote no comparable'); x.history = h; } }
     sailings.push(x);
   }
 }
