@@ -1,10 +1,10 @@
 {
  "sample": {
   "itinerary": {
-   "objectId": "23379735_CRUISE_INSIDE_2",
+   "objectId": "23379737_CRUISE_INSIDE_2",
    "bundleType": "cruise",
    "code": "JOY4MIANPINASMIA",
-   "packageId": "23379735",
+   "packageId": "23379737",
    "title": "4 días Bahamas desde/hasta Miami: Great Stirrup Cay y Nassau",
    "startingLocation": "Miami, Florida, EE.",
    "image": {
@@ -48,8 +48,8 @@
    "taxesAndFees": {
     "text": ""
    },
-   "combinedPrice": 207,
-   "basePrice": 249,
+   "combinedPrice": 195,
+   "basePrice": 239,
    "weight": 1000,
    "deals": [
     {
@@ -63,12 +63,6 @@
      "title": "Solo crucero",
      "weight": 5,
      "featured": false
-    },
-    {
-     "code": "Past-Guest-Offer",
-     "title": "Oferta para huéspedes anteriores",
-     "weight": 4,
-     "featured": true
     },
     {
      "code": "free-at-sea-upgrade-package-offer",
@@ -99,7 +93,7 @@
      "code": "SUITE",
      "title": "Suite",
      "statusText": "Available",
-     "combinedPrice": 497,
+     "combinedPrice": 409,
      "basePrice": 849
     },
     {
@@ -107,7 +101,7 @@
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
      "statusText": "Available",
-     "combinedPrice": 307,
+     "combinedPrice": 269,
      "basePrice": 449
     },
     {
@@ -115,24 +109,24 @@
      "code": "BALCONY",
      "title": "Camarote con balcón",
      "statusText": "Available",
-     "combinedPrice": 262,
-     "basePrice": 359
+     "combinedPrice": 289,
+     "basePrice": 439
     },
     {
      "status": "AVAILABLE",
      "code": "OCEANVIEW",
      "title": "Camarote exterior",
      "statusText": "Available",
-     "combinedPrice": 252,
-     "basePrice": 359
+     "combinedPrice": 262,
+     "basePrice": 379
     },
     {
      "status": "AVAILABLE",
      "code": "INSIDE",
      "title": "Camarote interior",
      "statusText": "Available",
-     "combinedPrice": 207,
-     "basePrice": 249
+     "combinedPrice": 247,
+     "basePrice": 329
     }
    ]
   },
