@@ -789,6 +789,11 @@
 10.1394,
 "https://es.wikipedia.org/wiki/Kiel"
 ],
+"Killybegs": [
+54.6361,
+-8.4444,
+"https://es.wikipedia.org/wiki/Killybegs"
+],
 "Kioto": [
 35.0116,
 135.7681,
@@ -808,6 +813,11 @@
 9.5478,
 100.0622,
 "https://es.wikipedia.org/wiki/Aeropuerto_de_Koh_Samui"
+],
+"Kobe": [
+34.6567,
+135.1689,
+"https://es.wikipedia.org/wiki/Estadio_Noevir_Kobe"
 ],
 "Kochi": [
 9.9312,
@@ -1654,6 +1664,11 @@
 -1.2606,
 "https://es.wikipedia.org/wiki/Shetland"
 ],
+"Shimizu": [
+35.0158,
+138.4897,
+"https://es.wikipedia.org/wiki/Shimizu-ku_(Shizuoka)"
+],
 "Shimonoseki": [
 33.9579,
 130.9413,
@@ -1693,6 +1708,11 @@
 55.9875,
 -3.4,
 "https://es.wikipedia.org/wiki/South_Queensferry"
+],
+"Southampton": [
+50.9067,
+-1.4044,
+"https://es.wikipedia.org/wiki/Southampton"
 ],
 "St. George's": [
 -34.7236,
@@ -1783,6 +1803,11 @@
 -37.6858,
 176.1667,
 "https://es.wikipedia.org/wiki/Tauranga"
+],
+"Tenerife": [
+28.2686,
+-16.6056,
+"https://es.wikipedia.org/wiki/Tenerife"
 ],
 "Tesalónica": [
 40.6837,
@@ -1903,6 +1928,11 @@
 21.5292,
 39.1611,
 "https://es.wikipedia.org/wiki/Yeda"
+],
+"Yokohama": [
+35.4503,
+139.6342,
+"https://es.wikipedia.org/wiki/Yokohama"
 ],
 "Zeebrugge": [
 51.3308,
