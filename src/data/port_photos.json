@@ -3751,5 +3751,41 @@
   "author": "Andreas F. Borchert",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Killybegs_Harbour_2007_08_21.jpg"
+ },
+ "Puerto Limón": {
+  "slug": "puerto-limon",
+  "thumb": "/img/puertos/puerto-limon-640.webp",
+  "large": "/img/puertos/puerto-limon-1280.webp",
+  "ratio": 2.222,
+  "author": "AndSalx95",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lim%C3%B3n_-_Panoramic_view_from_Downtown_Lim%C3%B3n.jpg"
+ },
+ "Key West": {
+  "slug": "key-west",
+  "thumb": "/img/puertos/key-west-640.webp",
+  "large": "/img/puertos/key-west-1280.webp",
+  "ratio": 1.756,
+  "author": "Tore Sætre",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Key_west_2001.JPG"
+ },
+ "Ronne": {
+  "slug": "ronne",
+  "thumb": "/img/puertos/ronne-640.webp",
+  "large": "/img/puertos/ronne-1280.webp",
+  "ratio": 1.329,
+  "author": "Werner Wilmes",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:R%C3%B8nne_Bornholm_-_52568086465.jpg"
+ },
+ "Souda": {
+  "slug": "souda",
+  "thumb": "/img/puertos/souda-640.webp",
+  "large": "/img/puertos/souda-1280.webp",
+  "ratio": 1.333,
+  "author": "Robin & Bazylek",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Cliffs_and_town_of_Souda.jpg"
  }
 }
