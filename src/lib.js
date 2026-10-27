@@ -25,10 +25,22 @@ function slim(html) {
 // Versión de cada fichero de assets según su contenido: la caché se renueva solo cuando el fichero cambia
 const AVC = {};
 export const AV = (f) => AVC[f] || (AVC[f] = (() => { try { return createHash('sha1').update(fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', 'public', 'assets', f))).digest('hex').slice(0, 10); } catch { return BUILD_DATE; } })());
+// Tarjetas con varias fotos candidatas (data-alt="url::pie|..."): en cada página se usa la primera libre,
+// y si todas están ya usadas, la menos repetida. Así un listado de 48 salidas del mismo barco no repite foto.
+export function pickPhotos(html) {
+  if (!html.includes('data-alt="')) return html;
+  const used = new Map();
+  return html.replace(/<img src="[^"]*" data-alt="([^"]*)"([^>]*)><span class="ph-cap"><\/span>/g, (m, list, rest) => {
+    const alts = list.split('|').map((z) => z.split('::'));
+    const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => ((used.get(b[0]) || 0) < (used.get(a[0]) || 0) ? b : a));
+    used.set(best[0], (used.get(best[0]) || 0) + 1);
+    return `<img src="${best[0]}"${rest}>${best[1] ? `<span class="ph-cap">${best[1]}</span>` : ''}`;
+  });
+}
 export function write(rel, html) {
   const file = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, rel.endsWith('.html') ? slim(html) : html);
+  fs.writeFileSync(file, rel.endsWith('.html') ? slim(pickPhotos(html)) : html);
 }
 export function rebase(html) {
   if (BASE === '/') return html;

@@ -113,13 +113,23 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   // Las 300 mejores ofertas tienen imagen propia para compartir (tools/og-offers.py la dibuja en el build)
   const ogSet = new Set([...sailings].sort((a, b) => deal(b).score - deal(a).score).slice(0, 300).map((x) => x.id));
   const ogOf = (x) => (ogSet.has(x.id) ? `/og/salidas/${x.id}.png` : null);
+  // Fotos candidatas de una tarjeta: escalas del itinerario (primero las que no son la salida) y al final el barco.
+  // lib.js write() elige en cada página la primera que aún no se ha usado, así no se repite la misma foto en el listado.
+  function cardImg(x, ph) {
+    const names = [...new Set(portsOf(x).map((p) => p.name))];
+    const order = [...names.filter((n) => n !== x.depart_port), ...names.filter((n) => n === x.depart_port)];
+    const alts = order.map((n) => [portPhotos[n]?.thumb, n]).filter(([u]) => u);
+    if (ph) alts.push([ph.thumb, '']);
+    if (!alts.length) return '';
+    return `<img src="${esc(alts[0][0])}" data-alt="${esc(alts.map(([u, n]) => `${u}::${n}`).join('|'))}" alt="" loading="lazy" decoding="async" width="640" height="427" class="ship-photo"><span class="ph-cap"></span>`;
+  }
   function card(x) {
     const s = bySlug[x.ship], d = deal(x), r = real(x), ph = photoOf(x);
     const lineN = s?.lineShort || Object.values(LINES).find((z) => z.slug === x.line)?.short || '';
     // Como mucho 3 etiquetas, por orden de importancia
     const tags = [d.atMin && d.drop >= 3 ? ['t-min', 'Mínimo histórico'] : null, d.drop >= 3 && !(d.atMin && d.drop >= 3) ? ['t-down', `Ha bajado un ${d.drop} %`] : null, cheaperSrc(x) ? ['t-min', `${eur(cheaperSrc(x).p)} en ${esc(cheaperSrc(x).z.partner)}`] : null, rose(x) ? ['t-up', 'Ha subido'] : null, isNew(x) ? ['t-new', 'Nueva'] : null, d.anomaly ? ['t-up', 'Precio anómalo'] : null,
       fromSpain(x) ? ['t-noplane', 'Sin avión desde España'] : null, x.adults_only ? ['', 'Solo adultos'] : null, x.currency_src === 'USD' ? ['', 'Precio en dólares convertido'] : null, seaCount(x) ? ['', `${seaCount(x)} día${seaCount(x) > 1 ? 's' : ''} de mar`] : null].filter(Boolean).slice(0, 3);
-    return `<a class="card sail-card offer-card" href="${url(x)}" aria-label="${esc(`${destName(x.destination, x)}, ${x.nights} noches en el ${shipName(x)}, ${fdate(x.date)}, desde ${x.depart_port}, desde ${eur(r.tarifa)} por persona. Nota del precio ${d.score}: ${d.label}`)}"><div class="ship-art${ph ? ' has-photo' : ''}">${ph ? `<img src="${esc(ph.thumb)}" alt="" loading="lazy" decoding="async" width="640" height="427" class="ship-photo">` : ''}<span class="scb ${dcls(d.score)}" title="Nota del precio ${d.score}/100"><b>${d.score}</b><i>${esc(d.label)}</i></span></div><div class="card-body"><h3>${esc(destName(x.destination, x))}, ${x.nights} noches</h3><p class="card-sub"><b>${esc(shipName(x))}</b> <span>${esc(lineN)}</span></p>
+    return `<a class="card sail-card offer-card" href="${url(x)}" aria-label="${esc(`${destName(x.destination, x)}, ${x.nights} noches en el ${shipName(x)}, ${fdate(x.date)}, desde ${x.depart_port}, desde ${eur(r.tarifa)} por persona. Nota del precio ${d.score}: ${d.label}`)}"><div class="ship-art${ph ? ' has-photo' : ''}">${cardImg(x, ph)}<span class="scb ${dcls(d.score)}" title="Nota del precio ${d.score}/100"><b>${d.score}</b><i>${esc(d.label)}</i></span></div><div class="card-body"><h3>${esc(destName(x.destination, x))}, ${x.nights} noches</h3><p class="card-sub"><b>${esc(shipName(x))}</b> <span>${esc(lineN)}</span></p>
     <p class="card-when">${fdate(x.date, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}, desde ${esc(x.depart_port)}${sameCount(x) ? ` <span class="more-d">+${sameCount(x)} fecha${sameCount(x) > 1 ? 's' : ''}</span>` : ''}</p>
     <p class="ports-line">${portsOf(x).slice(1, 5).map((p) => `<span>${esc(p.name)}</span>`).join('')}${portsOf(x).length > 5 ? ` <span class="more-p">+${portsOf(x).length - 5}</span>` : ''}</p>
     ${tags.length ? `<p class="card-tags">${tags.map(([c, t]) => `<span${c ? ` class="${c}"` : ''}>${t}</span>`).join('')}</p>` : ''}

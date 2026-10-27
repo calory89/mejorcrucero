@@ -1,0 +1,33 @@
+name: Fotos de escalas
+on:
+  workflow_dispatch:
+    inputs:
+      max:
+        description: 'Máximo de escalas nuevas'
+        default: '400'
+  push:
+    branches: [main]
+    paths: ['tools/port-photos.py']
+permissions:
+  contents: write
+  actions: write
+concurrency: port-photos
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet pillow
+      - name: Buscar fotos con licencia libre (Wikimedia Commons)
+        run: python3 tools/port-photos.py "${{ github.event.inputs.max || '400' }}"
+      - name: Guardar y republicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "mejorcrucero-bot"; git config user.email "bot@users.noreply.github.com"
+          git add src/data/port_photos.json public/img/puertos
+          git diff --cached --quiet && { echo "sin cambios"; exit 0; }
+          git commit -qm "Fotos de escalas (Wikimedia Commons)"
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep 5; done
+          gh api -X POST repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches -f ref=main
