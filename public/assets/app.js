@@ -906,3 +906,10 @@
   // Ayudas emergentes propias en vez del título del navegador (también con teclado)
   $$('.shore[title], .hero-score [title], .card-tags span[title], .t-noplane[title]').forEach((el) => { el.dataset.tip = el.title; el.removeAttribute('title'); if (!el.closest('a,button')) el.tabIndex = 0; });
 })();
+
+// Instalar como app (Android/Chrome): el botón del pie solo aparece si el navegador lo permite
+(() => { let ev = null; const btns = () => document.querySelectorAll('.js-install');
+  addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); ev = e; btns().forEach((b) => { b.hidden = false; }); });
+  document.addEventListener('click', async (e) => { const b = e.target.closest('.js-install'); if (!b || !ev) return; ev.prompt(); try { await ev.userChoice; } catch {} ev = null; btns().forEach((x) => { x.hidden = true; }); });
+  addEventListener('appinstalled', () => { btns().forEach((x) => { x.hidden = true; }); });
+})();

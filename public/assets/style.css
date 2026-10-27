@@ -877,3 +877,4 @@ a,button,select,summary,label{touch-action:manipulation}
 .filters .f-wide,.filters label{min-width:0}.filters input[type=search],.filters input[type=text]{width:100%;min-width:0;max-width:100%}
 .credits a,.credits li{overflow-wrap:anywhere}
 .tabs-nav,.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs-nav::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
+.foot .link-btn{background:none;border:0;padding:0;color:#B9C7D9;font:inherit;cursor:pointer;text-decoration:underline}
