@@ -233,7 +233,7 @@ ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="hig
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wqn50nb6kp");clarity("consentv2",{ad_Storage:"denied",analytics_Storage:"denied"});clarity("set","site","mejorcrucero");</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GES6R9Z8N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"granted"});gtag("js",new Date());gtag("config","G-3GES6R9Z8N");gtag("config","G-FJKJE77K4V");</script>
-<script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/admin/*","/api/*","/*\\?*"]}}]},"eagerness":"moderate"}]}</script>
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/admin/*","/embed/*"]}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body data-base="/" data-page="${esc(url)}">
 <a class="skip" href="#main">Saltar al contenido</a>

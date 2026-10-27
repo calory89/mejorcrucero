@@ -874,3 +874,6 @@ a,button,select,summary,label{touch-action:manipulation}
 .sail-card:focus-visible,.ship-card .card-link:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
 .ship-art img{background:linear-gradient(160deg,#dbe8fb,#eef4fd)}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) ::selection{background:#1E4C8F;color:#fff}}
+.filters .f-wide,.filters label{min-width:0}.filters input[type=search],.filters input[type=text]{width:100%;min-width:0;max-width:100%}
+.credits a,.credits li{overflow-wrap:anywhere}
+.tabs-nav,.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs-nav::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
