@@ -75,7 +75,8 @@ async function main() {
         date, nights, depart_port: depart, depart_port_slug: PORT_SLUG[depart] || null, arrive_port: it.roundtrip ? depart : PORT(sched[sched.length - 1]?.port) || depart,
         itinerary: { name: String(it.itineraryTitle || ''), ports },
         prices, price_usd: usd, currency_src: 'USD', fx: rate,
-        port_charges: taxUsd ? Math.round(taxUsd * rate) : null, service_night: null, service_included: false,
+        // El precio de carnival.com ya incluye tasas y cargos portuarios (CruiseDirect muestra el mismo importe 'incl. taxes & fees')
+        port_charges: taxUsd ? Math.round(taxUsd * rate) : 0, taxes_included: !taxUsd, service_night: null, service_included: false,
         sources: [{ partner: 'Carnival Cruise Line (web oficial EE. UU.)', url: 'https://www.carnival.com' + s.sailingURL, prices, official: true }],
       };
       const old = prevById[id]; const history = [...(old?.history || [])];

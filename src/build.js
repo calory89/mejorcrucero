@@ -66,6 +66,10 @@ const sailings = [];
     const AMER = ['caribe', 'canal-de-panama', 'riviera-mexicana', 'sudamerica', 'bermudas', 'canada-nueva-inglaterra', 'alaska', 'hawai'];
     if (AMER.includes(x.destination) && x.itinerary) for (const p of x.itinerary.ports) { if (p.name === 'Cartagena') p.name = 'Cartagena de Indias'; if (p.name === 'Falmouth') p.name = 'Falmouth (Jamaica)'; }
     x.depart_port = portName(x.depart_port); x.arrive_port = portName(x.arrive_port);
+    // Carnival publica el precio con tasas incluidas: no es 'tasas sin publicar'
+    if (x.line === 'carnival' && x.port_charges == null) { x.port_charges = 0; x.taxes_included = true; }
+    // Propinas obligatorias de Carnival (cargo de servicio por persona y noche, en dólares en content.js): que el precio real las incluya
+    if (x.line === 'carnival' && x.service_night == null && !x.service_included && x.fx && LINES['Carnival Cruise Line']?.tip) x.service_night = Math.round(LINES['Carnival Cruise Line'].tip * x.fx * 100) / 100;
     // Un punto del historial muy por encima del precio actual suele ser otro tipo de camarote (p. ej. solo había suite a la venta): no es una bajada real
     if (Array.isArray(x.history) && vals.length) { const lo = Math.min(...vals); const h = x.history.filter((p) => !(p.price > lo * 2.5)); if (h.length !== x.history.length) { qaMark('avisos', 'historial con camarote no comparable'); x.history = h; } }
     sailings.push(x);

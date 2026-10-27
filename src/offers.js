@@ -246,7 +246,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   <section class="block" id="precio"><h2>${r.partial ? 'Precio de este crucero' : 'Precio real de este crucero'}</h2>
   <div class="table-wrap"><table class="spec"><tbody>
     <tr><th scope="row">Tarifa (${esc(CABIN[cabinOf(x)].toLowerCase())}, por persona)</th><td>${eur(r.tarifa)}${x.base_price ? ` <s class="muted">${eur(x.base_price)}</s> <span class="badge-drop">−${d.disc}%</span>` : ''}</td></tr>
-    <tr><th scope="row">Tasas portuarias</th><td>${x.port_charges ? eur(x.port_charges) : 'Consultar'}</td></tr>
+    <tr><th scope="row">Tasas portuarias</th><td>${x.port_charges ? eur(x.port_charges) : x.taxes_included ? 'Incluidas en la tarifa' : 'Consultar'}</td></tr>
     <tr><th scope="row">Cuota de servicio (${x.nights} noches)</th><td>${x.service_included ? 'Incluida' : r.svc ? eur(r.svc) : 'Consultar'}</td></tr>
     <tr class="tot"><th scope="row">${r.partial ? 'Total conocido por persona (faltan las tasas)' : 'Precio real por persona'}</th><td><b>${eur(r.total)}</b></td></tr>
     <tr><th scope="row">Para dos personas${r.partial ? ' (sin tasas)' : ''}</th><td><b>${eur(r.total * 2)}</b></td></tr>
