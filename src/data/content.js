@@ -7,6 +7,7 @@ export const CONFIG = {
   tagline: 'Compara y elige tu mejor crucero al mejor precio',
   // Afiliación: rellenar con los IDs reales al darse de alta. Vacío = enlace normal.
   affiliates: {
+    cruisedirect: { name: 'CruiseDirect', url: 'https://www.cruisedirect.com/', param: '' }, // va por CJ: activo cuando exista cj.links.cruisedirect.aid
     logitravel: { name: 'Logitravel', url: 'https://www.logitravel.com/cruceros/', param: '' },
     crucerosnet: { name: 'Crucerosnet', url: 'https://www.crucerosnet.com/', param: '' },
     vayacruceros: { name: 'VayaCruceros', url: 'https://www.vayacruceros.com/', param: '' },

@@ -7,7 +7,7 @@ import { GUIDES } from './data/guides.js';
 import { DESTINATIONS, MONTHS, COMPARISONS } from './data/destinations.js';
 import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
 import { scoreBadge } from './lib.js';
-import { cj, tripBox, bookingHotels } from './lib.js';
+import { cj, tripBox, bookingHotels, cdLink, cdAff } from './lib.js';
 import { makeOffers } from './offers.js';
 import { makeTools2 } from './tools2.js';
 import { AV, SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
@@ -341,6 +341,7 @@ function shipPage(s) {
   <section id="reservar" class="block"><h2>Dónde reservar el ${esc(s.name)}</h2>
   <p class="muted">Compara la misma salida en la naviera y en las agencias.${s.sailings.length ? '' : ' Los precios en directo se están conectando: de momento te llevamos a la búsqueda de cada sitio.'}</p>
   <div class="partners">
+    ${cdLink(L.slug, s.slug) ? partnerLink({ href: cdLink(L.slug, s.slug, null, 'barco-' + s.slug), key: cdAff() ? 'cruisedirect' : null, title: 'CruiseDirect', sub: `Todas las salidas del ${s.name}`, page }) : ''}
     ${L.web ? partnerLink({ href: L.web, title: `Web oficial de ${L.short}`, sub: 'Precio de la naviera', page }) : ''}
     ${partnerLink({ href: affLink('logitravel'), key: 'logitravel', title: 'Logitravel', sub: 'Agencia online', page })}
     ${partnerLink({ href: affLink('crucerosnet'), key: 'crucerosnet', title: 'Crucerosnet', sub: 'Especialista en cruceros', page })}

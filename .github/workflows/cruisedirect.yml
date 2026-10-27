@@ -1,11 +1,6 @@
 name: IDs de CruiseDirect
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '23 4 * * 1'   # lunes: barcos nuevos en CruiseDirect
-  push:
-    branches: [main]
-    paths: ['tools/cruisedirect.py']
+  workflow_dispatch:   # solo a mano: cruisedirect.com responde 403 a GitHub Actions; los IDs se sacan con navegador
 permissions:
   contents: write
   actions: write

@@ -110,7 +110,7 @@ export function affLink(key, page = '') {
   if (a.param) url += (url.includes('?') ? '&' : '?') + a.param;
   return url;
 }
-export const isAff = (key) => !!CONFIG.affiliates[key]?.param;
+export const isAff = (key) => !!CONFIG.affiliates[key]?.param || (key === 'cruisedirect' && !!CONFIG.cj.links.cruisedirect?.aid);
 // Enlace de afiliado CJ (solo programas aprobados). url = destino profundo (si el programa lo permite).
 export function cj(kind, url, sid = 'web') {
   const L = CONFIG.cj.links[kind];
@@ -134,6 +134,22 @@ export function civLink(slug) {
   const a = CONFIG.affiliates.civitatis;
   return a.base + slug + '/' + (a.param ? '?' + a.param : '');
 }
+// CruiseDirect (agencia de EE. UU., 3 % por CJ): enlace a la salida exacta = página de la naviera filtrada por barco y día.
+// Los IDs de barco los mantiene tools/cruisedirect.py (src/data/cruisedirect.json). Si hay AID de CJ, el enlace va por CJ.
+const CD = (() => { try { return JSON.parse(fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), 'data', 'cruisedirect.json'), 'utf8')); } catch { return { lines: {}, ships: {} }; } })();
+export const cdHas = (line) => !!CD.lines?.[line];
+export function cdLink(line, ship, date, sid = 'web') {
+  const page = CD.lines?.[line];
+  if (!page) return null;
+  const id = CD.ships?.[ship];
+  const day = date ? Math.floor(Date.parse(date + 'T00:00:00Z') / 1000) : null;
+  const now = Math.floor(Date.now() / 1000);
+  const min = day ? day - 86400 : now, max = day ? day + 2 * 86400 - 1 : now + 365 * 86400;
+  let u = `https://www.cruisedirect.com/cruise-line/${page}?f%5B0%5D=departure_date%3A%28min%3A${min}%2Cmax%3A${max}%29`;
+  if (id) u += `&f%5B1%5D=ship%3A${id}`;
+  return CONFIG.cj.links.cruisedirect?.aid ? cj('cruisedirect', u, sid) : u;
+}
+export const cdAff = () => !!CONFIG.cj.links.cruisedirect?.aid;
 export function partnerLink({ href, key, title, sub, page }) {
   const aff = key ? isAff(key) : false;
   return `<a class="partner" href="${href}" target="_blank" rel="${key ? 'sponsored ' : ''}noopener" data-aff="${esc(key || 'oficial')}" data-page="${esc(page)}"><b>${esc(title)}</b><span>${esc(sub)}</span><span class="go">Ver precios</span><small class="comm">${aff ? 'Enlace de afiliado: podemos cobrar comisión' : 'Sin comisión para nosotros'}</small></a>`;
