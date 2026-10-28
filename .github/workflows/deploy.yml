@@ -12,7 +12,8 @@ permissions:
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # false: un push no puede cortar a mitad la importación programada de precios (antes se perdían actualizaciones)
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest

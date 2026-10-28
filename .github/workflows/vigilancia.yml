@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
   issues: write
-  actions: read
+  actions: write
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -32,6 +32,8 @@ jobs:
             require('fs').writeFileSync('p2.txt', out.join('\n'));
           " || echo "- No se pudo leer estado.json" > p2.txt
           [ -s p2.txt ] && problems="$problems\n$(cat p2.txt)"
+          # Si la importación programada no ha corrido (GitHub a veces se salta el cron o un push la cancela), lanzarla
+          node -e "const e=require('./estado.json'); const t=Math.max(...Object.values(e.porNaviera||{}).map(v=>Date.parse(v.ultima)||0)); process.exit((Date.now()-t)/36e5>14?0:1)" && { echo "Precios con más de 14 h: lanzo la importación"; gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy.yml/dispatches" -f ref=main || true; }
           last=$(gh run list -R "$GITHUB_REPOSITORY" -w Deploy -L 3 --json conclusion -q '[.[]|select(.conclusion=="failure")]|length')
           [ "$last" -ge 2 ] && problems="$problems\n- $last de los últimos 3 despliegues han fallado"
           if [ -n "$problems" ]; then
