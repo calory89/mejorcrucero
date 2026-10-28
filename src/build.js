@@ -37,6 +37,7 @@ const QA = { descartadas: {}, avisos: {} };
 const qaMark = (bag, k) => { QA[bag][k] = (QA[bag][k] || 0) + 1; };
 const TODAY = new Date().toISOString().slice(0, 10);
 const PORT_ALIAS = readJson('port_alias.json', {});
+const PC_EARLY = readJson('port_coords.json', {});
 // Mismo barco con nombre distinto según la fuente (naviera, agencia): todas apuntan a la misma ficha
 const SHIP_ALIAS = readJson('ship_alias.json', {});
 const cleanName = (t) => String(t || '').replace(/[™®]/g, '').replace(/\s{2,}/g, ' ').trim();
@@ -66,6 +67,16 @@ const sailings = [];
     const AMER = ['caribe', 'canal-de-panama', 'riviera-mexicana', 'sudamerica', 'bermudas', 'canada-nueva-inglaterra', 'alaska', 'hawai'];
     if (AMER.includes(x.destination) && x.itinerary) for (const p of x.itinerary.ports) { if (p.name === 'Cartagena') p.name = 'Cartagena de Indias'; if (p.name === 'Falmouth') p.name = 'Falmouth (Jamaica)'; }
     x.depart_port = portName(x.depart_port); x.arrive_port = portName(x.arrive_port);
+    // Tramos cortos de un viaje de reposicionamiento (p. ej. Savona-Barcelona en 2 noches) no son "travesías transatlánticas":
+    // si ninguna escala está al otro lado del Atlántico, se clasifican por dónde navegan
+    if (x.destination === 'transatlanticos' && x.itinerary?.ports?.length) {
+      const pc = (n) => PC_EARLY[portName(n)];
+      const pts = x.itinerary.ports.map((q) => pc(q.name)).filter(Boolean);
+      if (pts.length && !pts.some(([la, lo]) => lo < -30)) {
+        x.destination = pts.some(([la]) => la > 47) ? 'capitales-balticas' : pts.some(([la, lo]) => la < 33 && lo < -12) ? 'canarias-y-madeira' : 'mediterraneo-occidental';
+        qaMark('avisos', 'tramo de reposicionamiento reclasificado');
+      }
+    }
     // Carnival publica el precio con tasas incluidas: no es 'tasas sin publicar'
     if (x.line === 'carnival' && x.port_charges == null) { x.port_charges = 0; x.taxes_included = true; }
     // Propinas obligatorias de Carnival (cargo de servicio por persona y noche, en dólares en content.js): que el precio real las incluya

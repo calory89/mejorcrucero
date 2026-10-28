@@ -259,6 +259,7 @@
   // ---------- Ofertas: búsqueda en lenguaje natural ----------
   const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   const fold = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const sing = (t) => t.replace(/(^|[^\d.,])1 (ofertas|cruceros|fechas|salidas|noches)\b/g, (m, a, w) => `${a}1 ${({ ofertas: 'oferta', cruceros: 'crucero', fechas: 'fecha', salidas: 'salida', noches: 'noche' })[w]}`);
   const nlParse = (raw) => {
     let t = fold(raw); if (!t.trim()) return null;
     const money = /(?:menos de|hasta|maximo|max|por)\s*(\d{2,5})|(\d{2,5})\s*(?:€|eur)/.exec(t); const max = money ? +(money[1] || money[2]) : 0; if (money) t = t.replace(money[0], ' ');
@@ -315,8 +316,8 @@
           const cap = im.nextElementSibling; if (cap && cap.classList.contains('ph-cap')) { cap.textContent = best[1] || ''; cap.hidden = !best[1]; } }); }
       let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); }
       const total = full ? match : Math.max(match, allIds.length);
-      m.textContent = grouped ? (full ? `${total} cruceros (${total + grouped} fechas)${total > shown ? ` · mostrando ${shown}` : ''}` : `${total} ofertas · mostrando ${shown} cruceros distintos`) : `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`;
-      moreBtn.hidden = total <= shown; match = total; moreBtn.textContent = `Ver ${Math.min(PAGE, match - shown)} ofertas más (quedan ${match - shown})`;
+      m.textContent = sing(grouped ? (full ? `${total} cruceros (${total + grouped} fechas)${total > shown ? ` · mostrando ${shown}` : ''}` : `${total} ofertas · mostrando ${shown} cruceros distintos`) : `${total} ofertas${total > shown ? ` · mostrando ${shown}` : ''}`);
+      moreBtn.hidden = total <= shown; match = total; moreBtn.textContent = sing(`Ver ${Math.min(PAGE, match - shown)} ofertas más (quedan ${match - shown})`);
       const p = state(); const qsNew = p.toString();
       try { history.replaceState(null, '', location.pathname + (qsNew ? '?' + qsNew : '') + location.hash); } catch (e) {}
       store.set('mc_filters', { ...store.get('mc_filters', {}), [location.pathname]: qsNew });
