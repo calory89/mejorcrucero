@@ -41,10 +41,14 @@ export function pickPhotos(html) {
   });
   return html;
 }
+// "1 noches", "1 salidas"... -> singular (la mayoría de plantillas no lo distinguen)
+const SING = { noches: 'noche', salidas: 'salida', ofertas: 'oferta', fechas: 'fecha', escalas: 'escala', barcos: 'barco', cruceros: 'crucero', puertos: 'puerto', navieras: 'naviera', 'días': 'día' };
+export const singular = (s) => s.replace(/(^|[^\d.,])1 (noches|salidas|ofertas|fechas|escalas|barcos|cruceros|puertos|navieras|días)\b/g, (m, a, w) => `${a}1 ${SING[w]}`);
 export function write(rel, html) {
   const file = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, rel.endsWith('.html') ? slim(pickPhotos(html)) : html);
+  const txt = /\.(html|json|xml|txt)$/.test(rel) ? singular(html) : html;
+  fs.writeFileSync(file, rel.endsWith('.html') ? slim(pickPhotos(txt)) : txt);
 }
 export function rebase(html) {
   if (BASE === '/') return html;
