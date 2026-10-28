@@ -869,7 +869,7 @@ form .form-msg{font-weight:600;color:var(--ok)}
 ::selection{background:#CFE0FF;color:#0A2A4F}
 h1,h2,h3,.card h3{text-wrap:balance}.lead-p,.card p,.muted{text-wrap:pretty}
 a,button,select,summary,label{touch-action:manipulation}
-.foot,.faq,.forum{content-visibility:auto;contain-intrinsic-size:auto 600px}
+.faq,.forum{content-visibility:auto;contain-intrinsic-size:auto 600px}
 .chip{min-height:40px;display:inline-flex;align-items:center}
 .sail-card:focus-visible,.ship-card .card-link:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
 .ship-art img{background:linear-gradient(160deg,#dbe8fb,#eef4fd)}

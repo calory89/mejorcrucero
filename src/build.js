@@ -162,7 +162,7 @@ function home() {
   <div class="hero-copy">
     <h1>Compara cruceros con el precio que de verdad pagarás</h1>
     <p class="lead-p">Tasas y cuota de servicio incluidas. ${fmt(sailings.length)} salidas de ${new Set(sailings.map((x) => x.line)).size} navieras, comprobadas dos veces al día en sus webs oficiales.</p>
-    <form class="search search-big" action="/buscar/" role="search">
+    <form class="search search-big" action="/buscar/" role="search" aria-label="Buscar cruceros por destino, mes y puerto">
       <label><span>Destino</span><select name="destino"><option value="">Cualquiera</option>${DESTINATIONS.map((d) => `<option value="${d.slug}">${esc(d.name)}</option>`).join('')}</select></label>
       <label><span>Mes</span><select name="mes"><option value="">Cualquiera</option>${MONTHS.map((m, i) => `<option value="${i + 1}">${cap(m)}</option>`).join('')}</select></label>
       <label><span>Salida</span><select name="puerto"><option value="">Cualquiera</option>${allPorts.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join('')}</select></label>
