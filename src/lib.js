@@ -117,6 +117,12 @@ export function ltUrl(line, ship) {
   return base;
 }
 export const ltLink = (line, ship, page = '') => affLink('logitravel', page, ltUrl(line, ship));
+// Página de Logitravel para un puerto de salida o un destino (solo si existe: comprobadas a mano en src/data/logitravel.json)
+export function ltPlace(kind, slug, page = '') {
+  const v = kind === 'port' ? LT.ports?.[slug] : LT.destinations?.[slug];
+  if (!v) return null;
+  return affLink('logitravel', page, `https://www.logitravel.com/cruceros/${kind === 'port' ? `puertos/cruceros-desde-${v}` : `destinos/${v}`}/`);
+}
 export function affLink(key, page = '', deep = null) {
   const a = CONFIG.affiliates[key];
   if (a.awin?.mid && CONFIG.awin?.affid) return awinLink(a.awin.mid, deep || a.url, page);

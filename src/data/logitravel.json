@@ -254,5 +254,27 @@
   "zuiderdam": "holland-america-line"
  },
  "checked": "2026-10-28",
- "nota": "Fichas de barco en logitravel.com comprobadas (200) desde el navegador; 4 sin ficha (404). Enlaces por Awin (lib.js ltLink)."
+ "nota": "Fichas de barco en logitravel.com comprobadas (200) desde el navegador; 4 sin ficha (404). Enlaces por Awin (lib.js ltLink).",
+ "ports": {
+  "barcelona": "barcelona",
+  "palma": "palma-de-mallorca",
+  "valencia": "valencia",
+  "malaga": "malaga",
+  "alicante": "alicante",
+  "cadiz": "cadiz",
+  "tarragona": "tarragona",
+  "bilbao": "bilbao",
+  "tenerife": "santa-cruz-de-tenerife",
+  "gran-canaria": "las-palmas-de-gran-canaria"
+ },
+ "destinations": {
+  "mediterraneo-occidental": "mediterraneo-occidental",
+  "mediterraneo-oriental": "mediterraneo-oriental",
+  "caribe": "caribe",
+  "fiordos-noruegos": "norte-de-europa-y-fiordos",
+  "capitales-balticas": "norte-de-europa-y-fiordos",
+  "canarias-y-madeira": "islas-canarias",
+  "alaska": "alaska",
+  "transatlanticos": "transatlanticos"
+ }
 }
