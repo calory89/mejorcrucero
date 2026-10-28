@@ -172,7 +172,7 @@ export function cdLink(line, ship, date, sid = 'web') {
 export const cdAff = () => !!CONFIG.cj.links.cruisedirect?.aid;
 export function partnerLink({ href, key, title, sub, page }) {
   const aff = key ? isAff(key) : false;
-  return `<a class="partner" href="${href}" target="_blank" rel="${key ? 'sponsored ' : ''}noopener" data-aff="${esc(key || 'oficial')}" data-page="${esc(page)}"><b>${esc(title)}</b><span>${esc(sub)}</span><span class="go">Ver precios</span><small class="comm">${aff ? 'Enlace de afiliado: podemos cobrar comisión' : 'Sin comisión para nosotros'}</small></a>`;
+  return `<a class="partner" href="${href}" target="_blank" rel="${key ? 'sponsored ' : ''}noopener" data-aff="${esc(key || 'oficial')}" data-page="${esc(page)}"><b>${esc(title)}</b><span>${esc(sub)}</span><span class="go">Ver precios</span>${aff ? '<small class="comm">Enlace de afiliado</small>' : ''}</a>`;
 }
 
 export function leadForm(source, cta = 'Quiero los chollos', extra = '') {
