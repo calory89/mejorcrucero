@@ -95,8 +95,8 @@
      "code": "HAVEN",
      "title": "The Haven",
      "statusText": "Available",
-     "combinedPrice": 2874,
-     "basePrice": 5919
+     "combinedPrice": 2784,
+     "basePrice": 5739
     },
     {
      "status": "AVAILABLE",
@@ -126,7 +126,7 @@
      "title": "Camarote interior",
      "statusText": "Available",
      "combinedPrice": 669,
-     "basePrice": 1139
+     "basePrice": 1159
     },
     {
      "status": "SOLO_GUEST_ONLY",
