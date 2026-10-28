@@ -878,3 +878,6 @@ a,button,select,summary,label{touch-action:manipulation}
 .credits a,.credits li{overflow-wrap:anywhere}
 .tabs-nav,.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs-nav::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
 .foot .link-btn{background:none;border:0;padding:0;color:#B9C7D9;font:inherit;cursor:pointer;text-decoration:underline}
+.two-scores summary{cursor:pointer;color:var(--ink-2);font-weight:600}.two-scores p{margin:6px 0 0}
+.promos .promo{display:inline-block;background:var(--sea-2);color:var(--ink);border-radius:999px;padding:2px 10px;margin:2px 4px 2px 0;font-weight:600;font-size:.8rem}
+@media (max-width:640px){.price-box .actions,.offer-hero .actions{grid-template-columns:1fr 1fr}.price-box .actions>.btn:first-child,.offer-hero .actions>.btn:first-child{grid-column:1/-1}.price-box .actions .btn{min-height:44px;padding:10px 12px;font-size:.92rem;justify-content:center;text-align:center}}
