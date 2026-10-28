@@ -15,6 +15,10 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   // Coordenadas de los puertos conocidos para dibujar el mapa del itinerario
   const coord = Object.fromEntries([...PORT_COORDS, ...MORE_COORDS].map(([n, a, b]) => [n.split(' (')[0].toLowerCase(), [a, b]]));
   for (const x of sailings) for (const p of x.itinerary?.ports || []) { const c = coord[p.name.split(' (')[0].toLowerCase()] || coord[p.name.toLowerCase()]; if (c && !p.lat) { p.lat = c[0]; p.lon = c[1]; } }
+  // Nombres de escala que existen en dos sitios: se elige el más cercano a las escalas vecinas de esa salida
+  const ALT = { cartagena: [[37.6, -0.98], [10.42, -75.53]], falmouth: [[18.49, -77.65], [50.15, -5.07]], portland: [[50.57, -2.44], [43.66, -70.25], [45.52, -122.68]], kochi: [[33.56, 133.53], [9.97, 76.27]], 'san vicente': [[13.16, -61.23], [16.89, -24.98]], valencia: [[39.45, -0.32], [10.48, -68.01]], santiago: [[42.88, -8.54], [-33.03, -71.62]], 'san cristóbal': [[17.3, -62.72], [-0.9, -89.61]] };
+  const kmD = (a, b) => { const r = Math.PI / 180, h = Math.sin((b[0] - a[0]) * r / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin((b[1] - a[1]) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); };
+  for (const x of sailings) { const ps = (x.itinerary?.ports || []).filter((p) => p.name !== 'Navegación'); ps.forEach((p, i) => { const alt = ALT[p.name.split(' (')[0].toLowerCase()]; if (!alt) return; const nb = [ps[i - 1], ps[i + 1], ps[i - 2], ps[i + 2]].filter((q) => q && q.lat != null && !ALT[q.name.split(' (')[0].toLowerCase()]); if (!nb.length) return; const best = alt.reduce((m, c) => { const dd = Math.min(...nb.map((q) => kmD(c, [q.lat, q.lon]))); return dd < m[0] ? [dd, c] : m; }, [Infinity, null])[1]; p.lat = best[0]; p.lon = best[1]; }); }
   const destName = (slug, x) => DESTINATIONS.find((d) => d.slug === slug)?.name || EXTRA_DEST[slug] || cap(String(x?.dest_name || 'Crucero').trim());
   const minPrice = (x) => Math.min(...Object.values(x.prices || {}).filter((v) => v > 0));
   const cabinOf = (x) => Object.keys(x.prices || {}).find((k) => x.prices[k] === minPrice(x)) || 'interior';
