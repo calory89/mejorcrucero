@@ -106,13 +106,25 @@ export function videoFacade(id, title, es) {
   return `<button class="yt" type="button" data-id="${id}" aria-label="Reproducir vídeo: ${esc(title)}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="yt-play">${ICON.play}</span>${es ? '<span class="yt-es">ES</span>' : ''}<span class="yt-title">${esc(title)}</span></button>`;
 }
 
-export function affLink(key, page = '') {
+// Enlace por Awin: la tienda recibe al visitante en la página exacta (ued) y clickref dice qué página de MejorCrucero lo mandó
+export const awinLink = (mid, url, page = '') => `https://www.awin1.com/cread.php?awinmid=${mid}&awinaffid=${CONFIG.awin.affid}${page ? `&clickref=${encodeURIComponent(('mc-' + page).slice(0, 50))}` : ''}&ued=${encodeURIComponent(url)}`;
+// Logitravel: ficha del barco (o página de la naviera) en logitravel.com; mapa en src/data/logitravel.json
+const LT = (() => { try { return JSON.parse(fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), 'data', 'logitravel.json'), 'utf8')); } catch { return { lines: {}, ships: {} }; } })();
+export function ltUrl(line, ship) {
+  const base = 'https://www.logitravel.com/cruceros/';
+  if (ship && LT.ships?.[ship]) return `${base}navieras/${LT.ships[ship]}/barcos/${ship}/`;
+  if (line && LT.lines?.[line]) return `${base}navieras/${LT.lines[line]}/`;
+  return base;
+}
+export const ltLink = (line, ship, page = '') => affLink('logitravel', page, ltUrl(line, ship));
+export function affLink(key, page = '', deep = null) {
   const a = CONFIG.affiliates[key];
-  let url = a.url;
+  if (a.awin?.mid && CONFIG.awin?.affid) return awinLink(a.awin.mid, deep || a.url, page);
+  let url = deep || a.url;
   if (a.param) url += (url.includes('?') ? '&' : '?') + a.param;
   return url;
 }
-export const isAff = (key) => !!CONFIG.affiliates[key]?.param || (key === 'cruisedirect' && !!CONFIG.cj.links.cruisedirect?.aid);
+export const isAff = (key) => !!CONFIG.affiliates[key]?.param || !!CONFIG.affiliates[key]?.awin?.mid || (key === 'cruisedirect' && !!CONFIG.cj.links.cruisedirect?.aid);
 // Enlace de afiliado CJ (solo programas aprobados). url = destino profundo (si el programa lo permite).
 export function cj(kind, url, sid = 'web') {
   const L = CONFIG.cj.links[kind];

@@ -8,7 +8,8 @@ export const CONFIG = {
   // Afiliación: rellenar con los IDs reales al darse de alta. Vacío = enlace normal.
   affiliates: {
     cruisedirect: { name: 'CruiseDirect', url: 'https://www.cruisedirect.com/', param: '' }, // va por CJ: activo cuando exista cj.links.cruisedirect.aid
-    logitravel: { name: 'Logitravel', url: 'https://www.logitravel.com/cruceros/', param: '' },
+    // Logitravel ES por Awin (aceptado el 28-oct-2026): awinmid 11074, publisher 3132800. Enlaces con lib.js affLink/ltLink
+    logitravel: { name: 'Logitravel', url: 'https://www.logitravel.com/cruceros/', param: '', awin: { mid: '11074' } },
     crucerosnet: { name: 'Crucerosnet', url: 'https://www.crucerosnet.com/', param: '' },
     vayacruceros: { name: 'VayaCruceros', url: 'https://www.vayacruceros.com/', param: '' },
     civitatis: { name: 'Civitatis', base: 'https://www.civitatis.com/es/', param: '' }, // p.ej. 'aid=1234'
@@ -32,6 +33,7 @@ export const CONFIG = {
   },
   happyLowCost: 'https://www.facebook.com/happylowcostofficialpage',
   // CJ (Commission Junction): propiedad "MejorCrucero" = PID 101909239. Solo programas APROBADOS (21-oct-2026).
+  awin: { affid: '3132800' },
   cj: {
     pid: '101909239',
     host: 'https://www.kqzyfj.com',
