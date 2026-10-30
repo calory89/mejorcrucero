@@ -1551,6 +1551,20 @@
     "author": "Pescadno",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Cruising_Carnival_1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-3-640.webp",
+    "ratio": 1.749,
+    "author": "Another Believer",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Galveston,_Texas_(2024)_-_50.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-4-640.webp",
+    "ratio": 1.333,
+    "author": "WhisperToMe",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:GalvestonCityHall.JPG"
    }
   ]
  },
@@ -1601,6 +1615,20 @@
     "author": "Vmenkov",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:E9198-Long-Beach-lighthouse.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-3-640.webp",
+    "ratio": 1.645,
+    "author": "Demi Lucas",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Squirrel_On_The_Path_(143026077).jpeg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-4-640.webp",
+    "ratio": 1.6,
+    "author": "Terry Lucas",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belmont_Fishing_Pier_(191455031).jpeg"
    }
   ]
  },
@@ -1675,7 +1703,30 @@
   "ratio": 1.553,
   "author": "Quintin Soloviev",
   "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/jacksonville-2-640.webp",
+    "ratio": 1.501,
+    "author": "PicoOrdinalo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Confederate_Monument_Pedestal_(Jacksonville,_Florida).jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-3-640.webp",
+    "ratio": 1.501,
+    "author": "bubba73",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cummer_Museum,_Jacksonville,_FL,_US_(02).jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-4-640.webp",
+    "ratio": 1.333,
+    "author": "Michael Rivera",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Duval_County_Public_Schools,_Jacksonville.JPG"
+   }
+  ]
  },
  "Aruba": {
   "slug": "aruba",
@@ -2078,6 +2129,20 @@
     "author": "Haakon S. Krohn",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Belmopan_Parliament.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belize-3-640.webp",
+    "ratio": 1.292,
+    "author": "Ruben Wong",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:HRrubenFromWest.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belize-4-640.webp",
+    "ratio": 1.333,
+    "author": "Wikimedia Commons",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Menonite_Children.JPG"
    }
   ]
  },
@@ -4717,6 +4782,13 @@
     "author": "Vivekobey",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Administrative_Block_,_Cusat.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kochi-4-640.webp",
+    "ratio": 1.501,
+    "author": "Augustus Binu : flickr : Instagram : Contact",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bolgatty_Palace_Hotel_by_Augustus.jpg"
    }
   ]
  },
@@ -6748,6 +6820,13 @@
     "author": "Pi3.124",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Roatan_looking_north_towards_West_End.jpg"
+   },
+   {
+    "thumb": "/img/puertos/isla-tropicale-3-640.webp",
+    "ratio": 1.778,
+    "author": "Pi3.124",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Roatan_looking_northwest_with_West_Bay_on_the_right_and_Coxen_Hole_and_Manuel_Galvez_airport_in_the_upper_middle.jpg"
    }
   ]
  },
@@ -6758,7 +6837,30 @@
   "ratio": 1.333,
   "author": "Wilford Peloquin",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:153_Singapore,_Jan_1978_(52023517826).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:153_Singapore,_Jan_1978_(52023517826).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/singapur-2-640.webp",
+    "ratio": 1.62,
+    "author": "Presidential Press and Information Office",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2017_G20_Hamburg_summit_leaders_group_photo.jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-3-640.webp",
+    "ratio": 1.501,
+    "author": "Zexsen Xie from Singapore",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Black_Knight_Singapore_1_(12537881585).jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-4-640.webp",
+    "ratio": 1.78,
+    "author": "dronepicr",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Flower_Dome_and_Cloud_Forest_Singapore_(36712606096).jpg"
+   }
+  ]
  },
  "Valparaiso": {
   "slug": "valparaiso",
