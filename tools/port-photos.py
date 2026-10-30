@@ -12,7 +12,7 @@ D = lambda f: os.path.join(ROOT, 'src/data', f)
 IMG = os.path.join(ROOT, 'public/img/puertos')
 UA = {'User-Agent': 'MejorCruceroBot/1.0 (https://mejorcrucero.com; carlos@equinoxinvestmentgroup.com) python-urllib'}
 MAX = int(sys.argv[1]) if len(sys.argv) > 1 else 400
-BAD = re.compile(r'(surrender|war_|wwii|ww2|battle|soldier|troops|lobby|display|map|mapa|karte|carte|flag|bandera|escudo|coat_of_arms|wappen|blason|locator|location|localizaci|logo|seal|sello|\.svg$|\.gif$|\.tif)', re.I)
+BAD = re.compile(r'(_bus|bus_|autob|tram|food|stew|chicken|dish|post_office|courthouse|surrender|war_|wwii|ww2|battle|soldier|troops|lobby|display|map|mapa|karte|carte|flag|bandera|escudo|coat_of_arms|wappen|blason|locator|location|localizaci|logo|seal|sello|\.svg$|\.gif$|\.tif)', re.I)
 NOPORT = re.compile(r'(navegaci|date line|cruising|crossing|scenic|en el mar|at sea)', re.I)  # tramos de navegación, no son puertos
 FREE = re.compile(r'^(cc0|public domain|pd|cc[ -]by(-sa)?[ -]?\d|cc[ -]by(-sa)?$|cc by-sa|cc by)', re.I)
 
