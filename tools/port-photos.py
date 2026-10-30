@@ -55,6 +55,8 @@ for x in raw:
 todo = [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n not in photos and n in coords and n != 'Navegación'][:MAX]
 print(len(todo), 'escalas sin foto con coordenadas', flush=True)
 used = {v.get('page') for v in photos.values()}
+BP = D('port_photos_block.json')
+if os.path.exists(BP): used |= set(json.load(open(BP)).get('pages', []))  # descartadas a mano
 os.makedirs(IMG, exist_ok=True)
 added = 0
 

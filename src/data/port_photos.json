@@ -1392,12 +1392,12 @@
  },
  "Miami": {
   "slug": "miami",
-  "thumb": "/img/puertos/miami-640.webp",
-  "large": "/img/puertos/miami-1280.webp",
-  "ratio": 1.333,
-  "author": "Averette at English Wikipedia",
+  "thumb": "/img/puertos/miami-4-640.webp",
+  "large": "/img/puertos/miami-4-640.webp",
+  "ratio": 1.778,
+  "author": "Averette",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Atlantiscondominium.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Central_Downtown_Miami_20090513.jpg",
   "more": [
    {
     "thumb": "/img/puertos/miami-2-640.webp",
@@ -1412,13 +1412,6 @@
     "author": "Averette at English Wikipedia",
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Calleocho.jpg"
-   },
-   {
-    "thumb": "/img/puertos/miami-4-640.webp",
-    "ratio": 1.778,
-    "author": "Averette",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Central_Downtown_Miami_20090513.jpg"
    }
   ]
  },
@@ -1431,13 +1424,6 @@
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Port_Canaveral_Panorama_10-2019.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/port-canaveral-2-640.webp",
-    "ratio": 1.504,
-    "author": "NASA",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:STS-114_booster_recovery.jpg"
-   },
    {
     "thumb": "/img/puertos/port-canaveral-3-640.webp",
     "ratio": 1.919,
@@ -1545,33 +1531,19 @@
  },
  "Galveston": {
   "slug": "galveston",
-  "thumb": "/img/puertos/galveston-640.webp",
-  "large": "/img/puertos/galveston-1280.webp",
-  "ratio": 1.366,
-  "author": "Nsaum75 (talk)",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:BHSGalvEntrance.jpg",
+  "thumb": "/img/puertos/galveston-4-640.webp",
+  "large": "/img/puertos/galveston-4-640.webp",
+  "ratio": 1.41,
+  "author": "Farragutful",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Ashton_Villa_-_Galveston.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/galveston-2-640.webp",
-    "ratio": 1.775,
-    "author": "Nsaum75",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:GISD_Lovenberg_Admin_Bldg,_Galveston.jpg"
-   },
    {
     "thumb": "/img/puertos/galveston-3-640.webp",
     "ratio": 1.333,
     "author": "No machine-readable author provided. Onboleman~commonswiki assumed (based on cop",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Galveston_beach_sunset.JPG"
-   },
-   {
-    "thumb": "/img/puertos/galveston-4-640.webp",
-    "ratio": 1.41,
-    "author": "Farragutful",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Ashton_Villa_-_Galveston.jpg"
    }
   ]
  },
@@ -1609,12 +1581,12 @@
  },
  "Long Beach": {
   "slug": "long-beach",
-  "thumb": "/img/puertos/long-beach-640.webp",
-  "large": "/img/puertos/long-beach-1280.webp",
-  "ratio": 1.333,
-  "author": "Jakesoriano23",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Aquarium_of_the_Pacific.jpg",
+  "thumb": "/img/puertos/long-beach-3-640.webp",
+  "large": "/img/puertos/long-beach-3-640.webp",
+  "ratio": 1.501,
+  "author": "Regular Daddy",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:LongBeachLongView.jpg",
   "more": [
    {
     "thumb": "/img/puertos/long-beach-2-640.webp",
@@ -1622,13 +1594,6 @@
     "author": "Vmenkov",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:E9198-Long-Beach-lighthouse.jpg"
-   },
-   {
-    "thumb": "/img/puertos/long-beach-3-640.webp",
-    "ratio": 1.501,
-    "author": "Regular Daddy",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:LongBeachLongView.jpg"
    },
    {
     "thumb": "/img/puertos/long-beach-4-640.webp",
@@ -1671,47 +1636,15 @@
    }
   ]
  },
- "Santo Tomás": {
-  "slug": "santo-tomas",
-  "thumb": "/img/puertos/santo-tomas-640.webp",
-  "large": "/img/puertos/santo-tomas-1280.webp",
-  "ratio": 1.333,
-  "author": "Jorge RosasA",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:C%C3%BApula_de_Iglesia_Santo_Tom%C3%A1s_de_los_Pl%C3%A1tanos.jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/santo-tomas-2-640.webp",
-    "ratio": 1.501,
-    "author": "Valeria González Padilla",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Cascada_del_R%C3%ADo_Santo_Desierto.jpg"
-   },
-   {
-    "thumb": "/img/puertos/santo-tomas-3-640.webp",
-    "ratio": 1.328,
-    "author": "Sachavir Salvador Barrera",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rodilla_del_Diablo_Parque_nacional_Barranca_del_Cupatizio_Uruapan.JPG"
-   }
-  ]
- },
  "Puerto Plata": {
   "slug": "puerto-plata",
-  "thumb": "/img/puertos/puerto-plata-640.webp",
-  "large": "/img/puertos/puerto-plata-1280.webp",
-  "ratio": 1.333,
+  "thumb": "/img/puertos/puerto-plata-2-640.webp",
+  "large": "/img/puertos/puerto-plata-2-640.webp",
+  "ratio": 1.778,
   "author": "Jusunx",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Poli_deportivo_Puerto_plata.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Puerto_Plata_-_Vistapop25.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/puerto-plata-2-640.webp",
-    "ratio": 1.778,
-    "author": "Jusunx",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Puerto_Plata_-_Vistapop25.jpg"
-   },
    {
     "thumb": "/img/puertos/puerto-plata-3-640.webp",
     "ratio": 1.571,
@@ -1730,33 +1663,19 @@
  },
  "Jacksonville": {
   "slug": "jacksonville",
-  "thumb": "/img/puertos/jacksonville-640.webp",
-  "large": "/img/puertos/jacksonville-1280.webp",
-  "ratio": 1.333,
-  "author": "J.M.",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Football_field_at_D._B._Milne_Field,_Jacksonville_University.jpg",
+  "thumb": "/img/puertos/jacksonville-2-640.webp",
+  "large": "/img/puertos/jacksonville-2-640.webp",
+  "ratio": 1.553,
+  "author": "Quintin Soloviev",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/jacksonville-2-640.webp",
-    "ratio": 1.553,
-    "author": "Quintin Soloviev",
-    "license": "CC BY 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
-   },
    {
     "thumb": "/img/puertos/jacksonville-3-640.webp",
     "ratio": 1.588,
     "author": "Mary Whitworth",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Baptist_Health_System.jpg"
-   },
-   {
-    "thumb": "/img/puertos/jacksonville-4-640.webp",
-    "ratio": 1.333,
-    "author": "Mathew105601",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Building_A,_FSCJ.JPG"
    }
   ]
  },
@@ -1823,47 +1742,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:Cabo_San_Lucas_overview.jpg"
    }
   ]
- },
- "Norfolk": {
-  "slug": "norfolk",
-  "thumb": "/img/puertos/norfolk-640.webp",
-  "large": "/img/puertos/norfolk-1280.webp",
-  "ratio": 1.333,
-  "author": "Adam Smith",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Britpieryarmouth.JPG",
-  "more": [
-   {
-    "thumb": "/img/puertos/norfolk-2-640.webp",
-    "ratio": 1.417,
-    "author": "Bs0u10e01",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Holt_railway_station_heritage_2022.jpg"
-   },
-   {
-    "thumb": "/img/puertos/norfolk-3-640.webp",
-    "ratio": 1.682,
-    "author": "Cameron Self",
-    "license": "CC BY 2.5",
-    "page": "https://commons.wikimedia.org/wiki/File:NorwichPlayhouse_(cropped).JPG"
-   },
-   {
-    "thumb": "/img/puertos/norfolk-4-640.webp",
-    "ratio": 1.333,
-    "author": "No machine-readable author provided. Angmering assumed (based on copyright claim",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:NorwichRCC.JPG"
-   }
-  ]
- },
- "Isla Tropicale": {
-  "slug": "isla-tropicale",
-  "thumb": "/img/puertos/isla-tropicale-640.webp",
-  "large": "/img/puertos/isla-tropicale-1280.webp",
-  "ratio": 1.459,
-  "author": "Wikimedia Commons",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Malaita_Island_NASA.jpg"
  },
  "Seattle": {
   "slug": "seattle",
@@ -2132,33 +2010,19 @@
  },
  "Heraclión": {
   "slug": "heraclion",
-  "thumb": "/img/puertos/heraclion-640.webp",
-  "large": "/img/puertos/heraclion-1280.webp",
-  "ratio": 2.495,
-  "author": "Pitichinaccio",
-  "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:2011_Dimos_Irakliou.png",
+  "thumb": "/img/puertos/heraclion-2-640.webp",
+  "large": "/img/puertos/heraclion-2-640.webp",
+  "ratio": 1.333,
+  "author": "Beemwej",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Arsena%C5%82_Iraklio_864.JPG",
   "more": [
-   {
-    "thumb": "/img/puertos/heraclion-2-640.webp",
-    "ratio": 1.333,
-    "author": "Beemwej",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Arsena%C5%82_Iraklio_864.JPG"
-   },
    {
     "thumb": "/img/puertos/heraclion-3-640.webp",
     "ratio": 1.445,
     "author": "böhringer friedrich",
     "license": "CC BY-SA 2.5",
     "page": "https://commons.wikimedia.org/wiki/File:HeraklionStadt05.JPG"
-   },
-   {
-    "thumb": "/img/puertos/heraclion-4-640.webp",
-    "ratio": 1.333,
-    "author": "Florian Waßmann",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:KMV_Tu_204-100_in_Heraklion.JPG"
    }
   ]
  },
@@ -2351,19 +2215,19 @@
  },
  "Milos": {
   "slug": "milos",
-  "thumb": "/img/puertos/milos-640.webp",
-  "large": "/img/puertos/milos-1280.webp",
-  "ratio": 1.496,
-  "author": "Wikimedia Commons",
+  "thumb": "/img/puertos/milos-2-640.webp",
+  "large": "/img/puertos/milos-2-640.webp",
+  "ratio": 1.333,
+  "author": "Oliwan",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Milos.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Milos-10.jpg",
   "more": [
    {
-    "thumb": "/img/puertos/milos-2-640.webp",
+    "thumb": "/img/puertos/milos-4-640.webp",
     "ratio": 1.333,
-    "author": "Oliwan",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Milos-10.jpg"
+    "author": "pastitio",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chora_Milos.jpg"
    },
    {
     "thumb": "/img/puertos/milos-3-640.webp",
@@ -2371,13 +2235,6 @@
     "author": "Παρασκευόπουλος Δημήτρης / Dparaskevop at Greek Wikipedia",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Milos_ancient_theatre.JPG"
-   },
-   {
-    "thumb": "/img/puertos/milos-4-640.webp",
-    "ratio": 1.333,
-    "author": "pastitio",
-    "license": "CC BY 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Chora_Milos.jpg"
    }
   ]
  },
@@ -2415,27 +2272,13 @@
  },
  "Manhattan": {
   "slug": "manhattan",
-  "thumb": "/img/puertos/manhattan-640.webp",
-  "large": "/img/puertos/manhattan-1280.webp",
-  "ratio": 1.683,
-  "author": "unidentified illustrator",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Castle_Garden_aerial_view_ca1880.jpg",
+  "thumb": "/img/puertos/manhattan-3-640.webp",
+  "large": "/img/puertos/manhattan-3-640.webp",
+  "ratio": 1.526,
+  "author": "user:AngMoKio",
+  "license": "CC BY-SA 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:Manhattan_amk.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/manhattan-2-640.webp",
-    "ratio": 1.66,
-    "author": "Irving Underhill",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Manhattan_Bridge_Construction_1909.jpg"
-   },
-   {
-    "thumb": "/img/puertos/manhattan-3-640.webp",
-    "ratio": 1.526,
-    "author": "user:AngMoKio",
-    "license": "CC BY-SA 2.5",
-    "page": "https://commons.wikimedia.org/wiki/File:Manhattan_amk.jpg"
-   },
    {
     "thumb": "/img/puertos/manhattan-4-640.webp",
     "ratio": 1.333,
@@ -2625,33 +2468,19 @@
  },
  "Roatán": {
   "slug": "roatan",
-  "thumb": "/img/puertos/roatan-640.webp",
-  "large": "/img/puertos/roatan-1280.webp",
-  "ratio": 1.608,
-  "author": "Unknown authorUnknown author",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Coxen%27s_Hole,_Roat%C3%A1n_1910-1920.jpg",
+  "thumb": "/img/puertos/roatan-4-640.webp",
+  "large": "/img/puertos/roatan-4-640.webp",
+  "ratio": 1.684,
+  "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Isla_Roatan_~_Honduras_(31597566445).jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/roatan-2-640.webp",
-    "ratio": 1.6,
-    "author": "Guerrero ?",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Coxen%27s_Hole,_Roat%C3%A1n_1910-1925.jpg"
-   },
    {
     "thumb": "/img/puertos/roatan-3-640.webp",
     "ratio": 1.763,
     "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
     "license": "CC BY 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port_~_Isla_Roatan_(31089485956).jpg"
-   },
-   {
-    "thumb": "/img/puertos/roatan-4-640.webp",
-    "ratio": 1.684,
-    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
-    "license": "CC BY 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Isla_Roatan_~_Honduras_(31597566445).jpg"
    }
   ]
  },
@@ -2687,38 +2516,6 @@
    }
   ]
  },
- "Singapur": {
-  "slug": "singapur",
-  "thumb": "/img/puertos/singapur-640.webp",
-  "large": "/img/puertos/singapur-1280.webp",
-  "ratio": 1.47,
-  "author": "Photographer not identified. \"Official photograph\".\n\nPost-Work: User:W.wolny",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Surrender_Singapore.jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/singapur-2-640.webp",
-    "ratio": 1.432,
-    "author": "Wikimedia Commons",
-    "license": "CC BY 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Alexandra_Hospital,_Singapore._Wellcome_L0026874.jpg"
-   },
-   {
-    "thumb": "/img/puertos/singapur-3-640.webp",
-    "ratio": 1.778,
-    "author": "Unknown authorUnknown author, Japanese official photographer",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:BritishSurrender.jpg"
-   },
-   {
-    "thumb": "/img/puertos/singapur-4-640.webp",
-    "ratio": 1.402,
-    "author": "British official photograph no. FLM. 903. United States. Office of War Informati",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:View_of_Singapore_with_smoke_in_early_1942.jpg"
-   }
-  ]
- },
  "Provenza": {
   "slug": "provenza",
   "thumb": "/img/puertos/provenza-640.webp",
@@ -2730,35 +2527,12 @@
  },
  "Sevilla": {
   "slug": "sevilla",
-  "thumb": "/img/puertos/sevilla-640.webp",
-  "large": "/img/puertos/sevilla-1280.webp",
-  "ratio": 1.586,
-  "author": "José Demaría López",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:1916-04-29,_La_Esfera,_Panoramas_espa%C3%B1oles.%E2%80%94Vista_de_Sevilla,_tomada_desde_la_Giralda_(cropped).jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/sevilla-2-640.webp",
-    "ratio": 1.333,
-    "author": "CARLOS TEIXIDOR CADENAS",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:AVE_en_Sevilla,_en_la_estaci%C3%B3n_de_Santa_Justa,_tren_Serie_100_de_Renfe.JPG"
-   },
-   {
-    "thumb": "/img/puertos/sevilla-3-640.webp",
-    "ratio": 1.333,
-    "author": "Frobles",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:AeropuertoSevilla.jpg"
-   },
-   {
-    "thumb": "/img/puertos/sevilla-4-640.webp",
-    "ratio": 1.501,
-    "author": "Anual",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Antigua_Audiencia_de_Sevila.jpg"
-   }
-  ]
+  "thumb": "/img/puertos/sevilla-4-640.webp",
+  "large": "/img/puertos/sevilla-4-640.webp",
+  "ratio": 1.501,
+  "author": "Anual",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Antigua_Audiencia_de_Sevila.jpg"
  },
  "Ciudad Ho Chi Minh": {
   "slug": "ciudad-ho-chi-minh",
@@ -2908,33 +2682,19 @@
  },
  "Busan": {
   "slug": "busan",
-  "thumb": "/img/puertos/busan-640.webp",
-  "large": "/img/puertos/busan-1280.webp",
+  "thumb": "/img/puertos/busan-4-640.webp",
+  "large": "/img/puertos/busan-4-640.webp",
   "ratio": 1.333,
-  "author": "LERK",
-  "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Busan-subway-1000-45th-unit-20090223.jpg",
+  "author": "Brit in Seoul",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dongbaekseom_island,_Busan.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/busan-2-640.webp",
-    "ratio": 1.501,
-    "author": "Cheolstar",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Busan_Sajik_Stadium_20080706.JPG"
-   },
    {
     "thumb": "/img/puertos/busan-3-640.webp",
     "ratio": 1.501,
     "author": "bryan...",
     "license": "CC BY-SA 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Busan_South_Korea_Republic_of_Korea_ROK_Daehan_Minguk_(31877197338).jpg"
-   },
-   {
-    "thumb": "/img/puertos/busan-4-640.webp",
-    "ratio": 1.333,
-    "author": "Brit in Seoul",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Dongbaekseom_island,_Busan.jpg"
    }
   ]
  },
@@ -3074,15 +2834,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:Bridgetown,_Barbados..JPG"
    }
   ]
- },
- "Saint John": {
-  "slug": "saint-john",
-  "thumb": "/img/puertos/saint-john-640.webp",
-  "large": "/img/puertos/saint-john-1280.webp",
-  "ratio": 1.476,
-  "author": "Wikimedia Commons",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:SaintJohn1894.jpg"
  },
  "Puntarenas": {
   "slug": "puntarenas",
@@ -4324,33 +4075,19 @@
  },
  "Koh Samui": {
   "slug": "koh-samui",
-  "thumb": "/img/puertos/koh-samui-640.webp",
-  "large": "/img/puertos/koh-samui-1280.webp",
-  "ratio": 1.333,
-  "author": "MNXANL",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:202402_Check-in_Drop-Off_Area_of_USM.jpg",
+  "thumb": "/img/puertos/koh-samui-4-640.webp",
+  "large": "/img/puertos/koh-samui-4-640.webp",
+  "ratio": 1.501,
+  "author": "Maksim Sundukov",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_in_Big_Buddha_Temple_(Wat_Phra_Yai).jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/koh-samui-2-640.webp",
-    "ratio": 1.333,
-    "author": "Thajsko",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Ape_collecting_coconut_-_vycvi%C4%8Den%C3%A1_opice_trh%C3%A1_kokosy_-_panoramio.jpg"
-   },
    {
     "thumb": "/img/puertos/koh-samui-3-640.webp",
     "ratio": 1.429,
     "author": "Maksim Sundukov",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_Temple_(Wat_Phra_Yai).jpg"
-   },
-   {
-    "thumb": "/img/puertos/koh-samui-4-640.webp",
-    "ratio": 1.501,
-    "author": "Maksim Sundukov",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_in_Big_Buddha_Temple_(Wat_Phra_Yai).jpg"
    }
   ]
  },
