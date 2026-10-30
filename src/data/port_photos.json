@@ -1412,6 +1412,13 @@
     "author": "Averette at English Wikipedia",
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Calleocho.jpg"
+   },
+   {
+    "thumb": "/img/puertos/miami-4-640.webp",
+    "ratio": 1.333,
+    "author": "Steve",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Centro_de_Miami.jpg"
    }
   ]
  },
@@ -1544,6 +1551,20 @@
     "author": "No machine-readable author provided. Onboleman~commonswiki assumed (based on cop",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Galveston_beach_sunset.JPG"
+   },
+   {
+    "thumb": "/img/puertos/galveston-3-640.webp",
+    "ratio": 1.544,
+    "author": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Beach_hotel_galveston.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-4-640.webp",
+    "ratio": 1.333,
+    "author": "Pescadno",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruising_Carnival_1.jpg"
    }
   ]
  },
@@ -1601,6 +1622,13 @@
     "author": "Don Ramey Logan",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Long_Beach_CA_Photo_Don_Ramey_Logan.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-4-640.webp",
+    "ratio": 1.501,
+    "author": "Regular Daddy",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:POLB_Cranes.JPG"
    }
   ]
  },
@@ -1658,6 +1686,13 @@
     "author": "https://www.flickr.com/photos/scubabix/",
     "license": "CC BY 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Downtown_Puerto_Plata_Dominican_Republic_Cafe.jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-plata-4-640.webp",
+    "ratio": 1.333,
+    "author": "Ronald Saunders from Warrington, UK",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Flickr_-_ronsaunders47_-_DOMINICAN_REPUBLIC_(2).jpg"
    }
   ]
  },
@@ -1676,6 +1711,20 @@
     "author": "Mary Whitworth",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Baptist_Health_System.jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-3-640.webp",
+    "ratio": 1.494,
+    "author": "JAXPORT from Jacksonville, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CMA_CGM_Virginia_-_IMO_9351139_(3194444689).jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-4-640.webp",
+    "ratio": 1.494,
+    "author": "Excel23",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:CSXJAX15.JPG"
    }
   ]
  },
@@ -2023,6 +2072,13 @@
     "author": "böhringer friedrich",
     "license": "CC BY-SA 2.5",
     "page": "https://commons.wikimedia.org/wiki/File:HeraklionStadt05.JPG"
+   },
+   {
+    "thumb": "/img/puertos/heraclion-3-640.webp",
+    "ratio": 1.369,
+    "author": "C messier",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:%CE%9B%CE%B9%CE%BF%CE%BD%CF%84%CE%AC%CF%81%CE%B9%CE%B1_%CE%97%CF%81%CE%AC%CE%BA%CE%BB%CE%B5%CE%B9%CE%BF_9259.jpg"
    }
   ]
  },
@@ -2065,7 +2121,30 @@
   "ratio": 1.504,
   "author": "Mangrove Mike from North Carolina, USA",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:BZEBOYS_o.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:BZEBOYS_o.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/belize-2-640.webp",
+    "ratio": 1.502,
+    "author": "Official Navy Page from United States of America",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belize_Coast_Guard_and_U.S._Navy_Working_Together.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belize-3-640.webp",
+    "ratio": 1.35,
+    "author": "Haakon S. Krohn",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belmopan_Parliament.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belize-4-640.webp",
+    "ratio": 1.49,
+    "author": "Government of British Honduras",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:British_Honduras_1962_Hurricane_Hattie_stamp.jpg"
+   }
+  ]
  },
  "Boston": {
   "slug": "boston",
@@ -2235,6 +2314,13 @@
     "author": "Παρασκευόπουλος Δημήτρης / Dparaskevop at Greek Wikipedia",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Milos_ancient_theatre.JPG"
+   },
+   {
+    "thumb": "/img/puertos/milos-4-640.webp",
+    "ratio": 1.501,
+    "author": "Zde",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Abandoned_sulfur_mines,_Milos,_153059.jpg"
    }
   ]
  },
@@ -2285,6 +2371,20 @@
     "author": "Daniel Schwen",
     "license": "CC BY-SA 2.5",
     "page": "https://commons.wikimedia.org/wiki/File:NYC_Times_Square_wide_angle.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-3-640.webp",
+    "ratio": 1.502,
+    "author": "Ingfbruno",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:USA-NYC-Manhattan_%26_Empire_State0.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-4-640.webp",
+    "ratio": 1.506,
+    "author": "Ingfbruno",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:USA-NYC-Manhattan_from_Amtrak1.jpg"
    }
   ]
  },
@@ -2481,6 +2581,20 @@
     "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
     "license": "CC BY 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port_~_Isla_Roatan_(31089485956).jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-3-640.webp",
+    "ratio": 1.501,
+    "author": "Jürgen Schneider",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mahogany_Bay_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-4-640.webp",
+    "ratio": 1.778,
+    "author": "Banja-Frans Mulder",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Roatan,_Mahogany_Bay_-_panoramio.jpg"
    }
   ]
  },
@@ -2532,7 +2646,30 @@
   "ratio": 1.501,
   "author": "Anual",
   "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Antigua_Audiencia_de_Sevila.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Antigua_Audiencia_de_Sevila.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sevilla-2-640.webp",
+    "ratio": 1.333,
+    "author": "CARLOS TEIXIDOR CADENAS",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Arriba_de_la_Giralda_se_encuentra_la_escultura_del_Giraldillo,_Sevilla,_Espa%C3%B1a,_Spain.JPG"
+   },
+   {
+    "thumb": "/img/puertos/sevilla-3-640.webp",
+    "ratio": 1.333,
+    "author": "Pirado",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Ateneo_de_Sevilla.JPG"
+   },
+   {
+    "thumb": "/img/puertos/sevilla-4-640.webp",
+    "ratio": 1.336,
+    "author": "No machine-readable author provided. Dani svq assumed (based on copyright claims",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Auditoriocartuja2.JPG"
+   }
+  ]
  },
  "Ciudad Ho Chi Minh": {
   "slug": "ciudad-ho-chi-minh",
@@ -2695,6 +2832,20 @@
     "author": "bryan...",
     "license": "CC BY-SA 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Busan_South_Korea_Republic_of_Korea_ROK_Daehan_Minguk_(31877197338).jpg"
+   },
+   {
+    "thumb": "/img/puertos/busan-3-640.webp",
+    "ratio": 1.667,
+    "author": "Donggeon",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BUFS.jpg"
+   },
+   {
+    "thumb": "/img/puertos/busan-4-640.webp",
+    "ratio": 1.333,
+    "author": "Bergmann from jawp",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Busan-port-from-Busan-tower-2.jpg"
    }
   ]
  },
@@ -4088,6 +4239,20 @@
     "author": "Maksim Sundukov",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Big_Buddha_Temple_(Wat_Phra_Yai).jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-3-640.webp",
+    "ratio": 1.333,
+    "author": "Sgroey",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bo_Phut_Beach_Ko_Samui.jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-4-640.webp",
+    "ratio": 1.888,
+    "author": "Anthony_Byrne (talk) (Uploads)",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bo_Phut_Beach_on_the_north_end_of_Koh_Samui.jpg"
    }
   ]
  },
@@ -4525,7 +4690,30 @@
   "ratio": 1.333,
   "author": "ctd 2005",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Canada-charlottetown01.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Canada-charlottetown01.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/charlottetown-2-640.webp",
+    "ratio": 1.333,
+    "author": "Aconcagua",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Charlottetown_PEI_03.jpg"
+   },
+   {
+    "thumb": "/img/puertos/charlottetown-3-640.webp",
+    "ratio": 1.333,
+    "author": "Aconcagua",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Charlottetown_PEI_05.jpg"
+   },
+   {
+    "thumb": "/img/puertos/charlottetown-4-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. Atilin assumed (based on copyright claims).",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charlottetown_in_the_winter.jpg"
+   }
+  ]
  },
  "Valletta": {
   "slug": "valletta",
@@ -4579,7 +4767,30 @@
   "ratio": 1.5,
   "author": "Fsquares (The Ibrahims)",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kochi_Skyline.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Kochi_Skyline.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kochi-2-640.webp",
+    "ratio": 1.494,
+    "author": "Kno-Biesdorf",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:07.10.2007_Sunset_at_Kochi-Fishernets.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kochi-3-640.webp",
+    "ratio": 1.333,
+    "author": "Vivekobey",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Administrative_Block_,_Cusat.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kochi-4-640.webp",
+    "ratio": 1.778,
+    "author": "Tachs",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aster_Medcity_Hospital_Entrance.jpg"
+   }
+  ]
  },
  "Recife": {
   "slug": "recife",
@@ -4588,7 +4799,30 @@
   "ratio": 1.509,
   "author": "Portal da Copa/ME",
   "license": "CC BY 3.0 br",
-  "page": "https://commons.wikimedia.org/wiki/File:1212_recife_aerea_porto_2209.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:1212_recife_aerea_porto_2209.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/recife-2-640.webp",
+    "ratio": 1.333,
+    "author": "A. Júnior",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bairro_de_Boa_Viagem_-_Zona_Sul_-_Recife,_Pernambuco,_Brasil.jpg"
+   },
+   {
+    "thumb": "/img/puertos/recife-3-640.webp",
+    "ratio": 1.494,
+    "author": "Raul DS",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Boa_Viagem_(2)_-_Recife_-_Pernambuco,_Brasil.jpg"
+   },
+   {
+    "thumb": "/img/puertos/recife-4-640.webp",
+    "ratio": 1.333,
+    "author": "A. Júnior",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bom_Jesus_street,_Old_Recife_-_Recife,_Pernambuco,_Brazil(2).jpg"
+   }
+  ]
  },
  "Port Chalmers": {
   "slug": "port-chalmers",
@@ -6570,5 +6804,96 @@
   "author": "Robin & Bazylek",
   "license": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Cliffs_and_town_of_Souda.jpg"
+ },
+ "Isla Tropicale": {
+  "slug": "isla-tropicale",
+  "thumb": "/img/puertos/isla-tropicale-640.webp",
+  "large": "/img/puertos/isla-tropicale-1280.webp",
+  "ratio": 1.333,
+  "author": "Nickgray",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Roatan_Bay_Islands_from_hotel_lobby_display.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/isla-tropicale-2-640.webp",
+    "ratio": 1.778,
+    "author": "Pi3.124",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Roatan_Island_Agouti_-_Dasyprocta_ruatanica.jpg"
+   },
+   {
+    "thumb": "/img/puertos/isla-tropicale-3-640.webp",
+    "ratio": 1.333,
+    "author": "Penelopechicken123",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Roatan_from_a_cruise_ship.jpg"
+   },
+   {
+    "thumb": "/img/puertos/isla-tropicale-4-640.webp",
+    "ratio": 1.778,
+    "author": "Pi3.124",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Roatan_looking_north_towards_West_End.jpg"
+   }
+  ]
+ },
+ "Singapur": {
+  "slug": "singapur",
+  "thumb": "/img/puertos/singapur-640.webp",
+  "large": "/img/puertos/singapur-1280.webp",
+  "ratio": 1.362,
+  "author": "Unknown authorUnknown author",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Bosbritsurrendergroup.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/singapur-2-640.webp",
+    "ratio": 1.778,
+    "author": "S5A-0043",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:(SGP-Singapore)_East-West_Line_Alstom_Movia_R151_1925-1926_@_Eunos_2026-08-07.jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-3-640.webp",
+    "ratio": 1.778,
+    "author": "S5A-0043",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:(SGP-Singapore)_SBS_Transit_SG3142S_116_2025-05-01.jpg"
+   },
+   {
+    "thumb": "/img/puertos/singapur-4-640.webp",
+    "ratio": 1.333,
+    "author": "Wilford Peloquin",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:153_Singapore,_Jan_1978_(52023517826).jpg"
+   }
+  ]
+ },
+ "Valparaiso": {
+  "slug": "valparaiso",
+  "thumb": "/img/puertos/valparaiso-640.webp",
+  "large": "/img/puertos/valparaiso-1280.webp",
+  "ratio": 1.656,
+  "author": "Fflemingl",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Intendencia3.JPG"
+ },
+ "Cross International Date Line": {
+  "slug": "cross-international-date-line",
+  "thumb": "/img/puertos/cross-international-date-line-640.webp",
+  "large": "/img/puertos/cross-international-date-line-1280.webp",
+  "ratio": 1.347,
+  "author": "Unknown authorUnknown author or not provided",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:111-SC-8986_-_Red_cross_nurses_serve_coffee_to_the_16th_Infantry_in_Paris._-_NARA_-_55178330_(cropped)_(cropped).jpg"
+ },
+ "Miyako": {
+  "slug": "miyako",
+  "thumb": "/img/puertos/miyako-640.webp",
+  "large": "/img/puertos/miyako-1280.webp",
+  "ratio": 1.333,
+  "author": "Paipateroma",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Miyakojima_sky_view.jpg"
  }
 }
