@@ -586,6 +586,7 @@
 
   // Contacto (se guarda como mensaje para el panel)
   const ctf = $('#contact-form');
+  if (ctf) { const mo = new URLSearchParams(location.search).get('motivo'); const o = mo && [...ctf.kind.options].find((x) => x.value.toLowerCase().startsWith(mo.toLowerCase())); if (o) ctf.kind.value = o.value; }
   if (ctf) ctf.addEventListener('submit', async (e) => {
     e.preventDefault(); const m = $('.form-msg', ctf); if (ctf.website.value) return;
     try { await api('/report', { body: { target: 'contacto:' + ctf.email.value.trim(), reason: `[${ctf.kind.value}] ${ctf.msg.value.trim()}`, page: location.pathname } }); m.textContent = '¡Gracias! Te responderemos por email.'; ctf.reset(); }

@@ -50,7 +50,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const drop = hist.length > 1 ? Math.round((1 - minPrice(x) / Math.max(...hist.map((h) => h.price))) * 100) : 0;
     let score = Math.round(Math.min(100, pct * 75 + Math.min(15, Math.max(0, disc) * 0.4) + (atMin ? 10 : 0) + (drop >= 5 ? 5 : 0)));
     const vsMedian = Math.round((1 - v / median) * 100);
-    const label = score >= 85 ? 'Chollo' : score >= 70 ? 'Buen precio' : score >= 45 ? 'Precio normal' : 'Caro para lo que es';
+    const label = score >= 85 ? 'Chollo' : score >= 70 ? 'Buen precio' : score >= 45 ? 'Precio normal' : 'Por encima de la media';
     const anomaly = vals.length >= 6 && v < median * 0.5;
     // ¿Reservar ya o esperar? Reglas simples y explicadas con el histórico y los días que faltan
     const days = Math.round((new Date(x.date) - new Date()) / 864e5);
@@ -204,7 +204,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const dn = destName(x.destination, x), sn = shipName(x);
     const hist = x.history || [];
     const sameItin = sailings.filter((o) => o.ship === x.ship && o.id !== x.id && o.itinerary?.name === x.itinerary?.name).slice(0, 24);
-    const similar = sailings.filter((o) => o.id !== x.id && o.destination === x.destination && Math.abs(new Date(o.date) - new Date(x.date)) <= 75 * 864e5).sort((a, b) => deal(b).score - deal(a).score).slice(0, 6);
+    const similar = (() => { const seen = new Set([x.ship]); return sailings.filter((o) => o.id !== x.id && o.destination === x.destination && Math.abs(new Date(o.date) - new Date(x.date)) <= 75 * 864e5).sort((a, b) => deal(b).score - deal(a).score).filter((o) => !seen.has(o.ship) && seen.add(o.ship)).slice(0, 6); })(); // una por barco
     const official = (x.sources || []).find((z) => z.official) || (x.sources || [])[0];
     const offN = official ? official.partner.replace(/ \(web oficial.*\)/, '') : '';
     // Botón principal: CruiseDirect con la salida exacta (barco + día); si no vende esa naviera, la web oficial
@@ -361,7 +361,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   function monthTable(list) {
     const by = {}; for (const x of list) { const k = x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
     const rows = Object.entries(by).sort().map(([k, l]) => { const v = l.map(ppn).sort((a, b) => a - b); return [k, l.length, v[Math.floor(v.length / 2)], Math.min(...l.map(minPrice))]; });
-    return rows.length > 1 ? `<h2>Precio por mes</h2><div class="table-wrap"><table class="rank-t sortable"><thead><tr><th>Mes</th><th>Salidas</th><th>Precio real medio por noche</th><th>Desde</th></tr></thead><tbody>${rows.map(([k, n, med, min]) => `<tr><td>${cap(MES[+k.slice(5) - 1])} ${k.slice(0, 4)}</td><td>${n}</td><td data-v="${med}">${eur(med)}</td><td data-v="${min}">${eur(min)}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Mediana del precio real por persona y noche (tasas y cuota incluidas).</p>` : '';
+    return rows.length > 1 ? `<h2>Precio por mes</h2><div class="table-wrap"><table class="rank-t sortable pm-t"><thead><tr><th>Mes</th><th>Salidas</th><th>Media por noche</th><th>Desde</th></tr></thead><tbody>${rows.map(([k, n, med, min]) => `<tr><td>${cap(MES[+k.slice(5) - 1])} ${k.slice(0, 4)}</td><td>${n}</td><td data-v="${med}">${eur(med)}</td><td data-v="${min}">${eur(min)}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Mediana del precio real por persona y noche (tasas y cuota incluidas).</p>` : '';
   }
   function hubFaq(list, what) {
     if (!list.length) return '';
@@ -387,7 +387,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const pr = list.map(minPrice).sort((a, b) => a - b), pp = list.map(ppn).sort((a, b) => a - b);
     const ch = list.filter((x) => deal(x).score >= 85).length;
     return `<div class="hub-sum" tabindex="0" role="region" aria-label="Resumen del listado"><div><b>${list.length}</b><span>salidas</span></div><div><b>${eur(pr[0])}</b><span>la más barata por persona</span></div><div><b>${eur(pp[Math.floor(pp.length / 2)])}</b><span>precio real medio por noche</span></div><div><b>${ch}</b><span>chollo${ch === 1 ? '' : 's'}</span></div>${bestMonth(list)}${cheapLine(list)}</div>
-    <details class="legend small"><summary>¿Qué significan las etiquetas?</summary><ul><li><span class="sc-a-t">Chollo</span>: nota del precio de 85 o más, mucho más barato que cruceros parecidos.</li><li><span class="sc-b-t">Buen precio</span>: de 70 a 84.</li><li><span class="sc-c-t">Precio normal</span>: de 45 a 69, en la media.</li><li><span class="sc-e-t">Caro para lo que es</span>: menos de 45.</li><li><b>Barco N/100</b>: nota del barco (higiene, espacio, tripulación, modernidad y opiniones). <a href="/metodologia/">Metodología</a>.</li></ul></details>`;
+    <details class="legend small"><summary>¿Qué significan las etiquetas?</summary><ul><li><span class="sc-a-t">Chollo</span>: nota del precio de 85 o más, mucho más barato que cruceros parecidos.</li><li><span class="sc-b-t">Buen precio</span>: de 70 a 84.</li><li><span class="sc-c-t">Precio normal</span>: de 45 a 69, en la media.</li><li><span class="sc-e-t">Por encima de la media</span>: menos de 45, más caro que cruceros parecidos.</li><li><b>Barco N/100</b>: nota del barco (higiene, espacio, tripulación, modernidad y opiniones). <a href="/metodologia/">Metodología</a>.</li></ul></details>`;
   }
   // Tarjeta con los datos para filtrar en el navegador; el listado pinta 48 y el resto llega de /data/cards.json
   // Fechas especiales en las que se está a bordo (para el filtro del listado)

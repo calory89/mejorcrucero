@@ -116,6 +116,8 @@ const ships = [...readCsv('ships.csv').map((r) => ({ ...r, source: SOURCES[0][1]
 // usamos la cifra de doble ocupación (la menor) de la clase para que el espacio por pasajero sea comparable.
 ships.forEach((s) => { const sis = ships.filter((o) => o.line === s.line && o.pax && Math.abs(o.gt - s.gt) / s.gt <= 0.015); const m = Math.min(...sis.map((o) => o.pax)); if (s.pax && m < s.pax) { s.pax = m; s.ratio = Math.round((s.gt / m) * 10) / 10; } });
 ships.forEach((s) => { s.score = scoreShip(s, { vsp, community: ratings }); s.sc = s.score?.total ?? null; s.vsp = vsp[s.name] || null; s.tags = tagsFor(s, LINES[s.line]); });
+const awardSvg = (t, y, name) => `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="96" viewBox="0 0 300 96" role="img" aria-label="${esc(t)} ${y} MejorCrucero"><rect width="300" height="96" rx="14" fill="#0b2545"/><circle cx="46" cy="48" r="30" fill="#f2b705"/><text x="46" y="58" font-size="30" text-anchor="middle">🏆</text><text x="88" y="30" font-family="Archivo,Arial,sans-serif" font-size="10.5" fill="#9fb3d1" letter-spacing=".6">PREMIOS MEJORCRUCERO ${y}</text><text x="88" y="52" font-family="Archivo,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff">${esc(t.length > 26 ? t.replace('Mejor barco ', 'Mejor ') : t)}</text><text x="88" y="72" font-family="Archivo,Arial,sans-serif" font-size="12" fill="#cfe0f5">${esc(name)}</text></svg>`;
+const AWARDS = {}; // slug -> [premios del año], se rellena con los premios y se usa en la ficha
 const scored = ships.filter((s) => s.sc != null).sort((a, b) => b.sc - a.sc || b.gt - a.gt);
 scored.forEach((s, i) => { s.rank = i + 1; });
 
@@ -222,7 +224,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
 
 
 <section class="wrap block"><div class="block-h"><h2>Guías para cruceristas</h2><a href="/guias/">Todas las guías</a></div>
-<div class="grid grid-3">${GUIDES.slice(0, 6).map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e" aria-hidden="true">${g.emoji}</span><h3>${esc(g.title)}</h3><p>${esc(g.desc)}</p><span class="guide-t">${readMin(g)} min de lectura</span></a>`).join('')}</div></section>
+<div class="grid grid-3 home-guides">${GUIDES.slice(0, 6).map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e" aria-hidden="true">${g.emoji}</span><h3>${esc(g.title)}</h3><p>${esc(g.desc)}</p><span class="guide-t">${readMin(g)} min de lectura</span></a>`).join('')}</div></section>
 
 <section class="cta-band"><div class="wrap cta-in">
   <div><h2>Chollos de cruceros en tu email</h2><p>Una selección semanal de las mejores ofertas, con el precio real calculado. <a class="on-dark" href="/newsletter/">Mira cómo es</a>.</p></div>
@@ -310,7 +312,7 @@ function scoreSection(s) {
 function shipPage(s) {
   const L = LINES[s.line];
   const simD = (o) => Math.abs(o.gt - s.gt) / 20000 + (o.tier === s.tier ? 0 : 1.5) + Math.abs((o.sc ?? 60) - (s.sc ?? 60)) / 10 + Math.abs(o.year - s.year) / 8 + (o.line === s.line ? -0.5 : 0);
-  const similar = ships.filter((o) => o.slug !== s.slug).sort((a, b) => simD(a) - simD(b)).slice(0, 5);
+  const similar = ships.filter((o) => o.slug !== s.slug).sort((a, b) => simD(a) - simD(b)).slice(0, 9);
   const rankGt = [...ships].sort((a, b) => b.gt - a.gt).findIndex((o) => o.slug === s.slug) + 1;
   const ytq = (t) => `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name + ' ' + t)}`;
   const fw = forWhom(s);
@@ -330,6 +332,8 @@ function shipPage(s) {
     <h1>${esc(s.name)}</h1>
     ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>Nota del barco${s.score?.coverage < 70 ? ' (provisional)' : ''} · nº ${s.rank} de ${scored.length} con nota</small></span></a>` : ''}
     ${s.tags.length ? `<p class="tags">${s.tags.map(([k, t]) => `<a class="tag" href="/barcos/?tag=${k}">${esc(t)}</a>`).join('')}</p>` : ''}
+    ${(AWARDS[s.slug] || []).length ? `<p class="awards">${AWARDS[s.slug].map((t) => `<a class="award" href="/rankings/premios/">🏆 ${esc(t)} ${new Date().getFullYear()}</a>`).join('')}</p>` : ''}
+    ${(() => { const st = (s.score?.parts || []).filter((p) => p.max && p.pts / p.max >= 0.8).map((p) => p.label.toLowerCase()); return st.length ? `<p class="strengths small"><b>Destaca en:</b> ${esc(st.join(', '))}</p>` : ''; })()}
     <p class="match-box" data-slug="${s.slug}" hidden></p>
     <p class="lead-p">Barco ${s.size.toLowerCase()} de ${esc(L.short)} en servicio desde ${s.year}${s.pax ? `, con capacidad para unos ${fmt(s.pax)} pasajeros` : ''}. Vídeos, ficha técnica, dónde reservar y opiniones de cruceristas.</p>
     <div class="stats">
@@ -409,9 +413,9 @@ function shipPage(s) {
 
 <aside class="ship-side">
   <div class="side-card"><h2>Comparte este barco</h2>${shareBar(`Mira el ${s.name} en MejorCrucero:`, page)}</div>
-  ${s.sc != null ? `<div class="side-card"><h2>¿Tienes un blog o una agencia?</h2><p class="small">Pon la nota del ${esc(s.name)} en tu web:</p><textarea class="embed-code" readonly rows="3" aria-label="Código para insertar">&lt;iframe src="${SITE}/embed/${s.slug}/" width="300" height="120" style="border:0" title="MejorCrucero Score ${esc(s.name)}" loading="lazy"&gt;&lt;/iframe&gt;</textarea><button class="btn btn-sm btn-ghost js-copy-embed" type="button">Copiar código</button></div>` : ''}
+  ${s.sc != null ? `<details class="side-card embed-box"><summary><b>¿Tienes un blog o una agencia?</b> Pon la nota en tu web</summary><textarea class="embed-code" readonly rows="3" aria-label="Código para insertar">&lt;iframe src="${SITE}/embed/${s.slug}/" width="300" height="120" style="border:0" title="MejorCrucero Score ${esc(s.name)}" loading="lazy"&gt;&lt;/iframe&gt;</textarea><button class="btn btn-sm btn-ghost js-copy-embed" type="button">Copiar código</button></details>` : ''}
   ${(() => { const sis = ships.filter((o) => o.slug !== s.slug && o.line === s.line && Math.abs(o.gt - s.gt) / s.gt <= 0.015); return sis.length ? `<div class="side-card"><h2>Barcos gemelos</h2><p class="small">Misma naviera y tamaño casi idéntico: suelen ser de la misma clase.</p><ul class="mini">${sis.slice(0, 4).map((o) => `<li><a href="/herramientas/comparar/?b=${s.slug},${o.slug}"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${o.year} · comparar</span></a></li>`).join('')}</ul></div>` : ''; })()}
-  <div class="side-card"><h2>Barcos parecidos</h2><ul class="mini">${similar.map((o) => `<li><a href="/barcos/${o.slug}/"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${esc(o.lineShort)} · ${o.year} · ${fmt(o.gt)} GT</span></a></li>`).join('')}</ul>${s.sc != null && similar[0] ? `<a class="small" href="/herramientas/comparar/?b=${s.slug},${similar[0].slug}">Comparar con el ${esc(similar[0].name)}</a>` : ''}</div>
+  <div class="side-card"><h2>Barcos parecidos</h2><ul class="mini">${similar.filter((o) => !(o.line === s.line && Math.abs(o.gt - s.gt) / s.gt <= 0.015)).slice(0, 4).map((o) => `<li><a href="/barcos/${o.slug}/"><b>${esc(o.name)}${o.sc != null ? ` · ${o.sc}` : ''}</b><span>${esc(o.lineShort)} · ${o.year} · ${fmt(o.gt)} GT</span></a></li>`).join('')}</ul>${s.sc != null && similar[0] ? `<a class="small" href="/herramientas/comparar/?b=${s.slug},${similar[0].slug}">Comparar con el ${esc(similar[0].name)}</a>` : ''}</div>
   <div class="side-card"><h2>Guías útiles</h2><ul class="mini"><li><a href="/guias/como-elegir-camarote/"><b>Cómo elegir camarote</b><span>Y cuáles evitar</span></a></li><li><a href="/guias/propinas-y-cargos-de-servicio/"><b>Propinas y cargos</b><span>Cuánto se paga de verdad</span></a></li><li><a href="/guias/cuando-reservar-crucero/"><b>Cuándo reservar</b><span>Para pagar menos</span></a></li></ul></div>
 </aside>
 </div>
@@ -454,6 +458,7 @@ function linePage(l) {
   const sc = l.ships.filter((s) => s.sc != null), avg = sc.length ? Math.round(sc.reduce((a, s) => a + s.sc, 0) / sc.length) : null;
   const body = `<section class="wrap block page-h line-h" style="--c:${l.color}"><span class="line-bar"></span><h1>Cruceros ${esc(l.short)}</h1><p class="lead-p">${esc(l.blurb)}</p>
   <div class="stats stats-light">${avg != null ? `<div><b>${avg}</b><span>Nota media de la flota</span></div>` : ''}<div><b>${l.ships.length}</b><span>Barcos analizados</span></div><div><b>${Math.max(...l.ships.map((s) => s.year))}</b><span>Barco más nuevo</span></div><div><b>${l.tip ? String(l.tip).replace('.', ',') + ' $' : '–'}</b><span>Cargo servicio/noche (ref.)</span></div><div><b>${TIER[l.tier || 'estandar']}</b><span>Gama</span></div></div>
+  ${(() => { const aw = l.ships.filter((s) => AWARDS[s.slug]).flatMap((s) => AWARDS[s.slug].map((t) => [t, s])); return aw.length ? `<p class="awards">${aw.map(([t, s]) => `<a class="award" href="/barcos/${s.slug}/">🏆 ${esc(t)}: ${esc(s.name)}</a>`).join('')}</p>` : ''; })()}
   <div class="line-rating" data-ships="${l.ships.map((s) => s.slug).join(',')}" hidden></div>
   ${l.web ? `<p>${ltLink(l.slug, null) !== ltLink(null, null) ? `<a class="btn" href="${esc(ltLink(l.slug, null, 'naviera-' + l.slug))}" target="_blank" rel="sponsored noopener" data-aff="logitravel" data-page="/navieras/${l.slug}/">Ofertas de ${esc(l.short)} en Logitravel</a> ` : ''}<a class="btn${ltLink(l.slug, null) !== ltLink(null, null) ? ' btn-ghost' : ''}" href="${l.web}" target="_blank" rel="noopener" data-aff="oficial-${l.slug}" data-page="/navieras/${l.slug}/">Web oficial de ${esc(l.short)}</a> <a class="btn btn-ghost" href="/herramientas/precio-real/?linea=${l.slug}">Calcular precio real</a></p>` : ''}
   </section>
@@ -1032,7 +1037,7 @@ function trustPage() {
 }
 function contactPage() {
   const body = `<section class="wrap block page-h narrow"><h1>Contacto</h1><p class="lead-p">¿Una duda, un error en un precio o quieres colaborar? Escríbenos y te respondemos por email.</p>
-  <form class="calc contact-form" id="contact-form"><label><span>Tu email</span><input type="email" name="email" required autocomplete="email"></label><label><span>Motivo</span><select name="kind"><option>Duda sobre un crucero</option><option>Error en un precio o dato</option><option>Colaboración / agencias</option><option>Otro</option></select></label><label class="f-wide"><span>Mensaje</span><textarea name="msg" rows="5" maxlength="2000" required></textarea></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Enviar</button><p class="form-msg" role="status" aria-live="polite"></p></form>
+  <form class="calc contact-form" id="contact-form"><label><span>Tu email</span><input type="email" name="email" required autocomplete="email"></label><label><span>Motivo</span><select name="kind"><option>Duda sobre un crucero</option><option>Error en un precio o dato</option><option>Naviera: corregir datos o fotos de un barco</option><option>Colaboración / agencias</option><option>Otro</option></select></label><label class="f-wide"><span>Mensaje</span><textarea name="msg" rows="5" maxlength="2000" required></textarea></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Enviar</button><p class="form-msg" role="status" aria-live="polite"></p></form>
   <p class="muted small">Titular: ${LEGAL_OWNER}.</p></section>`;
   return layout({ title: 'Contacto', desc: 'Contacta con MejorCrucero: dudas, errores en precios y colaboraciones.', url: '/contacto/', body, crumbs: [['Inicio', '/'], ['Contacto', '/contacto/']] });
 }
@@ -1134,12 +1139,12 @@ OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUI
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());
-ships.forEach((s) => write(`barcos/${s.slug}/index.html`, shipPage(s)));
+// (las fichas de barco se escriben tras calcular los premios)
 sailings.forEach((x) => write(`salidas/${x.id}/index.html`, sailingPage(x)));
 OFF.hubs().forEach(([f, html]) => write(f, html));
 OFF.feeds().forEach(([f, c]) => write(f, c));
 write('navieras/index.html', linesIndex());
-lineList.forEach((l) => write(`navieras/${l.slug}/index.html`, linePage(l)));
+// (las páginas de naviera se escriben tras los premios)
 write('comparativas/index.html', comparisonsIndex());
 COMPARISONS.forEach(([a, b]) => lineBySlug[a] && lineBySlug[b] && write(`comparativas/${a}-vs-${b}/index.html`, comparisonPage(a, b)));
 write('destinos/index.html', destinationsIndex());
@@ -1184,9 +1189,14 @@ BEST_FOR.forEach((b) => write(`rankings/${b[0]}/index.html`, bestForPage(b)));
   { const top = (f) => scored.filter(f)[0]; const cheapGood = byShip(() => true).filter((r) => r.n >= 3 && (r.s.sc ?? 0) >= 70).map((r) => ({ ...r, m: med(r.ppn) })).sort((a, b) => a.m - b.m)[0];
     const awards = [['Mejor barco del año', top(() => true), 'Nota más alta del MejorCrucero Score.'], ...BEST_FOR.map(([slug, tag]) => [{ 'precio-medio': 'Mejor barco de precio medio', familias: 'Mejor barco para familias', espanol: 'Mejor barco con español a bordo', lujo: 'Mejor barco de lujo', parejas: 'Mejor barco para parejas', pequenos: 'Mejor barco pequeño', nuevos: 'Mejor barco nuevo' }[slug] || 'Mejor de su categoría', top((s) => hasTag(s, tag)), 'Nota más alta de su categoría.']), ['Mejor relación calidad precio', cheapGood?.s, cheapGood ? `Nota de 70 o más con la tarifa por noche más baja (mediana ${eur(cheapGood.m)}).` : '']].filter(([, s]) => s);
     const body = `<section class="wrap block page-h"><h1>Premios MejorCrucero ${Y0}</h1><p class="lead-p">Los premios salen solos de la nota de cada barco y de los precios publicados: no hay votos, jurado ni pagos. Se recalculan con cada actualización. <a href="/metodologia/">Cómo calculamos la nota</a>.</p>${shareBar(`Premios MejorCrucero ${Y0}:`, '/rankings/premios/')}</section><section class="wrap block"><div class="grid grid-3">${awards.map(([t, s, why]) => `<a class="tool tool-light" href="/barcos/${s.slug}/"><span class="eyebrow">${esc(t)}</span><h2 class="h-sm">${esc(s.name)}</h2><p class="small">${esc(s.lineShort)} · nota ${s.sc ?? '–'}/100</p><p class="muted small">${esc(why)}</p></a>`).join('')}</div></section>`;
-    write('rankings/premios/index.html', layout({ title: `Premios MejorCrucero ${Y0}: los mejores barcos del año`, desc: `Mejor barco del año, mejor para familias, parejas, lujo y calidad precio ${Y0}, calculados con datos verificables y sin votos pagados.`, url: '/rankings/premios/', body, crumbs: [['Inicio', '/'], ['Ranking', '/rankings/'], ['Premios', '/rankings/premios/']] })); }
+    const seals = `<section class="wrap block"><h2>Sellos para navieras y agencias</h2><p class="muted small">Si tu barco ha ganado, puedes usar el sello en tu web, folletos o redes. Es gratis y no hace falta pedir permiso; solo te pedimos que enlace a esta página.</p><div class="grid grid-3 seals">${awards.map(([t, sh]) => `<figure class="seal"><img src="/rankings/premios/sello/${sh.slug}.svg" width="300" height="96" alt="${esc(t)} ${Y0}: ${esc(sh.name)}" loading="lazy"><figcaption><input class="embed-code" readonly aria-label="Código del sello ${esc(sh.name)}" value="${esc(`<a href="${SITE}/rankings/premios/"><img src="${SITE}/rankings/premios/sello/${sh.slug}.svg" width="300" height="96" alt="${t} ${Y0} MejorCrucero"></a>`)}"><a class="small" href="/rankings/premios/sello/${sh.slug}.svg" download>Descargar SVG</a></figcaption></figure>`).join('')}</div></section>`;
+    for (const [t, sh] of awards) { (AWARDS[sh.slug] = AWARDS[sh.slug] || []).push(t);
+      write(`rankings/premios/sello/${sh.slug}.svg`, awardSvg(t, Y0, sh.name)); }
+    write('rankings/premios/index.html', layout({ title: `Premios MejorCrucero ${Y0}: los mejores barcos del año`, desc: `Mejor barco del año, mejor para familias, parejas, lujo y calidad precio ${Y0}, calculados con datos verificables y sin votos pagados.`, url: '/rankings/premios/', body: body + seals, crumbs: [['Inicio', '/'], ['Ranking', '/rankings/'], ['Premios', '/rankings/premios/']] })); }
   rankWith('barcos-con-mas-chollos', 'Los barcos con más chollos hoy', 'Barcos con más salidas con nota del precio de 85 o más.', byShip((x) => OFF.deal(x).score >= 85).sort((a, b) => b.n - a.n || (b.s.sc ?? 0) - (a.s.sc ?? 0)).slice(0, 30), ['Chollo desde', (r) => eur(r.min)]);
 }
+ships.forEach((s) => write(`barcos/${s.slug}/index.html`, shipPage(s)));
+lineList.forEach((l) => write(`navieras/${l.slug}/index.html`, linePage(l)));
 write('metodologia/index.html', methodology());
 scored.forEach((s) => { fs.mkdirSync(path.join(OUT, 'embed', s.slug), { recursive: true }); fs.writeFileSync(path.join(OUT, 'embed', s.slug, 'index.html'), embedPage(s)); });
 write('herramientas/index.html', toolsIndex());
@@ -1221,6 +1231,22 @@ write('mis-cruceros/index.html', myCruises());
 write('admin/index.html', admin());
 write('por-que-fiarte/index.html', trustPage());
 write('contacto/index.html', contactPage());
+// Para navieras: cómo tratamos sus barcos y cómo corregir datos (sin cifras de tráfico inventadas)
+{
+  const nLines = new Set(ships.map((s) => s.line)).size, withS = ships.filter((s) => s.sailings.length).length;
+  const body = `<section class="wrap block page-h narrow"><h1>Para navieras</h1><p class="lead-p">MejorCrucero compara ${fmt(ships.length)} barcos de ${nLines} navieras para viajeros de habla hispana. Queremos que cada barco aparezca con datos correctos, buenas fotos y un camino directo a tu web.</p></section>
+  <section class="wrap block narrow"><div class="grid grid-2">
+  <div class="tool tool-light"><h2 class="h-sm">Enlace a tu web oficial en cada oferta</h2><p class="small">Cada salida enlaza a la web oficial de la naviera, también cuando hay una agencia como botón principal. El precio que mostramos es el de tu web, con su fecha y hora de comprobación.</p></div>
+  <div class="tool tool-light"><h2 class="h-sm">Una nota que no se compra</h2><p class="small">La nota del barco sale de fuentes públicas (inspecciones sanitarias, espacio por pasajero, tripulación, antigüedad y opiniones). No vendemos posiciones ni premios. <a href="/metodologia/">Metodología</a>.</p></div>
+  <div class="tool tool-light"><h2 class="h-sm">Corregimos rápido</h2><p class="small">¿Un dato antiguo, una foto que no es del barco o una reforma que no aparece? Escríbenos con la fuente y lo corregimos. Las reformas y estrenos suben la nota de modernidad.</p></div>
+  <div class="tool tool-light"><h2 class="h-sm">Sellos de los premios</h2><p class="small">Los barcos premiados pueden usar el sello en su web y redes, gratis. <a href="/rankings/premios/">Ver premios y sellos</a>.</p></div>
+  <div class="tool tool-light"><h2 class="h-sm">Tus novedades, visibles</h2><p class="small">Las salidas nuevas aparecen en <a href="/novedades/">Novedades de las navieras</a> en cuanto salen a la venta en tu web. Hoy ${withS} barcos tienen salidas con precio en MejorCrucero.</p></div>
+  <div class="tool tool-light"><h2 class="h-sm">Datos abiertos</h2><p class="small">Puedes descargar lo que publicamos de tus barcos en <a href="/datos/">datos abiertos</a> (JSON y CSV) para revisarlo.</p></div>
+  </div>
+  <p class="cta-row"><a class="btn" href="/contacto/?motivo=naviera">Corregir datos o fotos de un barco</a> <a class="btn btn-ghost" href="/prensa/">Sala de prensa</a></p>
+  <p class="muted small">Lo que nunca hacemos: cambiar la nota a cambio de dinero, publicar precios sin fuente o esconder la web oficial. <a href="/por-que-fiarte/">Por qué fiarte</a>.</p></section>`;
+  write('para-navieras/index.html', layout({ title: 'Para navieras: datos, fotos y sellos de MejorCrucero', desc: 'Cómo aparecen tus barcos en MejorCrucero, cómo corregir datos o fotos y cómo usar los sellos de los premios.', url: '/para-navieras/', body, crumbs: [['Inicio', '/'], ['Para navieras', '/para-navieras/']] }));
+}
 write('herramientas/comparar-ofertas/index.html', toolCompareOffers());
 write('guias/index.html', guidesIndex());
 GUIDES.forEach((g) => write(`guias/${g.slug}/index.html`, guidePage(g)));
