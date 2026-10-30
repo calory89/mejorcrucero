@@ -12,7 +12,8 @@ D = lambda f: os.path.join(ROOT, 'src/data', f)
 IMG = os.path.join(ROOT, 'public/img/puertos')
 UA = {'User-Agent': 'MejorCruceroBot/1.0 (https://mejorcrucero.com; carlos@equinoxinvestmentgroup.com) python-urllib'}
 MAX = int(sys.argv[1]) if len(sys.argv) > 1 else 400
-BAD = re.compile(r'(map|mapa|karte|carte|flag|bandera|escudo|coat_of_arms|wappen|blason|locator|location|localizaci|logo|seal|sello|\.svg$|\.gif$|\.tif)', re.I)
+BAD = re.compile(r'(surrender|war_|wwii|ww2|battle|soldier|troops|lobby|display|map|mapa|karte|carte|flag|bandera|escudo|coat_of_arms|wappen|blason|locator|location|localizaci|logo|seal|sello|\.svg$|\.gif$|\.tif)', re.I)
+NOPORT = re.compile(r'(navegaci|date line|cruising|crossing|scenic|en el mar|at sea)', re.I)  # tramos de navegación, no son puertos
 FREE = re.compile(r'^(cc0|public domain|pd|cc[ -]by(-sa)?[ -]?\d|cc[ -]by(-sa)?$|cc by-sa|cc by)', re.I)
 
 
@@ -39,6 +40,13 @@ def km(a, b, c, d):
     return 12742 * math.asin(math.sqrt(h))
 
 
+def colorful(im):
+    # Fuera fotos en blanco y negro / sepia (fotos históricas) y escaneos casi sin color
+    sm = im.convert('HSV').resize((64, 40)).getdata()
+    sat = sum(px[1] for px in sm) / (len(sm) * 255)
+    return sat > 0.14
+
+
 def strip(h): return html.unescape(re.sub('<[^>]+>', '', h or '')).strip()
 
 
@@ -52,7 +60,7 @@ for x in raw:
     for p in (x.get('itinerary') or {}).get('ports', []):
         n = alias.get(p['name'].strip(), p['name'].strip())
         count[n] = count.get(n, 0) + 1
-todo = [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n not in photos and n in coords and n != 'Navegación'][:MAX]
+todo = [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n not in photos and n in coords and not NOPORT.search(n)][:MAX]
 print(len(todo), 'escalas sin foto con coordenadas', flush=True)
 used = {v.get('page') for v in photos.values()}
 BP = D('port_photos_block.json')
@@ -98,16 +106,15 @@ for n in todo:
             if not FREE.match(lic): continue
             page = info.get('descriptionurl')
             if page in used: continue
-            got = {'file': f, 'url': info.get('thumburl') or info['url'], 'license': lic, 'author': strip(md.get('Artist', {}).get('value', ''))[:80] or 'Wikimedia Commons', 'page': page}
+            b = get(info.get('thumburl') or info['url'], raw=True)
+            try: im = Image.open(io.BytesIO(b)).convert('RGB')
+            except Exception: continue
+            if not colorful(im): print(f'  {n}: {f} sin color, descartada'); used.add(page); continue
+            got = {'file': f, 'url': info.get('thumburl') or info['url'], 'license': lic, 'author': strip(md.get('Artist', {}).get('value', ''))[:80] or 'Wikimedia Commons', 'page': page, 'im': im}
             break
         if got: break
     if not got: print(f'- {n}: sin foto válida', flush=True); continue
-    b = get(got['url'], raw=True)
-    if not b: continue
-    try:
-        im = Image.open(io.BytesIO(b)).convert('RGB')
-    except Exception as e:
-        print('  imagen ilegible', e); continue
+    im = got['im']
     s = slugify(n)
     ratio = round(im.width / im.height, 3)
     for W in (640, 1280):
@@ -143,6 +150,7 @@ for n in [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n in pho
             b = get(info.get('thumburl') or info['url'], raw=True)
             try: im = Image.open(io.BytesIO(b)).convert('RGB')
             except Exception: continue
+            if not colorful(im): used.add(info['descriptionurl']); continue
             k = len(more) + 2; s2 = f"{cur['slug']}-{k}"; ratio = round(im.width / im.height, 3)
             im.resize((640, round(640 / ratio)), Image.LANCZOS).save(os.path.join(IMG, f'{s2}-640.webp'), 'WEBP', quality=76, method=6)
             more.append({'thumb': f'/img/puertos/{s2}-640.webp', 'ratio': ratio, 'author': strip(md.get('Artist', {}).get('value', ''))[:80] or 'Wikimedia Commons', 'license': lic, 'page': info['descriptionurl']})
