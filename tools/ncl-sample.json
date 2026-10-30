@@ -1,10 +1,10 @@
 {
  "sample": {
   "itinerary": {
-   "objectId": "23361659_CRUISE_INSIDE_2",
+   "objectId": "23361666_CRUISE_INSIDE_2",
    "bundleType": "cruise",
    "code": "EPIC7PCVNPIMBJGECCZMPCV",
-   "packageId": "23361659",
+   "packageId": "23361666",
    "title": "7 días Caribe desde/hasta Orlando: Great Stirrup Cay y Cozumel",
    "startingLocation": "Orlando (Port Canaveral), Florida",
    "image": {
@@ -56,8 +56,8 @@
    "taxesAndFees": {
     "text": ""
    },
-   "combinedPrice": 329,
-   "basePrice": 459,
+   "combinedPrice": 425,
+   "basePrice": 639,
    "weight": 999,
    "deals": [
     {
