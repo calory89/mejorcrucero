@@ -116,6 +116,7 @@ for n in todo:
     if not got: print(f'- {n}: sin foto válida', flush=True); continue
     im = got['im']
     s = slugify(n)
+    while any(v.get('slug') == s for k2, v in photos.items() if k2 != n): s += '-b'  # dos nombres con el mismo slug no pisan la foto
     ratio = round(im.width / im.height, 3)
     for W in (640, 1280):
         im.resize((W, round(W / ratio)), Image.LANCZOS).save(os.path.join(IMG, f'{s}-{W}.webp'), 'WEBP', quality=78, method=6)
@@ -139,6 +140,9 @@ for n in [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n in pho
         if co and km(coords[n][0], coords[n][1], co['lat'], co['lon']) > 80: continue
         for f in files[:30]:
             if len(more) >= EXTRA: break
+            # Extras: solo si el nombre del archivo menciona el lugar (evita ardillas, cumbres del G20, oficinas…)
+            key = [w for w in slugify(n).split('-') if len(w) >= 4] or [slugify(n)]
+            if not any(w in slugify(f) for w in key): continue
             ii = get('https://commons.wikimedia.org/w/api.php', {'action': 'query', 'format': 'json', 'titles': 'File:' + f, 'prop': 'imageinfo', 'iiprop': 'url|extmetadata|size|mime', 'iiurlwidth': 1280}); time.sleep(0.4)
             pg = next(iter((ii or {}).get('query', {}).get('pages', {}).values()), {})
             info = (pg.get('imageinfo') or [None])[0]
@@ -151,7 +155,9 @@ for n in [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n in pho
             try: im = Image.open(io.BytesIO(b)).convert('RGB')
             except Exception: continue
             if not colorful(im): used.add(info['descriptionurl']); continue
-            k = len(more) + 2; s2 = f"{cur['slug']}-{k}"; ratio = round(im.width / im.height, 3)
+            k = len(more) + 2
+            while os.path.exists(os.path.join(IMG, f"{cur['slug']}-{k}-640.webp")): k += 1  # no pisar fotos existentes
+            s2 = f"{cur['slug']}-{k}"; ratio = round(im.width / im.height, 3)
             im.resize((640, round(640 / ratio)), Image.LANCZOS).save(os.path.join(IMG, f'{s2}-640.webp'), 'WEBP', quality=76, method=6)
             more.append({'thumb': f'/img/puertos/{s2}-640.webp', 'ratio': ratio, 'author': strip(md.get('Artist', {}).get('value', ''))[:80] or 'Wikimedia Commons', 'license': lic, 'page': info['descriptionurl']})
             seen.add(info['descriptionurl']); used.add(info['descriptionurl']); print(f'+ extra {n}: {f}', flush=True)
