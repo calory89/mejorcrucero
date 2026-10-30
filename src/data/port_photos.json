@@ -1403,6 +1403,13 @@
     "author": "Steve",
     "license": "CC BY-SA 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Centro_de_Miami.jpg"
+   },
+   {
+    "thumb": "/img/puertos/miami-5-640.webp",
+    "ratio": 1.778,
+    "author": "Averette",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Central_Downtown_Miami_20090513.jpg"
    }
   ]
  },
@@ -1559,7 +1566,30 @@
   "ratio": 1.333,
   "author": "Vmenkov",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:E9198-Long-Beach-lighthouse.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:E9198-Long-Beach-lighthouse.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/long-beach-3-640.webp",
+    "ratio": 1.501,
+    "author": "Regular Daddy",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:LongBeachLongView.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-4-640.webp",
+    "ratio": 1.333,
+    "author": "Darkest tree",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Belmont_Heights_Long_Beach_California.jpg"
+   },
+   {
+    "thumb": "/img/puertos/long-beach-5-640.webp",
+    "ratio": 1.333,
+    "author": "Original uploader was Geographer at en.wikipedia",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Long_Beach.jpg"
+   }
+  ]
  },
  "Tampa": {
   "slug": "tampa",
@@ -1615,6 +1645,13 @@
     "author": "Ronald Saunders from Warrington, UK",
     "license": "CC BY-SA 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Flickr_-_ronsaunders47_-_DOMINICAN_REPUBLIC_(2).jpg"
+   },
+   {
+    "thumb": "/img/puertos/puerto-plata-5-640.webp",
+    "ratio": 1.572,
+    "author": "https://www.flickr.com/photos/scubabix/",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Puerto_Plata_Dominican_Republic_Cafe.jpg"
    }
   ]
  },
@@ -1625,7 +1662,16 @@
   "ratio": 1.501,
   "author": "PicoOrdinalo",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Confederate_Monument_Pedestal_(Jacksonville,_Florida).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Confederate_Monument_Pedestal_(Jacksonville,_Florida).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/jacksonville-3-640.webp",
+    "ratio": 1.553,
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
+   }
+  ]
  },
  "Aruba": {
   "slug": "aruba",
@@ -2028,6 +2074,13 @@
     "author": "Wikimedia Commons",
     "license": "CC BY-SA 2.5",
     "page": "https://commons.wikimedia.org/wiki/File:Menonite_Children.JPG"
+   },
+   {
+    "thumb": "/img/puertos/belize-5-640.webp",
+    "ratio": 1.333,
+    "author": "satanoid from Austin, TX, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rice_and_Beans,_Stew_Chicken_and_Potato_Salad_-_Belize.jpg"
    }
   ]
  },
@@ -2190,6 +2243,13 @@
     "author": "Zde",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Abandoned_sulfur_mines,_Milos,_153059.jpg"
+   },
+   {
+    "thumb": "/img/puertos/milos-5-640.webp",
+    "ratio": 1.333,
+    "author": "pastitio",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chora_Milos.jpg"
    }
   ]
  },
@@ -2240,6 +2300,20 @@
     "author": "Ingfbruno",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:USA-NYC-Manhattan_from_Amtrak1.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-5-640.webp",
+    "ratio": 1.526,
+    "author": "user:AngMoKio",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Manhattan_amk.jpg"
+   },
+   {
+    "thumb": "/img/puertos/manhattan-6-640.webp",
+    "ratio": 1.333,
+    "author": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_One_World_Observatory_view_southsoutheast_towards_Brooklyn_and_Manhattan_Bridges.jpg"
    }
   ]
  },
@@ -2436,6 +2510,20 @@
     "author": "Banja-Frans Mulder",
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Roatan,_Mahogany_Bay_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-5-640.webp",
+    "ratio": 1.763,
+    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port_~_Isla_Roatan_(31089485956).jpg"
+   },
+   {
+    "thumb": "/img/puertos/roatan-6-640.webp",
+    "ratio": 1.684,
+    "author": "Prayitno / Thank you for (12 millions +) view from Los Angeles, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Isla_Roatan_~_Honduras_(31597566445).jpg"
    }
   ]
  },
@@ -2502,6 +2590,13 @@
     "author": "No machine-readable author provided. Dani svq assumed (based on copyright claims",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Auditoriocartuja2.JPG"
+   },
+   {
+    "thumb": "/img/puertos/sevilla-5-640.webp",
+    "ratio": 1.333,
+    "author": "Frobles",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Autob%C3%BAs_urbano_de_Sevilla.JPG"
    }
   ]
  },
@@ -2666,6 +2761,20 @@
     "author": "Bergmann from jawp",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Busan-port-from-Busan-tower-2.jpg"
+   },
+   {
+    "thumb": "/img/puertos/busan-5-640.webp",
+    "ratio": 1.501,
+    "author": "bryan...",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Busan_South_Korea_Republic_of_Korea_ROK_Daehan_Minguk_(31877197338).jpg"
+   },
+   {
+    "thumb": "/img/puertos/busan-6-640.webp",
+    "ratio": 1.333,
+    "author": "Brit in Seoul",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dongbaekseom_island,_Busan.jpg"
    }
   ]
  },
@@ -4059,6 +4168,20 @@
     "author": "Anthony_Byrne (talk) (Uploads)",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bo_Phut_Beach_on_the_north_end_of_Koh_Samui.jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-5-640.webp",
+    "ratio": 1.778,
+    "author": "Marwan Mohamad",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ko_Samui_island.jpg"
+   },
+   {
+    "thumb": "/img/puertos/koh-samui-6-640.webp",
+    "ratio": 1.855,
+    "author": "Lisa Tancsics, uploaded by Pro2",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sunrise_thailand_ko_samui.jpg"
    }
   ]
  },
@@ -4588,6 +4711,13 @@
     "author": "Vivekobey",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Administrative_Block_,_Cusat.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kochi-4-640.webp",
+    "ratio": 1.333,
+    "author": "Ranjithsiji",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Double_Decker_Bus_Kochi.JPG"
    }
   ]
  },
@@ -6629,7 +6759,16 @@
   "ratio": 1.78,
   "author": "dronepicr",
   "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Flower_Dome_and_Cloud_Forest_Singapore_(36712606096).jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:Flower_Dome_and_Cloud_Forest_Singapore_(36712606096).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/singapur-2-640.webp",
+    "ratio": 1.501,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Hotel_Raffles,_Singapur,_2023-08-16,_DD_153-155_HDR.jpg"
+   }
+  ]
  },
  "Valparaiso": {
   "slug": "valparaiso",
@@ -6648,5 +6787,46 @@
   "author": "Paipateroma",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Miyakojima_sky_view.jpg"
+ },
+ "Galveston": {
+  "slug": "galveston",
+  "thumb": "/img/puertos/galveston-640.webp",
+  "large": "/img/puertos/galveston-1280.webp",
+  "ratio": 1.958,
+  "author": "Nsaum75",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Galveston_Texas_Skyline.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/galveston-2-640.webp",
+    "ratio": 1.41,
+    "author": "Farragutful",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ashton_Villa_-_Galveston.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-3-640.webp",
+    "ratio": 1.749,
+    "author": "Another Believer",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Galveston,_Texas_(2024)_-_50.jpg"
+   },
+   {
+    "thumb": "/img/puertos/galveston-4-640.webp",
+    "ratio": 1.251,
+    "author": "Jim Evans",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Galveston_US_Post_Office,_Custom_House_and_Courthouse.jpg"
+   }
+  ]
+ },
+ "Santa Lucía": {
+  "slug": "santa-lucia",
+  "thumb": "/img/puertos/santa-lucia-640.webp",
+  "large": "/img/puertos/santa-lucia-1280.webp",
+  "ratio": 1.333,
+  "author": "Egghead06",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:AnseLaReye_catholic_church.jpg"
  }
 }
