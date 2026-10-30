@@ -190,8 +190,8 @@
   "imageUrl": "/service/GetItineraryRandomImage.aspx?RegionCode=BH&Key=4DaysBMETheBahamasCarnivalElation&format=image",
   "id": "BME_JAX_EL_4_Thu",
   "code": "BME",
-  "image": "/-/media/Images/explore/destinations/ports/carnival-bahamas-itinerary-nassau-1.jpg?useCustomFunctions=1&centerCrop=1",
-  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-bahamas-itinerary-nassau-1.jpg?useCustomFunctions=1&centerCrop=1",
+  "image": "/-/media/Images/explore/destinations/ports/carnival-bahamas-port-nassau-5.jpg?useCustomFunctions=1&leftCrop=1",
+  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-bahamas-port-nassau-5.jpg?useCustomFunctions=1&leftCrop=1",
   "stateroomMetaInformation": [
    {
     "metacode": "IS",
@@ -224,8 +224,8 @@
   ],
   "specialScoops": [],
   "imageRandomizationInfo": {
-   "crop": "Center",
-   "metaTag": "carnival-nassau-search-1",
+   "crop": "Left",
+   "metaTag": "carnival-the-bahamas-port-nassau-5",
    "photoCredit": null
   },
   "itineraryTitle": "4-Day The Bahamas from Jacksonville, FL",
