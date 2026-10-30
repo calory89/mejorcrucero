@@ -585,6 +585,8 @@
   }, 60);
 
   // Contacto (se guarda como mensaje para el panel)
+  // Tablas largas plegadas: "Ver todo" despliega la tabla anterior
+  document.addEventListener('click', (e) => { const b = e.target.closest('.js-unfold'); if (!b) return; const t = b.previousElementSibling?.querySelector('table.collapsed'); if (t) { t.classList.remove('collapsed'); b.remove(); } });
   const ctf = $('#contact-form');
   if (ctf) { const mo = new URLSearchParams(location.search).get('motivo'); const o = mo && [...ctf.kind.options].find((x) => x.value.toLowerCase().startsWith(mo.toLowerCase())); if (o) ctf.kind.value = o.value; }
   if (ctf) ctf.addEventListener('submit', async (e) => {

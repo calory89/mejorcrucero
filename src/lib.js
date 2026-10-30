@@ -107,7 +107,7 @@ export function shipCard(s, opts = {}) {
 }
 
 export function videoFacade(id, title, es) {
-  return `<button class="yt" type="button" data-id="${id}" aria-label="Reproducir vídeo: ${esc(title)}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="yt-play">${ICON.play}</span>${es ? '<span class="yt-es">ES</span>' : ''}<span class="yt-title">${esc(title)}</span></button>`;
+  return `<button class="yt" type="button" data-id="${id}" aria-label="Reproducir vídeo: ${esc(title)}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="yt-play">${ICON.play}</span>${es ? '<span class="yt-es" aria-hidden="true">ES</span>' : ''}<span class="yt-title">${esc(title)}</span></button>`;
 }
 
 // Enlace por Awin: la tienda recibe al visitante en la página exacta (ued) y clickref dice qué página de MejorCrucero lo mandó
