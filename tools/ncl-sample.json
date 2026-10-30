@@ -1,30 +1,30 @@
 {
  "sample": {
   "itinerary": {
-   "objectId": "23361666_CRUISE_INSIDE_2",
+   "objectId": "23379737_CRUISE_INSIDE_2",
    "bundleType": "cruise",
-   "code": "EPIC7PCVNPIMBJGECCZMPCV",
-   "packageId": "23361666",
-   "title": "7 días Caribe desde/hasta Orlando: Great Stirrup Cay y Cozumel",
-   "startingLocation": "Orlando (Port Canaveral), Florida",
+   "code": "JOY4MIANPINASMIA",
+   "packageId": "23379737",
+   "title": "4 días Bahamas desde/hasta Miami: Great Stirrup Cay y Nassau",
+   "startingLocation": "Miami, Florida, EE.",
    "image": {
-    "src": "/content/dam/ncl/us/en/itineraries/bahamas-itineraries/1440_NCL_GSC_Aerial_Ship_Slide.jpg",
+    "src": "/content/dam/ncl/us/en/itineraries/drupal_gem/1440_GSC_AQUA2MIANPIMIA.jpg",
     "alt": "cq5dam.thumbnail.319.319.png"
    },
    "captionTitles": [],
    "destinations": [
     {
-     "code": "CARIBBEAN",
-     "title": "Caribe"
+     "code": "BAHAMAS",
+     "title": "Bahamas"
     }
    ],
    "embarkationPort": {
-    "code": "PCV",
-    "title": "Orlando (Port Canaveral), Florida"
+    "code": "MIA",
+    "title": "Miami, Florida, EE."
    },
    "disembarkationPort": {
-    "code": "PCV",
-    "title": "Orlando (Port Canaveral), Florida"
+    "code": "MIA",
+    "title": "Miami, Florida, EE."
    },
    "portsOfCall": [
     {
@@ -32,33 +32,25 @@
      "title": "Great Stirrup Cay, Bahamas"
     },
     {
-     "code": "MBJ",
-     "title": "Bahía Montego, Jamaica"
-    },
-    {
-     "code": "GEC",
-     "title": "George Town, Gran Caimán"
-    },
-    {
-     "code": "CZM",
-     "title": "Cozumel, México"
+     "code": "NAS",
+     "title": "Nassau, Bahamas"
     }
    ],
    "ship": {
-    "code": "EPIC",
-    "title": "Norwegian Epic"
+    "code": "JOY",
+    "title": "Norwegian Joy"
    },
    "duration": {
-    "days": 7,
-    "text": "7-day Cruise"
+    "days": 4,
+    "text": "4-day Cruise"
    },
    "currencyCode": "EUR",
    "taxesAndFees": {
     "text": ""
    },
-   "combinedPrice": 425,
-   "basePrice": 639,
-   "weight": 999,
+   "combinedPrice": 185,
+   "basePrice": 219,
+   "weight": 1000,
    "deals": [
     {
      "code": "50-off-all-cruises-offer",
@@ -82,57 +74,59 @@
   },
   "sailing": {
    "sailing": {
-    "packageId": "23361658",
-    "sailingId": "59101",
-    "vacationStartDate": "2026-11-22T00:00:00",
-    "vacationEndDate": "2026-11-29T00:00:00",
-    "sailStartDate": "2026-11-22T00:00:00",
-    "sailEndDate": "2026-11-29T00:00:00"
+    "packageId": "23379735",
+    "sailingId": "59357",
+    "vacationStartDate": "2026-11-16T00:00:00",
+    "vacationEndDate": "2026-11-20T00:00:00",
+    "sailStartDate": "2026-11-16T00:00:00",
+    "sailEndDate": "2026-11-20T00:00:00"
    },
    "stateroomTypesPricing": [
     {
-     "status": "AVAILABLE",
+     "status": "SOLD_OUT",
      "code": "HAVEN",
      "title": "The Haven",
+     "statusText": "Sold Out"
+    },
+    {
+     "status": "AVAILABLE",
+     "code": "SUITE",
+     "title": "Suite",
      "statusText": "Available",
-     "combinedPrice": 2784,
-     "basePrice": 5739
+     "combinedPrice": 459,
+     "basePrice": 949
     },
     {
      "status": "AVAILABLE",
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
      "statusText": "Available",
-     "combinedPrice": 857,
-     "basePrice": 1639
+     "combinedPrice": 269,
+     "basePrice": 449
     },
     {
      "status": "AVAILABLE",
      "code": "BALCONY",
      "title": "Camarote con balcón",
      "statusText": "Available",
-     "combinedPrice": 814,
-     "basePrice": 1529
+     "combinedPrice": 249,
+     "basePrice": 359
     },
     {
-     "status": "SOLD_OUT",
+     "status": "AVAILABLE",
      "code": "OCEANVIEW",
      "title": "Camarote exterior",
-     "statusText": "Sold Out"
+     "statusText": "Available",
+     "combinedPrice": 282,
+     "basePrice": 419
     },
     {
      "status": "AVAILABLE",
      "code": "INSIDE",
      "title": "Camarote interior",
      "statusText": "Available",
-     "combinedPrice": 669,
-     "basePrice": 1159
-    },
-    {
-     "status": "SOLO_GUEST_ONLY",
-     "code": "STUDIO",
-     "title": "Estudio",
-     "statusText": "Solo Guests Only"
+     "combinedPrice": 247,
+     "basePrice": 329
     }
    ]
   },
@@ -142,14 +136,24 @@
     "events": [
      {
       "eventType": "PORT",
-      "date": "2026-11-22T16:00:00",
+      "date": "2026-11-16T16:00:00",
       "order": 1,
-      "title": "Orlando (Port Canaveral), Florida",
-      "description": "<p>Los cruceros de NCL desde Port Canaveral ofrecen una escapada sin preocupaciones\na Las Bahamas y el Caribe desde una práctica ubicación céntrica en Florida. <a href=\"http://www.ncl.com/\" rel=\"nofollow\">Norwegian Cruise Line</a> se dedica a ofrecer\nescapadas sin esfuerzo — del tipo en el que cada persona puede crear sus propias vacaciones\nideales. A bordo, cada día ofrece algo para todos, con infinitas\noportunidades de hacer exactamente lo que te encanta — desde emociones de alta energía como\npistas de carreras y toboganes acuáticos hasta múltiples piscinas y jacuzzis, un spa de fama mundial,\nclubes infantiles gratuitos y más. Luego, todos pueden reunirse para\ndisfrutar de comidas compartidas en nuestros restaurantes galardonados. La aventura continúa\nen tierra mientras navegas de un hermoso destino al siguiente — incluso pasando un\ndía en nuestra exclusiva isla privada, Great Stirrup Cay. Y con los\nparques temáticos de fama mundial de Orlando y la Costa Espacial de Florida a solo un corto trayecto en coche desde el\npuerto, puedes añadir una excursión de un día de tu lista de deseos antes o después de tu travesía. Desde\ncrear recuerdos juntos mientras exploras destinos increíbles hasta hacer\nexactamente lo que te encanta a bordo, un crucero de NCL desde Port Canaveral lo hace fácil\npara que todos vacacionen a su manera.</p>",
+      "title": "Miami, Florida, EE.",
+      "description": "La sorprendente combinación de culturas y ambientes urbanos llamativos de Miami la convierten en un lugar para ver. Visite el moderno distrito Art Decó de South Beach, Calle Ocho en Little Havana, los vecindarios de primera categoría de Coconut Grove y Coral Gables y el ecosistema único de los Everglades.\n\n¿Busca un crucero desde Miami?  Consulte nuestra selección de cruceros por el Caribe.",
       "images": [
        {
-        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/agnostic/NCL-Caribbean-Cruise-Rollercoaster.jpg",
-        "title": "NCL-Caribbean-Cruise-Rollercoaster.jpg",
+        "path": "/content/dam/ncl/us/en/itineraries/bahamas-itineraries/881x400-Miami-Beach.jpg",
+        "title": "881x400-Miami-Beach.jpg",
+        "alt": "ac2939eacf16e21c774b222b1b8d354389601c37.png"
+       },
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/north-america/united-states/agnostic/NCL-Florida-Cruise-Sky-Aerial-Sunset-Miami.jpeg",
+        "title": "NCL-Florida-Cruise-Sky-Aerial-Sunset-Miami.jpeg",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       },
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/agnostic/NCL-Caribbean-Cruise-Miami.jpg",
+        "title": "NCL-Caribbean-Cruise-Miami.jpg",
         "alt": "cq5dam.thumbnail.319.319.png"
        }
       ],
@@ -159,7 +163,7 @@
        "isDisembarkation": false,
        "isOverNight": false,
        "dailySchedule": "4:00 PM",
-       "code": "PCV"
+       "code": "MIA"
       }
      }
     ]
@@ -169,7 +173,7 @@
     "events": [
      {
       "eventType": "PORT",
-      "date": "2026-11-23T08:00:00",
+      "date": "2026-11-17T08:00:00",
       "order": 1,
       "title": "Great Stirrup Cay, Bahamas",
       "description": "Great Stirrup Cay es un paraíso tropical, exclusivo de NCL\nhuéspedes. Ubicado en las hermosas Bahamas, aquí encontrará playas de arena blanca,\ndeliciosos bocados, villas privadas, Mandara Spa y esnórquel de talla mundial. ",
@@ -185,7 +189,7 @@
        "isEmbarkation": false,
        "isDisembarkation": false,
        "isOverNight": false,
-       "dailySchedule": "8:00 AM - 5:00 PM",
+       "dailySchedule": "8:00 AM - 6:00 PM",
        "code": "NPI"
       }
      }
@@ -195,18 +199,26 @@
     "day": 3,
     "events": [
      {
-      "eventType": "AT_SEA",
-      "date": "2026-11-24T00:00:00",
+      "eventType": "PORT",
+      "date": "2026-11-18T08:00:00",
       "order": 1,
-      "title": "Disfrutar. Brindar. Vivir. Descubrir. Desconectar. Y repetir.",
-      "description": "Viajeros de todas las edades disfrutarán del Norwegian Epic® gracias al parque acuático, el imponente muro de escalada y a los muchos y deliciosos establecimientos de restauración. Disfruta de un cóctel al atardecer en Shaker’s Martini & Champagne Bar y luego deléitate con un exquisito plato de pasta en el elegante restaurante italiano La Cucina. Tómate un descanso en el Mandara Spa®, o disfruta de un momento solo para adultos en los clubes de playa Vibe y Spice H2O, un oasis de día y una fiesta de noche. ",
+      "title": "Nassau, Bahamas",
+      "description": "Desde la costa hasta el final de Bay Street, encontrará algunas de las mejores tiendas libres de impuestos y una encantadora combinación de arquitectura, tanto antigua como nueva. Pero hay mucho para hacer además de ir de compras: nadar con los delfines, probar suerte en un casino o bucear con peces coloridos. Explore todas las actividades que puede disfrutar en sus vacaciones en crucero por las Bahamas noruegas.",
       "images": [
        {
-        "path": "/content/dam/ncl/us/en/lifestyle/homepage/ncl_Epic_Aerial At Sea 4.jpg",
-        "title": "ncl_Epic_Aerial At Sea 4.jpg",
-        "alt": "cq5dam.thumbnail.319.319.png"
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/bahamas/nassau/NCL-Nassau-Cruise-Underwater.jpg",
+        "title": "NCL-Nassau-Cruise-Underwater.jpg",
+        "alt": "8da9c6190de66ecfbd110fb678518297fd97efb4.png"
        }
-      ]
+      ],
+      "portInfo": {
+       "isTender": false,
+       "isEmbarkation": false,
+       "isDisembarkation": false,
+       "isOverNight": false,
+       "dailySchedule": "8:00 AM - 6:00 PM",
+       "code": "NAS"
+      }
      }
     ]
    }
