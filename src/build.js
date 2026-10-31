@@ -45,7 +45,7 @@ const HOMO = { "St. John's": [[17.12, -61.85, "St. John's (Antigua)"], [47.56, -
 const SHIP_ALIAS = readJson('ship_alias.json', {});
 const cleanName = (t) => String(t || '').replace(/[™®]/g, '').replace(/\s{2,}/g, ' ').trim();
 const portName = (t) => { const n = cleanName(t); return PORT_ALIAS[n] || n; };
-const JUNK_PORT = /meetup|cruise tracy|cruise endicott|scenic cruising|^cruise /i;
+const JUNK_PORT = /meetup|cruise tracy|cruise endicott|scenic cruising|^cruise |crossing the equator|cruzando el ecuador|international date line/i;
 const sailings = [];
 {
   const seenIds = new Set();

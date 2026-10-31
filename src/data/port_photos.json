@@ -5951,15 +5951,6 @@
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Holyhead_-_2024-06-15_04.jpg"
  },
- "Cobh": {
-  "slug": "cobh",
-  "thumb": "/img/puertos/cobh-640.webp",
-  "large": "/img/puertos/cobh-1280.webp",
-  "ratio": 1.778,
-  "author": "Mik Herman",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Cobh_St._Colman_Cathedral.jpg"
- },
  "Róterdam": {
   "slug": "roterdam",
   "thumb": "/img/puertos/roterdam-640.webp",
@@ -6839,5 +6830,14 @@
   "author": "663highland",
   "license": "CC BY 2.5",
   "page": "https://commons.wikimedia.org/wiki/File:151229_Kobe_Port_Japan01bs.jpg"
+ },
+ "Cobh (Cork)": {
+  "slug": "cobh",
+  "thumb": "/img/puertos/cobh-640.webp",
+  "large": "/img/puertos/cobh-1280.webp",
+  "ratio": 1.778,
+  "author": "Mik Herman",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Cobh_St._Colman_Cathedral.jpg"
  }
 }
