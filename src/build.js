@@ -465,7 +465,7 @@ function linePage(l) {
   <div class="line-rating" data-ships="${l.ships.map((s) => s.slug).join(',')}" hidden></div>
   ${l.web ? `<p>${ltLink(l.slug, null) !== ltLink(null, null) ? `<a class="btn" href="${esc(ltLink(l.slug, null, 'naviera-' + l.slug))}" target="_blank" rel="sponsored noopener" data-aff="logitravel" data-page="/navieras/${l.slug}/">Ofertas de ${esc(l.short)} en Logitravel</a> ` : ''}<a class="btn${ltLink(l.slug, null) !== ltLink(null, null) ? ' btn-ghost' : ''}" href="${l.web}" target="_blank" rel="noopener" data-aff="oficial-${l.slug}" data-page="/navieras/${l.slug}/">Web oficial de ${esc(l.short)}</a> <a class="btn btn-ghost" href="/herramientas/precio-real/?linea=${l.slug}">Calcular precio real</a></p>` : ''}
   </section>
-  ${OFF.includesBox(l.slug, l.short) ? `<div class="wrap">${OFF.includesBox(l.slug, l.short)}</div>` : ''}
+  ${OFF.includesBox(l.slug, l.short) ? `<div class="wrap">${OFF.includesBox(l.slug, l.short)}<p><a class="btn btn-ghost btn-sm" href="/guias/primer-crucero-con-${l.slug}/">Guía: tu primer crucero con ${esc(l.short)}</a></p></div>` : ''}
   ${(() => { const by = {}; l.ships.forEach((s) => { (by[s.year] = by[s.year] || []).push(s); }); const ys = Object.keys(by).sort(); return l.ships.length >= 3 ? `<section class="wrap block"><h2>La flota de ${esc(l.short)} año a año</h2><ol class="fleet-tl">${ys.map((y) => `<li><b>${y}</b>${by[y].map((s) => `<a href="/barcos/${s.slug}/">${esc(s.name)}${s.sc != null ? ` <small>${s.sc}</small>` : ''}</a>`).join('')}</li>`).join('')}</ol><p class="muted small">Año de entrada en servicio. El número es la nota del barco.</p></section>` : ''; })()}
   <section class="wrap block"><h2>Todos los barcos de ${esc(l.short)} comparados</h2><div class="table-wrap"><table class="rank-t sortable"><thead><tr><th><button type="button" class="th-sort">Barco</button></th><th><button type="button" class="th-sort">Nota</button></th><th><button type="button" class="th-sort">Año</button></th><th><button type="button" class="th-sort">Arqueo (GT)</button></th><th><button type="button" class="th-sort">Pasajeros</button></th><th><button type="button" class="th-sort">Espacio</button></th><th><button type="button" class="th-sort">Vídeos</button></th></tr></thead><tbody>${sorted.map((s) => `<tr><td><a href="/barcos/${s.slug}/">${esc(s.name)}</a></td><td data-v="${s.sc ?? -1}">${s.sc != null ? scoreBadge(s.sc) : '–'}</td><td data-v="${s.year}">${s.year}</td><td data-v="${s.gt}">${fmt(s.gt)}</td><td data-v="${s.pax || 0}">${fmt(s.pax)}</td><td data-v="${s.ratio || 0}">${dec(s.ratio)}</td><td data-v="${s.videos.length}">${s.videos.length || '–'}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Pulsa en una columna para ordenar.</p></section>
   <section class="wrap block"><h2>Fichas</h2><div class="grid">${sorted.map((s) => shipCard(s)).join('')}</div></section>
@@ -1061,6 +1061,7 @@ function toolCompareOffers() {
 function guidesIndex() {
   const body = `<section class="wrap block page-h"><h1>Guías para cruceristas</h1><p class="lead-p">Todo lo que nos habría gustado saber antes de nuestro primer crucero.</p>
   <div class="grid grid-3">${GUIDES.map((g) => `<a class="card guide" href="/guias/${g.slug}/"><span class="guide-e" aria-hidden="true">${g.emoji}</span><h2>${esc(g.title)}</h2><p>${esc(g.desc)}</p><span class="guide-t">${readMin(g)} min de lectura</span></a>`).join('')}</div>
+  ${LINE_GUIDES.length ? `<h2>Tu primer crucero con cada naviera</h2><ul class="cmp-links">${LINE_GUIDES.map(([sl, n]) => `<li><a href="/guias/${sl}/">Primer crucero con ${esc(n)}</a></li>`).join('')}</ul>` : ''}
   <h2>Más guías</h2><div class="grid grid-3">
   <a class="card guide" href="/destinos/"><span class="guide-e">🗺️</span><h3>${DESTINATIONS.length} guías de destinos</h3><p>Mejor época, puertos, mar y consejos.</p></a>
   <a class="card guide" href="/meses/"><span class="guide-e">📅</span><h3>Cruceros mes a mes</h3><p>Adónde ir en cada época del año.</p></a>
@@ -1198,7 +1199,7 @@ function shipVsPage(a, b, k) {
   ${row('Tripulación', (s) => (s.crew ? fmt(s.crew) : null))}${row('Eslora', (s) => (s.length ? `${s.length} m` : null))}
   ${row('Salidas a la venta', (s) => s.sailings.length)}${row('Desde (por persona)', (s) => (minP(s) ? eur(minP(s)) : null), null, cmp(minP, false))}
   </tbody></table></div><p class="small muted">En verde, el que gana en cada fila. <a href="/metodologia/">Cómo calculamos la nota</a>.</p>
-  <p class="cta-row">${[a, b].map((s) => (s.sailings.length ? `<a class="btn" href="/ofertas/barco-${s.slug}/">Salidas del ${esc(s.name)}</a>` : `<a class="btn btn-ghost" href="/barcos/${s.slug}/">Ficha del ${esc(s.name)}</a>`)).join(' ')}</p></section>`;
+  <p class="cta-row">${[a, b].map((s) => (s.sailings.length ? `<a class="btn" href="${s.sailings.length >= 6 ? `/ofertas/barco-${s.slug}/` : `/barcos/${s.slug}/#salidas`}">Salidas del ${esc(s.name)}</a>` : `<a class="btn btn-ghost" href="/barcos/${s.slug}/">Ficha del ${esc(s.name)}</a>`)).join(' ')}</p></section>`;
   return layout({ title: `${a.name} vs ${b.name}: comparativa de barcos`, desc: `${a.name} o ${b.name}: nota, tamaño, espacio por pasajero y precio de hoy comparados. ${facts[0] || ''}`.slice(0, 158), url: `/comparativas/${k}/`, body, crumbs: [['Inicio', '/'], ['Comparativas', '/comparativas/'], [`${a.name} vs ${b.name}`, `/comparativas/${k}/`]] });
 }
 SHIP_VS.forEach(([a, b, k]) => write(`comparativas/${k}/index.html`, shipVsPage(a, b, k)));
@@ -1306,8 +1307,27 @@ write('contacto/index.html', contactPage());
   write('para-navieras/index.html', layout({ title: 'Para navieras: datos, fotos y sellos de MejorCrucero', desc: 'Cómo aparecen tus barcos en MejorCrucero, cómo corregir datos o fotos y cómo usar los sellos de los premios.', url: '/para-navieras/', body, crumbs: [['Inicio', '/'], ['Para navieras', '/para-navieras/']] }));
 }
 write('herramientas/comparar-ofertas/index.html', toolCompareOffers());
-write('guias/index.html', guidesIndex());
 GUIDES.forEach((g) => write(`guias/${g.slug}/index.html`, guidePage(g)));
+// Guías "Tu primer crucero con…" por naviera: solo datos con fuente (lines_info.json) y las salidas que publicamos
+const LINE_INFO = readJson('lines_info.json', {});
+const LINE_GUIDES = Object.keys(LINE_INFO).filter((k) => k !== '_info' && lineBySlug[k]).map((k) => {
+  const L = lineBySlug[k], I = LINE_INFO[k], sl = sailings.filter((x) => x.line === k);
+  const ES = ['barcelona', 'palma', 'valencia', 'malaga', 'alicante', 'cadiz', 'tarragona', 'bilbao', 'vigo', 'tenerife', 'gran-canaria'];
+  const fromEs = sl.filter((x) => ES.includes(x.depart_port_slug));
+  const top = (f) => { const c = {}; sl.forEach((x) => { const v = f(x); if (v) c[v] = (c[v] || 0) + 1; }); return Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([v]) => v); };
+  const best = L.ships.filter((s) => s.sc != null && s.sailings.length).sort((a, b) => b.sc - a.sc).slice(0, 3);
+  const slug = `primer-crucero-con-${k}`;
+  const body = `<article class="wrap block page-h narrow"><h1>Tu primer crucero con ${esc(L.short)}: lo que debes saber</h1><p class="lead-p">${esc(L.blurb || '')}</p>
+  ${sl.length ? `<p>Hoy publicamos <b>${sl.length} salidas</b> de ${esc(L.short)}${fromEs.length ? `, ${fromEs.length} de ellas desde puertos españoles (sin coger avión)` : ''}. Destinos con más salidas: ${esc(top((x) => OFF.destName(x.destination, x)).join(', '))}. Desde <b>${eur(Math.min(...sl.map(OFF.minPrice)))}</b> por persona.</p><p class="cta-row"><a class="btn" href="/ofertas/naviera-${k}/">Ver las salidas de ${esc(L.short)}</a></p>` : ''}
+  ${OFF.includesBox(k, L.short).replace('<details class="incl-more">', '<details class="incl-more" open>')}
+  ${best.length ? `<section class="block"><h2>Los barcos mejor valorados de ${esc(L.short)} con salidas</h2><ul class="mini">${best.map((s) => `<li><a href="/barcos/${s.slug}/"><b>${esc(s.name)} · ${s.sc}/100</b><span>${s.year} · ${fmt(s.pax)} pasajeros · ${s.sailings.length} salidas</span></a></li>`).join('')}</ul></section>` : ''}
+  <section class="block"><h2>Antes de reservar</h2><ul><li>Compara el <a href="/herramientas/precio-real/">precio real</a> (tarifa, tasas y cuota de servicio), no solo la tarifa.</li><li>Elige bien el camarote: <a href="/guias/como-elegir-camarote/">cómo elegir camarote</a>.</li><li>Revisa la <a href="/herramientas/documentacion/">documentación</a> que necesitas para las escalas.</li><li>Crea una <a href="/herramientas/alerta-precio/">alerta de precio</a> si no tienes prisa.</li></ul></section>
+  <p class="small"><a href="/navieras/${k}/">Todo sobre ${esc(L.short)}</a> · <a href="/guias/">Más guías</a></p></article>`;
+  write(`guias/${slug}/index.html`, layout({ title: `Primer crucero con ${L.short}: qué incluye y qué saber`, desc: `Qué incluye un crucero de ${L.short}, propinas, bebidas, wifi, edad mínima y vestimenta, con fuentes oficiales, y sus mejores barcos con salidas hoy.`, url: `/guias/${slug}/`, body, crumbs: [['Inicio', '/'], ['Guías', '/guias/'], [`Primer crucero con ${L.short}`, `/guias/${slug}/`]] }));
+  return [slug, L.short];
+});
+write('guias/index.html', guidesIndex());
+
 write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));
 { // Créditos de todas las fotos (licencias CC piden atribución también cuando la foto sale en una tarjeta)
   const row = (name, v) => `<li><b>${esc(name)}</b>: <a href="${esc(v.page)}" target="_blank" rel="noopener">${esc(v.author || 'Wikimedia Commons')}</a> · ${esc(v.license || '')}</li>`;
