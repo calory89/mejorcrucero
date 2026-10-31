@@ -54,7 +54,7 @@
     const s = ships.find((x) => x.slug === box.dataset.slug); const a = window.MC_profile();
     if (!s) return;
     box.hidden = false;
-    if (!a) { box.innerHTML = `🎯 <a href="${BASE}herramientas/que-crucero/">Haz el test de 1 minuto</a> y te decimos qué encaje tiene este barco contigo.`; return; }
+    if (!a) { box.classList.add('mb-ask'); box.innerHTML = `🎯 <a href="${BASE}herramientas/que-crucero/">Haz el test de 1 minuto</a> y te decimos qué encaje tiene este barco contigo.`; return; }
     const { m, why } = window.MC_match(s, a, true);
     box.innerHTML = `🎯 <b>${m}% para ti</b>${why.length ? ` · ${esc(why.join(', '))}` : ''} · <a href="${BASE}herramientas/que-crucero/">rehacer el test</a>`;
   });
@@ -590,6 +590,8 @@
   // Contacto (se guarda como mensaje para el panel)
   // Tablas largas plegadas: "Ver todo" despliega la tabla anterior
   document.addEventListener('click', (e) => { const b = e.target.closest('.js-unfold'); if (!b) return; const t = b.previousElementSibling?.querySelector('table.collapsed'); if (t) { t.classList.remove('collapsed'); b.remove(); } });
+  // Entradilla larga de la oferta plegada en móvil: un toque la abre
+  $$('.offer-hero .lead-p').forEach((p) => { if (p.scrollHeight > p.clientHeight + 4) { p.classList.add('can-open'); p.addEventListener('click', () => p.classList.add('open'), { once: true }); } });
   const ctf = $('#contact-form');
   if (ctf) { const mo = new URLSearchParams(location.search).get('motivo'); const o = mo && [...ctf.kind.options].find((x) => x.value.toLowerCase().startsWith(mo.toLowerCase())); if (o) ctf.kind.value = o.value; }
   if (ctf) ctf.addEventListener('submit', async (e) => {
