@@ -831,6 +831,13 @@
     "author": "Joanbanjo",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Alacant_018.jpg"
+   },
+   {
+    "thumb": "/img/puertos/alicante-5-640.webp",
+    "ratio": 1.333,
+    "author": "Fabrice Pluchet",
+    "license": "CC BY-SA 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Alicante.jpg"
    }
   ]
  },
@@ -1330,6 +1337,13 @@
     "author": "KanoaWithington at English Wikipedia (Kanoa Withington)",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Hilo.jpg"
+   },
+   {
+    "thumb": "/img/puertos/hilo-3-640.webp",
+    "ratio": 1.78,
+    "author": "Robert Linsdell from St. Andrews, Canada",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Puhi_and_Kuhio_Bay,_Hilo_(503745)_(20340913684)_(cropped).jpg"
    }
   ]
  },
@@ -1649,6 +1663,13 @@
     "author": "Quintin Soloviev",
     "license": "CC BY 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
+   },
+   {
+    "thumb": "/img/puertos/jacksonville-4-640.webp",
+    "ratio": 1.488,
+    "author": "railfan 44",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:CSX_5508_ready_to_put_office_car_on_Silver_Meteor_atJacksonville,_FL_November_18,_1986_02_(22144391504).jpg"
    }
   ]
  },
@@ -2619,6 +2640,13 @@
     "author": "AussieNickuss at en.wikipedia",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Fed_Square_August_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/melbourne-4-640.webp",
+    "ratio": 1.501,
+    "author": "Andrew Mercer (www.baldwhiteguy.co.nz)",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Flinders_Street_Station_Melbourne_-_AndrewMercer_IMG10785.jpg"
    }
   ]
  },
@@ -2959,6 +2987,13 @@
     "author": "Wikimedia Commons",
     "license": "CC BY-SA 2.5",
     "page": "https://commons.wikimedia.org/wiki/File:Jlntuankuabdulrahman.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kuala-lumpur-5-640.webp",
+    "ratio": 1.501,
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia-Istana_Negara-Jalan-Duta-01.jpg"
    }
   ]
  },
@@ -3354,6 +3389,13 @@
     "author": "Marvin Nauman",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:FEMA_-_21590_-_Photograph_by_Marvin_Nauman_taken_on_01-21-2006_in_Louisiana.jpg"
+   },
+   {
+    "thumb": "/img/puertos/nueva-orleans-4-640.webp",
+    "ratio": 1.509,
+    "author": "thepipe26",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:New_Orleans_skyline_2012_from_Danziger.jpg"
    }
   ]
  },
@@ -3596,6 +3638,13 @@
     "author": "Vauxford",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:2020_Peugeot_e-2008_GT_Line.jpg"
+   },
+   {
+    "thumb": "/img/puertos/vigo-5-640.webp",
+    "ratio": 1.333,
+    "author": "Lansbricae",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Casa_dos_Mouros_-_Cande%C3%A1n_-_Vigo.jpg"
    }
   ]
  },
@@ -4377,6 +4426,13 @@
     "author": "Wknight94",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Belfast_City_Hall_2007.jpg"
+   },
+   {
+    "thumb": "/img/puertos/belfast-4-640.webp",
+    "ratio": 1.333,
+    "author": "Leslie Shaw",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Titanic_Belfast_front_view.jpg"
    }
   ]
  },
@@ -6722,5 +6778,32 @@
   "author": "Egghead06",
   "license": "CC0",
   "page": "https://commons.wikimedia.org/wiki/File:AnseLaReye_catholic_church.jpg"
+ },
+ "Bahía de las Islas": {
+  "slug": "bahia-de-las-islas",
+  "thumb": "/img/puertos/bahia-de-las-islas-640.webp",
+  "large": "/img/puertos/bahia-de-las-islas-1280.webp",
+  "ratio": 1.517,
+  "author": "Apcbg",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bay-of-Isles.PNG"
+ },
+ "South Queensferry": {
+  "slug": "south-queensferry",
+  "thumb": "/img/puertos/south-queensferry-640.webp",
+  "large": "/img/puertos/south-queensferry-1280.webp",
+  "ratio": 1.335,
+  "author": "David Dixon",
+  "license": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Queensferry,_The_Craigs_-_geograph.org.uk_-_6407505.jpg"
+ },
+ "Yeda": {
+  "slug": "yeda",
+  "thumb": "/img/puertos/yeda-640.webp",
+  "large": "/img/puertos/yeda-1280.webp",
+  "ratio": 1.54,
+  "author": "Gregor Rom",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Jeddah_Fahne.JPG"
  }
 }
