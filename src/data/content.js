@@ -215,5 +215,8 @@ export const SCALE_PORTS = [
 export const SOURCES = [
   ['Datos de barcos (año, arqueo bruto, pasajeros): Wikipedia, "List of largest cruise ships", consultado el 19-oct-2026', 'https://en.wikipedia.org/wiki/List_of_largest_cruise_ships'],
   ['Cargos de servicio por naviera (USD, mercado EE. UU.): Cruzely, actualizado el 3-feb-2026', 'https://www.cruzely.com/full-guide-to-cruise-ship-gratuities-for-2019-amounts-etiquette-and-more/'],
+  ['Propinas de Carnival: 17 USD por persona y día (19 USD en suites), web oficial, consultado el 31-oct-2026', 'https://www.carnival.com/help/gratuities-tips'],
+  ['Celestyal: tasas portuarias y propinas siempre incluidas en la tarifa, web oficial, consultado el 31-oct-2026', 'https://celestyal.com/whats-included/port-charges-and-gratuities/'],
+  ['Qué incluye cada naviera, edad mínima, vestimenta y wifi: webs oficiales (fuentes en src/data/lines_info.json), consultado el 31-oct-2026', 'https://www.costacruceros.es/'],
   ['Cruceristas españoles: Forbes España / CLIA (610.000 en 2024)', 'https://forbes.es/economia/813790/luigi-stefanelli-costa-cruceros-espana-es-un-mercado-estrategico-con-un-peso-cada-vez-mayor/'],
 ];

@@ -96,6 +96,8 @@ const sailings = [];
         qaMark('avisos', 'destino asignado por coordenadas');
       }
     }
+    // Celestyal: tasas portuarias y propinas siempre incluidas en la tarifa (celestyal.com/whats-included/port-charges-and-gratuities/)
+    if (x.line === 'celestyal' && x.port_charges == null) { x.port_charges = 0; x.taxes_included = true; x.service_included = true; }
     // Carnival publica el precio con tasas incluidas: no es 'tasas sin publicar'
     if (x.line === 'carnival' && x.port_charges == null) { x.port_charges = 0; x.taxes_included = true; }
     // Propinas obligatorias de Carnival (cargo de servicio por persona y noche, en dólares en content.js): que el precio real las incluya
