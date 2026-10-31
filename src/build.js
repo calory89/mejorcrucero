@@ -385,8 +385,8 @@ function shipPage(s) {
   <div class="cabin-results" aria-live="polite"></div>
   <p class="muted small">Suelen dar problemas los camarotes bajo la discoteca o el teatro, junto a zonas de servicio o con vistas tapadas por botes salvavidas. <a href="/guias/como-elegir-camarote/">Guía para elegir camarote</a>.</p></section>
 
-  <section class="block" id="ficha"><h2>Ficha técnica</h2>
-  <table class="spec"><tbody>
+  <section class="block" id="ficha"><div class="sec-h"><h2>Ficha técnica</h2><button class="chip js-print" type="button">Imprimir ficha</button></div>
+  <div class="table-wrap"><table class="spec collapsed m-only"><tbody>
     <tr><th scope="row">Naviera</th><td><a href="/navieras/${s.lineSlug}/">${esc(L.short)}</a> · ${TIER[s.tier]}</td></tr>
     <tr><th scope="row">En servicio desde</th><td>${s.year} (${s.age <= 0 ? 'nuevo' : s.age === 1 ? '1 año' : s.age + ' años'})</td></tr>
     <tr><th scope="row">Arqueo bruto</th><td>${fmt(s.gt)} GT · puesto ${rankGt} de ${ships.length}</td></tr>
@@ -400,7 +400,7 @@ function shipPage(s) {
     <tr><th scope="row">Índice de espacio</th><td>${dec(s.ratio)} GT por pasajero · ${spaceLabel(s.ratio)}</td></tr>
     <tr><th scope="row">Cargo de servicio (ref.)</th><td>${L.tip ? `${String(L.tip).replace('.', ',')} $ por persona y noche (camarote estándar, mercado EE. UU.)` : 'Consulta las condiciones de tu reserva'}</td></tr>
     <tr><th scope="row">Español a bordo</th><td>${L.es ? 'Habitual en el Mediterráneo' : 'Consúltalo al reservar'}</td></tr>
-  </tbody></table>
+  </tbody></table></div><button class="btn btn-ghost btn-sm js-unfold m-only-btn" type="button">Ver la ficha completa</button>
   <p class="muted small">Índice de espacio: arqueo bruto dividido entre pasajeros. Orientativo: algunas navieras publican capacidad máxima y otras a doble ocupación. Fuente: <a href="${esc(s.specSource || s.source)}" target="_blank" rel="noopener">Wikipedia</a>. ${reportBtn('barco:' + s.slug)}</p>
   </section>
 
@@ -1116,7 +1116,7 @@ const raffle = `<p>Estamos preparando un sorteo periódico para la comunidad de 
 
 function notFound() {
   const top = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 4);
-  return layout({ title: 'Página no encontrada', desc: 'Esta página no existe.', url: '/404.html', noindex: true, body: `<section class="wrap block page-h center"><h1>Este barco ya ha zarpado</h1><p class="lead-p">No encontramos la página que buscas. Puede que la oferta ya no esté disponible.</p><div class="next-sail" hidden></div><form class="gsearch gsearch-404" action="/buscar/" role="search"><label class="sr" for="q404">Buscar</label><input id="q404" name="q" type="search" placeholder="Barco, destino o puerto"></form><p><a class="btn" href="/ofertas/">Ver todas las ofertas</a> <a class="btn btn-ghost" href="/">Ir a la portada</a></p></section>${top.length ? `<section class="wrap block"><h2>Chollos de hoy</h2><div class="grid">${top.map(sailingCard).join('')}</div></section>` : ''}` });
+  return layout({ title: 'Página no encontrada', desc: 'Esta página no existe.', url: '/404.html', noindex: true, body: `<section class="wrap block page-h center"><svg class="z404" viewBox="0 0 320 140" width="320" height="140" role="img" aria-label="Un barco alejándose en el horizonte"><defs><linearGradient id="zsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#f5f9ff"/></linearGradient></defs><rect width="320" height="140" rx="16" fill="url(#zsky)"/><circle cx="250" cy="48" r="18" fill="#fde68a"/><g class="z-ship"><path d="M118 86h64l-8 11h-48z" fill="#0b2545"/><path d="M128 86v-8h34l6 8z" fill="#2f7bff"/><path d="M137 78v-6h18l4 6z" fill="#fff" stroke="#0b2545" stroke-width="1.5"/><rect x="148" y="64" width="6" height="8" fill="#f2b705"/><circle cx="160" cy="58" r="3" fill="#cbd5e1"/><circle cx="166" cy="52" r="4" fill="#e2e8f0"/></g><path d="M0 100q20-6 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0v40H0z" fill="#2f7bff" opacity=".35"/><path d="M0 110q20-6 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0v30H0z" fill="#2f7bff" opacity=".6"/></svg><h1>Este barco ya ha zarpado</h1><p class="lead-p">No encontramos la página que buscas. Puede que la oferta ya no esté disponible.</p><div class="next-sail" hidden></div><form class="gsearch gsearch-404" action="/buscar/" role="search"><label class="sr" for="q404">Buscar</label><input id="q404" name="q" type="search" placeholder="Barco, destino o puerto"></form><p><a class="btn" href="/ofertas/">Ver todas las ofertas</a> <a class="btn btn-ghost" href="/">Ir a la portada</a></p></section>${top.length ? `<section class="wrap block"><h2>Chollos de hoy</h2><div class="grid">${top.map(sailingCard).join('')}</div></section>` : ''}` });
 }
 function offline() {
   return layout({ title: 'Sin conexión', desc: 'Sin conexión.', url: '/offline/', noindex: true, body: `<section class="wrap block page-h center"><h1>Estás sin conexión</h1><p class="lead-p">Tus favoritos, checklist y cuenta atrás siguen disponibles en <a href="/mis-cruceros/">Mis cruceros</a> y en las páginas que ya visitaste.</p></section>` });

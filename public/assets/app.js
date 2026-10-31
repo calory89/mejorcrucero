@@ -108,7 +108,7 @@
     f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0`;
     f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
     f.allowFullscreen = true;
-    f.title = b.getAttribute('aria-label') || 'Vídeo';
+    f.title = (b.querySelector('.yt-title')?.textContent || b.getAttribute('aria-label') || 'Vídeo').trim();
     b.replaceChildren(f);
     track('video_play', b.dataset.id);
   });

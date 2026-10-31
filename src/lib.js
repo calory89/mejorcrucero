@@ -115,7 +115,7 @@ export function shipCard(s, opts = {}) {
 }
 
 export function videoFacade(id, title, es) {
-  return `<button class="yt" type="button" data-id="${id}" aria-label="Reproducir vídeo: ${esc(title)}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="yt-play">${ICON.play}</span>${es ? '<span class="yt-es" aria-hidden="true">ES</span>' : ''}<span class="yt-title">${esc(title)}</span></button>`;
+  return `<button class="yt" type="button" data-id="${id}"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="yt-play">${ICON.play}</span>${es ? '<span class="yt-es" aria-hidden="true">ES</span>' : ''}<span class="yt-title"><span class="sr">Reproducir vídeo: </span>${esc(title)}</span></button>`;
 }
 
 // Enlace por Awin: la tienda recibe al visitante en la página exacta (ued) y clickref dice qué página de MejorCrucero lo mandó
@@ -296,3 +296,7 @@ ${crumbHtml}
 ${CONFIG.cfBeacon ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CONFIG.cfBeacon}"}'></script>` : ''}
 </body></html>`);
 }
+
+// Bandera (emoji) de un país escrito en español; vacío si no se conoce
+const ISO = {"Alemania": "DE", "Antigua y Barbuda": "AG", "Antillas Neerlandesas": "CW", "Argentina": "AR", "Aruba": "AW", "Australia": "AU", "Bahamas": "BS", "Barbados": "BB", "Brasil": "BR", "Bélgica": "BE", "Cabo Verde": "CV", "Canadá": "CA", "Chile": "CL", "Corea": "KR", "Costa Rica": "CR", "Croacia": "HR", "Dinamarca": "DK", "Dominica": "DM", "España": "ES", "Estados Unidos": "US", "Fiyi": "FJ", "Francia": "FR", "Gibraltar": "GI", "Gran Bretaña": "GB", "Gran Turca": "TC", "Grecia": "GR", "Guadalupe": "GP", "Guatemala": "GT", "Holanda": "NL", "Hong Kong": "HK", "Irlanda": "IE", "Islandia": "IS", "Islas Cook": "CK", "Islas Vírgenes Británicas": "VG", "Italia": "IT", "Japón": "JP", "Las Islas Malvinas": "FK", "Malasia": "MY", "Maldivas": "MV", "Malta": "MT", "Marruecos": "MA", "Martinica": "MQ", "Mauricio": "MU", "Montenegro": "ME", "México": "MX", "Namibia": "NA", "Noruega": "NO", "Nueva Caledonia": "NC", "Nueva Zelanda": "NZ", "Panamá": "PA", "Papúa Nueva Guinea": "PG", "Pitcairn Island": "PN", "Polinesia Francesa": "PF", "Polonia": "PL", "Portugal": "PT", "República Dominicana": "DO", "Saint Kitts y Nevis": "KN", "Samoa": "WS", "San Vicente y las Granadinas": "VC", "Sri Lanka": "LK", "Sudáfrica": "ZA", "Suecia": "SE", "Tailandia": "TH", "Taiwán": "TW", "Tonga": "TO", "Turquía": "TR", "Túnez": "TN", "Uruguay": "UY", "Vietnam": "VN"};
+export const flag = (c) => { const k = ISO[String(c).trim()]; return k ? String.fromCodePoint(...[...k].map((ch) => 0x1f1e6 + ch.charCodeAt(0) - 65)) : ''; };

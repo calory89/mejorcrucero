@@ -925,3 +925,26 @@ table.collapsed tbody tr:nth-child(n+7){display:none}
 .locale-bar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:45;border:1px solid var(--line,#e5e7eb);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
 @media (min-width:701px){.locale-bar{left:auto;right:16px;bottom:16px;max-width:520px}}
 body:has(.m-cta) .locale-bar{bottom:calc(146px + env(safe-area-inset-bottom))}
+.ctry{white-space:nowrap}
+.z404{max-width:100%;height:auto;margin:0 auto 12px;display:block}
+@media (prefers-reduced-motion:no-preference){.z-ship{animation:zsail 6s ease-in-out infinite alternate}@keyframes zsail{from{transform:translateX(-10px)}to{transform:translateX(12px)}}
+ .card-tags .t-down{animation:tdown 1.2s ease-out 1}@keyframes tdown{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}100%{box-shadow:0 0 0 8px rgba(22,163,74,0)}}}
+/* Contraste AA en modo oscuro (revisión axe 31-oct) */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .badge-drop,:root:not([data-theme=light]) .has-offers{color:#6ee7b7!important}}
+:root[data-theme=dark] .badge-drop,:root[data-theme=dark] .has-offers{color:#6ee7b7!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .seg button[aria-pressed=true]{color:#06182c}}
+:root[data-theme=dark] .seg button[aria-pressed=true]{color:#06182c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .locale-bar{background:var(--card)!important;color:var(--ink)}}
+:root[data-theme=dark] .locale-bar{background:var(--card)!important;color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .fav{background:rgba(13,36,64,.92)!important;color:#c3d1e3}}
+:root[data-theme=dark] .fav{background:rgba(13,36,64,.92)!important;color:#c3d1e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .btn-wa{background:#22c55e!important;color:#03120a!important}}
+:root[data-theme=dark] .btn-wa{background:#22c55e!important;color:#03120a!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .eyebrow{color:#ffd166}}
+:root[data-theme=dark] .eyebrow{color:#ffd166}
+.hm-g .h2,.hm-g .h3,.hm-g .h4,.hm-g .h2 *,.hm-g .h3 *,.hm-g .h4 *{color:#0A2A4F!important}.hm-g .h1 *{color:#fff!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cta-band{background:#12305a!important}}:root[data-theme=dark] .cta-band{background:#12305a!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .card-tags .t-new{color:#cfe0ff}}:root[data-theme=dark] .card-tags .t-new{color:#cfe0ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hm-g .h0{color:#a9b8cc}}:root[data-theme=dark] .hm-g .h0{color:#a9b8cc}
+@media (min-width:701px){table.collapsed.m-only tbody tr{display:table-row!important}.m-only-btn{display:none}}
+@media print{.m-only-btn{display:none}table.collapsed tbody tr{display:table-row!important}}
