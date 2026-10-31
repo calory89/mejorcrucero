@@ -52,6 +52,8 @@
 
   // ---------- Autocompletar global ----------
   const gq = $('#gq'), gl = $('#gq-list');
+  // Atajo: "/" lleva al buscador (como en GitHub o YouTube), salvo si ya se está escribiendo
+  if (gq) document.addEventListener('keydown', (e) => { if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return; const t = e.target; if (t.closest && t.closest('input,textarea,select,[contenteditable]')) return; e.preventDefault(); gq.focus(); });
   if (gq) {
     let idx = [], active = -1;
     const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();

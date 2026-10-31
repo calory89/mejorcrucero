@@ -207,6 +207,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
 
 
 
+${AWARD_LIST.length ? `<section class="wrap block awards-home"><div class="block-h"><h2>Premios MejorCrucero ${new Date().getFullYear()}</h2><a href="/rankings/premios/">Cómo se eligen</a></div><div class="aw-strip">${AWARD_LIST.map(([t, sh]) => `<a class="aw-item" href="/barcos/${sh.slug}/">${sh.photo ? `<img src="${sh.photo.thumb}" alt="" width="96" height="64" loading="lazy" decoding="async">` : ''}<span><small>🏆 ${esc(t)}</small><b>${esc(sh.name)}</b></span></a>`).join('')}</div></section>` : ''}
 <section class="wrap block"><div class="block-h"><h2>¿Adónde quieres ir?</h2><a href="/destinos/">Todos los destinos</a></div>
 <div class="dest-grid">${DESTINATIONS.map((d) => destCard(d)).join('')}</div></section>
 
@@ -330,7 +331,7 @@ function shipPage(s) {
   <div>
     <a class="eyebrow eyebrow-l" href="/navieras/${s.lineSlug}/">${esc(L.short)} · ${TIER[s.tier]}</a>
     <h1>${esc(s.name)}</h1>
-    ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>Nota del barco${s.score?.coverage < 70 ? ' (provisional)' : ''} · nº ${s.rank} de ${scored.length} con nota</small></span></a>` : ''}
+    ${s.sc != null ? `<a class="hero-score" href="#nota">${scoreBadge(s.sc, true)}<span><b>${scoreLabel(s.sc)}</b><small>Nota del barco${s.score?.coverage < 70 ? ' (provisional)' : ''} · nº ${s.rank} de ${scored.length} con nota${(() => { const fl = scored.filter((o) => o.line === s.line); return fl.length >= 3 ? ` · nº ${fl.indexOf(s) + 1} de ${fl.length} en ${esc(L.short)}` : ''; })()}</small></span></a>` : ''}
     ${s.tags.length ? `<p class="tags">${s.tags.map(([k, t]) => `<a class="tag" href="/barcos/?tag=${k}">${esc(t)}</a>`).join('')}</p>` : ''}
     ${(AWARDS[s.slug] || []).length ? `<p class="awards">${AWARDS[s.slug].map((t) => `<a class="award" href="/rankings/premios/">🏆 ${esc(t)} ${new Date().getFullYear()}</a>`).join('')}</p>` : ''}
     ${(() => { const st = (s.score?.parts || []).filter((p) => p.max && p.pts / p.max >= 0.8).map((p) => p.label.toLowerCase()); return st.length ? `<p class="strengths small"><b>Destaca en:</b> ${esc(st.join(', '))}</p>` : ''; })()}
