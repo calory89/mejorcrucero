@@ -183,9 +183,9 @@ Mein Schiff 3,2500,,1000,293.2,,,,https://en.wikipedia.org/wiki/Mein_Schiff_3
 Mein Schiff 4,2506,,1030,293.2,,,,https://en.wikipedia.org/wiki/Mein_Schiff_4
 Mein Schiff 5,2534,,1030,295.26,,,,https://en.wikipedia.org/wiki/Mein_Schiff_5
 Mein Schiff 6,2534,,1030,295.26,,,,https://en.wikipedia.org/wiki/Mein_Schiff_6
-Mein Schiff 1,,,,,,,,
-Mein Schiff 2,,,,,,,,
-Mein Schiff 7,,,,,,,,
+Mein Schiff 1,2894,,1000,317.5,,,,https://www.meyerturku.fi/en/products-and-technology/world-class-cruise-ships/mein-schiff-1/
+Mein Schiff 2,2894,,1000,317.2,,,,https://www.meyerturku.fi/en/products-and-technology/world-class-cruise-ships/mein-schiff-2/
+Mein Schiff 7,2894,,1000,316,,,,https://www.meyerturku.fi/en/products-and-technology/world-class-cruise-ships/mein-schiff-7/
 Mein Schiff Flow,,,,,,,,
 Marella Discovery,1830,,720,264.0,11,2016,Splendour of the Seas; TUI Discovery,https://en.wikipedia.org/wiki/Marella_Discovery
 Marella Discovery 2,1836,,771,264.26,11,,Legend of the Seas; TUI Discovery 2,https://en.wikipedia.org/wiki/Marella_Discovery_2
@@ -208,8 +208,8 @@ Insignia,698,824,400,180.45,9,,R One; Columbus 2,https://en.wikipedia.org/wiki/M
 Sirena,688,826,373,181.0,11,2016,R Four; Tahitian Princess; Ocean Princess,https://en.wikipedia.org/wiki/MS_Sirena
 Marina,1250,,780,238.4,,,,https://en.wikipedia.org/wiki/MS_Marina
 Riviera,1250,,800,239.3,15,,,https://en.wikipedia.org/wiki/MS_Riviera
-Vista,,,,,,,,
-Allura,,,,,,,,
+Vista,1200,,800,,,,,https://d1io3yog0oux5.cloudfront.net/_2628f34e7dbca4da445c3a359daae448/nclhltd/news/2023-05-01_Oceania_Cruises_Takes_Delivery_of_and_Announces_544.pdf
+Allura,1200,,,246,,,,https://www.fincantieri.com/en/media/press-releases/2025/fincantieri-delivers-oceania-allura/
 Seven Seas Navigator,490,,340,170.69,13,2016,Blue Sea,https://en.wikipedia.org/wiki/Seven_Seas_Navigator
 Seven Seas Voyager,706,,447,206.5,12,,,https://en.wikipedia.org/wiki/Seven_Seas_Voyager
 Seven Seas Mariner,700,,445,216.1,8,,,https://en.wikipedia.org/wiki/Seven_Seas_Mariner
@@ -232,8 +232,8 @@ Viking Mira,,,,,,,,
 Viking Libra,,,,,,,,
 Viking Octantis,378,,,205.0,,,,https://en.wikipedia.org/wiki/Viking_Octantis
 Viking Polaris,,,,,,,,
-Explora I,,,,,,,,
-Explora II,,,,,,,,
+Explora I,,,,248,,,,https://explorajourneys.com/au/en/press-and-media/press/explora-i-completes-successful-sea-trials
+Explora II,,,,248,,,,https://explorajourneys.com/au/en/press-and-media/press/explora-ii-completes-successful-sea-trials
 Explora III,,,,,,,,
 Azamara Journey,694,,407,181.0,11,,R Six; Blue Star; Blue Dream,https://en.wikipedia.org/wiki/Azamara_Journey
 Azamara Quest,686,,408,181.0,11,,R Seven; Delphin Renaissance; Blue Moon,https://en.wikipedia.org/wiki/Azamara_Quest
@@ -296,8 +296,8 @@ Wind Surf,386,,214,187.0,8,,La Fayette; Club Med 1,https://en.wikipedia.org/wiki
 Star Pride,312,,188,159.0,5,2016,Seabourn Pride,https://en.wikipedia.org/wiki/Star_Pride
 Star Breeze,208,,164,134.0,4,2007,Seabourn Spirit,https://en.wikipedia.org/wiki/Star_Breeze
 Star Legend,312,,164,159.6,,,Royal Viking Queen; Queen Odyssey; Seabourn Legend,https://en.wikipedia.org/wiki/Star_Legend_(ship)
-Star Seeker,,,,,,,,
-Star Explorer,,,,,,,,
+Star Seeker,224,,130,,,,,https://www.windstarcruises.com/ships/star-seeker/
+Star Explorer,224,,130,,,,,https://www.windstarcruises.com/ships/star-explorer/
 Spirit of Discovery,999,,523,236.0,10,,,https://en.wikipedia.org/wiki/Spirit_of_Discovery_(2019)
 Spirit of Adventure,999,,540,236.6,15,,,https://en.wikipedia.org/wiki/Spirit_of_Adventure_(2020_ship)
 Amadea,604,,292,192.82,,,Asuka,https://en.wikipedia.org/wiki/MS_Amadea
@@ -321,16 +321,16 @@ Adora Magic City,5246,,1200,323.6,14,,,https://en.wikipedia.org/wiki/Adora_Magic
 Adora Flora City,,,,,,,,
 Europa,408,,275,198.6,11,,,https://en.wikipedia.org/wiki/MS_Europa_(1999)
 Europa 2,516,,370,225.62,7,,,https://en.wikipedia.org/wiki/MS_Europa_2
-Hanseatic Inspiration,,,,,,,,
-Hanseatic Nature,,,,,,,,
-Hanseatic Spirit,,,,,,,,
+Hanseatic Inspiration,,230,,,,,,https://www.hl-cruises.com/fleet/expeditionships
+Hanseatic Nature,,230,,,,,,https://www.hl-cruises.com/fleet/expeditionships
+Hanseatic Spirit,,230,,,,,,https://www.hl-cruises.com/fleet/expeditionships
 Aranui 5,256,,64,126.0,10,,,https://en.wikipedia.org/wiki/Aranui_5
 Astoria Grande,1186,,360,193.3,11,2005,AIDA; AIDAcara,https://en.wikipedia.org/wiki/Astoria_Grande
 Club Med 2,386,,214,194.0,8,,,https://en.wikipedia.org/wiki/Club_Med_2
 Exploris One,144,,118,108.1,7,2017,Delfin Clipper; Sally Clipper; Baltic Clipper; Delfin Star; Dream 21; World Discoverer; World Adventurer; Prince Albert II; Silver Explorer; Discoverer,https://en.wikipedia.org/wiki/Exploris_One
 Ocean Endeavour,199,,90,137.61,9,2010,Konstantin Simonov; Francesca; The Iris; Kristina Katarina,https://en.wikipedia.org/wiki/MS_Ocean_Endeavour
 Clio,90,,60,100.0,,2012,Le Levant; Tere Moana,https://en.wikipedia.org/wiki/MS_Clio
-Hebridean Princess,,,,72.0,,1989,Columba,https://en.wikipedia.org/wiki/MV_Hebridean_Princess
+Hebridean Princess,49,,38,72.0,,1989,Columba,https://en.wikipedia.org/wiki/MV_Hebridean_Princess
 Heritage Adventurer,184,,125,124.8,6,2025,Society Adventurer; Hanseatic; RCGS Resolute,https://en.wikipedia.org/wiki/Heritage_Adventurer
 Hondius,170,,57,107.6,,,,https://en.wikipedia.org/wiki/MV_Hondius
 Sea Cloud II,96,,63,105.9,5,,,https://en.wikipedia.org/wiki/Sea_Cloud_II

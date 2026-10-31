@@ -361,7 +361,7 @@ function shipPage(s) {
     <div class="stats">
       <div><b>${s.year}</b><span>Año</span></div>
       <div><b>${fmt(s.gt)}</b><span>Arqueo (GT)</span></div>
-      <div><b>${fmt(s.pax)}</b><span>Pasajeros</span></div>
+      <div><b>${s.pax ? fmt(s.pax) : s.paxMax ? `hasta ${fmt(s.paxMax)}` : '–'}</b><span>Pasajeros</span></div>
       <div><b>${dec(s.ratio)}</b><span>Espacio · ${spaceLabel(s.ratio)}</span></div>
     </div>
     ${s.sailings.length ? `<p class="from-price">Ofertas desde <b>${eur(Math.min(...s.sailings.map(OFF.minPrice)))}</b> por persona · <a href="#salidas">${s.sailings.length} salidas</a></p>` : ''}
