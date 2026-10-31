@@ -4,6 +4,8 @@
   'use strict';
   const BASE = document.body.dataset.base || '/';
   const $ = (s, el = document) => el.querySelector(s);
+  // Fotos candidatas de una tarjeta: data-alt (lista) o data-ai (índices del bloque #ph-pool de la página)
+  let PHP = null; const altsOf = (im) => { if (im.dataset.alt) return im.dataset.alt.split('|').map((z) => z.split('::')); if (PHP === null) { try { PHP = JSON.parse(document.getElementById('ph-pool')?.textContent || '[]'); } catch { PHP = []; } } return (im.dataset.ai || '').split(',').map((i) => PHP[+i]).filter(Boolean).map((z) => z.split('::')); };
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const qs = new URLSearchParams(location.search);
   const store = {
@@ -279,8 +281,9 @@
     const allIds = (g.dataset.all || '').split(',').filter(Boolean);
     let full = cards.length >= allIds.length, loading = null;
     const ensureAll = () => full ? Promise.resolve() : (loading = loading || getJson('cards.json').then((h) => {
-      const have = new Set(cards.map((c) => c.dataset.id)); const tmp = document.createElement('div');
-      tmp.innerHTML = allIds.filter((id) => !have.has(id) && h[id]).map((id) => h[id]).join('');
+      const have = new Set(cards.map((c) => c.dataset.id)); const tmp = document.createElement('div'); const hp = h.p || [], hc = h.c || h;
+      tmp.innerHTML = allIds.filter((id) => !have.has(id) && hc[id]).map((id) => hc[id]).join('');
+      tmp.querySelectorAll('img[data-ai]').forEach((im) => { im.dataset.alt = im.dataset.ai.split(',').map((i) => hp[+i]).filter(Boolean).join('|'); im.removeAttribute('data-ai'); });
       const extra = [...tmp.children]; extra.forEach((c) => { c.hidden = true; g.appendChild(c); }); cards.push(...extra); full = true; extra.forEach((c) => { c.classList.toggle('is-seen', seenIds.has(c.dataset.id)); c.classList.toggle('is-saved', favIds.has(c.dataset.id)); });
     }).catch(() => { full = true; }));
     const PAGE = 24; let limit = PAGE;
@@ -308,8 +311,8 @@
       });
       // Tras ordenar o filtrar, que dos tarjetas visibles no repitan foto (cada una trae sus fotos candidatas en data-alt)
       { const used = new Map(), last = new Map(); let k = 0; const cost = (u) => (used.get(u) || 0) * 1e6 + (last.has(u) ? last.get(u) : -1e6);
-        cards.forEach((c) => { if (c.hidden) return; const im = c.querySelector('img[data-alt]'); if (!im) return;
-          const alts = im.dataset.alt.split('|').map((z) => z.split('::'));
+        cards.forEach((c) => { if (c.hidden) return; const im = c.querySelector('img[data-alt],img[data-ai]'); if (!im) return;
+          const alts = altsOf(im); if (!alts.length) return;
           const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => (cost(b[0]) < cost(a[0]) ? b : a));
           used.set(best[0], (used.get(best[0]) || 0) + 1); last.set(best[0], k++);
           if (im.getAttribute('src') !== best[0]) im.setAttribute('src', best[0]);

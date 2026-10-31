@@ -27,7 +27,7 @@ must('robots.txt', 'Sitemap:');
 
 // El listado declara todas las salidas y cards.json tiene una tarjeta por cada una
 const all = /data-all="([^"]*)"/.exec(of)?.[1]?.split(',').filter(Boolean) || [];
-let cards = {}; try { cards = JSON.parse(read('data/cards.json') || '{}'); } catch { fails.push('cards.json no es JSON válido'); }
+let cards = {}; try { const cj = JSON.parse(read('data/cards.json') || '{}'); cards = cj.c || cj; if (cj.p && !Array.isArray(cj.p)) fails.push('cards.json: p no es lista'); } catch { fails.push('cards.json no es JSON válido'); }
 const missing = all.filter((id) => !cards[id]); if (missing.length) fails.push(`${missing.length} salidas del listado sin tarjeta en cards.json`);
 for (const f of ['data/ofertas.json', 'data/chollos.json']) { try { JSON.parse(read(f)); } catch { fails.push(`${f} no es JSON válido`); } }
 

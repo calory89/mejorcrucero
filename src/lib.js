@@ -39,7 +39,15 @@ export function pickPhotos(html) {
     const r = k <= 2 ? rest.replace(' loading="lazy"', ' fetchpriority="high"') : rest;
     return `<img src="${best[0]}" data-alt="${list}"${r}><span class="ph-cap"${best[1] ? '' : ' hidden'}>${best[1]}</span>`;
   });
-  return html;
+  return poolAlts(html, true);
+}
+// Las fotos candidatas se repiten en cada tarjeta: un único bloque por página (#ph-pool) y en cada foto solo índices (data-ai).
+// En listados grandes el HTML baja un 25-30 %. v3.js reconstruye la lista con el bloque.
+export function poolAlts(html, page) {
+  const pool = [], idx = new Map();
+  const out = html.replace(/ data-alt="([^"]*)"/g, (m, list) => ' data-ai="' + list.split('|').map((z) => { if (!idx.has(z)) { idx.set(z, pool.length); pool.push(z); } return idx.get(z); }).join(',') + '"');
+  if (!page) return { html: out, pool };
+  return pool.length ? out.replace('</body>', `<script type="application/json" id="ph-pool">${JSON.stringify(pool).replace(/</g, '\\u003c')}</script></body>`) : out;
 }
 // "1 noches", "1 salidas"... -> singular (la mayoría de plantillas no lo distinguen)
 const SING = { noches: 'noche', salidas: 'salida', ofertas: 'oferta', fechas: 'fecha', escalas: 'escala', barcos: 'barco', cruceros: 'crucero', puertos: 'puerto', navieras: 'naviera', 'días': 'día' };
