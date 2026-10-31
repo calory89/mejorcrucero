@@ -6124,15 +6124,6 @@
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Roseau_(Dominica).jpg"
  },
- "Horta": {
-  "slug": "horta",
-  "thumb": "/img/puertos/horta-640.webp",
-  "large": "/img/puertos/horta-1280.webp",
-  "ratio": 1.333,
-  "author": "pere prlpz",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Forma_212_P1200570.jpg"
- },
  "Santa Marta": {
   "slug": "santa-marta",
   "thumb": "/img/puertos/santa-marta-640.webp",
@@ -6492,15 +6483,6 @@
   "author": "Wikimedia Commons",
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Lyttelton,_New_Zealand.jpg"
- },
- "Kobe": {
-  "slug": "kobe",
-  "thumb": "/img/puertos/kobe-640.webp",
-  "large": "/img/puertos/kobe-1280.webp",
-  "ratio": 1.504,
-  "author": "yuk",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Inside_View_of_Kobe_Wing_Stadium.jpg"
  },
  "Shimizu": {
   "slug": "shimizu",
