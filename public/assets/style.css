@@ -921,3 +921,7 @@ table.collapsed tbody tr:nth-child(n+7){display:none}
  .offer-hero .lead-p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:1rem}
  .offer-hero .lead-p.open{display:block;-webkit-line-clamp:unset}
  .offer-hero .lead-p.can-open:not(.open){cursor:pointer;position:relative}.offer-hero .lead-p.can-open:not(.open)::after{content:"más";position:absolute;right:0;bottom:0;background:var(--bg);padding-left:6px;color:var(--sea);font-weight:600}}
+/* Aviso de idioma/moneda flotante: no empuja la página (antes movía todo el contenido al aparecer) */
+.locale-bar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:45;border:1px solid var(--line,#e5e7eb);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+@media (min-width:701px){.locale-bar{left:auto;right:16px;bottom:16px;max-width:520px}}
+body:has(.m-cta) .locale-bar{bottom:calc(146px + env(safe-area-inset-bottom))}
