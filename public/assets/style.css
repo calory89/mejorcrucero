@@ -908,3 +908,8 @@ a,button,select,summary,label{touch-action:manipulation}
 @media (max-width:640px){.rail-m{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px;overscroll-behavior-x:contain}.rail-m>*{scroll-snap-align:start}}
 table.collapsed tbody tr:nth-child(n+7){display:none}
 @media (max-width:700px){body:has(.m-cta) .to-top{bottom:calc(146px + env(safe-area-inset-bottom));width:42px;height:42px}}
+.card-tags .t-award{background:#fff6d6;color:#6b4e00}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .card-tags .t-award{background:#3a2e05;color:#ffe08a}}:root[data-theme=dark] .card-tags .t-award{background:#3a2e05;color:#ffe08a}
+.pill-award{position:absolute;left:10px;bottom:10px;background:#fff6d6;color:#6b4e00;font-weight:700;font-size:.75rem;padding:3px 8px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.ship-art .pill-award{top:auto;left:auto;right:10px;bottom:10px;z-index:1;background:#fff6d6;color:#6b4e00;font-size:.72rem;padding:4px 8px}
+.award-card{display:flex;flex-direction:column;gap:6px;overflow:hidden}.award-card img{width:calc(100% + 44px);max-width:none;margin:-22px -22px 8px;aspect-ratio:16/9;object-fit:cover;height:auto}

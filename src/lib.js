@@ -92,7 +92,7 @@ export function shipSvg(s, w = 320) {
 
 export function shipVisual(s, w = 300, eager = false) {
   if (s.photo) {
-    return `<img src="${esc(s.photo.thumb)}"${s.photo.hi ? ` srcset="${esc(s.photo.thumb)} 640w, ${esc(s.photo.large)} 1280w" sizes="(max-width: 600px) 100vw, 360px"` : ''} alt="${esc(s.name)} navegando" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" class="ship-photo">`;
+    return `<img src="${esc(s.photo.thumb)}" alt="${esc(s.name)} navegando" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" class="ship-photo">`;
   }
   return shipSvg(s, w);
 }
@@ -106,7 +106,7 @@ export const scoreBadge = (n, big = false) => (n == null ? '' : `<span class="sc
 
 export function shipCard(s, opts = {}) {
   return `<article class="card ship-card" data-name="${esc(s.name.toLowerCase())}" data-line="${s.lineSlug}" data-size="${s.size}" data-gt="${s.gt}" data-year="${s.year}" data-ratio="${s.ratio ?? 0}" data-pax="${s.pax ?? 0}" data-tier="${s.tier}" data-sc="${s.sc ?? -1}" data-slug="${s.slug}">
-  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">Vídeos</span>' : ''}${scoreBadge(s.sc)}</div>
+  <a class="card-link" href="/barcos/${s.slug}/"><div class="ship-art${s.photo ? ' has-photo' : ''}" style="--c:${s.color}">${shipVisual(s, 300)}${s.videos.length ? '<span class="pill pill-video">Vídeos</span>' : ''}${scoreBadge(s.sc)}${s.awards?.length ? `<span class="pill pill-award" title="${esc(s.awards.join(' · '))}">🏆 Premio ${new Date().getFullYear()}</span>` : ''}</div>
   <div class="card-body"><h3>${esc(s.name)}</h3><p class="card-sub"><span>${esc(s.lineShort)}</span></p>
   <dl class="facts-dl"><div><dt>Año</dt><dd>${s.year}</dd></div><div><dt>Pasajeros</dt><dd>${fmt(s.pax)}</dd></div><div><dt>Espacio</dt><dd>${dec(s.ratio)}</dd></div></dl>${s.sailings?.length ? `<p class="has-offers">${s.sailings.length} salida${s.sailings.length > 1 ? 's' : ''} a la venta</p>` : ''}</div></a>
   <button class="fav" type="button" data-fav="${s.slug}" aria-label="Guardar ${esc(s.name)} en favoritos" aria-pressed="false">${ICON.heart}</button>
@@ -231,7 +231,7 @@ export function forumBlock(thread, title, opts = {}) {
 
 const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad']];
 
-export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null }) {
+export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null, preloadMedia = null }) {
   pages.push({ url, noindex });
   // Descripción de 160 caracteres como máximo, cortada por palabra
   if (desc && desc.length > 160) desc = desc.slice(0, 157).replace(/\s+\S*$/, '').replace(/[,;:·\s]+$/, '') + '…';
@@ -256,12 +256,11 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png"><link rel="apple-touch-icon" href="/icon-192.png"><link rel="manifest" href="/manifest.webmanifest">
 <script>try{var t=localStorage.getItem('mc_theme');if(t)document.documentElement.dataset.theme=t;var z=localStorage.getItem('mc_textsize');if(z)document.documentElement.style.fontSize=z}catch(e){}</script>
-${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high">` : ''}<meta name="referrer" content="strict-origin-when-cross-origin">
+${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high"${preloadMedia ? ` media="${preloadMedia}"` : ''}>` : ''}<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css?v=${AV('style.css')}">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
-<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wqn50nb6kp");clarity("consentv2",{ad_Storage:"denied",analytics_Storage:"denied"});clarity("set","site","mejorcrucero");</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3GES6R9Z8N"></script>
+<script>window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};(function(){var d=0;function L(){if(d)return;d=1;[["https://www.clarity.ms/tag/wqn50nb6kp"],["https://www.googletagmanager.com/gtag/js?id=G-3GES6R9Z8N"]].forEach(function(u){var t=document.createElement("script");t.async=1;t.src=u[0];document.head.appendChild(t)})}addEventListener("load",function(){setTimeout(L,1500)});["pointerdown","keydown","touchstart","scroll"].forEach(function(e){addEventListener(e,L,{once:true,passive:true})})})();/* Analítica: se carga tras la página o al primer gesto (no bloquea la carga) */clarity("consentv2",{ad_Storage:"denied",analytics_Storage:"denied"});clarity("set","site","mejorcrucero");</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"granted"});gtag("js",new Date());gtag("config","G-3GES6R9Z8N");gtag("config","G-FJKJE77K4V");</script>
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/admin/*","/embed/*"]}}]},"eagerness":"moderate"}]}</script>
 </head>

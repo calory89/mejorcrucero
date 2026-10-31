@@ -48,7 +48,7 @@
     if ((cur || !/^es\b/i.test(lang)) && !store.get('mc_locale_ok', 0)) { const bar = document.createElement('div'); bar.className = 'locale-bar small'; bar.setAttribute('role', 'status');
       bar.innerHTML = `<span>${/^es\b/i.test(lang) ? 'Los precios están en euros (€).' : 'Esta web está en español y los precios en euros (€).'} <span class="js-fx"></span></span><button type="button" class="btn btn-ghost btn-sm" aria-label="Cerrar aviso">✕</button>`;
       document.body.prepend(bar); $('button', bar).addEventListener('click', () => { store.set('mc_locale_ok', 1); bar.remove(); });
-      if (cur && cur !== 'EUR') fetch('https://api.frankfurter.app/latest?from=EUR&to=' + cur).then((r) => r.json()).then((j) => { const v = j?.rates?.[cur]; if (v) $('.js-fx', bar).textContent = `Hoy, 1 € ≈ ${new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2 }).format(v)} ${cur} (cambio del BCE).`; }).catch(() => {}); } } catch {}
+      if (['USD', 'MXN', 'GBP'].includes(cur)) fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=' + cur).then((r) => r.json()).then((j) => { const v = j?.rates?.[cur]; if (v) $('.js-fx', bar).textContent = `Hoy, 1 € ≈ ${new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2 }).format(v)} ${cur} (cambio del BCE).`; }).catch(() => {}); } } catch {}
 
   // ---------- Autocompletar global ----------
   const gq = $('#gq'), gl = $('#gq-list');

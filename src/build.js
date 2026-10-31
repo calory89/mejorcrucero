@@ -184,7 +184,7 @@ function home() {
     <p class="hero-ideas">Ideas: <a href="/ofertas/chollos/">chollos de hoy</a>, <a href="/ofertas/desde-barcelona/">desde Barcelona</a>, <a href="/ofertas/canarias-y-madeira/">Canarias</a>, <a href="/ofertas/mediterraneo-oriental/">islas griegas</a>, <a href="/ofertas/minicruceros/">minicruceros</a>, <a href="/ofertas/para-familias/">en familia</a> y <a href="/ofertas/con-espanol-a-bordo/">con español a bordo</a>.</p>
     <ul class="hero-trust"><li><b>Precios comprobados</b> ${(() => { const d = new Date(sailings.reduce((m, x) => (x.updated && x.updated > m ? x.updated : m), '') || Date.now()); return `el ${d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' })} a las ${d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}`; })()}</li><li><b>${ships.length}</b> barcos con nota de 0 a 100</li><li><b>Precio real</b> con tasas, no solo la tarifa</li><li><b>Sin comisiones</b> que cambien el orden</li></ul>
   </div>
-  <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}"${heroShip.photo?.thumb ? ` srcset="${heroShip.photo.thumb} 640w, ${heroShip.photo.large} 1280w" sizes="(max-width: 900px) 100vw, 600px"` : ''} alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
+  <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}"${heroShip.photo?.thumb ? ` srcset="${heroShip.photo.thumb} 640w, ${heroShip.photo.large} 1280w" sizes="(max-width: 900px) 100vw, 600px"` : ''} alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high" loading="lazy"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
 </div></section>
 
 <section class="wrap block for-you" id="for-you" hidden></section>
@@ -233,7 +233,7 @@ ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date)
   return layout({
     title: 'MejorCrucero: compara y elige tu mejor crucero al mejor precio',
     desc: `El comparador de cruceros de España: ${sailings.length} ofertas con precio real y nota de 0 a 100, ${ships.length} barcos puntuados, vídeos y opiniones. Cruceros desde Barcelona, Valencia, Málaga, Palma y Canarias.`,
-    url: '/', body, preload: heroShip.photo ? heroShip.photo.large : null,
+    url: '/', body, preload: heroShip.photo ? heroShip.photo.large : null, preloadMedia: '(min-width: 901px)',
     schema: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'MejorCrucero', url: SITE, inLanguage: 'es-ES', potentialAction: { '@type': 'SearchAction', target: SITE + '/buscar/?q={q}', 'query-input': 'required name=q' } }],
   });
 }
@@ -1124,8 +1124,8 @@ function offline() {
 // ---------- build ----------
 async function getFx() {
   try {
-    const r = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,MXN', { signal: AbortSignal.timeout(8000), redirect: 'follow' });
-    if (r.ok) { const j = await r.json(); fx = { usdEur: j.rates.EUR, usdMxn: j.rates.MXN, date: j.date, source: 'Banco Central Europeo (frankfurter.app)' }; }
+    const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=EUR,MXN', { signal: AbortSignal.timeout(8000), redirect: 'follow' });
+    if (r.ok) { const j = await r.json(); fx = { usdEur: j.rates.EUR, usdMxn: j.rates.MXN, date: j.date, source: 'Banco Central Europeo (frankfurter.dev)' }; }
   } catch {}
 }
 await getFx();
@@ -1137,6 +1137,15 @@ fs.cpSync(path.join(OUT, '..', 'public'), OUT, { recursive: true });
 // Coordenadas extra de escalas (tools/port-coords.py, desde Wikipedia); las fijas de PORT_COORDS mandan
 const EXTRA_COORDS = Object.entries(readJson('port_coords.json', {})).map(([n, v]) => [n, v[0], v[1]]);
 OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE, PORT_COORDS: [...EXTRA_COORDS, ...PORT_COORDS], portPhotos });
+// Premios del año (se calculan antes de escribir páginas: salen en tarjetas, fichas y navieras)
+const AWARD_LIST = (() => {
+  const byShip = (filter) => { const m = {}; for (const x of sailings.filter(filter)) { const s = bySlug[x.ship]; if (!s) continue; (m[s.slug] = m[s.slug] || { s, n: 0, ppn: [] }); m[s.slug].n++; m[s.slug].ppn.push(Math.round(OFF.minPrice(x) / x.nights)); } return Object.values(m); };
+  const med = (a) => { const v = [...a].sort((p, q) => p - q); return v[Math.floor(v.length / 2)]; };
+  const top = (f) => scored.filter(f)[0]; const cheapGood = byShip(() => true).filter((r) => r.n >= 3 && (r.s.sc ?? 0) >= 70).map((r) => ({ ...r, m: med(r.ppn) })).sort((a, b) => a.m - b.m)[0];
+  const awards = [['Mejor barco del año', top(() => true), 'Nota más alta del MejorCrucero Score.'], ...BEST_FOR.map(([slug, tag]) => [{ 'precio-medio': 'Mejor barco de precio medio', familias: 'Mejor barco para familias', espanol: 'Mejor barco con español a bordo', lujo: 'Mejor barco de lujo', parejas: 'Mejor barco para parejas', pequenos: 'Mejor barco pequeño', nuevos: 'Mejor barco nuevo' }[slug] || 'Mejor de su categoría', top((s) => hasTag(s, tag)), 'Nota más alta de su categoría.']), ['Mejor relación calidad precio', cheapGood?.s, cheapGood ? `Nota de 70 o más con la tarifa por noche más baja (mediana ${eur(cheapGood.m)}).` : '']].filter(([, s]) => s);
+  return awards;
+})();
+for (const [t, sh] of AWARD_LIST) { (AWARDS[sh.slug] = AWARDS[sh.slug] || []).push(t); sh.awards = AWARDS[sh.slug]; }
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());
@@ -1187,11 +1196,10 @@ BEST_FOR.forEach((b) => write(`rankings/${b[0]}/index.html`, bestForPage(b)));
   { const ei = OFF.escalaIndex(); simpleRank('escalas-mas-visitadas', 'Las escalas de crucero más visitadas', 'Puertos en los que paran más salidas (sin contar el puerto de embarque).', Object.entries(ei).sort((a, b) => b[1].length - a[1].length).slice(0, 50).map(([n, l]) => [l.length >= 6 ? `<a href="/ofertas/escala-${slugify(n)}/">${esc(n)}</a>` : esc(n), l.length, eur(Math.min(...l.map(OFF.minPrice)))]), ['Escala', 'Salidas', 'Desde']); }
   { const c = {}; sailings.forEach((x) => { const k = x.depart_port; if (k) (c[k] = c[k] || []).push(x); }); simpleRank('puertos-de-salida-con-mas-cruceros', 'Los puertos de salida con más cruceros', 'Puertos de embarque con más salidas a la venta.', Object.entries(c).sort((a, b) => b[1].length - a[1].length).slice(0, 40).map(([n, l]) => { const ps = l[0].depart_port_slug; return [ps && allPorts.some((z) => z.slug === ps) ? `<a href="/ofertas/desde-${ps}/">${esc(n)}</a>` : esc(n), l.length, eur(Math.min(...l.map(OFF.minPrice)))]; }), ['Puerto', 'Salidas', 'Desde']); }
   // Premios MejorCrucero del año: calculados con la nota, sin votos ni pagos
-  { const top = (f) => scored.filter(f)[0]; const cheapGood = byShip(() => true).filter((r) => r.n >= 3 && (r.s.sc ?? 0) >= 70).map((r) => ({ ...r, m: med(r.ppn) })).sort((a, b) => a.m - b.m)[0];
-    const awards = [['Mejor barco del año', top(() => true), 'Nota más alta del MejorCrucero Score.'], ...BEST_FOR.map(([slug, tag]) => [{ 'precio-medio': 'Mejor barco de precio medio', familias: 'Mejor barco para familias', espanol: 'Mejor barco con español a bordo', lujo: 'Mejor barco de lujo', parejas: 'Mejor barco para parejas', pequenos: 'Mejor barco pequeño', nuevos: 'Mejor barco nuevo' }[slug] || 'Mejor de su categoría', top((s) => hasTag(s, tag)), 'Nota más alta de su categoría.']), ['Mejor relación calidad precio', cheapGood?.s, cheapGood ? `Nota de 70 o más con la tarifa por noche más baja (mediana ${eur(cheapGood.m)}).` : '']].filter(([, s]) => s);
-    const body = `<section class="wrap block page-h"><h1>Premios MejorCrucero ${Y0}</h1><p class="lead-p">Los premios salen solos de la nota de cada barco y de los precios publicados: no hay votos, jurado ni pagos. Se recalculan con cada actualización. <a href="/metodologia/">Cómo calculamos la nota</a>.</p>${shareBar(`Premios MejorCrucero ${Y0}:`, '/rankings/premios/')}</section><section class="wrap block"><div class="grid grid-3">${awards.map(([t, s, why]) => `<a class="tool tool-light" href="/barcos/${s.slug}/"><span class="eyebrow">${esc(t)}</span><h2 class="h-sm">${esc(s.name)}</h2><p class="small">${esc(s.lineShort)} · nota ${s.sc ?? '–'}/100</p><p class="muted small">${esc(why)}</p></a>`).join('')}</div></section>`;
+  { const awards = AWARD_LIST;
+    const body = `<section class="wrap block page-h"><h1>Premios MejorCrucero ${Y0}</h1><p class="lead-p">Los premios salen solos de la nota de cada barco y de los precios publicados: no hay votos, jurado ni pagos. Se recalculan con cada actualización. <a href="/metodologia/">Cómo calculamos la nota</a>.</p>${shareBar(`Premios MejorCrucero ${Y0}:`, '/rankings/premios/')}</section><section class="wrap block"><div class="grid grid-3">${awards.map(([t, s, why]) => `<a class="tool tool-light award-card" href="/barcos/${s.slug}/">${s.photo ? `<img src="${s.photo.thumb}" alt="${esc(s.name)}" width="640" height="${Math.round(640 / (s.photo.ratio || 1.6))}" loading="lazy" decoding="async">` : ''}<span class="eyebrow">🏆 ${esc(t)}</span><h2 class="h-sm">${esc(s.name)}</h2><p class="small">${esc(s.lineShort)} · nota ${s.sc ?? '–'}/100</p><p class="muted small">${esc(why)}</p></a>`).join('')}</div></section>`;
     const seals = `<section class="wrap block"><h2>Sellos para navieras y agencias</h2><p class="muted small">Si tu barco ha ganado, puedes usar el sello en tu web, folletos o redes. Es gratis y no hace falta pedir permiso; solo te pedimos que enlace a esta página.</p><div class="grid grid-3 seals">${awards.map(([t, sh]) => `<figure class="seal"><img src="/rankings/premios/sello/${sh.slug}.svg" width="300" height="96" alt="${esc(t)} ${Y0}: ${esc(sh.name)}" loading="lazy"><figcaption><input class="embed-code" readonly aria-label="Código del sello ${esc(sh.name)}" value="${esc(`<a href="${SITE}/rankings/premios/"><img src="${SITE}/rankings/premios/sello/${sh.slug}.svg" width="300" height="96" alt="${t} ${Y0} MejorCrucero"></a>`)}"><a class="small" href="/rankings/premios/sello/${sh.slug}.svg" download>Descargar SVG</a></figcaption></figure>`).join('')}</div></section>`;
-    for (const [t, sh] of awards) { (AWARDS[sh.slug] = AWARDS[sh.slug] || []).push(t);
+    for (const [t, sh] of awards) {
       write(`rankings/premios/sello/${sh.slug}.svg`, awardSvg(t, Y0, sh.name)); }
     write('rankings/premios/index.html', layout({ title: `Premios MejorCrucero ${Y0}: los mejores barcos del año`, desc: `Mejor barco del año, mejor para familias, parejas, lujo y calidad precio ${Y0}, calculados con datos verificables y sin votos pagados.`, url: '/rankings/premios/', body: body + seals, crumbs: [['Inicio', '/'], ['Ranking', '/rankings/'], ['Premios', '/rankings/premios/']] })); }
   rankWith('barcos-con-mas-chollos', 'Los barcos con más chollos hoy', 'Barcos con más salidas con nota del precio de 85 o más.', byShip((x) => OFF.deal(x).score >= 85).sort((a, b) => b.n - a.n || (b.s.sc ?? 0) - (a.s.sc ?? 0)).slice(0, 30), ['Chollo desde', (r) => eur(r.min)]);
