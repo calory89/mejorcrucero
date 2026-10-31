@@ -60,7 +60,7 @@ export const LINES = {
     blurb: 'Naviera italiana con mucha tradición entre el público español y latino. Barcos como el Costa Smeralda y el Costa Toscana, con salidas habituales desde el Mediterráneo occidental.' },
   'Norwegian Cruise Line': { tier: 'estandar', slug: 'norwegian', short: 'Norwegian (NCL)', web: 'https://www.ncl.com/', tip: 20, tipSuite: 25, color: '#0e7490', es: false,
     blurb: 'Pionera del "freestyle cruising": sin horarios fijos de cena ni código de vestimenta estricto. The Haven es su zona de suites con servicio exclusivo.' },
-  'Carnival Cruise Line': { tier: 'estandar', slug: 'carnival', short: 'Carnival', web: 'https://www.carnival.com/', tip: 16, tipSuite: 18, color: '#c2410c', es: false,
+  'Carnival Cruise Line': { tier: 'estandar', slug: 'carnival', short: 'Carnival', web: 'https://www.carnival.com/', tip: 17, tipSuite: 19, color: '#c2410c', es: false,
     blurb: 'La naviera "divertida" por excelencia en EE. UU., con barcos como el Mardi Gras y la montaña rusa BOLT. Muy orientada al Caribe desde puertos estadounidenses.' },
   'Princess Cruises': { tier: 'premium', slug: 'princess', short: 'Princess', web: 'https://www.princess.com/', tip: 17, tipSuite: 19, color: '#1e3a8a', es: false,
     blurb: 'Ambiente más tranquilo y clásico, buena gastronomía y el sistema MedallionClass. Gran presencia en Alaska y el Mediterráneo.' },

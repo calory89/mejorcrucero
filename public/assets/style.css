@@ -957,3 +957,8 @@ body:has(.m-cta) .locale-bar{bottom:calc(146px + env(safe-area-inset-bottom))}
 .vs-t th,.vs-t td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.vs-t thead th{background:var(--bg);font-size:.9rem}
 .vs-t tbody th{font-weight:600;color:var(--ink-2);width:38%}.vs-t td{width:31%}
 @media (max-width:480px){.vs-t th,.vs-t td{padding:8px;font-size:.88rem}}
+.incl-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media (max-width:560px){.incl-g{grid-template-columns:1fr}}
+.incl-y,.incl-n{list-style:none;padding:0;margin:0}.incl-y li,.incl-n li{padding:4px 0 4px 26px;position:relative}
+.incl-y li::before{content:"✓";position:absolute;left:4px;color:#16a34a;font-weight:800}.incl-n li::before{content:"+";position:absolute;left:6px;color:#b45309;font-weight:800}
+.incl-dl{display:grid;gap:8px;margin:14px 0}.incl-dl div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.incl-dl dt{font-weight:700;font-size:.9rem}.incl-dl dd{margin:2px 0 0;color:var(--ink-2)}
+.incl-more{margin:12px 0}.incl-more summary{cursor:pointer;font-weight:600;color:var(--sea)}
