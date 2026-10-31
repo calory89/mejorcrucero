@@ -1953,6 +1953,13 @@
     "author": "Seán Pòl Ó Creachmhaoil",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Bastions_C_and_D_of_the_Keep_at_the_Royal_Naval_Dockyard_on_Ireland_Island,_Bermuda_with_two_6_inch_RBL_Mk_VII.jpg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
+    "ratio": 1.716,
+    "author": "Wikimedia Commons",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Dockyard,_Camder_Hulks_and_Barracks.jpg"
    }
   ]
  },
@@ -6839,5 +6846,535 @@
   "author": "Mik Herman",
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Cobh_St._Colman_Cathedral.jpg"
+ },
+ "Míkonos": {
+  "slug": "mikonos",
+  "thumb": "/img/puertos/mikonos-640.webp",
+  "large": "/img/puertos/mikonos-1280.webp",
+  "ratio": 1.501,
+  "author": "dronepicr",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Little_Venice_with_a_view_of_the_ferry_terminal_in_Mykonos,_Greece_-_50661522178.jpg"
+ },
+ "Kuşadası": {
+  "slug": "kusadas",
+  "thumb": "/img/puertos/kusadas-640.webp",
+  "large": "/img/puertos/kusadas-1280.webp",
+  "ratio": 1.893,
+  "author": "jpitha",
+  "license": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Ku%C5%9Fadas%C4%B1_Overlook.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/kusadas-2-640.webp",
+    "ratio": 1.333,
+    "author": "Slyronit",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ataturk_memorial,_Kusadasi.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kusadas-3-640.webp",
+    "ratio": 1.501,
+    "author": "Rabe!",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kusadasi_-_Atat%C3%BCrk-Denkmal.jpg"
+   },
+   {
+    "thumb": "/img/puertos/kusadas-4-640.webp",
+    "ratio": 1.78,
+    "author": "Slyronit",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kusadasi_Shoreline_2.jpg"
+   }
+  ]
+ },
+ "Amber Cove": {
+  "slug": "amber-cove",
+  "thumb": "/img/puertos/amber-cove-640.webp",
+  "large": "/img/puertos/amber-cove-1280.webp",
+  "ratio": 1.778,
+  "author": "Joe deSousa",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Amber_Cove_Sunrise_(31647461387).jpg"
+ },
+ "Rodas": {
+  "slug": "rodas",
+  "thumb": "/img/puertos/rodas-640.webp",
+  "large": "/img/puertos/rodas-1280.webp",
+  "ratio": 1.504,
+  "author": "Böhringer Friedrich",
+  "license": "CC BY-SA 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:RhodosStadtzentrum5.JPG"
+ },
+ "Ensenada": {
+  "slug": "ensenada",
+  "thumb": "/img/puertos/ensenada-640.webp",
+  "large": "/img/puertos/ensenada-1280.webp",
+  "ratio": 1.656,
+  "author": "Brocken Inaglory",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:McWay_cove_1.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ensenada-2-640.webp",
+    "ratio": 1.333,
+    "author": "Javiermkn",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Antiguo_Cuartel_de_la_Compa%C3%B1%C3%ADa_Fija_Ensenada.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ensenada-3-640.webp",
+    "ratio": 1.333,
+    "author": "Alistair Cunningham",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Coastline_north_of_Ensenada_-_panoramio_-_Alistair_Cunningham.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ensenada-4-640.webp",
+    "ratio": 1.576,
+    "author": "Michael Boyd",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruiseport_Village,_Bahia_Ensenada,_Ensenada,_B.C.,_Mexico_-_panoramio_(cropped).jpg"
+   }
+  ]
+ },
+ "Gran Turca": {
+  "slug": "gran-turca",
+  "thumb": "/img/puertos/gran-turca-640.webp",
+  "large": "/img/puertos/gran-turca-1280.webp",
+  "ratio": 1.333,
+  "author": "Jersyko at English Wikipedia",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Grand_Turk_beach.JPG"
+ },
+ "Londres": {
+  "slug": "londres",
+  "thumb": "/img/puertos/londres-640.webp",
+  "large": "/img/puertos/londres-1280.webp",
+  "ratio": 1.778,
+  "author": "Ilya Grigorik",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:London_Skyline_(125508655).jpeg"
+ },
+ "Montego Bay": {
+  "slug": "montego-bay",
+  "thumb": "/img/puertos/montego-bay-640.webp",
+  "large": "/img/puertos/montego-bay-1280.webp",
+  "ratio": 1.714,
+  "author": "Grahampurse",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Montego_bay-1001.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/montego-bay-2-640.webp",
+    "ratio": 1.931,
+    "author": "Don Ramey Logan",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Montego_Bay_Photo_Don_Ramey_Logan.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montego-bay-3-640.webp",
+    "ratio": 1.506,
+    "author": "Balou46",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:JM-montego-bay-bank.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montego-bay-4-640.webp",
+    "ratio": 1.501,
+    "author": "Balou46",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:JM-montego-bay-nat-mus.jpg"
+   }
+  ]
+ },
+ "Ketchikan": {
+  "slug": "ketchikan",
+  "thumb": "/img/puertos/ketchikan-640.webp",
+  "large": "/img/puertos/ketchikan-1280.webp",
+  "ratio": 1.501,
+  "author": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Calle_hist%C3%B3rica_Creek,_Ketchikan,_Alaska,_Estados_Unidos,_2017-08-16,_DD_52.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ketchikan-2-640.webp",
+    "ratio": 1.501,
+    "author": "Thomson M",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Ketchikan_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/ketchikan-3-640.webp",
+    "ratio": 1.501,
+    "author": "Thomson M",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Ketchikan_-_panoramio_(1).jpg"
+   },
+   {
+    "thumb": "/img/puertos/ketchikan-4-640.webp",
+    "ratio": 1.858,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ketchikan,_Alaska,_Estados_Unidos,_2017-08-16,_DD_03.jpg"
+   }
+  ]
+ },
+ "Curazao": {
+  "slug": "curazao",
+  "thumb": "/img/puertos/curazao-640.webp",
+  "large": "/img/puertos/curazao-1280.webp",
+  "ratio": 2.169,
+  "author": "Martin Falbisoner",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Facades_of_Handelskade,_Willemstad,_Cura%C3%A7ao_-_February_2020.jpg"
+ },
+ "Bermuda": {
+  "slug": "bermuda",
+  "thumb": "/img/puertos/bermuda-640.webp",
+  "large": "/img/puertos/bermuda-1280.webp",
+  "ratio": 1.506,
+  "author": "Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:ISS017-E-10695_-_View_of_Bermuda.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bermuda-2-640.webp",
+    "ratio": 1.5,
+    "author": "Seán Pòl Ó Creachmhaoil",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:An_IOD_sloop_and_a_19th_Century_Bermudian_working_boat_in_Bermuda.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bermuda-3-640.webp",
+    "ratio": 1.324,
+    "author": "British Army",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Battalion_Training_at_Tucker%27s_Town_Bermuda_of_the_3rd_Battalion_Royal_Fusiliers.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bermuda-4-640.webp",
+    "ratio": 1.419,
+    "author": "Vincenzo Coronelli",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bermuda_Coronelli.jpg"
+   }
+  ]
+ },
+ "Juneau": {
+  "slug": "juneau",
+  "thumb": "/img/puertos/juneau-640.webp",
+  "large": "/img/puertos/juneau-1280.webp",
+  "ratio": 1.501,
+  "author": "Ifly6",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Queen_Elizabeth_(ship,_2010)_in_Juneau,_Alaska_2024-08-15_(cropped).jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/juneau-2-640.webp",
+    "ratio": 1.333,
+    "author": "Wknight94",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:City_Hall,_Juneau,_Alaska.jpg"
+   },
+   {
+    "thumb": "/img/puertos/juneau-3-640.webp",
+    "ratio": 1.501,
+    "author": "File:Cruise Ships in Juneau Alaska.jpg: User Lordkinbote on en.wikipedia\nderivat",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cruise_Ships_in_Juneau_Alaska_b.jpg"
+   },
+   {
+    "thumb": "/img/puertos/juneau-4-640.webp",
+    "ratio": 1.631,
+    "author": "Joseph",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Downtown_Juneau,_Alaska_at_night.jpg"
+   }
+  ]
+ },
+ "Skagway": {
+  "slug": "skagway",
+  "thumb": "/img/puertos/skagway-640.webp",
+  "large": "/img/puertos/skagway-1280.webp",
+  "ratio": 1.483,
+  "author": "Ulises Icardi",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Autopista_Klondike,_en_su_acceso_a_la_frontera_con_Canad%C3%A1..jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/skagway-2-640.webp",
+    "ratio": 1.471,
+    "author": "Christopher Michel from San Francisco, USA",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Skagway_aerial_view.jpg"
+   },
+   {
+    "thumb": "/img/puertos/skagway-3-640.webp",
+    "ratio": 2.13,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cementerio_de_la_fiebre_del_oro,_Skagway,_Alaska,_Estados_Unidos,_2017-08-26,_DD_42-44_PAN.jpg"
+   },
+   {
+    "thumb": "/img/puertos/skagway-4-640.webp",
+    "ratio": 1.45,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Centro_hist%C3%B3rico_de_Skagway,_Alaska,_Estados_Unidos,_2017-08-18,_DD_41.jpg"
+   }
+  ]
+ },
+ "Ocho Ríos": {
+  "slug": "ocho-rios",
+  "thumb": "/img/puertos/ocho-rios-640.webp",
+  "large": "/img/puertos/ocho-rios-1280.webp",
+  "ratio": 1.333,
+  "author": "Standish77 at English Wikipedia",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Ochi.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/ocho-rios-2-640.webp",
+    "ratio": 1.509,
+    "author": "Balou46",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:JM-ocho_rios-hafen-01.jpg"
+   }
+  ]
+ },
+ "Mesina": {
+  "slug": "mesina",
+  "thumb": "/img/puertos/mesina-640.webp",
+  "large": "/img/puertos/mesina-1280.webp",
+  "ratio": 1.342,
+  "author": "Stefano Barillà.\nOriginal uploader was StefanoBarillà at it.wikipedia.\n\nLater ve",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Messina_harbour_-_aerial_view.jpg"
+ },
+ "Costa Maya": {
+  "slug": "costa-maya",
+  "thumb": "/img/puertos/costa-maya-640.webp",
+  "large": "/img/puertos/costa-maya-1280.webp",
+  "ratio": 1.333,
+  "author": "No machine-readable author provided. NormanEinstein assumed (based on copyright ",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Costa_maya_beach.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/costa-maya-2-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. NormanEinstein assumed (based on copyright ",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Costa_maya_from_cruise_ship.jpg"
+   }
+  ]
+ },
+ "Agadir": {
+  "slug": "agadir",
+  "thumb": "/img/puertos/agadir-640.webp",
+  "large": "/img/puertos/agadir-1280.webp",
+  "ratio": 1.836,
+  "author": "Michel Terrier",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Agadir_-_2013.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/agadir-2-640.webp",
+    "ratio": 1.499,
+    "author": "Abdeaitali",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:South_view_sea_side_from_Kasbah_of_Agadir_Oufella_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/agadir-3-640.webp",
+    "ratio": 1.501,
+    "author": "Sir James",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2010-12-14_Morocco_Agadir_marina.JPG"
+   },
+   {
+    "thumb": "/img/puertos/agadir-4-640.webp",
+    "ratio": 1.333,
+    "author": "SkyeyIncrease",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_view_of_the_Belvedere_Park_in_Agadir.jpg"
+   }
+  ]
+ },
+ "Montevideo": {
+  "slug": "montevideo",
+  "thumb": "/img/puertos/montevideo-640.webp",
+  "large": "/img/puertos/montevideo-1280.webp",
+  "ratio": 1.333,
+  "author": "Elemaki",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:10._Estaci%C3%B3n_de_Buqueb%C3%BAs_(3).JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/montevideo-2-640.webp",
+    "ratio": 1.333,
+    "author": "Felipe Restrepo Acosta",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_Avenida_Italia,_Br._Gral._Artigas_y_Jorge_Canning._Hospital_Italiano_Umberto_I._En_Montevideo,_Uruguay.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montevideo-3-640.webp",
+    "ratio": 1.316,
+    "author": "Felipe Restrepo Acosta",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2016_cementerio_Montevideo.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montevideo-4-640.webp",
+    "ratio": 1.333,
+    "author": "Stefano Vigorelli",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alcoh%C3%B3licos_An%C3%B3nimos,_Montevideo_URU.jpg"
+   }
+  ]
+ },
+ "Santa Cruz de la Palma": {
+  "slug": "santa-cruz-de-la-palma",
+  "thumb": "/img/puertos/santa-cruz-de-la-palma-640.webp",
+  "large": "/img/puertos/santa-cruz-de-la-palma-1280.webp",
+  "ratio": 1.333,
+  "author": "RomareySZ",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Calle_principal_de_Santa_Cruz_de_La_Palma.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/santa-cruz-de-la-palma-2-640.webp",
+    "ratio": 1.741,
+    "author": "Pwagenblast",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Blick_auf_Santa_Cruz.jpg"
+   }
+  ]
+ },
+ "Malé": {
+  "slug": "male",
+  "thumb": "/img/puertos/male-640.webp",
+  "large": "/img/puertos/male-1280.webp",
+  "ratio": 1.501,
+  "author": "Shahee Ilyas",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Male-total.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/male-2-640.webp",
+    "ratio": 1.954,
+    "author": "Shahee Ilyas",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mal%C3%A9.jpg"
+   },
+   {
+    "thumb": "/img/puertos/male-3-640.webp",
+    "ratio": 1.501,
+    "author": "Panda 51",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Sinamal%C3%A9_Bridge.jpg"
+   },
+   {
+    "thumb": "/img/puertos/male-4-640.webp",
+    "ratio": 1.709,
+    "author": "Zairon",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Male%27_Hukuru_Miskiy_1.jpg"
+   }
+  ]
+ },
+ "Córcega": {
+  "slug": "corcega",
+  "thumb": "/img/puertos/corcega-640.webp",
+  "large": "/img/puertos/corcega-1280.webp",
+  "ratio": 1.343,
+  "author": "Fondo Antiguo de la Biblioteca de la Universidad de Sevilla from Sevilla, España",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%22Corsica_Insula%22_(21632102494).jpg"
+ },
+ "Zakynthos": {
+  "slug": "zakynthos",
+  "thumb": "/img/puertos/zakynthos-640.webp",
+  "large": "/img/puertos/zakynthos-1280.webp",
+  "ratio": 1.333,
+  "author": "Algont at Dutch Wikipedia",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gezicht-opZante-met-haven.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/zakynthos-2-640.webp",
+    "ratio": 1.501,
+    "author": "Maesi64",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Church_and_monastery_ruins_Panag%C3%ADa_Skopi%C3%B3tissa_%E2%80%93_Mount_Skop%C3%B3s_-_Zakynthos_-_Greece_%E2%80%93_01.jpg"
+   },
+   {
+    "thumb": "/img/puertos/zakynthos-3-640.webp",
+    "ratio": 1.501,
+    "author": "Maesi64",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dionysios_Solomos_statue_-_Zakynthos_%E2%80%93_Greek_%E2%80%93_01.jpg"
+   }
+  ]
+ },
+ "Sitka": {
+  "slug": "sitka",
+  "thumb": "/img/puertos/sitka-640.webp",
+  "large": "/img/puertos/sitka-1280.webp",
+  "ratio": 1.494,
+  "author": "Gillfoto",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Sitka_84_Elev_135.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/sitka-2-640.webp",
+    "ratio": 1.608,
+    "author": "BackwaterSurfer",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fast_Ferry_Chenega_at_Sitka.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sitka-3-640.webp",
+    "ratio": 1.501,
+    "author": "Jackhayes1",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:RegattaSitka.jpg"
+   },
+   {
+    "thumb": "/img/puertos/sitka-4-640.webp",
+    "ratio": 1.333,
+    "author": "No machine-readable author provided. Jarfingle~commonswiki assumed (based on cop",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:SitkaChannel.JPG"
+   }
+  ]
+ },
+ "Bar": {
+  "slug": "bar",
+  "thumb": "/img/puertos/bar-640.webp",
+  "large": "/img/puertos/bar-1280.webp",
+  "ratio": 1.333,
+  "author": "Feranza",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Rincones_de_Bar.jpg"
+ },
+ "Eden": {
+  "slug": "eden",
+  "thumb": "/img/puertos/eden-640.webp",
+  "large": "/img/puertos/eden-1280.webp",
+  "ratio": 1.773,
+  "author": "Bewitch9999",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Crown_and_Anchor_Inn.jpg"
+ },
+ "Isafjordur": {
+  "slug": "isafjordur",
+  "thumb": "/img/puertos/isafjordur-640.webp",
+  "large": "/img/puertos/isafjordur-1280.webp",
+  "ratio": 1.778,
+  "author": "Sturlast~iswiki",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%C3%8Dsafj%C3%B6r%C3%B0ur_12_June_2019.jpg"
  }
 }
