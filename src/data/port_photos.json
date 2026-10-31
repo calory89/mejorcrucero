@@ -1520,38 +1520,6 @@
    }
   ]
  },
- "San Juan": {
-  "slug": "san-juan",
-  "thumb": "/img/puertos/san-juan-640.webp",
-  "large": "/img/puertos/san-juan-1280.webp",
-  "ratio": 1.501,
-  "author": "Miguel",
-  "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Nueva_Catedral_de_San_Juan_(11426785093).jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/san-juan-2-640.webp",
-    "ratio": 1.501,
-    "author": "Miguel",
-    "license": "CC BY-SA 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Auditorio_Juan_Victoria_(11426827724).jpg"
-   },
-   {
-    "thumb": "/img/puertos/san-juan-3-640.webp",
-    "ratio": 1.333,
-    "author": "Enrique Guardia",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Autopista_014,_San_Juan,_Argentina.JPG"
-   },
-   {
-    "thumb": "/img/puertos/san-juan-4-640.webp",
-    "ratio": 2.109,
-    "author": "Enrique Guardia",
-    "license": "CC0",
-    "page": "https://commons.wikimedia.org/wiki/File:Av._Libertador_General_San_Mart%C3%ADn_entre_Rivadavia_y_Marquesado,_provincia_de_San_Juan,_Argentina.jpg"
-   }
-  ]
- },
  "Long Beach": {
   "slug": "long-beach",
   "thumb": "/img/puertos/long-beach-2-640.webp",
@@ -1965,33 +1933,19 @@
  },
  "Royal Naval Dockyard": {
   "slug": "royal-naval-dockyard",
-  "thumb": "/img/puertos/royal-naval-dockyard-640.webp",
-  "large": "/img/puertos/royal-naval-dockyard-1280.webp",
-  "ratio": 1.47,
-  "author": "Dan Conlin",
+  "thumb": "/img/puertos/royal-naval-dockyard-2-640.webp",
+  "large": "/img/puertos/royal-naval-dockyard-2-640.webp",
+  "ratio": 1.333,
+  "author": "Ekem",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Admiralty_House_Halifax.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BMMentry.JPG",
   "more": [
-   {
-    "thumb": "/img/puertos/royal-naval-dockyard-2-640.webp",
-    "ratio": 1.333,
-    "author": "Ekem",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:BMMentry.JPG"
-   },
    {
     "thumb": "/img/puertos/royal-naval-dockyard-3-640.webp",
     "ratio": 1.506,
     "author": "Jerrye and Roy Klotz MD",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:COMMISSIONER%27S_HOUSE_IN_THE_ROYAL_DOCKYARD,_BERMUDA.jpg"
-   },
-   {
-    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
-    "ratio": 1.481,
-    "author": "Nilfanion",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Chatham_Clock_Tower_Building_from_HMS_Cavalier.jpg"
    }
   ]
  },
@@ -5801,15 +5755,6 @@
   "license": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Minato_Mirai_In_Blue.jpg"
  },
- "St. George's": {
-  "slug": "st-george-s",
-  "thumb": "/img/puertos/st-george-s-640.webp",
-  "large": "/img/puertos/st-george-s-1280.webp",
-  "ratio": 1.501,
-  "author": "BugWarp",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:St._George%27s_College,_Quilmes_-_BugWarp_05.jpg"
- },
  "Pitcairn": {
   "slug": "pitcairn",
   "thumb": "/img/puertos/pitcairn-640.webp",
@@ -5944,15 +5889,6 @@
   "author": "Diliff",
   "license": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:Mont_St_Michel_3,_Brittany,_France_-_July_2011.jpg"
- },
- "Gothenburg": {
-  "slug": "gothenburg",
-  "thumb": "/img/puertos/gothenburg-640.webp",
-  "large": "/img/puertos/gothenburg-1280.webp",
-  "ratio": 2.166,
-  "author": "Ammodramus",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Gothenburg_Pony_Express_Station_from_SW.JPG"
  },
  "Nordfjordeid": {
   "slug": "nordfjordeid",
@@ -6422,15 +6358,6 @@
   "license": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:Otaru_from_Tenguyama.JPG"
  },
- "Alta": {
-  "slug": "alta",
-  "thumb": "/img/puertos/alta-640.webp",
-  "large": "/img/puertos/alta-1280.webp",
-  "ratio": 1.675,
-  "author": "JulioCruz",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:La_Aut%C3%A9ntica_Sonora_Siguaray.jpg"
- },
  "Newport": {
   "slug": "newport",
   "thumb": "/img/puertos/newport-640.webp",
@@ -6778,15 +6705,6 @@
   "author": "Egghead06",
   "license": "CC0",
   "page": "https://commons.wikimedia.org/wiki/File:AnseLaReye_catholic_church.jpg"
- },
- "Bahía de las Islas": {
-  "slug": "bahia-de-las-islas",
-  "thumb": "/img/puertos/bahia-de-las-islas-640.webp",
-  "large": "/img/puertos/bahia-de-las-islas-1280.webp",
-  "ratio": 1.517,
-  "author": "Apcbg",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Bay-of-Isles.PNG"
  },
  "South Queensferry": {
   "slug": "south-queensferry",

@@ -38,6 +38,9 @@ const qaMark = (bag, k) => { QA[bag][k] = (QA[bag][k] || 0) + 1; };
 const TODAY = new Date().toISOString().slice(0, 10);
 const PORT_ALIAS = readJson('port_alias.json', {});
 const PC_EARLY = readJson('port_coords.json', {});
+const HOMO = { "St. John's": [[17.12, -61.85, "St. John's (Antigua)"], [47.56, -52.71, null]], 'Sídney': [[-33.87, 151.21, null], [46.14, -60.19, 'Sydney (Nueva Escocia)']], Sydney: [[-33.87, 151.21, 'Sídney'], [46.14, -60.19, 'Sydney (Nueva Escocia)']],
+  Portland: [[43.66, -70.25, 'Portland (Maine)'], [50.57, -2.44, 'Portland (Inglaterra)'], [45.52, -122.68, null]], Kochi: [[33.56, 133.53, 'Kochi (Japón)'], [9.97, 76.27, null]],
+  Newcastle: [[-32.93, 151.78, 'Newcastle (Australia)'], [54.99, -1.44, null]], "St. George's": [[12.05, -61.75, "St. George's (Granada)"], [32.38, -64.68, "St. George's (Bermudas)"]], "St. George's (Granada)": [[12.05, -61.75, null], [32.38, -64.68, "St. George's (Bermudas)"]] };
 // Mismo barco con nombre distinto según la fuente (naviera, agencia): todas apuntan a la misma ficha
 const SHIP_ALIAS = readJson('ship_alias.json', {});
 const cleanName = (t) => String(t || '').replace(/[™®]/g, '').replace(/\s{2,}/g, ' ').trim();
@@ -63,6 +66,12 @@ const sailings = [];
     if (SHIP_ALIAS[x.ship]) { x.ship = SHIP_ALIAS[x.ship]; qaMark('avisos', 'barco unificado con alias'); }
     x.ship_name = cleanName(x.ship_name); x.depart_port = cleanName(x.depart_port); x.arrive_port = cleanName(x.arrive_port);
     if (x.itinerary) { x.itinerary.name = cleanName(x.itinerary.name); x.itinerary.ports = (x.itinerary.ports || []).map((p) => (JUNK_PORT.test(p.name) ? { ...p, name: 'Navegación' } : { ...p, name: portName(p.name) })); }
+    // Homónimos (mismo nombre, otro lugar): se elige el lugar más cercano a las escalas vecinas y se renombra
+    // para que mapa, foto y página de escala sean los del sitio correcto (control de coordenadas, 31-oct-2026)
+    if (x.itinerary?.ports?.length) { const ps = x.itinerary.ports; ps.forEach((p, i) => { const opts = HOMO[p.name]; if (!opts) return;
+      const nb = [ps[i - 1], ps[i + 1], ps[i - 2], ps[i + 2]].filter((q) => q && !HOMO[q.name] && PC_EARLY[q.name]).map((q) => PC_EARLY[q.name]); if (!nb.length) return;
+      const kmH = (a, b) => { const r = Math.PI / 180, h = Math.sin((b[0] - a[0]) * r / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin((b[1] - a[1]) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); };
+      const best = opts.reduce((m, o) => { const d = Math.min(...nb.map((c) => kmH(o, c))); return d < m[0] ? [d, o] : m; }, [Infinity, null])[1]; if (best && best[2]) p.name = best[2]; }); }
     // Nombres que existen en dos continentes: se distinguen por el destino del crucero
     const AMER = ['caribe', 'canal-de-panama', 'riviera-mexicana', 'sudamerica', 'bermudas', 'canada-nueva-inglaterra', 'alaska', 'hawai'];
     if (AMER.includes(x.destination) && x.itinerary) for (const p of x.itinerary.ports) { if (p.name === 'Cartagena') p.name = 'Cartagena de Indias'; if (p.name === 'Falmouth') p.name = 'Falmouth (Jamaica)'; }
@@ -75,6 +84,16 @@ const sailings = [];
       if (pts.length && !pts.some(([la, lo]) => lo < -30)) {
         x.destination = pts.some(([la]) => la > 47) ? 'capitales-balticas' : pts.some(([la, lo]) => la < 33 && lo < -12) ? 'canarias-y-madeira' : 'mediterraneo-occidental';
         qaMark('avisos', 'tramo de reposicionamiento reclasificado');
+      }
+    }
+    // Salidas sin destino de la naviera: se asigna por dónde navegan (coordenadas de las escalas); si no encaja, 'especiales'
+    if (!x.destination && x.itinerary?.ports?.length) {
+      const pts = x.itinerary.ports.map((q) => PC_EARLY[portName(q.name)]).filter(Boolean);
+      const eu = (p) => p[1] > -30 && p[1] < 45 && p[0] > 25, am = (p) => p[1] < -30, car = (p) => p[0] > 9 && p[0] < 27.5 && p[1] > -90 && p[1] < -59;
+      if (pts.length >= 2) {
+        const f = pts[0], l = pts[pts.length - 1];
+        x.destination = (eu(f) && am(l)) || (am(f) && eu(l)) ? 'transatlanticos' : pts.filter(car).length >= pts.length / 2 ? 'caribe' : pts.every((p) => p[1] > 100) ? 'asia' : 'especiales';
+        qaMark('avisos', 'destino asignado por coordenadas');
       }
     }
     // Carnival publica el precio con tasas incluidas: no es 'tasas sin publicar'
@@ -1149,6 +1168,11 @@ const EXTRA_COORDS = Object.entries(readJson('port_coords.json', {})).map(([n, v
 // Valoración media de los pasajeros (API propia): se pinta en tarjetas cuando hay 3 opiniones o más
 for (const sh of ships) { const r = ratings['barco:' + sh.slug]; if (r && r.n >= 3) sh.rating = r; }
 OFF = makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, allPorts, BUILD_DATE, PORT_COORDS: [...EXTRA_COORDS, ...PORT_COORDS], portPhotos, LINE_INFO: readJson('lines_info.json', {}) });
+// Control de coordenadas: escalas que quedan a más de 2.500 km de sus dos vecinas (cuando esas vecinas están cerca entre sí)
+// suelen ser homónimos mal resueltos (p. ej. "Santo Tomás" de México en vez de las Islas Vírgenes). Se listan en el informe del build.
+{ const km = (a, b) => { const r = Math.PI / 180, h = Math.sin((b[0] - a[0]) * r / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin((b[1] - a[1]) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); };
+  const bad = {}; for (const x of sailings) { const ps = OFF.portsOf(x).filter((p) => p.lat != null); for (let i = 1; i < ps.length - 1; i++) { const a = [ps[i - 1].lat, ps[i - 1].lon], b = [ps[i].lat, ps[i].lon], c = [ps[i + 1].lat, ps[i + 1].lon]; if (km(a, b) > 2500 && km(b, c) > 2500 && km(a, c) < 1500) bad[ps[i].name] = (bad[ps[i].name] || 0) + 1; } }
+  const l = Object.entries(bad).sort((a, b) => b[1] - a[1]); if (l.length) console.log('Coordenadas sospechosas:', l.slice(0, 15).map(([n, c]) => `${n} (${c})`).join(', ')); }
 // Premios del año (se calculan antes de escribir páginas: salen en tarjetas, fichas y navieras)
 const AWARD_LIST = (() => {
   const byShip = (filter) => { const m = {}; for (const x of sailings.filter(filter)) { const s = bySlug[x.ship]; if (!s) continue; (m[s.slug] = m[s.slug] || { s, n: 0, ppn: [] }); m[s.slug].n++; m[s.slug].ppn.push(Math.round(OFF.minPrice(x) / x.nights)); } return Object.values(m); };
