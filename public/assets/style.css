@@ -967,3 +967,10 @@ body:has(.m-cta) .locale-bar{bottom:calc(146px + env(safe-area-inset-bottom))}
 .fleet-tl li::before{content:"";position:absolute;top:-8px;left:10px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--sea)}
 .fleet-tl b{font-size:.95rem}.fleet-tl a{font-size:.85rem;text-decoration:none;color:var(--ink)}.fleet-tl a:hover{color:var(--sea)}.fleet-tl small{color:var(--muted);font-weight:700}
 ul.incl-dl{list-style:none;padding:0}ul.incl-dl li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+table.pm-t.collapsed tbody tr:nth-child(n+7){display:table-row}table.pm-t.collapsed tbody tr:nth-child(n+13){display:none}
+@media (min-width:1000px){.dest-grid:not(.big){grid-template-columns:repeat(4,1fr)}}
+.simple-t td,.simple-t th{width:auto}
+table.m20.collapsed tbody tr:nth-child(n+7){display:table-row}
+@media (max-width:700px){table.m20.collapsed tbody tr:nth-child(n+21){display:none!important}}
+@media (min-width:701px){.m20-btn{display:none}}
+.rank-t tr[hidden],tr[hidden]{display:none!important}

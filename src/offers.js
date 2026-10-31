@@ -381,7 +381,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   function monthTable(list) {
     const by = {}; for (const x of list) { const k = x.date.slice(0, 7); (by[k] = by[k] || []).push(x); }
     const rows = Object.entries(by).sort().map(([k, l]) => { const v = l.map(ppn).sort((a, b) => a - b); return [k, l.length, v[Math.floor(v.length / 2)], Math.min(...l.map(minPrice))]; });
-    return rows.length > 1 ? `<h2>Precio por mes</h2><div class="table-wrap"><table class="rank-t sortable pm-t"><thead><tr><th>Mes</th><th>Salidas</th><th>Media por noche</th><th>Desde</th></tr></thead><tbody>${rows.map(([k, n, med, min]) => `<tr><td>${cap(MES[+k.slice(5) - 1])} ${k.slice(0, 4)}</td><td>${n}</td><td data-v="${med}">${eur(med)}</td><td data-v="${min}">${eur(min)}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Mediana del precio real por persona y noche (tasas y cuota incluidas).</p>` : '';
+    return rows.length > 1 ? `<h2>Precio por mes</h2><div class="table-wrap"><table class="rank-t sortable pm-t${rows.length > 12 ? ' collapsed' : ''}"><thead><tr><th>Mes</th><th>Salidas</th><th>Media por noche</th><th>Desde</th></tr></thead><tbody>${rows.map(([k, n, med, min]) => `<tr><td>${cap(MES[+k.slice(5) - 1])} ${k.slice(0, 4)}</td><td>${n}</td><td data-v="${med}">${eur(med)}</td><td data-v="${min}">${eur(min)}</td></tr>`).join('')}</tbody></table></div>${rows.length > 12 ? `<button class="btn btn-ghost btn-sm js-unfold" type="button">Ver los ${rows.length} meses</button>` : ''}<p class="muted small">Mediana del precio real por persona y noche (tasas y cuota incluidas).</p>` : '';
   }
   function hubFaq(list, what) {
     if (!list.length) return '';

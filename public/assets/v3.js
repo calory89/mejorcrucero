@@ -70,6 +70,7 @@
 
   // ---------- Ranking: filtro por naviera ----------
   const rf = $('#rank-filter');
+  rf?.addEventListener('change', () => { document.querySelectorAll('#top table.collapsed').forEach((t) => t.classList.remove('collapsed')); document.querySelectorAll('#top .m20-btn').forEach((b) => b.remove()); });
   if (rf) rf.addEventListener('input', () => { const l = rf.linea.value; $$('#top tbody tr').forEach((tr) => { tr.hidden = l && tr.dataset.line !== l; }); });
 
   // ---------- Copiar código para insertar ----------
