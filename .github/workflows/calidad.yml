@@ -1,0 +1,39 @@
+name: Calidad semanal
+# Cada lunes: pruebas en navegador contra la web publicada (listado, filtros, fotos, mapa, reservar)
+# y Lighthouse en móvil de las páginas clave. Si algo falla o el rendimiento baja de 75, el trabajo falla (aviso por email de GitHub).
+on:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm i --no-save playwright@1.49 lighthouse@12 && npx playwright install --with-deps chromium
+      - name: Pruebas en navegador
+        run: BASE_URL=https://mejorcrucero.com node test/browser.mjs
+      - name: Lighthouse (móvil)
+        if: always()
+        run: |
+          export CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())")
+          echo "## Lighthouse móvil" >> $GITHUB_STEP_SUMMARY
+          bad=0
+          for u in / /ofertas/ /barcos/norwegian-prima/; do
+            npx lighthouse "https://mejorcrucero.com$u" --quiet --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=lh.json --form-factor=mobile || continue
+            line=$(node -e "const j=require('./lh.json');const c=j.categories,a=j.audits;const s=k=>Math.round(c[k].score*100);console.log('$u', 'rendimiento', s('performance'), 'accesibilidad', s('accessibility'), 'SEO', s('seo'), 'LCP', a['largest-contentful-paint'].displayValue, 'CLS', a['cumulative-layout-shift'].displayValue)")
+            echo "- $line" >> $GITHUB_STEP_SUMMARY; echo "$line"
+            p=$(node -e "console.log(Math.round(require('./lh.json').categories.performance.score*100))"); [ "$p" -lt 75 ] && bad=1
+          done
+          exit $bad
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: capturas
+          path: shots/
