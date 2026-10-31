@@ -44,7 +44,7 @@ def colorful(im):
     # Fuera fotos en blanco y negro / sepia (fotos históricas) y escaneos casi sin color
     sm = im.convert('HSV').resize((64, 40)).getdata()
     sat = sum(px[1] for px in sm) / (len(sm) * 255)
-    return sat > 0.14
+    return sat > 0.06
 
 
 def strip(h): return html.unescape(re.sub('<[^>]+>', '', h or '')).strip()

@@ -819,13 +819,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Vista_de_Alicante,_Espa%C3%B1a,_2014-07-04,_DD_49.JPG",
   "more": [
    {
-    "thumb": "/img/puertos/alicante-2-640.webp",
-    "ratio": 1.908,
-    "author": "Federico Ruiz / Tomás Carlos Capuz",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:1858-06-15,_El_Museo_Universal,_Inauguraci%C3%B3n_del_ferro-carril_de_Alicante.jpg"
-   },
-   {
     "thumb": "/img/puertos/alicante-3-640.webp",
     "ratio": 1.553,
     "author": "Alfred Guesdon",
@@ -1337,20 +1330,6 @@
     "author": "KanoaWithington at English Wikipedia (Kanoa Withington)",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Hilo.jpg"
-   },
-   {
-    "thumb": "/img/puertos/hilo-3-640.webp",
-    "ratio": 1.298,
-    "author": "Unknown authorUnknown author",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Distant_view_of_the_suburbs_of_Hilo,_Hawaii,_1907_(CHS-427).jpg"
-   },
-   {
-    "thumb": "/img/puertos/hilo-4-640.webp",
-    "ratio": 1.326,
-    "author": "Unknown authorUnknown author or not provided",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Hawaii_-_Hilo_-_NARA_-_23937301_(cropped).jpg"
    }
   ]
  },
@@ -1928,13 +1907,6 @@
     "author": "caspermoller  (https://www.flickr.com/photos/caspermoller/)",
     "license": "CC BY 2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Nyhavns_P%C3%B8lser,_Copenhagen_2008.jpg"
-   },
-   {
-    "thumb": "/img/puertos/copenhague-4-640.webp",
-    "ratio": 1.336,
-    "author": "Leif Jørgensen",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Gammel_Kongevej.JPG"
    }
   ]
  },
@@ -2647,13 +2619,6 @@
     "author": "AussieNickuss at en.wikipedia",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Fed_Square_August_2007.jpg"
-   },
-   {
-    "thumb": "/img/puertos/melbourne-4-640.webp",
-    "ratio": 1.387,
-    "author": "Victoria State Transport Authority, restored by Adam Cuerden",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Flinders_Street_Station,_Melbourne,_at_the_intersection_of_Swanston_Street_and_Flinders_Street,_1927_-_Glass_plate.jpg"
    }
   ]
  },
@@ -2987,13 +2952,6 @@
     "author": "User:Two hundred percent.",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Jalan_Sultan_Sulaiman_cluster,_Kuala_Lumpur.jpg"
-   },
-   {
-    "thumb": "/img/puertos/kuala-lumpur-3-640.webp",
-    "ratio": 1.35,
-    "author": "Wikimedia Commons",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Japanese_troops_mopping_up_in_Kuala_Lumpur.jpg"
    },
    {
     "thumb": "/img/puertos/kuala-lumpur-4-640.webp",
@@ -3396,13 +3354,6 @@
     "author": "Marvin Nauman",
     "license": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:FEMA_-_21590_-_Photograph_by_Marvin_Nauman_taken_on_01-21-2006_in_Louisiana.jpg"
-   },
-   {
-    "thumb": "/img/puertos/nueva-orleans-4-640.webp",
-    "ratio": 1.333,
-    "author": "Infrogmation of New Orleans",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_Superdome_Poydras_1.JPG"
    }
   ]
  },
@@ -3625,20 +3576,13 @@
  },
  "Vigo": {
   "slug": "vigo",
-  "thumb": "/img/puertos/vigo-640.webp",
-  "large": "/img/puertos/vigo-1280.webp",
-  "ratio": 2.393,
-  "author": "Patricio Bocconi Camirani / Manuel Nao / Bernardo Rico",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:1877-08-15,_La_Ilustraci%C3%B3n_Espa%C3%B1ola_y_Americana,_Viaje_de_S._M._el_rey_a_las_provincias_del_noroeste_(cropped)_Vigo,_Vista_general_de_la_ciudad_y_del_puerto,_visitados_por_S._M._el_2_del_actual.jpg",
+  "thumb": "/img/puertos/vigo-2-640.webp",
+  "large": "/img/puertos/vigo-2-640.webp",
+  "ratio": 1.509,
+  "author": "Ploetzlich (Diskussion) 11:55, 27. Okt. 2014 (CET)",
+  "license": "CC BY-SA 3.0 de",
+  "page": "https://commons.wikimedia.org/wiki/File:2014-10-18_-_Ayuntamiento_-_Vigo_-_Spain.JPG",
   "more": [
-   {
-    "thumb": "/img/puertos/vigo-2-640.webp",
-    "ratio": 1.509,
-    "author": "Ploetzlich (Diskussion) 11:55, 27. Okt. 2014 (CET)",
-    "license": "CC BY-SA 3.0 de",
-    "page": "https://commons.wikimedia.org/wiki/File:2014-10-18_-_Ayuntamiento_-_Vigo_-_Spain.JPG"
-   },
    {
     "thumb": "/img/puertos/vigo-3-640.webp",
     "ratio": 1.509,
@@ -4433,13 +4377,6 @@
     "author": "Wknight94",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Belfast_City_Hall_2007.jpg"
-   },
-   {
-    "thumb": "/img/puertos/belfast-4-640.webp",
-    "ratio": 1.394,
-    "author": "Unknown authorUnknown author",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:RMS_Titanic_sea_trials_April_2,_1912.jpg"
    }
   ]
  },
@@ -4862,15 +4799,6 @@
   "author": "Pear285",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Sacred_Heart_Basilica_Timaru_front_side_2015.jpg"
- },
- "Bahía de las Islas": {
-  "slug": "bahia-de-las-islas",
-  "thumb": "/img/puertos/bahia-de-las-islas-640.webp",
-  "large": "/img/puertos/bahia-de-las-islas-1280.webp",
-  "ratio": 1.542,
-  "author": "Apcbg",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Pendleton-1802.PNG"
  },
  "Ilha Grande": {
   "slug": "ilha-grande",
@@ -6033,15 +5961,6 @@
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Cobh_St._Colman_Cathedral.jpg"
  },
- "South Queensferry": {
-  "slug": "south-queensferry",
-  "thumb": "/img/puertos/south-queensferry-640.webp",
-  "large": "/img/puertos/south-queensferry-1280.webp",
-  "ratio": 1.509,
-  "author": "William Miller",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:The_Queensferry,_from_the_South_East_engraving_by_William_Miller_after_C_Stanfield.jpg"
- },
  "Róterdam": {
   "slug": "roterdam",
   "thumb": "/img/puertos/roterdam-640.webp",
@@ -6402,15 +6321,6 @@
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:2005-08-17_Marina_City,_Aqaba,_Jordanien_02.jpg"
  },
- "Yeda": {
-  "slug": "yeda",
-  "thumb": "/img/puertos/yeda-640.webp",
-  "large": "/img/puertos/yeda-1280.webp",
-  "ratio": 1.827,
-  "author": "No machine-readable author provided. Ammar shaker assumed (based on copyright cl",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:DSC00029-jed-gate.JPG"
- },
  "Mascate": {
   "slug": "mascate",
   "thumb": "/img/puertos/mascate-640.webp",
@@ -6428,15 +6338,6 @@
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Al_Ahmed_St,_Doha,_Catar,_2013-08-06,_DD_01.JPG"
- },
- "Abu Dhabi": {
-  "slug": "abu-dhabi",
-  "thumb": "/img/puertos/abu-dhabi-640.webp",
-  "large": "/img/puertos/abu-dhabi-1280.webp",
-  "ratio": 1.372,
-  "author": "Ulises Icardi",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Jeque_Zayed_firmando_la_uni%C3%B3n_de_los_Emiratos_%C3%81rabes_en_1971.jpg"
  },
  "Dubái": {
   "slug": "dubai",

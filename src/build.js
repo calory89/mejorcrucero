@@ -1039,7 +1039,7 @@ function trustPage() {
 function contactPage() {
   const body = `<section class="wrap block page-h narrow"><h1>Contacto</h1><p class="lead-p">¿Una duda, un error en un precio o quieres colaborar? Escríbenos y te respondemos por email.</p>
   <form class="calc contact-form" id="contact-form"><label><span>Tu email</span><input type="email" name="email" required autocomplete="email"></label><label><span>Motivo</span><select name="kind"><option>Duda sobre un crucero</option><option>Error en un precio o dato</option><option>Naviera: corregir datos o fotos de un barco</option><option>Colaboración / agencias</option><option>Otro</option></select></label><label class="f-wide"><span>Mensaje</span><textarea name="msg" rows="5" maxlength="2000" required></textarea></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Enviar</button><p class="form-msg" role="status" aria-live="polite"></p></form>
-  <p class="muted small">Titular: ${LEGAL_OWNER}.</p></section>`;
+  <p class="muted small">Titular: ${LEGAL_OWNER.replace(/\.$/, "")}.</p></section>`;
   return layout({ title: 'Contacto', desc: 'Contacta con MejorCrucero: dudas, errores en precios y colaboraciones.', url: '/contacto/', body, crumbs: [['Inicio', '/'], ['Contacto', '/contacto/']] });
 }
 function toolCompareOffers() {
