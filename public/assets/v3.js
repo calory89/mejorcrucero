@@ -289,7 +289,7 @@
     const PAGE = 24; let limit = PAGE;
     const seenIds = new Set(store.get('mc_offer_recent', []).map((x) => x.id));
     const favIds = new Set(store.get('mc_offer_favs', []).map((x) => x.id)); const mark = () => cards.forEach((c) => { c.classList.toggle('is-seen', seenIds.has(c.dataset.id)); c.classList.toggle('is-saved', favIds.has(c.dataset.id)); }); setTimeout(mark, 0);
-    const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop, fit: (c) => { const pf = store.get('mc_pref', {}); return -(+c.dataset.score + (pf.dst && c.dataset.dst === pf.dst ? 30 : 0) + (pf.port && c.dataset.port === pf.port ? 20 : 0) + (pf.b && +c.dataset.price <= pf.b ? 15 : 0)); } }[o] || ((c) => -+c.dataset.score));
+    const key = (o) => ({ score: (c) => -+c.dataset.score, price: (c) => +c.dataset.price, ppn: (c) => +c.dataset.ppn, date: (c) => c.dataset.date, real: (c) => +c.dataset.real, nights: (c) => +c.dataset.nights, ssc: (c) => -+c.dataset.ssc, drop: (c) => -+c.dataset.drop, near: (c) => { const P = window.__mcPos; if (!P || !c.dataset.ll) return 1e9; const [la, lo] = c.dataset.ll.split(',').map(Number), r = Math.PI / 180; return Math.acos(Math.min(1, Math.sin(P[0] * r) * Math.sin(la * r) + Math.cos(P[0] * r) * Math.cos(la * r) * Math.cos((lo - P[1]) * r))); }, fit: (c) => { const pf = store.get('mc_pref', {}); return -(+c.dataset.score + (pf.dst && c.dataset.dst === pf.dst ? 30 : 0) + (pf.port && c.dataset.port === pf.port ? 20 : 0) + (pf.b && +c.dataset.price <= pf.b ? 15 : 0)); } }[o] || ((c) => -+c.dataset.score));
     const moreBtn = document.createElement('button'); moreBtn.type = 'button'; moreBtn.className = 'btn btn-ghost btn-block js-more'; g.after(moreBtn);
     moreBtn.addEventListener('click', () => { limit += PAGE; if (!full) { g.insertAdjacentHTML('beforeend', '<div class="card skel-card" aria-hidden="true"></div>'.repeat(6)); g.setAttribute('aria-busy', 'true'); } ensureAll().then(() => { $$('.skel-card', g).forEach((x) => x.remove()); g.removeAttribute('aria-busy'); apply(true); }); });
     const reset = $('.js-reset-filters', f.parentNode);
@@ -592,6 +592,11 @@
   document.addEventListener('click', (e) => { const b = e.target.closest('.js-unfold'); if (!b) return; const t = b.previousElementSibling?.querySelector('table.collapsed'); if (t) { t.classList.remove('collapsed'); b.remove(); } });
   // Entradilla larga de la oferta plegada en móvil: un toque la abre
   $$('.offer-hero .lead-p').forEach((p) => { if (p.scrollHeight > p.clientHeight + 4) { p.classList.add('can-open'); p.addEventListener('click', () => p.classList.add('open'), { once: true }); } });
+  // Ordenar por cercanía: pide la ubicación una vez (no se guarda ni se envía a ningún sitio)
+  document.addEventListener('change', (e) => { const sel = e.target; if (sel.name !== 'o' || sel.value !== 'near' || window.__mcPos) return;
+    if (!navigator.geolocation) { sel.value = 'score'; return; }
+    navigator.geolocation.getCurrentPosition((p) => { window.__mcPos = [p.coords.latitude, p.coords.longitude]; sel.dispatchEvent(new Event('input', { bubbles: true })); sel.dispatchEvent(new Event('change', { bubbles: true })); }, () => { sel.value = 'score'; sel.dispatchEvent(new Event('input', { bubbles: true })); alertMsg(sel); }, { maximumAge: 6e5, timeout: 10000 }); });
+  const alertMsg = (el) => { const m = document.createElement('p'); m.className = 'small muted'; m.textContent = 'Sin permiso de ubicación: ordenamos por mejor oferta.'; el.closest('label')?.after(m); setTimeout(() => m.remove(), 5000); };
   const ctf = $('#contact-form');
   if (ctf) { const mo = new URLSearchParams(location.search).get('motivo'); const o = mo && [...ctf.kind.options].find((x) => x.value.toLowerCase().startsWith(mo.toLowerCase())); if (o) ctf.kind.value = o.value; }
   if (ctf) ctf.addEventListener('submit', async (e) => {

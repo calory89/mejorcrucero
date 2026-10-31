@@ -840,6 +840,19 @@
     document.head.append(s);
   });
 
+  // Mapa de puertos de salida (Leaflet bajo demanda): un punto por puerto con número de salidas y precio desde
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.js-map2'); if (!b) return;
+    const box = b.parentElement, pts = JSON.parse(box.dataset.pts); b.disabled = true; b.textContent = 'Cargando mapa…';
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.append(css);
+    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box), { scrollWheelZoom: false }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m);
+      pts.forEach(([la, lo, n, c, u, mn]) => L.circleMarker([la, lo], { radius: Math.min(18, 5 + Math.sqrt(c) * 1.4), color: '#0a47b8', weight: 1, fillColor: '#2f7bff', fillOpacity: .55 }).addTo(m).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver salidas</a>` : ''}`));
+      m.fitBounds(pts.map((p) => [p[0], p[1]]), { padding: [20, 20] }); };
+    s.onerror = () => { b.disabled = false; b.textContent = 'No se ha podido cargar el mapa. Reintentar'; };
+    document.head.append(s);
+  });
+
   // ---------- Comunidad viva: opiniones recientes, actividad, preguntas sin responder, encuestas ----------
   const tName = (t) => { const [k, ...r] = String(t).split(':'); const v = r.join(':'); return { barco: 'barcos/' + v + '/#foro', puerto: 'puertos/' + v + '/#foro', guia: 'guias/' + v + '/#foro', naviera: 'navieras/' + v + '/#foro', escala: 'ofertas/escala-' + v + '/#foro' }[k] || 'comunidad/'; };
   const prettyT = (t) => String(t).split(':').slice(1).join(' ').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
