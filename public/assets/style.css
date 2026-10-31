@@ -966,3 +966,4 @@ body:has(.m-cta) .locale-bar{bottom:calc(146px + env(safe-area-inset-bottom))}
 .fleet-tl li{flex:0 0 auto;min-width:132px;padding:22px 10px 0;border-top:3px solid var(--sea);position:relative;scroll-snap-align:start;display:flex;flex-direction:column;gap:4px}
 .fleet-tl li::before{content:"";position:absolute;top:-8px;left:10px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--sea)}
 .fleet-tl b{font-size:.95rem}.fleet-tl a{font-size:.85rem;text-decoration:none;color:var(--ink)}.fleet-tl a:hover{color:var(--sea)}.fleet-tl small{color:var(--muted);font-weight:700}
+ul.incl-dl{list-style:none;padding:0}ul.incl-dl li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}

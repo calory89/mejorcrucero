@@ -588,6 +588,7 @@ function portPage(p) {
     <li>Ten a mano el documento que exige tu itinerario. <a href="/guias/documentacion-crucero/">Guía de documentación</a>.</li>
   </ul></section>
   <section class="wrap block"><h2>Barcos que puedes comparar</h2><p class="muted">Las navieras cambian sus puertos de embarque cada temporada. Elige barco y comprueba en la web de reserva si sale desde ${esc(city)}.</p><div class="grid">${featured.slice(0, 4).map((s) => shipCard(s)).join('')}</div></section>
+  ${ps.length ? `<section class="cta-band cta-inline wrap"><div class="cta-in"><div><h2>Chollos desde ${esc(city)} en tu email</h2><p>Te avisamos cuando salga una oferta buena con embarque en ${esc(city)}. Como mucho una vez por semana.</p></div>${leadForm('newsletter-puerto-' + p.slug, 'Avisadme')}</div></section>` : ''}
   <div class="wrap">${forumBlock('puerto:' + p.slug, `Dudas sobre el puerto de ${city}`, { tabs: [['question', 'Preguntas'], ['comment', 'Consejos']] })}</div>`;
   return layout({ title: `Cruceros desde ${city}: puerto, excursiones y consejos`, desc: `Todo para embarcar en un crucero desde ${p.name}: puerto, excursiones, vuelos y cómo calcular el precio real.`, url: `/puertos/${p.slug}/`, body, crumbs: [['Inicio', '/'], ['Puertos', '/puertos/'], [city, `/puertos/${p.slug}/`]] });
 }
