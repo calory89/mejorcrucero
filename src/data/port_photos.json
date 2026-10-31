@@ -1946,6 +1946,20 @@
     "author": "Jerrye and Roy Klotz MD",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:COMMISSIONER%27S_HOUSE_IN_THE_ROYAL_DOCKYARD,_BERMUDA.jpg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
+    "ratio": 1.727,
+    "author": "Royal Navy",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Floating_dock_Bermuda_at_HM_Dockyard_Bermuda.jpeg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-5-640.webp",
+    "ratio": 1.501,
+    "author": "Seán Pòl Ó Creachmhaoil",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bastions_C_and_D_of_the_Keep_at_the_Royal_Naval_Dockyard_on_Ireland_Island,_Bermuda_with_two_6_inch_RBL_Mk_VII.jpg"
    }
   ]
  },
@@ -6686,7 +6700,30 @@
   "ratio": 1.333,
   "author": "Egghead06",
   "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:AnseLaReye_catholic_church.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:AnseLaReye_catholic_church.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/santa-lucia-2-640.webp",
+    "ratio": 1.333,
+    "author": "Just a Brazilian man from Brazil",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Castries,_Saint_Lucia_(51267509945).jpg"
+   },
+   {
+    "thumb": "/img/puertos/santa-lucia-3-640.webp",
+    "ratio": 1.502,
+    "author": "joncallas",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Fire_dancers_with_limbo_pole_Saint_Lucia.jpg"
+   },
+   {
+    "thumb": "/img/puertos/santa-lucia-4-640.webp",
+    "ratio": 1.333,
+    "author": "XeresNelro",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Near_Central_Park,_Soufriere_Saint_Lucia.jpg"
+   }
+  ]
  },
  "South Queensferry": {
   "slug": "south-queensferry",
@@ -6705,5 +6742,109 @@
   "author": "Gregor Rom",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Jeddah_Fahne.JPG"
+ },
+ "San Juan": {
+  "slug": "san-juan",
+  "thumb": "/img/puertos/san-juan-640.webp",
+  "large": "/img/puertos/san-juan-1280.webp",
+  "ratio": 1.333,
+  "author": "Farragutful",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:2013_Old_San_Juan_01.JPG",
+  "more": [
+   {
+    "thumb": "/img/puertos/san-juan-2-640.webp",
+    "ratio": 1.333,
+    "author": "Jorge Colomer",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Castillo_San_Felipe_del_Morro_in_San_Juan_Puerto_Rico.jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-juan-3-640.webp",
+    "ratio": 1.333,
+    "author": "https://www.flickr.com/photos/oquendo/5625625150/in/set-72157600856128577",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Old_San_Juan-Cruise_Ship.jpg"
+   },
+   {
+    "thumb": "/img/puertos/san-juan-4-640.webp",
+    "ratio": 1.432,
+    "author": "P. Hughes",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Old_San_Juan_-_City_Hall.jpg"
+   }
+  ]
+ },
+ "Santo Tomás": {
+  "slug": "santo-tomas",
+  "thumb": "/img/puertos/santo-tomas-640.webp",
+  "large": "/img/puertos/santo-tomas-1280.webp",
+  "ratio": 1.515,
+  "author": "Haakon S. Krohn",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Charlotte_Amalie_1.jpg"
+ },
+ "Bahía de las Islas": {
+  "slug": "bahia-de-las-islas",
+  "thumb": "/img/puertos/bahia-de-las-islas-640.webp",
+  "large": "/img/puertos/bahia-de-las-islas-1280.webp",
+  "ratio": 1.335,
+  "author": "W. Bulach",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:00_4801_Dolphins_-_Bay_of_Islands.jpg"
+ },
+ "St. George's (Granada)": {
+  "slug": "st-george-s-granada",
+  "thumb": "/img/puertos/st-george-s-granada-640.webp",
+  "large": "/img/puertos/st-george-s-granada-1280.webp",
+  "ratio": 1.357,
+  "author": "P. Hughes",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Grenada_-_St._George.jpg"
+ },
+ "Gothenburg": {
+  "slug": "gothenburg",
+  "thumb": "/img/puertos/gothenburg-640.webp",
+  "large": "/img/puertos/gothenburg-1280.webp",
+  "ratio": 1.333,
+  "author": "Image taken from the square 'Drottningtorget' by Martin Olsson (mnemo on wikiped",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Centralstationen_goteborg.jpg"
+ },
+ "Napier": {
+  "slug": "napier",
+  "thumb": "/img/puertos/napier-640.webp",
+  "large": "/img/puertos/napier-1280.webp",
+  "ratio": 3.844,
+  "author": "No machine-readable author provided. Christiaan assumed (based on copyright clai",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Napier,_New_Zealand_from_Sugar_Loaf_hill.jpg"
+ },
+ "Horta": {
+  "slug": "horta",
+  "thumb": "/img/puertos/horta-640.webp",
+  "large": "/img/puertos/horta-1280.webp",
+  "ratio": 2.457,
+  "author": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Vista_de_Horta_desde_el_mirador_de_Nossa_Senhora_da_Concei%C3%A7%C3%A3o,_Isla_de_Fayal,_Azores,_Portugal,_2020-07-26,_DD_13.jpg"
+ },
+ "Alta": {
+  "slug": "alta",
+  "thumb": "/img/puertos/alta-640.webp",
+  "large": "/img/puertos/alta-1280.webp",
+  "ratio": 1.333,
+  "author": "The original uploader was Haavis at Norwegian Wikipedia.",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Bilde-Alta_boligomraade.jpg"
+ },
+ "Kobe": {
+  "slug": "kobe",
+  "thumb": "/img/puertos/kobe-640.webp",
+  "large": "/img/puertos/kobe-1280.webp",
+  "ratio": 1.501,
+  "author": "663highland",
+  "license": "CC BY 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:151229_Kobe_Port_Japan01bs.jpg"
  }
 }
