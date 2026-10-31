@@ -1953,13 +1953,6 @@
     "author": "Seán Pòl Ó Creachmhaoil",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Bastions_C_and_D_of_the_Keep_at_the_Royal_Naval_Dockyard_on_Ireland_Island,_Bermuda_with_two_6_inch_RBL_Mk_VII.jpg"
-   },
-   {
-    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
-    "ratio": 1.716,
-    "author": "Wikimedia Commons",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Dockyard,_Camder_Hulks_and_Barracks.jpg"
    }
   ]
  },
@@ -6908,27 +6901,13 @@
  },
  "Ensenada": {
   "slug": "ensenada",
-  "thumb": "/img/puertos/ensenada-640.webp",
-  "large": "/img/puertos/ensenada-1280.webp",
-  "ratio": 1.656,
-  "author": "Brocken Inaglory",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:McWay_cove_1.jpg",
+  "thumb": "/img/puertos/ensenada-2-640.webp",
+  "large": "/img/puertos/ensenada-2-640.webp",
+  "ratio": 1.333,
+  "author": "Javiermkn",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Antiguo_Cuartel_de_la_Compa%C3%B1%C3%ADa_Fija_Ensenada.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/ensenada-2-640.webp",
-    "ratio": 1.333,
-    "author": "Javiermkn",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Antiguo_Cuartel_de_la_Compa%C3%B1%C3%ADa_Fija_Ensenada.jpg"
-   },
-   {
-    "thumb": "/img/puertos/ensenada-3-640.webp",
-    "ratio": 1.333,
-    "author": "Alistair Cunningham",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Coastline_north_of_Ensenada_-_panoramio_-_Alistair_Cunningham.jpg"
-   },
    {
     "thumb": "/img/puertos/ensenada-4-640.webp",
     "ratio": 1.576,
@@ -6971,20 +6950,6 @@
     "author": "Don Ramey Logan",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Montego_Bay_Photo_Don_Ramey_Logan.jpg"
-   },
-   {
-    "thumb": "/img/puertos/montego-bay-3-640.webp",
-    "ratio": 1.506,
-    "author": "Balou46",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:JM-montego-bay-bank.jpg"
-   },
-   {
-    "thumb": "/img/puertos/montego-bay-4-640.webp",
-    "ratio": 1.501,
-    "author": "Balou46",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:JM-montego-bay-nat-mus.jpg"
    }
   ]
  },
@@ -7031,35 +6996,12 @@
  },
  "Bermuda": {
   "slug": "bermuda",
-  "thumb": "/img/puertos/bermuda-640.webp",
-  "large": "/img/puertos/bermuda-1280.webp",
-  "ratio": 1.506,
-  "author": "Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:ISS017-E-10695_-_View_of_Bermuda.jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/bermuda-2-640.webp",
-    "ratio": 1.5,
-    "author": "Seán Pòl Ó Creachmhaoil",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:An_IOD_sloop_and_a_19th_Century_Bermudian_working_boat_in_Bermuda.jpg"
-   },
-   {
-    "thumb": "/img/puertos/bermuda-3-640.webp",
-    "ratio": 1.324,
-    "author": "British Army",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Battalion_Training_at_Tucker%27s_Town_Bermuda_of_the_3rd_Battalion_Royal_Fusiliers.jpg"
-   },
-   {
-    "thumb": "/img/puertos/bermuda-4-640.webp",
-    "ratio": 1.419,
-    "author": "Vincenzo Coronelli",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Bermuda_Coronelli.jpg"
-   }
-  ]
+  "thumb": "/img/puertos/bermuda-2-640.webp",
+  "large": "/img/puertos/bermuda-2-640.webp",
+  "ratio": 1.5,
+  "author": "Seán Pòl Ó Creachmhaoil",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:An_IOD_sloop_and_a_19th_Century_Bermudian_working_boat_in_Bermuda.jpg"
  },
  "Juneau": {
   "slug": "juneau",
@@ -7095,27 +7037,13 @@
  },
  "Skagway": {
   "slug": "skagway",
-  "thumb": "/img/puertos/skagway-640.webp",
-  "large": "/img/puertos/skagway-1280.webp",
-  "ratio": 1.483,
-  "author": "Ulises Icardi",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Autopista_Klondike,_en_su_acceso_a_la_frontera_con_Canad%C3%A1..jpg",
+  "thumb": "/img/puertos/skagway-2-640.webp",
+  "large": "/img/puertos/skagway-2-640.webp",
+  "ratio": 1.471,
+  "author": "Christopher Michel from San Francisco, USA",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Skagway_aerial_view.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/skagway-2-640.webp",
-    "ratio": 1.471,
-    "author": "Christopher Michel from San Francisco, USA",
-    "license": "CC BY 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Skagway_aerial_view.jpg"
-   },
-   {
-    "thumb": "/img/puertos/skagway-3-640.webp",
-    "ratio": 2.13,
-    "author": "Diego Delso",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Cementerio_de_la_fiebre_del_oro,_Skagway,_Alaska,_Estados_Unidos,_2017-08-26,_DD_42-44_PAN.jpg"
-   },
    {
     "thumb": "/img/puertos/skagway-4-640.webp",
     "ratio": 1.45,
@@ -7204,35 +7132,12 @@
  },
  "Montevideo": {
   "slug": "montevideo",
-  "thumb": "/img/puertos/montevideo-640.webp",
-  "large": "/img/puertos/montevideo-1280.webp",
+  "thumb": "/img/puertos/montevideo-2-640.webp",
+  "large": "/img/puertos/montevideo-2-640.webp",
   "ratio": 1.333,
-  "author": "Elemaki",
-  "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:10._Estaci%C3%B3n_de_Buqueb%C3%BAs_(3).JPG",
-  "more": [
-   {
-    "thumb": "/img/puertos/montevideo-2-640.webp",
-    "ratio": 1.333,
-    "author": "Felipe Restrepo Acosta",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:2016_Avenida_Italia,_Br._Gral._Artigas_y_Jorge_Canning._Hospital_Italiano_Umberto_I._En_Montevideo,_Uruguay.jpg"
-   },
-   {
-    "thumb": "/img/puertos/montevideo-3-640.webp",
-    "ratio": 1.316,
-    "author": "Felipe Restrepo Acosta",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:2016_cementerio_Montevideo.jpg"
-   },
-   {
-    "thumb": "/img/puertos/montevideo-4-640.webp",
-    "ratio": 1.333,
-    "author": "Stefano Vigorelli",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Alcoh%C3%B3licos_An%C3%B3nimos,_Montevideo_URU.jpg"
-   }
-  ]
+  "author": "Felipe Restrepo Acosta",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:2016_Avenida_Italia,_Br._Gral._Artigas_y_Jorge_Canning._Hospital_Italiano_Umberto_I._En_Montevideo,_Uruguay.jpg"
  },
  "Santa Cruz de la Palma": {
   "slug": "santa-cruz-de-la-palma",
@@ -7283,15 +7188,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:Male%27_Hukuru_Miskiy_1.jpg"
    }
   ]
- },
- "Córcega": {
-  "slug": "corcega",
-  "thumb": "/img/puertos/corcega-640.webp",
-  "large": "/img/puertos/corcega-1280.webp",
-  "ratio": 1.343,
-  "author": "Fondo Antiguo de la Biblioteca de la Universidad de Sevilla from Sevilla, España",
-  "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%22Corsica_Insula%22_(21632102494).jpg"
  },
  "Zakynthos": {
   "slug": "zakynthos",
