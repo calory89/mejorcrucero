@@ -295,14 +295,25 @@
       const [sails, ships] = await Promise.all([getJson('sailings.json'), getShips()]);
       const v = Object.fromEntries(p);
       const [nmin, nmax] = (v.noches || '0-999').split('-').map(Number);
-      const q = (v.q || '').toLowerCase();
+      // Búsqueda por palabras: sin tildes, sin palabras vacías; "junio" filtra el mes y "barato" ordena por precio
+      const fold = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const MES_N = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      const STOP = new Set(['crucero', 'cruceros', 'de', 'del', 'en', 'el', 'la', 'los', 'las', 'por', 'para', 'con', 'y', 'a', 'un', 'una', 'desde', 'barato', 'baratos', 'barata', 'oferta', 'ofertas', 'precio', 'precios', 'vs', 'o']);
+      const toks = fold(v.q).split(/[^a-z0-9]+/).filter(Boolean);
+      const qm = toks.map((t) => MES_N.indexOf(t)).find((i) => i >= 0); if (qm != null && !v.mes) v.mes = String(qm + 1);
+      if (toks.some((t) => /^barat/.test(t)) && !v.orden) v.orden = 'precio';
+      const qt = toks.filter((t) => !STOP.has(t) && MES_N.indexOf(t) < 0 && t.length > 1);
+      const q = '';
+      // Páginas (guías, herramientas, comparativas, rankings…) que encajan con las palabras
+      if (qt.length) getJson('paginas.json').then((pg) => { const sc = pg.map(([t, u]) => { const h = fold(t + ' ' + u.replace(/[-/]/g, ' ')); const n = qt.filter((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1)))).length; return [n, t, u]; }).filter((r, _, all) => { const best = Math.max(...all.map((z) => z[0])); return best > 0 && r[0] === best; }).sort((a, b) => { const pr = (u) => (/^\/(guias|herramientas|comparativas)\//.test(u) ? 0 : 1); return b[0] - a[0] || pr(a[2]) - pr(b[2]) || a[1].length - b[1].length; }).slice(0, 8);
+        const box = $('#s-pages'); if (!box) return; box.hidden = !sc.length; box.innerHTML = sc.length ? `<h2 class="h-sm">Páginas</h2><ul class="mini mini-grid">${sc.map(([, t, u]) => `<li><a href="${BASE}${u.slice(1)}"><b>${esc(t)}</b></a></li>`).join('')}</ul>` : ''; }).catch(() => {}); else { const box = $('#s-pages'); if (box) box.hidden = true; }
       const res = sails.filter((x) => {
         const s = ships.find((y) => y.slug === x.ship) || {};
         const min = Math.min(...Object.entries(x.prices || {}).filter(([k, val]) => val && (!v.cabina || k === v.cabina)).map(([, val]) => val));
         if (!isFinite(min)) return false;
         x._min = min; x._ppn = min / x.nights; x._s = s;
         return (!v.destino || x.destination === v.destino) && (!v.mes || new Date(x.date).getMonth() + 1 === +v.mes) && (!v.puerto || x.depart_port_slug === v.puerto) && x.nights >= nmin && x.nights <= nmax && (!v.max || min <= +v.max)
-          && (!v.perfil || (v.perfil === 'adultos' ? x.adults_only : !x.adults_only)) && (!q || `${s.name} ${s.lineShort} ${x.itinerary?.name} ${x.depart_port}`.toLowerCase().includes(q));
+          && (!v.perfil || (v.perfil === 'adultos' ? x.adults_only : !x.adults_only)) && (!qt.length || (() => { const h = fold(`${s.name} ${s.lineShort} ${x.itinerary?.name} ${x.depart_port} ${(x.itinerary?.ports || []).map((pp) => pp.name).join(' ')} ${(meta.dest.find((d) => d.slug === x.destination) || {}).name || ''}`); return qt.every((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1)))); })());
       }).sort(v.orden === 'precio' ? (a, b) => a._min - b._min : v.orden === 'fecha' ? (a, b) => a.date.localeCompare(b.date) : (a, b) => a._ppn - b._ppn);
       $('#s-count').textContent = sails.length ? `${res.length} salida${res.length === 1 ? '' : 's'}` : '';
       $('#s-results').innerHTML = res.slice(0, 60).map((x) => `<a class="card sail-card" href="${BASE}salidas/${x.id}/"><div class="card-body"><span class="eyebrow">${esc(x._s.lineShort || '')} · ${esc(x._s.name || x.ship)}</span><h3>${esc(x.itinerary?.name || 'Crucero')}</h3><p class="muted small">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${x.nights} noches · desde ${esc(x.depart_port)}</p><p class="price">desde <b>${eur(x._min)}</b> <span class="muted small">(${eur(x._ppn)}/noche)</span></p></div></a>`).join('');

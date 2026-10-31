@@ -232,7 +232,7 @@ export function forumBlock(thread, title, opts = {}) {
 const NAV = [['/ofertas/', 'Ofertas'], ['/barcos/', 'Barcos'], ['/destinos/', 'Destinos'], ['/herramientas/', 'Herramientas'], ['/comunidad/', 'Comunidad']];
 
 export function layout({ title, desc, url, body, schema = [], ogType = 'website', crumbs = null, noindex = false, og = '/og.png', image = null, preload = null, preloadMedia = null }) {
-  pages.push({ url, noindex });
+  pages.push({ url, noindex, title });
   // Descripción de 160 caracteres como máximo, cortada por palabra
   if (desc && desc.length > 160) desc = desc.slice(0, 157).replace(/\s+\S*$/, '').replace(/[,;:·\s]+$/, '') + '…';
   const fullTitle = url === '/' ? title : title.length > 55 ? title : `${title} | MejorCrucero`;
