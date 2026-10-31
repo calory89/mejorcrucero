@@ -392,7 +392,7 @@
       try { history.scrollRestoration = 'manual'; sessionStorage.removeItem('mc_back'); } catch {}
       limit = Math.max(PAGE, back.limit || PAGE); const go = () => { apply(true); requestAnimationFrame(() => scrollTo(0, back.y)); };
       if (limit > cards.length) { apply(true); ensureAll().then(go); } else go();
-    } else apply();
+    } else (window.requestIdleCallback || ((fn) => setTimeout(fn, 1)))(() => apply(), { timeout: 800 }); // tras pintar: la página ya llega ordenada
   });
   $$('.js-share-search').forEach((b) => b.addEventListener('click', async () => {
     const u = location.href, t = document.querySelector('h1')?.textContent.trim() || 'Ofertas de cruceros';

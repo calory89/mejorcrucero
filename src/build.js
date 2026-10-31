@@ -496,7 +496,7 @@ function comparisonPage(a, b) {
   if (A.tier !== B.tier) verdict.push(`${A.short} es de gama ${TIER[A.tier].toLowerCase()} y ${B.short} de gama ${TIER[B.tier].toLowerCase()}: compara siempre con el precio real.`);
   const url = `/comparativas/${a}-vs-${b}/`;
   const body = `<section class="wrap block page-h"><h1>${esc(A.short)} vs ${esc(B.short)}: ¿cuál es mejor?</h1><p class="lead-p">Comparamos flota, tamaño, edad, espacio por pasajero, cargos de servicio y estilo con datos públicos, para que elijas con criterio.</p></section>
-  <section class="wrap block"><div class="table-wrap"><table class="cmp-t"><thead><tr><th></th><th><a href="/navieras/${a}/">${esc(A.short)}</a></th><th><a href="/navieras/${b}/">${esc(B.short)}</a></th></tr></thead><tbody>
+  <section class="wrap block"><div class="table-wrap"><table class="cmp-t"><thead><tr><th><span class="sr">Dato</span></th><th><a href="/navieras/${a}/">${esc(A.short)}</a></th><th><a href="/navieras/${b}/">${esc(B.short)}</a></th></tr></thead><tbody>
   ${row('Estilo', esc(A.blurb), esc(B.blurb))}
   ${row('Gama', TIER[A.tier], TIER[B.tier])}
   ${row('Barcos analizados', sa.n, sb.n, cmpNum(sa.n, sb.n))}
@@ -1193,7 +1193,7 @@ function shipVsPage(a, b, k) {
   if (minP(a) && minP(b)) { const [w] = minP(a) < minP(b) ? [a, b] : [b, a]; facts.push(`Hoy sale más barato el ${w.name}: desde ${eur(minP(w))} por persona.`); }
   const body = `<section class="wrap block page-h"><h1>${esc(a.name)} o ${esc(b.name)}: ¿cuál elegir?</h1><p class="lead-p">Comparamos los dos barcos con los mismos datos de su ficha: nota MejorCrucero, tamaño, espacio y precio de hoy.</p>${facts.length ? `<ul class="vs-facts">${facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}</section>
   <section class="wrap block"><h2>Tamaño comparado</h2><div class="vs-size">${bar(a, mx)}${bar(b, mx)}</div></section>
-  <section class="wrap block"><div class="table-wrap"><table class="vs-t"><thead><tr><th></th><th><a href="/barcos/${a.slug}/">${esc(a.name)}</a></th><th><a href="/barcos/${b.slug}/">${esc(b.name)}</a></th></tr></thead><tbody>
+  <section class="wrap block"><div class="table-wrap"><table class="vs-t"><thead><tr><th><span class="sr">Dato</span></th><th><a href="/barcos/${a.slug}/">${esc(a.name)}</a></th><th><a href="/barcos/${b.slug}/">${esc(b.name)}</a></th></tr></thead><tbody>
   ${row('Naviera', (s) => esc(s.lineShort))}${row('Nota MejorCrucero', (s) => (s.sc != null ? `${s.sc}/100` : null), null, cmp((s) => s.sc))}
   ${parts.map((l) => row(esc(l), (s) => { const p = pt(s, l); return p ? `${String(p.pts).replace('.', ',')}/${p.max}` : null; }, null, cmp((s) => pt(s, l)?.pts))).join('')}
   ${row('Año', (s) => s.year, null, cmp((s) => s.year))}${row('Arqueo', (s) => `${fmt(s.gt)} GT`)}${row('Pasajeros', (s) => (s.pax ? fmt(s.pax) : null))}${row('GT por pasajero', (s) => (s.ratio ? dec(s.ratio) : null), null, cmp((s) => s.ratio))}
