@@ -1,0 +1,75 @@
+{
+  "_info": "Qué incluye y normas de cada naviera, con fuente. Revisado: 2026-10-31",
+  "costa": {
+    "incluido": ["Pensión completa", "Espectáculos en el teatro", "Entretenimiento para todas las edades", "Clubs infantiles de 3 a 17 años", "Limpieza diaria del camarote"],
+    "no_incluido": ["Bebidas sin paquete My Drinks", "Wifi", "Excursiones", "Spa y peluquería", "Lavandería"],
+    "propinas": "Cuota de servicio obligatoria de 11 o 12 € por adulto y noche según crucero, 5,5 o 6 € por niño y gratis para menores de 4 años, aunque algunas tarifas ya la incluyen.",
+    "bebidas": "Las bebidas solo están incluidas si se añade el paquete My Drinks o se reserva la tarifa Todo Incluido.",
+    "edad_minima": "Bebés desde 6 meses (12 meses en cruceros de 15 días o más y transoceánicos) y los menores de 18 años no pueden viajar solos.",
+    "vestimenta": "Ambiente informal, con ropa elegante para la cena de gala y cómoda durante el día.",
+    "wifi": "Wifi de pago en todo el barco, por uso o con planes prepago cargados a la Tarjeta Costa.",
+    "idioma": "La web oficial habla de ambiente internacional y permite elegir idioma en las excursiones, sin garantizar personal en español.",
+    "fuentes": [
+      "https://www.costacruceros.es/faq.html",
+      "https://www.costacruceros.es/",
+      "https://www.costacruceros.es/barcos/toscana.html",
+      "https://www.costacruceros.es/la-experiencia/todo-incluido.html",
+      "https://www.costacruceros.es/content/dam/costa/costa-asset/pdf-2026/es/Informaci%C3%B3n%20m%C3%A9dica%20y%20los%20requisitos%20para%20viajar%20con%20Costa%20Cruceros.pdf",
+      "https://www.costacruceros.es/content/dam/costa/costa-asset/pdf/es/Informaciones_utiles_E.pdf",
+      "https://www.costacruceros.com/content/dam/costa/costa-asset/pdf/ra/Terminos_y_Condiciones_generales_Costa_Cruceros_October_25.pdf"
+    ]
+  },
+  "norwegian": {
+    "incluido": ["Restaurantes gratuitos y buffet", "Espectáculos a bordo", "Piscinas y jacuzzis", "Club infantil de 3 a 17 años", "Gimnasio"],
+    "no_incluido": ["Restaurantes de especialidad", "Alcohol y refrescos", "Wifi", "Excursiones", "Spa y cargo por servicio"],
+    "propinas": "Cargo por servicio diario de 20 USD por persona (25 USD en The Haven y suites) para mayores de 3 años, según la web de EE. UU.; no hemos verificado el importe en euros para España.",
+    "bebidas": "Incluye café normal, té, agua con hielo, té helado y algunos zumos en el desayuno del buffet.",
+    "edad_minima": "Bebés desde 6 meses (12 meses con 3 o más días seguidos de navegación) y los menores de 21 deben compartir camarote con un mayor de 21 en cruceros con escala en EE. UU., Canadá o China (18 en el resto).",
+    "vestimenta": "Sin código formal obligatorio, se pide ropa arreglada en restaurantes y nada de bañador.",
+    "wifi": "El wifi no está incluido en la tarifa básica y se paga aparte.",
+    "idioma": null,
+    "fuentes": [
+      "https://ncl.com/cruise-faq/cruise-fare-includes",
+      "https://www.ncl.com/cruise-faq/what-is-onboard-service-charge",
+      "https://www.ncl.com/faq/what-is-ncl-onboard-service-charge",
+      "https://www.ncl.com/es/en/cruise-faq/requirements",
+      "https://www.ncl.com/fr/en/cruise-faq/are-there-any-dress-codes-onboard-restaurants-or-bars"
+    ]
+  },
+  "carnival": {
+    "incluido": ["Restaurante principal y buffet Lido", "Espectáculos y música en directo", "Piscinas y toboganes", "Club infantil de 2 a 17 años", "Gimnasio"],
+    "no_incluido": ["Restaurantes de especialidad", "Bebidas de bar", "Wifi", "Excursiones", "Spa y casino"],
+    "propinas": "Propina diaria de 17 USD por persona en camarotes estándar y 19 USD en suites para mayores de 2 años, más un 20% de servicio en bebidas.",
+    "bebidas": "Incluye agua no embotellada, limonada, té helado, chocolate caliente y café y té normales en el restaurante principal y el Lido.",
+    "edad_minima": "Bebés desde 6 meses (12 meses con más de 2 días seguidos de navegación) y los menores de 21 deben viajar con un familiar o tutor de 25 años o más.",
+    "vestimenta": "Estilo cruise casual la mayoría de noches y una o dos noches de cruise elegant en el restaurante principal.",
+    "wifi": "Wifi de pago con planes desde 20,40 USD por día comprados antes del crucero.",
+    "idioma": null,
+    "fuentes": [
+      "https://help.carnival.com/app/answers/detail/a_id/3861/",
+      "https://www.carnival.com/help/gratuities-tips",
+      "https://help.carnival.com/app/answers/detail/a_id/2545",
+      "https://help.carnival.com/app/answers/detail/a_id/3668/~/traveling-with-infants-and-toddlers",
+      "https://help.carnival.com/app/answers/detail/a_id/10972/",
+      "https://www.carnival.com/awaywego/cruising-fun/how-to-plan/best-cruise-tips-first-timers",
+      "https://www.carnival.com/internet-plans"
+    ]
+  },
+  "celestyal": {
+    "incluido": ["Pensión completa", "Bebidas no alcohólicas básicas", "Wifi básico", "Espectáculos y actividades", "Tasas portuarias y propinas"],
+    "no_incluido": ["Bebidas alcohólicas", "Excursiones", "Vuelos y hoteles", "Wifi con más datos", "Gastos personales"],
+    "propinas": "Las propinas y las tasas portuarias están siempre incluidas en la tarifa.",
+    "bebidas": "Incluye café de filtro, té, agua y zumo ilimitados en estaciones de día y refrescos con las comidas en los restaurantes principales, pero no el alcohol.",
+    "edad_minima": "Bebés desde 3 meses y los menores de 18 años solo embarcan acompañados de un padre o tutor.",
+    "vestimenta": "Noche de gala con vestimenta formal sugerida en cruceros de 4 y 7 noches y sin pantalón corto en las cenas.",
+    "wifi": "Wifi Essential gratuito para navegar, correo y mensajería, con paquetes mayores de pago.",
+    "idioma": null,
+    "fuentes": [
+      "https://celestyal.com/whats-included/",
+      "https://celestyal.com/whats-included/port-charges-and-gratuities/",
+      "https://celestyal.com/content/dam/celestyal/wordpress-assets/celestyal-website/2023/07/celestyal-uk-conditions-of-carriage-2023-1.pdf",
+      "https://celestyal.com/us/terms-and-conditions/booking-conditions",
+      "https://widgety-assets.s3.amazonaws.com/2024/01/18/10/12/07/ac947827-afcc-4d67-bfd0-e4132363fe54/Celestyal%20Cruises,%20Know%20Before%20You%20Go%20Brochure%202024%20-%20JOURNEY.pdf"
+    ]
+  }
+}

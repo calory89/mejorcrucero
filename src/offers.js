@@ -131,6 +131,13 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     if (!alts.length) return '';
     return `<img src="${esc(alts[0][0])}" data-alt="${esc(alts.map(([u, n]) => `${u}::${n}`).join('|'))}" alt="" loading="lazy" decoding="async" width="640" height="427" class="ship-photo"><span class="ph-cap"></span>`;
   }
+  // Mini gráfica del precio en la tarjeta (solo si hay 3 comprobaciones o más y el precio se ha movido)
+  function cardSpark(x) {
+    const h = (x.history || []).map((z) => z.price).filter((v) => v > 0); if (h.length < 3 || new Set(h).size < 2) return '';
+    const W = 56, H = 16, mn = Math.min(...h), mx = Math.max(...h), pts = h.map((v, i) => `${Math.round((i / (h.length - 1)) * W)},${Math.round(H - 2 - ((v - mn) / (mx - mn || 1)) * (H - 4))}`).join(' ');
+    const down = h[h.length - 1] < h[0];
+    return ` <svg class="spark ${down ? 'sp-down' : 'sp-up'}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Precio: de ${eur(h[0])} a ${eur(h[h.length - 1])} en ${h.length} comprobaciones"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+  }
   function card(x) {
     const s = bySlug[x.ship], d = deal(x), r = real(x), ph = photoOf(x);
     const lineN = s?.lineShort || Object.values(LINES).find((z) => z.slug === x.line)?.short || '';
@@ -141,7 +148,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     <p class="card-when">${fdate(x.date, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}, desde ${esc(x.depart_port)}${sameCount(x) ? ` <span class="more-d">+${sameCount(x)} fecha${sameCount(x) > 1 ? 's' : ''}</span>` : ''}</p>
     <p class="ports-line">${portsOf(x).slice(1, 5).map((p) => `<span>${esc(p.name)}</span>`).join('')}${portsOf(x).length > 5 ? ` <span class="more-p">+${portsOf(x).length - 5}</span>` : ''}</p>
     ${tags.length ? `<p class="card-tags">${tags.map(([c, t]) => `<span${c ? ` class="${c}"` : ''}>${t}</span>`).join('')}</p>` : ''}
-    <div class="card-foot"><p class="price"><span class="tkt"><small>desde</small><b>${eur(r.tarifa)}</b><small>por persona</small></span><span class="price-real">${r.partial ? 'Tasas aparte' : `Precio real ${eur(r.total)}`}${d.disc >= 10 ? ` <span class="badge-drop">${d.disc} % menos que el catálogo</span>` : ''}</span><span class="ppn-v"><b>${eur(r.partial ? ppnT(x) : ppn(x))}</b> por noche${r.partial ? ' sin tasas' : ''}</span></p>${lowAvail(x) ? '<p class="low-av">Quedan pocas plazas, según la naviera</p>' : ''}${x.updated ? `<p class="checked">Precio comprobado el ${fdate(x.updated.slice(0, 10), { day: 'numeric', month: 'short' })}</p>` : ''}</div></div></a>`;
+    ${s?.rating ? `<p class="card-rate small"><span aria-hidden="true">★</span> ${String(s.rating.avg.toFixed(1)).replace('.', ',')} <span class="muted">(${s.rating.n} opiniones de pasajeros)</span></p>` : ''}
+    <div class="card-foot"><p class="price"><span class="tkt"><small>desde</small><b>${eur(r.tarifa)}</b><small>por persona</small></span><span class="price-real">${r.partial ? 'Tasas aparte' : `Precio real ${eur(r.total)}`}${d.disc >= 10 ? ` <span class="badge-drop">${d.disc} % menos que el catálogo</span>` : ''}</span><span class="ppn-v"><b>${eur(r.partial ? ppnT(x) : ppn(x))}</b> por noche${r.partial ? ' sin tasas' : ''}</span></p>${lowAvail(x) ? '<p class="low-av">Quedan pocas plazas, según la naviera</p>' : ''}${x.updated ? `<p class="checked">Precio comprobado el ${fdate(x.updated.slice(0, 10), { day: 'numeric', month: 'short' })}${cardSpark(x)}</p>` : ''}</div></div></a>`;
   }
 
 
