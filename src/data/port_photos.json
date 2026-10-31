@@ -1953,6 +1953,13 @@
     "author": "Seán Pòl Ó Creachmhaoil",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Bastions_C_and_D_of_the_Keep_at_the_Royal_Naval_Dockyard_on_Ireland_Island,_Bermuda_with_two_6_inch_RBL_Mk_VII.jpg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
+    "ratio": 1.671,
+    "author": "Royal Navy",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:HMS_Exeter_at_Royal_Naval_Dockyard,_Ireland_Island,_Imperial_fortress_of_Bermuda_with_Gibb%27s_Hill_Lighthouse_beyond,_ca_1936.jpg"
    }
   ]
  },
@@ -6914,6 +6921,20 @@
     "author": "Michael Boyd",
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Cruiseport_Village,_Bahia_Ensenada,_Ensenada,_B.C.,_Mexico_-_panoramio_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/ensenada-3-640.webp",
+    "ratio": 1.438,
+    "author": "Adam Jones from Kelowna, BC, Canada",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Cultural_Center_-_Former_Hotel_Riviera_-_Ensenada,_BC_-_Mexico_-_02_(6924922029)_(cropped).jpg"
+   },
+   {
+    "thumb": "/img/puertos/ensenada-5-640.webp",
+    "ratio": 1.335,
+    "author": "Isaacmoon",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ensenada,_Baja_California_(cropped).JPG"
    }
   ]
  },
@@ -7001,7 +7022,30 @@
   "ratio": 1.5,
   "author": "Seán Pòl Ó Creachmhaoil",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:An_IOD_sloop_and_a_19th_Century_Bermudian_working_boat_in_Bermuda.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:An_IOD_sloop_and_a_19th_Century_Bermudian_working_boat_in_Bermuda.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/bermuda-3-640.webp",
+    "ratio": 1.501,
+    "author": "JoeyBagODonuts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Front_Street,_Hamilton,_Bermuda.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bermuda-4-640.webp",
+    "ratio": 1.333,
+    "author": "Michael A. Orlando",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gibb%27s_Hill_Lighthouse,_Bermuda_July_2015_-_panoramio.jpg"
+   },
+   {
+    "thumb": "/img/puertos/bermuda-5-640.webp",
+    "ratio": 1.333,
+    "author": "Adi Marshall",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Harrington_Sound,_Bermuda.jpg"
+   }
+  ]
  },
  "Juneau": {
   "slug": "juneau",
@@ -7050,6 +7094,20 @@
     "author": "Diego Delso",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Centro_hist%C3%B3rico_de_Skagway,_Alaska,_Estados_Unidos,_2017-08-18,_DD_41.jpg"
+   },
+   {
+    "thumb": "/img/puertos/skagway-3-640.webp",
+    "ratio": 1.821,
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Centro_hist%C3%B3rico_de_Skagway,_Alaska,_Estados_Unidos,_2017-08-18,_DD_45.jpg"
+   },
+   {
+    "thumb": "/img/puertos/skagway-5-640.webp",
+    "ratio": 1.333,
+    "author": "Notyourbroom",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kirmses_advertisement_Skagway_2009.jpg"
    }
   ]
  },
@@ -7137,7 +7195,30 @@
   "ratio": 1.333,
   "author": "Felipe Restrepo Acosta",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:2016_Avenida_Italia,_Br._Gral._Artigas_y_Jorge_Canning._Hospital_Italiano_Umberto_I._En_Montevideo,_Uruguay.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:2016_Avenida_Italia,_Br._Gral._Artigas_y_Jorge_Canning._Hospital_Italiano_Umberto_I._En_Montevideo,_Uruguay.jpg",
+  "more": [
+   {
+    "thumb": "/img/puertos/montevideo-3-640.webp",
+    "ratio": 1.501,
+    "author": "Intendencia de Montevideo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Atardecer_en_Pocitos,_Montevideo,_Uruguay.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montevideo-4-640.webp",
+    "ratio": 1.499,
+    "author": "Intendencia de Montevideo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Avenida_18_de_Julio_Montevideo,_Uruguay_2021.jpg"
+   },
+   {
+    "thumb": "/img/puertos/montevideo-5-640.webp",
+    "ratio": 1.501,
+    "author": "Intendencia de Montevideo",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Calle_Washington_en_Ciudad_Vieja,_Montevideo,_Uruguay.jpg"
+   }
+  ]
  },
  "Santa Cruz de la Palma": {
   "slug": "santa-cruz-de-la-palma",
@@ -7272,5 +7353,68 @@
   "author": "Sturlast~iswiki",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%C3%8Dsafj%C3%B6r%C3%B0ur_12_June_2019.jpg"
+ },
+ "Córcega": {
+  "slug": "corcega",
+  "thumb": "/img/puertos/corcega-640.webp",
+  "large": "/img/puertos/corcega-1280.webp",
+  "ratio": 1.501,
+  "author": "Jean-Pol GRANDMONT",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:0_Aiguilles_de_Bavella_JPG1.jpg"
+ },
+ "Puerto Vila": {
+  "slug": "puerto-vila",
+  "thumb": "/img/puertos/puerto-vila-640.webp",
+  "large": "/img/puertos/puerto-vila-1280.webp",
+  "ratio": 1.495,
+  "author": "Phillip Capper from Wellington, New Zealand",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Port_Vila_aerial.jpg"
+ },
+ "Golfo degli Aranci": {
+  "slug": "golfo-degli-aranci",
+  "thumb": "/img/puertos/golfo-degli-aranci-640.webp",
+  "large": "/img/puertos/golfo-degli-aranci-1280.webp",
+  "ratio": 1.501,
+  "author": "Gianni Careddu",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Golfo_Aranci_-_Panorama_(02).JPG"
+ },
+ "Grundafjord": {
+  "slug": "grundafjord",
+  "thumb": "/img/puertos/grundafjord-640.webp",
+  "large": "/img/puertos/grundafjord-1280.webp",
+  "ratio": 2.443,
+  "author": "Chensiyuan",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:1_grundarfj%C3%B6r%C3%B0ur_2017_aerial_pano.jpg"
+ },
+ "Dun Laoghaire": {
+  "slug": "dun-laoghaire",
+  "thumb": "/img/puertos/dun-laoghaire-640.webp",
+  "large": "/img/puertos/dun-laoghaire-1280.webp",
+  "ratio": 1.333,
+  "author": "Ave Maria Mõistlik",
+  "license": "CC BY-SA 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:Dun.Laoghaire.009.jpg"
+ },
+ "Torshavn": {
+  "slug": "torshavn",
+  "thumb": "/img/puertos/torshavn-640.webp",
+  "large": "/img/puertos/torshavn-1280.webp",
+  "ratio": 1.501,
+  "author": "Stig Nygaard from Copenhagen, Denmark",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Tinganes_57.jpg"
+ },
+ "St. Peter Port": {
+  "slug": "st-peter-port",
+  "thumb": "/img/puertos/st-peter-port-640.webp",
+  "large": "/img/puertos/st-peter-port-1280.webp",
+  "ratio": 1.333,
+  "author": "AlanFord at English Wikipedia",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:StPeterPortSouth.jpg"
  }
 }
