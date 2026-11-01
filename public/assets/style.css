@@ -1004,3 +1004,5 @@ table.m20.collapsed tbody tr:nth-child(n+7){display:table-row}
 /* Menú móvil: el desenfoque de la cabecera hacía que el menú "fijo" quedara recortado a la cabecera */
 .top:has(.burger[open]){backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--card)}
 @media (max-width:760px){.burger[open] .burger-nav{height:calc(100dvh - 64px);background:var(--card)}body:has(.burger[open]){overflow:hidden}}
+.fcol summary{list-style:none;cursor:default}.fcol summary::-webkit-details-marker{display:none}.fcol summary h2{margin:0 0 10px}
+@media (max-width:800px){.foot-in{grid-template-columns:1fr!important;gap:0}.fcol{border-top:1px solid rgba(255,255,255,.12)}.fcol summary{cursor:pointer;padding:14px 0;display:flex;justify-content:space-between;align-items:center}.fcol summary h2{margin:0}.fcol summary::after{content:"+";font-size:1.3rem;color:#B9C7D9}.fcol[open] summary::after{content:"–"}.fcol ul{padding-bottom:12px}}

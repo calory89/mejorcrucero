@@ -33,12 +33,19 @@
   const track = (name, target = '', variant = '') => api('/evt', { body: { name, page: PAGE, target, variant } }).catch(() => {});
 
   // ---------- Tema claro / oscuro ----------
+  const themeNow = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const themeLbl = () => $$('.js-theme span').forEach((s) => { s.textContent = themeNow() === 'dark' ? 'Modo claro' : 'Modo oscuro'; });
+  themeLbl();
   $$('.js-theme').forEach((b) => b.addEventListener('click', () => {
-    const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    const next = cur === 'dark' ? 'light' : 'dark';
+    const next = themeNow() === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('mc_theme', next); } catch {}
+    themeLbl();
   }));
+  // Pie: columnas plegadas en móvil (en escritorio, abiertas)
+  if (matchMedia('(max-width: 800px)').matches) $$('.fcol').forEach((d) => { d.open = false; });
+  // Menú: el botón dice "Cerrar menú" cuando está abierto
+  $$('.burger').forEach((d) => d.addEventListener('toggle', () => { const s = $('summary', d); if (s) s.setAttribute('aria-label', d.open ? 'Cerrar menú' : 'Abrir menú'); }));
 
   // ---------- Service worker (PWA) ----------
   if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', () => navigator.serviceWorker.register(BASE + 'sw.js').catch(() => {}));
