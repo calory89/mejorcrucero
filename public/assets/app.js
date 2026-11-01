@@ -389,7 +389,7 @@
         const vals = val ? sel.map(val) : [];
         const top = val ? Math.max(...vals) : null;
         return `<tr><th scope="row">${lbl}</th>${sel.map((s, i) => `<td class="${val && sel.length > 1 && vals[i] === top ? 'best' : ''}">${f(s)}</td>`).join('')}</tr>`;
-      }).join('')}</tbody></table></div>`;
+      }).join('')}</tbody></table></div>${sel.length > 1 && sel.every((z) => z.gt) ? (() => { const mx = Math.max(...sel.map((z) => z.gt)); return `<h2 class="h-sm">Tamaño, a escala</h2><div class="vs-size">${sel.map((z) => `<div class="vs-bar"><span style="width:${Math.max(8, Math.round((z.gt / mx) * 100))}%"></span><b>${esc(z.name)}</b> <small>${num(z.gt)} GT${z.pax ? ` · ${num(z.pax)} pasajeros` : ''}</small></div>`).join('')}</div><p class="small muted">Barras proporcionales al arqueo bruto (GT), la medida oficial del volumen del barco.</p>`; })() : ''}`;
     };
     cmp.addEventListener('input', render);
     render();

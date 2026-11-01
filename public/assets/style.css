@@ -1065,3 +1065,4 @@ input[type=checkbox]{vertical-align:middle;margin:0 6px 0 0}
 @media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}}
 .s-voice{margin-top:6px}.s-fix{color:var(--ink-2);margin:4px 0 0}
 .map-tall{height:min(70vh,620px)!important}
+.foot{content-visibility:auto;contain-intrinsic-size:auto 700px}
