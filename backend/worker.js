@@ -51,7 +51,28 @@ const SITE = 'https://mejorcrucero.com';
 const fold = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const eurF = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
 const fecha = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-const confirmToken = async (env, email) => (await sha((env.SALT || 'mc') + ':confirm:' + email)).slice(0, 20);
+// Sal secreta de los enlaces de confirmar y de baja: la del secreto SALT o, si no existe, una aleatoria guardada en D1
+let SALT_CACHE = null;
+async function saltOf(env) {
+  if (env.SALT) return env.SALT;
+  if (SALT_CACHE) return SALT_CACHE;
+  let r = await env.DB.prepare("SELECT value FROM settings WHERE key='salt'").first();
+  if (!r) { const v = [...crypto.getRandomValues(new Uint8Array(32))].map((x) => x.toString(16).padStart(2, '0')).join(''); await env.DB.prepare("INSERT OR IGNORE INTO settings(key,value) VALUES('salt',?)").bind(v).run(); r = await env.DB.prepare("SELECT value FROM settings WHERE key='salt'").first(); }
+  return (SALT_CACHE = r.value);
+}
+// El id de usuario es público (sale en perfiles y mensajes); para actuar como ese usuario hace falta su clave privada (ukey),
+// que solo guarda su navegador. La primera vez que un id se usa con una clave, queda unido a ella.
+async function ownsUser(env, id, ukey) {
+  if (!id) return true;
+  const k = clean(ukey, 64); if (!/^[a-f0-9]{32,64}$/.test(k)) return false;
+  const kh = await sha('u:' + k);
+  const row = await env.DB.prepare('SELECT key_hash FROM user_keys WHERE id=?').bind(id).first();
+  if (!row) { await env.DB.prepare('INSERT OR IGNORE INTO user_keys(id,key_hash) VALUES(?,?)').bind(id, kh).run(); const r2 = await env.DB.prepare('SELECT key_hash FROM user_keys WHERE id=?').bind(id).first(); return r2?.key_hash === kh; }
+  return row.key_hash === kh;
+}
+// Comparación en tiempo constante (para claves de administración)
+async function eqSecret(a, b) { const [x, y] = await Promise.all([sha('cmp:' + a), sha('cmp:' + b)]); let d = 0; for (let i = 0; i < x.length; i++) d |= x.charCodeAt(i) ^ y.charCodeAt(i); return d === 0; }
+const confirmToken = async (env, email) => (await sha((await saltOf(env)) + ':confirm:' + email)).slice(0, 20);
 // Correo de confirmación (una vez por email): hasta confirmarlo, no se envían avisos de alertas nuevas
 async function askConfirm(env, email) {
   if (!email || (await env.DB.prepare('SELECT 1 FROM confirmed WHERE email=?').bind(email).first())) return;
@@ -59,11 +80,15 @@ async function askConfirm(env, email) {
   const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:600px;margin:auto;color:#0f172a"><p style="font:700 22px Georgia,serif;color:#0b2540">MejorCrucero</p><h1 style="font-size:20px">Confirma tu email</h1><p>Has pedido avisos de cruceros en MejorCrucero. Pulsa para confirmar que este email es tuyo:</p><p><a href="${link}" style="display:inline-block;background:#c2410c;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">Confirmar mi email</a></p><p style="color:#64748b;font-size:13px">Si no has sido tú, ignora este correo: no te escribiremos más.</p></div>`;
   await env.DB.prepare('INSERT OR IGNORE INTO outbox(email,kind,subject,html,text,k) VALUES(?,?,?,?,?,?)').bind(email, 'confirm', 'Confirma tu email para recibir los avisos', html, `Confirma tu email para recibir los avisos de MejorCrucero: ${link}`, 'confirm:' + email).run();
 }
-const unsubToken = async (env, email) => (await sha((env.SALT || 'mc') + ':unsub:' + email)).slice(0, 20);
+const unsubToken = async (env, email) => (await sha((await saltOf(env)) + ':unsub:' + email)).slice(0, 20);
+// Enlaces de baja de correos ya enviados con la sal antigua: siguen valiendo para darse de baja hasta el 1-ene-2027
+const unsubTokenOld = async (email) => (await sha('mc:unsub:' + email)).slice(0, 20);
+// Escapar todo lo que entra en el HTML de los correos
+const eH = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 async function mailBody(env, email, title, intro, items) {
   const u = `https://mejorcrucero-api.mejorcrucero.workers.dev/unsub?e=${encodeURIComponent(email)}&t=${await unsubToken(env, email)}`;
-  const rows = items.map((o) => `<tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb"><a href="${SITE}/salidas/${o.i}/?utm_source=email&utm_medium=aviso" style="color:#0b2540;font-weight:700;text-decoration:none">${o.t} · ${o.sn}</a><br><span style="color:#475569">${fecha(o.d)} · desde ${o.p}</span><br><b style="color:#c2410c;font-size:18px">${eurF(o.pr)}</b>${o.was ? ` <s style="color:#64748b">${eurF(o.was)}</s>` : ''} <span style="color:#475569">por persona · nota de la oferta ${o.sc}/100</span></td></tr>`).join('');
-  const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:600px;margin:auto;color:#0f172a"><p style="font:700 22px Georgia,serif;color:#0b2540">MejorCrucero</p><h1 style="font-size:20px">${title}</h1><p>${intro}</p><table style="width:100%;border-collapse:collapse">${rows}</table><p style="color:#64748b;font-size:13px;margin-top:24px">Precios públicos de la web oficial de la naviera en el momento de la comprobación; pueden cambiar. Recibes esto porque creaste un aviso en mejorcrucero.com. <a href="${u}">Darme de baja</a>.</p></div>`;
+  const rows = items.map((o) => `<tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb"><a href="${SITE}/salidas/${o.i}/?utm_source=email&utm_medium=aviso" style="color:#0b2540;font-weight:700;text-decoration:none">${eH(o.t)} · ${eH(o.sn)}</a><br><span style="color:#475569">${fecha(o.d)} · desde ${eH(o.p)}</span><br><b style="color:#c2410c;font-size:18px">${eurF(o.pr)}</b>${o.was ? ` <s style="color:#64748b">${eurF(o.was)}</s>` : ''} <span style="color:#475569">por persona · nota de la oferta ${o.sc}/100</span></td></tr>`).join('');
+  const html = `<div style="font-family:system-ui,Arial,sans-serif;max-width:600px;margin:auto;color:#0f172a"><p style="font:700 22px Georgia,serif;color:#0b2540">MejorCrucero</p><h1 style="font-size:20px">${eH(title)}</h1><p>${eH(intro)}</p><table style="width:100%;border-collapse:collapse">${rows}</table><p style="color:#64748b;font-size:13px;margin-top:24px">Precios públicos de la web oficial de la naviera en el momento de la comprobación; pueden cambiar. Recibes esto porque creaste un aviso en mejorcrucero.com. <a href="${u}">Darme de baja</a>.</p></div>`;
   const text = `${title}\n\n${intro}\n\n${items.map((o) => `- ${o.t} · ${o.sn} · ${fecha(o.d)} desde ${o.p}: ${eurF(o.pr)} p.p. ${SITE}/salidas/${o.i}/`).join('\n')}\n\nDarme de baja: ${u}`;
   return { html, text };
 }
@@ -120,9 +145,10 @@ async function runAlerts(env) {
     }
   }
   // Barcos seguidos: salidas nuevas (la primera pasada solo registra lo que ya había, sin email)
-  const follows = (await env.DB.prepare("SELECT email, thread FROM follows WHERE thread LIKE 'barco:%'").all()).results;
+  const follows = (await env.DB.prepare("SELECT email, thread, created FROM follows WHERE thread LIKE 'barco:%'").all()).results;
   for (const f of follows) {
     if (blocked.has(f.email)) continue;
+    if (String(f.created || '') >= '2026-11-02' && !okMail.has(f.email)) continue; // seguir un barco también exige email confirmado
     const slug = f.thread.slice(6), init = `finit:${f.email}:${slug}`, first = !(await isSeen(env, init));
     const fresh = [];
     for (const o of offers.filter((x) => x.s === slug)) { const k = `f:${f.email}:${o.i}`; if (!(await isSeen(env, k))) { await markSeen(env, k); if (!first) fresh.push(o); } }
@@ -181,14 +207,14 @@ export default {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\/+$/, '');
     const ip = req.headers.get('CF-Connecting-IP') || 'x';
-    const ipHash = await sha(ip + (env.SALT || 'mc'));
+    const ipHash = await sha(ip + (await saltOf(env)));
     const body = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
     const R = (d, s) => json(d, s, origin);
     try {
       if (p === '/health') return R({ ok: true });
       if (p === '/unsub') {
         const e = clean(url.searchParams.get('e'), 254).toLowerCase();
-        if (!EMAIL.test(e) || url.searchParams.get('t') !== (await unsubToken(env, e))) return new Response('Enlace no válido', { status: 400 });
+        const tk = url.searchParams.get('t'); if (!EMAIL.test(e) || !(tk === (await unsubToken(env, e)) || (Date.now() < Date.UTC(2027, 0, 1) && tk === (await unsubTokenOld(e))))) return new Response('Enlace no válido', { status: 400 });
         await env.DB.prepare('INSERT OR IGNORE INTO unsub(email) VALUES(?)').bind(e).run();
         await env.DB.prepare("UPDATE outbox SET status='unsub' WHERE email=? AND status='pending'").bind(e).run();
         return new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Baja confirmada</title><body style="font-family:system-ui;max-width:520px;margin:60px auto;padding:0 16px"><h1>Baja confirmada</h1><p>No te enviaremos más avisos a este email.</p><p><a href="https://mejorcrucero.com/">Volver a MejorCrucero</a></p>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
@@ -206,7 +232,7 @@ export default {
       }
       // Operación interna: lanzar el motor de avisos ahora (protegido con el secreto del puente de email)
       if (p === '/ops/run-alerts' && req.method === 'POST') {
-        if (!env.MC_EMAIL_SECRET || req.headers.get('x-mc-secret') !== env.MC_EMAIL_SECRET) return R({ error: 'forbidden' }, 403);
+        if (!env.MC_EMAIL_SECRET || !(await eqSecret(req.headers.get('x-mc-secret') || '', env.MC_EMAIL_SECRET))) return R({ error: 'forbidden' }, 403);
         return R(await runAlerts(env));
       }
       if (p === '/alert' && req.method === 'POST') {
@@ -214,7 +240,11 @@ export default {
         const email = clean(body.email, 254).toLowerCase();
         if (email && !EMAIL.test(email)) return R({ error: 'email' }, 400);
         if (await limited(env, 'alert:' + ipHash, 30, 60)) return R({ error: 'rate' }, 429);
-        const { website, email: _e, ...rest } = body;
+        // Solo los campos que hacen falta para avisar (sin número de reserva ni vendedor) y con formato comprobado
+        const KEEP = ['ship', 'date', 'price', 'nights', 'cabin', 'id', 'base', 'target', 'destino', 'mes', 'max', 'puerto', 'noches', 'naviera', 'line', 'q', 'channel', 'o', 'n', 'b'];
+        const rest = {}; for (const k of KEEP) if (body[k] != null && body[k] !== '') rest[k] = typeof body[k] === 'number' && isFinite(body[k]) ? body[k] : clean(body[k], 120);
+        if (rest.ship && !/^[\p{L}\p{N} .'&()-]{2,60}$/u.test(rest.ship)) return R({ error: 'datos' }, 400);
+        if (email) { const n = await env.DB.prepare('SELECT COUNT(*) n FROM alerts WHERE email=?').bind(email).first(); if (n.n >= 30) return R({ error: 'demasiadas' }, 429); }
         await env.DB.prepare('INSERT INTO alerts(email, kind, payload) VALUES(?,?,?)').bind(email || null, clean(body.kind || 'price', 40), JSON.stringify(rest).slice(0, 4000)).run();
         if (email) { await askConfirm(env, email); ctx.waitUntil(sendOutbox(env).catch(() => {})); }
         return R({ ok: true });
@@ -223,7 +253,9 @@ export default {
         const email = clean(body.email, 254).toLowerCase();
         const thread = clean(body.thread, 140);
         if (!EMAIL.test(email) || !THREAD.test(thread)) return R({ error: 'datos' }, 400);
+        if (await limited(env, 'follow:' + ipHash, 20, 60)) return R({ error: 'rate' }, 429);
         await env.DB.prepare('INSERT OR IGNORE INTO follows(email, thread) VALUES(?,?)').bind(email, thread).run();
+        await askConfirm(env, email); ctx.waitUntil(sendOutbox(env).catch(() => {}));
         return R({ ok: true });
       }
 
@@ -232,6 +264,8 @@ export default {
         const id = clean(body.id, 40);
         const name = clean(body.name, 40);
         if (!/^[a-z0-9]{16,40}$/.test(id) || name.length < 2) return R({ error: 'datos' }, 400);
+        if (await limited(env, 'user:' + ipHash, 30, 60)) return R({ error: 'rate' }, 429);
+        if (!(await ownsUser(env, id, body.ukey))) return R({ error: 'permiso' }, 403);
         const cruises = Math.max(0, Math.min(500, parseInt(body.cruises) || 0));
         await env.DB.prepare('INSERT INTO users(id,name,cruises,lines) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name, cruises=excluded.cruises, lines=excluded.lines')
           .bind(id, name, cruises, clean(body.lines, 200)).run();
@@ -305,10 +339,14 @@ export default {
             if (sh && sh.length > 3 && (slug.includes(sh) || sh.includes(slug.replace(/^msc-/, '')))) verified = 1;
           } catch {}
         }
+        // Sin la clave del usuario, el mensaje se publica sin perfil (no se puede firmar como otro ni como Experto)
+        const postUid = clean(body.user_id, 40) && (await ownsUser(env, clean(body.user_id, 40), body.ukey)) ? clean(body.user_id, 40) : null;
+        const parentId = body.parent ? parseInt(body.parent) : null;
+        if (parentId && !(Number.isInteger(parentId) && (await env.DB.prepare('SELECT 1 FROM posts WHERE id=? AND thread=?').bind(parentId, thread).first()))) return R({ error: 'datos' }, 400);
         const key = clean(body.key, 64), eh = /^[a-z0-9]{20,64}$/.test(key) ? await sha('edit:' + key) : null;
         const photo = /^op\/[a-f0-9]{32}\.(jpg|png|webp)$/.test(String(body.photo || '')) ? body.photo : null;
         const r = await env.DB.prepare('INSERT INTO posts(thread,parent,user_id,name,kind,body,rating,cabin,video,ip_hash,hidden,mod,verified,edit_hash,photo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id')
-          .bind(thread, body.parent ? parseInt(body.parent) : null, clean(body.user_id, 40) || null, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified, eh, photo).first();
+          .bind(thread, parentId, postUid, name, kind, text, rating ? JSON.stringify(rating) : null, clean(body.cabin, 10) || null, vm ? vm[1] : null, ipHash, hidden, mod, verified, eh, photo).first();
         return R({ ok: true, id: r.id, held: !!hidden, verified: !!verified, photoPending: !!photo });
       }
       // Editar (15 minutos) o borrar tu mensaje: solo con la clave secreta que guardó tu navegador al publicarlo
@@ -327,6 +365,7 @@ export default {
       if (p === '/poll') {
         const poll = clean(req.method === 'POST' ? body.poll : url.searchParams.get('poll'), 40);
         if (!/^[a-z0-9-]{3,40}$/.test(poll)) return R({ error: 'datos' }, 400);
+        if (req.method === 'POST' && (await limited(env, 'poll:' + ipHash, 30, 60))) return R({ error: 'rate' }, 429);
         if (req.method === 'POST') { const opt = clean(body.option, 40); if (!/^[a-z0-9-]{1,40}$/.test(opt)) return R({ error: 'datos' }, 400); await env.DB.prepare('INSERT OR IGNORE INTO polls(poll, option, voter) VALUES(?,?,?)').bind(poll, opt, ipHash).run(); }
         const r = await env.DB.prepare('SELECT option, COUNT(*) n FROM polls WHERE poll=? GROUP BY option').bind(poll).all();
         return R({ results: Object.fromEntries(r.results.map((x) => [x.option, x.n])) });
@@ -337,8 +376,12 @@ export default {
         if (await limited(env, 'photo:' + ipHash, 10, 60)) return R({ error: 'rate' }, 429);
         const m = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(body.data || ''));
         if (!m) return R({ error: 'formato' }, 400);
+        if (m[2].length > 2.1e6) return R({ error: 'tamano' }, 400);
         const bin = Uint8Array.from(atob(m[2]), (c) => c.charCodeAt(0));
         if (bin.length > 1.5e6 || bin.length < 2000) return R({ error: 'tamano' }, 400);
+        // Que el contenido sea de verdad la imagen que dice ser (firma de JPEG, PNG o WebP)
+        const sig = { jpeg: bin[0] === 0xff && bin[1] === 0xd8 && bin[2] === 0xff, png: bin[0] === 0x89 && bin[1] === 0x50 && bin[2] === 0x4e && bin[3] === 0x47, webp: String.fromCharCode(...bin.slice(0, 4)) === 'RIFF' && String.fromCharCode(...bin.slice(8, 12)) === 'WEBP' };
+        if (!sig[m[1]]) return R({ error: 'formato' }, 400);
         const key = 'op/' + (await sha(ipHash + Date.now() + Math.random())) + '.' + (m[1] === 'jpeg' ? 'jpg' : m[1]);
         await env.FOTOS.put(key, bin, { httpMetadata: { contentType: 'image/' + m[1] } });
         return R({ ok: true, key });
@@ -365,6 +408,8 @@ export default {
       }
       if (p === '/vote' && req.method === 'POST') {
         const id = parseInt(body.id);
+        if (!Number.isInteger(id) || id < 1) return R({ error: 'datos' }, 400);
+        if (await limited(env, 'vote:' + ipHash, 60, 60)) return R({ error: 'rate' }, 429);
         const ins = await env.DB.prepare('INSERT OR IGNORE INTO votes(post_id, voter) VALUES(?,?)').bind(id, ipHash).run();
         if (ins.meta.changes) await env.DB.prepare('UPDATE posts SET votes=votes+1 WHERE id=?').bind(id).run();
         return R({ ok: true });
@@ -374,12 +419,15 @@ export default {
         const target = clean(body.target, 200);
         await env.DB.prepare('INSERT INTO reports(target, reason, page) VALUES(?,?,?)').bind(target, clean(body.reason, 1000), clean(body.page, 300)).run();
         const m = /^post:(\d+)$/.exec(target);
-        if (m) await env.DB.prepare('UPDATE posts SET reports=reports+1, hidden=CASE WHEN reports+1>=3 THEN 1 ELSE hidden END WHERE id=?').bind(parseInt(m[1])).run();
+        // Cada persona cuenta una sola vez por mensaje: hacen falta 3 personas distintas para ocultarlo
+        if (m) { const ins = await env.DB.prepare('INSERT OR IGNORE INTO report_votes(post_id, voter) VALUES(?,?)').bind(parseInt(m[1]), ipHash).run(); if (ins.meta.changes) await env.DB.prepare('UPDATE posts SET reports=reports+1, hidden=CASE WHEN reports+1>=3 THEN 1 ELSE hidden END WHERE id=?').bind(parseInt(m[1])).run(); }
         return R({ ok: true });
       }
       if (p === '/join' && req.method === 'POST') {
         const thread = clean(body.thread, 140), uid = clean(body.user_id, 40), name = clean(body.name, 40);
         if (!thread.startsWith('salida:') || !THREAD.test(thread) || !uid || name.length < 2) return R({ error: 'datos' }, 400);
+        if (await limited(env, 'join:' + ipHash, 30, 60)) return R({ error: 'rate' }, 429);
+        if (!(await ownsUser(env, uid, body.ukey))) return R({ error: 'permiso' }, 403);
         await env.DB.prepare('INSERT OR IGNORE INTO members(thread,user_id,name) VALUES(?,?,?)').bind(thread, uid, name).run();
         const n = await env.DB.prepare('SELECT COUNT(*) n FROM members WHERE thread=?').bind(thread).first();
         return R({ ok: true, members: n.n });
@@ -429,6 +477,7 @@ export default {
       if (p === '/summary' && req.method === 'GET') {
         const thread = clean(url.searchParams.get('thread'), 140);
         if (!env.AI || !THREAD.test(thread)) return R({ summary: null });
+        if (await limited(env, 'sum:' + ipHash, 60, 60)) return R({ summary: null });
         const cached = await env.DB.prepare('SELECT body, posts, created FROM summaries WHERE thread=?').bind(thread).first();
         const r = await env.DB.prepare("SELECT body FROM posts WHERE thread=? AND kind IN ('review','comment') AND hidden=0 ORDER BY id DESC LIMIT 60").bind(thread).all();
         if (r.results.length < 5) return R({ summary: null, need: 5 - r.results.length });
@@ -459,7 +508,8 @@ export default {
 
       // --- Administración
       if (p.startsWith('/admin/')) {
-        if (!env.ADMIN_TOKEN || req.headers.get('Authorization') !== 'Bearer ' + env.ADMIN_TOKEN) return R({ error: 'auth' }, 401);
+        if (await limited(env, 'adm:' + ipHash, 60, 60)) return R({ error: 'rate' }, 429);
+        if (!env.ADMIN_TOKEN || !(await eqSecret(req.headers.get('Authorization') || '', 'Bearer ' + env.ADMIN_TOKEN))) return R({ error: 'auth' }, 401);
         if (p === '/admin/photos') return R((await env.DB.prepare('SELECT id,thread,name,photo FROM posts WHERE photo IS NOT NULL AND photo_ok=0 AND hidden=0 ORDER BY id DESC LIMIT 100').all()).results);
         if (p === '/admin/photo-raw') { const o = env.FOTOS && await env.FOTOS.get(clean(url.searchParams.get('k'), 80)); return o ? new Response(o.body, { headers: { 'Content-Type': o.httpMetadata?.contentType || 'image/jpeg', 'Access-Control-Allow-Origin': origin } }) : R({ error: 'no' }, 404); }
         if (p === '/admin/photo') { await env.DB.prepare('UPDATE posts SET photo_ok=? WHERE id=?').bind(body.ok ? 1 : -1, parseInt(body.id)).run(); return R({ ok: true }); }
@@ -508,7 +558,8 @@ export default {
       }
       return R({ error: 'not found' }, 404);
     } catch (e) {
-      return R({ error: 'server', detail: String(e).slice(0, 200) }, 500);
+      console.error(e);
+      return R({ error: 'server' }, 500);
     }
   },
   async scheduled(event, env, ctx) { ctx.waitUntil(runAlerts(env).catch(() => {})); },

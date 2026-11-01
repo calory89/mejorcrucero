@@ -21,10 +21,12 @@
   const uid = () => { let id = store.get('mc_uid'); if (!id) { id = Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(36).padStart(2, '0')).join('').slice(0, 24); store.set('mc_uid', id); } return id; };
   const me = () => store.get('mc_me', {});
 
+  // Clave privada de este navegador: demuestra a la API que el perfil es tuyo (el id es público, la clave no sale de aquí)
+  const ukeyOf = () => { try { let k = localStorage.getItem('mc_ukey'); if (!k || !/^[a-f0-9]{32,64}$/.test(k)) { k = Array.from(crypto.getRandomValues(new Uint8Array(24)), (b) => b.toString(16).padStart(2, '0')).join(''); localStorage.setItem('mc_ukey', k); } return k; } catch { return ''; } };
   async function api(path, opts = {}) {
     const cfg = await getConfig();
     if (!cfg.api) throw new Error('noapi');
-    const r = await fetch(cfg.api.replace(/\/$/, '') + path, { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'Content-Type': 'application/json' } : {}, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    const r = await fetch(cfg.api.replace(/\/$/, '') + path, { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'Content-Type': 'application/json' } : {}, body: opts.body ? JSON.stringify({ ...opts.body, ukey: ukeyOf() }) : undefined });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw Object.assign(new Error(j.error || 'error'), { data: j });
     return j;
@@ -880,7 +882,7 @@
     const box = b.parentElement, pts = JSON.parse(box.dataset.ports);
     const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
     const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
-    s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box)); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); const ll = pts.map((p) => [p[0], p[1]]); pts.forEach((p) => L.marker([p[0], p[1]]).addTo(m).bindPopup(p[2])); L.polyline(ll, { color: '#c93b1f' }).addTo(m); m.fitBounds(ll, { padding: [30, 30] }); };
+    s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box)); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); const ll = pts.map((p) => [p[0], p[1]]); pts.forEach((p) => L.marker([p[0], p[1]]).addTo(m).bindPopup(esc(p[2]))); L.polyline(ll, { color: '#c93b1f' }).addTo(m); m.fitBounds(ll, { padding: [30, 30] }); };
     document.head.append(s);
   });
 

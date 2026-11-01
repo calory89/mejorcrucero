@@ -19,9 +19,11 @@
   const getJson = (f) => memo[f] || (memo[f] = fetch(BASE + 'data/' + f).then((r) => r.json()));
   const getShips = () => getJson('ships.json');
   const cfg = () => getJson('config.json').catch(() => ({}));
+  // Clave privada de este navegador: demuestra a la API que el perfil es tuyo (el id es público, la clave no sale de aquí)
+  const ukeyOf = () => { try { let k = localStorage.getItem('mc_ukey'); if (!k || !/^[a-f0-9]{32,64}$/.test(k)) { k = Array.from(crypto.getRandomValues(new Uint8Array(24)), (b) => b.toString(16).padStart(2, '0')).join(''); localStorage.setItem('mc_ukey', k); } return k; } catch { return ''; } };
   async function api(path, opts = {}) {
     const c = await cfg(); if (!c.api) throw new Error('noapi');
-    const r = await fetch(c.api + path, { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'Content-Type': 'application/json' } : {}, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    const r = await fetch(c.api + path, { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'Content-Type': 'application/json' } : {}, body: opts.body ? JSON.stringify({ ...opts.body, ukey: ukeyOf() }) : undefined });
     const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || 'error'); return j;
   }
   const uid = () => { let id = store.get('mc_uid'); if (!id) { id = Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(36).padStart(2, '0')).join('').slice(0, 24); store.set('mc_uid', id); } return id; };
@@ -427,7 +429,7 @@
 // ---------- Contador de guardadas en la barra inferior ----------
   { const n = store.get('mc_offer_favs', []).length; $$('.bn-count').forEach((b) => { if (n) { b.hidden = false; b.textContent = n > 9 ? '9+' : n; } }); }
 // ---------- Mis cruceros: exportar, importar y borrar los datos del navegador ----------
-  const MY_KEYS = ['mc_offer_favs', 'mc_offer_recent', 'mc_pref', 'mc_hide_lines', 'mc_hide_ships', 'mc_notes', 'mc_watch', 'mc_searches', 'mc_filters', 'mc_group', 'mc_recent_q', 'mc_prices'];
+  const MY_KEYS = ['mc_ukey', 'mc_uid', 'mc_offer_favs', 'mc_offer_recent', 'mc_pref', 'mc_hide_lines', 'mc_hide_ships', 'mc_notes', 'mc_watch', 'mc_searches', 'mc_filters', 'mc_group', 'mc_recent_q', 'mc_prices'];
   $$('.js-export-my').forEach((b) => b.addEventListener('click', () => { const data = Object.fromEntries(MY_KEYS.map((k) => [k, store.get(k, null)]).filter(([, v]) => v != null)); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: 'mejorcrucero', v: 1, data }, null, 1)], { type: 'application/json' })); a.download = 'mis-cruceros.json'; a.click(); }));
   $$('.js-import-my').forEach((inp) => inp.addEventListener('change', async () => { const msg = $('.js-my-msg'); try { const j = JSON.parse(await inp.files[0].text()); if (j.app !== 'mejorcrucero') throw 0; for (const [k, v] of Object.entries(j.data || {})) if (MY_KEYS.includes(k)) store.set(k, v); msg.textContent = 'Datos cargados. Recargando…'; setTimeout(() => location.reload(), 600); } catch { msg.textContent = 'Ese fichero no es una copia de Mis cruceros.'; } }));
   $$('.js-clear-my').forEach((b) => b.addEventListener('click', () => { if (b.dataset.sure) { MY_KEYS.forEach((k) => { try { localStorage.removeItem(k); } catch {} }); $('.js-my-msg').textContent = 'Datos borrados de este navegador.'; setTimeout(() => location.reload(), 600); } else { b.dataset.sure = 1; b.textContent = '¿Seguro? Pulsa otra vez para borrar'; } }));

@@ -51,7 +51,8 @@ const own = [], merged = new Set();
 for (const x of raw) {
   if (!x.ship || !/^\d{4}-\d{2}-\d{2}$/.test(String(x.date)) || x.date < today || !(x.nights > 0) || !x.prices) continue;
   const prices = Object.fromEntries(Object.entries(x.prices).filter(([, v]) => v > 0)); if (!Object.keys(prices).length) continue;
-  const ship = ALIAS[slugify(x.ship)] || slugify(x.ship); const src = { partner: x.partner || PARTNER, url: x.url || (x.sources || [])[0]?.url || null, prices };
+  const ship = ALIAS[slugify(x.ship)] || slugify(x.ship); const okUrl = (u) => (/^https:\/\//i.test(u || '') ? u : null); // solo enlaces https (nada de javascript:)
+  const src = { partner: x.partner || PARTNER, url: okUrl(x.url) || okUrl((x.sources || [])[0]?.url) || null, prices };
   const twin = byShipDate.get(`${ship}|${x.date}`);
   if (twin) { twin.sources = [...(twin.sources || []).filter((s) => s.partner !== src.partner), src]; merged.add(twin.id); continue; }
   const id = `${PREFIX}-${slugify(x.id || `${ship}-${x.date}`)}`;

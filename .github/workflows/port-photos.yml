@@ -20,7 +20,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: pip install --quiet pillow
       - name: Buscar fotos con licencia libre (Wikimedia Commons)
-        run: python3 tools/port-photos.py "${{ github.event.inputs.max || '400' }}"
+        env:
+          MAX: ${{ github.event.inputs.max || '400' }}
+        run: python3 tools/port-photos.py "$MAX"
       - name: Guardar y republicar
         env:
           GH_TOKEN: ${{ github.token }}

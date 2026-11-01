@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths: ['backend/**', '.github/workflows/deploy-api.yml']
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,10 +28,10 @@ jobs:
       - name: Base de datos D1
         if: steps.cf.outputs.ok == 'si'
         run: |
-          npx --yes wrangler@4 d1 create mejorcrucero || true
-          ID=$(npx --yes wrangler@4 d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).find(d=>d.name==='mejorcrucero').uuid))")
+          npx --yes wrangler@4.150.0 d1 create mejorcrucero || true
+          ID=$(npx --yes wrangler@4.150.0 d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).find(d=>d.name==='mejorcrucero').uuid))")
           sed -i "s/__D1_ID__/$ID/" wrangler.toml
-          npx --yes wrangler@4 d1 execute mejorcrucero --remote --file schema.sql
+          npx --yes wrangler@4.150.0 d1 execute mejorcrucero --remote --file schema.sql
       - name: Publicar Worker
         if: steps.cf.outputs.ok == 'si'
-        run: npx --yes wrangler@4 deploy
+        run: npx --yes wrangler@4.150.0 deploy

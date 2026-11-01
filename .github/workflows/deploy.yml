@@ -6,10 +6,7 @@ on:
   schedule:
     - cron: '17 5 * * *'
     - cron: '17 17 * * *'   # segunda actualización de precios   # reconstrucción diaria: tipo de cambio del BCE y, cuando exista, feed de precios
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+permissions: {}
 concurrency:
   group: pages
   # false: un push no puede cortar a mitad la importación programada de precios (antes se perdían actualizaciones)
@@ -17,6 +14,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -109,6 +108,9 @@ jobs:
           path: dist
   deploy:
     needs: build
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -118,6 +120,7 @@ jobs:
         uses: actions/deploy-pages@v4
   indexnow:
     needs: deploy
+    permissions: {}
     runs-on: ubuntu-latest
     if: ${{ vars.CNAME != '' }}
     steps:

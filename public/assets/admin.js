@@ -4,10 +4,10 @@
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   let API = '';
-  const tok = () => { try { return localStorage.getItem('mc_admin') || ''; } catch { return ''; } };
+  const tok = () => { try { return sessionStorage.getItem('mc_admin') || ''; } catch { return ''; } };
   const call = async (p, body) => { const r = await fetch(API + p, { method: body ? 'POST' : 'GET', headers: { Authorization: 'Bearer ' + tok(), ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined }); if (r.status === 401) throw new Error('auth'); return r.json(); };
   const table = (rows) => rows.length ? `<div class="table-wrap"><table class="rank-t"><thead><tr>${Object.keys(rows[0]).map((k) => `<th>${esc(k)}</th>`).join('')}</tr></thead><tbody>${rows.map((r) => `<tr>${Object.values(r).map((v) => `<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '<p class="muted">Nada todavía.</p>';
-  const csv = (rows, name) => { if (!rows.length) return; const k = Object.keys(rows[0]); const t = [k.join(','), ...rows.map((r) => k.map((x) => `"${String(r[x] ?? '').replace(/"/g, '""')}"`).join(','))].join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([t], { type: 'text/csv' })); a.download = name + '.csv'; a.click(); };
+  const csv = (rows, name) => { if (!rows.length) return; const k = Object.keys(rows[0]); const t = [k.join(','), ...rows.map((r) => k.map((x) => { let v = String(r[x] ?? ''); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return `"${v.replace(/"/g, '""')}"`; }).join(','))].join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([t], { type: 'text/csv' })); a.download = name + '.csv'; a.click(); };
   async function load() {
     const out = $('#adm-out');
     try {
@@ -28,13 +28,13 @@
       call('/admin/searches?days=' + days).then((v) => { $('#adm-search').innerHTML = `<h3>Más buscado</h3>${v.top.length ? table(v.top.map(({ q, n }) => ({ q, n }))) : '<p class="muted">Aún sin datos.</p>'}<h3>Búsquedas sin resultados (ideas de páginas)</h3>${v.sinResultados.length ? table(v.sinResultados) : '<p class="muted">Ninguna.</p>'}`; }).catch(() => { $('#adm-search').innerHTML = '<p class="muted">Sin datos.</p>'; });
       $('#run-alerts').onclick = async () => { $('#run-out').textContent = 'Comprobando…'; try { $('#run-out').textContent = JSON.stringify(await call('/admin/run-alerts')); } catch { $('#run-out').textContent = 'Error'; } };
       call('/admin/photos').then(async (ph) => { const box = $('#adm-photos'); if (!ph.length) { box.innerHTML = '<p class="muted">No hay fotos pendientes.</p>'; return; } box.innerHTML = ph.map((x) => `<div class="side-card"><img data-k="${esc(x.photo)}" alt="" style="width:100%;border-radius:8px"><p class="small"><b>${esc(x.name)}</b> · ${esc(x.thread)}</p><button class="btn btn-sm" data-pok="${x.id}">Aprobar</button> <button class="btn btn-sm btn-ghost" data-pno="${x.id}">Rechazar</button></div>`).join('');
-        for (const im of box.querySelectorAll('img[data-k]')) { try { const cfg = await (await fetch(BASE + 'data/config.json')).json(); const r = await fetch(cfg.api.replace(/\/$/, '') + '/admin/photo-raw?k=' + encodeURIComponent(im.dataset.k), { headers: { Authorization: 'Bearer ' + localStorage.getItem('mc_admin') } }); im.src = URL.createObjectURL(await r.blob()); } catch {} } }).catch(() => {});
+        for (const im of box.querySelectorAll('img[data-k]')) { try { const cfg = await (await fetch(BASE + 'data/config.json')).json(); const r = await fetch(cfg.api.replace(/\/$/, '') + '/admin/photo-raw?k=' + encodeURIComponent(im.dataset.k), { headers: { Authorization: 'Bearer ' + sessionStorage.getItem('mc_admin') } }); im.src = URL.createObjectURL(await r.blob()); } catch {} } }).catch(() => {});
       $('#dl-leads').onclick = async () => csv(await call('/admin/leads'), 'leads');
       $('#dl-alerts').onclick = async () => csv(await call('/admin/alerts'), 'alertas');
     } catch (e) { out.innerHTML = `<p class="tip">${e.message === 'auth' ? 'Clave incorrecta.' : 'No se ha podido conectar con la API.'}</p>`; }
   }
   document.addEventListener('click', async (e) => { const po = e.target.dataset.pok, pn = e.target.dataset.pno; if (po || pn) { await call('/admin/photo', { id: +(po || pn), ok: po ? 1 : 0 }); load(); return; } const s = e.target.dataset.show, h = e.target.dataset.hide; if (s || h) { await call('/admin/hide', { id: +(s || h), hidden: h ? 1 : 0 }); load(); } });
-  $('#adm-form').addEventListener('submit', (e) => { e.preventDefault(); try { localStorage.setItem('mc_admin', $('#adm-token').value.trim()); } catch {} load(); });
+  $('#adm-form').addEventListener('submit', (e) => { e.preventDefault(); try { sessionStorage.setItem('mc_admin', $('#adm-token').value.trim()); } catch {} load(); });
   $('#adm-days').addEventListener('change', load);
   fetch(BASE + 'data/config.json').then((r) => r.json()).then((c) => { API = c.api; if (tok()) { $('#adm-token').value = tok(); load(); } });
 })();

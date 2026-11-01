@@ -21,3 +21,5 @@ CREATE TABLE IF NOT EXISTS polls (poll TEXT NOT NULL, option TEXT NOT NULL, vote
 -- 005 (24-oct-2026): doble confirmación del email y ajustes (admin_email se guarda en la base, no en el repo)
 CREATE TABLE IF NOT EXISTS confirmed (email TEXT PRIMARY KEY, created TEXT DEFAULT (datetime('now')));
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS user_keys (id TEXT PRIMARY KEY, key_hash TEXT NOT NULL, created TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS report_votes (post_id INTEGER, voter TEXT, PRIMARY KEY(post_id, voter));

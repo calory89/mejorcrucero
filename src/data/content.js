@@ -19,7 +19,9 @@ export const CONFIG = {
   // API propia (Cloudflare Worker en backend/). Vacío = funciones de comunidad en modo "abre pronto".
   api: 'https://mejorcrucero-api.mejorcrucero.workers.dev',
   // Cloudflare Web Analytics (sin cookies). Vacío = desactivado.
-  cfBeacon: '37bd2ff83b984ab597913eaa6ba0d248',
+  // Cloudflare Web Analytics: la etiqueta manual daba error CORS en cada visita (el token no coincide con el dominio).
+  // Se apaga hasta que Carlos active Web Analytics para mejorcrucero.com en el panel de Cloudflare y ponga aquí su token.
+  cfBeacon: '',
   // Tests A/B: variantes de texto que se reparten al azar y se miden con /evt
   ab: { heroCta: ['Ver cruceros', 'Buscar cruceros'], salidaCta: ['Ver precio en {n}', 'Reservar en {n}', 'Ver disponibilidad en {n}'] },
   author: { name: 'Carlos de Ory', role: 'Fundador de MejorCrucero y de Happy Low Cost' },
