@@ -739,7 +739,7 @@ function toolsIndex() {
 function toolPrice() {
   const opts = [...lineList].sort((a, b) => a.short.localeCompare(b.short)).map((l) => `<option value="${l.slug}" data-tip="${l.tip ?? ''}">${esc(l.short)}</option>`).join('');
   const offer = (n) => `<fieldset class="offer" data-offer="${n}"><legend>Oferta ${n.toUpperCase()}${n === 'b' ? ' <small class="muted">(opcional, para comparar)</small>' : ''}</legend>
-      <label><span>Naviera</span><select name="line_${n}">${opts}</select></label>
+      <label><span>Naviera</span><select name="line_${n}"><option value="" data-tip="">Elige naviera</option>${opts}</select></label>
       <label><span>Precio total de la reserva (€)</span><input name="fare_${n}" type="number" min="0" step="1" inputmode="numeric" ${n === 'a' ? 'value="1200" required' : ''}></label>
       <label><span>Noches</span><input name="nights_${n}" type="number" min="1" max="60" value="7"></label>
       <label><span>Cargo de servicio por persona y noche</span><span class="cur-row"><input name="tip_${n}" type="number" min="0" step="0.5" value="16" aria-label="Importe del cargo de servicio"><select name="tipcur_${n}" aria-label="Moneda del cargo"><option value="USD">$</option><option value="EUR">€</option></select></span><small class="tip-note muted"></small></label>

@@ -426,7 +426,7 @@
       const t = o.dataset.tip;
       calc['tip_' + n].value = t || 0;
       calc['tipcur_' + n].value = 'USD';
-      $(`[data-offer="${n}"] .tip-note`).textContent = t ? `Referencia ${o.textContent}: ${t.replace('.', ',')} $ (mercado EE. UU.). Ajústalo si tu reserva dice otra cosa.` : `Sin referencia pública para ${o.textContent}: revisa tu reserva.`;
+      $(`[data-offer="${n}"] .tip-note`).textContent = t ? `Referencia ${o.textContent}: ${t.replace('.', ',')} $ (mercado EE. UU.). Ajústalo si tu reserva dice otra cosa.` : (o.value ? `Sin referencia pública para ${o.textContent}: revisa tu reserva.` : 'Elige la naviera y te ponemos su cargo de servicio de referencia.');
     };
     const offer = (n, people, shared) => {
       const fare = v('fare_' + n); if (!fare) return null;
