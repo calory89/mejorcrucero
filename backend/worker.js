@@ -119,17 +119,20 @@ async function answerChat(env, q) {
   let note = P.rasgo_sin_datos ? `No tenemos datos fiables de ${String(P.rasgo_sin_datos).slice(0, 40)} por barco, así que no lo puedo comparar. ` : '';
   if (P.tipo === 'info') {
     const pg = await siteJson('paginas.json').catch(() => []); const ws = [...new Set([...(P.palabras || []), ...foldS(q).split(/[^a-z0-9]+/)].map(foldS).filter((w) => w.length > 3))];
-    const hits = pg.map(([t, u]) => [ws.filter((w) => foldS(t + ' ' + u).includes(w)).length, t, u]).filter((r) => r[0] > 0).sort((a, b) => b[0] - a[0] || a[1].length - b[1].length).slice(0, 4);
+    // Peso de cada palabra según lo rara que es: "propinas" pesa más que "carnival"
+    const H = pg.map(([t, u]) => foldS(t + ' ' + u)); const idf = Object.fromEntries(ws.map((w) => [w, Math.log((pg.length + 1) / (1 + H.filter((h) => h.includes(w)).length))]));
+    const hits = pg.map(([t, u], k) => [ws.reduce((a, w) => a + (H[k].includes(w) ? idf[w] : 0), 0) + (/^\/(guias|herramientas)\//.test(u) ? 0.5 : 0), t, u]).filter((r) => r[0] > 0.6).sort((a, b) => b[0] - a[0] || a[1].length - b[1].length).slice(0, 4);
     return { msg: hits.length ? 'Esto es lo que tenemos sobre eso en MejorCrucero:' : 'No tengo una respuesta fiable para eso. Prueba a buscar una salida o un barco concreto.', items: [], links: hits.map(([, t, u]) => ({ t, u })) };
   }
   if (P.tipo === 'barcos' || (!P.destino && !P.mes && !P.max && (P.rasgo || P.rasgo_sin_datos || P.orden === 'barco'))) {
     let l = ships.filter((s) => s.sc != null);
     if (P.naviera) l = l.filter((s) => s.lineSlug === P.naviera);
-    if (P.rasgo && TRAITS[P.rasgo]) l = l.filter((s) => (s.tags || []).includes(P.rasgo));
+    if (P.rasgo && TRAITS[P.rasgo] && P.rasgo !== 'nuevo') l = l.filter((s) => (s.tags || []).includes(P.rasgo));
     const sale = {}; for (const o of offers) if (o.d >= today) sale[o.s] = Math.min(sale[o.s] || 1e9, o.r);
     l.sort((a, b) => (P.rasgo === 'nuevo' ? b.year - a.year : 0) || (P.rasgo === 'espacioso' || P.rasgo_sin_datos ? (b.ratio || 0) - (a.ratio || 0) : 0) || b.sc - a.sc);
     l.sort((a, b) => (sale[b.slug] ? 1 : 0) - (sale[a.slug] ? 1 : 0));
     const top = l.slice(0, 6);
+    if (!top.length) return { msg: `${note}No tengo barcos que encajen con eso${P.naviera ? ` en ${LINES_N[P.naviera] || P.naviera}` : ''}. Prueba sin algún filtro.`, items: [] };
     const what = P.rasgo && TRAITS[P.rasgo] ? `Barcos ${TRAITS[P.rasgo]}` : P.rasgo_sin_datos ? 'Barcos con más espacio por pasajero y mejor nota' : 'Barcos con mejor nota';
     return { msg: `${note}${what}${P.naviera ? ` de ${LINES_N[P.naviera] || P.naviera}` : ''}, primero los que tienen salidas a la venta:`, items: top.map((s) => ({ k: 'barco', u: `/barcos/${s.slug}/`, t: s.name, sub: `${s.lineShort} · ${s.year} · ${s.pax || '–'} pasajeros · espacio ${s.ratio || '–'} GT/pax`, sc: s.sc, img: s.img, pr: sale[s.slug] || null })) };
   }
