@@ -33,3 +33,38 @@ for o in items:
     d.text((1015, 548), o['label'][:16], font=font(26, True), fill='white', anchor='mm')
     im.save(os.path.join(OUT, f"{o['id']}.png"), optimize=True); n += 1
 print(f'{n} imágenes de ofertas')
+
+# Listados (destinos, escalas, meses…): foto de la mejor oferta de fondo, título y precio desde
+pages_f = os.path.join(ROOT, 'dist/data/og-pages.json')
+if os.path.exists(pages_f):
+    OUTP = os.path.join(ROOT, 'dist/og/p'); os.makedirs(OUTP, exist_ok=True); m = 0
+    for o in json.load(open(pages_f, encoding='utf-8')):
+        src = None
+        for cand in (o['photo'].replace('-640.webp', '-1280.webp'), o['photo']):
+            for base in ('dist', 'public'):
+                f = os.path.join(ROOT, base, cand)
+                if os.path.exists(f): src = f; break
+            if src: break
+        try:
+            ph = Image.open(src).convert('RGB') if src else None
+        except Exception:
+            ph = None
+        if ph:
+            r = max(1200 / ph.width, 630 / ph.height); ph = ph.resize((int(ph.width * r) + 1, int(ph.height * r) + 1))
+            l, t = (ph.width - 1200) // 2, (ph.height - 630) // 2; im = ph.crop((l, t, l + 1200, t + 630))
+            shade = Image.new('RGB', (1200, 630), '#071a30'); mask = Image.linear_gradient('L').resize((1200, 630)).point(lambda v: min(235, int(70 + v * 0.75)))
+            im = Image.composite(shade, im, mask)
+        else:
+            im = bg.copy()
+        d = ImageDraw.Draw(im)
+        d.text((70, 60), 'MejorCrucero', font=font(38, True), fill='#ffffff')
+        title = o['title']; sz = 72
+        while d.textlength(title, font=font(sz, True)) > 1060 and sz > 34: sz -= 4
+        d.text((70, 330), title, font=font(sz, True), fill='white')
+        d.text((70, 340 + sz + 14), o['sub'], font=font(36), fill='#e6eef7')
+        p = 'desde ' + eur(o['price']) + ' por persona'
+        d.rounded_rectangle((70, 500, 70 + d.textlength(p, font=font(40, True)) + 48, 572), 16, fill='#ffc400')
+        d.text((94, 512), p, font=font(40, True), fill='#0b2540')
+        if o.get('credit'): d.text((1130, 600), o['credit'][:90], font=font(18), fill='#dbe6f3', anchor='rs')
+        im.save(os.path.join(OUTP, f"{o['k']}.jpg"), quality=80, optimize=True, progressive=True); m += 1
+    print(f'{m} imágenes de listados')

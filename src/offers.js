@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { CONFIG } from './data/content.js';
 // Ofertas: una página por salida (como los chollos de Happy Low Cost), nota del precio 0-100,
 // precio real (tarifa + tasas + cuota de servicio) y páginas de ofertas por destino, puerto, mes y naviera.
@@ -427,6 +428,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     return links.length ? `<section class="wrap block"><h2 class="h-sm">Listados relacionados</h2><div class="chips">${links.map(([h, t]) => `<a class="chip" href="${h}">${esc(t)}</a>`).join('')}</div></section>` : '';
   }
   const HUB_URLS = new Set();
+  const OG_PAGES = [];
+  const PH_CREDIT = {}; try { for (const v of Object.values(JSON.parse(fs.readFileSync(new URL('./data/port_photos.json', import.meta.url), 'utf8')))) for (const z of [v, ...(v.more || [])]) if (z && z.thumb && z.author) PH_CREDIT[z.thumb] = `Foto: ${z.author} · ${z.license || ''} · Wikimedia Commons`; } catch {}
   function hub({ url: u, title, h1, intro, list, crumbs, sortBy = 'score', extra = '', what = '', after = '', schemaExtra = null, pager = false }) {
     const sorted = [...list].sort(sortBy === 'date' ? (a, b) => a.date.localeCompare(b.date) : (a, b) => deal(b).score - deal(a).score || minPrice(a) - minPrice(b));
     const cheapest = [...list].sort((a, b) => minPrice(a) - minPrice(b))[0];
@@ -440,7 +443,9 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     ${list.length > 30 ? heatmap(list) : ''}${list.length > 5 ? `<section class="wrap block">${monthTable(list)}</section>` : ''}${after}${hubFaq(list, what)}
     ${related(list, u)}
     <section class="wrap block"><p class="muted small">Precios por persona de las webs oficiales de las navieras, actualizados dos veces al día. Precio real = tarifa + tasas + cuota de servicio. Por defecto ordenamos por nota del precio y, a igualdad, por el más barato; las comisiones nunca cambian el orden. <a href="/metodologia/#ofertas">Cómo calculamos la nota del precio</a>.</p></section>`;
-    return layout({ title, desc: `${title}: ${list.length} salidas comparadas con precio real (tasas incluidas) y nota de 0 a 100. Elige tu mejor crucero al mejor precio.`, url: u, body, crumbs,
+    // Imagen para compartir del listado (la genera tools/og-offers.py con la foto de la mejor oferta)
+    let og; if (list.length >= 20 && cheapest) { const ph = (/src="([^"]*\/img\/puertos\/[^"]+-640\.webp)"/.exec(cardFull(sorted[0])) || [])[1]; if (ph) { const k = u.replace(/^\/|\/$/g, '').replace(/\//g, '-'); og = `/og/p/${k}.jpg`; OG_PAGES.push({ k, title: h1 || title, sub: `${list.length} salidas con precio real`, price: minPrice(cheapest), photo: ph.replace(/^.*\/img\//, 'img/'), credit: PH_CREDIT[ph.replace(/^.*(\/img\/)/, '$1')] || '' }); } }
+    return layout({ title, desc: `${title}: ${list.length} salidas comparadas con precio real (tasas incluidas) y nota de 0 a 100. Elige tu mejor crucero al mejor precio.`, url: u, body, crumbs, ...(og ? { og } : {}),
       schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: sorted.slice(0, 20).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + url(x), name: titleOf(x) })) }, ...(schemaExtra ? [schemaExtra] : [])] });
   }
   // Índice de escalas: puerto -> salidas que paran allí (sin contar el de salida)
@@ -653,5 +658,5 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const destFeeds = [...new Set(sailings.map((x) => x.destination).filter(Boolean))].map((d) => { const l = sailings.filter((x) => x.destination === d && new Date(x.date) > new Date()).sort((a, b) => deal(b).score - deal(a).score).slice(0, 30); return [`ofertas/${d}/feed.xml`, `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Ofertas de cruceros por ${esc(destName(d))} · MejorCrucero</title><link>${SITE}/ofertas/${d}/</link><description>Las mejores ofertas de cruceros por ${esc(destName(d))} con precio real y nota de 0 a 100</description><language>es-ES</language>${l.map(item).join('')}</channel></rss>`]; });
     return [...destFeeds, ['data/og-offers.json', JSON.stringify(og)], ['ofertas/feed.xml', rss], ['data/chollos.json', JSON.stringify(json)], ['data/ofertas.json', JSON.stringify(lite)], ['data/cards.json', (() => { const ids = Object.keys(cards), { html, pool } = poolAlts(ids.map((id) => cards[id]).join('\u0001')); const parts = html.split('\u0001'); return JSON.stringify({ p: pool, c: Object.fromEntries(ids.map((id, i) => [id, parts[i]])) }); })()]];
   }
-  return { feeds, card, includesBox, page, hubs, deal, real, minPrice, ppn, destName, url, escalaIndex, portsOf, escalaMap };
+  return { OG_PAGES, feeds, card, includesBox, page, hubs, deal, real, minPrice, ppn, destName, url, escalaIndex, portsOf, escalaMap };
 }

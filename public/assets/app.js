@@ -874,8 +874,8 @@
   document.addEventListener('click', (e) => {
     const b = e.target.closest('.js-map'); if (!b) return;
     const box = b.parentElement, pts = JSON.parse(box.dataset.ports);
-    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.append(css);
-    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
+    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
     s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box)); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); const ll = pts.map((p) => [p[0], p[1]]); pts.forEach((p) => L.marker([p[0], p[1]]).addTo(m).bindPopup(p[2])); L.polyline(ll, { color: '#c93b1f' }).addTo(m); m.fitBounds(ll, { padding: [30, 30] }); };
     document.head.append(s);
   });
@@ -888,16 +888,16 @@
       if (vis.length) m.fitBounds(vis, { padding: [20, 20], maxZoom: 6 }); };
     sel.addEventListener('change', () => { const u = new URL(location); sel.value === '0' ? u.searchParams.delete('mes') : u.searchParams.set('mes', sel.value); history.replaceState(null, '', u); draw(); });
     const load = () => { const b = $('.js-mmap', box); if (b) { b.disabled = true; b.textContent = 'Cargando mapa…'; }
-      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.append(css);
-      const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.onload = () => { box.innerHTML = '<div class="map-box map-tall"></div>'; m = L.map($('.map-box', box), { scrollWheelZoom: false, worldCopyJump: true }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); m.setView([30, -20], 2); draw(); }; document.head.append(s); };
+      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
+      const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = ''; s.onload = () => { box.innerHTML = '<div class="map-box map-tall"></div>'; m = L.map($('.map-box', box), { scrollWheelZoom: false, worldCopyJump: true }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); m.setView([30, -20], 2); draw(); }; document.head.append(s); };
     box.addEventListener('click', (e) => { if (e.target.closest('.js-mmap')) load(); }); if (matchMedia('(min-width: 761px)').matches) load(); } }
 
   // Mapa de puertos de salida (Leaflet bajo demanda): un punto por puerto con número de salidas y precio desde
   document.addEventListener('click', (e) => {
     const b = e.target.closest('.js-map2'); if (!b) return;
     const box = b.parentElement, pts = JSON.parse(box.dataset.pts); b.disabled = true; b.textContent = 'Cargando mapa…';
-    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.append(css);
-    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
+    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
     s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box), { scrollWheelZoom: false }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m);
       pts.forEach(([la, lo, n, c, u, mn]) => L.circleMarker([la, lo], { radius: Math.min(18, 5 + Math.sqrt(c) * 1.4), color: '#0a47b8', weight: 1, fillColor: '#2f7bff', fillOpacity: .55 }).addTo(m).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver salidas</a>` : ''}`));
       m.fitBounds(pts.map((p) => [p[0], p[1]]), { padding: [20, 20] }); };

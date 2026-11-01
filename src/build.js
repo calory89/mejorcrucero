@@ -1199,6 +1199,7 @@ write('barcos/index.html', shipsIndex());
 // (las fichas de barco se escriben tras calcular los premios)
 sailings.forEach((x) => write(`salidas/${x.id}/index.html`, sailingPage(x)));
 OFF.hubs().forEach(([f, html]) => write(f, html));
+write('data/og-pages.json', JSON.stringify(OFF.OG_PAGES));
 OFF.feeds().forEach(([f, c]) => write(f, c));
 write('navieras/index.html', linesIndex());
 // (las páginas de naviera se escriben tras los premios)
