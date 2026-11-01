@@ -73,7 +73,7 @@
   // ---------- Ranking: filtro por naviera ----------
   const rf = $('#rank-filter');
   rf?.addEventListener('change', () => { document.querySelectorAll('#top table.collapsed').forEach((t) => t.classList.remove('collapsed')); document.querySelectorAll('#top .m20-btn').forEach((b) => b.remove()); });
-  if (rf) rf.addEventListener('input', () => { const l = rf.linea.value; $$('#top tbody tr').forEach((tr) => { tr.hidden = l && tr.dataset.line !== l; }); });
+  if (rf) rf.addEventListener('input', () => { const l = rf.linea.value, v = rf.venta?.checked; $$('#top tbody tr').forEach((tr) => { tr.hidden = (l && tr.dataset.line !== l) || (v && tr.dataset.sale !== '1'); }); });
 
   // ---------- Copiar código para insertar ----------
   $$('.js-copy-text').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.text); b.textContent = '¡Copiado!'; } catch {} }));
@@ -637,3 +637,7 @@
 
 // Mis cruceros vacío: una guía corta en vez de seis secciones vacías
 (() => { const st = document.querySelector('.mine-start'); if (!st) return; try { const g = (k) => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } }; const any = ['mc_favs', 'mc_offer_favs', 'mc_offer_recent', 'mc_recent', 'mc_alerts', 'mc_cd', 'mc_sailed', 'mc_watch'].some((k) => { const v = g(k); return Array.isArray(v) ? v.length : v && Object.keys(v).length; }); st.hidden = !!any; } catch {} })();
+// Pestañas fijas: marca la sección que estás viendo y la deja a la vista
+(() => { const nav = document.querySelector('.tabs-nav'); if (!nav || !('IntersectionObserver' in window)) return; const links = [...nav.querySelectorAll('a[href^="#"]')]; const secs = links.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean); if (!secs.length) return;
+  const set = (id) => links.forEach((a) => { const on = a.getAttribute('href') === '#' + id; a.classList.toggle('on', on); if (on) { a.setAttribute('aria-current', 'location'); const r = a.getBoundingClientRect(), n = nav.getBoundingClientRect(); if (r.left < n.left || r.right > n.right) nav.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' }); } else a.removeAttribute('aria-current'); });
+  const io = new IntersectionObserver((es) => { const v = es.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]; if (v) set(v.target.id); }, { rootMargin: '-30% 0px -60% 0px' }); secs.forEach((s) => io.observe(s)); })();

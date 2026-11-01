@@ -2,7 +2,7 @@
 export const GUIDES = [
   {
     slug: 'primer-crucero',
-    title: 'Tu primer crucero: guía completa para no equivocarte',
+    title: 'Tu primer crucero: lo esencial para no equivocarte',
     desc: 'Cómo elegir naviera, barco, itinerario y camarote en tu primer crucero, y qué gastos extra conviene tener en cuenta antes de reservar.',
     emoji: '🧭',
     body: `

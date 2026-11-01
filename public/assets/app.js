@@ -890,7 +890,7 @@
   { const box = $('.mmap'); if (box) { const pts = JSON.parse(box.dataset.pts); let m = null, layer = null; const sel = $('.js-mmap-mes'); if (qs.get('mes')) sel.value = qs.get('mes');
     const draw = () => { if (!m) return; if (layer) layer.remove(); layer = L.layerGroup().addTo(m); const mo = +sel.value; const vis = [];
       for (const [la, lo, n, u, mm] of pts) { let c = 0, mn = Infinity; for (const [k, [cc, p]] of Object.entries(mm)) if (!mo || +k === mo) { c += cc; mn = Math.min(mn, p); } if (!c) continue; vis.push([la, lo]);
-        L.circleMarker([la, lo], { radius: Math.min(20, 4 + Math.sqrt(c) * 1.5), color: '#0a47b8', weight: 1, fillColor: '#2f7bff', fillOpacity: .55 }).addTo(layer).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} pasan por aquí · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver cruceros con esta escala</a>` : ''}`); }
+        L.circleMarker([la, lo], { radius: Math.min(20, 4 + Math.sqrt(c) * 1.5), color: '#0B1F4B', weight: 1.5, fillColor: '#FFC72C', fillOpacity: .55 }).addTo(layer).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} pasan por aquí · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver cruceros con esta escala</a>` : ''}`); }
       if (vis.length) m.fitBounds(vis, { padding: [20, 20], maxZoom: 6 }); };
     sel.addEventListener('change', () => { const u = new URL(location); sel.value === '0' ? u.searchParams.delete('mes') : u.searchParams.set('mes', sel.value); history.replaceState(null, '', u); draw(); });
     const load = () => { const b = $('.js-mmap', box); if (b) { b.disabled = true; b.textContent = 'Cargando mapa…'; }
@@ -905,7 +905,7 @@
     const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
     const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
     s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box), { scrollWheelZoom: false }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m);
-      pts.forEach(([la, lo, n, c, u, mn]) => L.circleMarker([la, lo], { radius: Math.min(18, 5 + Math.sqrt(c) * 1.4), color: '#0a47b8', weight: 1, fillColor: '#2f7bff', fillOpacity: .55 }).addTo(m).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver salidas</a>` : ''}`));
+      pts.forEach(([la, lo, n, c, u, mn]) => L.circleMarker([la, lo], { radius: Math.min(18, 5 + Math.sqrt(c) * 1.4), color: '#0B1F4B', weight: 1.5, fillColor: '#FFC72C', fillOpacity: .55 }).addTo(m).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver salidas</a>` : ''}`));
       m.fitBounds(pts.map((p) => [p[0], p[1]]), { padding: [20, 20] }); };
     s.onerror = () => { b.disabled = false; b.textContent = 'No se ha podido cargar el mapa. Reintentar'; };
     document.head.append(s);
