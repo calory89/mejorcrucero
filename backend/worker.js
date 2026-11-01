@@ -104,7 +104,7 @@ async function llmParse(env, q) {
     const r = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' }, body: JSON.stringify({ model: env.CHAT_MODEL || 'claude-haiku-5-5', max_tokens: 300, system: PARSE_SYS, messages: [{ role: 'user', content: user }] }) });
     if (r.ok) { const j = await r.json(); txt = (j.content || []).map((c) => c.text || '').join(''); }
   }
-  if (!txt && env.AI) { const o = await ai(env, { messages: [{ role: 'system', content: PARSE_SYS }, { role: 'user', content: user }], max_tokens: 300 }); txt = o.response || ''; }
+  if (!txt && env.AI) { const o = await ai(env, { messages: [{ role: 'system', content: PARSE_SYS }, { role: 'user', content: user }], max_tokens: 300 }); if (o && o.response && typeof o.response === 'object') return o.response; txt = String(o?.response || ''); }
   const m2 = /\{[\s\S]*\}/.exec(txt); if (!m2) return null;
   try { return JSON.parse(m2[0]); } catch { return null; }
 }
