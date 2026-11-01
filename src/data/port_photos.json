@@ -7398,23 +7398,5 @@
   "author": "AlanFord at English Wikipedia",
   "license": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:StPeterPortSouth.jpg"
- },
- "Gothenburg": {
-  "slug": "gothenburg",
-  "thumb": "/img/puertos/gothenburg-640.webp",
-  "large": "/img/puertos/gothenburg-1280.webp",
-  "ratio": 3.274,
-  "author": "Wikimedia Commons",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Gbguniversitet_kopiera.jpg"
- },
- "Alta": {
-  "slug": "alta",
-  "thumb": "/img/puertos/alta-640.webp",
-  "large": "/img/puertos/alta-1280.webp",
-  "ratio": 2.184,
-  "author": "FN-sambandet Norge",
-  "license": "CC BY-SA 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:9_-_FN-stafett_2012_-_Komsa_skole_(Alta).jpg"
  }
 }

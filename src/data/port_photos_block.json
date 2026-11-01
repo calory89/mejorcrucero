@@ -15,6 +15,7 @@
   "https://commons.wikimedia.org/wiki/File:2016_cementerio_Montevideo.jpg",
   "https://commons.wikimedia.org/wiki/File:2017_G20_Hamburg_summit_leaders_group_photo.jpg",
   "https://commons.wikimedia.org/wiki/File:202402_Check-in_Drop-Off_Area_of_USM.jpg",
+  "https://commons.wikimedia.org/wiki/File:9_-_FN-stafett_2012_-_Komsa_skole_(Alta).jpg",
   "https://commons.wikimedia.org/wiki/File:AVE_en_Sevilla,_en_la_estaci%C3%B3n_de_Santa_Justa,_tren_Serie_100_de_Renfe.JPG",
   "https://commons.wikimedia.org/wiki/File:A_Squirrel_On_The_Path_(143026077).jpeg",
   "https://commons.wikimedia.org/wiki/File:Admiralty_House_Halifax.jpg",
@@ -77,6 +78,7 @@
   "https://commons.wikimedia.org/wiki/File:Galveston_US_Post_Office,_Custom_House_and_Courthouse.jpg",
   "https://commons.wikimedia.org/wiki/File:Galveston_beach_sunset.JPG",
   "https://commons.wikimedia.org/wiki/File:Gammel_Kongevej.JPG",
+  "https://commons.wikimedia.org/wiki/File:Gbguniversitet_kopiera.jpg",
   "https://commons.wikimedia.org/wiki/File:Gothenburg_Pony_Express_Station_from_SW.JPG",
   "https://commons.wikimedia.org/wiki/File:HMS_Exeter_at_Royal_Naval_Dockyard,_Ireland_Island,_Imperial_fortress_of_Bermuda_with_Gibb%27s_Hill_Lighthouse_beyond,_ca_1936.jpg",
   "https://commons.wikimedia.org/wiki/File:Hawaii_-_Hilo_-_NARA_-_23937301_(cropped).jpg",
@@ -113,5 +115,9 @@
   "https://commons.wikimedia.org/wiki/File:Surrender_Singapore.jpg",
   "https://commons.wikimedia.org/wiki/File:The_Queensferry,_from_the_South_East_engraving_by_William_Miller_after_C_Stanfield.jpg",
   "https://commons.wikimedia.org/wiki/File:View_of_Singapore_with_smoke_in_early_1942.jpg"
+ ],
+ "skip_ports": [
+  "Alta",
+  "Gothenburg"
  ]
 }

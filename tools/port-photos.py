@@ -60,11 +60,12 @@ for x in raw:
     for p in (x.get('itinerary') or {}).get('ports', []):
         n = alias.get(p['name'].strip(), p['name'].strip())
         count[n] = count.get(n, 0) + 1
-todo = [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n not in photos and n in coords and not NOPORT.search(n)][:MAX]
-print(len(todo), 'escalas sin foto con coordenadas', flush=True)
 used = {v.get('page') for v in photos.values()}
 BP = D('port_photos_block.json')
-if os.path.exists(BP): used |= set(json.load(open(BP)).get('pages', []))  # descartadas a mano
+SKIP = set()
+if os.path.exists(BP): _b = json.load(open(BP)); used |= set(_b.get('pages', [])); SKIP = set(_b.get('skip_ports', []))  # descartadas a mano; escalas sin foto aceptable en Commons
+todo = [n for n, _ in sorted(count.items(), key=lambda kv: -kv[1]) if n not in photos and n in coords and not NOPORT.search(n) and n not in SKIP][:MAX]
+print(len(todo), 'escalas sin foto con coordenadas', flush=True)
 os.makedirs(IMG, exist_ok=True)
 added = 0
 
