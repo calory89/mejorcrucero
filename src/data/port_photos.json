@@ -6786,15 +6786,6 @@
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Grenada_-_St._George.jpg"
  },
- "Gothenburg": {
-  "slug": "gothenburg",
-  "thumb": "/img/puertos/gothenburg-640.webp",
-  "large": "/img/puertos/gothenburg-1280.webp",
-  "ratio": 1.333,
-  "author": "Image taken from the square 'Drottningtorget' by Martin Olsson (mnemo on wikiped",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Centralstationen_goteborg.jpg"
- },
  "Napier": {
   "slug": "napier",
   "thumb": "/img/puertos/napier-640.webp",
@@ -6812,15 +6803,6 @@
   "author": "Diego Delso",
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Vista_de_Horta_desde_el_mirador_de_Nossa_Senhora_da_Concei%C3%A7%C3%A3o,_Isla_de_Fayal,_Azores,_Portugal,_2020-07-26,_DD_13.jpg"
- },
- "Alta": {
-  "slug": "alta",
-  "thumb": "/img/puertos/alta-640.webp",
-  "large": "/img/puertos/alta-1280.webp",
-  "ratio": 1.333,
-  "author": "The original uploader was Haavis at Norwegian Wikipedia.",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Bilde-Alta_boligomraade.jpg"
  },
  "Kobe": {
   "slug": "kobe",
@@ -7094,13 +7076,6 @@
     "author": "Diego Delso",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Centro_hist%C3%B3rico_de_Skagway,_Alaska,_Estados_Unidos,_2017-08-18,_DD_45.jpg"
-   },
-   {
-    "thumb": "/img/puertos/skagway-5-640.webp",
-    "ratio": 1.333,
-    "author": "Notyourbroom",
-    "license": "CC BY 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Kirmses_advertisement_Skagway_2009.jpg"
    }
   ]
  },

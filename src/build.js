@@ -69,7 +69,8 @@ const sailings = [];
     // Homónimos (mismo nombre, otro lugar): se elige el lugar más cercano a las escalas vecinas y se renombra
     // para que mapa, foto y página de escala sean los del sitio correcto (control de coordenadas, 31-oct-2026)
     if (x.itinerary?.ports?.length) { const ps = x.itinerary.ports; ps.forEach((p, i) => { const opts = HOMO[p.name]; if (!opts) return;
-      const nb = [ps[i - 1], ps[i + 1], ps[i - 2], ps[i + 2]].filter((q) => q && !HOMO[q.name] && PC_EARLY[q.name]).map((q) => PC_EARLY[q.name]); if (!nb.length) return;
+      const nb = [ps[i - 1], ps[i + 1], ps[i - 2], ps[i + 2]].filter((q) => q && !HOMO[q.name] && PC_EARLY[q.name]).map((q) => PC_EARLY[q.name]);
+      if (!nb.length) { if (p.name === "St. George's") p.name = x.destination === 'bermudas' ? "St. George's (Bermudas)" : "St. George's (Granada)"; return; } // sin vecinas conocidas: por el destino
       const kmH = (a, b) => { const r = Math.PI / 180, h = Math.sin((b[0] - a[0]) * r / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin((b[1] - a[1]) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); };
       const best = opts.reduce((m, o) => { const d = Math.min(...nb.map((c) => kmH(o, c))); return d < m[0] ? [d, o] : m; }, [Infinity, null])[1]; if (best && best[2]) p.name = best[2]; }); }
     // Nombres que existen en dos continentes: se distinguen por el destino del crucero
