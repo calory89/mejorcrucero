@@ -1,5 +1,5 @@
 name: Cloudflare (zona)
-# Manual: comprueba qué permite el token de Cloudflare de los secretos y, si se pide, aplica la caché larga y las cabeceras de seguridad.
+# Manual y de solo lectura: comprueba qué permite el token de Cloudflare guardado en los secretos (zona, DNS, SSL, reglas).
 on:
   workflow_dispatch:
     inputs:

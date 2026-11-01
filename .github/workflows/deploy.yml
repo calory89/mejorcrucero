@@ -75,7 +75,7 @@ jobs:
           BASE: ${{ vars.BASE || '/mejorcrucero/' }}
           CNAME: ${{ vars.CNAME }}
         run: |
-          npm i --no-save --no-audit --no-fund esbuild@0.24 >/dev/null 2>&1 || echo "sin esbuild: JS sin minificar"
+          npm i --no-save --no-audit --no-fund esbuild@0.24.2 >/dev/null 2>&1 || echo "sin esbuild: JS sin minificar"
           node src/build.js
       - name: Imágenes para compartir de las mejores ofertas
         run: |
