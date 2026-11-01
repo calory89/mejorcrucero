@@ -190,8 +190,8 @@
   "imageUrl": "/service/GetItineraryRandomImage.aspx?RegionCode=MB&Key=4DaysLXQBajaMexicoCarnivalFirenze&format=image",
   "id": "LXQ_LAX_FN_4_Mon",
   "code": "LXQ",
-  "image": "/-/media/Images/explore/destinations/ports/carnival-mexico-itinerary-catalina-4.jpg?useCustomFunctions=1&leftCrop=1",
-  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-mexico-itinerary-catalina-4.jpg?useCustomFunctions=1&leftCrop=1",
+  "image": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-ensenada-1.jpg?useCustomFunctions=1&leftCrop=1",
+  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-ensenada-1.jpg?useCustomFunctions=1&leftCrop=1",
   "stateroomMetaInformation": [
    {
     "metacode": "IS",
@@ -241,7 +241,7 @@
   ],
   "imageRandomizationInfo": {
    "crop": "Left",
-   "metaTag": "carnival-mexico-search-catalina-island-1",
+   "metaTag": "carnival-mexico-port-ensenada-1",
    "photoCredit": null
   },
   "itineraryTitle": "4-Day Baja Mexico from Long Beach (Los Angeles), CA",
