@@ -1054,3 +1054,10 @@ input[type=checkbox]{vertical-align:middle;margin:0 6px 0 0}
  section.block:not(.folded)>h2 .fold-btn{width:100%;justify-content:space-between;padding:16px 0 8px}
  .chart .ct{font-size:22px!important;font-weight:600}}
 .fold-btn{background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+@media (max-width:760px){.tabs-nav{-webkit-mask:linear-gradient(90deg,#000 85%,transparent);mask:linear-gradient(90deg,#000 85%,transparent);padding-right:28px}
+ .cta-band .cta-in{gap:12px!important}.cta-band .cta-in>div p{margin-bottom:0}.cta-band{margin-left:12px;margin-right:12px;border-radius:20px}}
+.btn.btn-sm{height:auto;white-space:normal;text-align:center;line-height:1.25;padding-top:8px;padding-bottom:8px}
+.rank-t.keep-t td{white-space:normal}
+@media (max-width:700px){.rank-t.keep-t.collapsed td:last-child{white-space:normal!important;min-width:12ch}}
+.rank-t.keep-t td:first-child{white-space:nowrap!important}
+@media (max-width:760px){.cta-band .cta-in{padding-bottom:28px!important}.cta-band form.lead{margin:0}}
