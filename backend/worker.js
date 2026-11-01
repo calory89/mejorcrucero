@@ -478,6 +478,19 @@ export default {
           const leads = (await env.DB.prepare("SELECT source, COUNT(*) n FROM leads WHERE created > datetime('now', ?) GROUP BY source ORDER BY n DESC LIMIT 30").bind(`-${days} days`).all()).results;
           return R({ days, events: ev, affPages: pages, ab, leads });
         }
+        if (p === '/admin/vitals') {
+          const days = Math.min(90, parseInt(url.searchParams.get('days')) || 28);
+          const rows = (await env.DB.prepare("SELECT page, variant, target FROM events WHERE name='vitals' AND created > datetime('now', ?) ORDER BY id DESC LIMIT 20000").bind(`-${days} days`).all()).results;
+          const g = {}; for (const r of rows) { const [l, c, i] = String(r.target).split('|').map(Number); const k = r.page + ' ' + r.variant; (g[k] = g[k] || { l: [], c: [], i: [] }); if (l > 0) g[k].l.push(l); if (c >= 0) g[k].c.push(c); if (i > 0) g[k].i.push(i); }
+          const p75 = (a) => { if (!a.length) return null; a.sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(a.length * 0.75))]; };
+          return R({ days, pages: Object.entries(g).map(([k, v]) => ({ page: k, n: v.l.length, lcp_p75: p75(v.l), cls_p75: p75(v.c), inp_p75: p75(v.i) })).sort((a, b) => b.n - a.n) });
+        }
+        if (p === '/admin/searches') {
+          const days = Math.min(90, parseInt(url.searchParams.get('days')) || 30), w = `-${days} days`;
+          const q = async (sql) => (await env.DB.prepare(sql).bind(w).all()).results;
+          return R({ days, top: await q("SELECT page AS x, target AS q, COUNT(*) n FROM events WHERE name='search' AND created > datetime('now', ?) GROUP BY target ORDER BY n DESC LIMIT 100"),
+            sinResultados: await q("SELECT target AS q, COUNT(*) n FROM events WHERE name='search' AND variant='0' AND created > datetime('now', ?) GROUP BY target ORDER BY n DESC LIMIT 100") });
+        }
         if (p === '/admin/queue') return R((await env.DB.prepare('SELECT id,thread,name,kind,body,reports,mod,created FROM posts WHERE hidden=1 OR reports>0 ORDER BY id DESC LIMIT 200').all()).results);
         if (p === '/admin/reports') return R((await env.DB.prepare('SELECT * FROM reports ORDER BY id DESC LIMIT 500').all()).results);
         if (p === '/admin/leads') return R((await env.DB.prepare('SELECT * FROM leads ORDER BY id DESC LIMIT 5000').all()).results);

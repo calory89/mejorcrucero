@@ -16,9 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm i --no-save playwright@1.49 lighthouse@12 && npx playwright install --with-deps chromium
+      - run: npm i --no-save playwright@1.49 lighthouse@12 axe-core@4.10 && npx playwright install --with-deps chromium
       - name: Pruebas en navegador
         run: BASE_URL=https://mejorcrucero.com node test/browser.mjs
+      - name: Accesibilidad (axe, claro y oscuro)
+        if: always()
+        run: BASE_URL=https://mejorcrucero.com node test/axe.mjs
       - name: Lighthouse (móvil)
         if: always()
         run: |

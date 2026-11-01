@@ -78,5 +78,10 @@ for (const p of ['index.html', 'ofertas/index.html', 'barcos/index.html', ...(an
   const h = read(p);
   for (const m of h.matchAll(/<script type="(application\/ld\+json|speculationrules|application\/json)"[^>]*>([\s\S]*?)<\/script>/g)) { try { JSON.parse(m[2]); } catch (e) { fails.push(`JSON inválido (${m[1]}) en ${p}: ${e.message.slice(0, 80)}`); } }
 }
+// Presupuesto de peso: si algo crece de golpe, la prueba avisa antes de publicar
+{ const zlib = await import('node:zlib'); const gz = (f) => { try { return zlib.gzipSync(fs.readFileSync(path.join(D, f))).length; } catch { return 0; } };
+  for (const [f, max] of [['assets/style.css', 30e3], ['assets/app.js', 36e3], ['assets/v3.js', 28e3], ['index.html', 22e3], ['data/cards.json', 900e3]]) { const n = gz(f); if (n > max) fails.push(`${f} pesa ${Math.round(n / 1024)} KB comprimido (máximo ${Math.round(max / 1024)} KB)`); }
+  const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : e.name === 'index.html' ? [path.join(d, e.name)] : []);
+  const big = walk(D).filter((f) => fs.statSync(f).size > 330e3); if (big.length) fails.push(`${big.length} páginas de más de 330 KB: ${big.slice(0, 3).join(', ')}`); }
 if (fails.length) { console.error(`✖ Prueba rápida: ${fails.length} fallos\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
 console.log(`✔ Prueba rápida OK: ${sailings.length} salidas, ${sample.length} páginas revisadas, ${all.length} tarjetas en el listado`);

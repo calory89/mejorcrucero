@@ -31,6 +31,15 @@
   }
   const hasApi = async () => !!(await getConfig()).api;
   const track = (name, target = '', variant = '') => api('/evt', { body: { name, page: PAGE, target, variant } }).catch(() => {});
+  // ---------- Velocidad real de los visitantes (LCP, CLS, INP), 1 de cada 4 visitas, sin datos personales ----------
+  try { if (Math.random() < 0.25 && 'PerformanceObserver' in window) {
+    const kind = (location.pathname.split('/')[1] || 'portada').slice(0, 20); let lcp = 0, cls = 0, inp = 0, sent = 0;
+    new PerformanceObserver((l) => { const e = l.getEntries().pop(); if (e) lcp = Math.round(e.startTime); }).observe({ type: 'largest-contentful-paint', buffered: true });
+    new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput) cls += e.value; }).observe({ type: 'layout-shift', buffered: true });
+    try { new PerformanceObserver((l) => { for (const e of l.getEntries()) if (e.interactionId) inp = Math.max(inp, Math.round(e.duration)); }).observe({ type: 'event', buffered: true, durationThreshold: 40 }); } catch {}
+    const send = () => { if (sent || !lcp) return; sent = 1; const dev = matchMedia('(max-width:760px)').matches ? 'm' : 'd'; getConfig().then((c) => { if (!c.api) return; const b = JSON.stringify({ name: 'vitals', page: kind, target: `${lcp}|${cls.toFixed(3)}|${inp}`, variant: dev }); navigator.sendBeacon ? navigator.sendBeacon(c.api.replace(/\/$/, '') + '/evt', new Blob([b], { type: 'text/plain' })) : fetch(c.api.replace(/\/$/, '') + '/evt', { method: 'POST', body: b, keepalive: true }); }); };
+    addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') send(); });
+  } } catch {}
 
   // ---------- Tema claro / oscuro ----------
   const themeNow = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -314,6 +323,13 @@
       if (toks.some((t) => /^barat/.test(t)) && !v.orden) v.orden = 'precio';
       const qt = toks.filter((t) => !STOP.has(t) && MES_N.indexOf(t) < 0 && t.length > 1);
       const q = '';
+      // Sinónimos habituales y corrección de erratas (sin tildes): "fiordos" = Noruega, "mediteraneo" = mediterraneo
+      const SYN = { fiordos: ['noruega', 'fiord', 'geiranger', 'bergen'], fiordo: ['noruega', 'fiord'], griegas: ['grecia', 'griega', 'oriental', 'santorini', 'mikonos'], grecia: ['griega', 'oriental', 'santorini', 'atenas', 'pireo'], nordicas: ['baltico', 'norte de europa', 'copenhague', 'estocolmo'], capitales: ['baltico', 'norte de europa'], antillas: ['caribe'], bahamas: ['caribe', 'nassau', 'bahamas'], mexico: ['cozumel', 'costa maya', 'riviera mexicana', 'mexic'], canarias: ['canarias', 'tenerife', 'gran canaria', 'lanzarote'], islandia: ['islandia', 'reikiavik', 'akureyri'], egipto: ['egipto', 'alejandria', 'port said'], minicrucero: ['mini'], navidad: ['diciembre'], nochevieja: ['diciembre'] };
+      const VOC = (meta.vocab || []);
+      const lev = (a, b) => { if (Math.abs(a.length - b.length) > 2) return 9; const d = Array.from({ length: a.length + 1 }, (_, i) => [i]); for (let j = 1; j <= b.length; j++) d[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; };
+      const fixed = [];
+      const alts = qt.map((w) => { if (SYN[w]) return [w, ...SYN[w]]; if (w.length < 4 || !VOC.length || VOC.includes(w) || VOC.some((x) => x.startsWith(w))) return [w]; let best = null, bd = w.length >= 7 ? 3 : 2; for (const x of VOC) { const dd = lev(w, x); if (dd < bd) { bd = dd; best = x; } } if (best) { fixed.push([w, best]); return [w, best]; } return [w]; });
+      const fx = $('#s-fix'); if (fx) { fx.hidden = !fixed.length; fx.textContent = fixed.length ? `Buscando también: ${fixed.map(([a, b]) => `«${b}» (has escrito «${a}»)`).join(', ')}` : ''; }
       // Páginas (guías, herramientas, comparativas, rankings…) que encajan con las palabras
       if (qt.length) getJson('paginas.json').then((pg) => { const sc = pg.map(([t, u]) => { const h = fold(t + ' ' + u.replace(/[-/]/g, ' ')); const n = qt.filter((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1)))).length; return [n, t, u]; }).filter((r, _, all) => { const best = Math.max(...all.map((z) => z[0])); return best > 0 && r[0] === best; }).sort((a, b) => { const pr = (u) => (/^\/(guias|herramientas|comparativas)\//.test(u) ? 0 : 1); return b[0] - a[0] || pr(a[2]) - pr(b[2]) || a[1].length - b[1].length; }).slice(0, 8);
         const box = $('#s-pages'); if (!box) return; box.hidden = !sc.length; box.innerHTML = sc.length ? `<h2 class="h-sm">Páginas</h2><ul class="mini mini-grid">${sc.map(([, t, u]) => `<li><a href="${BASE}${u.slice(1)}"><b>${esc(t)}</b></a></li>`).join('')}</ul>` : ''; }).catch(() => {}); else { const box = $('#s-pages'); if (box) box.hidden = true; }
@@ -323,11 +339,12 @@
         if (!isFinite(min)) return false;
         x._min = min; x._ppn = min / x.nights; x._s = s;
         return (!v.destino || x.destination === v.destino) && (!v.mes || new Date(x.date).getMonth() + 1 === +v.mes) && (!v.puerto || x.depart_port_slug === v.puerto) && x.nights >= nmin && x.nights <= nmax && (!v.max || min <= +v.max)
-          && (!v.perfil || (v.perfil === 'adultos' ? x.adults_only : !x.adults_only)) && (!qt.length || (() => { const h = fold(`${s.name} ${s.lineShort} ${x.itinerary?.name} ${x.depart_port} ${(x.itinerary?.ports || []).map((pp) => pp.name).join(' ')} ${(meta.dest.find((d) => d.slug === x.destination) || {}).name || ''}`); return qt.every((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1)))); })());
+          && (!v.perfil || (v.perfil === 'adultos' ? x.adults_only : !x.adults_only)) && (!qt.length || (() => { const h = fold(`${s.name} ${s.lineShort} ${x.itinerary?.name} ${x.depart_port} ${(x.itinerary?.ports || []).map((pp) => pp.name).join(' ')} ${(meta.dest.find((d) => d.slug === x.destination) || {}).name || ''}`); return alts.every((al) => al.some((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1))))); })());
       }).sort(v.orden === 'precio' ? (a, b) => a._min - b._min : v.orden === 'fecha' ? (a, b) => a.date.localeCompare(b.date) : (a, b) => a._ppn - b._ppn);
       $('#s-count').textContent = sails.length ? `${res.length} salida${res.length === 1 ? '' : 's'}` : '';
       $('#s-results').innerHTML = res.slice(0, 60).map((x) => `<a class="card sail-card" href="${BASE}salidas/${x.id}/"><div class="card-body"><span class="eyebrow">${esc(x._s.lineShort || '')} · ${esc(x._s.name || x.ship)}</span><h3>${esc(((meta.names || {})[x.destination] || (meta.dest.find((d) => d.slug === x.destination) || {}).name || x.dest_name || x.itinerary?.name || 'Crucero') + ', ' + x.nights + ' noches')}</h3><p class="muted small">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${x.nights} noches · desde ${esc(x.depart_port)}</p><p class="price">desde <b>${eur(x._min)}</b> <span class="muted small">(${eur(x._ppn)}/noche)</span></p></div></a>`).join('');
       const empty = !res.length;
+      clearTimeout(run._t); if (v.q && v.q.trim().length > 2) run._t = setTimeout(() => track('search', v.q.trim().toLowerCase().slice(0, 80), String(res.length)), 1800);
       $('#s-empty').hidden = !empty;
       if (empty) {
         const dests = meta.dest.filter((d) => (!v.destino || d.slug === v.destino) && (!v.mes || d.months.includes(+v.mes)));
@@ -336,6 +353,8 @@
         $('#s-alt').innerHTML = `${dests.length ? `<h2>Destinos que encajan</h2><div class="dest-grid">${dests.map((d) => `<a class="dest" href="${BASE}destinos/${d.slug}/"><span class="dest-e">${d.emoji}</span><b>${esc(d.name)}</b></a>`).join('')}</div>` : ''}${port ? `<p><a class="btn btn-ghost" href="${BASE}puertos/${port.slug}/">Guía del puerto de ${esc(port.name)}</a></p>` : ''}<h2>Barcos ${q ? 'que coinciden' : 'más nuevos'}</h2><div class="grid">${sh.map(miniCard).join('')}</div>`;
       }
     };
+    { const SR = window.SpeechRecognition || window.webkitSpeechRecognition; const qi = sform.q; if (SR && qi) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm s-voice'; b.innerHTML = '<span aria-hidden="true">🎙️</span> Buscar hablando'; qi.closest('label').after(b);
+      b.addEventListener('click', () => { const r = new SR(); r.lang = 'es-ES'; r.interimResults = false; b.disabled = true; b.lastChild.textContent = ' Escuchando…'; r.onresult = (e) => { qi.value = e.results[0][0].transcript; run(); }; r.onend = () => { b.disabled = false; b.lastChild.textContent = ' Buscar hablando'; }; r.onerror = r.onend; try { r.start(); } catch { r.onend(); } }); } }
     sform.addEventListener('input', run);
     sform.addEventListener('submit', (e) => { e.preventDefault(); run(); });
     run();
@@ -860,6 +879,18 @@
     s.onload = () => { box.innerHTML = '<div class="map-box"></div>'; const m = L.map($('.map-box', box)); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); const ll = pts.map((p) => [p[0], p[1]]); pts.forEach((p) => L.marker([p[0], p[1]]).addTo(m).bindPopup(p[2])); L.polyline(ll, { color: '#c93b1f' }).addTo(m); m.fitBounds(ll, { padding: [30, 30] }); };
     document.head.append(s);
   });
+
+  // Mapa de cruceros por mes (Leaflet bajo demanda): filtra los puntos por mes sin recargar
+  { const box = $('.mmap'); if (box) { const pts = JSON.parse(box.dataset.pts); let m = null, layer = null; const sel = $('.js-mmap-mes'); if (qs.get('mes')) sel.value = qs.get('mes');
+    const draw = () => { if (!m) return; if (layer) layer.remove(); layer = L.layerGroup().addTo(m); const mo = +sel.value; const vis = [];
+      for (const [la, lo, n, u, mm] of pts) { let c = 0, mn = Infinity; for (const [k, [cc, p]] of Object.entries(mm)) if (!mo || +k === mo) { c += cc; mn = Math.min(mn, p); } if (!c) continue; vis.push([la, lo]);
+        L.circleMarker([la, lo], { radius: Math.min(20, 4 + Math.sqrt(c) * 1.5), color: '#0a47b8', weight: 1, fillColor: '#2f7bff', fillOpacity: .55 }).addTo(layer).bindPopup(`<b>${esc(n)}</b><br>${c} salida${c > 1 ? 's' : ''} pasan por aquí · desde ${mn} €${u ? `<br><a href="${BASE}${u.slice(1)}">Ver cruceros con esta escala</a>` : ''}`); }
+      if (vis.length) m.fitBounds(vis, { padding: [20, 20], maxZoom: 6 }); };
+    sel.addEventListener('change', () => { const u = new URL(location); sel.value === '0' ? u.searchParams.delete('mes') : u.searchParams.set('mes', sel.value); history.replaceState(null, '', u); draw(); });
+    const load = () => { const b = $('.js-mmap', box); if (b) { b.disabled = true; b.textContent = 'Cargando mapa…'; }
+      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.append(css);
+      const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.onload = () => { box.innerHTML = '<div class="map-box map-tall"></div>'; m = L.map($('.map-box', box), { scrollWheelZoom: false, worldCopyJump: true }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); m.setView([30, -20], 2); draw(); }; document.head.append(s); };
+    box.addEventListener('click', (e) => { if (e.target.closest('.js-mmap')) load(); }); if (matchMedia('(min-width: 761px)').matches) load(); } }
 
   // Mapa de puertos de salida (Leaflet bajo demanda): un punto por puerto con número de salidas y precio desde
   document.addEventListener('click', (e) => {

@@ -1061,3 +1061,7 @@ input[type=checkbox]{vertical-align:middle;margin:0 6px 0 0}
 @media (max-width:700px){.rank-t.keep-t.collapsed td:last-child{white-space:normal!important;min-width:12ch}}
 .rank-t.keep-t td:first-child{white-space:nowrap!important}
 @media (max-width:760px){.cta-band .cta-in{padding-bottom:28px!important}.cta-band form.lead{margin:0}}
+/* Transición suave entre páginas (navegadores que la soportan) */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}}
+.s-voice{margin-top:6px}.s-fix{color:var(--ink-2);margin:4px 0 0}
+.map-tall{height:min(70vh,620px)!important}
