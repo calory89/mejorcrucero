@@ -1190,3 +1190,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visib
 .hub-tools{padding-top:20px!important}
 @media (max-width:760px){.page-h.hub-h{padding-top:150px!important}.page-h.hub-h .port-fig{height:260px}}
 @media (max-width:760px){.page-h.port-h .credit{top:8px!important;bottom:auto!important}.page-h.hub-h h1{font-size:1.75rem}}
+/* Arreglos de la auditoría tras el rediseño */
+.cmp-links.big a{font:700 1.1rem/1.3 var(--sans)!important;color:var(--ink)!important;margin:0;border:2px solid var(--edge)!important;border-radius:var(--radius)!important;box-shadow:var(--pop);padding:16px 18px;overflow-wrap:anywhere}
+.cmp-links a span{color:var(--flag-r)!important;font-style:normal;font-weight:800}
+.calc-out{background:var(--navy)!important;color:#fff!important}.calc-out *{color:inherit}
+.btn-on-dark,.btn-ghost.btn-on-dark{color:#fff!important;border-color:#fff!important}
+.cmp-bar{z-index:32!important}
+@media (max-width:760px){.cmp-bar{bottom:calc(60px + env(safe-area-inset-bottom))!important}}
