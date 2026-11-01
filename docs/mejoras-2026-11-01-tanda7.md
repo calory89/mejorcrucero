@@ -18,3 +18,19 @@ Salen de una revisión independiente (capturas en móvil y escritorio, claro y o
 14. Flota año a año indica que se puede desplazar
 15. Aviso de idioma y moneda: arriba en móvil (no tapa los filtros) y se oculta solo a los 15 s
 16. Selectores segmentados sin desbordar en pantallas estrechas
+
+## Tanda 8 (1-nov, mediodía)
+17. Mapa de escalas de los listados: nombres legibles (antes casi invisibles) y puntos más grandes
+18. Tabla "Precio por mes" cabe entera en el móvil, con cifras alineadas
+19. Oferta en móvil: secciones plegadas en lista compacta (antes 90 px de hueco entre cada una)
+20. Gráfica del histórico de precio con cifras legibles en móvil
+21. Aviso de idioma y moneda en línea bajo la cabecera: ya no tapa nada en móvil ni en escritorio
+22. "Pregunta a la IA" vuelve a su sitio en la página: en escritorio tapaba "Guardar oferta"
+23. Desplegables de la portada con su flecha (no parecían desplegables)
+24. Contraste en modo oscuro: botón de la IA y horas en tierra del itinerario (axe: 0 fallos)
+25. Buscador: "€ por noche" ya no se corta
+26. Descripciones de 9 páginas ampliadas con lo que dice cada página (aviso legal, cookies, privacidad, créditos…)
+27. Pestañas de la ficha indican que hay más a la derecha
+28. Botones largos ("Ver las 46 salidas con filtros…") ya no se salen de su caja
+29. "Dónde estará" del barco: la zona se lee entera
+30. Newsletter de la portada con márgenes y sin hueco sobrante
