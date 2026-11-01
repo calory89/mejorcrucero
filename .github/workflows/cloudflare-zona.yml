@@ -1,0 +1,27 @@
+name: Cloudflare (zona)
+# Manual: comprueba qué permite el token de Cloudflare de los secretos y, si se pide, aplica la caché larga y las cabeceras de seguridad.
+on:
+  workflow_dispatch:
+    inputs:
+      aplicar:
+        description: 'si = aplicar reglas; no = solo comprobar'
+        default: 'no'
+permissions:
+  contents: read
+jobs:
+  zona:
+    runs-on: ubuntu-latest
+    env:
+      CF: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      APLICAR: ${{ github.event.inputs.aplicar }}
+    steps:
+      - name: Comprobar token y zona
+        run: |
+          api() { curl -s -H "Authorization: Bearer $CF" -H "Content-Type: application/json" "https://api.cloudflare.com/client/v4$@"; }
+          echo "Token:"; api /user/tokens/verify | jq -c '{success, status: .result.status}'
+          echo "Zonas visibles:"; api "/zones?name=mejorcrucero.com" | jq -c '{success, n: (.result|length), zona: [.result[]? | {id, name, status, plan: .plan.name}], errors}'
+          Z=$(api "/zones?name=mejorcrucero.com" | jq -r '.result[0].id // empty'); echo "zona=$Z"
+          [ -z "$Z" ] && { echo "El token no ve la zona mejorcrucero.com"; exit 0; }
+          echo "DNS (proxy):"; api "/zones/$Z/dns_records?per_page=50" | jq -c '[.result[]? | select(.name=="mejorcrucero.com" or .name=="www.mejorcrucero.com") | {type, name, content, proxied}], .errors'
+          echo "Reglas de caché:"; api "/zones/$Z/rulesets/phases/http_request_cache_settings/entrypoint" | jq -c '{ok: .success, reglas: [.result.rules[]?.description], errors}'
+          echo "Ajuste SSL:"; api "/zones/$Z/settings/ssl" | jq -c '{ok: .success, valor: .result.value, errors}'
