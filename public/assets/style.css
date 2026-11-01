@@ -1014,3 +1014,5 @@ table.m20.collapsed tbody tr:nth-child(n+7){display:table-row}
 @media (min-width:701px){.locale-bar{left:16px!important;right:auto!important;max-width:420px}}
 .tabs-nav{top:var(--hdr,57px)!important}
 body:has(.tabs-nav) [id]{scroll-margin-top:calc(var(--hdr,57px) + 72px)}
+/* Tablas anchas que en móvil se desplazan en horizontal en vez de convertirse en fichas */
+@media (max-width:700px){.rank-t.keep-t thead{display:table-header-group!important}.rank-t.keep-t tr{display:table-row!important;padding:0!important}.rank-t.keep-t td,.rank-t.keep-t th{display:table-cell!important;padding:8px 10px!important;white-space:nowrap;border-bottom:1px solid var(--line)!important;grid-row:auto!important;grid-column:auto!important}.rank-t.keep-t td:first-child{position:sticky;left:0;background:var(--card);z-index:1}}
