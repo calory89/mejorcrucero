@@ -276,6 +276,9 @@
   // ---------- Ofertas: ordenar y filtrar el listado sin recargar ----------
   $$('.offer-filter').forEach((f) => {
     const g = $(f.dataset.target); if (!g) return;
+    // Móvil: arriba solo el buscador; noches, presupuesto, mes, salida y orden van en "Filtros y orden" (las tarjetas suben media pantalla)
+    if (matchMedia('(max-width: 700px)').matches) { const mf = $('.more-f', f), inn = $('.more-f-in', f), main = $('.main-f', f), ord = f.elements.o?.closest('label');
+      if (mf && inn && main) { inn.prepend(main); if (ord) inn.prepend(ord); const sm = $('summary', mf); if (sm) sm.firstChild.textContent = 'Filtros y orden '; } }
     $$('[data-open-wide]', f).forEach((d) => { if (innerWidth > 760) d.open = true; });
     const cards = [...g.children];
     // El servidor pinta las primeras 48; el resto se carga una vez al filtrar o pedir más

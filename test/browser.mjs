@@ -13,9 +13,9 @@ const page = async (u) => { const p = await ctx.newPage(); const errs = []; p.on
 const check = (name, cond, extra = '') => (cond ? ok : fails).push(name + (extra ? ` (${extra})` : ''));
 const vis = (p) => p.evaluate(() => { const ims = [...document.querySelectorAll('#offer-grid .offer-card:not([hidden]) img.ship-photo')]; const s = ims.map((i) => i.getAttribute('src')); return { n: ims.length, uniq: new Set(s).size }; });
 try {
-  { const { p, errs } = await page('/ofertas/'); let v = await vis(p); check('listado: tarjetas', v.n >= 12, v.n); check('listado: fotos sin repetir', v.uniq === v.n, `${v.uniq}/${v.n}`);
+  { const { p, errs } = await page('/ofertas/'); let v = await vis(p); check('listado: tarjetas', v.n >= 20, v.n); check('listado: fotos sin repetir', v.uniq === v.n, `${v.uniq}/${v.n}`);
     await p.click('.js-more'); await p.waitForTimeout(3000); v = await vis(p); check('listado: cargar más', v.n >= 40, v.n); check('listado: fotos sin repetir tras cargar más', v.uniq >= v.n - 2, `${v.uniq}/${v.n}`);
-    await p.selectOption('.offer-filter select[name=o]', 'price'); await p.waitForTimeout(800);
+    await p.evaluate(() => { const d = document.querySelector('.offer-filter .more-f'); if (d) d.open = true; }); await p.selectOption('.offer-filter select[name=o]', 'price'); await p.waitForTimeout(800);
     const pr = await p.evaluate(() => [...document.querySelectorAll('#offer-grid .offer-card:not([hidden])')].slice(0, 10).map((c) => +c.dataset.price)); check('listado: ordenar por precio', pr.every((x, i) => !i || x >= pr[i - 1]), pr.slice(0, 4).join(','));
     await p.selectOption('.offer-filter select[name=o]', 'near'); await p.waitForTimeout(3000);
     const w = await p.evaluate(() => document.querySelector('#offer-grid .offer-card:not([hidden]) .card-when')?.textContent || ''); check('listado: puerto más cercano (desde Madrid)', /Valencia|Barcelona|Málaga|Alicante|Palma|Cádiz|Tarragona|Bilbao|Vigo/.test(w), w.trim().slice(0, 60));
