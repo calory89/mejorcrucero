@@ -519,7 +519,8 @@
   const mo = $('#my-offers');
   if (mo) {
     const favs = store.get('mc_offer_favs', []), rec = store.get('mc_offer_recent', []).filter((r) => !favs.some((f) => f.id === r.id)).slice(0, 8);
-    const li = (x, tag) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d)} · desde ${eur(x.p)}${tag ? ' · ' + tag : ''}</span></a></li>`;
+    const fd = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(d || '') ? new Date(d + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : d || ''); const gone = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d || '') && d < new Date().toISOString().slice(0, 10);
+    const li = (x, tag) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(fd(x.d))} · desde ${eur(x.p)}${tag ? ' · ' + tag : ''}${gone(x.d) ? ' · ya ha salido' : ''}</span></a></li>`;
     if (favs.length || rec.length) mo.innerHTML = `<ul class="mini">${favs.map((x) => li(x, '❤️ guardada')).join('')}${rec.map((x) => li(x, 'vista')).join('')}</ul>`;
   }
 // ---------- Ofertas: datos ligeros ----------
@@ -631,3 +632,6 @@
     if (fix) { if (!h) { h = document.createElement('button'); h.type = 'button'; h.className = 'typo link'; i.after(h); } h.textContent = `¿Querías decir ${u}@${fix}?`; h.onclick = () => { i.value = `${u}@${fix}`; h.remove(); }; } else if (h) h.remove();
   }, true);
 })();
+
+// Mis cruceros vacío: una guía corta en vez de seis secciones vacías
+(() => { const st = document.querySelector('.mine-start'); if (!st) return; try { const g = (k) => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } }; const any = ['mc_favs', 'mc_offer_favs', 'mc_offer_recent', 'mc_recent', 'mc_alerts', 'mc_cd', 'mc_sailed', 'mc_watch'].some((k) => { const v = g(k); return Array.isArray(v) ? v.length : v && Object.keys(v).length; }); st.hidden = !!any; } catch {} })();
