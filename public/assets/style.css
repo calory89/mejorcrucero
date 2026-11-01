@@ -1078,3 +1078,4 @@ input[type=checkbox]{vertical-align:middle;margin:0 6px 0 0}
  .award-card img{grid-row:1/4;width:96px!important;height:96px!important;margin:0!important;aspect-ratio:1;border-radius:10px}
  .award-card .eyebrow{font-size:.78rem}.award-card h2{margin:0;font-size:1.05rem}.award-card p{margin:0}.award-card p.muted{display:none}}
 @media (max-width:700px){.award-card:not(:has(img)){display:flex!important;flex-direction:column}}
+.offer-filter label.chk{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;gap:10px;min-height:44px}.offer-filter label.chk input{margin:0;width:20px;height:20px;flex:none}

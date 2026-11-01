@@ -374,7 +374,7 @@
       r.addEventListener('change', () => sel.dispatchEvent(new Event('change', { bubbles: true }))); f.addEventListener('change', show); show(); } }
     // Barra fija con el contador y acceso a los filtros al bajar por el listado
     { const bar = document.createElement('div'); bar.className = 'f-sticky'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Filtros rápidos'); bar.innerHTML = '<span class="f-sticky-n"></span><button type="button" class="btn btn-sm">Filtros</button>'; document.body.append(bar);
-      $('button', bar).addEventListener('click', () => f.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      $('button', bar).addEventListener('click', () => { const d = f.querySelector('details'); if (d) d.open = true; f.scrollIntoView({ behavior: 'smooth', block: 'start' }); const fi = d && d.querySelector('select, input:not([type=hidden])'); if (fi) setTimeout(() => fi.focus({ preventScroll: true }), 450); });
       const io = new IntersectionObserver(([e]) => { bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); $('.f-sticky-n', bar).textContent = ($('.offer-count', f)?.textContent || '').split(' · ')[0]; }); io.observe(f); }
     // Meses como fila de botones desplazable
     { const sel = f.elements.m; if (sel && sel.tagName === 'SELECT' && sel.options.length > 2) { const row = document.createElement('div'); row.className = 'seg seg-scroll'; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Mes');
