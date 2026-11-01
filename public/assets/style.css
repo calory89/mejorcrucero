@@ -1009,3 +1009,5 @@ table.m20.collapsed tbody tr:nth-child(n+7){display:table-row}
 @media (max-width:700px){.offer-filter .f-wide>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
  .page-h .lead-p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
  .offer-filter .more-f summary{min-height:44px;display:flex;align-items:center}}
+/* Portada móvil: el barco arriba (antes la portada en móvil no tenía ninguna imagen) */
+@media (max-width:860px){.hero-v4 .hero-fig{display:block;order:-1;margin:0 0 4px}.hero-v4 .hero-fig img{aspect-ratio:2/1;border-radius:14px}.hero-v4 .hero-fig figcaption{font-size:.68rem;margin-top:4px}.hero-v4 .hero-in{gap:14px}}
