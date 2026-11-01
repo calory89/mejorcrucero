@@ -79,7 +79,9 @@ def candidates(lang, title):
     files = []
     if pg.get('pageimage'): files.append(pg['pageimage'])
     for im in pg.get('images', []): files.append(im['title'].split(':', 1)[1].replace(' ', '_'))
-    files = [f for i, f in enumerate(files) if f not in files[:i] and not BAD.search(f)]
+    # Fuera también fotos históricas (años 1800-1999 en el nombre del fichero, archivos como Fortepan) y trenes o aeródromos
+    OLD = re.compile(r'(?<![0-9])(18[0-9]{2}|19[0-9]{2})(?![0-9])|fortepan|railway|_train|silver_meteor|aviation|aerodrom|airport|aeropuerto', re.I)
+    files = [f for i, f in enumerate(files) if f not in files[:i] and not BAD.search(f) and not OLD.search(f)]
     return co, files
 
 

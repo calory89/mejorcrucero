@@ -34,3 +34,17 @@ Salen de una revisión independiente (capturas en móvil y escritorio, claro y o
 28. Botones largos ("Ver las 46 salidas con filtros…") ya no se salen de su caja
 29. "Dónde estará" del barco: la zona se lee entera
 30. Newsletter de la portada con márgenes y sin hueco sobrante
+
+## Tanda 10 (1-nov, tarde): UX, fallos y funcionalidades
+31. Páginas de naviera en móvil 3 veces más cortas (Carnival: de 17.900 a 6.000 px): fichas en carrusel y tabla de flota plegada
+32. Herramientas en móvil en 2 columnas compactas (antes 45 tarjetas apiladas)
+33. Premios en móvil: tarjeta horizontal con foto pequeña
+34. Mis cruceros: guía de uso cuando está vacío, secciones en rejilla en escritorio y "Tus datos" al final
+35. "Mi resumen y retos" ya no sale vacío
+36. Ofertas guardadas con fecha en español y aviso "ya ha salido"
+37. El botón "Filtros" fijo del listado abre el panel de filtros (antes solo subía)
+38. Casilla "Ver cada fecha por separado" alineada
+39. Calculadora del precio real sin naviera preseleccionada (salía Adora Cruises con "sin referencia")
+40. Fuera 9 fotos de escalas antiguas o de otro lugar: Dubrovnik 1965, Ámsterdam 1912, Koper 1900, Rijeka 1918, un tren en Jacksonville, una placa en Bergen, Panamá 1994, Charleroi (en Bruselas/Brujas) y el aeródromo de Gosselies
+41. El importador de fotos descarta fotos históricas, trenes y aeropuertos
+42. Títulos largos corregidos (naviera + destino, escala + mes)
