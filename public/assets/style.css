@@ -1079,3 +1079,110 @@ input[type=checkbox]{vertical-align:middle;margin:0 6px 0 0}
  .award-card .eyebrow{font-size:.78rem}.award-card h2{margin:0;font-size:1.05rem}.award-card p{margin:0}.award-card p.muted{display:none}}
 @media (max-width:700px){.award-card:not(:has(img)){display:flex!important;flex-direction:column}}
 .offer-filter label.chk{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;gap:10px;min-height:44px}.offer-filter label.chk input{margin:0;width:20px;height:20px;flex:none}
+
+/* =====================================================================
+   DISEÑO B · Banderas de señales (1-nov-2026)
+   Azul marino de casco, amarillo señal para la acción, rojo de bandera solo para chollos.
+   Bordes gruesos con sombra desplazada (como una pegatina de maleta) y fotos a sangre.
+   ===================================================================== */
+@font-face{font-family:'Jakarta';font-style:normal;font-display:swap;font-weight:200 800;src:url(/fonts/jakarta-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Jakarta';font-style:normal;font-display:swap;font-weight:200 800;src:url(/fonts/jakarta-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--navy:#0B1F4B;--flag-y:#FFC72C;--flag-r:#D62839;--ink:#0B1F4B;--ink-2:#33456E;--muted:#5D6A90;--bg:#FFFFFF;--card:#fff;--line:#E2E7F2;--sea:#1D4ED8;--sea-2:#E8EEFF;--coral:#1D4ED8;--coral-d:#1638A8;--sun:#FFC72C;--soft:#F3F5FB;--radius:18px;--edge:#0B1F4B;--pop:4px 4px 0 var(--edge);--shadow:none;--sans:'Jakarta',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--serif:var(--sans)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#EEF2FF;--ink-2:#C5CEEA;--muted:#9AA6CC;--bg:#081430;--card:#0F1E44;--line:#22346A;--sea:#8DB0FF;--sea-2:#15295A;--coral:#8DB0FF;--coral-d:#B5CBFF;--soft:#0D1B3D;--edge:#000814}}
+:root[data-theme=dark]{--ink:#EEF2FF;--ink-2:#C5CEEA;--muted:#9AA6CC;--bg:#081430;--card:#0F1E44;--line:#22346A;--sea:#8DB0FF;--sea-2:#15295A;--coral:#8DB0FF;--coral-d:#B5CBFF;--soft:#0D1B3D;--edge:#000814}
+body{font-family:var(--sans);background:var(--bg);letter-spacing:-.005em}
+h1,h2,h3,.h-sm,.logo span{font-family:var(--sans)!important;font-stretch:100%!important;letter-spacing:-.03em}
+h1{font-weight:800}h2{font-weight:800}h3{font-weight:700}
+/* Cabecera: casco azul marino */
+.top{background:var(--navy)!important;border-bottom:0!important;backdrop-filter:none!important;color:#fff}
+.top .nav a,.top .logo span,.top .icon-btn,.top .burger>summary,.top .notif{color:#fff!important}.top .logo b{color:var(--flag-y)!important}
+.top .nav a[aria-current],.top .nav a:hover{color:var(--flag-y)!important;box-shadow:none!important}
+.top .gsearch input{background:rgba(255,255,255,.12)!important;color:#fff!important;border:1px solid rgba(255,255,255,.18)!important}.top .gsearch input::placeholder{color:#B7C3E6}.top .gq-k{background:rgba(255,255,255,.15);color:#fff;border:0}
+.top .burger[open]>summary{color:#fff!important}
+/* Botones: amarillo señal para actuar, contorno marino para lo secundario */
+.btn:not(.btn-ghost):not(.link-btn),.nav-cta{background:var(--flag-y)!important;color:var(--navy)!important;border:2px solid var(--navy)!important;border-radius:999px!important;font-weight:800!important;box-shadow:2px 2px 0 var(--navy)!important;transition:transform .12s,box-shadow .12s}
+.btn:not(.btn-ghost):not(.link-btn):hover,.nav-cta:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--navy)!important}
+.btn:not(.btn-ghost):not(.link-btn):active{transform:translate(2px,2px);box-shadow:0 0 0 var(--navy)!important}
+.top .nav-cta{border-color:var(--flag-y)!important;box-shadow:none!important}
+.btn-ghost{border-radius:999px!important;border:2px solid var(--ink)!important;color:var(--ink)!important;background:transparent!important;font-weight:700!important}
+/* Tarjetas: borde marino y sombra desplazada */
+.card,.tool,.dest,.side-card,.aw-item,.port,.award-card{border:2px solid var(--edge)!important;border-radius:var(--radius)!important;box-shadow:var(--pop)!important;background:var(--card)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .card,:root:not([data-theme=light]) .tool,:root:not([data-theme=light]) .dest,:root:not([data-theme=light]) .side-card{border-color:#2B4280!important}}
+:root[data-theme=dark] .card,:root[data-theme=dark] .tool,:root[data-theme=dark] .dest,:root[data-theme=dark] .side-card{border-color:#2B4280!important}
+a.card:hover,a.tool:hover,a.dest:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--edge)!important}
+.ship-art{border-radius:calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0!important;aspect-ratio:16/10}
+.ship-art img{transition:transform .5s}a.card:hover .ship-art img{transform:scale(1.04)}
+.offer-card .tkt{background:var(--flag-y)!important;color:var(--navy)!important;border-radius:12px!important;-webkit-mask:none!important;mask:none!important;border:2px solid var(--navy)}
+.offer-card .tkt *{color:var(--navy)!important}
+.scb{border-radius:999px!important;background:var(--navy)!important;color:#fff!important;border:2px solid #fff}.scb.sc-a{background:var(--flag-r)!important}
+.card-tags span,.chip,a.tag{border-radius:999px!important;border:2px solid var(--line)!important;background:var(--card)!important;color:var(--ink)!important;font-weight:700!important}
+.chip:hover{border-color:var(--ink)!important}
+.t-min{background:var(--flag-r)!important;color:#fff!important;border-color:var(--flag-r)!important}
+.t-award{background:#FFF4D1!important;border-color:var(--flag-y)!important;color:#5A4300!important}
+.badge-drop{color:#0B7A47!important}
+.ph-cap{background:var(--navy)!important;color:#fff!important;border-radius:999px!important}
+/* Título de sección con banderín de señales (navy, amarillo, rojo) */
+.block-h h2,.wrap.block>h2:first-child{position:relative;padding-left:22px}
+.block-h h2::before,.wrap.block>h2:first-child::before{content:"";position:absolute;left:0;top:.18em;width:12px;height:.9em;background:linear-gradient(var(--navy) 0 33%,var(--flag-y) 33% 66%,var(--flag-r) 66%);clip-path:polygon(0 0,100% 50%,0 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .block-h h2::before,:root:not([data-theme=light]) .wrap.block>h2:first-child::before{background:linear-gradient(#fff 0 33%,var(--flag-y) 33% 66%,var(--flag-r) 66%)}}
+/* Portada: foto a sangre con el barco, texto en blanco */
+.hero-v4{position:relative;isolation:isolate;background:var(--navy)!important;color:#fff;padding:72px 0 56px!important;overflow:hidden}
+.hero-v4 .hero-fig{position:absolute;inset:0;margin:0;z-index:-1;max-width:none!important;width:100%!important}
+.hero-v4 .hero-fig img{width:100%;height:100%;object-fit:cover;border-radius:0!important;box-shadow:none!important;aspect-ratio:auto!important}
+.hero-v4 .hero-fig::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,31,75,.94) 0,rgba(11,31,75,.78) 42%,rgba(11,31,75,.15) 75%)}
+.hero-v4 .hero-fig figcaption{position:absolute;right:12px;bottom:8px;z-index:1;color:#D7DEF3!important;font-size:.72rem}.hero-v4 .hero-fig figcaption a{color:#fff!important}
+.hero-v4 .hero-in{display:block!important}.hero-v4 .hero-copy{max-width:640px}
+.hero-v4 h1{color:#fff!important;font-size:clamp(2.2rem,5vw,3.6rem)!important;line-height:1.02!important}
+.hero-v4 .lead-p,.hero-v4 .hero-ideas,.hero-v4 .hero-trust,.hero-v4 .hero-trust *{color:#E6EBFA!important}
+.hero-v4 .hero-ideas a{color:var(--flag-y)!important}
+.hero-v4 .hero-trust svg,.hero-v4 .hero-trust li::before{color:var(--flag-y)!important;filter:none}
+.hero-v4 .search-big{background:#fff!important;border:2px solid var(--navy)!important;border-radius:20px!important;box-shadow:6px 6px 0 var(--flag-y)!important}
+.hero-v4 .search-big span{color:var(--navy)!important}
+@media (max-width:760px){.hero-v4{padding:40px 0 28px!important}.hero-v4 .hero-fig::after{background:linear-gradient(180deg,rgba(11,31,75,.55) 0,rgba(11,31,75,.92) 55%)}.hero-v4 .hero-fig figcaption{top:8px;bottom:auto}}
+/* Destinos y puertos: la foto pasa a ser la cabecera */
+.page-h.port-h{position:relative;isolation:isolate;display:block!important;min-height:420px;padding:56px 40px 40px!important;margin-top:16px;border-radius:24px;overflow:hidden;color:#fff;background:var(--navy);border:2px solid var(--navy);box-shadow:6px 6px 0 var(--flag-y)}
+.page-h.port-h>div{max-width:620px;position:relative}
+.page-h.port-h .port-fig{position:absolute;inset:0;margin:0;z-index:-1;max-width:none!important;width:100%!important}
+.page-h.port-h .port-fig img{width:100%;height:100%;object-fit:cover;border-radius:0!important;box-shadow:none!important}
+.page-h.port-h .port-fig::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,31,75,.92) 0,rgba(11,31,75,.7) 50%,rgba(11,31,75,.2) 100%)}
+.page-h.port-h .credit{position:absolute;right:14px;bottom:10px;z-index:1;color:#D7DEF3!important;font-size:.72rem}.page-h.port-h .credit a{color:#fff!important}
+.page-h.port-h h1,.page-h.port-h .lead-p,.page-h.port-h .eyebrow{color:#fff!important}
+.page-h.port-h .stats div{background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.25)!important;box-shadow:none!important}.page-h.port-h .stats b,.page-h.port-h .stats span{color:#fff!important}
+.page-h.port-h .btn-ghost{color:#fff!important;border-color:#fff!important}
+@media (max-width:760px){.page-h.port-h{padding:28px 20px 40px!important;min-height:0;border-radius:18px;margin:12px}.page-h.port-h .port-fig::after{background:linear-gradient(180deg,rgba(11,31,75,.6) 0,rgba(11,31,75,.93) 50%)}.page-h.port-h .credit{top:8px;bottom:auto}}
+/* Ficha de barco: foto grande con marco */
+.ship-hero-art img{border:2px solid var(--edge);border-radius:20px!important;box-shadow:6px 6px 0 var(--flag-y)!important}
+/* Pie y barra inferior en marino */
+.foot{background:var(--navy)!important}
+.bottom-nav{background:var(--navy)!important;border-top:0!important}.bottom-nav a{color:#C2CCEB!important}.bottom-nav a[aria-current=page]{color:var(--flag-y)!important}
+.bottom-nav .bn-count{background:var(--flag-r)!important}
+.m-cta{border-top:2px solid var(--navy)!important}
+.f-sticky{background:var(--navy)!important;border:2px solid var(--flag-y)}
+/* Formularios */
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{border-radius:12px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid var(--flag-y)!important;outline-offset:2px}
+.eyebrow{color:var(--sea)!important;letter-spacing:0!important;text-transform:none!important;font-weight:700}
+.locale-bar{background:#FFF4D1!important;border:2px solid var(--navy)!important;color:var(--navy)!important}
+@media (max-width:760px){
+ .hero-v4{padding:190px 0 28px!important}
+ .hero-v4 .hero-fig{display:block!important;bottom:auto;height:520px}
+ .hero-v4 .hero-fig::after{background:linear-gradient(180deg,rgba(11,31,75,.05) 0,rgba(11,31,75,.35) 25%,var(--navy) 36%)!important}
+ .page-h.port-h{padding-top:170px!important}
+ .page-h.port-h .port-fig{bottom:auto;height:360px}
+ .page-h.port-h .port-fig::after{background:linear-gradient(180deg,rgba(11,31,75,.0) 0,rgba(11,31,75,.4) 30%,var(--navy) 47%)!important}
+ .page-h.port-h .big-e{display:none}}
+.offer-card .card-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-tags span{border-width:1.5px!important;font-size:.78rem!important;padding:3px 10px!important}
+@media (max-width:760px){
+ .hero-v4{padding-top:230px!important}.hero-v4 .hero-fig{height:340px}.hero-v4 .hero-fig img{object-position:center 60%}
+ .hero-v4 .hero-fig::after{background:linear-gradient(180deg,rgba(11,31,75,0) 0,rgba(11,31,75,.25) 45%,var(--navy) 66%)!important}
+ .hero-v4 .hero-fig figcaption{top:auto;bottom:auto;top:200px}
+ .page-h.port-h .port-fig{height:300px}.page-h.port-h .port-fig img{object-position:center 65%}
+ .page-h.port-h .port-fig::after{background:linear-gradient(180deg,rgba(11,31,75,0) 0,rgba(11,31,75,.3) 40%,var(--navy) 56%)!important}
+ .page-h.port-h .credit{top:140px}
+ .offer-hero .ship-hero-art{display:contents}
+ .offer-hero .ship-hero-art>.ship-photo{order:-1;width:calc(100% + 32px);max-width:none;margin:-8px -16px 4px;border-radius:0!important;aspect-ratio:16/9;border:0!important;box-shadow:none!important}
+ .offer-hero .ship-hero-art>.price-box{order:1}}
+.dest.dest-ph{background:linear-gradient(180deg,rgba(11,31,75,.1),rgba(11,31,75,.88)),var(--ph) center/cover no-repeat!important}
+.locale-bar *{color:var(--navy)!important}.locale-bar .btn{background:#fff!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .locale-bar{background:#FFF4D1!important}}:root[data-theme=dark] .locale-bar{background:#FFF4D1!important}
