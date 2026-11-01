@@ -1255,3 +1255,19 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 /* Ficha de barco en móvil: la foto arriba, como en las ofertas */
 @media (max-width:760px){.ship:not(.offer) .ship-hero-in{display:flex!important;flex-direction:column}.ship:not(.offer) .ship-hero-art{order:-1;margin:-8px -16px 8px}.ship:not(.offer) .ship-hero-art img{border-radius:0!important;border:0!important;box-shadow:none!important;aspect-ratio:16/9;object-fit:cover;width:100%}.ship:not(.offer) .ship-hero-art .credit{padding:0 16px}}
 .checked-line{opacity:.85;margin-top:6px}.checked-line::before{content:"✓ ";color:var(--flag-y);font-weight:800}
+/* Asistente de cruceros */
+.mc-chat{background:var(--navy);color:#fff;border-radius:22px;padding:22px;border:2px solid var(--navy);box-shadow:6px 6px 0 var(--flag-y)}
+.mc-chat-l{display:block;font-weight:800;font-size:1.1rem;margin-bottom:10px;color:#fff}
+.mc-chat-row{display:flex;gap:8px}.mc-chat-row input[type=text]:not(.hp){flex:1;min-height:52px;font-size:1.05rem;border-radius:999px!important;border:2px solid #fff;padding:0 18px;background:#fff;color:var(--navy)}
+.mc-chat-row .btn{min-height:52px;padding:0 22px}
+.mc-chat-ex{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}.mc-chat-ex .chip{background:rgba(255,255,255,.1)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important;font-weight:600!important;cursor:pointer}
+.mc-chat-out:not(:empty){margin-top:16px;background:var(--card);color:var(--ink);border-radius:16px;padding:16px}
+.mc-msg{margin:0 0 10px;font-weight:600}.mc-off{color:#B6401F}.mc-wait{margin:0;color:var(--muted)}
+.mc-list{display:grid;gap:10px}@media (min-width:900px){.mc-list{grid-template-columns:1fr 1fr}}
+.mc-res{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center;text-decoration:none;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:8px;background:var(--card)}
+.mc-res:hover{border-color:var(--ink)}.mc-res img,.mc-res-ph{width:96px;height:64px;object-fit:cover;border-radius:10px;background:var(--soft)}
+.mc-res-b b{display:block;font-size:.98rem}.mc-res-b small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.mc-res-p{text-align:right}.mc-res-p b{display:block;font-size:1.1rem;font-weight:800}.mc-res-p small{display:block;font-size:.72rem;color:var(--muted)}.mc-sc{display:inline-block;margin-top:4px;font-style:normal;font-size:.72rem;font-weight:700;background:var(--navy);color:#fff;border-radius:999px;padding:1px 8px}
+.mc-chat-note{margin:12px 0 0;color:#C9D3F0}
+@media (max-width:600px){.mc-chat{padding:16px;border-radius:18px}.mc-chat-row{flex-direction:column}.mc-chat-row .btn{width:100%}.mc-res{grid-template-columns:72px 1fr}.mc-res img,.mc-res-ph{width:72px;height:56px}.mc-res-p{grid-column:2;text-align:left;display:flex;gap:8px;align-items:baseline}}
+.home-chat{padding-top:28px!important}

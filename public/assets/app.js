@@ -986,3 +986,30 @@
   document.addEventListener('click', async (e) => { const b = e.target.closest('.js-install'); if (!b || !ev) return; ev.prompt(); try { await ev.userChoice; } catch {} ev = null; btns().forEach((x) => { x.hidden = true; }); });
   addEventListener('appinstalled', () => { btns().forEach((x) => { x.hidden = true; }); });
 })();
+
+// ---------- Asistente de cruceros ----------
+(() => {
+  const boxes = document.querySelectorAll('.mc-chat'); if (!boxes.length) return;
+  const t0 = performance.now();
+  const escH = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const eurF = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  const fd = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(d) ? new Date(d + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : d);
+  const base = (document.body.dataset.base || '/').replace(/\/$/, '');
+  const card = (it) => `<a class="mc-res" href="${base}${escH(it.u)}">${it.img ? `<img src="${base}${escH(it.img)}" alt="" loading="lazy" width="120" height="80">` : '<span class="mc-res-ph" aria-hidden="true"></span>'}<span class="mc-res-b"><b>${escH(it.t)}</b><small>${escH(String(it.sub || '').replace(/(\d{4}-\d{2}-\d{2})/, (m) => fd(m)))}</small></span><span class="mc-res-p">${it.pr ? `<b>${eurF(it.pr)}</b><small>${it.k === 'barco' ? 'desde, con tasas' : it.tx ? 'precio real' : 'sin tasas'}</small>` : ''}${it.sc != null ? `<i class="mc-sc">${it.k === 'barco' ? 'nota' : 'oferta'} ${+it.sc}</i>` : ''}</span></a>`;
+  boxes.forEach((box) => {
+    const f = box.querySelector('form'), out = box.querySelector('.mc-chat-out'), inp = f.q;
+    const ask = async (q) => {
+      out.innerHTML = '<p class="mc-wait">Buscando…</p>'; f.querySelector('button').disabled = true;
+      try {
+        const c = await fetch(base + '/data/config.json').then((r) => r.json());
+        const r = await fetch(c.api.replace(/\/$/, '') + '/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q, website: f.website.value, t: Math.round(performance.now() - t0) }) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { out.innerHTML = `<p class="mc-msg">${escH(j.msg || 'No he podido buscar ahora. Prueba otra vez en un momento.')}</p>`; return; }
+        out.innerHTML = `<p class="mc-msg${j.off ? ' mc-off' : ''}">${escH(j.msg)}</p>${(j.items || []).length ? `<div class="mc-list">${j.items.map(card).join('')}</div>` : ''}${(j.links || []).length ? `<ul class="mini">${j.links.map((l) => `<li><a href="${base}${escH(l.u)}"><b>${escH(l.t)}</b></a></li>`).join('')}</ul>` : ''}${j.more ? `<p class="small muted">Hay ${j.more} salidas que encajan; te enseño las 6 primeras. Para verlas todas usa el <a href="${base}/buscar/?q=${encodeURIComponent(q)}">buscador</a>.</p>` : ''}`;
+      } catch { out.innerHTML = '<p class="mc-msg">No he podido conectar con el asistente. Prueba el <a href="' + base + '/buscar/">buscador</a>.</p>'; }
+      finally { f.querySelector('button').disabled = false; }
+    };
+    f.addEventListener('submit', (e) => { e.preventDefault(); const q = inp.value.trim(); if (q.length >= 3) ask(q); });
+    box.querySelectorAll('.js-chat-ex').forEach((b) => b.addEventListener('click', () => { inp.value = b.textContent; ask(b.textContent); }));
+  });
+})();

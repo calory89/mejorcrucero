@@ -210,6 +210,7 @@ function home() {
   <figure class="hero-fig"><img src="${BASE.replace(/\/$/, '')}${heroShip.photo?.large || heroBg.large}"${heroShip.photo?.thumb ? ` srcset="${heroShip.photo.thumb} 640w, ${heroShip.photo.large} 1280w" sizes="(max-width: 900px) 100vw, 600px"` : ''} alt="${esc(heroShip.photo ? heroShip.name : heroBg.label)}" width="1280" height="853" fetchpriority="high"><figcaption>${heroShip.photo ? `${photoCredit(heroShip)}` : `${esc(heroBg.label)}. Foto: ${esc(heroBg.author || '')} (${esc(heroBg.license || '')}), Wikimedia Commons`}</figcaption></figure>
 </div></section>
 
+<section class="wrap block home-chat"><div class="block-h"><h2>Pregúntale al asistente de cruceros</h2><a href="/herramientas/asistente/">Abrir en grande</a></div>${chatBox('chat-home')}</section>
 <section class="wrap block for-you" id="for-you" hidden></section>
 <section class="wrap block" id="recent-reviews" hidden></section>
 <section class="wrap block" id="my-searches" hidden></section>
@@ -822,12 +823,17 @@ function toolQuiz() {
   return layout({ title: 'Test: ¿qué crucero es para mí?', desc: 'Responde 7 preguntas y descubre qué barcos y destinos de crucero encajan con tu forma de viajar.', url: '/herramientas/que-crucero/', body, crumbs: toolCrumbs('¿Qué crucero?', '/herramientas/que-crucero/') });
 }
 
+// Asistente de cruceros: entiende la pregunta con IA, pero los resultados salen de nuestros datos (no inventa)
+function chatBox(id, big = false) {
+  const ex = ['Crucero más barato por el Mediterráneo en noviembre', 'Barco más nuevo de Costa', 'Caribe en enero por menos de 800 €', 'Crucero para familias desde Barcelona', 'Barco con mejor gimnasio'];
+  return `<div class="mc-chat${big ? ' mc-chat-big' : ''}" id="${id}"><form class="mc-chat-f" autocomplete="off"><label for="${id}-q" class="mc-chat-l">Pregunta lo que quieras sobre cruceros</label><div class="mc-chat-row"><input id="${id}-q" name="q" type="text" maxlength="300" required placeholder="Ej.: crucero más barato por el Mediterráneo en noviembre"><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Buscar</button></div></form>
+  <p class="mc-chat-ex small">${ex.map((t) => `<button class="chip js-chat-ex" type="button">${esc(t)}</button>`).join('')}</p>
+  <div class="mc-chat-out" aria-live="polite"></div><p class="mc-chat-note small">Solo responde a cruceros. Los precios y barcos salen de nuestros datos, comprobados en las webs oficiales.</p></div>`;
+}
 function toolAssistant() {
-  const body = `<section class="wrap block page-h"><h1>Asistente IA de cruceros</h1><p class="lead-p">Cuéntale cómo quieres viajar y te recomienda barcos de nuestra base de datos, con sus motivos. No inventa precios: para eso tienes las demás herramientas.</p></section>
-  <section class="wrap block chat-wrap"><div class="chat" id="chat" aria-live="polite"><div class="msg bot">¡Hola! Dime con quién viajas, qué te apetece (playa, ciudades, atracciones, tranquilidad), si quieres salir desde España y tu presupuesto aproximado.</div></div>
-  <form class="chat-form" id="chat-form"><label class="sr" for="chat-q">Tu pregunta</label><textarea id="chat-q" name="q" rows="2" maxlength="600" placeholder="Ej.: Somos 2 adultos y un bebé, queremos salir desde Barcelona en mayo y no gastar mucho" required></textarea><button class="btn" type="submit">Enviar</button></form>
-  <div class="chips"><button class="chip js-ask" type="button">Familia con niños, barco con toboganes y español</button><button class="chip js-ask" type="button">Pareja, tranquilo, sin niños</button><button class="chip js-ask" type="button">El barco más nuevo de MSC o Costa</button></div></section>`;
-  return layout({ title: 'Asistente IA para elegir crucero', desc: 'Pregunta en lenguaje natural y el asistente de MejorCrucero te recomienda barcos con sus motivos.', url: '/herramientas/asistente/', body, crumbs: toolCrumbs('Asistente IA', '/herramientas/asistente/') });
+  const body = `<section class="wrap block page-h"><h1>Asistente de cruceros</h1><p class="lead-p">Pregúntale como se lo preguntarías a un amigo que sabe de cruceros: destino, mes, presupuesto, puerto de salida o qué barco es mejor en algo. Te enseña las salidas y barcos que encajan, con el precio real de nuestra base de datos.</p></section>
+  <section class="wrap block">${chatBox('chat-main', true)}</section>`;
+  return layout({ title: 'Asistente de cruceros: pregunta y te enseña las ofertas', desc: 'Pregunta en lenguaje natural (crucero más barato por el Mediterráneo en noviembre, barco más nuevo de Costa...) y te enseña las salidas y barcos que encajan, con precio real.', url: '/herramientas/asistente/', body, crumbs: toolCrumbs('Asistente IA', '/herramientas/asistente/') });
 }
 
 function toolCompare() {

@@ -23,3 +23,4 @@ CREATE TABLE IF NOT EXISTS confirmed (email TEXT PRIMARY KEY, created TEXT DEFAU
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 CREATE TABLE IF NOT EXISTS user_keys (id TEXT PRIMARY KEY, key_hash TEXT NOT NULL, created TEXT DEFAULT (datetime('now')));
 CREATE TABLE IF NOT EXISTS report_votes (post_id INTEGER, voter TEXT, PRIMARY KEY(post_id, voter));
+CREATE TABLE IF NOT EXISTS chat_cache (k TEXT PRIMARY KEY, out TEXT, created TEXT DEFAULT (datetime('now')));
