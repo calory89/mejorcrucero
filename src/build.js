@@ -271,7 +271,7 @@ function searchPage() {
     <label><span>Máximo p.p. (€)</span><input name="max" type="number" min="0" step="50" inputmode="numeric"></label>
     <label><span>Camarote</span><select name="cabina"><option value="">Cualquiera</option><option value="interior">Interior</option><option value="exterior">Exterior</option><option value="balcon">Balcón</option><option value="suite">Suite</option></select></label>
     <label><span>Viajo</span><select name="perfil"><option value="">Me da igual</option><option value="ninos">Con niños</option><option value="adultos">Solo adultos</option></select></label>
-    <label><span>Ordenar</span><select name="orden"><option value="real">Precio por noche</option><option value="precio">Precio</option><option value="fecha">Fecha</option></select></label>
+    <label><span>Ordenar</span><select name="orden"><option value="real">€ por noche</option><option value="precio">Precio</option><option value="fecha">Fecha</option></select></label>
     <label class="span2"><span>Texto (barco, naviera, puerto)</span><input name="q" type="search" placeholder="Ej.: MSC, Santorini, Icon…"></label>
   </form>
   <p class="muted small" id="s-count" aria-live="polite"></p>
@@ -559,7 +559,7 @@ function destinationPage(d) {
 
 function monthsIndex() {
   const body = `<section class="wrap block page-h"><h1>Cruceros por meses: adónde ir en cada época</h1><p class="lead-p">Elige mes y te decimos qué destinos están en temporada.</p><div class="months big">${MONTHS.map((m) => `<a class="m on" href="/meses/${m}/">${cap(m)}</a>`).join('')}</div></section>`;
-  return layout({ title: 'Cruceros por meses: qué destino elegir', desc: 'Qué destinos de crucero están en temporada cada mes del año.', url: '/meses/', body, crumbs: [['Inicio', '/'], ['Por meses', '/meses/']] });
+  return layout({ title: 'Cruceros por meses: qué destino elegir', desc: 'Qué destinos de crucero están en temporada cada mes del año, con el número de salidas y el precio real por noche de cada mes.', url: '/meses/', body, crumbs: [['Inicio', '/'], ['Por meses', '/meses/']] });
 }
 
 function monthPage(i) {
@@ -1357,20 +1357,20 @@ const LINE_GUIDES = Object.keys(LINE_INFO).filter((k) => k !== '_info' && lineBy
 });
 write('guias/index.html', guidesIndex());
 
-write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));
+write('sobre-nosotros/index.html', simplePage('/sobre-nosotros/', 'Quiénes somos', 'Quién está detrás de MejorCrucero y nuestras reglas: cero datos inventados, precio real con tasas, opiniones de verdad y transparencia con el dinero.', about, { schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Quiénes somos' }] }));
 { // Créditos de todas las fotos (licencias CC piden atribución también cuando la foto sale en una tarjeta)
   const row = (name, v) => `<li><b>${esc(name)}</b>: <a href="${esc(v.page)}" target="_blank" rel="noopener">${esc(v.author || 'Wikimedia Commons')}</a> · ${esc(v.license || '')}</li>`;
   const shipRows = ships.filter((s) => photos[s.slug]).map((s) => row(s.name, photos[s.slug])).join('');
   const portRows = Object.entries(portPhotos).sort(([a], [b]) => a.localeCompare(b, 'es')).map(([n, v]) => row(n, v) + (v.more || []).map((m, i) => row(`${n} (${i + 2})`, m)).join('')).join('');
-  write('creditos-fotos/index.html', simplePage('/creditos-fotos/', 'Créditos de las fotos', 'Autor y licencia de cada foto de barcos y escalas de MejorCrucero.', `<p>Todas las fotos de barcos y escalas proceden de Wikimedia Commons y se usan bajo su licencia libre (CC0, dominio público, CC BY o CC BY-SA). Las fotos se han redimensionado. Si eres el autor de alguna y quieres cambiar la atribución, <a href="/contacto/">escríbenos</a>.</p><h2>Barcos</h2><ul class="credits">${shipRows}</ul><h2>Escalas y puertos</h2><ul class="credits">${portRows}</ul>`));
+  write('creditos-fotos/index.html', simplePage('/creditos-fotos/', 'Créditos de las fotos', 'Autor y licencia de cada foto de barcos y escalas de MejorCrucero. Todas proceden de Wikimedia Commons y tienen licencia libre.', `<p>Todas las fotos de barcos y escalas proceden de Wikimedia Commons y se usan bajo su licencia libre (CC0, dominio público, CC BY o CC BY-SA). Las fotos se han redimensionado. Si eres el autor de alguna y quieres cambiar la atribución, <a href="/contacto/">escríbenos</a>.</p><h2>Barcos</h2><ul class="credits">${shipRows}</ul><h2>Escalas y puertos</h2><ul class="credits">${portRows}</ul>`));
 }
-write('afiliacion/index.html', simplePage('/afiliacion/', 'Cómo ganamos dinero', 'Transparencia sobre los enlaces de afiliación de MejorCrucero.', affiliation));
-write('newsletter/index.html', simplePage('/newsletter/', 'La newsletter de MejorCrucero', 'Qué recibirás en la newsletter semanal de chollos de cruceros.', newsletter));
-write('creadores/index.html', simplePage('/creadores/', 'Programa de creadores', 'Colabora con MejorCrucero con tus vídeos de cruceros.', creators));
+write('afiliacion/index.html', simplePage('/afiliacion/', 'Cómo ganamos dinero', 'Transparencia sobre los enlaces de afiliación de MejorCrucero: con qué agencias trabajamos y por qué la comisión nunca cambia la nota ni el orden.', affiliation));
+write('newsletter/index.html', simplePage('/newsletter/', 'La newsletter de MejorCrucero', 'Qué recibirás en la newsletter semanal de chollos de cruceros de MejorCrucero y cómo darte de baja cuando quieras.', newsletter));
+write('creadores/index.html', simplePage('/creadores/', 'Programa de creadores', 'Colabora con MejorCrucero con tus vídeos de cruceros: los mejores salen en la ficha de cada barco con tu nombre y enlace a tu canal.', creators));
 write('sorteo/index.html', simplePage('/sorteo/', 'Sorteo de la comunidad', 'Sorteo de la comunidad de MejorCrucero.', raffle, { noindex: true }));
-write('aviso-legal/index.html', simplePage('/aviso-legal/', 'Aviso legal', 'Aviso legal de MejorCrucero.com', legal));
-write('privacidad/index.html', simplePage('/privacidad/', 'Política de privacidad', 'Política de privacidad de MejorCrucero.com', privacy));
-write('cookies/index.html', simplePage('/cookies/', 'Política de cookies', 'Política de cookies de MejorCrucero.com', cookies));
+write('aviso-legal/index.html', simplePage('/aviso-legal/', 'Aviso legal', 'Aviso legal de MejorCrucero.com: titular de la web, qué somos (comparador, no agencia), quién responde de cada reserva y de los contenidos.: titular de la web, condiciones de uso, propiedad intelectual y responsabilidad sobre precios y enlaces.', legal));
+write('privacidad/index.html', simplePage('/privacidad/', 'Política de privacidad', 'Política de privacidad de MejorCrucero.com: qué datos tratamos (email de alertas y newsletter, comunidad, estadísticas sin cookies) y tus derechos.: qué datos guardamos (alertas y newsletter), para qué, cuánto tiempo y cómo borrarlos.', privacy));
+write('cookies/index.html', simplePage('/cookies/', 'Política de cookies', 'Política de cookies de MejorCrucero.com: sin cookies publicitarias propias, qué guardamos en tu navegador y cómo cargan YouTube y los enlaces de agencias.: qué cookies usamos, para qué sirven, cuánto duran y cómo puedes rechazarlas o borrarlas.', cookies));
 write('404.html', notFound());
 write('offline/index.html', offline());
 
