@@ -1953,6 +1953,13 @@
     "author": "Seán Pòl Ó Creachmhaoil",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Bastions_C_and_D_of_the_Keep_at_the_Royal_Naval_Dockyard_on_Ireland_Island,_Bermuda_with_two_6_inch_RBL_Mk_VII.jpg"
+   },
+   {
+    "thumb": "/img/puertos/royal-naval-dockyard-4-640.webp",
+    "ratio": 2.095,
+    "author": "George Pearson / James Davis Cooper / After Robert Taylor Pritchett",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:HM_Dockyard_Bermuda-Ana_Brassey_1883.jpg"
    }
   ]
  },
@@ -7076,6 +7083,13 @@
     "author": "Diego Delso",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Centro_hist%C3%B3rico_de_Skagway,_Alaska,_Estados_Unidos,_2017-08-18,_DD_45.jpg"
+   },
+   {
+    "thumb": "/img/puertos/skagway-5-640.webp",
+    "ratio": 1.333,
+    "author": "Notyourbroom",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Soapy_Smith_parlor_Skagway_2009.jpg"
    }
   ]
  },
@@ -7384,5 +7398,23 @@
   "author": "AlanFord at English Wikipedia",
   "license": "Public domain",
   "page": "https://commons.wikimedia.org/wiki/File:StPeterPortSouth.jpg"
+ },
+ "Gothenburg": {
+  "slug": "gothenburg",
+  "thumb": "/img/puertos/gothenburg-640.webp",
+  "large": "/img/puertos/gothenburg-1280.webp",
+  "ratio": 3.274,
+  "author": "Wikimedia Commons",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gbguniversitet_kopiera.jpg"
+ },
+ "Alta": {
+  "slug": "alta",
+  "thumb": "/img/puertos/alta-640.webp",
+  "large": "/img/puertos/alta-1280.webp",
+  "ratio": 2.184,
+  "author": "FN-sambandet Norge",
+  "license": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:9_-_FN-stafett_2012_-_Komsa_skole_(Alta).jpg"
  }
 }
