@@ -1072,15 +1072,6 @@
   "license": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Largo_do_Pelourinho,_Salvador_20150719-DSC05452.JPG"
  },
- "Colón": {
-  "slug": "colon",
-  "thumb": "/img/puertos/colon-640.webp",
-  "large": "/img/puertos/colon-1280.webp",
-  "ratio": 1.455,
-  "author": "Ancestor of Infrogmation of New Orleans",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Panama_Canal_locks_1994_ships.jpg"
- },
  "Zadar": {
   "slug": "zadar",
   "thumb": "/img/puertos/zadar-640.webp",
@@ -1239,13 +1230,6 @@
     "author": "Diego Delso",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Casco_viejo_de_Dubrovnik,_Croacia,_2014-04-14,_DD_09.JPG"
-   },
-   {
-    "thumb": "/img/puertos/dubrovnik-4-640.webp",
-    "ratio": 1.61,
-    "author": "FOTO:Fortepan — ID 74331: Adományozó/Donor: Romák Éva.",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Dubrovnik_1965,_Kik%C3%B6t%C5%91._Fortepan_74331.jpg"
    }
   ]
  },
@@ -1631,13 +1615,6 @@
     "author": "Quintin Soloviev",
     "license": "CC BY 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Jacksonville_skyline.jpg"
-   },
-   {
-    "thumb": "/img/puertos/jacksonville-4-640.webp",
-    "ratio": 1.488,
-    "author": "railfan 44",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:CSX_5508_ready_to_put_office_car_on_Silver_Meteor_atJacksonville,_FL_November_18,_1986_02_(22144391504).jpg"
    }
   ]
  },
@@ -2368,13 +2345,6 @@
     "author": "Jorge Royan",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Channel_-_1124.jpg"
-   },
-   {
-    "thumb": "/img/puertos/amsterdam-3-640.webp",
-    "ratio": 1.553,
-    "author": "Unknown authorUnknown author",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Amsterdam_1912_Damrak.jpg"
    },
    {
     "thumb": "/img/puertos/amsterdam-4-640.webp",
@@ -3125,24 +3095,6 @@
    }
   ]
  },
- "Bruselas / Brujas": {
-  "slug": "bruselas-brujas",
-  "thumb": "/img/puertos/bruselas-brujas-640.webp",
-  "large": "/img/puertos/bruselas-brujas-1280.webp",
-  "ratio": 1.372,
-  "author": "Jean-Pol GRANDMONT",
-  "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:1920_-_Lef%C3%A9bure_Marcel_-_Terrain_d%27aviation_de_Gosselies.jpg",
-  "more": [
-   {
-    "thumb": "/img/puertos/bruselas-brujas-2-640.webp",
-    "ratio": 1.839,
-    "author": "Ad Meskens",
-    "license": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Charleroi_brussels_south_main_hall.jpg"
-   }
-  ]
- },
  "Bonaire": {
   "slug": "bonaire",
   "thumb": "/img/puertos/bonaire-640.webp",
@@ -3176,21 +3128,13 @@
   ]
  },
  "Koper": {
+  "thumb": "/img/puertos/koper-2-640.webp",
+  "ratio": 1.515,
+  "author": "TICKoper",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Koper,_mesto.jpg",
   "slug": "koper",
-  "thumb": "/img/puertos/koper-640.webp",
-  "large": "/img/puertos/koper-1280.webp",
-  "ratio": 1.402,
-  "author": "Unknown authorUnknown author",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:Capodistria_1900.jpg",
   "more": [
-   {
-    "thumb": "/img/puertos/koper-2-640.webp",
-    "ratio": 1.515,
-    "author": "TICKoper",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Koper,_mesto.jpg"
-   },
    {
     "thumb": "/img/puertos/koper-3-640.webp",
     "ratio": 1.328,
@@ -3205,7 +3149,8 @@
     "license": "CC BY 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Capodistria,_palazzo_pretorio,_01.jpg"
    }
-  ]
+  ],
+  "large": "/img/puertos/koper-2-640.webp"
  },
  "Bora Bora": {
   "slug": "bora-bora",
@@ -3793,13 +3738,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:06.05.25_16_Fra_Nordnes_i_Bergen.JPG"
    },
    {
-    "thumb": "/img/puertos/bergen-3-640.webp",
-    "ratio": 1.492,
-    "author": "Holger Uwe Schmitt",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:1885_bis_1907_lebte_hier_der_Komponist_Edvard_Grieg._02.jpg"
-   },
-   {
     "thumb": "/img/puertos/bergen-4-640.webp",
     "ratio": 1.501,
     "author": "Svein-Magne Tunli - tunliweb.no",
@@ -4227,13 +4165,6 @@
     "author": "Antonio199cro",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Korzodayrijeka.jpg"
-   },
-   {
-    "thumb": "/img/puertos/rijeka-3-640.webp",
-    "ratio": 1.875,
-    "author": "Francesco Slocovich",
-    "license": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:The_celebration_of_the_birthday_of_the_Italian_King_Vittorio_Emanuele_III_on_November_11,_1918.jpg"
    },
    {
     "thumb": "/img/puertos/rijeka-4-640.webp",
