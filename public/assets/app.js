@@ -251,7 +251,8 @@
 
   // ---------- Aviso al salir (una vez por semana, solo escritorio) ----------
   const exitM = $('#exit-modal');
-  if (exitM && matchMedia('(pointer:fine)').matches && !PAGE.includes('/herramientas/alerta-precio/')) {
+  // Sin ventanas emergentes al intentar salir: molestan y no las queremos (las agencias sí las usan)
+  if (false && exitM && matchMedia('(pointer:fine)').matches && !PAGE.includes('/herramientas/alerta-precio/')) {
     const last = store.get('mc_exit', 0);
     if (Date.now() - last > 7 * 864e5) {
       const h = (e) => { if (e.clientY <= 0 && !e.relatedTarget && performance.now() > 15000) { document.removeEventListener('mouseout', h); store.set('mc_exit', Date.now()); exitM.showModal(); track('exit_intent'); } };

@@ -1271,3 +1271,5 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 .mc-chat-note{margin:12px 0 0;color:#C9D3F0}
 @media (max-width:600px){.mc-chat{padding:16px;border-radius:18px}.mc-chat-row{flex-direction:column}.mc-chat-row .btn{width:100%}.mc-res{grid-template-columns:72px 1fr}.mc-res img,.mc-res-ph{width:72px;height:56px}.mc-res-p{grid-column:2;text-align:left;display:flex;gap:8px;align-items:baseline}}
 .home-chat{padding-top:28px!important}
+.neutral-seal{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:var(--soft);color:var(--ink)}
+.not-for ul{margin:0}.not-for{border-left:4px solid var(--flag-r);padding-left:16px!important}
