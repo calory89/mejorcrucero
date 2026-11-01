@@ -1215,3 +1215,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visib
  #offer-grid .offer-card .tkt b{font-size:1.45rem!important}
  #offer-grid .offer-card .card-sub{font-size:.85rem}
  #offer-grid{padding-bottom:80px}}
+/* Aviso de idioma y moneda: flotante abajo, sin mover la página; se va solo */
+.locale-bar,body:has(.m-cta) .locale-bar{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;top:auto!important;margin:0 auto!important;max-width:560px;width:auto;z-index:60!important;box-shadow:4px 4px 0 var(--navy)!important;animation:lb-in .3s ease-out}
+@media (min-width:761px){.locale-bar{bottom:20px!important;left:20px!important;right:auto!important}}
+body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!important}
+@keyframes lb-in{from{transform:translateY(20px);opacity:0}}
+@media (max-width:760px){.locale-bar,body:has(.m-cta) .locale-bar{top:auto!important}}
