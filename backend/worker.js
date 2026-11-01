@@ -134,7 +134,9 @@ async function answerChat(env, q) {
     return { msg: `${note}${what}${P.naviera ? ` de ${LINES_N[P.naviera] || P.naviera}` : ''}, primero los que tienen salidas a la venta:`, items: top.map((s) => ({ k: 'barco', u: `/barcos/${s.slug}/`, t: s.name, sub: `${s.lineShort} · ${s.year} · ${s.pax || '–'} pasajeros · espacio ${s.ratio || '–'} GT/pax`, sc: s.sc, img: s.img, pr: sale[s.slug] || null })) };
   }
   let l = offers.filter((o) => o.d >= today);
-  if (P.destino && DEST_N[P.destino]) l = l.filter((o) => o.dst === P.destino);
+  // "Mediterráneo" sin más: oriental y occidental
+  const medBoth = P.destino && String(P.destino).startsWith('mediterraneo') && !/oriental|occidental|grieg|grecia|turqu|adriat/.test(foldS(q));
+  if (medBoth) l = l.filter((o) => String(o.dst).startsWith('mediterraneo')); else if (P.destino && DEST_N[P.destino]) l = l.filter((o) => o.dst === P.destino);
   if (P.mes) l = l.filter((o) => +o.d.slice(5, 7) === +P.mes && (!P.anio || +o.d.slice(0, 4) === +P.anio));
   if (P.max) l = l.filter((o) => o.r <= +P.max);
   if (P.noches_min) l = l.filter((o) => o.n >= +P.noches_min);
@@ -147,7 +149,7 @@ async function answerChat(env, q) {
   const ord = P.orden || 'chollo';
   l.sort(ord === 'barato' ? (a, b) => (b.tx - a.tx) || a.r - b.r : ord === 'fecha' ? (a, b) => a.d.localeCompare(b.d) : ord === 'barco' ? (a, b) => (bySlug[b.s]?.sc || 0) - (bySlug[a.s]?.sc || 0) || a.r - b.r : (a, b) => b.sc - a.sc || a.r - b.r);
   const seen = new Set(); const top = []; for (const o of l) { const k = o.s + o.t; if (seen.has(k)) continue; seen.add(k); top.push(o); if (top.length >= 6) break; }
-  const parts = [P.destino && DEST_N[P.destino] ? `por ${DEST_N[P.destino]}` : '', P.mes ? `en ${MES_N[P.mes - 1]}${P.anio ? ` de ${P.anio}` : ''}` : '', P.puerto ? `desde ${String(P.puerto).slice(0, 30)}` : '', P.max ? `por menos de ${+P.max} €` : '', P.naviera ? `con ${LINES_N[P.naviera] || ''}` : ''].filter(Boolean).join(' ');
+  const parts = [medBoth ? 'por el Mediterráneo' : P.destino && DEST_N[P.destino] ? `por ${DEST_N[P.destino]}` : '', P.mes ? `en ${MES_N[P.mes - 1]}${P.anio ? ` de ${P.anio}` : ''}` : '', P.puerto ? `desde ${String(P.puerto).slice(0, 30)}` : '', P.max ? `por menos de ${+P.max} €` : '', P.naviera ? `con ${LINES_N[P.naviera] || ''}` : ''].filter(Boolean).join(' ');
   const head = { barato: 'Los cruceros más baratos', chollo: 'Las mejores ofertas', barco: 'Los cruceros en los barcos con mejor nota', fecha: 'Las próximas salidas' }[ord] || 'Cruceros';
   if (!top.length) return { msg: `${note}No hay salidas a la venta ${parts || 'con esos datos'} en las navieras que comparamos (Costa, Norwegian, Carnival y Celestyal). Prueba a quitar algún filtro.`, items: [] };
   return { msg: `${note}${head} ${parts}${ord === 'barato' ? ' (precio real con tasas primero; las de Norwegian no publican tasas)' : ''}:`, items: top.map((o) => ({ k: 'oferta', u: `/salidas/${o.i}/`, t: o.t, sub: `${o.sn} · ${o.d} · desde ${o.p}`, pr: o.r, tx: o.tx, sc: o.sc, img: o.img })), more: l.length > 6 ? l.length : 0 };
