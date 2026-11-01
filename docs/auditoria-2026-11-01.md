@@ -148,3 +148,82 @@ Fuentes de la nota:
 98. Pruebas A/B del texto del botón Reservar, medidas en /admin/.
 99. Newsletter con chollos según el puerto de salida elegido en la portada.
 100. Informe semanal automático en /admin/ con búsquedas sin resultado, velocidad real y clics por agencia.
+
+## Estado tras implementar (1-nov, noche)
+
+✅ hecho · ⏳ depende de Carlos · ⛔ no se puede sin datos o no compensa · ➡️ siguiente tanda
+
+**Precio y datos:**
+- ✅ Hechos: 1, 2, 3, 9, 10, 11, 14.
+- 5 ✅ parcial: las salidas sin tasas van detrás en "Mejor oferta" y dicen "La naviera no publica las tasas".
+- ⏳ Pendientes de Carlos: 6 y 7 (feed de Awin).
+- ➡️ Para la siguiente tanda: 4, 8, 12 y 13.
+
+**Listados y buscador:**
+- ✅ Hechos: 15 (primer resultado de 2.400 a 1.000 px en móvil), 16, 17, 18 (tarjeta de 750 a 420 px), 19, 22, 23 y 27 (ya existía).
+- ➡️ Para la siguiente tanda: 20, 21, 24, 25, 26 y 28.
+
+**Oferta:**
+- ✅ Hechos: 31, 32 y 34.
+- 29 y 30 ✅ parcial: en móvil, la tabla quita la columna de tarifa y el desglose usa etiquetas anchas.
+- ➡️ Para la siguiente tanda: 33, 35, 36 y 37.
+
+**Barco:**
+- ✅ Hechos: 38, 40, 41 y 42.
+- 39 ✅ parcial: "Guardar" pasa a ser solo el corazón.
+- ➡️ Para la siguiente tanda: 43 y 44.
+
+**Navieras, destinos y premios:**
+- ✅ Hechos: 45, 46, 47, 49, 51, 52, 53, 55 y 56.
+- 50 ✅ parcial: ahora dice "todo el año".
+- 54 ⛔: no hay foto con licencia.
+- ➡️ Para la siguiente tanda: 48 y 57.
+
+**Diseño:**
+- ✅ Hechos: 58, 64, 65, 66, 67, 68 y 71 (en tandas anteriores).
+- 70 se queda como está: es una prueba A/B en marcha.
+- ➡️ Para la siguiente tanda: 59, 60, 61, 62, 63, 69, 72 y 73.
+
+**Móvil:**
+- ✅ Hechos: 74 y 75.
+- ➡️ Para la siguiente tanda: 76, 77 y 78.
+
+**Velocidad:**
+- ✅ Hechos: 80 (el aviso de moneda ya no empuja la página), 84 (analítica a los 5 s y en reposo) y 86 (etiqueta de Cloudflare apagada hasta tener token).
+- ⏳ Pendientes de Carlos: 79 y 85 (¿qué etiqueta de Google Analytics es la buena?).
+- ➡️ Para la siguiente tanda: 81, 82, 83 y 87.
+
+**Confianza:**
+- ✅ Hechos: 90 (fuera el sorteo a medias), 91 (título honesto) y 94.
+- ⏳ Pendientes de Carlos: 88 y 93.
+- ➡️ Para la siguiente tanda: 89 y 92.
+
+**Conversión:**
+- 95 ✅ parcial: ranking y premios ya enlazan a las salidas.
+- ➡️ Para la siguiente tanda: 96, 97, 98, 99 y 100.
+
+### Seguridad (revisión independiente del código y la API)
+- Sal secreta para los enlaces de confirmar y de baja. Si no hay secreto en Cloudflare, se crea una aleatoria en la base de datos. Los enlaces de baja antiguos valen hasta el 1-ene-2027.
+- Clave privada por navegador: ya nadie puede firmar mensajes ni editar perfiles como otro usuario o como Experto (comprobado en producción: "permiso").
+- Seguir un barco exige confirmar el email y tiene límite de peticiones.
+- Alertas:
+  - solo guardan los campos necesarios (ya no guardan el número de reserva ni el vendedor);
+  - el nombre del barco se valida;
+  - como máximo 30 por email;
+  - todo lo que llega al correo va escapado.
+- Reportes: uno por persona y mensaje.
+- Límites de peticiones en votos, encuestas, perfil, grupos, resúmenes y administración.
+- El panel de administración compara la clave en tiempo constante, no carga analítica (Clarity grababa la sesión) y guarda la clave solo durante la sesión.
+- Fotos: se comprueba el tamaño antes de abrirlas y que el contenido sea de verdad JPEG, PNG o WebP.
+- Corregido XSS en el mapa de escalas, en el widget para blogs y en el JSON metido en páginas.
+- Los enlaces del feed de agencias solo pueden ser https.
+- Política de seguridad de contenidos (CSP) en todas las páginas, sin errores.
+- La API no devuelve detalles de error internos.
+- Permisos mínimos en GitHub Actions, wrangler en versión fija y entradas por variable.
+- ⏳ Pendiente de Carlos: secretos `SALT` y `ADMIN_TOKEN` en el Worker, y cabeceras HSTS y frame-ancestors en Cloudflare.
+
+### Indexación (Google y buscadores con IA)
+- robots.txt da la bienvenida explícita a GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot y otros, con las mismas reglas que el resto.
+- llms-full.txt con el ranking, los destinos y las guías; llms.txt enlaza a él.
+- 137 listados con menos de 5 salidas pasan a noindex: se pueden seguir visitando, pero no compiten con las páginas buenas.
+- Títulos de destino con artículo ("Cruceros por el Caribe").
