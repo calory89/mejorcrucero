@@ -1273,3 +1273,4 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 .home-chat{padding-top:28px!important}
 .neutral-seal{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:var(--soft);color:var(--ink)}
 .not-for ul{margin:0}.not-for{border-left:4px solid var(--flag-r);padding-left:16px!important}
+.mc-sc,.mc-res-p small{white-space:nowrap}

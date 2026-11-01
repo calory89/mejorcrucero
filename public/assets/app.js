@@ -996,7 +996,7 @@
   const eurF = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
   const fd = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(d) ? new Date(d + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : d);
   const base = (document.body.dataset.base || '/').replace(/\/$/, '');
-  const card = (it) => `<a class="mc-res" href="${base}${escH(it.u)}">${it.img ? `<img src="${base}${escH(it.img)}" alt="" loading="lazy" width="120" height="80">` : '<span class="mc-res-ph" aria-hidden="true"></span>'}<span class="mc-res-b"><b>${escH(it.t)}</b><small>${escH(String(it.sub || '').replace(/(\d{4}-\d{2}-\d{2})/, (m) => fd(m)))}</small></span><span class="mc-res-p">${it.pr ? `<b>${eurF(it.pr)}</b><small>${it.k === 'barco' ? 'desde, con tasas' : it.tx ? 'precio real' : 'sin tasas'}</small>` : ''}${it.sc != null ? `<i class="mc-sc">${it.k === 'barco' ? 'nota' : 'oferta'} ${+it.sc}</i>` : ''}</span></a>`;
+  const card = (it) => `<a class="mc-res" href="${base}${escH(it.u)}">${it.img ? `<img src="${base}${escH(it.img)}" alt="" loading="lazy" width="120" height="80">` : '<span class="mc-res-ph" aria-hidden="true"></span>'}<span class="mc-res-b"><b>${escH(it.t)}</b><small>${escH(String(it.sub || '').replace(/(\d{4}-\d{2}-\d{2})/, (m) => fd(m)))}</small></span><span class="mc-res-p">${it.pr ? `<b>${eurF(it.pr)}</b><small>${it.k === 'barco' ? 'desde, con tasas' : it.tx ? 'precio real' : 'sin tasas'}</small>` : ''}${it.sc != null ? `<i class="mc-sc">nota ${+it.sc}</i>` : ''}</span></a>`;
   boxes.forEach((box) => {
     const f = box.querySelector('form'), out = box.querySelector('.mc-chat-out'), inp = f.q;
     const ask = async (q) => {
