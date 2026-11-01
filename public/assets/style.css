@@ -1186,3 +1186,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visib
 .dest.dest-ph{background:linear-gradient(180deg,rgba(11,31,75,.1),rgba(11,31,75,.88)),var(--ph) center/cover no-repeat!important}
 .locale-bar *{color:var(--navy)!important}.locale-bar .btn{background:#fff!important}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .locale-bar{background:#FFF4D1!important}}:root[data-theme=dark] .locale-bar{background:#FFF4D1!important}
+.page-h.hub-h{min-height:300px;padding:48px 40px!important}.page-h.hub-h h1{font-size:clamp(1.9rem,4vw,3rem)}
+.hub-tools{padding-top:20px!important}
+@media (max-width:760px){.page-h.hub-h{padding-top:150px!important}.page-h.hub-h .port-fig{height:260px}}
+@media (max-width:760px){.page-h.port-h .credit{top:8px!important;bottom:auto!important}.page-h.hub-h h1{font-size:1.75rem}}

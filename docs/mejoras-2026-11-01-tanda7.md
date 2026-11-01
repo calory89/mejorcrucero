@@ -48,3 +48,20 @@ Salen de una revisión independiente (capturas en móvil y escritorio, claro y o
 40. Fuera 9 fotos de escalas antiguas o de otro lugar: Dubrovnik 1965, Ámsterdam 1912, Koper 1900, Rijeka 1918, un tren en Jacksonville, una placa en Bergen, Panamá 1994, Charleroi (en Bruselas/Brujas) y el aeródromo de Gosselies
 41. El importador de fotos descarta fotos históricas, trenes y aeropuertos
 42. Títulos largos corregidos (naviera + destino, escala + mes)
+
+## Tanda 11 (1-nov, noche): rediseño "Banderas de señales" (elegido por Carlos entre 3 propuestas)
+43. Paleta nueva: azul marino de casco, amarillo señal para todo lo que se pulsa, rojo de bandera solo para chollos y mínimos históricos
+44. Tipografía nueva: Plus Jakarta Sans (alojada en la web, licencia OFL), en lugar de Archivo ancha
+45. Cabecera azul marino con buscador translúcido y "Crear alerta" en amarillo
+46. Botones en píldora con borde marino y pequeña sombra que se hunde al pulsar
+47. Tarjetas con borde marino y sombra desplazada; al pasar el ratón se levantan y la foto se acerca
+48. Precio en etiqueta amarilla con borde; nota en círculo marino (roja si es chollo)
+49. Banderín de señales (marino, amarillo, rojo) en los títulos de sección
+50. Portada con la foto del barco a sangre y el titular en blanco; buscador con sombra amarilla
+51. Destinos y puertos: la foto es la cabecera, con los datos encima
+52. 1.600 listados de ofertas con foto de cabecera (la de su mejor oferta, con crédito)
+53. Ofertas en móvil: la foto del barco arriba, a todo lo ancho
+54. Ficha de barco: foto con marco y sombra amarilla
+55. Pie, barra inferior del móvil y barra de filtros en marino, con el apartado activo en amarillo
+56. Modo oscuro con la misma paleta (azul noche), accesibilidad axe sin fallos en claro y oscuro
+57. Foco del teclado visible en amarillo en toda la web
