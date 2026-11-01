@@ -42,6 +42,8 @@
     try { localStorage.setItem('mc_theme', next); } catch {}
     themeLbl();
   }));
+  // Altura real de la cabecera fija: las pestañas de sección se pegan justo debajo (antes quedaban tapadas)
+  { const hd = $('header.top'); const setH = () => hd && document.documentElement.style.setProperty('--hdr', hd.offsetHeight + 'px'); setH(); addEventListener('resize', setH, { passive: true }); if (hd && 'ResizeObserver' in window) new ResizeObserver(setH).observe(hd); }
   // Pie: columnas plegadas en móvil (en escritorio, abiertas)
   if (matchMedia('(max-width: 800px)').matches) $$('.fcol').forEach((d) => { d.open = false; });
   // Menú: el botón dice "Cerrar menú" cuando está abierto
