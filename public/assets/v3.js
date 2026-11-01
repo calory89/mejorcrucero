@@ -432,7 +432,7 @@
   $$('.js-import-my').forEach((inp) => inp.addEventListener('change', async () => { const msg = $('.js-my-msg'); try { const j = JSON.parse(await inp.files[0].text()); if (j.app !== 'mejorcrucero') throw 0; for (const [k, v] of Object.entries(j.data || {})) if (MY_KEYS.includes(k)) store.set(k, v); msg.textContent = 'Datos cargados. Recargando…'; setTimeout(() => location.reload(), 600); } catch { msg.textContent = 'Ese fichero no es una copia de Mis cruceros.'; } }));
   $$('.js-clear-my').forEach((b) => b.addEventListener('click', () => { if (b.dataset.sure) { MY_KEYS.forEach((k) => { try { localStorage.removeItem(k); } catch {} }); $('.js-my-msg').textContent = 'Datos borrados de este navegador.'; setTimeout(() => location.reload(), 600); } else { b.dataset.sure = 1; b.textContent = '¿Seguro? Pulsa otra vez para borrar'; } }));
 // ---------- Ofertas: vistas recientemente encima del listado ----------
-  { const og = $('#offer-grid'); const rec = store.get('mc_offer_recent', []).slice(0, 6); if (og && rec.length >= 2 && location.pathname.replace(BASE, '/') === '/ofertas/') { const box = document.createElement('div'); box.className = 'recent-strip'; box.innerHTML = `<h2 class="h-sm">Vistas recientemente</h2><ul class="mini mini-grid">${rec.map((x) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d)} · desde ${eur(x.p)}</span></a></li>`).join('')}</ul>`; og.parentNode.insertBefore(box, og); } }
+  { const og = $('#offer-grid'); const rec = store.get('mc_offer_recent', []).slice(0, 6); if (og && rec.length >= 2 && location.pathname.replace(BASE, '/') === '/ofertas/') { const box = document.createElement('div'); box.className = 'recent-strip'; box.innerHTML = `<h2 class="h-sm">Vistas recientemente</h2><ul class="mini mini-grid">${rec.map((x) => `<li><a href="${BASE}salidas/${esc(x.id)}/"><b>${esc(x.t)}</b><span>${esc(x.d ? new Date(x.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : '')} · desde ${eur(x.p)}</span></a></li>`).join('')}</ul>`; og.parentNode.insertBefore(box, og); } }
 // ---------- Tamaño del texto (100 %, 112,5 %, 125 %) ----------
   $$('.js-textsize').forEach((b) => b.addEventListener('click', () => {
     const steps = ['', '112.5%', '125%']; let cur = ''; try { cur = localStorage.getItem('mc_textsize') || ''; } catch {}
@@ -560,7 +560,7 @@
   const cf = $('#cmpo-form');
   if (cf) getOffers().then((all) => {
     const by = Object.fromEntries(all.map((o) => [o.i, o]));
-    const label = (o) => `${o.sn} · ${o.d} · ${o.n} noches · ${o.p} · ${o.pr} €`;
+    const label = (o) => `${o.sn} · ${new Date(o.d + 'T12:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${o.n} noches · ${o.p} · ${o.pr} €`;
     $('#cmpo-dl').innerHTML = all.slice(0, 1500).map((o) => `<option value="${esc(label(o))}">`).join('');
     const render = () => {
       const sel = store.get('mc_cmp_offers', []).map((i) => by[i]).filter(Boolean); const out = $('#cmpo-out');

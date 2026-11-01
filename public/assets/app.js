@@ -57,6 +57,7 @@
     if ((cur || !/^es\b/i.test(lang)) && !store.get('mc_locale_ok', 0)) { const bar = document.createElement('div'); bar.className = 'locale-bar small'; bar.setAttribute('role', 'status');
       bar.innerHTML = `<span>${/^es\b/i.test(lang) ? 'Los precios están en euros (€).' : 'Esta web está en español y los precios en euros (€).'} <span class="js-fx"></span></span><button type="button" class="btn btn-ghost btn-sm" aria-label="Cerrar aviso">✕</button>`;
       document.body.prepend(bar); $('button', bar).addEventListener('click', () => { store.set('mc_locale_ok', 1); bar.remove(); });
+      setTimeout(() => { bar.classList.add('gone'); setTimeout(() => bar.remove(), 400); }, 15000);
       if (['USD', 'MXN', 'GBP'].includes(cur)) fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=' + cur).then((r) => r.json()).then((j) => { const v = j?.rates?.[cur]; if (v) $('.js-fx', bar).textContent = `Hoy, 1 € ≈ ${new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2 }).format(v)} ${cur} (cambio del BCE).`; }).catch(() => {}); } } catch {}
 
   // ---------- Autocompletar global ----------
@@ -325,7 +326,7 @@
           && (!v.perfil || (v.perfil === 'adultos' ? x.adults_only : !x.adults_only)) && (!qt.length || (() => { const h = fold(`${s.name} ${s.lineShort} ${x.itinerary?.name} ${x.depart_port} ${(x.itinerary?.ports || []).map((pp) => pp.name).join(' ')} ${(meta.dest.find((d) => d.slug === x.destination) || {}).name || ''}`); return qt.every((w) => h.includes(w) || (w.length > 4 && h.includes(w.slice(0, -1)))); })());
       }).sort(v.orden === 'precio' ? (a, b) => a._min - b._min : v.orden === 'fecha' ? (a, b) => a.date.localeCompare(b.date) : (a, b) => a._ppn - b._ppn);
       $('#s-count').textContent = sails.length ? `${res.length} salida${res.length === 1 ? '' : 's'}` : '';
-      $('#s-results').innerHTML = res.slice(0, 60).map((x) => `<a class="card sail-card" href="${BASE}salidas/${x.id}/"><div class="card-body"><span class="eyebrow">${esc(x._s.lineShort || '')} · ${esc(x._s.name || x.ship)}</span><h3>${esc(x.itinerary?.name || 'Crucero')}</h3><p class="muted small">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${x.nights} noches · desde ${esc(x.depart_port)}</p><p class="price">desde <b>${eur(x._min)}</b> <span class="muted small">(${eur(x._ppn)}/noche)</span></p></div></a>`).join('');
+      $('#s-results').innerHTML = res.slice(0, 60).map((x) => `<a class="card sail-card" href="${BASE}salidas/${x.id}/"><div class="card-body"><span class="eyebrow">${esc(x._s.lineShort || '')} · ${esc(x._s.name || x.ship)}</span><h3>${esc(((meta.names || {})[x.destination] || (meta.dest.find((d) => d.slug === x.destination) || {}).name || x.dest_name || x.itinerary?.name || 'Crucero') + ', ' + x.nights + ' noches')}</h3><p class="muted small">${new Date(x.date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} · ${x.nights} noches · desde ${esc(x.depart_port)}</p><p class="price">desde <b>${eur(x._min)}</b> <span class="muted small">(${eur(x._ppn)}/noche)</span></p></div></a>`).join('');
       const empty = !res.length;
       $('#s-empty').hidden = !empty;
       if (empty) {
