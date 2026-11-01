@@ -974,3 +974,33 @@ table.m20.collapsed tbody tr:nth-child(n+7){display:table-row}
 @media (max-width:700px){table.m20.collapsed tbody tr:nth-child(n+21){display:none!important}}
 @media (min-width:701px){.m20-btn{display:none}}
 .rank-t tr[hidden],tr[hidden]{display:none!important}
+.f-sticky:not(.on){visibility:hidden;opacity:0;pointer-events:none}.f-sticky{transition:transform .25s,opacity .2s,visibility .25s}
+/* ===== Tanda 7: diseño (1-nov-2026) =====
+   Lo distintivo es el billete del precio: todas las tarjetas lo llevan (amarillo si es chollo, azul claro si no);
+   el resto se calma: menos líneas, menos etiquetas, más aire. */
+.offer-card{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:none;transition:border-color .15s}
+.offer-card:hover{border-color:var(--sea)}
+.offer-card .card-body{padding:14px 16px 14px;gap:3px}
+.offer-card h3{font-size:1.12rem;font-stretch:108%;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.offer-card .card-sub{margin:0;font-size:.9rem;color:var(--ink-2)}.offer-card .card-sub span{color:var(--muted)}
+.offer-card .card-when{margin:2px 0 0;font-size:.86rem;color:var(--muted)}
+.offer-card .ports-line{font-size:.84rem;color:var(--ink-2);min-height:0;margin:4px 0 0}
+.offer-card .ports-line span+span::before{content:" › ";color:var(--muted)}
+.offer-card .card-tags{margin:8px 0 0;gap:6px}
+.offer-card .checked{font-size:0;margin:0}.offer-card .checked::before{display:none}.offer-card .checked .spark{margin:4px 0 0}
+.card-foot{border-top:0;padding-top:0;margin-top:12px}
+.offer-card .tkt{background:var(--sea-2);padding:7px 14px 7px 16px;border-radius:7px;-webkit-mask:radial-gradient(circle 5px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 5px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 5px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 5px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.offer-card:has(.sc-a) .tkt{background:var(--sun);-webkit-mask:radial-gradient(circle 5px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 5px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 5px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 5px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.offer-card .tkt small{color:var(--ink-2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .offer-card .tkt{background:#12305a}:root:not([data-theme=light]) .offer-card:has(.sc-a) .tkt{background:var(--sun)}}
+:root[data-theme=dark] .offer-card .tkt{background:#12305a}:root[data-theme=dark] .offer-card:has(.sc-a) .tkt{background:var(--sun)}
+/* Oferta: un botón principal y el resto discreto */
+.price-box .actions{display:flex!important;flex-direction:column;gap:10px;align-items:stretch}
+.price-box .actions>.btn{width:100%;justify-content:center;min-height:52px;font-size:1.05rem}
+.alt-links{margin:0;font-size:.9rem;color:var(--muted)}.alt-l{font-weight:600}.alt-l+.alt-l::before{content:" o ";color:var(--muted);font-weight:400}
+.mini-actions{display:flex;gap:8px;flex-wrap:wrap}.mini-actions .chip{flex:1;justify-content:center;min-height:42px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:0 14px;font-weight:600;font-size:.9rem;text-decoration:none;cursor:pointer}
+.mini-actions .chip[aria-pressed=true]{border-color:var(--sea);color:var(--sea)}
+.mini-actions .chip svg{width:16px;height:16px}
+/* Menú móvil: el desenfoque de la cabecera hacía que el menú "fijo" quedara recortado a la cabecera */
+.top:has(.burger[open]){backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--card)}
+@media (max-width:760px){.burger[open] .burger-nav{height:calc(100dvh - 64px);background:var(--card)}body:has(.burger[open]){overflow:hidden}}
