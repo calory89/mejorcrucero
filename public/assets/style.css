@@ -1252,3 +1252,6 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 .btn.btn-wa:not(.btn-ghost):not(.link-btn){background:transparent!important;color:#0f7a3f!important;border:2px solid #0f7a3f!important;box-shadow:none!important}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .btn.btn-wa:not(.btn-ghost):not(.link-btn){color:#4ade80!important;border-color:#4ade80!important}}
 :root[data-theme=dark] .btn.btn-wa:not(.btn-ghost):not(.link-btn){color:#4ade80!important;border-color:#4ade80!important}
+/* Ficha de barco en móvil: la foto arriba, como en las ofertas */
+@media (max-width:760px){.ship:not(.offer) .ship-hero-in{display:flex!important;flex-direction:column}.ship:not(.offer) .ship-hero-art{order:-1;margin:-8px -16px 8px}.ship:not(.offer) .ship-hero-art img{border-radius:0!important;border:0!important;box-shadow:none!important;aspect-ratio:16/9;object-fit:cover;width:100%}.ship:not(.offer) .ship-hero-art .credit{padding:0 16px}}
+.checked-line{opacity:.85;margin-top:6px}.checked-line::before{content:"✓ ";color:var(--flag-y);font-weight:800}

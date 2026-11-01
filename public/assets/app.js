@@ -896,7 +896,7 @@
     const load = () => { const b = $('.js-mmap', box); if (b) { b.disabled = true; b.textContent = 'Cargando mapa…'; }
       const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = ''; document.head.append(css);
       const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = ''; s.onload = () => { box.innerHTML = '<div class="map-box map-tall"></div>'; m = L.map($('.map-box', box), { scrollWheelZoom: false, worldCopyJump: true }); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(m); m.setView([30, -20], 2); draw(); }; document.head.append(s); };
-    box.addEventListener('click', (e) => { if (e.target.closest('.js-mmap')) load(); }); if (matchMedia('(min-width: 761px)').matches) load(); } }
+    box.addEventListener('click', (e) => { if (e.target.closest('.js-mmap')) load(); }); if (matchMedia('(min-width: 761px)').matches) load(); else if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }); io.observe(box); } } }
 
   // Mapa de puertos de salida (Leaflet bajo demanda): un punto por puerto con número de salidas y precio desde
   document.addEventListener('click', (e) => {
