@@ -242,7 +242,7 @@ ${AWARD_LIST.length ? `<section class="wrap block awards-home"><div class="block
   </div></section>
 
 <section class="wrap block"><div class="block-h"><h2>Embarca sin salir de España</h2><a href="/puertos/">Todos los puertos</a></div>
-<div class="ports">${HOME_PORTS.map((p) => { const n = sailings.filter((x) => x.depart_port_slug === p.slug && new Date(x.date) > new Date()).length; return `<a class="port" href="/puertos/${p.slug}/"><b>${esc(p.name)}</b><span>${esc(p.region)}${n ? ` · <strong>${n} salida${n > 1 ? 's' : ''}</strong>` : ''}</span></a>`; }).join('')}</div></section>
+<div class="ports">${HOME_PORTS.map((p) => [p, sailings.filter((x) => x.depart_port_slug === p.slug && new Date(x.date) > new Date()).length]).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]).map(([p, n]) => { return `<a class="port" href="/puertos/${p.slug}/"><b>${esc(p.name)}</b><span>${esc(p.region)}${n ? ` · <strong>${n} salida${n > 1 ? 's' : ''}</strong>` : ''}</span></a>`; }).join('')}</div></section>
 
 
 

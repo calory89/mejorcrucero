@@ -1197,3 +1197,21 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visib
 .btn-on-dark,.btn-ghost.btn-on-dark{color:#fff!important;border-color:#fff!important}
 .cmp-bar{z-index:32!important}
 @media (max-width:760px){.cmp-bar{bottom:calc(60px + env(safe-area-inset-bottom))!important}}
+/* Listados: menos cosas antes del primer resultado */
+.tool-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 0}
+.more-acts{position:relative}.more-acts>summary{list-style:none;cursor:pointer;font-weight:700;color:var(--ink);padding:8px 14px;border:2px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;gap:6px;min-height:40px}.more-acts>summary::-webkit-details-marker{display:none}.more-acts>summary::after{content:"▾"}
+.more-acts[open]>summary{border-color:var(--ink)}.more-acts-in{position:absolute;z-index:25;top:calc(100% + 6px);left:0;display:grid;gap:6px;background:var(--card);border:2px solid var(--edge);border-radius:14px;box-shadow:var(--pop);padding:10px;min-width:240px}
+.more-acts-in .btn{justify-content:flex-start;width:100%}
+.hub-tools .chips,.offers-chips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;-webkit-mask:linear-gradient(90deg,#000 90%,transparent);mask:linear-gradient(90deg,#000 90%,transparent)}
+.hub-tools .chips::-webkit-scrollbar{display:none}.hub-tools .chips>*{flex:none}
+/* Tarjeta de oferta compacta en móvil: dos por pantalla */
+@media (max-width:700px){
+ #offer-grid .offer-card .ship-art{aspect-ratio:2/1!important}
+ #offer-grid .offer-card .card-body{padding:12px 14px!important}
+ #offer-grid .offer-card h3{font-size:1.05rem}
+ #offer-grid .offer-card .ports-line{-webkit-line-clamp:1}
+ #offer-grid .offer-card .card-tags span:nth-child(n+2){display:none}
+ #offer-grid .offer-card .card-foot{margin-top:8px}
+ #offer-grid .offer-card .tkt b{font-size:1.45rem!important}
+ #offer-grid .offer-card .card-sub{font-size:.85rem}
+ #offer-grid{padding-bottom:80px}}
