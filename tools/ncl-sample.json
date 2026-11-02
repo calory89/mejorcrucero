@@ -69,13 +69,13 @@
     {
      "code": "just-cruise-offer",
      "title": "Solo crucero",
-     "weight": 5,
+     "weight": 9,
      "featured": false
     },
     {
      "code": "free-at-sea-upgrade-package-offer",
      "title": "Reciba los 4 paquetes",
-     "weight": 7,
+     "weight": 6,
      "featured": false
     }
    ]
@@ -95,8 +95,8 @@
      "code": "HAVEN",
      "title": "The Haven",
      "statusText": "Available",
-     "combinedPrice": 2784,
-     "basePrice": 5739
+     "combinedPrice": 4644,
+     "basePrice": 9459
     },
     {
      "status": "AVAILABLE",
