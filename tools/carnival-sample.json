@@ -2,7 +2,7 @@
  "itinerary": {
   "roundtrip": true,
   "leadSailing": {
-   "fromPrice": 193,
+   "fromPrice": 192,
    "fromPriceCurrency": "USD",
    "taxesAndFees": 0,
    "departureDate": "2026-11-30T00:00:00.000Z",
@@ -134,13 +134,13 @@
      },
      "oceanview": {
       "metacode": "OS",
-      "price": 663,
+      "price": 673,
       "priceCurrency": "USD",
       "taxesAndFees": 0,
       "taxesAndFeesCurrency": "USD",
       "soldOut": false,
-      "rateCode": "P2P",
-      "offerId": 268586,
+      "rateCode": "PSV",
+      "offerId": 230139,
       "categoryCode": "OV",
       "upgradeFrom": "OV",
       "extraSavingsType": null,
@@ -190,8 +190,8 @@
   "imageUrl": "/service/GetItineraryRandomImage.aspx?RegionCode=MB&Key=4DaysLXQBajaMexicoCarnivalFirenze&format=image",
   "id": "LXQ_LAX_FN_4_Mon",
   "code": "LXQ",
-  "image": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-catalina-island-4.jpg?useCustomFunctions=1&centerCrop=1",
-  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-catalina-island-4.jpg?useCustomFunctions=1&centerCrop=1",
+  "image": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-ensenada-1.jpg?useCustomFunctions=1&leftCrop=1",
+  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-mexico-port-ensenada-1.jpg?useCustomFunctions=1&leftCrop=1",
   "stateroomMetaInformation": [
    {
     "metacode": "IS",
@@ -240,8 +240,8 @@
    }
   ],
   "imageRandomizationInfo": {
-   "crop": "Center",
-   "metaTag": "carnival-mexico-port-catalina-island-4",
+   "crop": "Left",
+   "metaTag": "carnival-mexico-port-ensenada-1",
    "photoCredit": null
   },
   "itineraryTitle": "4-Day Baja Mexico from Long Beach (Los Angeles), CA",
