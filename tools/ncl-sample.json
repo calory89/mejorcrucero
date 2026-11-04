@@ -63,7 +63,7 @@
     {
      "code": "50-off-all-cruises-offer",
      "title": "50% de descuento en todos los cruceros",
-     "weight": 5,
+     "weight": 7,
      "featured": false
     },
     {
@@ -95,15 +95,15 @@
      "code": "HAVEN",
      "title": "The Haven",
      "statusText": "Available",
-     "combinedPrice": 2784,
-     "basePrice": 5739
+     "combinedPrice": 4459,
+     "basePrice": 9089
     },
     {
      "status": "AVAILABLE",
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
      "statusText": "Available",
-     "combinedPrice": 917,
+     "combinedPrice": 1007,
      "basePrice": 1759
     },
     {
