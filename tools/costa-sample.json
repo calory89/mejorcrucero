@@ -483,32 +483,32 @@
   "classification_EUR_Platinum": "MEPLATIN",
   "classification_EUR_Blue": "MEBLUE",
   "classification_EUR_Gold": "MEGOLDEN",
-  "serviceChargesIncluded_EUR_Silver_ALSILVER": "false",
+  "serviceChargesIncluded_EUR_Silver_ALSILVER": "true",
   "serviceChargesIncluded_EUR_Platinum": "true",
-  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "false",
+  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "true",
   "serviceChargesIncluded_EUR_Bronze": "true",
-  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "false",
-  "serviceChargesIncluded_EUR_Blue_MEBLUE": "false",
-  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "false",
+  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "true",
+  "serviceChargesIncluded_EUR_Blue_MEBLUE": "true",
+  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "true",
   "serviceChargesIncluded_EUR_Silver": "true",
   "serviceChargesIncluded_EUR_anonymous_PROMO": "false",
   "serviceChargesIncluded_EUR_Blue": "true",
   "serviceChargesIncluded_EUR_Gold": "true",
   "serviceChargesIncluded_EUR_anonymous": "false",
-  "serviceChargesIncluded_EUR_Blue_ALBLUE": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "false",
-  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "false",
-  "serviceChargesIncluded_EUR_Silver_MYSILVER": "false",
-  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "false",
-  "serviceChargesIncluded_EUR_Blue_MYBLUE": "false",
+  "serviceChargesIncluded_EUR_Blue_ALBLUE": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "true",
+  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "true",
+  "serviceChargesIncluded_EUR_Silver_MYSILVER": "true",
+  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "true",
+  "serviceChargesIncluded_EUR_Blue_MYBLUE": "true",
   "serviceChargesIncluded_EUR_anonymous_PIND": "false",
-  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "false",
-  "serviceChargesIncluded_EUR_Silver_MESILVER": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "false",
+  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "true",
+  "serviceChargesIncluded_EUR_Silver_MESILVER": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "true",
   "roomCategoryId_EUR_Gold_MEGOLDEN": "I1",
   "roomCategoryId_EUR_Blue_MEBLUE": "I1",
   "roomCategoryId_EUR_Bronze": "I1",
@@ -535,6 +535,128 @@
   "roomCategoryId_EUR_Gold_MYGOLDEN": "I1",
   "roomCategoryId_EUR_anonymous_MYCRUISE": "",
   "roomCategoryId_EUR_Gold_ALGOLDEN": "I1",
+  "offerNames_EUR_Blue_MYBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Blue_ALBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Bronze_ALBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYEXPLOR": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Bronze_MEBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
   "offerNames_EUR_anonymous": [
    {
     "id": "COMFADVA",
@@ -563,6 +685,160 @@
     "name": "Descuentos de {discount} %"
    }
   ],
+  "offerNames_EUR_anonymous_PIND": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   }
+  ],
+  "offerNames_EUR_Silver_ALSILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Gold_MYGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Bronze_MYBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Blue_MEBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Silver_MESILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Platinum_ALPLATIN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
   "offerNames_EUR_Platinum": [
    {
     "id": "COMFADVA",
@@ -585,7 +861,161 @@
     "name": "Descuentos de {discount} %"
    }
   ],
+  "offerNames_EUR_Platinum_MEPLATIN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Gold_ALGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYALLINC": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Gold_MEGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMLON",
+    "name": "NPM 26 MED LONG 3.0"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_anonymous_PROMO": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "ESAHA194",
+    "name": "Promo de Invierno"
+   }
+  ],
+  "offerNames_EUR_Silver_MYSILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
   "offerNames_EUR_Silver": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_Platinum_MYPLATIN": [
    {
     "id": "COMFADVA",
     "name": "COMF.ADVANCED PRICE 90DD"
@@ -637,6 +1067,24 @@
    {
     "id": "FCCFAKCC",
     "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "PRIVILEG",
+    "name": "Descuentos de {discount} %"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYCRUISE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
    },
    {
     "id": "FKREPET2",
@@ -1090,30 +1538,30 @@
   "classification_EUR_Platinum": "MEPLATIN",
   "classification_EUR_Blue": "MEBLUE",
   "classification_EUR_Gold": "MEGOLDEN",
-  "serviceChargesIncluded_EUR_Silver_ALSILVER": "false",
+  "serviceChargesIncluded_EUR_Silver_ALSILVER": "true",
   "serviceChargesIncluded_EUR_Platinum": "true",
-  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "false",
+  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "true",
   "serviceChargesIncluded_EUR_Bronze": "true",
-  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "false",
-  "serviceChargesIncluded_EUR_Blue_MEBLUE": "false",
-  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "false",
+  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "true",
+  "serviceChargesIncluded_EUR_Blue_MEBLUE": "true",
+  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "true",
   "serviceChargesIncluded_EUR_Silver": "true",
   "serviceChargesIncluded_EUR_Blue": "true",
   "serviceChargesIncluded_EUR_Gold": "true",
   "serviceChargesIncluded_EUR_anonymous": "true",
-  "serviceChargesIncluded_EUR_Blue_ALBLUE": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "false",
-  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "false",
-  "serviceChargesIncluded_EUR_Silver_MYSILVER": "false",
-  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "false",
-  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "false",
-  "serviceChargesIncluded_EUR_Blue_MYBLUE": "false",
-  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "false",
-  "serviceChargesIncluded_EUR_Silver_MESILVER": "false",
-  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "false",
+  "serviceChargesIncluded_EUR_Blue_ALBLUE": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "true",
+  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "true",
+  "serviceChargesIncluded_EUR_Silver_MYSILVER": "true",
+  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "true",
+  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "true",
+  "serviceChargesIncluded_EUR_Blue_MYBLUE": "true",
+  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "true",
+  "serviceChargesIncluded_EUR_Silver_MESILVER": "true",
+  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "true",
   "roomCategoryId_EUR_Gold_MEGOLDEN": "I1",
   "roomCategoryId_EUR_Blue_MEBLUE": "I1",
   "roomCategoryId_EUR_Bronze": "I1",
@@ -1138,6 +1586,108 @@
   "roomCategoryId_EUR_Gold_MYGOLDEN": "I1",
   "roomCategoryId_EUR_anonymous_MYCRUISE": "I1",
   "roomCategoryId_EUR_Gold_ALGOLDEN": "I1",
+  "offerNames_EUR_Blue_MYBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
+  "offerNames_EUR_Blue_ALBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
+  "offerNames_EUR_Bronze_ALBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYEXPLOR": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
+  "offerNames_EUR_Bronze_MEBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
   "offerNames_EUR_anonymous": [
    {
     "id": "COMFADVA",
@@ -1170,6 +1720,130 @@
     "name": "NPM 2021 HSC INCLUDED"
    }
   ],
+  "offerNames_EUR_Silver_ALSILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
+  "offerNames_EUR_Gold_MYGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
+  "offerNames_EUR_Bronze_MYBRONZE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
+  "offerNames_EUR_Blue_MEBLUE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
+  "offerNames_EUR_Silver_MESILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
+  "offerNames_EUR_Platinum_ALPLATIN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
   "offerNames_EUR_Platinum": [
    {
     "id": "COMFADVA",
@@ -1188,7 +1862,127 @@
     "name": "NPM 2021 HSC INCLUDED"
    }
   ],
+  "offerNames_EUR_Platinum_MEPLATIN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
+  "offerNames_EUR_Gold_ALGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYALLINC": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   }
+  ],
+  "offerNames_EUR_Gold_MEGOLDEN": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYALLI",
+    "name": "NPM ALLINCLUSIVE 2021"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   },
+   {
+    "id": "NPSXMINI",
+    "name": "NPM 26 MINI WEST"
+   }
+  ],
+  "offerNames_EUR_Silver_MYSILVER": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
   "offerNames_EUR_Silver": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
+   },
+   {
+    "id": "FCCFAKCC",
+    "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
+  "offerNames_EUR_Platinum_MYPLATIN": [
    {
     "id": "COMFADVA",
     "name": "COMF.ADVANCED PRICE 90DD"
@@ -1232,6 +2026,20 @@
    {
     "id": "FCCFAKCC",
     "name": "Double Points FCC"
+   },
+   {
+    "id": "FKREPET2",
+    "name": "¡10.000 puntos extra C|Club!"
+   },
+   {
+    "id": "NPMYHSC",
+    "name": "NPM 2021 HSC INCLUDED"
+   }
+  ],
+  "offerNames_EUR_anonymous_MYCRUISE": [
+   {
+    "id": "COMFADVA",
+    "name": "COMF.ADVANCED PRICE 90DD"
    },
    {
     "id": "FKREPET2",
