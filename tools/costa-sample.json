@@ -1,6 +1,6 @@
 [
  {
-  "itineraryId": "SVN10A28",
+  "itineraryId": "BCN10A1L",
   "itineraryImage": "",
   "itineraryImageAlt": "",
   "doubleImage": {
@@ -48,10 +48,10 @@
    },
    "alt": ""
   },
-  "itineraryPath": "/content/costa/master_website/es_ES/cruises/SVN10A28/FS10261105.html",
-  "cruiseId": "FS10261105_SVN10A28",
+  "itineraryPath": "/content/costa/master_website/es_ES/cruises/BCN10A1L/FS10261106.html",
+  "cruiseId": "FS10261106_BCN10A1L",
   "tourId": "",
-  "title": "Mediterráneo Occidental desde Savona",
+  "title": "Mediterráneo Occidental desde Barcelona",
   "dayAndNightName": "11 días (10 noches)",
   "nightTitle": "",
   "serviceCharges": [
@@ -65,39 +65,39 @@
   ],
   "portsList": [
    {
-    "portName": "Savona",
+    "portName": "Barcelona",
     "dayIndicator": "1"
    },
    {
-    "portName": "Barcelona",
-    "dayIndicator": "2"
-   },
-   {
     "portName": "Gibraltar",
-    "dayIndicator": "4"
+    "dayIndicator": "3"
    },
    {
     "portName": "Tánger",
-    "dayIndicator": "5"
+    "dayIndicator": "4"
    },
    {
     "portName": "Casablanca",
-    "dayIndicator": "6"
+    "dayIndicator": "5"
    },
    {
     "portName": "Cádiz",
-    "dayIndicator": "7"
+    "dayIndicator": "6"
    },
    {
     "portName": "Málaga",
-    "dayIndicator": "8"
+    "dayIndicator": "7"
    },
    {
     "portName": "Marsella",
-    "dayIndicator": "10"
+    "dayIndicator": "9"
    },
    {
     "portName": "Savona",
+    "dayIndicator": "10"
+   },
+   {
+    "portName": "Barcelona",
     "dayIndicator": "11"
    }
   ],
@@ -114,11 +114,6 @@
    "CW"
   ],
   "portImages": [
-   {
-    "imagePath": "/content/dam/costa/inventory-assets/ports/SVN/c037-2.jpg",
-    "portName": "Savona",
-    "alt": "Savona en un crucero Costa"
-   },
    {
     "imagePath": "/content/dam/costa/costa-asset/images/sandbox/C037_Barcellona.jpg",
     "portName": "Barcelona",
@@ -158,14 +153,19 @@
     "imagePath": "/content/dam/costa/inventory-assets/ports/SVN/c037-2.jpg",
     "portName": "Savona",
     "alt": "Savona en un crucero Costa"
+   },
+   {
+    "imagePath": "/content/dam/costa/costa-asset/images/sandbox/C037_Barcellona.jpg",
+    "portName": "Barcelona",
+    "alt": ""
    }
   ],
   "portsOfCall": [
    "GIB",
    "CAS",
    "CAD",
-   "SVN",
    "AGP",
+   "SVN",
    "BCN",
    "TNG",
    "MRS"
@@ -176,45 +176,48 @@
    "imageAlt": "",
    "text": ""
   },
-  "departurePortName": "Savona",
-  "departurePortCode": "SVN",
+  "departurePortName": "Barcelona",
+  "departurePortCode": "BCN",
   "shipId": "FS",
   "shipVersion": "v1",
-  "visitingCountries": "Italia, España, Gibraltar, Marruecos, Francia",
-  "departureDate": "2026-11-05T00:00:00Z",
-  "arrivalPortName": "Savona",
-  "arrivalPortCode": "SVN",
+  "visitingCountries": "España, Gibraltar, Marruecos, Francia, Italia",
+  "departureDate": "2026-11-06T00:00:00Z",
+  "arrivalPortName": "Barcelona",
+  "arrivalPortCode": "BCN",
   "destinationName": "Mediterráneo Occidental",
-  "price_EUR_Gold_MEGOLDEN": "1652.0",
-  "price_EUR_Platinum_MEPLATIN": "1652.0",
-  "price_EUR_Gold": "1193.0",
-  "price_EUR_Blue": "1370.0",
-  "price_EUR_Bronze_MYBRONZE": "1311.0",
-  "price_EUR_Platinum_MYPLATIN": "1193.0",
-  "price_EUR_Silver_MESILVER": "1711.0",
-  "price_EUR_Bronze": "1311.0",
-  "price_EUR_anonymous_MYEXPLOR": "1888.0",
-  "price_EUR_Silver_ALSILVER": "1522.0",
-  "price_EUR_Platinum_ALPLATIN": "1463.0",
-  "price_EUR_Blue_ALBLUE": "1640.0",
-  "price_EUR_Bronze_MEBRONZE": "1770.0",
-  "price_EUR_anonymous": "1429.0",
-  "price_EUR_Platinum": "1193.0",
-  "price_EUR_anonymous_MYALLINC": "1699.0",
-  "price_EUR_Bronze_ALBRONZE": "1581.0",
-  "price_EUR_Blue_MYBLUE": "1370.0",
-  "price_EUR_Blue_MEBLUE": "1829.0",
-  "price_EUR_Silver": "1252.0",
-  "price_EUR_Gold_MYGOLDEN": "1193.0",
-  "price_EUR_Gold_ALGOLDEN": "1463.0",
-  "price_EUR_Silver_MYSILVER": "1252.0",
-  "price_EUR_anonymous_MYCRUISE": "1429.0",
+  "price_EUR_Gold_MEGOLDEN": "1204.0",
+  "price_EUR_Platinum_MEPLATIN": "1204.0",
+  "price_EUR_Gold": "745.0",
+  "price_EUR_Blue": "838.0",
+  "price_EUR_Bronze_MYBRONZE": "807.0",
+  "price_EUR_Platinum_MYPLATIN": "745.0",
+  "price_EUR_Silver_MESILVER": "1235.0",
+  "price_EUR_Bronze": "807.0",
+  "price_EUR_anonymous_MYEXPLOR": "0.0",
+  "price_EUR_Silver_ALSILVER": "1046.0",
+  "price_EUR_Platinum_ALPLATIN": "1015.0",
+  "price_EUR_Blue_ALBLUE": "1108.0",
+  "price_EUR_Bronze_MEBRONZE": "1266.0",
+  "price_EUR_anonymous": "949.0",
+  "price_EUR_Platinum": "745.0",
+  "price_EUR_anonymous_MYALLINC": "0.0",
+  "price_EUR_Bronze_ALBRONZE": "1077.0",
+  "price_EUR_Blue_MYBLUE": "838.0",
+  "price_EUR_Blue_MEBLUE": "1297.0",
+  "price_EUR_Silver": "776.0",
+  "price_EUR_Gold_MYGOLDEN": "745.0",
+  "price_EUR_Gold_ALGOLDEN": "1015.0",
+  "price_EUR_anonymous_PIND": "949.0",
+  "price_EUR_Silver_MYSILVER": "776.0",
+  "price_EUR_anonymous_PROMO": "0.0",
+  "price_EUR_anonymous_MYCRUISE": "0.0",
   "solrPriceAirAndSea_EUR_Bronze_MEBRONZE": "0.0",
   "solrPriceAirAndSea_EUR_Gold": "0.0",
   "solrPriceAirAndSea_EUR_Blue": "0.0",
   "solrPriceAirAndSea_EUR_Platinum_MEPLATIN": "0.0",
   "solrPriceAirAndSea_EUR_anonymous": "0.0",
   "solrPriceAirAndSea_EUR_Silver_ALSILVER": "0.0",
+  "solrPriceAirAndSea_EUR_anonymous_PIND": "0.0",
   "solrPriceAirAndSea_EUR_anonymous_MYCRUISE": "0.0",
   "solrPriceAirAndSea_EUR_Bronze_ALBRONZE": "0.0",
   "solrPriceAirAndSea_EUR_Blue_MYBLUE": "0.0",
@@ -225,6 +228,7 @@
   "solrPriceAirAndSea_EUR_Platinum": "0.0",
   "solrPriceAirAndSea_EUR_Gold_MEGOLDEN": "0.0",
   "solrPriceAirAndSea_EUR_Silver_MYSILVER": "0.0",
+  "solrPriceAirAndSea_EUR_anonymous_PROMO": "0.0",
   "solrPriceAirAndSea_EUR_anonymous_MYALLINC": "0.0",
   "solrPriceAirAndSea_EUR_anonymous_MYEXPLOR": "0.0",
   "solrPriceAirAndSea_EUR_Silver_MESILVER": "0.0",
@@ -249,6 +253,7 @@
   "solrBrochurePriceAirAndSea_EUR_Gold": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Platinum_MEPLATIN": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Bronze_MEBRONZE": "0.0",
+  "solrBrochurePriceAirAndSea_EUR_anonymous_PIND": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Platinum_ALPLATIN": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Bronze_ALBRONZE": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Blue_MYBLUE": "0.0",
@@ -257,6 +262,7 @@
   "solrBrochurePriceAirAndSea_EUR_Blue_MEBLUE": "0.0",
   "solrBrochurePriceAirAndSea_EUR_Blue_ALBLUE": "0.0",
   "solrBrochurePriceAirAndSea_EUR_anonymous": "0.0",
+  "solrBrochurePriceAirAndSea_EUR_anonymous_PROMO": "0.0",
   "taxExpenses_EUR_Blue_MYBLUE": "0.0",
   "taxExpenses_EUR_Blue": "0.0",
   "taxExpenses_EUR_Gold": "0.0",
@@ -267,12 +273,14 @@
   "taxExpenses_EUR_Bronze_MEBRONZE": "0.0",
   "taxExpenses_EUR_anonymous": "0.0",
   "taxExpenses_EUR_Silver": "0.0",
+  "taxExpenses_EUR_anonymous_PROMO": "0.0",
   "taxExpenses_EUR_Platinum_MYPLATIN": "0.0",
   "taxExpenses_EUR_Bronze_ALBRONZE": "0.0",
   "taxExpenses_EUR_Silver_MYSILVER": "0.0",
   "taxExpenses_EUR_anonymous_MYALLINC": "0.0",
   "taxExpenses_EUR_Bronze_MYBRONZE": "0.0",
   "taxExpenses_EUR_Gold_MYGOLDEN": "0.0",
+  "taxExpenses_EUR_anonymous_PIND": "0.0",
   "taxExpenses_EUR_anonymous_MYEXPLOR": "0.0",
   "taxExpenses_EUR_Bronze": "0.0",
   "taxExpenses_EUR_Platinum": "0.0",
@@ -289,8 +297,10 @@
   "roomTypeId_EUR_Platinum_ALPLATIN": "I",
   "roomTypeId_EUR_Gold_MYGOLDEN": "I",
   "roomTypeId_EUR_anonymous_MYEXPLOR": "I",
+  "roomTypeId_EUR_anonymous_PROMO": "I",
   "roomTypeId_EUR_Platinum_MEPLATIN": "I",
   "roomTypeId_EUR_anonymous": "I",
+  "roomTypeId_EUR_anonymous_PIND": "I",
   "roomTypeId_EUR_Blue_ALBLUE": "I",
   "roomTypeId_EUR_Silver": "I",
   "roomTypeId_EUR_Bronze_MYBRONZE": "I",
@@ -305,30 +315,33 @@
   "roomTypeId_EUR_Silver_ALSILVER": "I",
   "roomTypeId_EUR_Silver_MESILVER": "I",
   "roomTypeId_EUR_Blue_MEBLUE": "I",
-  "basePrice_EUR_Platinum_MYPLATIN": "1429.0",
-  "basePrice_EUR_Blue_MEBLUE": "1888.0",
-  "basePrice_EUR_Bronze_MEBRONZE": "1888.0",
-  "basePrice_EUR_Blue": "1370.0",
-  "basePrice_EUR_Gold": "1193.0",
-  "basePrice_EUR_Blue_MYBLUE": "1429.0",
-  "basePrice_EUR_Bronze_MYBRONZE": "1429.0",
-  "basePrice_EUR_Platinum_MEPLATIN": "1888.0",
+  "basePrice_EUR_Platinum_MYPLATIN": "869.0",
+  "basePrice_EUR_Blue_MEBLUE": "1328.0",
+  "basePrice_EUR_Bronze_MEBRONZE": "1328.0",
+  "basePrice_EUR_Blue": "838.0",
+  "basePrice_EUR_Gold": "745.0",
+  "basePrice_EUR_Blue_MYBLUE": "869.0",
+  "basePrice_EUR_Bronze_MYBRONZE": "869.0",
+  "basePrice_EUR_Platinum_MEPLATIN": "1328.0",
   "basePrice_EUR_anonymous": "0.0",
-  "basePrice_EUR_Platinum_ALPLATIN": "1699.0",
-  "basePrice_EUR_Gold_MYGOLDEN": "1429.0",
-  "basePrice_EUR_Silver": "1252.0",
+  "basePrice_EUR_Platinum_ALPLATIN": "1139.0",
+  "basePrice_EUR_anonymous_PROMO": "849.0",
+  "basePrice_EUR_Gold_MYGOLDEN": "869.0",
+  "basePrice_EUR_Silver": "776.0",
   "basePrice_EUR_anonymous_MYCRUISE": "0.0",
-  "basePrice_EUR_Gold_ALGOLDEN": "1699.0",
-  "basePrice_EUR_Silver_MYSILVER": "1429.0",
-  "basePrice_EUR_Gold_MEGOLDEN": "1888.0",
-  "basePrice_EUR_Blue_ALBLUE": "1699.0",
+  "basePrice_EUR_anonymous_PIND": "0.0",
+  "basePrice_EUR_Gold_ALGOLDEN": "1139.0",
+  "basePrice_EUR_Silver_MYSILVER": "869.0",
+  "basePrice_EUR_Gold_MEGOLDEN": "1328.0",
+  "basePrice_EUR_Blue_ALBLUE": "1139.0",
   "basePrice_EUR_anonymous_MYEXPLOR": "0.0",
-  "basePrice_EUR_Platinum": "1193.0",
-  "basePrice_EUR_Silver_MESILVER": "1888.0",
-  "basePrice_EUR_Silver_ALSILVER": "1699.0",
-  "basePrice_EUR_Bronze_ALBRONZE": "1699.0",
-  "basePrice_EUR_Bronze": "1311.0",
+  "basePrice_EUR_Platinum": "745.0",
+  "basePrice_EUR_Silver_MESILVER": "1328.0",
+  "basePrice_EUR_Silver_ALSILVER": "1139.0",
+  "basePrice_EUR_Bronze_ALBRONZE": "1139.0",
+  "basePrice_EUR_Bronze": "807.0",
   "basePrice_EUR_anonymous_MYALLINC": "0.0",
+  "baseTaxExpenses_EUR_anonymous_PIND": "0.0",
   "baseTaxExpenses_EUR_Silver_MYSILVER": "0.0",
   "baseTaxExpenses_EUR_Gold_MEGOLDEN": "0.0",
   "baseTaxExpenses_EUR_Gold_ALGOLDEN": "0.0",
@@ -342,6 +355,7 @@
   "baseTaxExpenses_EUR_Bronze_MYBRONZE": "0.0",
   "baseTaxExpenses_EUR_anonymous_MYEXPLOR": "0.0",
   "baseTaxExpenses_EUR_anonymous_MYCRUISE": "0.0",
+  "baseTaxExpenses_EUR_anonymous_PROMO": "0.0",
   "baseTaxExpenses_EUR_Platinum": "0.0",
   "baseTaxExpenses_EUR_anonymous": "0.0",
   "baseTaxExpenses_EUR_Platinum_MYPLATIN": "0.0",
@@ -371,12 +385,14 @@
   "packageType_EUR_anonymous": "",
   "packageType_EUR_Gold_MYGOLDEN": "",
   "packageType_EUR_Platinum_MEPLATIN": "",
+  "packageType_EUR_anonymous_PIND": "",
   "packageType_EUR_Platinum": "",
   "packageType_EUR_anonymous_MYALLINC": "",
   "packageType_EUR_Bronze": "",
   "packageType_EUR_anonymous_MYEXPLOR": "",
   "packageType_EUR_Silver_MYSILVER": "",
   "packageType_EUR_Gold_MEGOLDEN": "",
+  "packageType_EUR_anonymous_PROMO": "",
   "packageType_EUR_Gold_ALGOLDEN": "",
   "packageType_EUR_Bronze_MYBRONZE": "",
   "packageType_EUR_Silver_MESILVER": "",
@@ -391,6 +407,7 @@
   "packageType_EUR_Blue_MEBLUE": "",
   "roomTypeName_EUR_Bronze_MYBRONZE": "Camarote Interior",
   "roomTypeName_EUR_Platinum": "Camarote Interior",
+  "roomTypeName_EUR_anonymous_PROMO": "Camarote Interior",
   "roomTypeName_EUR_anonymous_MYCRUISE": "Camarote Interior",
   "roomTypeName_EUR_anonymous": "Camarote Interior",
   "roomTypeName_EUR_Gold": "Camarote Interior",
@@ -409,6 +426,7 @@
   "roomTypeName_EUR_Gold_MEGOLDEN": "Camarote Interior",
   "roomTypeName_EUR_Silver": "Camarote Interior",
   "roomTypeName_EUR_Platinum_ALPLATIN": "Camarote Interior",
+  "roomTypeName_EUR_anonymous_PIND": "Camarote Interior",
   "roomTypeName_EUR_Platinum_MEPLATIN": "Camarote Interior",
   "roomTypeName_EUR_Blue_MYBLUE": "Camarote Interior",
   "roomTypeName_EUR_anonymous_MYALLINC": "Camarote Interior",
@@ -416,6 +434,8 @@
   "fare_EUR_anonymous_MYCRUISE": "MYCRUISE",
   "fare_EUR_Silver_MESILVER": "MESILVER",
   "fare_EUR_Bronze": "MYBRONZE",
+  "fare_EUR_anonymous_PROMO": "PROMO",
+  "fare_EUR_anonymous_PIND": "PIND",
   "fare_EUR_Platinum_MYPLATIN": "MYPLATIN",
   "fare_EUR_Silver_ALSILVER": "ALSILVER",
   "fare_EUR_Bronze_MEBRONZE": "MEBRONZE",
@@ -430,7 +450,7 @@
   "fare_EUR_Bronze_MYBRONZE": "MYBRONZE",
   "fare_EUR_Gold_MEGOLDEN": "MEGOLDEN",
   "fare_EUR_Blue_MEBLUE": "MEBLUE",
-  "fare_EUR_anonymous": "MYCRUISE",
+  "fare_EUR_anonymous": "PIND",
   "fare_EUR_Platinum": "MYPLATIN",
   "fare_EUR_Bronze_ALBRONZE": "ALBRONZE",
   "fare_EUR_Gold_MYGOLDEN": "MYGOLDEN",
@@ -455,198 +475,70 @@
   "classification_EUR_Silver_ALSILVER": "ALSILVER",
   "classification_EUR_Blue_MEBLUE": "MEBLUE",
   "classification_EUR_Platinum_MYPLATIN": "MYPLATIN",
+  "classification_EUR_anonymous_PIND": "PIND",
   "classification_EUR_Bronze_MYBRONZE": "MYBRONZE",
+  "classification_EUR_anonymous_PROMO": "PROMO",
   "classification_EUR_Blue_MYBLUE": "MYBLUE",
   "classification_EUR_anonymous": "MYEXPLOR",
   "classification_EUR_Platinum": "MEPLATIN",
   "classification_EUR_Blue": "MEBLUE",
   "classification_EUR_Gold": "MEGOLDEN",
-  "serviceChargesIncluded_EUR_Silver_ALSILVER": "true",
+  "serviceChargesIncluded_EUR_Silver_ALSILVER": "false",
   "serviceChargesIncluded_EUR_Platinum": "true",
-  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "true",
+  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "false",
   "serviceChargesIncluded_EUR_Bronze": "true",
-  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "true",
-  "serviceChargesIncluded_EUR_Blue_MEBLUE": "true",
-  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "true",
+  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "false",
+  "serviceChargesIncluded_EUR_Blue_MEBLUE": "false",
+  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "false",
   "serviceChargesIncluded_EUR_Silver": "true",
+  "serviceChargesIncluded_EUR_anonymous_PROMO": "false",
   "serviceChargesIncluded_EUR_Blue": "true",
   "serviceChargesIncluded_EUR_Gold": "true",
-  "serviceChargesIncluded_EUR_anonymous": "true",
-  "serviceChargesIncluded_EUR_Blue_ALBLUE": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "true",
-  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "true",
-  "serviceChargesIncluded_EUR_Silver_MYSILVER": "true",
-  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "true",
-  "serviceChargesIncluded_EUR_Blue_MYBLUE": "true",
-  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "true",
-  "serviceChargesIncluded_EUR_Silver_MESILVER": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "true",
+  "serviceChargesIncluded_EUR_anonymous": "false",
+  "serviceChargesIncluded_EUR_Blue_ALBLUE": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "false",
+  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "false",
+  "serviceChargesIncluded_EUR_Silver_MYSILVER": "false",
+  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "false",
+  "serviceChargesIncluded_EUR_Blue_MYBLUE": "false",
+  "serviceChargesIncluded_EUR_anonymous_PIND": "false",
+  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "false",
+  "serviceChargesIncluded_EUR_Silver_MESILVER": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "false",
   "roomCategoryId_EUR_Gold_MEGOLDEN": "I1",
   "roomCategoryId_EUR_Blue_MEBLUE": "I1",
   "roomCategoryId_EUR_Bronze": "I1",
   "roomCategoryId_EUR_Silver": "I1",
   "roomCategoryId_EUR_Bronze_ALBRONZE": "I1",
-  "roomCategoryId_EUR_anonymous": "I1",
+  "roomCategoryId_EUR_anonymous": "IV",
   "roomCategoryId_EUR_Silver_MYSILVER": "I1",
   "roomCategoryId_EUR_Gold": "I1",
   "roomCategoryId_EUR_Blue": "I1",
-  "roomCategoryId_EUR_anonymous_MYALLINC": "I1",
+  "roomCategoryId_EUR_anonymous_MYALLINC": "",
   "roomCategoryId_EUR_Bronze_MYBRONZE": "I1",
   "roomCategoryId_EUR_Platinum": "I1",
   "roomCategoryId_EUR_Platinum_MEPLATIN": "I1",
+  "roomCategoryId_EUR_anonymous_PIND": "IV",
   "roomCategoryId_EUR_Silver_ALSILVER": "I1",
   "roomCategoryId_EUR_Blue_ALBLUE": "I1",
   "roomCategoryId_EUR_Silver_MESILVER": "I1",
   "roomCategoryId_EUR_Bronze_MEBRONZE": "I1",
   "roomCategoryId_EUR_Blue_MYBLUE": "I1",
-  "roomCategoryId_EUR_anonymous_MYEXPLOR": "I1",
+  "roomCategoryId_EUR_anonymous_MYEXPLOR": "",
   "roomCategoryId_EUR_Platinum_ALPLATIN": "I1",
+  "roomCategoryId_EUR_anonymous_PROMO": "",
   "roomCategoryId_EUR_Platinum_MYPLATIN": "I1",
   "roomCategoryId_EUR_Gold_MYGOLDEN": "I1",
-  "roomCategoryId_EUR_anonymous_MYCRUISE": "I1",
+  "roomCategoryId_EUR_anonymous_MYCRUISE": "",
   "roomCategoryId_EUR_Gold_ALGOLDEN": "I1",
-  "offerNames_EUR_Blue_MYBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Blue_ALBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Bronze_ALBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_anonymous_MYEXPLOR": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Bronze_MEBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
   "offerNames_EUR_anonymous": [
    {
     "id": "COMFADVA",
     "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
    }
   ],
   "offerNames_EUR_Bronze": [
@@ -665,154 +557,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Silver_ALSILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Gold_MYGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Bronze_MYBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Blue_MEBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Silver_MESILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Platinum_ALPLATIN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
    },
    {
     "id": "PRIVILEG",
@@ -841,151 +585,7 @@
     "name": "Descuentos de {discount} %"
    }
   ],
-  "offerNames_EUR_Platinum_MEPLATIN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Gold_ALGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_anonymous_MYALLINC": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Gold_MEGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXMLON",
-    "name": "NPM 26 MED LONG 3.0"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Silver_MYSILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
   "offerNames_EUR_Silver": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
-  "offerNames_EUR_Platinum_MYPLATIN": [
    {
     "id": "COMFADVA",
     "name": "COMF.ADVANCED PRICE 90DD"
@@ -1051,24 +651,6 @@
     "name": "Descuentos de {discount} %"
    }
   ],
-  "offerNames_EUR_anonymous_MYCRUISE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "PRIVILEG",
-    "name": "Descuentos de {discount} %"
-   }
-  ],
   "gatewayCode_EUR_Platinum": "",
   "gatewayCode_EUR_Silver": "",
   "gatewayCode_EUR_Blue": "",
@@ -1079,14 +661,14 @@
   "dealCodes": [],
   "duration": "11",
   "cruiseType": "",
-  "arrivalDate": "2026-11-15T00:00:00Z",
+  "arrivalDate": "2026-11-16T00:00:00Z",
   "availabilityStatus": "GREEN",
   "isSoldOut": false,
   "isOptionalFlightAvailable": false,
   "isSellable": true
  },
  {
-  "itineraryId": "CIV07ACX",
+  "itineraryId": "CIV05A19",
   "itineraryImage": "",
   "itineraryImageAlt": "",
   "doubleImage": {
@@ -1134,19 +716,19 @@
    },
    "alt": ""
   },
-  "itineraryPath": "/content/costa/master_website/es_ES/cruises/CIV07ACX/TO07261105.html",
-  "cruiseId": "TO07261105_CIV07ACX",
+  "itineraryPath": "/content/costa/master_website/es_ES/cruises/CIV05A19/SM05261106.html",
+  "cruiseId": "SM05261106_CIV05A19",
   "tourId": "",
-  "title": "Mediterráneo Occidental desde Civitavecchia | Roma",
-  "dayAndNightName": "8 días (7 noches)",
+  "title": "Minicruceros desde Civitavecchia | Roma",
+  "dayAndNightName": "6 días (5 noches)",
   "nightTitle": "",
   "serviceCharges": [
    {
     "currency": "EUR",
     "adultAmount": "11",
     "childAmount": "5.5",
-    "totalAdultAmount": "77",
-    "totalChildAmount": "38.5"
+    "totalAdultAmount": "55",
+    "totalChildAmount": "27.5"
    }
   ],
   "portsList": [
@@ -1155,7 +737,7 @@
     "dayIndicator": "1"
    },
    {
-    "portName": "Génova | Portofino",
+    "portName": "Savona",
     "dayIndicator": "2"
    },
    {
@@ -1167,32 +749,14 @@
     "dayIndicator": "4"
    },
    {
-    "portName": "El punto más oscuro del mar de las islas Baleares",
-    "dayIndicator": "4",
-    "isSeaDestination": true
-   },
-   {
-    "portName": "El punto más oscuro del mar de las islas Baleares",
-    "dayIndicator": "5",
-    "isSeaDestination": true
-   },
-   {
-    "portName": "Palma",
-    "dayIndicator": "5"
-   },
-   {
-    "portName": "Nápoles",
-    "dayIndicator": "7"
-   },
-   {
     "portName": "Civitavecchia | Roma",
-    "dayIndicator": "8"
+    "dayIndicator": "6"
    }
   ],
   "portCharges": {
-   "childAmount": "200",
-   "infantAmount": "200",
-   "adultAmount": "200",
+   "childAmount": "150",
+   "infantAmount": "150",
+   "adultAmount": "150",
    "currencyCode": "EUR"
   },
   "documents": [
@@ -1200,7 +764,7 @@
    "Pasaporte"
   ],
   "destinationIds": [
-   "CW"
+   "MC"
   ],
   "portImages": [
    {
@@ -1209,9 +773,9 @@
     "alt": ""
    },
    {
-    "imagePath": "/content/dam/costa/inventory-assets/ports/GOA/goa-genova-port-1b.jpg",
-    "portName": "Génova | Portofino",
-    "alt": ""
+    "imagePath": "/content/dam/costa/inventory-assets/ports/SVN/c037-2.jpg",
+    "portName": "Savona",
+    "alt": "Savona en un crucero Costa"
    },
    {
     "imagePath": "/content/dam/costa/inventory-assets/ports/MRS/mrs-marsiglia-port-1b.jpg",
@@ -1224,16 +788,6 @@
     "alt": ""
    },
    {
-    "imagePath": "/content/dam/costa/inventory-assets/ports/PMI/pmi-palma-port-1b.jpg",
-    "portName": "Palma",
-    "alt": ""
-   },
-   {
-    "imagePath": "/content/dam/costa/costa-asset/c_037/place/C037_Places_Napoli.jpg",
-    "portName": "Nápoles",
-    "alt": ""
-   },
-   {
     "imagePath": "/content/dam/costa/inventory-assets/ports/CIV/civ-civitavecchia_roma-port-1b.jpg",
     "portName": "Civitavecchia | Roma",
     "alt": ""
@@ -1241,14 +795,11 @@
   ],
   "portsOfCall": [
    "CIV",
-   "GOA",
-   "S0G",
+   "SVN",
    "BCN",
-   "NAP",
-   "PMI",
    "MRS"
   ],
-  "shipName": "Costa Toscana",
+  "shipName": "Costa Smeralda",
   "cruiseThematic": {
    "imageUrl": "",
    "imageAlt": "",
@@ -1256,37 +807,37 @@
   },
   "departurePortName": "Civitavecchia | Roma",
   "departurePortCode": "CIV",
-  "shipId": "TO",
+  "shipId": "SM",
   "shipVersion": "v1",
   "visitingCountries": "Italia, Francia, España",
-  "departureDate": "2026-11-05T00:00:00Z",
+  "departureDate": "2026-11-06T00:00:00Z",
   "arrivalPortName": "Civitavecchia | Roma",
   "arrivalPortCode": "CIV",
-  "destinationName": "Mediterráneo Occidental",
-  "price_EUR_Gold_MEGOLDEN": "1158.0",
-  "price_EUR_Platinum_MEPLATIN": "1158.0",
-  "price_EUR_Gold": "839.0",
-  "price_EUR_Blue": "839.0",
-  "price_EUR_Bronze_MYBRONZE": "839.0",
-  "price_EUR_Platinum_MYPLATIN": "839.0",
-  "price_EUR_Silver_MESILVER": "1158.0",
-  "price_EUR_Bronze": "839.0",
-  "price_EUR_anonymous_MYEXPLOR": "1158.0",
-  "price_EUR_Silver_ALSILVER": "1029.0",
-  "price_EUR_Platinum_ALPLATIN": "1029.0",
-  "price_EUR_Blue_ALBLUE": "1029.0",
-  "price_EUR_Bronze_MEBRONZE": "1158.0",
-  "price_EUR_anonymous": "839.0",
-  "price_EUR_Platinum": "839.0",
-  "price_EUR_anonymous_MYALLINC": "1029.0",
-  "price_EUR_Bronze_ALBRONZE": "1029.0",
-  "price_EUR_Blue_MYBLUE": "839.0",
-  "price_EUR_Blue_MEBLUE": "1158.0",
-  "price_EUR_Silver": "839.0",
-  "price_EUR_Gold_MYGOLDEN": "839.0",
-  "price_EUR_Gold_ALGOLDEN": "1029.0",
-  "price_EUR_Silver_MYSILVER": "839.0",
-  "price_EUR_anonymous_MYCRUISE": "839.0",
+  "destinationName": "Minicruceros",
+  "price_EUR_Gold_MEGOLDEN": "718.0",
+  "price_EUR_Platinum_MEPLATIN": "718.0",
+  "price_EUR_Gold": "449.0",
+  "price_EUR_Blue": "449.0",
+  "price_EUR_Bronze_MYBRONZE": "449.0",
+  "price_EUR_Platinum_MYPLATIN": "449.0",
+  "price_EUR_Silver_MESILVER": "718.0",
+  "price_EUR_Bronze": "449.0",
+  "price_EUR_anonymous_MYEXPLOR": "718.0",
+  "price_EUR_Silver_ALSILVER": "629.0",
+  "price_EUR_Platinum_ALPLATIN": "629.0",
+  "price_EUR_Blue_ALBLUE": "629.0",
+  "price_EUR_Bronze_MEBRONZE": "718.0",
+  "price_EUR_anonymous": "449.0",
+  "price_EUR_Platinum": "449.0",
+  "price_EUR_anonymous_MYALLINC": "629.0",
+  "price_EUR_Bronze_ALBRONZE": "629.0",
+  "price_EUR_Blue_MYBLUE": "449.0",
+  "price_EUR_Blue_MEBLUE": "718.0",
+  "price_EUR_Silver": "449.0",
+  "price_EUR_Gold_MYGOLDEN": "449.0",
+  "price_EUR_Gold_ALGOLDEN": "629.0",
+  "price_EUR_Silver_MYSILVER": "449.0",
+  "price_EUR_anonymous_MYCRUISE": "449.0",
   "solrPriceAirAndSea_EUR_Bronze_MEBRONZE": "0.0",
   "solrPriceAirAndSea_EUR_Gold": "0.0",
   "solrPriceAirAndSea_EUR_Blue": "0.0",
@@ -1539,30 +1090,30 @@
   "classification_EUR_Platinum": "MEPLATIN",
   "classification_EUR_Blue": "MEBLUE",
   "classification_EUR_Gold": "MEGOLDEN",
-  "serviceChargesIncluded_EUR_Silver_ALSILVER": "true",
+  "serviceChargesIncluded_EUR_Silver_ALSILVER": "false",
   "serviceChargesIncluded_EUR_Platinum": "true",
-  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "true",
+  "serviceChargesIncluded_EUR_Bronze_MEBRONZE": "false",
   "serviceChargesIncluded_EUR_Bronze": "true",
-  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "true",
-  "serviceChargesIncluded_EUR_Blue_MEBLUE": "true",
-  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "true",
+  "serviceChargesIncluded_EUR_Bronze_MYBRONZE": "false",
+  "serviceChargesIncluded_EUR_Blue_MEBLUE": "false",
+  "serviceChargesIncluded_EUR_Gold_MYGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_MYPLATIN": "false",
   "serviceChargesIncluded_EUR_Silver": "true",
   "serviceChargesIncluded_EUR_Blue": "true",
   "serviceChargesIncluded_EUR_Gold": "true",
   "serviceChargesIncluded_EUR_anonymous": "true",
-  "serviceChargesIncluded_EUR_Blue_ALBLUE": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "true",
-  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "true",
-  "serviceChargesIncluded_EUR_Silver_MYSILVER": "true",
-  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "true",
-  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "true",
-  "serviceChargesIncluded_EUR_Blue_MYBLUE": "true",
-  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "true",
-  "serviceChargesIncluded_EUR_Silver_MESILVER": "true",
-  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "true",
+  "serviceChargesIncluded_EUR_Blue_ALBLUE": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYCRUISE": "false",
+  "serviceChargesIncluded_EUR_Gold_MEGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_MEPLATIN": "false",
+  "serviceChargesIncluded_EUR_Silver_MYSILVER": "false",
+  "serviceChargesIncluded_EUR_Gold_ALGOLDEN": "false",
+  "serviceChargesIncluded_EUR_Platinum_ALPLATIN": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYEXPLOR": "false",
+  "serviceChargesIncluded_EUR_Blue_MYBLUE": "false",
+  "serviceChargesIncluded_EUR_Bronze_ALBRONZE": "false",
+  "serviceChargesIncluded_EUR_Silver_MESILVER": "false",
+  "serviceChargesIncluded_EUR_anonymous_MYALLINC": "false",
   "roomCategoryId_EUR_Gold_MEGOLDEN": "I1",
   "roomCategoryId_EUR_Blue_MEBLUE": "I1",
   "roomCategoryId_EUR_Bronze": "I1",
@@ -1587,128 +1138,6 @@
   "roomCategoryId_EUR_Gold_MYGOLDEN": "I1",
   "roomCategoryId_EUR_anonymous_MYCRUISE": "I1",
   "roomCategoryId_EUR_Gold_ALGOLDEN": "I1",
-  "offerNames_EUR_Blue_MYBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Blue_ALBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Bronze_ALBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_anonymous_MYEXPLOR": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Bronze_MEBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
   "offerNames_EUR_anonymous": [
    {
     "id": "COMFADVA",
@@ -1721,10 +1150,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "offerNames_EUR_Bronze": [
@@ -1743,158 +1168,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Silver_ALSILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Gold_MYGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Bronze_MYBRONZE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Blue_MEBLUE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Silver_MESILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Platinum_ALPLATIN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "offerNames_EUR_Platinum": [
@@ -1913,132 +1186,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Platinum_MEPLATIN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Gold_ALGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_anonymous_MYALLINC": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Gold_MEGOLDEN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYALLI",
-    "name": "NPM ALLINCLUSIVE 2021"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "NPSXME7W",
-    "name": "NPM 26 MED7 WEST 4.0"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Silver_MYSILVER": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "offerNames_EUR_Silver": [
@@ -2057,32 +1204,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_Platinum_MYPLATIN": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FCCFAKCC",
-    "name": "Double Points FCC"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "offerNames_EUR_Gold": [
@@ -2101,10 +1222,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "offerNames_EUR_Blue": [
@@ -2123,28 +1240,6 @@
    {
     "id": "NPMYHSC",
     "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
-   }
-  ],
-  "offerNames_EUR_anonymous_MYCRUISE": [
-   {
-    "id": "COMFADVA",
-    "name": "COMF.ADVANCED PRICE 90DD"
-   },
-   {
-    "id": "FKREPET2",
-    "name": "¡10.000 puntos extra C|Club!"
-   },
-   {
-    "id": "NPMYHSC",
-    "name": "NPM 2021 HSC INCLUDED"
-   },
-   {
-    "id": "SEADEST",
-    "name": "Nuevos destinos y experiencias"
    }
   ],
   "gatewayCode_EUR_Platinum": "",
@@ -2155,9 +1250,9 @@
   "gatewayCode_EUR_Bronze": "",
   "regions": [],
   "dealCodes": [],
-  "duration": "8",
+  "duration": "6",
   "cruiseType": "",
-  "arrivalDate": "2026-11-12T00:00:00Z",
+  "arrivalDate": "2026-11-11T00:00:00Z",
   "availabilityStatus": "GREEN",
   "isSoldOut": false,
   "isOptionalFlightAvailable": false,
