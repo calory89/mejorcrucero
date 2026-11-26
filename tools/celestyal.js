@@ -68,7 +68,7 @@ async function main() {
   }
   if (out.length < 30) { console.error(`Solo ${out.length} salidas válidas de Celestyal: no se toca nada`); process.exit(0); }
   const others = prev.filter((x) => !String(x.id).startsWith('celestyal-') && x.date >= today);
-  fs.writeFileSync(OUT, JSON.stringify([...others, ...out].sort((a, b) => a.date.localeCompare(b.date))));
+  fs.writeFileSync(OUT, JSON.stringify([...new Map([...others, ...out].map((x) => [x.id, x])).values()].sort((a, b) => a.date.localeCompare(b.date))));
   console.log(`Celestyal: ${out.length} salidas de ${pr.itineraries.length} itinerarios (precios del ${pr.info || '?'}). Otras fuentes: ${others.length}.`);
 }
 main();

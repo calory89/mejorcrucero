@@ -64,5 +64,5 @@ for (const x of raw) {
 }
 if (own.length + merged.size < 5) { console.error(`Solo ${own.length + merged.size} salidas útiles en el feed: no se toca nada`); process.exit(0); }
 const others = prev.filter((x) => !String(x.id).startsWith(PREFIX + '-') && x.date >= today);
-fs.writeFileSync(OUT, JSON.stringify([...others, ...own].sort((a, b) => a.date.localeCompare(b.date))));
+fs.writeFileSync(OUT, JSON.stringify([...new Map([...others, ...own].map((x) => [x.id, x])).values()].sort((a, b) => a.date.localeCompare(b.date))));
 console.log(`Feed ${PARTNER}: ${own.length} salidas nuevas y ${merged.size} precios añadidos a salidas que ya teníamos. Otras fuentes: ${others.length}.`);

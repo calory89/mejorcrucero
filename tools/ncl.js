@@ -127,7 +127,7 @@ async function main() {
   const kept = prev.filter((x) => String(x.id).startsWith('ncl-') && x.date >= today && x.ncl_code && !done.has(x.ncl_code));
   out.push(...kept);
   const others = prev.filter((x) => !String(x.id).startsWith('ncl-') && x.date >= today);
-  fs.writeFileSync(OUT, JSON.stringify([...others, ...out].sort((a, b) => a.date.localeCompare(b.date))));
+  fs.writeFileSync(OUT, JSON.stringify([...new Map([...others, ...out].map((x) => [x.id, x])).values()].sort((a, b) => a.date.localeCompare(b.date))));
   console.log(`NCL: ${out.length} salidas importadas de ${its.length} itinerarios. Otras fuentes: ${others.length}. Camarotes sin mapear: ${unknownCabins.size}. Sin leer hoy: ${failed.length} (conservadas ${kept.length} salidas anteriores).`);
 }
 main();

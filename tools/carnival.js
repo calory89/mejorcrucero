@@ -88,7 +88,7 @@ async function main() {
   try { fs.writeFileSync('tools/carnival-sample.json', JSON.stringify({ itinerary: { ...its[0], sailings: (its[0].sailings || []).slice(0, 1) } }, null, 1)); } catch {}
   if (out.length < 100) { console.error(`Solo ${out.length} salidas válidas de Carnival: no se toca nada`); process.exit(0); }
   const others = prev.filter((x) => !String(x.id).startsWith('carnival-') && x.date >= today);
-  fs.writeFileSync(OUT, JSON.stringify([...others, ...out].sort((a, b) => a.date.localeCompare(b.date))));
+  fs.writeFileSync(OUT, JSON.stringify([...new Map([...others, ...out].map((x) => [x.id, x])).values()].sort((a, b) => a.date.localeCompare(b.date))));
   console.log(`Carnival: ${out.length} salidas de ${its.length} itinerarios (1 USD = ${rate} EUR). Otras fuentes: ${others.length}.`);
 }
 main();

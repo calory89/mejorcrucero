@@ -98,7 +98,7 @@ async function main() {
   out.sort((a, b) => a.date.localeCompare(b.date));
   // Conserva salidas de otras fuentes (no Costa)
   const others = prev.filter((x) => !String(x.id).startsWith('costa-') && x.date >= today);
-  fs.writeFileSync(OUT, JSON.stringify([...others, ...out]));
+  fs.writeFileSync(OUT, JSON.stringify([...new Map([...others, ...out].map((x) => [x.id, x])).values()]));
   console.log(`Costa: ${out.length} salidas importadas (${rows.length} en la fuente). Otras fuentes: ${others.length}.`);
 }
 main();
