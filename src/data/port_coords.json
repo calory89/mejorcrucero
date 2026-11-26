@@ -184,6 +184,11 @@
 -79.25,
 "https://es.wikipedia.org/wiki/Bimini"
 ],
+"Bodø": [
+67.2831,
+14.3831,
+"https://es.wikipedia.org/wiki/Bod%C3%B8"
+],
 "Bonaire": [
 12.2,
 -68.25,
@@ -629,6 +634,11 @@
 -71.14,
 ""
 ],
+"Granada": [
+37.175,
+-3.6,
+"https://es.wikipedia.org/wiki/Granada"
+],
 "Great Stirrup Cay": [
 25.8333,
 -77.9,
@@ -674,10 +684,20 @@
 -63.5714,
 "https://es.wikipedia.org/wiki/Halifax"
 ],
+"Hammerfest": [
+70.6633,
+23.6778,
+"https://es.wikipedia.org/wiki/Hammerfest"
+],
 "Hanói": [
 21.0245,
 105.8412,
 "https://es.wikipedia.org/wiki/Han%C3%B3i"
+],
+"Harstad": [
+68.7988,
+16.5393,
+"https://es.wikipedia.org/wiki/Harstad"
 ],
 "Harvest Caye": [
 16.4783,
@@ -1374,6 +1394,11 @@
 -77.1,
 ""
 ],
+"Olden": [
+61.8366,
+6.8065,
+"https://es.wikipedia.org/wiki/Olden"
+],
 "Olimpia": [
 37.6383,
 21.63,
@@ -1618,6 +1643,11 @@
 9.9773,
 -84.8346,
 "https://es.wikipedia.org/wiki/Puntarenas_(ciudad)"
+],
+"RIN": [
+51.9808,
+4.0931,
+"https://es.wikipedia.org/wiki/Rin"
 ],
 "Rabaul": [
 -4.1981,
@@ -1878,6 +1908,11 @@
 59.45,
 -135.31,
 ""
+],
+"Skjolden": [
+61.4833,
+7.6,
+"https://es.wikipedia.org/wiki/Skjolden"
 ],
 "Sognefjord": [
 61.1,
