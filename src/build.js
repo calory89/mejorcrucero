@@ -9,6 +9,7 @@ import { scoreShip, tagsFor, scoreLabel, scoreClass, PARTS } from './score.js';
 import { scoreBadge, conArt } from './lib.js';
 import { cj, tripBox, bookingHotels, cdLink, cdAff, ltLink, ltPlace } from './lib.js';
 import { makeOffers } from './offers.js';
+import { makeBlog } from './blog.js';
 import { makeTools2 } from './tools2.js';
 import { AV, SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
@@ -217,6 +218,7 @@ function home() {
 <section class="wrap block" id="my-searches" hidden></section>
 ${(() => { const wk = Date.now() - 7 * 864e5; const drops = sailings.map((x) => { const h = (x.history || []).filter((p) => new Date(p.date) >= wk); if (h.length < 1 || !(x.history || []).length) return null; const prev = Math.max(...(x.history || []).filter((p) => new Date(p.date) < new Date(TODAY)).map((p) => p.price), 0); const now = OFF.minPrice(x); return prev > now ? { x, prev, now, pct: Math.round((1 - now / prev) * 100) } : null; }).filter((d) => d && d.pct >= 5 && OFF.deal(d.x).score >= 45).sort((a, b) => b.pct - a.pct).slice(0, 6);
   return drops.length ? `<section class="wrap block drops-sec"><div class="block-h"><h2>Han bajado esta semana</h2><a href="/ofertas/bajadas/">Ver todas</a></div><div class="grid carousel-m">${drops.slice(0, 4).map((d) => sailingCard(d.x)).join('')}</div></section>` : ''; })()}
+${BLOG_POSTS.length ? `<section class="wrap block"><div class="block-h"><h2>Del blog: precios reales de hoy</h2><a href="/blog/">Ver el blog</a></div><div class="chips">${BLOG_POSTS.slice(0, 8).map((p) => `<a class="chip" href="${p.url}">${esc(p.h1)}</a>`).join('')}</div></section>` : ''}
 ${deals.length ? `<section class="wrap block"><div class="block-h"><h2>Chollos de cruceros de hoy</h2><a href="/ofertas/">Ver las ${fmt(sailings.length)} ofertas</a></div><div class="chips scroll"><a class="chip" href="/ofertas/chollos/">Chollos</a><a class="chip" href="/ultima-hora/">Última hora</a><a class="chip" href="/ofertas/bajadas/">Han bajado</a><a class="chip" href="/ofertas/nuevas/">Nuevas</a>${HOME_PORTS.filter((p) => sailings.some((x) => x.depart_port_slug === p.slug)).map((p) => `<a class="chip" href="/ofertas/desde-${p.slug}/">Desde ${esc(p.name.split(' (')[0].replace('Santa Cruz de ', '').replace('Las Palmas de ', ''))}</a>`).join('')}</div><div class="grid carousel-m">${deals.map(sailingCard).join('')}</div>
 <p class="near"><button class="btn btn-ghost btn-sm js-near" type="button">Cruceros desde el puerto más cercano</button> <span class="near-out muted small" aria-live="polite"></span></p></section>` : ''}
 ${(() => { const mini = sailings.filter((x) => x.nights <= 4 && new Date(x.date) > new Date() && OFF.deal(x).score >= 55).sort((a, b) => OFF.minPrice(a) - OFF.minPrice(b)).slice(0, 4); return mini.length ? `<section class="wrap block"><div class="block-h"><h2>Minicruceros para un fin de semana o puente</h2><a href="/ofertas/minicruceros/">Ver todos</a></div><div class="grid carousel-m">${mini.map(sailingCard).join('')}</div></section>` : ''; })()}
@@ -1233,6 +1235,8 @@ const AWARD_LIST = (() => {
   return awards;
 })();
 for (const [t, sh] of AWARD_LIST) { (AWARDS[sh.slug] = AWARDS[sh.slug] || []).push(t); sh.awards = AWARDS[sh.slug]; }
+const BLOG_POSTS = makeBlog({ sailings, OFF, bySlug, LINES });
+console.log(`Blog: ${BLOG_POSTS.length} artículos`);
 write('index.html', home());
 write('buscar/index.html', searchPage());
 write('barcos/index.html', shipsIndex());
