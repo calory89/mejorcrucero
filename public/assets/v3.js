@@ -56,9 +56,9 @@
     const s = ships.find((x) => x.slug === box.dataset.slug); const a = window.MC_profile();
     if (!s) return;
     box.hidden = false;
-    if (!a) { box.classList.add('mb-ask'); box.innerHTML = `🎯 <a href="${BASE}herramientas/que-crucero/">Haz el test de 1 minuto</a> y te decimos qué encaje tiene este barco contigo.`; return; }
+    if (!a) { box.classList.add('mb-ask'); box.innerHTML = `<svg class="ico-i" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm0-14a6 6 0 1 0 6 6 6 6 0 0 0-6-6Zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm0-6a2 2 0 1 0 2 2 2 2 0 0 0-2-2Z" fill="currentColor"/></svg> <a href="${BASE}herramientas/que-crucero/">Haz el test de 1 minuto</a> y te decimos qué encaje tiene este barco contigo.`; return; }
     const { m, why } = window.MC_match(s, a, true);
-    box.innerHTML = `🎯 <b>${m}% para ti</b>${why.length ? ` · ${esc(why.join(', '))}` : ''} · <a href="${BASE}herramientas/que-crucero/">rehacer el test</a>`;
+    box.innerHTML = `<svg class="ico-i" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm0-14a6 6 0 1 0 6 6 6 6 0 0 0-6-6Zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm0-6a2 2 0 1 0 2 2 2 2 0 0 0-2-2Z" fill="currentColor"/></svg> <b>${m}% para ti</b>${why.length ? ` · ${esc(why.join(', '))}` : ''} · <a href="${BASE}herramientas/que-crucero/">rehacer el test</a>`;
   });
 
   // ---------- Sorpréndeme ----------

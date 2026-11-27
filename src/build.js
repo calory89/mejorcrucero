@@ -1147,7 +1147,7 @@ function guidesIndex() {
   <a class="card guide" href="/destinos/"><span class="guide-e">🗺️</span><h3>${DESTINATIONS.length} guías de destinos</h3><p>Mejor época, puertos, mar y consejos.</p></a>
   <a class="card guide" href="/meses/"><span class="guide-e">📅</span><h3>Cruceros mes a mes</h3><p>Adónde ir en cada época del año.</p></a>
   <a class="card guide" href="/comparativas/"><span class="guide-e">⚖️</span><h3>${COMPARISONS.length} comparativas de navieras</h3><p>MSC vs Costa, Royal Caribbean vs MSC…</p></a>
-  <a class="card guide" href="/puertos/"><span class="guide-e">⚓</span><h3>${allPorts.length} guías de puertos</h3><p>Cómo embarcar, excursiones y vuelos.</p></a>
+  <a class="card guide" href="/puertos/"><span class="guide-e"><svg class="ico-i" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2a3 3 0 0 1 1 5.83V9h3v2h-3v8.9A7 7 0 0 0 19 14h-2l3-4 3 4h-2a9 9 0 0 1-18 0H1l3-4 3 4H5a7 7 0 0 0 6 5.9V11H8V9h3V7.83A3 3 0 0 1 12 2Zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" fill="currentColor"/></svg></span><h3>${allPorts.length} guías de puertos</h3><p>Cómo embarcar, excursiones y vuelos.</p></a>
   <a class="card guide" href="/navieras/"><span class="guide-e">🚢</span><h3>${lineList.length} guías de navieras</h3><p>Estilo, flota y para quién es cada una.</p></a></div></section>`;
   return layout({ title: 'Guías de cruceros: consejos para acertar y pagar menos', desc: 'Guías prácticas de cruceros: primer crucero, camarotes, propinas, bebé, documentación, mareo, excursiones, destinos y navieras.', url: '/guias/', body, crumbs: [['Inicio', '/'], ['Guías', '/guias/']] });
 }

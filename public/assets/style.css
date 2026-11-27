@@ -1281,3 +1281,9 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 @media (max-width:700px){.qk-row{flex-direction:column;gap:4px}.qk .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}}
 @media (min-width:701px){.qk .chips{flex-wrap:wrap;overflow:visible;-webkit-mask-image:none;mask-image:none}}
 @media (max-width:700px){.qk-row:nth-child(n+2){display:none}}
+/* Tanda 6: en móvil, foto más baja para que el titular, el precio y el buscador entren antes en pantalla */
+@media (max-width:760px){.hero-v4 .hero-fig img{max-height:30vh;aspect-ratio:auto;object-fit:cover}.hero-v4 h1{font-size:clamp(1.8rem,8.4vw,2.3rem)}.ship-hero-art .ship-photo{max-height:34vh;object-fit:cover;aspect-ratio:auto}}
+.price-seal{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:#137a3d;background:#e8f6ee;border-radius:999px;padding:4px 10px;margin:6px 0}
+.price-seal svg{flex:none}
+[data-theme=dark] .price-seal,.dark .price-seal{background:#123524;color:#8fe0b0}
+.ico-i{display:inline-block;vertical-align:-3px;margin-right:4px}
