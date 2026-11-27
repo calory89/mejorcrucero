@@ -321,7 +321,7 @@
           const alts = altsOf(im); if (!alts.length) return;
           const best = alts.find(([u]) => !used.has(u)) || alts.reduce((a, b) => (cost(b[0]) < cost(a[0]) ? b : a));
           used.set(best[0], (used.get(best[0]) || 0) + 1); last.set(best[0], k++);
-          if (im.getAttribute('src') !== best[0]) im.setAttribute('src', best[0]);
+          if (im.getAttribute('src') !== best[0]) { im.setAttribute('src', best[0]); if (best[1]) im.alt = best[1]; }
           const cap = im.nextElementSibling; if (cap && cap.classList.contains('ph-cap')) { cap.textContent = best[1] || ''; cap.hidden = !best[1]; } }); }
       let m = $('.offer-count', f); if (!m) { m = document.createElement('p'); m.className = 'offer-count muted small'; m.setAttribute('aria-live', 'polite'); f.appendChild(m); }
       const total = full ? match : Math.max(match, allIds.length);

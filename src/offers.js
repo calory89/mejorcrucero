@@ -82,7 +82,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   const dcls = (n) => (n >= 85 ? 'sc-a' : n >= 70 ? 'sc-b' : n >= 45 ? 'sc-c' : 'sc-e');
   const url = (x) => `/salidas/${x.id}/`;
   const shipName = (x) => bySlug[x.ship]?.name || x.ship_name || x.ship;
-  const TITLE_USED = new Map();
+  const TITLE_USED = new Map(), DESC_USED = new Set();
   const titleOf = (x) => `Crucero ${destName(x.destination, x)} de ${x.nights} noches desde ${x.depart_port} en el ${shipName(x)}`;
   // Itinerario normalizado: un registro por día (los días que la naviera no lista son de navegación),
   // sin "Navegación" en días que ya tienen escala y con los puertos de varios días seguidos fusionados ("Cabo Norte · días 6-7").
@@ -136,7 +136,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     const alts = [...order.map((n) => [portPhotos[n]?.thumb, n]), ...order.flatMap((n) => (portPhotos[n]?.more || []).map((m) => [m.thumb, n]))].filter(([u]) => u);
     if (ph) alts.push([ph.thumb, '']);
     if (!alts.length) return '';
-    return `<img src="${esc(alts[0][0])}" data-alt="${esc(alts.map(([u, n]) => `${u}::${n}`).join('|'))}" alt="" loading="lazy" decoding="async" width="640" height="427" class="ship-photo"><span class="ph-cap"></span>`;
+    return `<img src="${esc(alts[0][0])}" data-alt="${esc(alts.map(([u, n]) => `${u}::${n}`).join('|'))}" alt="${esc(alts[0][1] ? `${alts[0][1]}, escala del crucero en el ${shipName(x)}` : shipName(x))}" loading="lazy" decoding="async" width="640" height="427" class="ship-photo"><span class="ph-cap"></span>`;
   }
   // Mini gráfica del precio en la tarjeta (solo si hay 3 comprobaciones o más y el precio se ha movido)
   function cardSpark(x) {
@@ -368,7 +368,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
 </aside></div>
 <div class="m-cta"><div><b>${eur(r.partial ? r.tarifa : r.total)}</b><small>${r.partial ? 'por persona, sin tasas' : 'precio real por persona'}</small></div>${book ? `<a class="btn btn-sm" href="${esc(book.url)}" target="_blank" rel="${book.rel}" data-aff="${esc(book.key)}" data-page="${url(x)}">Reservar</a>` : ''}</div></article>`;
     return layout({
-      title, desc: `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}: ${stops.slice(1, 6).map((p) => p.name).join(', ')}. Desde ${eur(r.tarifa)} (precio real ${eur(r.total)} con tasas). Nota del precio ${d.score}/100.`,
+      title, desc: (() => { let ds0 = `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}: ${stops.slice(1, 6).map((p) => p.name).join(', ')}. Desde ${eur(r.tarifa)} (precio real ${eur(r.total)} con tasas). Nota del precio ${d.score}/100.`; if (DESC_USED.has(ds0)) ds0 = `${x.nights} noches desde ${x.depart_port} el ${fdate(x.date)} en el ${sn}, con escala en ${stops.slice(1, -1).map((p) => p.name).slice(-3).join(', ')}. Desde ${eur(r.tarifa)} (real ${eur(r.total)}). Nota ${d.score}/100.`; DESC_USED.add(ds0); return ds0; })(),
       url: url(x), body, ogType: 'product', og: ogOf(x) || (ph ? `/og/${x.ship}.png` : '/og.png'), preload: ph ? ph.thumb : null,
       crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [dn, `/ofertas/${x.destination || ''}/`], [`${sn} · ${fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' })}`, url(x)]],
       schema: [

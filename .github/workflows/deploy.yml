@@ -82,7 +82,7 @@ jobs:
           python3 -c "import PIL" 2>/dev/null || pip install -q pillow
           python3 tools/og-offers.py || echo "sin imágenes de ofertas"
       - name: Prueba rápida del resultado
-        run: node test/smoke.mjs
+        run: node test/smoke.mjs && node test/schema.mjs
       - name: Publicar chollos nuevos en Telegram (apagado hasta que exista TELEGRAM_BOT_TOKEN)
         if: ${{ github.event_name != 'push' }}
         env:

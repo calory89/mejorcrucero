@@ -1287,3 +1287,6 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 .price-seal svg{flex:none}
 [data-theme=dark] .price-seal,.dark .price-seal{background:#123524;color:#8fe0b0}
 .ico-i{display:inline-block;vertical-align:-3px;margin-right:4px}
+
+[data-theme=dark] .cmp-t td.best,[data-theme=dark] .cmp-t .best{background:#103626;color:#b9f3d4}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cmp-t td.best,:root:not([data-theme=light]) .cmp-t .best{background:#103626;color:#b9f3d4}}

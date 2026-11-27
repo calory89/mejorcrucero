@@ -5,7 +5,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PW || 'playwright');
 const axeSrc = require('fs').readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 const BASE = (process.env.BASE_URL || 'http://localhost:8811').replace(/\/$/, '');
-const pages = ['/', '/ofertas/', '/barcos/norwegian-prima/', '/puertos/barcelona/', '/buscar/', '/rankings/', '/herramientas/', '/destinos/caribe/'];
+const pages = ['/', '/ofertas/', '/barcos/norwegian-prima/', '/puertos/barcelona/', '/buscar/', '/rankings/', '/herramientas/', '/destinos/caribe/', '/blog/', '/blog/minicruceros-desde-espana/', '/ofertas/escala-malaga/', '/herramientas/reservar-ya-o-esperar/', '/navieras/costa/', '/comparativas/msc-vs-costa/', '/meses/diciembre/'];
 const b = await chromium.launch(); let total = 0;
 for (const scheme of ['light', 'dark']) for (const u of pages) {
   const p = await b.newPage({ viewport: { width: 390, height: 900 }, colorScheme: scheme });
