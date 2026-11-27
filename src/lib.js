@@ -236,7 +236,7 @@ export function layout({ title, desc, url, body, schema = [], ogType = 'website'
   // Descripción de 160 caracteres como máximo, cortada por palabra
   if (desc && desc.length > 160) desc = desc.slice(0, 157).replace(/\s+\S*$/, '').replace(/[,;:·\s]+$/, '') + '…';
   const fullTitle = url === '/' ? title : title.length > 55 ? title : `${title} | MejorCrucero`;
-  const ld = [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'MejorCrucero', url: SITE, logo: SITE + '/icon-512.png', sameAs: [CONFIG.happyLowCost], founder: { '@type': 'Person', name: CONFIG.author.name } }, ...schema];
+  const ld = [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'MejorCrucero', url: SITE, logo: SITE + '/icon-512.png', sameAs: [CONFIG.happyLowCost, 'https://www.happylowcost.com/'], founder: { '@type': 'Person', name: CONFIG.author.name } }, ...schema];
   if (crumbs) ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: crumbs.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) });
   const crumbHtml = crumbs ? `<nav class="crumbs wrap" aria-label="Migas de pan"><ol>${crumbs.map(([n, u], i) => i === crumbs.length - 1 ? `<li aria-current="page">${esc(n)}</li>` : `<li><a href="${u}">${esc(n)}</a></li>`).join('')}</ol></nav>` : '';
   const ogImg = image || SITE + og;
@@ -249,7 +249,7 @@ export function layout({ title, desc, url, body, schema = [], ogType = 'website'
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${SITE}${url}">
 <link rel="alternate" hreflang="es-ES" href="${SITE}${url}"><link rel="alternate" hreflang="x-default" href="${SITE}${url}">
-<meta property="og:locale" content="es_ES"><meta name="geo.region" content="ES"><link rel="alternate" type="application/rss+xml" title="Chollos de cruceros" href="/ofertas/feed.xml">
+<meta property="og:locale" content="es_ES"><meta name="geo.region" content="ES"><link rel="alternate" type="application/rss+xml" title="Chollos de cruceros" href="/ofertas/feed.xml"><link rel="alternate" type="application/rss+xml" title="Blog de MejorCrucero" href="/blog/feed.xml">
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="theme-color" content="#0F5BD8">
 <meta property="og:type" content="${ogType}"><meta property="og:site_name" content="MejorCrucero"><meta property="og:title" content="${esc(fullTitle)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE}${url}"><meta property="og:image" content="${esc(ogImg)}"><meta property="og:image:alt" content="${esc(fullTitle)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="es_ES">

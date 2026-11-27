@@ -1,6 +1,6 @@
 // Blog de MejorCrucero: artículos que se reescriben en cada build SOLO con datos reales de las salidas
 // (precio de la web oficial de cada naviera). Nada inventado: si no hay datos suficientes, el artículo no se publica.
-import { esc, eur, fmt, cap, layout, write, SITE, BUILD_DATE } from './lib.js';
+import { esc, eur, fmt, cap, layout, write, SITE, BUILD_DATE, shareBar, leadForm } from './lib.js';
 import { CONFIG } from './data/content.js';
 
 const MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -45,6 +45,9 @@ ${extra ? extra(L, stats) : ''}
 <section class="faq"><h2>Preguntas frecuentes</h2>${faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</section>
 ${related.length ? `<h2>Sigue buscando</h2><div class="chips">${related.map(([u, t]) => `<a class="chip" href="${u}">${esc(t)}</a>`).join('')}</div>` : ''}
 <p class="tip"><b>Consejo:</b> crea una <a href="/herramientas/alerta-precio/">alerta de precio</a> y te avisamos si alguna de estas salidas baja.</p>
+<section class="cta-band cta-inline"><div class="cta-in"><div><h2>Recibe los chollos de cruceros por email</h2><p>Como mucho un email a la semana, con precios reales. Te das de baja con un clic.</p></div>${leadForm('blog:' + slug, 'Apuntarme')}</div></section>
+${shareBar(`${h1 || title}:`, url)}
+<p class="muted small">¿Ves un dato mal? Lo corregimos con la fuente delante: <a href="/por-que-fiarte/#correcciones">política de correcciones</a>. ¿Buscas vuelos baratos? Mira <a href="https://www.happylowcost.com/" rel="noopener">Happy Low Cost</a>, del mismo equipo.</p>
 </article>`;
     const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: title, description: desc(stats), datePublished: PUBLISHED, dateModified: today, author: { '@type': 'Person', name: CONFIG.author.name, url: SITE + '/sobre-nosotros/' }, publisher: { '@type': 'Organization', name: 'MejorCrucero', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } }, mainEntityOfPage: SITE + url }, { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }, { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: T.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + OFF.url(x), name: `${shipName(x)} · ${fshort(x.date)}` })) }];
     write(`blog/${slug}/index.html`, layout({ title, desc: desc(stats), url, body, schema, ogType: 'article', crumbs: [['Inicio', '/'], ['Blog', '/blog/'], [h1 || title, url]] }));
