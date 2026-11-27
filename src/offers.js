@@ -82,6 +82,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
   const dcls = (n) => (n >= 85 ? 'sc-a' : n >= 70 ? 'sc-b' : n >= 45 ? 'sc-c' : 'sc-e');
   const url = (x) => `/salidas/${x.id}/`;
   const shipName = (x) => bySlug[x.ship]?.name || x.ship_name || x.ship;
+  const TITLE_USED = new Map();
   const titleOf = (x) => `Crucero ${destName(x.destination, x)} de ${x.nights} noches desde ${x.depart_port} en el ${shipName(x)}`;
   // Itinerario normalizado: un registro por día (los días que la naviera no lista son de navegación),
   // sin "Navegación" en días que ya tienen escala y con los puertos de varios días seguidos fusionados ("Cabo Norte · días 6-7").
@@ -245,7 +246,9 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     // Título de máximo ~70 caracteres: si no cabe, destino corto (antes de " e " o de la coma) y luego sin año
     const title = (() => { const d1 = fdate(x.date, { day: 'numeric', month: 'short', year: 'numeric' }), d2 = fdate(x.date, { day: 'numeric', month: 'short' }), ds = dn.split(/ e | y |, /)[0];
       const opts = [`${sn}: ${dn}, ${x.nights} noches · ${d1} · ${eur(r.tarifa)}`, `${sn}: ${ds}, ${x.nights} noches · ${d1} · ${eur(r.tarifa)}`, `${sn}: ${ds}, ${x.nights} noches · ${d2} · ${eur(r.tarifa)}`];
-      return opts.find((t) => t.length <= 70) || opts[2]; })();
+      let t = opts.find((q) => q.length <= 70) || opts[2]; const prev = TITLE_USED.get(t);
+      if (prev && prev.id !== x.id) { const pn = new Set((prev.itinerary?.ports || []).map((q) => q.name)); const diff = (x.itinerary?.ports || []).map((q) => q.name).find((n) => n && !pn.has(n)); t = `${sn}: ${ds}${diff ? ` con ${diff}` : ` desde ${x.depart_port}`}, ${x.nights} noches · ${d2} · ${eur(r.tarifa)}`; }
+      TITLE_USED.set(t, x); return t; })();
     const faqs = [
       ['¿Qué incluye el precio?', `El precio desde ${eur(r.tarifa)} por persona es la tarifa de la web oficial de ${L?.short || 'la naviera'} para un ${CABIN[cabinOf(x)].toLowerCase()} en ocupación doble. ${x.port_charges ? `Las tasas portuarias (${eur(x.port_charges)} por adulto) se pagan aparte. ` : ''}${x.service_included ? 'La cuota de servicio está incluida en esta tarifa.' : x.service_night ? `La cuota de servicio (${String(x.service_night).replace('.', ',')} € por adulto y noche) no está incluida.` : ''} Bebidas, excursiones y restaurantes de pago van aparte salvo que elijas un paquete.`],
       ['¿Cuánto cuesta en total para dos personas?', `Unos ${eur(r.total * 2)} para dos adultos (tarifa + tasas${r.svc ? ' + cuota de servicio' : ''}), sin vuelos ni extras. Calcula tu caso en la calculadora de precio real.`],
