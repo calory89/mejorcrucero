@@ -47,6 +47,8 @@ export const CONFIG = {
       car: { aid: '12506471', name: 'Holiday Autos', what: 'Alquiler de coches', def: 'https://www.holidayautos.com/es/' },
       vpn: { aid: '13942081', name: 'NordVPN', what: 'VPN para el wifi del barco', def: null },
       orlando: { aid: '12834895', name: 'Undercover Tourist', what: 'Entradas a parques de Orlando', def: null },
+      // CruiseDirect (CJ 965192) aprobado y activo; "Evergreen Link for CruiseDirect" admite deep link (27-nov-2026).
+      cruisedirect: { aid: '15734200', name: 'CruiseDirect', what: 'Reservar crucero (EE. UU., USD)', def: 'https://www.cruisedirect.com/' },
     },
   },
 };
