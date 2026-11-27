@@ -1276,3 +1276,8 @@ body:has(.m-cta) .locale-bar{bottom:calc(90px + env(safe-area-inset-bottom))!imp
 .mc-sc,.mc-res-p small{white-space:nowrap}
 
 .h1-sub{display:block;font-size:.5em;font-weight:600;opacity:.85;margin-top:.25em;letter-spacing:0}
+.qk{display:grid;gap:8px;margin:14px 0}.qk-row{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.qk-l{font-size:.82rem;font-weight:700;color:var(--ink-2);min-width:110px}.qk .chips{margin:0}.qk .chip small{opacity:.65;margin-left:4px;font-weight:500}
+.offer-filter select:focus-visible,.offer-filter input:focus-visible,.chip:focus-visible,.af-chip:focus-visible,.more-f summary:focus-visible{outline:3px solid #2F7BFF;outline-offset:2px}
+@media (max-width:700px){.qk-row{flex-direction:column;gap:4px}.qk .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}}
+@media (min-width:701px){.qk .chips{flex-wrap:wrap;overflow:visible;-webkit-mask-image:none;mask-image:none}}
+@media (max-width:700px){.qk-row:nth-child(n+2){display:none}}
