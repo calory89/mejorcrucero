@@ -464,7 +464,8 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     let og; if (list.length >= 20 && cheapest) { const ph = (/src="([^"]*\/img\/puertos\/[^"]+-640\.webp)"/.exec(cardFull(sorted[0])) || [])[1]; if (ph) { const k = u.replace(/^\/|\/$/g, '').replace(/\//g, '-'); og = `/og/p/${k}.jpg`; OG_PAGES.push({ k, title: h1 || title, sub: `${list.length} salidas con precio real`, price: minPrice(cheapest), photo: ph.replace(/^.*\/img\//, 'img/'), credit: PH_CREDIT[ph.replace(/^.*(\/img\/)/, '$1')] || '' }); } }
     const pm = cheapest ? eur(minPrice(cheapest)) : '';
     if (cheapest) title = title.replace(/: ofertas y precios$/, `: ofertas desde ${pm}`).replace(/: todas las salidas comparadas$/, `: ${list.length} salidas desde ${pm}`).replace(/: salidas en los próximos 60 días$/, `: ${list.length} salidas desde ${pm}`);
-    const t2 = cheapest && title.length <= 46 && !/desde \d/.test(title) ? `${title.replace(/ 20\d\d$/, '')}: desde ${eur(minPrice(cheapest))}${/ 20\d\d$/.test(title) ? ` (${title.slice(-4)})` : ''}` : title;
+    if (cheapest) title = title.replace(/: ofertas (20\d\d)$/, (m0, yy) => { const t3 = `: ofertas desde ${pm} (${yy})`; return title.length - m0.length + t3.length <= 66 ? t3 : `: ofertas desde ${pm}`; });
+    const t2 = cheapest && title.length <= 46 && !/desde \d/.test(title) && !/:/.test(title) ? `${title.replace(/ 20\d\d$/, '')}: desde ${eur(minPrice(cheapest))}${/ 20\d\d$/.test(title) ? ` (${title.slice(-4)})` : ''}` : title;
     return layout({ title: t2, desc: cheapest ? `${list.length} cruceros desde ${eur(minPrice(cheapest))} por persona con tasas incluidas. ${title.replace(/:.*$/, '').replace(/ 20\d\d$/, '')}: precio real, nota de 0 a 100 y todas las fechas para elegir tu mejor crucero al mejor precio.` : `${title}: salidas comparadas con precio real y nota de 0 a 100.`, url: u, body, crumbs, ...(og ? { og } : {}), ...(list.length < 5 ? { noindex: true } : {}),
       schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: sorted.slice(0, 20).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + url(x), name: titleOf(x) })) }, ...(schemaExtra ? [schemaExtra] : [])] });
   }
@@ -490,6 +491,31 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
       <li><b>Precio desde:</b> ${eur(Math.min(...l.map(minPrice)))} por persona</li></ul></section>`;
   }
   const coordOf = (name) => coord[String(name).split(' (')[0].toLowerCase()] || null;
+  const wikiOf = {}; for (const [n, , , w] of [...PORT_COORDS]) if (w) wikiOf[n.split(' (')[0].toLowerCase()] = w;
+  function escalaGuide(name, l) {
+    const mins = (t) => { const m = /(\d{2}):(\d{2})/.exec(t || ''); return m ? +m[1] * 60 + +m[2] : null; };
+    const hhmm = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(Math.round(m % 60)).padStart(2, '0')}`;
+    const med = (a) => { const s = [...a].sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : null; };
+    const arr = [], dep = [], stay = []; let tender = 0, calls = 0;
+    for (const x of l) { const p = daysOf(x).find((e) => e.name === name); if (!p) continue; calls++; if (p.tender) tender++; const a = mins(p.arrive), d = mins(p.depart); if (a != null) arr.push(a); if (d != null) dep.push(d); if (a != null && d != null && d > a && p.to === p.day) stay.push(d - a); }
+    const byM = {}; l.forEach((x) => { const m = +x.date.slice(5, 7); byM[m] = (byM[m] || 0) + 1; });
+    const topM = Object.entries(byM).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([m]) => MES[m - 1]);
+    const lines = {}; l.forEach((x) => { const n = Object.values(LINES).find((z) => z.slug === x.line)?.short || x.line; lines[n] = (lines[n] || 0) + 1; });
+    const c = coordOf(name), w = wikiOf[String(name).split(' (')[0].toLowerCase()];
+    const mA = med(arr), mD = med(dep), mS = med(stay);
+    const faq = [];
+    if (mA != null && mD != null) faq.push([`¿A qué hora llegan y salen los cruceros de ${name}?`, `Según los horarios publicados por las navieras, la llegada más habitual es hacia las ${hhmm(mA)} y la salida hacia las ${hhmm(mD)}.`]);
+    if (mS) faq.push([`¿Cuánto tiempo para un crucero en ${name}?`, `La mitad de las escalas en ${name} duran ${String(Math.round(mS / 30) / 2).replace('.', ',')} horas o más. Cuenta con volver al barco al menos 1 hora antes de la salida.`]);
+    faq.push([`¿Hay que bajar en lancha en ${name}?`, tender ? `En ${tender} de ${calls} escalas la naviera indica desembarco en lancha (tender). Eso suma tiempo de espera para bajar y subir.` : `En las salidas que tenemos, ninguna naviera indica desembarco en lancha en ${name}: el barco atraca en el muelle.`]);
+    faq.push([`¿Qué navieras paran en ${name}?`, `${Object.entries(lines).sort((a, b) => b[1] - a[1]).map(([n, k]) => `${n} (${k})`).slice(0, 6).join(', ')}, contando las salidas que tenemos a la venta.`]);
+    if (topM.length) faq.push([`¿En qué meses hay más cruceros con escala en ${name}?`, `Entre las salidas a la venta, los meses con más escalas son ${topM.join(', ')}.`]);
+    const html = `<section class="wrap block"><h2>Planifica tu día en ${esc(name)}</h2>
+      ${mS ? `<p>Con una escala típica de <b>${String(Math.round(mS / 30) / 2).replace('.', ',')} horas</b>${mA != null && mD != null ? ` (llegada hacia las ${hhmm(mA)}, salida hacia las ${hhmm(mD)})` : ''}, te quedan unas <b>${String(Math.max(1, Math.round((mS - 90) / 30) / 2)).replace('.', ',')} horas útiles</b> si bajas 30 minutos después de atracar y vuelves 1 hora antes de zarpar.</p>` : ''}
+      <div class="chips">${c ? `<a class="chip" href="https://www.openstreetmap.org/?mlat=${c[0]}&mlon=${c[1]}#map=14/${c[0]}/${c[1]}" target="_blank" rel="noopener">Mapa de ${esc(name)}</a>` : ''}<a class="chip" href="${cj('attr', null, 'escala-' + slugify(name))}" target="_blank" rel="sponsored noopener" data-aff="cj-attr">Excursiones en ${esc(name)}</a>${c ? `<a class="chip" href="/herramientas/tiempo-puerto/?lat=${c[0]}&lon=${c[1]}&n=${encodeURIComponent(name)}">El tiempo a 14 días</a>` : ''}${w ? `<a class="chip" href="${esc(w)}" target="_blank" rel="noopener">${esc(name)} en Wikipedia</a>` : ''}<a class="chip" href="/guias/excursiones-por-libre/">Excursiones por libre: cómo no perder el barco</a></div>
+      ${c ? `<h3 class="h-sm">El tiempo estos días en ${esc(name)}</h3><div class="wx-auto" data-lat="${c[0]}" data-lon="${c[1]}"><p class="muted small">Cargando la previsión…</p></div>` : ''}</section>
+      <section class="wrap block faq"><h2>Escala en ${esc(name)}: preguntas frecuentes</h2>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</section>`;
+    return { html, faq };
+  }
   // Escalas cercanas (por distancia real entre coordenadas) con su propia página
   function nearby(name) {
     const c = coordOf(name); if (!c) return '';
@@ -576,7 +602,7 @@ export function makeOffers({ sailings, bySlug, LINES, DESTINATIONS, forWhom, all
     // Cruceros con escala en un puerto (no cuenta el puerto de salida): páginas para cada escala frecuente
     for (const [name, l] of Object.entries(escalaIndex())) {
       if (l.length < 6) continue; const sl = slugify(name);
-      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, after: escalaFacts(name, l) + nearby(name) + `<div class="wrap">${forumBlock('escala:' + sl, `Opiniones de ${name} y sus excursiones`, { optional: true, tabs: [['review', 'Opiniones de la escala'], ['excursion', 'Excursiones'], ['question', 'Preguntas']] })}</div>`, schemaExtra: (() => { const c = coordOf(name); return c ? { '@context': 'https://schema.org', '@type': 'Place', name, geo: { '@type': 'GeoCoordinates', latitude: c[0], longitude: c[1] }, url: SITE + `/ofertas/escala-${sl}/` } : null; })(), crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
+      out.push([`ofertas/escala-${sl}/index.html`, hub({ url: `/ofertas/escala-${sl}/`, title: `Cruceros con escala en ${name}: ofertas ${y}`, h1: `Cruceros con escala en ${name}`, intro: `Salidas que paran en ${name}, con su precio real y la nota del precio.`, what: `con escala en ${name}`, list: l, after: escalaFacts(name, l) + escalaGuide(name, l).html + nearby(name) + `<div class="wrap">${forumBlock('escala:' + sl, `Opiniones de ${name} y sus excursiones`, { optional: true, tabs: [['review', 'Opiniones de la escala'], ['excursion', 'Excursiones'], ['question', 'Preguntas']] })}</div>`, schemaExtra: (() => { const c = coordOf(name); const g = escalaGuide(name, l); return c ? { '@context': 'https://schema.org', '@graph': [{ '@type': 'FAQPage', mainEntity: g.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }, { '@type': ['Place', 'TouristDestination'], name, geo: { '@type': 'GeoCoordinates', latitude: c[0], longitude: c[1] }, url: SITE + `/ofertas/escala-${sl}/` }] } : null; })(), crumbs: [['Inicio', '/'], ['Ofertas', '/ofertas/'], [`Escala en ${name}`, `/ofertas/escala-${sl}/`]] })]);
     }
     { const all = Object.entries(escalaIndex()).filter(([, l]) => l.length >= 6).sort((a, b) => a[0].localeCompare(b[0], 'es'));
       const body = `<section class="wrap block page-h"><h1>Cruceros por escala</h1><p class="lead-p">Elige el puerto que quieres visitar y mira todos los cruceros que paran allí, con su precio real. ${all.length} escalas.</p><ul class="az-list">${all.map(([n, l]) => `<li><a href="/ofertas/escala-${slugify(n)}/">${esc(n)}</a> <span class="muted small">(${l.length})</span></li>`).join('')}</ul></section>`;
