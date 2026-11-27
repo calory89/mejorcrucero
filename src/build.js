@@ -10,6 +10,7 @@ import { scoreBadge, conArt } from './lib.js';
 import { cj, tripBox, bookingHotels, cdLink, cdAff, ltLink, ltPlace } from './lib.js';
 import { makeOffers } from './offers.js';
 import { makeBlog } from './blog.js';
+import { makeEstudio } from './estudio.js';
 import { makeTools2 } from './tools2.js';
 import { AV, SITE, BASE, BUILD_DATE, OUT, esc, slugify, dec, fmt, eur, cap, pages, write, ICON, shipSvg, photoCredit, shipCard, videoFacade, affLink, civLink, partnerLink, leadForm, shareBar, reportBtn, forumBlock, layout } from './lib.js';
 
@@ -757,6 +758,7 @@ function embedPage(s) {
 const TOOLS = [
   ['asistente', '🤖', 'Asistente IA', 'Cuéntale cómo quieres viajar y te recomienda barcos.'],
   ['precio-real', '💶', 'Calculadora del precio real', 'Propinas, bebidas, extras, presupuesto total y comparar dos ofertas.'],
+  ['reservar-ya-o-esperar', '📉', '¿Reservo ya o espero?', 'Lo que dicen los precios reales: cuántas salidas bajan y cuántas suben.'],
   ['alerta-precio', '🔔', 'Alerta de bajada de precio', 'Vigila tu reserva y genera el email para reclamar.'],
   ['que-crucero', '🧭', '¿Qué crucero es para mí?', 'Test de 7 preguntas con barcos y destinos recomendados.'],
   ['comparar', '⚖️', 'Comparar barcos', 'Hasta 3 barcos frente a frente.'],
@@ -793,7 +795,7 @@ const toolCrumbs = (n, u) => [['Inicio', '/'], ['Herramientas', '/herramientas/'
 const shipDatalist = (id) => `<datalist id="${id}">${ships.map((s) => `<option value="${esc(s.name)}">`).join('')}</datalist>`;
 
 function toolsIndex() {
-  const GROUPS = [['Precio y dinero', ['precio-real', 'presupuesto-total', 'gasto-a-bordo', 'propinas', 'paquete-bebidas', 'suplemento-individual', 'pago-a-plazos', 'presupuesto-compartido', 'alerta-precio', 'reclamar']], ['Elegir crucero', ['asistente', 'que-crucero', 'comparar', 'comparar-ofertas', 'comparar-salidas', 'comparar-destinos', 'comparar-camarotes', 'camarotes', 'camarote-mareo', 'mareometro', 'vacaciones', 'sin-avion', 'mapa-escalas']], ['Preparar el viaje', ['checklist', 'maleta', 'documentacion', 'cuenta-atras', 'dias-libres', 'tiempo-puerto', 'conversor-horario', 'glosario']], ['Para tu web', ['widget-chollos']]];
+  const GROUPS = [['Precio y dinero', ['reservar-ya-o-esperar', 'precio-real', 'presupuesto-total', 'gasto-a-bordo', 'propinas', 'paquete-bebidas', 'suplemento-individual', 'pago-a-plazos', 'presupuesto-compartido', 'alerta-precio', 'reclamar']], ['Elegir crucero', ['asistente', 'que-crucero', 'comparar', 'comparar-ofertas', 'comparar-salidas', 'comparar-destinos', 'comparar-camarotes', 'camarotes', 'camarote-mareo', 'mareometro', 'vacaciones', 'sin-avion', 'mapa-escalas']], ['Preparar el viaje', ['checklist', 'maleta', 'documentacion', 'cuenta-atras', 'dias-libres', 'tiempo-puerto', 'conversor-horario', 'glosario']], ['Para tu web', ['widget-chollos']]];
   const tcard = ([s, e, n, d]) => `<a class="tool tool-light" href="/herramientas/${s}/"><span class="tool-i" aria-hidden="true">${e}</span><h3>${esc(n)}</h3><p>${esc(d)}</p></a>`;
   const used = new Set(GROUPS.flatMap((g) => g[1]));
   const body = `<section class="wrap block page-h"><h1>Herramientas para cruceristas</h1><p class="lead-p">Gratis y sin registro.</p>${GROUPS.map(([g, l]) => { const items = l.map((k) => TOOLS.find((t) => t[0] === k)).filter(Boolean); return items.length ? `<h2 class="tools-g">${g}</h2><div class="grid grid-3">${items.map(tcard).join('')}</div>` : ''; }).join('')}${TOOLS.some((t) => !used.has(t[0])) ? `<h2 class="tools-g">Más</h2><div class="grid grid-3">${TOOLS.filter((t) => !used.has(t[0])).map(tcard).join('')}</div>` : ''}</section>`;
@@ -1186,6 +1188,7 @@ function guidePage(g) {
   const body = `<article class="wrap block prose-wrap"><header class="page-h"><span class="guide-e big-e">${g.emoji}</span><h1>${esc(g.title)}</h1><p class="lead-p">${esc(g.desc)}</p>
   <p class="byline">Por <a href="/sobre-nosotros/">${esc(CONFIG.author.name)}</a>, ${esc(CONFIG.author.role.charAt(0).toLowerCase() + CONFIG.author.role.slice(1))} · Actualizado: ${BUILD_DATE}</p></header>
   <div class="prose">${linkGlossary(g.body)}</div>
+  ${g.slug === 'cuando-reservar-crucero' && typeof ESTUDIO !== 'undefined' && ESTUDIO ? `<div class="tip"><b>Con datos reales:</b> de ${fmt(ESTUDIO.all.n)} salidas que seguimos, el ${Math.round(ESTUDIO.all.dn * 100)} % bajó de precio y el ${Math.round(ESTUDIO.all.up * 100)} % subió. <a href="/herramientas/reservar-ya-o-esperar/">Míralo por naviera, destino y antelación</a>.</div>` : ''}
   <p>${reportBtn('guia:' + g.slug)}</p>
   ${shareBar(g.title, `/guias/${g.slug}/`)}
   ${(() => { const top = [...sailings].filter((x) => new Date(x.date) > new Date()).sort((a, b) => OFF.deal(b).score - OFF.deal(a).score).slice(0, 3); return top.length ? `<aside class="block"><h2>Chollos de cruceros de hoy</h2><div class="grid grid-3">${top.map(sailingCard).join('')}</div><p><a href="/ofertas/">Ver todas las ofertas</a></p></aside>` : ''; })()}
@@ -1372,6 +1375,7 @@ ships.forEach((s) => write(`barcos/${s.slug}/index.html`, shipPage(s)));
 lineList.forEach((l) => write(`navieras/${l.slug}/index.html`, linePage(l)));
 write('metodologia/index.html', methodology());
 scored.forEach((s) => { fs.mkdirSync(path.join(OUT, 'embed', s.slug), { recursive: true }); fs.writeFileSync(path.join(OUT, 'embed', s.slug, 'index.html'), embedPage(s)); });
+const ESTUDIO = makeEstudio({ sailings, OFF, LINES });
 write('herramientas/index.html', toolsIndex());
 write('herramientas/precio-real/index.html', toolPrice());
 write('herramientas/alerta-precio/index.html', toolAlert());
@@ -1638,7 +1642,7 @@ write('accesibilidad/index.html', layout({ title: 'Accesibilidad de MejorCrucero
   <h2>Nota de prensa automática</h2><blockquote class="tip"><p><b>${now.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</b> ${esc(facts.join(' '))} Los datos completos por destino y mes están disponibles en abierto en mejorcrucero.com/datos/.</p></blockquote>
   <p class="small"><button class="btn btn-ghost btn-sm js-copy-text" type="button" data-text="${esc(facts.join(' '))} Fuente: MejorCrucero (${SITE}/prensa/).">Copiar texto con la fuente</button></p>
   <h2>Precio por noche por destino</h2><div class="table-wrap"><table class="rank-t"><thead><tr><th>Destino</th><th>Salidas</th><th>Mediana real por noche</th></tr></thead><tbody>${dRows.map(([d, v, n]) => `<tr><td><a href="/ofertas/${d}/">${esc(OFF.destName(d))}</a></td><td>${n}</td><td>${eur(v)}</td></tr>`).join('')}</tbody></table></div>
-  <h2>Más datos</h2><ul class="list"><li><a href="/ofertas/observatorio/">Observatorio de precios</a></li><li><a href="/datos/">Datos abiertos (JSON y CSV)</a></li><li><a href="/rankings/premios/">Premios MejorCrucero del año</a></li><li><a href="/metodologia/">Metodología</a></li><li>Para entrevistas o datos a medida, escríbenos desde <a href="/contacto/">contacto</a>.</li></ul></section>`;
+  <h2>Más datos</h2><ul class="list"><li><a href="/ofertas/observatorio/">Observatorio de precios</a></li><li><a href="/herramientas/reservar-ya-o-esperar/">Estudio: ¿bajan o suben los precios de los cruceros? (CSV descargable)</a></li><li><a href="/datos/">Datos abiertos (JSON y CSV)</a></li><li><a href="/rankings/premios/">Premios MejorCrucero del año</a></li><li><a href="/metodologia/">Metodología</a></li><li>Para entrevistas o datos a medida, escríbenos desde <a href="/contacto/">contacto</a>.</li></ul></section>`;
   write('prensa/index.html', layout({ title: `Sala de prensa: precios de cruceros en ${mesTxt}`, desc: `Cifras de precios de cruceros listas para citar: ${facts[1]}`.slice(0, 160), url: '/prensa/', body, crumbs: [['Inicio', '/'], ['Prensa', '/prensa/']] }));
 }
 // Novedades: salidas que las navieras han puesto a la venta en los últimos 7 días
