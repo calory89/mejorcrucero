@@ -72,5 +72,5 @@ export const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'j
 // Pares de navieras para comparativas (búsquedas "X vs Y")
 export const COMPARISONS = [
   ['msc', 'costa'], ['royal-caribbean', 'msc'], ['royal-caribbean', 'norwegian'], ['costa', 'royal-caribbean'], ['msc', 'norwegian'],
-  ['celebrity', 'princess'], ['celebrity', 'royal-caribbean'], ['carnival', 'royal-caribbean'], ['disney', 'royal-caribbean'], ['norwegian', 'celebrity'],
+  ['celebrity', 'princess'], ['celebrity', 'royal-caribbean'], ['carnival', 'royal-caribbean'], ['disney', 'royal-caribbean'], ['norwegian', 'celebrity'], ['virgin-voyages', 'princess'], ['virgin-voyages', 'royal-caribbean'],
 ];
