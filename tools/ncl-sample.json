@@ -1,56 +1,56 @@
 {
  "sample": {
   "itinerary": {
-   "objectId": "23468015_CRUISE_INSIDE_2",
+   "objectId": "23379737_CRUISE_INSIDE_2",
    "bundleType": "cruise",
-   "code": "GETAWAY5PCVCZMNPIPCV",
-   "packageId": "23468015",
-   "title": "5 días Caribe Occidental desde Orlando (Puerto Cañaveral)",
-   "startingLocation": "Orlando (Port Canaveral), Florida",
+   "code": "JOY4MIANPINASMIA",
+   "packageId": "23379737",
+   "title": "4 días Bahamas desde/hasta Miami: Great Stirrup Cay y Nassau",
+   "startingLocation": "Miami, Florida, EE.",
    "image": {
-    "src": "/content/dam/ncl/us/en/itineraries/bahamas-itineraries/1440_NCL_GSC_CLIFF_SIDE.jpg",
+    "src": "/content/dam/ncl/us/en/itineraries/drupal_gem/1440_GSC_AQUA2MIANPIMIA.jpg",
     "alt": "cq5dam.thumbnail.319.319.png"
    },
    "captionTitles": [],
    "destinations": [
     {
-     "code": "CARIBBEAN",
-     "title": "Caribe"
+     "code": "BAHAMAS",
+     "title": "Bahamas"
     }
    ],
    "embarkationPort": {
-    "code": "PCV",
-    "title": "Orlando (Port Canaveral), Florida"
+    "code": "MIA",
+    "title": "Miami, Florida, EE."
    },
    "disembarkationPort": {
-    "code": "PCV",
-    "title": "Orlando (Port Canaveral), Florida"
+    "code": "MIA",
+    "title": "Miami, Florida, EE."
    },
    "portsOfCall": [
     {
-     "code": "CZM",
-     "title": "Cozumel, México"
-    },
-    {
      "code": "NPI",
      "title": "Great Stirrup Cay, Bahamas"
+    },
+    {
+     "code": "NAS",
+     "title": "Nassau, Bahamas"
     }
    ],
    "ship": {
-    "code": "GETAWAY",
-    "title": "Norwegian Getaway"
+    "code": "JOY",
+    "title": "Norwegian Joy"
    },
    "duration": {
-    "days": 5,
-    "text": "5-day Cruise"
+    "days": 4,
+    "text": "4-day Cruise"
    },
    "currencyCode": "EUR",
    "taxesAndFees": {
     "text": ""
    },
-   "combinedPrice": 220,
-   "basePrice": 299,
-   "weight": 999,
+   "combinedPrice": 185,
+   "basePrice": 219,
+   "weight": 1000,
    "deals": [
     {
      "code": "50-off-all-cruises-offer",
@@ -80,12 +80,12 @@
   },
   "sailing": {
    "sailing": {
-    "packageId": "23468014",
-    "sailingId": "59663",
-    "vacationStartDate": "2026-12-04T00:00:00",
-    "vacationEndDate": "2026-12-09T00:00:00",
-    "sailStartDate": "2026-12-04T00:00:00",
-    "sailEndDate": "2026-12-09T00:00:00"
+    "packageId": "23379737",
+    "sailingId": "59359",
+    "vacationStartDate": "2026-11-30T00:00:00",
+    "vacationEndDate": "2026-12-04T00:00:00",
+    "sailStartDate": "2026-11-30T00:00:00",
+    "sailEndDate": "2026-12-04T00:00:00"
    },
    "stateroomTypesPricing": [
     {
@@ -93,46 +93,44 @@
      "code": "HAVEN",
      "title": "The Haven",
      "statusText": "Available",
-     "combinedPrice": 1595,
-     "basePrice": 3069
+     "combinedPrice": 975,
+     "basePrice": 1819
     },
     {
-     "status": "AVAILABLE",
+     "status": "SOLD_OUT",
+     "code": "SUITE",
+     "title": "Suite",
+     "statusText": "Sold Out"
+    },
+    {
+     "status": "SOLD_OUT",
      "code": "MINISUITE",
      "title": "Club Balcony Suite",
-     "statusText": "Available",
-     "combinedPrice": 430,
-     "basePrice": 739
+     "statusText": "Sold Out"
     },
     {
      "status": "AVAILABLE",
      "code": "BALCONY",
      "title": "Camarote con balcón",
      "statusText": "Available",
-     "combinedPrice": 355,
-     "basePrice": 569
+     "combinedPrice": 205,
+     "basePrice": 259
     },
     {
      "status": "AVAILABLE",
      "code": "OCEANVIEW",
      "title": "Camarote exterior",
      "statusText": "Available",
-     "combinedPrice": 295,
-     "basePrice": 449
+     "combinedPrice": 195,
+     "basePrice": 239
     },
     {
      "status": "AVAILABLE",
      "code": "INSIDE",
      "title": "Camarote interior",
      "statusText": "Available",
-     "combinedPrice": 265,
-     "basePrice": 389
-    },
-    {
-     "status": "SOLO_GUEST_ONLY",
-     "code": "STUDIO",
-     "title": "Estudio",
-     "statusText": "Solo Guests Only"
+     "combinedPrice": 185,
+     "basePrice": 219
     }
    ]
   },
@@ -142,14 +140,24 @@
     "events": [
      {
       "eventType": "PORT",
-      "date": "2026-12-04T16:00:00",
+      "date": "2026-11-30T16:00:00",
       "order": 1,
-      "title": "Orlando (Port Canaveral), Florida",
-      "description": "<p>Los cruceros de NCL desde Port Canaveral ofrecen una escapada sin preocupaciones\na Las Bahamas y el Caribe desde una práctica ubicación céntrica en Florida. <a href=\"http://www.ncl.com/\" rel=\"nofollow\">Norwegian Cruise Line</a> se dedica a ofrecer\nescapadas sin esfuerzo — del tipo en el que cada persona puede crear sus propias vacaciones\nideales. A bordo, cada día ofrece algo para todos, con infinitas\noportunidades de hacer exactamente lo que te encanta — desde emociones de alta energía como\npistas de carreras y toboganes acuáticos hasta múltiples piscinas y jacuzzis, un spa de fama mundial,\nclubes infantiles gratuitos y más. Luego, todos pueden reunirse para\ndisfrutar de comidas compartidas en nuestros restaurantes galardonados. La aventura continúa\nen tierra mientras navegas de un hermoso destino al siguiente — incluso pasando un\ndía en nuestra exclusiva isla privada, Great Stirrup Cay. Y con los\nparques temáticos de fama mundial de Orlando y la Costa Espacial de Florida a solo un corto trayecto en coche desde el\npuerto, puedes añadir una excursión de un día de tu lista de deseos antes o después de tu travesía. Desde\ncrear recuerdos juntos mientras exploras destinos increíbles hasta hacer\nexactamente lo que te encanta a bordo, un crucero de NCL desde Port Canaveral lo hace fácil\npara que todos vacacionen a su manera.</p>",
+      "title": "Miami, Florida, EE.",
+      "description": "La sorprendente combinación de culturas y ambientes urbanos llamativos de Miami la convierten en un lugar para ver. Visite el moderno distrito Art Decó de South Beach, Calle Ocho en Little Havana, los vecindarios de primera categoría de Coconut Grove y Coral Gables y el ecosistema único de los Everglades.\n\n¿Busca un crucero desde Miami?  Consulte nuestra selección de cruceros por el Caribe.",
       "images": [
        {
-        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/agnostic/NCL-Caribbean-Cruise-Rollercoaster.jpg",
-        "title": "NCL-Caribbean-Cruise-Rollercoaster.jpg",
+        "path": "/content/dam/ncl/us/en/itineraries/bahamas-itineraries/881x400-Miami-Beach.jpg",
+        "title": "881x400-Miami-Beach.jpg",
+        "alt": "ac2939eacf16e21c774b222b1b8d354389601c37.png"
+       },
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/north-america/united-states/agnostic/NCL-Florida-Cruise-Sky-Aerial-Sunset-Miami.jpeg",
+        "title": "NCL-Florida-Cruise-Sky-Aerial-Sunset-Miami.jpeg",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       },
+       {
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/agnostic/NCL-Caribbean-Cruise-Miami.jpg",
+        "title": "NCL-Caribbean-Cruise-Miami.jpg",
         "alt": "cq5dam.thumbnail.319.319.png"
        }
       ],
@@ -159,7 +167,7 @@
        "isDisembarkation": false,
        "isOverNight": false,
        "dailySchedule": "4:00 PM",
-       "code": "PCV"
+       "code": "MIA"
       }
      }
     ]
@@ -168,35 +176,16 @@
     "day": 2,
     "events": [
      {
-      "eventType": "AT_SEA",
-      "date": "2026-12-05T00:00:00",
-      "order": 1,
-      "title": "Disfrutar. Brindar. Vivir. Descubrir. Desconectar. Y repetir.",
-      "description": "Disfruta de unas vistas increíbles en The Waterfront, mientras comes en magníficos restaurantes como Cagney’s Steakhouse y Sugarcane Mojito Bar. Juega con tus amigos en el complejo deportivo, donde la actividad nunca se detiene, y vive emociones fuertes en los toboganes acuáticos The Whip y Free Fall. O bien relájate en el Mandara Spa. Y cuando se pone el sol, comienza el entretenimiento: ¡musicales, comedia, concursos y mucho más!",
-      "images": [
-       {
-        "path": "/content/dam/ncl/us/en/lifestyle/homepage/ncl_Gtwy_Ocho_Rios_8.jpg",
-        "title": "ncl_Gtwy_Ocho_Rios_8.jpg",
-        "alt": "cq5dam.thumbnail.319.319.png"
-       }
-      ]
-     }
-    ]
-   },
-   {
-    "day": 3,
-    "events": [
-     {
       "eventType": "PORT",
-      "date": "2026-12-06T07:00:00",
+      "date": "2026-12-01T07:00:00",
       "order": 1,
-      "title": "Cozumel, México",
-      "description": "La isla de Cozumel, ubicada en el extremo de la Península de Yucatán, sigue siendo conocida por sus fantásticas oportunidades de pesca, esnórquel y buceo. Y a pesar del crecimiento del turismo en los últimos años, la isla y su única ciudad, San Miguel, conservan gran parte de su calidez y encanto originales.",
+      "title": "Great Stirrup Cay, Bahamas",
+      "description": "Great Stirrup Cay es un paraíso tropical, exclusivo de NCL\nhuéspedes. Ubicado en las hermosas Bahamas, aquí encontrará playas de arena blanca,\ndeliciosos bocados, villas privadas, Mandara Spa y esnórquel de talla mundial. ",
       "images": [
        {
-        "path": "/content/dam/ncl/us/en/destinations-ports/north-america/mexico/cozumel/NCL-Cozumel-Cruise-FamousFor-Beach-Blog.jpg",
-        "title": "NCL-Cozumel-Cruise-FamousFor-Beach-Blog.jpg",
-        "alt": "a1a4878ef3950d4b31008095951d87806c06d50c.png"
+        "path": "/content/dam/ncl/us/en/destinations-ports/caribbean-central-america/bahamas/great-stirrup-cay/NCL-Bahamas-GSC-Cruise2.png",
+        "title": "NCL-Bahamas-GSC-Cruise2.png",
+        "alt": "cq5dam.thumbnail.319.319.png"
        }
       ],
       "portInfo": {
@@ -204,9 +193,28 @@
        "isEmbarkation": false,
        "isDisembarkation": false,
        "isOverNight": false,
-       "dailySchedule": "7:00 AM - 6:00 PM",
-       "code": "CZM"
+       "dailySchedule": "7:00 AM - 5:00 PM",
+       "code": "NPI"
       }
+     }
+    ]
+   },
+   {
+    "day": 3,
+    "events": [
+     {
+      "eventType": "AT_SEA",
+      "date": "2026-12-02T00:00:00",
+      "order": 1,
+      "title": "Disfrutar. Brindar. Vivir. Descubrir. Desconectar. Y repetir.",
+      "description": "Adéntrate en un mundo lleno de alegría, que te deleitará con cócteles en el Vibe Beach Club, solo para adultos, y momentos de relajación total en la Thermal Suite del Mandara Spa. Las opciones de restauración de Joy complacen hasta los paladares más exigentes. Cuenta con tres restaurantes principales incluidos con menús que cambian a diario, así como almuerzos junto al mar o cenas bajo las estrellas en The Waterfront. Termina tu día con un espectáculo por la noche.",
+      "images": [
+       {
+        "path": "/content/dam/ncl/us/en/lifestyle/homepage/ncl_Joy_Aerial_Sea_0070.jpg",
+        "title": "ncl_Joy_Aerial_Sea_0070.jpg",
+        "alt": "cq5dam.thumbnail.319.319.png"
+       }
+      ]
      }
     ]
    }
