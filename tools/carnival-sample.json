@@ -190,8 +190,8 @@
   "imageUrl": "/service/GetItineraryRandomImage.aspx?RegionCode=CE&Key=4DaysEC2EasternCaribbeanCarnivalConquest&format=image",
   "id": "EC2_MIA_CQ_4_Mon",
   "code": "EC2",
-  "image": "/-/media/Images/explore/destinations/ports/carnival-caribbean-itinerary-grand-turk-1.jpg?useCustomFunctions=1&rightCrop=1",
-  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-caribbean-itinerary-grand-turk-1.jpg?useCustomFunctions=1&rightCrop=1",
+  "image": "/-/media/Images/explore/destinations/ports/carnival-caribbean-port-grand-turk-1-1.jpg?useCustomFunctions=1&centerCrop=1",
+  "imageSquare": "/-/media/Images/explore/destinations/ports/carnival-caribbean-port-grand-turk-1-1.jpg?useCustomFunctions=1&centerCrop=1",
   "stateroomMetaInformation": [
    {
     "metacode": "IS",
@@ -224,8 +224,8 @@
   ],
   "specialScoops": [],
   "imageRandomizationInfo": {
-   "crop": "Right",
-   "metaTag": "carnival-caribbean-search-grand-turk-1",
+   "crop": "Center",
+   "metaTag": "carnival-caribbean-port-grand-turk-1",
    "photoCredit": null
   },
   "itineraryTitle": "4-Day Eastern Caribbean from Miami, FL",
